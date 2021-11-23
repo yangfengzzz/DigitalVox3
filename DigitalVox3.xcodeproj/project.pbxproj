@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04CE367C274D077100204B8E /* DigitalVox3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DigitalVox3; sourceTree = BUILT_PRODUCTS_DIR; };
+		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE367F274D077100204B8E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,7 +41,7 @@
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
-				04CE367E274D077100204B8E /* DigitalVox3 */,
+				04CE367E274D077100204B8E /* apps */,
 				04CE367D274D077100204B8E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,25 +49,25 @@
 		04CE367D274D077100204B8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04CE367C274D077100204B8E /* DigitalVox3 */,
+				04CE367C274D077100204B8E /* apps */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		04CE367E274D077100204B8E /* DigitalVox3 */ = {
+		04CE367E274D077100204B8E /* apps */ = {
 			isa = PBXGroup;
 			children = (
 				04CE367F274D077100204B8E /* main.cpp */,
 			);
-			path = DigitalVox3;
+			path = apps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		04CE367B274D077100204B8E /* DigitalVox3 */ = {
+		04CE367B274D077100204B8E /* apps */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "DigitalVox3" */;
+			buildConfigurationList = 04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "apps" */;
 			buildPhases = (
 				04CE3678274D077100204B8E /* Sources */,
 				04CE3679274D077100204B8E /* Frameworks */,
@@ -77,9 +77,9 @@
 			);
 			dependencies = (
 			);
-			name = DigitalVox3;
+			name = apps;
 			productName = DigitalVox3;
-			productReference = 04CE367C274D077100204B8E /* DigitalVox3 */;
+			productReference = 04CE367C274D077100204B8E /* apps */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -109,7 +109,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				04CE367B274D077100204B8E /* DigitalVox3 */,
+				04CE367B274D077100204B8E /* apps */,
 			);
 		};
 /* End PBXProject section */
@@ -269,7 +269,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "DigitalVox3" */ = {
+		04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "apps" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04CE3684274D077100204B8E /* Debug */,
