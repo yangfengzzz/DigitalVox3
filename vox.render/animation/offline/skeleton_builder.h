@@ -28,8 +28,8 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
 
-#include "ozz/base/maths/transform.h"
-#include "ozz/base/memory/unique_ptr.h"
+#include "maths/transform.h"
+#include "memory/unique_ptr.h"
 
 namespace ozz {
 namespace animation {

@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
 #define OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
 
-#include "ozz/animation/runtime/animation.h"
+#include "animation/runtime/animation.h"
 
 namespace ozz {
 namespace animation {

@@ -30,10 +30,10 @@
 
 #include <cassert>
 
-#include "ozz/base/maths/math_constant.h"
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/vec_float.h"
-#include "ozz/base/platform.h"
+#include "maths/math_constant.h"
+#include "maths/math_ex.h"
+#include "maths/vec_float.h"
+#include "platform.h"
 
 namespace ozz {
 namespace math {

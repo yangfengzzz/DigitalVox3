@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_ANIMATION_RUNTIME_TRACK_SAMPLING_JOB_H_
 #define OZZ_OZZ_ANIMATION_RUNTIME_TRACK_SAMPLING_JOB_H_
 
-#include "ozz/animation/runtime/track.h"
+#include "animation/runtime/track.h"
 
 namespace ozz {
 namespace animation {

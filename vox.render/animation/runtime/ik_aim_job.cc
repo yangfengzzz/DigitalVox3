@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/ik_aim_job.h"
+#include "animation/runtime/ik_aim_job.h"
 
 #include <cassert>
 
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/simd_quaternion.h"
+#include "maths/math_ex.h"
+#include "maths/simd_quaternion.h"
 
 using namespace ozz::math;
 

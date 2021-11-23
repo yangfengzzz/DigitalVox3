@@ -27,12 +27,12 @@
 
 #include "fbx2ozz.h"
 
-#include "ozz/animation/offline/fbx/fbx.h"
-#include "ozz/animation/offline/fbx/fbx_skeleton.h"
+#include "animation/offline/fbx/fbx.h"
+#include "animation/offline/fbx/fbx_skeleton.h"
 
-#include "ozz/animation/offline/raw_skeleton.h"
+#include "animation/offline/raw_skeleton.h"
 
-#include "ozz/base/log.h"
+#include "log.h"
 
 bool Fbx2OzzImporter::Import(ozz::animation::offline::RawSkeleton* _skeleton,
                              const NodeType& _types) {

@@ -77,15 +77,15 @@
 // integrity, like data corruption or file truncation, must also be validated on
 // the user side.
 
-#include "ozz/base/endianness.h"
-#include "ozz/base/io/stream.h"
-#include "ozz/base/platform.h"
-#include "ozz/base/span.h"
+#include "endianness.h"
+#include "io/stream.h"
+#include "platform.h"
+#include "span.h"
 
 #include <stdint.h>
 #include <cassert>
 
-#include "ozz/base/io/archive_traits.h"
+#include "io/archive_traits.h"
 
 namespace ozz {
 namespace io {

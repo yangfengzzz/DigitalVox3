@@ -25,20 +25,20 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/fbx/fbx_animation.h"
+#include "animation/offline/fbx/fbx_animation.h"
 
-#include "ozz/animation/offline/fbx/fbx.h"
+#include "animation/offline/fbx/fbx.h"
 
-#include "ozz/animation/offline/raw_animation.h"
-#include "ozz/animation/offline/raw_animation_utils.h"
-#include "ozz/animation/offline/raw_track.h"
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/animation/runtime/skeleton_utils.h"
+#include "animation/offline/raw_animation.h"
+#include "animation/offline/raw_animation_utils.h"
+#include "animation/offline/raw_track.h"
+#include "animation/runtime/skeleton.h"
+#include "animation/runtime/skeleton_utils.h"
 
-#include "ozz/base/log.h"
+#include "log.h"
 
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/transform.h"
+#include "maths/math_ex.h"
+#include "maths/transform.h"
 
 namespace ozz {
 namespace animation {

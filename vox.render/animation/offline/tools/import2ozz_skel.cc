@@ -33,22 +33,22 @@
 
 #include "import2ozz_config.h"
 
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/tools/import2ozz.h"
 
-#include "ozz/animation/offline/raw_skeleton.h"
-#include "ozz/animation/offline/skeleton_builder.h"
+#include "animation/offline/raw_skeleton.h"
+#include "animation/offline/skeleton_builder.h"
 
-#include "ozz/animation/runtime/skeleton.h"
+#include "animation/runtime/skeleton.h"
 
-#include "ozz/base/containers/map.h"
-#include "ozz/base/containers/set.h"
+#include "containers/map.h"
+#include "containers/set.h"
 
-#include "ozz/base/io/archive.h"
-#include "ozz/base/io/stream.h"
+#include "io/archive.h"
+#include "io/stream.h"
 
-#include "ozz/base/memory/unique_ptr.h"
+#include "memory/unique_ptr.h"
 
-#include "ozz/base/log.h"
+#include "log.h"
 
 #include "json/json.h"
 

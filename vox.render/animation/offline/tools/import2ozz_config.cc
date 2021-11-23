@@ -33,15 +33,15 @@
 
 #include "import2ozz_anim.h"
 #include "import2ozz_track.h"
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/tools/import2ozz.h"
 
-#include "ozz/animation/offline/animation_optimizer.h"
-#include "ozz/animation/offline/track_optimizer.h"
+#include "animation/offline/animation_optimizer.h"
+#include "animation/offline/track_optimizer.h"
 
-#include "ozz/base/containers/string.h"
-#include "ozz/base/log.h"
+#include "containers/string.h"
+#include "log.h"
 
-#include "ozz/options/options.h"
+#include "options/options.h"
 
 #include "json/json.h"
 

@@ -30,7 +30,7 @@
 
 #include <new>
 
-#include "ozz/base/memory/allocator.h"
+#include "memory/allocator.h"
 
 namespace ozz {
 // Define a STL allocator compliant allocator->

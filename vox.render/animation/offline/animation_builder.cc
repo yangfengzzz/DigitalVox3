@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/animation_builder.h"
+#include "animation/offline/animation_builder.h"
 
 #include <algorithm>
 #include <cassert>
@@ -33,11 +33,11 @@
 #include <cstring>
 #include <limits>
 
-#include "ozz/animation/offline/raw_animation.h"
-#include "ozz/animation/runtime/animation.h"
-#include "ozz/base/containers/vector.h"
-#include "ozz/base/maths/simd_math.h"
-#include "ozz/base/memory/allocator.h"
+#include "animation/offline/raw_animation.h"
+#include "animation/runtime/animation.h"
+#include "containers/vector.h"
+#include "maths/simd_math.h"
+#include "memory/allocator.h"
 
 // Internal include file
 #define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.

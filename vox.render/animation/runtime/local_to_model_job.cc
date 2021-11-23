@@ -25,16 +25,16 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/local_to_model_job.h"
+#include "animation/runtime/local_to_model_job.h"
 
 #include <cassert>
 
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/simd_math.h"
-#include "ozz/base/maths/soa_float4x4.h"
-#include "ozz/base/maths/soa_transform.h"
+#include "maths/math_ex.h"
+#include "maths/simd_math.h"
+#include "maths/soa_float4x4.h"
+#include "maths/soa_transform.h"
 
-#include "ozz/animation/runtime/skeleton.h"
+#include "animation/runtime/skeleton.h"
 
 namespace ozz {
 namespace animation {

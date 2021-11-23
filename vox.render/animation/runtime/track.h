@@ -28,12 +28,12 @@
 #ifndef OZZ_OZZ_ANIMATION_RUNTIME_TRACK_H_
 #define OZZ_OZZ_ANIMATION_RUNTIME_TRACK_H_
 
-#include "ozz/base/io/archive_traits.h"
-#include "ozz/base/platform.h"
-#include "ozz/base/span.h"
+#include "io/archive_traits.h"
+#include "platform.h"
+#include "span.h"
 
-#include "ozz/base/maths/quaternion.h"
-#include "ozz/base/maths/vec_float.h"
+#include "maths/quaternion.h"
+#include "maths/vec_float.h"
 
 namespace ozz {
 namespace animation {

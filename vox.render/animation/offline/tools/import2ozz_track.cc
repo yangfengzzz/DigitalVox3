@@ -33,17 +33,17 @@
 #include <cstring>
 
 #include "import2ozz_config.h"
-#include "ozz/animation/offline/raw_track.h"
-#include "ozz/animation/offline/tools/import2ozz.h"
-#include "ozz/animation/offline/track_builder.h"
-#include "ozz/animation/offline/track_optimizer.h"
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/animation/runtime/track.h"
-#include "ozz/base/io/archive.h"
-#include "ozz/base/io/stream.h"
-#include "ozz/base/log.h"
-#include "ozz/base/memory/unique_ptr.h"
-#include "ozz/options/options.h"
+#include "animation/offline/raw_track.h"
+#include "animation/offline/tools/import2ozz.h"
+#include "animation/offline/track_builder.h"
+#include "animation/offline/track_optimizer.h"
+#include "animation/runtime/skeleton.h"
+#include "animation/runtime/track.h"
+#include "io/archive.h"
+#include "io/stream.h"
+#include "log.h"
+#include "memory/unique_ptr.h"
+#include "options/options.h"
 
 namespace ozz {
 namespace animation {

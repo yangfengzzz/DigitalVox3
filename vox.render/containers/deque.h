@@ -30,7 +30,7 @@
 
 #include <deque>
 
-#include "ozz/base/containers/std_allocator.h"
+#include "containers/std_allocator.h"
 
 namespace ozz {
 // Redirects std::deque to ozz::deque in order to replace std default allocator

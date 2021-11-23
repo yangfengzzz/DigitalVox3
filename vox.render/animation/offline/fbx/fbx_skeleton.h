@@ -28,8 +28,8 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_SKELETON_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_SKELETON_H_
 
-#include "ozz/animation/offline/fbx/fbx.h"
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/fbx/fbx.h"
+#include "animation/offline/tools/import2ozz.h"
 
 namespace ozz {
 namespace animation {

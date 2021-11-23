@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/raw_animation.h"
-#include "ozz/animation/runtime/skeleton.h"
+#include "animation/offline/raw_animation.h"
+#include "animation/runtime/skeleton.h"
 
 namespace ozz {
 namespace animation {

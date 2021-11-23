@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/tools/import2ozz.h"
 
 // Mocks OzzImporter so it can be used to dump default and reference
 // configurations.

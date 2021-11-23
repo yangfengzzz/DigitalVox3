@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/io/stream.h"
+#include "io/stream.h"
 
 #include <cassert>
 #include <cstdio>
 #include <cstring>
 #include <limits>
 
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/memory/allocator.h"
+#include "maths/math_ex.h"
+#include "memory/allocator.h"
 
 namespace ozz {
 namespace io {

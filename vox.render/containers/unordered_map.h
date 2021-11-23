@@ -39,7 +39,7 @@
 #pragma warning(pop)
 #endif  // _MSC_VER
 
-#include "ozz/base/containers/std_allocator.h"
+#include "containers/std_allocator.h"
 
 namespace ozz {
 

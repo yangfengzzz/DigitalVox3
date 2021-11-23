@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/io/archive.h"
+#include "io/archive.h"
 
 #include <cassert>
 

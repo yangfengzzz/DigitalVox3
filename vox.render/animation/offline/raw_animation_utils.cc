@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/raw_animation_utils.h"
+#include "animation/offline/raw_animation_utils.h"
 
 #include <algorithm>
 #include <limits>

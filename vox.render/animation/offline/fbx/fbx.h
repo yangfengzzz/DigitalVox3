@@ -30,8 +30,8 @@
 
 #include <fbxsdk.h>
 
-#include "ozz/base/maths/simd_math.h"
-#include "ozz/base/maths/transform.h"
+#include "maths/simd_math.h"
+#include "maths/transform.h"
 
 namespace ozz {
 namespace math {

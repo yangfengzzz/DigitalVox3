@@ -28,9 +28,9 @@
 #ifndef OZZ_ANIMATION_OFFLINE_FBX_FBX2OZZ_H_
 #define OZZ_ANIMATION_OFFLINE_FBX_FBX2OZZ_H_
 
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/tools/import2ozz.h"
 
-#include "ozz/animation/offline/fbx/fbx.h"
+#include "animation/offline/fbx/fbx.h"
 
 // fbx2ozz is a command line tool that converts an animation imported from a
 // fbx document to ozz runtime format.

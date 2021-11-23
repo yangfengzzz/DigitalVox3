@@ -28,8 +28,8 @@
 #ifndef OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_SKEL_H_
 #define OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_SKEL_H_
 
-#include "ozz/base/endianness.h"
-#include "ozz/base/platform.h"
+#include "endianness.h"
+#include "platform.h"
 
 namespace Json {
 class Value;

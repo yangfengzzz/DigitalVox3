@@ -30,7 +30,7 @@
 
 #include <sstream>
 
-#include "gtest/gtest.h"
+#include "gtest.h"
 
 // EXPECT_ASSERTION expands to real death test if assertions are enabled.
 // Parameters:

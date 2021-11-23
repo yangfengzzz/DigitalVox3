@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/blending_job.h"
+#include "animation/runtime/blending_job.h"
 
 #include <cassert>
 #include <cstddef>
 
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/soa_transform.h"
+#include "animation/runtime/skeleton.h"
+#include "maths/math_ex.h"
+#include "maths/soa_transform.h"
 
 namespace ozz {
 namespace animation {

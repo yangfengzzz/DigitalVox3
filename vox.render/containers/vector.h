@@ -30,7 +30,7 @@
 
 #include <vector>
 
-#include "ozz/base/containers/std_allocator.h"
+#include "containers/std_allocator.h"
 
 namespace ozz {
 // Redirects std::vector to ozz::vector in order to replace std default

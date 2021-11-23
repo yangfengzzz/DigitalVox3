@@ -28,10 +28,10 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
 
-#include "ozz/animation/offline/raw_animation.h"
+#include "animation/offline/raw_animation.h"
 
-#include "ozz/base/maths/transform.h"
-#include "ozz/base/span.h"
+#include "maths/transform.h"
+#include "span.h"
 
 namespace ozz {
 namespace animation {

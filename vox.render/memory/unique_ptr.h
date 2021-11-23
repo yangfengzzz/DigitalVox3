@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_BASE_MEMORY_UNIQUE_PTR_H_
 #define OZZ_OZZ_BASE_MEMORY_UNIQUE_PTR_H_
 
-#include "ozz/base/memory/allocator.h"
+#include "memory/allocator.h"
 
 #include <memory>
 #include <utility>

@@ -28,9 +28,9 @@
 #ifndef OZZ_OZZ_BASE_CONTAINERS_STRING_ARCHIVE_H_
 #define OZZ_OZZ_BASE_CONTAINERS_STRING_ARCHIVE_H_
 
-#include "ozz/base/containers/string.h"
-#include "ozz/base/io/archive_traits.h"
-#include "ozz/base/platform.h"
+#include "containers/string.h"
+#include "io/archive_traits.h"
+#include "platform.h"
 
 namespace ozz {
 namespace io {

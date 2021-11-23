@@ -27,11 +27,11 @@
 
 #include "fbx2ozz.h"
 
-#include "ozz/animation/offline/fbx/fbx_animation.h"
+#include "animation/offline/fbx/fbx_animation.h"
 
-#include "ozz/animation/offline/raw_animation.h"
+#include "animation/offline/raw_animation.h"
 
-#include "ozz/base/log.h"
+#include "log.h"
 
 Fbx2OzzImporter::AnimationNames Fbx2OzzImporter::GetAnimationNames() {
   if (!scene_loader_) {

@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/skeleton_builder.h"
+#include "animation/offline/skeleton_builder.h"
 
 #include <cstring>
 
-#include "ozz/animation/offline/raw_skeleton.h"
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/base/containers/vector.h"
-#include "ozz/base/maths/soa_transform.h"
-#include "ozz/base/memory/allocator.h"
+#include "animation/offline/raw_skeleton.h"
+#include "animation/runtime/skeleton.h"
+#include "containers/vector.h"
+#include "maths/soa_transform.h"
+#include "memory/allocator.h"
 
 namespace ozz {
 namespace animation {

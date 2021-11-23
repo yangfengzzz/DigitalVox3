@@ -31,8 +31,8 @@
 #include <cassert>
 #include <cmath>
 
-#include "ozz/base/maths/math_constant.h"
-#include "ozz/base/platform.h"
+#include "maths/math_constant.h"
+#include "platform.h"
 
 namespace ozz {
 namespace math {

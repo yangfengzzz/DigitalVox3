@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/track_optimizer.h"
+#include "animation/offline/track_optimizer.h"
 
 #include <cassert>
 #include <cstddef>
@@ -34,12 +34,12 @@
 #define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "decimate.h"
 
-#include "ozz/base/maths/math_ex.h"
+#include "maths/math_ex.h"
 
-#include "ozz/animation/offline/raw_track.h"
+#include "animation/offline/raw_track.h"
 
 // Needs runtime track to access TrackPolicy.
-#include "ozz/animation/runtime/track.h"
+#include "animation/runtime/track.h"
 
 namespace ozz {
 namespace animation {

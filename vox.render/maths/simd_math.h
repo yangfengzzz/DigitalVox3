@@ -28,8 +28,8 @@
 #ifndef OZZ_OZZ_BASE_MATHS_SIMD_MATH_H_
 #define OZZ_OZZ_BASE_MATHS_SIMD_MATH_H_
 
-#include "ozz/base/maths/internal/simd_math_config.h"
-#include "ozz/base/platform.h"
+#include "maths/internal/simd_math_config.h"
+#include "platform.h"
 
 namespace ozz {
 namespace math {
@@ -1221,9 +1221,9 @@ OZZ_INLINE SimdFloat4 HalfToFloat(_SimdInt4 _h);
 }  // namespace ozz
 
 #if defined(OZZ_SIMD_SSEx)
-#include "ozz/base/maths/internal/simd_math_sse-inl.h"
+#include "maths/internal/simd_math_sse-inl.h"
 #elif defined(OZZ_SIMD_REF)
-#include "ozz/base/maths/internal/simd_math_ref-inl.h"
+#include "maths/internal/simd_math_ref-inl.h"
 #else
 #error No simd_math implementation detected
 #endif

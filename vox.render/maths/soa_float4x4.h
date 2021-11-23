@@ -30,9 +30,9 @@
 
 #include <cassert>
 
-#include "ozz/base/maths/soa_float.h"
-#include "ozz/base/maths/soa_quaternion.h"
-#include "ozz/base/platform.h"
+#include "maths/soa_float.h"
+#include "maths/soa_quaternion.h"
+#include "platform.h"
 
 namespace ozz {
 namespace math {

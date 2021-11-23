@@ -25,16 +25,16 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/maths/math_archive.h"
+#include "maths/math_archive.h"
 
 #include <cassert>
 
-#include "ozz/base/io/archive.h"
-#include "ozz/base/maths/box.h"
-#include "ozz/base/maths/quaternion.h"
-#include "ozz/base/maths/rect.h"
-#include "ozz/base/maths/transform.h"
-#include "ozz/base/maths/vec_float.h"
+#include "io/archive.h"
+#include "maths/box.h"
+#include "maths/quaternion.h"
+#include "maths/rect.h"
+#include "maths/transform.h"
+#include "maths/vec_float.h"
 
 namespace ozz {
 namespace io {

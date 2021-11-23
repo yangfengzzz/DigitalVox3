@@ -25,9 +25,9 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/track_sampling_job.h"
-#include "ozz/animation/runtime/track.h"
-#include "ozz/base/maths/math_ex.h"
+#include "animation/runtime/track_sampling_job.h"
+#include "animation/runtime/track.h"
+#include "maths/math_ex.h"
 
 #include <algorithm>
 #include <cassert>

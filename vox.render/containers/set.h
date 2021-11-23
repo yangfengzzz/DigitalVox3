@@ -30,7 +30,7 @@
 
 #include <set>
 
-#include "ozz/base/containers/std_allocator.h"
+#include "containers/std_allocator.h"
 
 namespace ozz {
 // Redirects std::set to ozz::set in order to replace std default allocator by

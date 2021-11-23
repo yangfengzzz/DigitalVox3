@@ -31,7 +31,7 @@
 // Provides Stream interface used to read/write a memory buffer or a file with
 // Crt fread/fwrite/fseek/ftell like functions.
 
-#include "ozz/base/platform.h"
+#include "platform.h"
 
 #include <cstddef>
 

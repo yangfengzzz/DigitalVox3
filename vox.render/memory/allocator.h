@@ -32,7 +32,7 @@
 #include <new>
 #include <utility>
 
-#include "ozz/base/platform.h"
+#include "platform.h"
 
 namespace ozz {
 namespace memory {

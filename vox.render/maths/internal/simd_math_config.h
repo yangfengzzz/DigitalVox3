@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_BASE_MATHS_INTERNAL_SIMD_MATH_CONFIG_H_
 #define OZZ_OZZ_BASE_MATHS_INTERNAL_SIMD_MATH_CONFIG_H_
 
-#include "ozz/base/platform.h"
+#include "platform.h"
 
 // Avoid SIMD instruction detection if reference (aka scalar) implementation is
 // forced.

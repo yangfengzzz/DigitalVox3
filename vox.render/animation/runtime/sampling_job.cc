@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/sampling_job.h"
+#include "animation/runtime/sampling_job.h"
 
 #include <cassert>
 
-#include "ozz/animation/runtime/animation.h"
-#include "ozz/base/maths/math_constant.h"
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/soa_transform.h"
-#include "ozz/base/memory/allocator.h"
+#include "animation/runtime/animation.h"
+#include "maths/math_constant.h"
+#include "maths/math_ex.h"
+#include "maths/soa_transform.h"
+#include "memory/allocator.h"
 
 // Internal include file
 #define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.

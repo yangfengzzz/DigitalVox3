@@ -25,11 +25,11 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/fbx/fbx_skeleton.h"
+#include "animation/offline/fbx/fbx_skeleton.h"
 
-#include "ozz/animation/offline/raw_skeleton.h"
+#include "animation/offline/raw_skeleton.h"
 
-#include "ozz/base/log.h"
+#include "log.h"
 
 namespace ozz {
 namespace animation {

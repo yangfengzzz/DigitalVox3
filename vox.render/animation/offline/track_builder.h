@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_TRACK_BUILDER_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_TRACK_BUILDER_H_
 
-#include "ozz/base/memory/unique_ptr.h"
+#include "memory/unique_ptr.h"
 
 namespace ozz {
 namespace animation {

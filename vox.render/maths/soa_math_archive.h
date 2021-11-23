@@ -28,8 +28,8 @@
 #ifndef OZZ_OZZ_BASE_MATHS_SOA_MATH_ARCHIVE_H_
 #define OZZ_OZZ_BASE_MATHS_SOA_MATH_ARCHIVE_H_
 
-#include "ozz/base/io/archive_traits.h"
-#include "ozz/base/platform.h"
+#include "io/archive_traits.h"
+#include "platform.h"
 
 namespace ozz {
 namespace math {

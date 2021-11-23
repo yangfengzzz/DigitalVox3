@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/memory/allocator.h"
+#include "memory/allocator.h"
 
 #include <memory.h>
 
@@ -33,7 +33,7 @@
 #include <cassert>
 #include <cstdlib>
 
-#include "ozz/base/maths/math_ex.h"
+#include "maths/math_ex.h"
 
 namespace ozz {
 namespace memory {

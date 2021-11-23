@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/animation_optimizer.h"
+#include "animation/offline/animation_optimizer.h"
 
 #include <cassert>
 #include <cstddef>
@@ -34,14 +34,14 @@
 // Internal include file
 #define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "decimate.h"
-#include "ozz/animation/offline/raw_animation.h"
-#include "ozz/animation/offline/raw_animation_utils.h"
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/animation/runtime/skeleton_utils.h"
-#include "ozz/base/containers/stack.h"
-#include "ozz/base/containers/vector.h"
-#include "ozz/base/maths/math_constant.h"
-#include "ozz/base/maths/math_ex.h"
+#include "animation/offline/raw_animation.h"
+#include "animation/offline/raw_animation_utils.h"
+#include "animation/runtime/skeleton.h"
+#include "animation/runtime/skeleton_utils.h"
+#include "containers/stack.h"
+#include "containers/vector.h"
+#include "maths/math_constant.h"
+#include "maths/math_ex.h"
 
 namespace ozz {
 namespace animation {

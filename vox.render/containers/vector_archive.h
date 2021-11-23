@@ -28,9 +28,9 @@
 #ifndef OZZ_OZZ_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
 #define OZZ_OZZ_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
 
-#include "ozz/base/containers/vector.h"
-#include "ozz/base/io/archive.h"
-#include "ozz/base/platform.h"
+#include "containers/vector.h"
+#include "io/archive.h"
+#include "platform.h"
 
 namespace ozz {
 namespace io {

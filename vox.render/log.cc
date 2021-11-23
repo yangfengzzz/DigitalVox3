@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/log.h"
+#include "log.h"
 
 #include <iomanip>
 #include <sstream>
 
-#include "ozz/base/memory/allocator.h"
+#include "memory/allocator.h"
 
 namespace ozz {
 namespace log {

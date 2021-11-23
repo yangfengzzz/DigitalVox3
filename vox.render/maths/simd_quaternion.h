@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_BASE_MATHS_SIMD_QUATERNION_H_
 #define OZZ_OZZ_BASE_MATHS_SIMD_QUATERNION_H_
 
-#include "ozz/base/maths/simd_math.h"
+#include "maths/simd_math.h"
 
 #include <cmath>
 

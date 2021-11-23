@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/raw_animation.h"
+#include "animation/offline/raw_animation.h"
 
-#include "ozz/base/io/archive.h"
-#include "ozz/base/maths/math_archive.h"
+#include "io/archive.h"
+#include "maths/math_archive.h"
 
-#include "ozz/base/containers/string_archive.h"
-#include "ozz/base/containers/vector_archive.h"
-#include "ozz/base/log.h"
+#include "containers/string_archive.h"
+#include "containers/vector_archive.h"
+#include "log.h"
 
 namespace ozz {
 namespace io {

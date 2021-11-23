@@ -28,9 +28,9 @@
 #ifndef OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_H_
 #define OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_H_
 
-#include "ozz/base/io/archive_traits.h"
-#include "ozz/base/platform.h"
-#include "ozz/base/span.h"
+#include "io/archive_traits.h"
+#include "platform.h"
+#include "span.h"
 
 namespace ozz {
 namespace io {

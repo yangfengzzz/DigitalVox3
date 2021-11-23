@@ -28,12 +28,12 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_H_
 
-#include "ozz/base/containers/string.h"
-#include "ozz/base/containers/vector.h"
+#include "containers/string.h"
+#include "containers/vector.h"
 
-#include "ozz/animation/offline/raw_animation.h"
-#include "ozz/animation/offline/raw_skeleton.h"
-#include "ozz/animation/offline/raw_track.h"
+#include "animation/offline/raw_animation.h"
+#include "animation/offline/raw_skeleton.h"
+#include "animation/offline/raw_track.h"
 
 namespace ozz {
 namespace animation {

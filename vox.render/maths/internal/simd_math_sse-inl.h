@@ -36,7 +36,7 @@
 // Temporarly needed while trigonometric functions aren't implemented.
 #include <cmath>
 
-#include "ozz/base/maths/math_constant.h"
+#include "maths/math_constant.h"
 
 namespace ozz {
 namespace math {

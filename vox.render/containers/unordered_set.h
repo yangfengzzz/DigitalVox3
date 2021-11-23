@@ -30,7 +30,7 @@
 
 #include <unordered_set>
 
-#include "ozz/base/containers/std_allocator.h"
+#include "containers/std_allocator.h"
 
 namespace ozz {
 // Redirects std::unordered_set to ozz::UnorderedSet in order to replace std

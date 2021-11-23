@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/track_triggering_job.h"
-#include "ozz/animation/runtime/track.h"
+#include "animation/runtime/track_triggering_job.h"
+#include "animation/runtime/track.h"
 
 #include <algorithm>
 #include <cassert>

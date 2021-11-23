@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/tools/import2ozz.h"
 
 #include "json/json.h"
 
@@ -36,9 +36,9 @@
 #include "import2ozz_anim.h"
 #include "import2ozz_config.h"
 #include "import2ozz_skel.h"
-#include "ozz/base/io/stream.h"
-#include "ozz/base/log.h"
-#include "ozz/options/options.h"
+#include "io/stream.h"
+#include "log.h"
+#include "options/options.h"
 
 // Declares command line options.
 OZZ_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)

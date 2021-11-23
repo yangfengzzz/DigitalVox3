@@ -28,10 +28,10 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_RAW_SKELETON_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_RAW_SKELETON_H_
 
-#include "ozz/base/containers/string.h"
-#include "ozz/base/containers/vector.h"
-#include "ozz/base/io/archive_traits.h"
-#include "ozz/base/maths/transform.h"
+#include "containers/string.h"
+#include "containers/vector.h"
+#include "io/archive_traits.h"
+#include "maths/transform.h"
 
 namespace ozz {
 namespace animation {

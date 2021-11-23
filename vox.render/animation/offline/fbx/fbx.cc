@@ -25,11 +25,11 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/fbx/fbx.h"
+#include "animation/offline/fbx/fbx.h"
 
-#include "ozz/base/log.h"
-#include "ozz/base/maths/transform.h"
-#include "ozz/base/memory/allocator.h"
+#include "log.h"
+#include "maths/transform.h"
+#include "memory/allocator.h"
 
 namespace ozz {
 namespace animation {

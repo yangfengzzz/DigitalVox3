@@ -25,9 +25,9 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/skeleton_utils.h"
+#include "animation/runtime/skeleton_utils.h"
 
-#include "ozz/base/maths/soa_transform.h"
+#include "maths/soa_transform.h"
 
 #include <assert.h>
 

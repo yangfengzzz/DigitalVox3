@@ -25,11 +25,11 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/maths/simd_math_archive.h"
+#include "maths/simd_math_archive.h"
 
 #include <cassert>
 
-#include "ozz/base/io/archive.h"
+#include "io/archive.h"
 
 namespace ozz {
 namespace io {

@@ -30,7 +30,7 @@
 
 #include <cstddef>
 
-#include "ozz/base/maths/vec_float.h"
+#include "maths/vec_float.h"
 
 namespace ozz {
 namespace math {

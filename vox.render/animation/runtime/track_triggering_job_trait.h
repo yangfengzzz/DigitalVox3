@@ -33,7 +33,7 @@
 // This is a separate file from "track_triggering_job.h" to prevent everyone
 // from including stl file <iterator>.
 
-#include "ozz/animation/runtime/track_triggering_job.h"
+#include "animation/runtime/track_triggering_job.h"
 
 #include <iterator>
 

@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/additive_animation_builder.h"
+#include "animation/offline/additive_animation_builder.h"
 
 #include <cassert>
 #include <cstddef>
 
-#include "ozz/animation/offline/raw_animation.h"
-#include "ozz/base/maths/transform.h"
+#include "animation/offline/raw_animation.h"
+#include "maths/transform.h"
 
 namespace ozz {
 namespace animation {

@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/maths/simd_math.h"
+#include "maths/simd_math.h"
 
 namespace ozz {
 namespace math {

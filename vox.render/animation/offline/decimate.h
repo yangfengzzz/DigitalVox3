@@ -32,8 +32,8 @@
 #error "This header is private, it cannot be included from public headers."
 #endif  // OZZ_INCLUDE_PRIVATE_HEADER
 
-#include "ozz/base/containers/stack.h"
-#include "ozz/base/containers/vector.h"
+#include "containers/stack.h"
+#include "containers/vector.h"
 
 #include <cassert>
 

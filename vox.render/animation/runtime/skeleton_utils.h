@@ -28,8 +28,8 @@
 #ifndef OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_UTILS_H_
 #define OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_UTILS_H_
 
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/base/maths/transform.h"
+#include "animation/runtime/skeleton.h"
+#include "maths/transform.h"
 
 #include <cassert>
 

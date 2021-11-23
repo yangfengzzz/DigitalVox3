@@ -33,15 +33,15 @@
 #include <cassert>
 #include <cstring>
 
-#include "ozz/animation/offline/raw_animation_utils.h"
-#include "ozz/animation/offline/tools/import2ozz.h"
-#include "ozz/animation/runtime/skeleton.h"
-#include "ozz/base/containers/map.h"
-#include "ozz/base/containers/set.h"
-#include "ozz/base/containers/vector.h"
-#include "ozz/base/log.h"
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/simd_math.h"
+#include "animation/offline/raw_animation_utils.h"
+#include "animation/offline/tools/import2ozz.h"
+#include "animation/runtime/skeleton.h"
+#include "containers/map.h"
+#include "containers/set.h"
+#include "containers/vector.h"
+#include "log.h"
+#include "maths/math_ex.h"
+#include "maths/simd_math.h"
 
 #define TINYGLTF_IMPLEMENTATION
 

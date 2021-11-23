@@ -28,13 +28,13 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_RAW_TRACK_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_RAW_TRACK_H_
 
-#include "ozz/base/containers/string.h"
-#include "ozz/base/containers/vector.h"
+#include "containers/string.h"
+#include "containers/vector.h"
 
-#include "ozz/base/io/archive_traits.h"
+#include "io/archive_traits.h"
 
-#include "ozz/base/maths/quaternion.h"
-#include "ozz/base/maths/vec_float.h"
+#include "maths/quaternion.h"
+#include "maths/vec_float.h"
 
 namespace ozz {
 namespace animation {

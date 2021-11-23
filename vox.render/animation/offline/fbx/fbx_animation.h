@@ -28,12 +28,12 @@
 #ifndef OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
 #define OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
 
-#include "ozz/animation/offline/fbx/fbx.h"
+#include "animation/offline/fbx/fbx.h"
 
-#include "ozz/animation/offline/tools/import2ozz.h"
+#include "animation/offline/tools/import2ozz.h"
 
-#include "ozz/base/containers/string.h"
-#include "ozz/base/containers/vector.h"
+#include "containers/string.h"
+#include "containers/vector.h"
 
 namespace ozz {
 namespace animation {

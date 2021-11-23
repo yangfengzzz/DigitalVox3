@@ -30,7 +30,7 @@
 
 #include <string>
 
-#include "ozz/base/containers/std_allocator.h"
+#include "containers/std_allocator.h"
 
 namespace ozz {
 // Redirects std::basic_string to ozz::string in order to replace std default

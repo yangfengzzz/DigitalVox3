@@ -25,10 +25,10 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/containers/string_archive.h"
+#include "containers/string_archive.h"
 
-#include "ozz/base/io/archive.h"
-#include "ozz/base/maths/math_ex.h"
+#include "io/archive.h"
+#include "maths/math_ex.h"
 
 namespace ozz {
 namespace io {

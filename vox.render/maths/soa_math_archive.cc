@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/maths/soa_math_archive.h"
+#include "maths/soa_math_archive.h"
 
-#include "ozz/base/io/archive.h"
-#include "ozz/base/maths/soa_float.h"
-#include "ozz/base/maths/soa_float4x4.h"
-#include "ozz/base/maths/soa_quaternion.h"
-#include "ozz/base/maths/soa_transform.h"
+#include "io/archive.h"
+#include "maths/soa_float.h"
+#include "maths/soa_float4x4.h"
+#include "maths/soa_quaternion.h"
+#include "maths/soa_transform.h"
 
 namespace ozz {
 namespace io {

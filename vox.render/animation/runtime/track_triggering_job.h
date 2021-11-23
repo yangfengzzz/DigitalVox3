@@ -28,7 +28,7 @@
 #ifndef OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
 #define OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
 
-#include "ozz/base/platform.h"
+#include "platform.h"
 
 namespace ozz {
 namespace animation {

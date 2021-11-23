@@ -27,7 +27,7 @@
 
 #include "fbx2ozz.h"
 
-#include "ozz/base/log.h"
+#include "log.h"
 
 int main(int _argc, const char** _argv) {
   Fbx2OzzImporter converter;

@@ -25,18 +25,18 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/offline/track_builder.h"
+#include "animation/offline/track_builder.h"
 
 #include <cassert>
 #include <cmath>
 #include <cstring>
 #include <limits>
 
-#include "ozz/base/memory/allocator.h"
+#include "memory/allocator.h"
 
-#include "ozz/animation/offline/raw_track.h"
+#include "animation/offline/raw_track.h"
 
-#include "ozz/animation/runtime/track.h"
+#include "animation/runtime/track.h"
 
 namespace ozz {
 namespace animation {

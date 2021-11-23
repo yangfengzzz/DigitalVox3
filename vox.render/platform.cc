@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/platform.h"
+#include "platform.h"
 
 namespace ozz {
 

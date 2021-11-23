@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/base/maths/box.h"
+#include "maths/box.h"
 
 #include <limits>
 
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/maths/simd_math.h"
+#include "maths/math_ex.h"
+#include "maths/simd_math.h"
 
 namespace ozz {
 namespace math {

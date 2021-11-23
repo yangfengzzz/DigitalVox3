@@ -28,9 +28,9 @@
 #ifndef OZZ_OZZ_BASE_MATHS_TRANSFORM_H_
 #define OZZ_OZZ_BASE_MATHS_TRANSFORM_H_
 
-#include "ozz/base/maths/quaternion.h"
-#include "ozz/base/maths/vec_float.h"
-#include "ozz/base/platform.h"
+#include "maths/quaternion.h"
+#include "maths/vec_float.h"
+#include "platform.h"
 
 namespace ozz {
 namespace math {

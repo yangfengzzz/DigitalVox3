@@ -25,16 +25,16 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/animation/runtime/animation.h"
+#include "animation/runtime/animation.h"
 
 #include <cassert>
 #include <cstring>
 
-#include "ozz/base/io/archive.h"
-#include "ozz/base/log.h"
-#include "ozz/base/maths/math_archive.h"
-#include "ozz/base/maths/math_ex.h"
-#include "ozz/base/memory/allocator.h"
+#include "io/archive.h"
+#include "log.h"
+#include "maths/math_archive.h"
+#include "maths/math_ex.h"
+#include "memory/allocator.h"
 
 // Internal include file
 #define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
