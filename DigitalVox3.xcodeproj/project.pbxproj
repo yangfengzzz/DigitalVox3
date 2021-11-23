@@ -58,7 +58,6 @@
 		04CE3770274D0F5100204B8E /* fbx2ozz_anim.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3769274D0F5100204B8E /* fbx2ozz_anim.cc */; };
 		04CE3771274D0F5100204B8E /* fbx2ozz_skel.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE376A274D0F5100204B8E /* fbx2ozz_skel.cc */; };
 		04CE3772274D0F5100204B8E /* fbx.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE376C274D0F5100204B8E /* fbx.cc */; };
-		04CE377C274D127C00204B8E /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE377B274D127C00204B8E /* jsoncpp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -636,7 +635,6 @@
 				04CE3725274D0E5400204B8E /* ik_aim_job.cc in Sources */,
 				04CE3687274D086900204B8E /* main.mm in Sources */,
 				04CE3750274D0EB900204B8E /* track_builder.cc in Sources */,
-				04CE377C274D127C00204B8E /* jsoncpp.cpp in Sources */,
 				04CE3691274D089700204B8E /* imgui_tables.cpp in Sources */,
 				04CE372D274D0E5400204B8E /* animation_utils.cc in Sources */,
 				04CE36F2274D0CDC00204B8E /* math_archive.cc in Sources */,
