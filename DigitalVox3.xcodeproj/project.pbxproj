@@ -117,6 +117,8 @@
 		04CE38BA274D1FE500204B8E /* additive_animation_builder_tests.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38AE274D1FE500204B8E /* additive_animation_builder_tests.cc */; };
 		04CE38BB274D1FE500204B8E /* animation_builder_tests.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38AF274D1FE500204B8E /* animation_builder_tests.cc */; };
 		04CE38C2274D21AE00204B8E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE38C1274D21AE00204B8E /* CoreFoundation.framework */; };
+		04CE38C5274D25BB00204B8E /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38C3274D25BB00204B8E /* matrix.cpp */; };
+		04CE38C6274D25BB00204B8E /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38C4274D25BB00204B8E /* matrix.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,6 +379,8 @@
 		04CE38BD274D200400204B8E /* fuse_ozz_animation_fbx_tests.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fuse_ozz_animation_fbx_tests.cc; sourceTree = "<group>"; };
 		04CE38BF274D201300204B8E /* test2ozz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test2ozz.cc; sourceTree = "<group>"; };
 		04CE38C1274D21AE00204B8E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		04CE38C3274D25BB00204B8E /* matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = matrix.cpp; sourceTree = "<group>"; };
+		04CE38C4274D25BB00204B8E /* matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +496,8 @@
 				04CE36EE274D0CDC00204B8E /* rect.h */,
 				04CE36E9274D0CDC00204B8E /* box.h */,
 				04CE36EF274D0CDC00204B8E /* box.cc */,
+				04CE38C4274D25BB00204B8E /* matrix.h */,
+				04CE38C3274D25BB00204B8E /* matrix.cpp */,
 			);
 			path = maths;
 			sourceTree = "<group>";
@@ -885,6 +891,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,6 +1010,7 @@
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
+				04CE38C5274D25BB00204B8E /* matrix.cpp in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
 				04CE37B8274D167E00204B8E /* simd_math.cc in Sources */,
