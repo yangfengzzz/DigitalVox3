@@ -25,60 +25,51 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_BOX_H_
-#define OZZ_OZZ_BASE_MATHS_BOX_H_
+#include "maths/bounding_box.h"
 
-#include <cstddef>
+#include <limits>
 
-#include "maths/vec_float.h"
+#include "maths/math_ex.h"
+#include "maths/simd_math.h"
 
 namespace ozz {
 namespace math {
 
-// Matrix forward declaration.
-struct Float4x4;
+BoundingBox::BoundingBox()
+: min(std::numeric_limits<float>::max()),
+max(-std::numeric_limits<float>::max()) {}
 
-// Defines an axis aligned box.
-struct Box {
-  // Constructs an invalid box.
-  Box();
-
-  // Constructs a box with the specified _min and _max bounds.
-  Box(const Float3& _min, const Float3& _max) : min(_min), max(_max) {}
-
-  // Constructs the smallest box that contains the _count points _points.
-  // _stride is the number of bytes between points.
-  explicit Box(const Float3& _point) : min(_point), max(_point) {}
-
-  // Constructs the smallest box that contains the _count points _points.
-  // _stride is the number of bytes between points, it must be greater or
-  // equal to sizeof(Float3).
-  Box(const Float3* _points, size_t _stride, size_t _count);
-
-  // Tests whether *this is a valid box.
-  bool is_valid() const { return min <= max; }
-
-  // Tests whether _p is within box bounds.
-  bool is_inside(const Float3& _p) const { return _p >= min && _p <= max; }
-
-  // Box's min and max bounds.
-  Float3 min;
-  Float3 max;
-};
-
-// Merges two boxes _a and _b.
-// Both _a and _b can be invalid.
-OZZ_INLINE Box Merge(const Box& _a, const Box& _b) {
-  if (!_a.is_valid()) {
-    return _b;
-  } else if (!_b.is_valid()) {
-    return _a;
-  }
-  return Box(Min(_a.min, _b.min), Max(_a.max, _b.max));
+BoundingBox::BoundingBox(const Float3* _points, size_t _stride, size_t _count) {
+    assert(_stride >= sizeof(Float3) &&
+           "_stride must be greater or equal to sizeof(Float3)");
+    
+    Float3 local_min(std::numeric_limits<float>::max());
+    Float3 local_max(-std::numeric_limits<float>::max());
+    
+    const Float3* end = PointerStride(_points, _stride * _count);
+    for (; _points < end; _points = PointerStride(_points, _stride)) {
+        local_min = Min(local_min, *_points);
+        local_max = Max(local_max, *_points);
+    }
+    
+    min = local_min;
+    max = local_max;
 }
 
-// Compute box transformation by a matrix.
-Box TransformBox(const Float4x4& _matrix, const Box& _box);
+BoundingBox TransformBox(const Float4x4& _matrix, const BoundingBox& _box) {
+    const SimdFloat4 min = simd_float4::Load3PtrU(&_box.min.x);
+    const SimdFloat4 max = simd_float4::Load3PtrU(&_box.max.x);
+    
+    // Transforms min and max.
+    const SimdFloat4 ta = TransformPoint(_matrix, min);
+    const SimdFloat4 tb = TransformPoint(_matrix, max);
+    
+    // Finds new min and max and store them in box.
+    BoundingBox tbox;
+    math::Store3PtrU(Min(ta, tb), &tbox.min.x);
+    math::Store3PtrU(Max(ta, tb), &tbox.max.x);
+    return tbox;
+}
+
 }  // namespace math
 }  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_BOX_H_

@@ -30,7 +30,7 @@
 #include <cassert>
 
 #include "io/archive.h"
-#include "maths/box.h"
+#include "maths/bounding_box.h"
 #include "maths/quaternion.h"
 #include "maths/rect.h"
 #include "maths/transform.h"
@@ -40,86 +40,86 @@ namespace ozz {
 namespace io {
 void Extern<math::Float2>::Save(OArchive& _archive, const math::Float2* _values,
                                 size_t _count) {
-  _archive << MakeArray(&_values->x, 2 * _count);
+    _archive << MakeArray(&_values->x, 2 * _count);
 }
 void Extern<math::Float2>::Load(IArchive& _archive, math::Float2* _values,
                                 size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->x, 2 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->x, 2 * _count);
 }
 
 void Extern<math::Float3>::Save(OArchive& _archive, const math::Float3* _values,
                                 size_t _count) {
-  _archive << MakeArray(&_values->x, 3 * _count);
+    _archive << MakeArray(&_values->x, 3 * _count);
 }
 void Extern<math::Float3>::Load(IArchive& _archive, math::Float3* _values,
                                 size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->x, 3 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->x, 3 * _count);
 }
 
 void Extern<math::Float4>::Save(OArchive& _archive, const math::Float4* _values,
                                 size_t _count) {
-  _archive << MakeArray(&_values->x, 4 * _count);
+    _archive << MakeArray(&_values->x, 4 * _count);
 }
 void Extern<math::Float4>::Load(IArchive& _archive, math::Float4* _values,
                                 size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->x, 4 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->x, 4 * _count);
 }
 
 void Extern<math::Quaternion>::Save(OArchive& _archive,
                                     const math::Quaternion* _values,
                                     size_t _count) {
-  _archive << MakeArray(&_values->x, 4 * _count);
+    _archive << MakeArray(&_values->x, 4 * _count);
 }
 void Extern<math::Quaternion>::Load(IArchive& _archive,
                                     math::Quaternion* _values, size_t _count,
                                     uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->x, 4 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->x, 4 * _count);
 }
 
 void Extern<math::Transform>::Save(OArchive& _archive,
                                    const math::Transform* _values,
                                    size_t _count) {
-  _archive << MakeArray(&_values->translation.x, 10 * _count);
+    _archive << MakeArray(&_values->translation.x, 10 * _count);
 }
 void Extern<math::Transform>::Load(IArchive& _archive, math::Transform* _values,
                                    size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->translation.x, 10 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->translation.x, 10 * _count);
 }
 
-void Extern<math::Box>::Save(OArchive& _archive, const math::Box* _values,
-                             size_t _count) {
-  _archive << MakeArray(&_values->min.x, 6 * _count);
+void Extern<math::BoundingBox>::Save(OArchive& _archive, const math::BoundingBox* _values,
+                                     size_t _count) {
+    _archive << MakeArray(&_values->min.x, 6 * _count);
 }
-void Extern<math::Box>::Load(IArchive& _archive, math::Box* _values,
-                             size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->min.x, 6 * _count);
+void Extern<math::BoundingBox>::Load(IArchive& _archive, math::BoundingBox* _values,
+                                     size_t _count, uint32_t _version) {
+    (void)_version;
+    _archive >> MakeArray(&_values->min.x, 6 * _count);
 }
 
 void Extern<math::RectFloat>::Save(OArchive& _archive,
                                    const math::RectFloat* _values,
                                    size_t _count) {
-  _archive << MakeArray(&_values->left, 4 * _count);
+    _archive << MakeArray(&_values->left, 4 * _count);
 }
 void Extern<math::RectFloat>::Load(IArchive& _archive, math::RectFloat* _values,
                                    size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->left, 4 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->left, 4 * _count);
 }
 
 void Extern<math::RectInt>::Save(OArchive& _archive,
                                  const math::RectInt* _values, size_t _count) {
-  _archive << MakeArray(&_values->left, 4 * _count);
+    _archive << MakeArray(&_values->left, 4 * _count);
 }
 void Extern<math::RectInt>::Load(IArchive& _archive, math::RectInt* _values,
                                  size_t _count, uint32_t _version) {
-  (void)_version;
-  _archive >> MakeArray(&_values->left, 4 * _count);
+    (void)_version;
+    _archive >> MakeArray(&_values->left, 4 * _count);
 }
 }  // namespace io
 }  // namespace ozz

@@ -38,7 +38,7 @@ struct Float3;
 struct Float4;
 struct Quaternion;
 struct Transform;
-struct Box;
+struct BoundingBox;
 struct RectFloat;
 struct RectInt;
 }  // namespace math
@@ -88,11 +88,11 @@ struct Extern<math::Transform> {
                    uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::Box)
+OZZ_IO_TYPE_NOT_VERSIONABLE(math::BoundingBox)
 template <>
-struct Extern<math::Box> {
-  static void Save(OArchive& _archive, const math::Box* _values, size_t _count);
-  static void Load(IArchive& _archive, math::Box* _values, size_t _count,
+struct Extern<math::BoundingBox> {
+  static void Save(OArchive& _archive, const math::BoundingBox* _values, size_t _count);
+  static void Load(IArchive& _archive, math::BoundingBox* _values, size_t _count,
                    uint32_t _version);
 };
 
