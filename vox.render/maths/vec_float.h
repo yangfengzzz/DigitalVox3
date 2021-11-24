@@ -36,6 +36,8 @@
 
 namespace ozz {
 namespace math {
+struct Matrix;
+struct Quaternion;
 
 // Declares a 2d float vector.
 struct Float2 {
@@ -462,6 +464,76 @@ OZZ_INLINE Float2 Clamp(const Float2& _a, const Float2& _v, const Float2& _b) {
   const Float2 min(_v.x < _b.x ? _v.x : _b.x, _v.y < _b.y ? _v.y : _b.y);
   return Float2(_a.x > min.x ? _a.x : min.x, _a.y > min.y ? _a.y : min.y);
 }
+
+/**
+ * Performs a normal transformation using the given 4x4 matrix.
+ * @remarks
+ * A normal transform performs the transformation with the assumption that the w component
+ * is zero. This causes the fourth row and fourth column of the matrix to be unused. The
+ * end result is a vector that is not translated, but all other transformation properties
+ * apply. This is often preferred for normal vectors as normals purely represent direction
+ * rather than location because normal vectors should not be translated.
+ * @param v - The normal vector to transform
+ * @param m - The transform matrix
+ * @param out - The transformed normal
+ */
+void transformNormal(const Float3& v, const Matrix& m, Float3& out);
+
+/**
+ * Performs a transformation using the given 4x4 matrix.
+ * @param v - The vector to transform
+ * @param m - The transform matrix
+ * @param out - The transformed vector3
+ */
+void transformToVec(const Float3& v, const Matrix& m, Float3& out);
+
+/**
+ * Performs a transformation from vector3 to vector4 using the given 4x4 matrix.
+ * @param v - The vector to transform
+ * @param m - The transform matrix
+ * @param out - The transformed vector4
+ */
+void transformToVec(const Float3& v, const Matrix& m, Float4& out);
+
+/**
+ * Performs a coordinate transformation using the given 4x4 matrix.
+ *
+ * @remarks
+ * A coordinate transform performs the transformation with the assumption that the w component
+ * is one. The four dimensional vector obtained from the transformation operation has each
+ * component in the vector divided by the w component. This forces the w-component to be one and
+ * therefore makes the vector homogeneous. The homogeneous vector is often preferred when working
+ * with coordinates as the w component can safely be ignored.
+ * @param v - The coordinate vector to transform
+ * @param m - The transform matrix
+ * @param out - The transformed coordinates
+ */
+void transformCoordinate(const Float3& v, const Matrix& m, Float3& out);
+
+/**
+ * Performs a transformation using the given quaternion.
+ * @param v - The vector to transform
+ * @param quaternion - The transform quaternion
+ * @param out - The transformed vector
+ */
+void transformByQuat(const Float3& v, const Quaternion& quaternion, Float3& out);
+
+/**
+ * Performs a transformation using the given 4x4 matrix.
+ * @param v - The vector to transform
+ * @param m - The transform matrix
+ * @param out - The transformed vector3
+ */
+void transform(const Float4& v, const Matrix& m, Float4& out);
+
+/**
+ * Performs a transformation using the given quaternion.
+ * @param v - The vector to transform
+ * @param q - The transform quaternion
+ * @param out - The transformed vector
+ */
+void transformByQuat(const Float4& v, const Quaternion& q, Float4& out);
+
 }  // namespace math
 }  // namespace ozz
 #endif  // OZZ_OZZ_BASE_MATHS_VEC_FLOAT_H_

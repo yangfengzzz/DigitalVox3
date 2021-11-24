@@ -31,6 +31,7 @@
 
 #include "maths/math_ex.h"
 #include "maths/simd_math.h"
+#include "bounding_sphere.h"
 
 namespace ozz {
 namespace math {
@@ -55,6 +56,24 @@ BoundingBox::BoundingBox(const Float3* _points, size_t _stride, size_t _count) {
     min = local_min;
     max = local_max;
 }
+
+BoundingBox BoundingBox::fromSphere(const BoundingSphere& sphere) {
+    const auto& center = sphere.center;
+    const auto& radius = sphere.radius;
+    BoundingBox out;
+    auto& min = out.min;
+    auto& max = out.max;
+    
+    min.x = center.x - radius;
+    min.y = center.y - radius;
+    min.z = center.z - radius;
+    max.x = center.x + radius;
+    max.y = center.y + radius;
+    max.z = center.z + radius;
+    
+    return out;
+}
+
 
 BoundingBox TransformBox(const Float4x4& _matrix, const BoundingBox& _box) {
     const SimdFloat4 min = simd_float4::Load3PtrU(&_box.min.x);

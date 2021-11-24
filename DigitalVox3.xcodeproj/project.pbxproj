@@ -123,6 +123,7 @@
 		04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38CD274E689400204B8E /* matrix3x3.cpp */; };
 		04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38CF274E79E600204B8E /* bounding_sphere.cpp */; };
 		04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38D0274E79E600204B8E /* bounding_sphere.h */; };
+		04CE38D4274E819500204B8E /* vec_float.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38D3274E819500204B8E /* vec_float.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +390,7 @@
 		04CE38CD274E689400204B8E /* matrix3x3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = matrix3x3.cpp; sourceTree = "<group>"; };
 		04CE38CF274E79E600204B8E /* bounding_sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_sphere.cpp; sourceTree = "<group>"; };
 		04CE38D0274E79E600204B8E /* bounding_sphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bounding_sphere.h; sourceTree = "<group>"; };
+		04CE38D3274E819500204B8E /* vec_float.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vec_float.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,6 +487,7 @@
 				04CE36E1274D0CDB00204B8E /* math_constant.h */,
 				04CE36E2274D0CDB00204B8E /* math_ex.h */,
 				04CE36DF274D0CDB00204B8E /* vec_float.h */,
+				04CE38D3274E819500204B8E /* vec_float.cpp */,
 				04CE36DD274D0CDB00204B8E /* quaternion.h */,
 				04CE38CB274E678400204B8E /* quaternion.cpp */,
 				04CE36EB274D0CDC00204B8E /* transform.h */,
@@ -1052,6 +1055,7 @@
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,
 				04CE37EF274D167F00204B8E /* animation_optimizer.cc in Sources */,
+				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,
 				04CE37F6274D167F00204B8E /* track_optimizer.cc in Sources */,
