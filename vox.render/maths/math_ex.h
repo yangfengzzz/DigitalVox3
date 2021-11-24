@@ -139,6 +139,11 @@ OZZ_INLINE float degreeToRadian(float d) {
     return d * kDegreeToRadian;
 }
 
+template <typename T>
+OZZ_INLINE int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
 }  // namespace math
 }  // namespace ozz
 #endif  // OZZ_OZZ_BASE_MATHS_MATH_EX_H_

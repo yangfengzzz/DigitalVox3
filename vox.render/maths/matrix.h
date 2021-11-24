@@ -14,9 +14,17 @@
 #include "maths/math_constant.h"
 #include "platform.h"
 #include "quaternion.h"
+#include "matrix3x3.h"
 
 namespace ozz {
 namespace math {
+struct Matrix;
+OZZ_INLINE void invert(const Matrix& a, Matrix& out);
+OZZ_INLINE void rotateAxisAngle(const Matrix& m, const Float3& axis, float r, Matrix& out);
+OZZ_INLINE void scale(const Matrix& m, const Float3& s, Matrix& out);
+OZZ_INLINE void translate(const Matrix& m, const Float3& v, Matrix& out);
+OZZ_INLINE void transpose(const Matrix& a, Matrix& out);
+
 // Represents a 4x4 mathematical matrix.
 struct Matrix {
     std::array<float, 16> elements;
@@ -99,6 +107,209 @@ struct Matrix {
         
         // Calculate the determinant
         return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+    }
+    
+    /**
+     * Decompose this matrix to translation, rotation and scale elements.
+     * @param translation - Translation vector as an output parameter
+     * @param rotation - Rotation quaternion as an output parameter
+     * @param scale - Scale vector as an output parameter
+     * @returns True if this matrix can be decomposed, false otherwise
+     */
+    bool decompose(Float3& translation, Quaternion& rotation, Float3& scale) {
+        Matrix3x3 rm;
+        
+        const auto& e = elements;
+        auto& rme = rm.elements;
+        
+        const auto& m11 = e[0];
+        const auto& m12 = e[1];
+        const auto& m13 = e[2];
+        const auto& m14 = e[3];
+        const auto& m21 = e[4];
+        const auto& m22 = e[5];
+        const auto& m23 = e[6];
+        const auto& m24 = e[7];
+        const auto& m31 = e[8];
+        const auto& m32 = e[9];
+        const auto& m33 = e[10];
+        const auto& m34 = e[11];
+        
+        translation.x = e[12];
+        translation.y = e[13];
+        translation.z = e[14];
+        
+        const auto xs = sgn(m11 * m12 * m13 * m14) < 0 ? -1 : 1;
+        const auto ys = sgn(m21 * m22 * m23 * m24) < 0 ? -1 : 1;
+        const auto zs = sgn(m31 * m32 * m33 * m34) < 0 ? -1 : 1;
+        
+        const auto sx = xs * std::sqrt(m11 * m11 + m12 * m12 + m13 * m13);
+        const auto sy = ys * std::sqrt(m21 * m21 + m22 * m22 + m23 * m23);
+        const auto sz = zs * std::sqrt(m31 * m31 + m32 * m32 + m33 * m33);
+        
+        scale.x = sx;
+        scale.y = sy;
+        scale.z = sz;
+        
+        if (
+            std::abs(sx) < kNormalizationToleranceSq ||
+            std::abs(sy) < kNormalizationToleranceSq ||
+            std::abs(sz) < kNormalizationToleranceSq
+            ) {
+                rotation.identity();
+                return false;
+            } else {
+                const auto invSX = 1 / sx;
+                const auto invSY = 1 / sy;
+                const auto invSZ = 1 / sz;
+                
+                rme[0] = m11 * invSX;
+                rme[1] = m12 * invSX;
+                rme[2] = m13 * invSX;
+                rme[3] = m21 * invSY;
+                rme[4] = m22 * invSY;
+                rme[5] = m23 * invSY;
+                rme[6] = m31 * invSZ;
+                rme[7] = m32 * invSZ;
+                rme[8] = m33 * invSZ;
+                rotation = Quaternion::rotationMatrix3x3(rm);
+                return true;
+            }
+    }
+    
+    /**
+     * Get rotation from this matrix.
+     * @param out - Rotation quaternion as an output parameter
+     */
+    void getRotation(Quaternion& out) {
+        const auto& e = elements;
+        auto trace = e[0] + e[5] + e[10];
+        
+        if (trace > kNormalizationToleranceSq) {
+            auto S = std::sqrt(trace + 1.0) * 2;
+            out.w = 0.25 * S;
+            out.x = (e[6] - e[9]) / S;
+            out.y = (e[8] - e[2]) / S;
+            out.z = (e[1] - e[4]) / S;
+        } else if (e[0] > e[5] && e[0] > e[10]) {
+            auto S = std::sqrt(1.0 + e[0] - e[5] - e[10]) * 2;
+            out.w = (e[6] - e[9]) / S;
+            out.x = 0.25 * S;
+            out.y = (e[1] + e[4]) / S;
+            out.z = (e[8] + e[2]) / S;
+        } else if (e[5] > e[10]) {
+            auto S = std::sqrt(1.0 + e[5] - e[0] - e[10]) * 2;
+            out.w = (e[8] - e[2]) / S;
+            out.x = (e[1] + e[4]) / S;
+            out.y = 0.25 * S;
+            out.z = (e[6] + e[9]) / S;
+        } else {
+            auto S = std::sqrt(1.0 + e[10] - e[0] - e[5]) * 2;
+            out.w = (e[1] - e[4]) / S;
+            out.x = (e[8] + e[2]) / S;
+            out.y = (e[6] + e[9]) / S;
+            out.z = 0.25 * S;
+        }
+    }
+    
+    /**
+     * Get scale from this matrix.
+     * @param out - Scale vector as an output parameter
+     */
+    void getScaling(Float3& out) {
+        //getScale()
+        const auto& e = elements;
+        const auto& m11 = e[0],
+        m12 = e[1],
+        m13 = e[2];
+        const auto& m21 = e[4],
+        m22 = e[5],
+        m23 = e[6];
+        const auto& m31 = e[8],
+        m32 = e[9],
+        m33 = e[10];
+        
+        out.x = std::sqrt(m11 * m11 + m12 * m12 + m13 * m13);
+        out.y = std::sqrt(m21 * m21 + m22 * m22 + m23 * m23);
+        out.z = std::sqrt(m31 * m31 + m32 * m32 + m33 * m33);
+    }
+    
+    /**
+     * Get translation from this matrix.
+     * @param out - Translation vector as an output parameter
+     */
+    void getTranslation(Float3& out) {
+        const auto& e = elements;
+        
+        out.x = e[12];
+        out.y = e[13];
+        out.z = e[14];
+    }
+    
+    /**
+     * Identity this matrix.
+     */
+    void identity() {
+        auto& e = elements;
+        
+        e[0] = 1;
+        e[1] = 0;
+        e[2] = 0;
+        e[3] = 0;
+        
+        e[4] = 0;
+        e[5] = 1;
+        e[6] = 0;
+        e[7] = 0;
+        
+        e[8] = 0;
+        e[9] = 0;
+        e[10] = 1;
+        e[11] = 0;
+        
+        e[12] = 0;
+        e[13] = 0;
+        e[14] = 0;
+        e[15] = 1;
+    }
+    
+    /**
+     * Invert the matrix.
+     */
+    void invert() {
+        ::ozz::math::invert(*this, *this);
+    }
+    
+    /**
+     * This matrix rotates around an arbitrary axis.
+     * @param axis - The axis
+     * @param r - The rotation angle in radians
+     */
+    void rotateAxisAngle(const Float3& axis, float r) {
+        ::ozz::math::rotateAxisAngle(*this, axis, r, *this);
+    }
+    
+    /**
+     * Scale this matrix by a given vector.
+     * @param s - The given vector
+     */
+    void scale(const Float3& s) {
+        ::ozz::math::scale(*this, s, *this);
+    }
+    
+    /**
+     * Translate this matrix by a given vector.
+     * @param v - The given vector
+     */
+    void translate(const Float3& v) {
+        ::ozz::math::translate(*this, v, *this);
+    }
+    
+    /**
+     * Calculate the transpose of this matrix.
+     */
+    void transpose() {
+        ::ozz::math::transpose(*this, *this);
     }
 };
 
