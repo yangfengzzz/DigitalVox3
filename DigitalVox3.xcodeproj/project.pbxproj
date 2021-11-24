@@ -124,6 +124,7 @@
 		04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38CF274E79E600204B8E /* bounding_sphere.cpp */; };
 		04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38D0274E79E600204B8E /* bounding_sphere.h */; };
 		04CE38D4274E819500204B8E /* vec_float.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38D3274E819500204B8E /* vec_float.cpp */; };
+		04CE38D8274E847100204B8E /* color.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38D6274E847100204B8E /* color.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +392,7 @@
 		04CE38CF274E79E600204B8E /* bounding_sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_sphere.cpp; sourceTree = "<group>"; };
 		04CE38D0274E79E600204B8E /* bounding_sphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bounding_sphere.h; sourceTree = "<group>"; };
 		04CE38D3274E819500204B8E /* vec_float.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vec_float.cpp; sourceTree = "<group>"; };
+		04CE38D6274E847100204B8E /* color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -513,6 +515,7 @@
 				04CE38C4274D25BB00204B8E /* matrix.h */,
 				04CE38C8274DBF3C00204B8E /* matrix3x3.h */,
 				04CE38CD274E689400204B8E /* matrix3x3.cpp */,
+				04CE38D6274E847100204B8E /* color.h */,
 			);
 			path = maths;
 			sourceTree = "<group>";
@@ -908,6 +911,7 @@
 			files = (
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
+				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
