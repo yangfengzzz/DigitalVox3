@@ -89,3 +89,84 @@ TEST(Quaternion, invert) {
     const auto out = invert(a);
     EXPECT_QUATERNION_EQ(out, -0.3076923076923077, -0.3076923076923077, -0.3076923076923077, 0.15384615384615385);
 }
+
+TEST(Quaternion, lerp) {
+    const auto a = Quaternion(0, 1, 2, 0);
+    const auto b = Quaternion(2, 2, 0, 0);
+    const auto normal = Quaternion(1, 1.5, 1, 0);
+    auto out = Lerp(a, b, 0.5);
+    out = Normalize(out);
+    EXPECT_QUATERNION_EQ(Normalize(normal), out.x, out.y, out.z, out.w);
+}
+
+TEST(Quaternion, slerp) {
+    auto a = Quaternion(1, 1, 1, 0.5);
+    a = Normalize(a);
+    auto b = Quaternion(0.5, 0.5, 0.5, 0.5);
+    b = Normalize(b);
+    auto out = SLerp(a, b, 0.5);
+    out = Normalize(out);
+    auto c = Quaternion(0.75, 0.75, 0.75, 0.5);
+    c = Normalize(c);
+    EXPECT_QUATERNION_EQ(out, c.x, c.y, c.z, c.w);
+}
+
+TEST(Quaternion, normalize) {
+    const auto a = Quaternion(3, 4, 0, 0);
+    const auto out = Normalize(a);
+    EXPECT_QUATERNION_EQ(out, 0.6, 0.8, 0, 0);
+}
+
+TEST(Quaternion, rotation) {
+    auto out = Quaternion::rotationX(1.5);
+    EXPECT_QUATERNION_EQ(out, 0.6816387600233341, 0, 0, 0.7316888688738209);
+    
+    out = Quaternion::rotationY(1.5);
+    EXPECT_QUATERNION_EQ(out, 0, 0.6816387600233341, 0, 0.7316888688738209);
+    
+    out = Quaternion::rotationZ(1.5);
+    EXPECT_QUATERNION_EQ(out, 0, 0, 0.6816387600233341, 0.7316888688738209);
+}
+
+TEST(Quaternion, rotate) {
+    const auto a = Quaternion();
+    auto b = Quaternion();
+    
+    auto out = Quaternion::rotateX(a, 1.5);
+    b.rotateX(1.5);
+    EXPECT_QUATERNION_EQ(out, 0.6816387600233341, 0, 0, 0.7316888688738209);
+    EXPECT_QUATERNION_EQ(out, b.x, b.y, b.z, b.w);
+    
+    out = Quaternion::rotateY(a, 1.5);
+    b = Quaternion();
+    b.rotateY(1.5);
+    EXPECT_QUATERNION_EQ(out, 0, 0.6816387600233341, 0, 0.7316888688738209);
+    EXPECT_QUATERNION_EQ(out, b.x, b.y, b.z, b.w);
+    
+    out = Quaternion::rotateZ(a, 1.5);
+    b = Quaternion();
+    b.rotateZ(1.5);
+    EXPECT_QUATERNION_EQ(out, 0, 0, 0.6816387600233341, 0.7316888688738209);
+    EXPECT_QUATERNION_EQ(out, b.x, b.y, b.z, b.w);
+}
+
+TEST(Quaternion, rotatAxisAngle) {
+    auto a = Float3(0, 5, 0);
+    a = Normalize(a);
+    const auto b = 0.5 * M_PI;
+    const auto out = Quaternion::FromAxisAngle(a, b);
+    EXPECT_QUATERNION_EQ(out, 0, 0.7071067811865475, 0, 0.7071067811865476);
+}
+
+TEST(Quaternion, scale) {
+    const auto a = Quaternion(3, 4, 5, 0);
+    const auto out = a * 3.0;
+    
+    EXPECT_QUATERNION_EQ(out, 9, 12, 15, 0);
+}
+
+TEST(Quaternion, toEuler) {
+    const auto a = Quaternion::FromEuler(M_PI / 3, 0, 0);
+    const auto euler = ToEuler(a);
+    EXPECT_FLOAT3_EQ(euler, M_PI / 3, 0, 0);
+}
