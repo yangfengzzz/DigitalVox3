@@ -63,7 +63,6 @@ struct Ray {
      * The coordinates of the specified distance from the origin in the ray direction.
      * @param distance - The specified distance
      * @param out - The coordinates as an output parameter
-     * @returns The out
      */
     void getPoint(float distance, Float3& out);
 };
