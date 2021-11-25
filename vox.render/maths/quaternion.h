@@ -39,9 +39,6 @@ namespace ozz {
 namespace math {
 struct Matrix3x3;
 struct Quaternion;
-OZZ_INLINE void rotateX(const Quaternion& quaternion, float rad, Quaternion& out);
-OZZ_INLINE void rotateY(const Quaternion& quaternion, float rad, Quaternion& out);
-OZZ_INLINE void rotateZ(const Quaternion& quaternion, float rad, Quaternion& out);
 
 struct Quaternion {
     float x, y, z, w;
@@ -93,6 +90,108 @@ struct Quaternion {
     }
     
     /**
+     * Calculate a quaternion rotate around X axis.
+     * @param rad - The rotation angle in radians
+     * @return out - The calculated quaternion
+     */
+    static OZZ_INLINE Quaternion rotationX(float rad) {
+        rad *= 0.5;
+        const auto s = std::sin(rad);
+        const auto c = std::cos(rad);
+        return Quaternion(s, 0, 0, c);
+    }
+    
+    /**
+     * Calculate a quaternion rotate around Y axis.
+     * @param rad - The rotation angle in radians
+     * @return out - The calculated quaternion
+     */
+    static OZZ_INLINE Quaternion rotationY(float rad) {
+        rad *= 0.5;
+        const auto s = std::sin(rad);
+        const auto c = std::cos(rad);
+        return Quaternion(0, s, 0, c);
+    }
+    
+    /**
+     * Calculate a quaternion rotate around Z axis.
+     * @param rad - The rotation angle in radians
+     * @return out - The calculated quaternion
+     */
+    static OZZ_INLINE Quaternion rotationZ(float rad) {
+        rad *= 0.5;
+        const auto s = std::sin(rad);
+        const auto c = std::cos(rad);
+        return Quaternion(0, 0, s, c);
+    }
+    
+    /**
+     * Calculate a quaternion that the specified quaternion rotate around X axis.
+     * @param quaternion - The specified quaternion
+     * @param rad - The rotation angle in radians
+     * @return out - The calculated quaternion
+     */
+    static OZZ_INLINE Quaternion rotateX(const Quaternion& quaternion, float rad) {
+        const auto& x = quaternion.x;
+        const auto& y = quaternion.y;
+        const auto& z = quaternion.z;
+        const auto& w = quaternion.w;
+        
+        rad *= 0.5;
+        const auto bx = std::sin(rad);
+        const auto bw = std::cos(rad);
+        
+        return Quaternion(x * bw + w * bx,
+                          y * bw + z * bx,
+                          z * bw - y * bx,
+                          w * bw - x * bx);
+    }
+    
+    /**
+     * Calculate a quaternion that the specified quaternion rotate around Y axis.
+     * @param quaternion - The specified quaternion
+     * @param rad - The rotation angle in radians
+     * @return out - The calculated quaternion
+     */
+    static OZZ_INLINE Quaternion rotateY(const Quaternion& quaternion, float rad) {
+        const auto& x = quaternion.x;
+        const auto& y = quaternion.y;
+        const auto& z = quaternion.z;
+        const auto& w = quaternion.w;
+        
+        rad *= 0.5;
+        const auto by = std::sin(rad);
+        const auto bw = std::cos(rad);
+        
+        return Quaternion(x * bw - z * by,
+                          y * bw + w * by,
+                          z * bw + x * by,
+                          w * bw - y * by);
+    }
+    
+    /**
+     * Calculate a quaternion that the specified quaternion rotate around Z axis.
+     * @param quaternion - The specified quaternion
+     * @param rad - The rotation angle in radians
+     * @return out - The calculated quaternion
+     */
+    static OZZ_INLINE Quaternion rotateZ(const Quaternion& quaternion, float rad) {
+        const auto& x = quaternion.x;
+        const auto& y = quaternion.y;
+        const auto& z = quaternion.z;
+        const auto& w = quaternion.w;
+        
+        rad *= 0.5;
+        const auto bz = std::sin(rad);
+        const auto bw = std::cos(rad);
+        
+        return Quaternion(x * bw + y * bz,
+                          y * bw - x * bz,
+                          z * bw + w * bz,
+                          w * bw - z * bz);
+    }
+    
+    /**
      * Calculate the length of this quaternion.
      * @returns The length of this quaternion
      */
@@ -113,7 +212,7 @@ struct Quaternion {
      * @param rad - The rotation angle in radians
      */
     void rotateX(float rad) {
-        ::ozz::math::rotateX(*this, rad, *this);
+        *this = Quaternion::rotateX(*this, rad);
     }
     
     /**
@@ -121,7 +220,7 @@ struct Quaternion {
      * @param rad - The rotation angle in radians
      */
     void rotateY(float rad) {
-        ::ozz::math::rotateY(*this, rad, *this);
+        *this = Quaternion::rotateY(*this, rad);
     }
     
     /**
@@ -129,16 +228,17 @@ struct Quaternion {
      * @param rad - The rotation angle in radians
      */
     void rotateZ(float rad) {
-        ::ozz::math::rotateZ(*this, rad, *this);
+        *this = Quaternion::rotateZ(*this, rad);
     }
 };
 
 /**
  * Calculate the inverse of the specified quaternion.
  * @param a - The quaternion whose inverse is to be calculated
- * @param out - The inverse of the specified quaternion
+ * @return out - The inverse of the specified quaternion
  */
-OZZ_INLINE void invert(const Quaternion& a, Quaternion& out) {
+OZZ_INLINE Quaternion invert(const Quaternion& a) {
+    Quaternion out;
     const auto& x = a.x;
     const auto& y = a.y;
     const auto& z = a.z;
@@ -151,6 +251,7 @@ OZZ_INLINE void invert(const Quaternion& a, Quaternion& out) {
         out.z = -z * invDot;
         out.w = w * invDot;
     }
+    return out;
 }
 
 // Returns true if each element of a is equal to each element of _b.
@@ -231,27 +332,6 @@ OZZ_INLINE Quaternion NormalizeSafe(const Quaternion& _q,
                       _q.w * inv_len);
 }
 
-OZZ_INLINE Quaternion Quaternion::FromAxisAngle(const Float3& _axis,
-                                                float _angle) {
-    assert(IsNormalized(_axis) && "axis is not normalized.");
-    const float half_angle = _angle * .5f;
-    const float half_sin = std::sin(half_angle);
-    const float half_cos = std::cos(half_angle);
-    return Quaternion(_axis.x * half_sin, _axis.y * half_sin, _axis.z * half_sin,
-                      half_cos);
-}
-
-OZZ_INLINE Quaternion Quaternion::FromAxisCosAngle(const Float3& _axis,
-                                                   float _cos) {
-    assert(IsNormalized(_axis) && "axis is not normalized.");
-    assert(_cos >= -1.f && _cos <= 1.f && "cos is not in [-1,1] range.");
-    
-    const float half_cos2 = (1.f + _cos) * 0.5f;
-    const float half_sin = std::sqrt(1.f - half_cos2);
-    return Quaternion(_axis.x * half_sin, _axis.y * half_sin, _axis.z * half_sin,
-                      std::sqrt(half_cos2));
-}
-
 // Returns to an axis angle representation of quaternion _q.
 // Assumes quaternion _q is normalized.
 OZZ_INLINE Float4 ToAxisAngle(const Quaternion& _q) {
@@ -269,23 +349,6 @@ OZZ_INLINE Float4 ToAxisAngle(const Quaternion& _q) {
         const float inv_s = 1.f / s;
         return Float4(_q.x * inv_s, _q.y * inv_s, _q.z * inv_s, angle);
     }
-}
-
-OZZ_INLINE Quaternion Quaternion::FromEuler(float _yaw, float _pitch,
-                                            float _roll) {
-    const float half_yaw = _yaw * .5f;
-    const float c1 = std::cos(half_yaw);
-    const float s1 = std::sin(half_yaw);
-    const float half_pitch = _pitch * .5f;
-    const float c2 = std::cos(half_pitch);
-    const float s2 = std::sin(half_pitch);
-    const float half_roll = _roll * .5f;
-    const float c3 = std::cos(half_roll);
-    const float s3 = std::sin(half_roll);
-    const float c1c2 = c1 * c2;
-    const float s1s2 = s1 * s2;
-    return Quaternion(c1c2 * s3 + s1s2 * c3, s1 * c2 * c3 + c1 * s2 * s3,
-                      c1 * s2 * c3 - s1 * c2 * s3, c1c2 * c3 - s1s2 * s3);
 }
 
 // Returns to an Euler representation of quaternion _q.
@@ -315,50 +378,6 @@ OZZ_INLINE Float3 ToEuler(const Quaternion& _q) {
                              -sqx + sqy - sqz + sqw);
     }
     return euler;
-}
-
-OZZ_INLINE Quaternion Quaternion::FromVectors(const Float3& _from,
-                                              const Float3& _to) {
-    // http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
-    
-    const float norm_from_norm_to = std::sqrt(LengthSqr(_from) * LengthSqr(_to));
-    if (norm_from_norm_to < 1.e-5f) {
-        return Quaternion::identity();
-    }
-    const float real_part = norm_from_norm_to + Dot(_from, _to);
-    Quaternion quat;
-    if (real_part < 1.e-6f * norm_from_norm_to) {
-        // If _from and _to are exactly opposite, rotate 180 degrees around an
-        // arbitrary orthogonal axis. Axis normalization can happen later, when we
-        // normalize the quaternion.
-        quat = std::abs(_from.x) > std::abs(_from.z)
-        ? Quaternion(-_from.y, _from.x, 0.f, 0.f)
-        : Quaternion(0.f, -_from.z, _from.y, 0.f);
-    } else {
-        const Float3 cross = Cross(_from, _to);
-        quat = Quaternion(cross.x, cross.y, cross.z, real_part);
-    }
-    return Normalize(quat);
-}
-
-OZZ_INLINE Quaternion Quaternion::FromUnitVectors(const Float3& _from,
-                                                  const Float3& _to) {
-    assert(IsNormalized(_from) && IsNormalized(_to) &&
-           "Input vectors must be normalized.");
-    
-    // http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
-    const float real_part = 1.f + Dot(_from, _to);
-    if (real_part < 1.e-6f) {
-        // If _from and _to are exactly opposite, rotate 180 degrees around an
-        // arbitrary orthogonal axis.
-        // Normalisation isn't needed, as from is already.
-        return std::abs(_from.x) > std::abs(_from.z)
-        ? Quaternion(-_from.y, _from.x, 0.f, 0.f)
-        : Quaternion(0.f, -_from.z, _from.y, 0.f);
-    } else {
-        const Float3 cross = Cross(_from, _to);
-        return Normalize(Quaternion(cross.x, cross.y, cross.z, real_part));
-    }
 }
 
 // Returns the dot product of _a and _b.
@@ -435,120 +454,88 @@ OZZ_INLINE Float3 TransformVector(const Quaternion& _q, const Float3& _v) {
     return Float3(_v.x + b.x + b.x, _v.y + b.y + b.y, _v.z + b.z + b.z);
 }
 
-
-/**
- * Calculate a quaternion rotate around X axis.
- * @param rad - The rotation angle in radians
- * @param out - The calculated quaternion
- */
-OZZ_INLINE void rotationX(float rad, Quaternion& out) {
-    rad *= 0.5;
-    const auto s = std::sin(rad);
-    const auto c = std::cos(rad);
-    
-    out.x = s;
-    out.y = 0;
-    out.z = 0;
-    out.w = c;
+OZZ_INLINE Quaternion Quaternion::FromAxisAngle(const Float3& _axis,
+                                                float _angle) {
+    assert(IsNormalized(_axis) && "axis is not normalized.");
+    const float half_angle = _angle * .5f;
+    const float half_sin = std::sin(half_angle);
+    const float half_cos = std::cos(half_angle);
+    return Quaternion(_axis.x * half_sin, _axis.y * half_sin, _axis.z * half_sin,
+                      half_cos);
 }
 
-/**
- * Calculate a quaternion rotate around Y axis.
- * @param rad - The rotation angle in radians
- * @param out - The calculated quaternion
- */
-OZZ_INLINE void rotationY(float rad, Quaternion& out) {
-    rad *= 0.5;
-    const auto s = std::sin(rad);
-    const auto c = std::cos(rad);
+OZZ_INLINE Quaternion Quaternion::FromAxisCosAngle(const Float3& _axis,
+                                                   float _cos) {
+    assert(IsNormalized(_axis) && "axis is not normalized.");
+    assert(_cos >= -1.f && _cos <= 1.f && "cos is not in [-1,1] range.");
     
-    out.x = 0;
-    out.y = s;
-    out.z = 0;
-    out.w = c;
+    const float half_cos2 = (1.f + _cos) * 0.5f;
+    const float half_sin = std::sqrt(1.f - half_cos2);
+    return Quaternion(_axis.x * half_sin, _axis.y * half_sin, _axis.z * half_sin,
+                      std::sqrt(half_cos2));
 }
 
-/**
- * Calculate a quaternion rotate around Z axis.
- * @param rad - The rotation angle in radians
- * @param out - The calculated quaternion
- */
-OZZ_INLINE void rotationZ(float rad, Quaternion& out) {
-    rad *= 0.5;
-    const auto s = std::sin(rad);
-    const auto c = std::cos(rad);
-    
-    out.x = 0;
-    out.y = 0;
-    out.z = s;
-    out.w = c;
+OZZ_INLINE Quaternion Quaternion::FromEuler(float _yaw, float _pitch,
+                                            float _roll) {
+    const float half_yaw = _yaw * .5f;
+    const float c1 = std::cos(half_yaw);
+    const float s1 = std::sin(half_yaw);
+    const float half_pitch = _pitch * .5f;
+    const float c2 = std::cos(half_pitch);
+    const float s2 = std::sin(half_pitch);
+    const float half_roll = _roll * .5f;
+    const float c3 = std::cos(half_roll);
+    const float s3 = std::sin(half_roll);
+    const float c1c2 = c1 * c2;
+    const float s1s2 = s1 * s2;
+    return Quaternion(c1c2 * s3 + s1s2 * c3, s1 * c2 * c3 + c1 * s2 * s3,
+                      c1 * s2 * c3 - s1 * c2 * s3, c1c2 * c3 - s1s2 * s3);
 }
 
-/**
- * Calculate a quaternion that the specified quaternion rotate around X axis.
- * @param quaternion - The specified quaternion
- * @param rad - The rotation angle in radians
- * @param out - The calculated quaternion
- */
-OZZ_INLINE void rotateX(const Quaternion& quaternion, float rad, Quaternion& out) {
-    const auto& x = quaternion.x;
-    const auto& y = quaternion.y;
-    const auto& z = quaternion.z;
-    const auto& w = quaternion.w;
+OZZ_INLINE Quaternion Quaternion::FromVectors(const Float3& _from,
+                                              const Float3& _to) {
+    // http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
     
-    rad *= 0.5;
-    const auto bx = std::sin(rad);
-    const auto bw = std::cos(rad);
-    
-    out.x = x * bw + w * bx;
-    out.y = y * bw + z * bx;
-    out.z = z * bw - y * bx;
-    out.w = w * bw - x * bx;
+    const float norm_from_norm_to = std::sqrt(LengthSqr(_from) * LengthSqr(_to));
+    if (norm_from_norm_to < 1.e-5f) {
+        return Quaternion::identity();
+    }
+    const float real_part = norm_from_norm_to + Dot(_from, _to);
+    Quaternion quat;
+    if (real_part < 1.e-6f * norm_from_norm_to) {
+        // If _from and _to are exactly opposite, rotate 180 degrees around an
+        // arbitrary orthogonal axis. Axis normalization can happen later, when we
+        // normalize the quaternion.
+        quat = std::abs(_from.x) > std::abs(_from.z)
+        ? Quaternion(-_from.y, _from.x, 0.f, 0.f)
+        : Quaternion(0.f, -_from.z, _from.y, 0.f);
+    } else {
+        const Float3 cross = Cross(_from, _to);
+        quat = Quaternion(cross.x, cross.y, cross.z, real_part);
+    }
+    return Normalize(quat);
 }
 
-/**
- * Calculate a quaternion that the specified quaternion rotate around Y axis.
- * @param quaternion - The specified quaternion
- * @param rad - The rotation angle in radians
- * @param out - The calculated quaternion
- */
-OZZ_INLINE void rotateY(const Quaternion& quaternion, float rad, Quaternion& out) {
-    const auto& x = quaternion.x;
-    const auto& y = quaternion.y;
-    const auto& z = quaternion.z;
-    const auto& w = quaternion.w;
+OZZ_INLINE Quaternion Quaternion::FromUnitVectors(const Float3& _from,
+                                                  const Float3& _to) {
+    assert(IsNormalized(_from) && IsNormalized(_to) &&
+           "Input vectors must be normalized.");
     
-    rad *= 0.5;
-    const auto by = std::sin(rad);
-    const auto bw = std::cos(rad);
-    
-    out.x = x * bw - z * by;
-    out.y = y * bw + w * by;
-    out.z = z * bw + x * by;
-    out.w = w * bw - y * by;
+    // http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
+    const float real_part = 1.f + Dot(_from, _to);
+    if (real_part < 1.e-6f) {
+        // If _from and _to are exactly opposite, rotate 180 degrees around an
+        // arbitrary orthogonal axis.
+        // Normalisation isn't needed, as from is already.
+        return std::abs(_from.x) > std::abs(_from.z)
+        ? Quaternion(-_from.y, _from.x, 0.f, 0.f)
+        : Quaternion(0.f, -_from.z, _from.y, 0.f);
+    } else {
+        const Float3 cross = Cross(_from, _to);
+        return Normalize(Quaternion(cross.x, cross.y, cross.z, real_part));
+    }
 }
 
-/**
- * Calculate a quaternion that the specified quaternion rotate around Z axis.
- * @param quaternion - The specified quaternion
- * @param rad - The rotation angle in radians
- * @param out - The calculated quaternion
- */
-OZZ_INLINE void rotateZ(const Quaternion& quaternion, float rad, Quaternion& out) {
-    const auto& x = quaternion.x;
-    const auto& y = quaternion.y;
-    const auto& z = quaternion.z;
-    const auto& w = quaternion.w;
-    
-    rad *= 0.5;
-    const auto bz = std::sin(rad);
-    const auto bw = std::cos(rad);
-    
-    out.x = x * bw + y * bz;
-    out.y = y * bw - x * bz;
-    out.z = z * bw + w * bz;
-    out.w = w * bw - z * bz;
-}
 
 }  // namespace math
 }  // namespace ozz
