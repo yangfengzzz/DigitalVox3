@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FC4274F6124006CD384 /* bounding_frustum.cpp */; };
+		04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FC5274F6124006CD384 /* bounding_frustum.h */; };
+		04160FCA274F6374006CD384 /* collision_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FC8274F6374006CD384 /* collision_util.cpp */; };
+		04160FCB274F6374006CD384 /* collision_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FC9274F6374006CD384 /* collision_util.h */; };
+		04160FD1274F7079006CD384 /* ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FCF274F7079006CD384 /* ray.cpp */; };
+		04160FD2274F7079006CD384 /* ray.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FD0274F7079006CD384 /* ray.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -168,6 +174,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04160FC4274F6124006CD384 /* bounding_frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_frustum.cpp; sourceTree = "<group>"; };
+		04160FC5274F6124006CD384 /* bounding_frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bounding_frustum.h; sourceTree = "<group>"; };
+		04160FC8274F6374006CD384 /* collision_util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = collision_util.cpp; sourceTree = "<group>"; };
+		04160FC9274F6374006CD384 /* collision_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collision_util.h; sourceTree = "<group>"; };
+		04160FCD274F6514006CD384 /* containment_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = containment_type.h; sourceTree = "<group>"; };
+		04160FCE274F6538006CD384 /* planeIntersection_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = planeIntersection_type.h; sourceTree = "<group>"; };
+		04160FCF274F7079006CD384 /* ray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ray.cpp; sourceTree = "<group>"; };
+		04160FD0274F7079006CD384 /* ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ray.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -433,6 +447,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04160FCC274F6505006CD384 /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				04160FCD274F6514006CD384 /* containment_type.h */,
+				04160FCE274F6538006CD384 /* planeIntersection_type.h */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +513,7 @@
 		04CE36BB274D0BF200204B8E /* maths */ = {
 			isa = PBXGroup;
 			children = (
+				04160FCC274F6505006CD384 /* enums */,
 				04CE36E1274D0CDB00204B8E /* math_constant.h */,
 				04CE36E2274D0CDB00204B8E /* math_ex.h */,
 				04CE36DF274D0CDB00204B8E /* vec_float.h */,
@@ -522,6 +546,12 @@
 				04CE38D6274E847100204B8E /* color.h */,
 				04CE38DA274E8C2D00204B8E /* plane.h */,
 				04CE38D9274E8C2D00204B8E /* plane.cpp */,
+				04160FC5274F6124006CD384 /* bounding_frustum.h */,
+				04160FC4274F6124006CD384 /* bounding_frustum.cpp */,
+				04160FC9274F6374006CD384 /* collision_util.h */,
+				04160FC8274F6374006CD384 /* collision_util.cpp */,
+				04160FD0274F7079006CD384 /* ray.h */,
+				04160FCF274F7079006CD384 /* ray.cpp */,
 			);
 			path = maths;
 			sourceTree = "<group>";
@@ -916,9 +946,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CE38DC274E8C2D00204B8E /* plane.h in Headers */,
+				04160FD2274F7079006CD384 /* ray.h in Headers */,
+				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
+				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1035,6 +1068,8 @@
 			files = (
 				04CE3790274D167E00204B8E /* platform.cc in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
+				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
+				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
@@ -1063,6 +1098,7 @@
 				04CE37E6274D167F00204B8E /* raw_animation.cc in Sources */,
 				04CE37E7274D167F00204B8E /* raw_animation_utils.cc in Sources */,
 				04CE38CC274E678400204B8E /* quaternion.cpp in Sources */,
+				04160FD1274F7079006CD384 /* ray.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,
