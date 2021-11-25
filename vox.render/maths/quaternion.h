@@ -46,11 +46,8 @@ OZZ_INLINE void rotateZ(const Quaternion& quaternion, float rad, Quaternion& out
 struct Quaternion {
     float x, y, z, w;
     
-    // Constructs an uninitialized quaternion.
-    OZZ_INLINE Quaternion() {}
-    
     // Constructs a quaternion from 4 floating point values.
-    OZZ_INLINE Quaternion(float _x, float _y, float _z, float _w)
+    OZZ_INLINE Quaternion(float _x = 0, float _y = 0, float _z = 0, float _w = 1)
     : x(_x), y(_y), z(_z), w(_w) {}
     
     // Returns a normalized quaternion initialized from an axis angle
