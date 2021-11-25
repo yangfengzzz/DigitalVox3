@@ -34,22 +34,55 @@ static const float kFloatNearEstTolerance = 1e-3f;
 // Implements "float near" test as a function. Avoids overloading compiler
 // optimizer when too much EXPECT_NEAR are used in a single compilation unit.
 inline void ExpectFloatNear(float _a, float _b,
-                            float _tol = kFloatNearTolerance) {
-  EXPECT_NEAR(_a, _b, _tol);
+        float _tol = kFloatNearTolerance) {
+    EXPECT_NEAR(_a, _b, _tol);
 }
 
 // Implements "int equality" test as a function. Avoids overloading compiler
 // optimizer when too much EXPECT_TRUE are used in a single compilation unit.
-inline void ExpectIntEq(int _a, int _b) { EXPECT_EQ(_a, _b); }
+inline void ExpectIntEq(int _a, int _b) {
+    EXPECT_EQ(_a, _b);
+}
 
 // Implements "bool equality" test as a function. Avoids overloading compiler
 // optimizer when too much EXPECT_TRUE are used in a single compilation unit.
-inline void ExpectTrue(bool _b) { EXPECT_TRUE(_b); }
+inline void ExpectTrue(bool _b) {
+    EXPECT_TRUE(_b);
+}
 
 // Macro for testing floats, dedicated to estimated functions with a lower
 // precision.
 #define EXPECT_FLOAT_EQ_EST(_expected, _x) \
   EXPECT_NEAR(_expected, _x, kFloatNearEstTolerance)
+
+// Macro for testing ozz::math::Matrix members with x, y, z, w float values,
+// using EXPECT_FLOAT_EQ internally.
+#define EXPECT_MATRIX_EQ(_expected, _x0, _x1, _x2, _x3, \
+                                    _y0, _y1, _y2, _y3, \
+                                    _z0, _z1, _z2, _z3, \
+                                    _w0, _w1, _w2, _w3) \
+                                                    \
+  do {                                              \
+    SCOPED_TRACE("");                               \
+    const ozz::math::Matrix expected(_expected);    \
+    ExpectFloatNear(expected.elements[0], _x0);      \
+    ExpectFloatNear(expected.elements[1], _x1);      \
+    ExpectFloatNear(expected.elements[2], _x2);      \
+    ExpectFloatNear(expected.elements[3], _x3);      \
+    ExpectFloatNear(expected.elements[4], _y0);      \
+    ExpectFloatNear(expected.elements[5], _y1);      \
+    ExpectFloatNear(expected.elements[6], _y2);      \
+    ExpectFloatNear(expected.elements[7], _y3);      \
+    ExpectFloatNear(expected.elements[8], _z0);      \
+    ExpectFloatNear(expected.elements[9], _z1);      \
+    ExpectFloatNear(expected.elements[10], _z2);     \
+    ExpectFloatNear(expected.elements[11], _z3);     \
+    ExpectFloatNear(expected.elements[12], _w0);     \
+    ExpectFloatNear(expected.elements[13], _w1);     \
+    ExpectFloatNear(expected.elements[14], _w2);     \
+    ExpectFloatNear(expected.elements[15], _w3);     \
+                                                    \
+  } while (void(0), 0)
 
 // Macro for testing ozz::math::Float4 members with x, y, z, w float values,
 // using EXPECT_FLOAT_EQ internally.
@@ -400,7 +433,7 @@ inline void ExpectTrue(bool _b) { EXPECT_TRUE(_b); }
 // values.
 // Dedicated to estimated functions with a lower precision.
 #define EXPECT_SOAQUATERNION_EQ_EST(_expected, _x0, _x1, _x2, _x3, _y0, _y1, \
-                                    _y2, _y3, _z0, _z1, _z2, _z3, _w0, _w1,  \
+                                    _y2, _y3, _z0, _z1, _z2, _z3, _w0, _w1, \
                                     _w2, _w3)                                \
                                                                              \
   do {                                                                       \
@@ -413,14 +446,14 @@ inline void ExpectTrue(bool _b) { EXPECT_TRUE(_b); }
                                                                              \
   } while (void(0), 0)
 
-#define EXPECT_SOAFLOAT4x4_EQ(                                                 \
+#define EXPECT_SOAFLOAT4x4_EQ(\
     _expected, col0xx, col0xy, col0xz, col0xw, col0yx, col0yy, col0yz, col0yw, \
-    col0zx, col0zy, col0zz, col0zw, col0wx, col0wy, col0wz, col0ww, col1xx,    \
-    col1xy, col1xz, col1xw, col1yx, col1yy, col1yz, col1yw, col1zx, col1zy,    \
-    col1zz, col1zw, col1wx, col1wy, col1wz, col1ww, col2xx, col2xy, col2xz,    \
-    col2xw, col2yx, col2yy, col2yz, col2yw, col2zx, col2zy, col2zz, col2zw,    \
-    col2wx, col2wy, col2wz, col2ww, col3xx, col3xy, col3xz, col3xw, col3yx,    \
-    col3yy, col3yz, col3yw, col3zx, col3zy, col3zz, col3zw, col3wx, col3wy,    \
+    col0zx, col0zy, col0zz, col0zw, col0wx, col0wy, col0wz, col0ww, col1xx, \
+    col1xy, col1xz, col1xw, col1yx, col1yy, col1yz, col1yw, col1zx, col1zy, \
+    col1zz, col1zw, col1wx, col1wy, col1wz, col1ww, col2xx, col2xy, col2xz, \
+    col2xw, col2yx, col2yy, col2yz, col2yw, col2zx, col2zy, col2zz, col2zw, \
+    col2wx, col2wy, col2wz, col2ww, col3xx, col3xy, col3xz, col3xw, col3yx, \
+    col3yy, col3yz, col3yw, col3zx, col3zy, col3zz, col3zw, col3wx, col3wy, \
     col3wz, col3ww)                                                            \
                                                                                \
   do {                                                                         \

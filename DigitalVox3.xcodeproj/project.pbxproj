@@ -137,6 +137,7 @@
 		04CE38DB274E8C2D00204B8E /* plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38D9274E8C2D00204B8E /* plane.cpp */; };
 		04CE38DC274E8C2D00204B8E /* plane.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38DA274E8C2D00204B8E /* plane.h */; };
 		04CE38E3274FC42E00204B8E /* quat_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E1274FC42E00204B8E /* quat_tests.cpp */; };
+		04CE38E5274FD28C00204B8E /* matrix_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E4274FD28C00204B8E /* matrix_tests.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -419,6 +420,7 @@
 		04CE38D9274E8C2D00204B8E /* plane.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = plane.cpp; sourceTree = "<group>"; };
 		04CE38DA274E8C2D00204B8E /* plane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plane.h; sourceTree = "<group>"; };
 		04CE38E1274FC42E00204B8E /* quat_tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = quat_tests.cpp; sourceTree = "<group>"; };
+		04CE38E4274FD28C00204B8E /* matrix_tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_tests.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -863,6 +865,7 @@
 				04160FD5274F8D53006CD384 /* vector3_tests.cpp */,
 				04160FD8274F93FD006CD384 /* vector4_tests.cpp */,
 				04CE38E1274FC42E00204B8E /* quat_tests.cpp */,
+				04CE38E4274FD28C00204B8E /* matrix_tests.cpp */,
 			);
 			path = maths;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 				04CE3856274D19B700204B8E /* intrusive_list_tests.cc in Sources */,
 				04CE389B274D1F8800204B8E /* sampling_job_tests.cc in Sources */,
 				04CE38A1274D1F8800204B8E /* blending_job_tests.cc in Sources */,
+				04CE38E5274FD28C00204B8E /* matrix_tests.cpp in Sources */,
 				04CE3874274D19C800204B8E /* soa_math_archive_tests.cc in Sources */,
 				04CE3851274D19AD00204B8E /* unique_ptr_tests.cc in Sources */,
 				04CE38B6274D1FE500204B8E /* raw_skeleton_archive_tests.cc in Sources */,
