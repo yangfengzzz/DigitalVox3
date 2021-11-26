@@ -121,23 +121,20 @@ TEST(Vector3, scale) {
 
 TEST(Vector3, transform) {
     const auto a = Float3(2, 3, 4);
-    Float3 out;
-    
     const auto m44 = Matrix(2, 7, 17, 0, 3, 11, 19, 0, 5, 13, 23, 0, 0, 0, 0, 1);
-    transformNormal(a, m44, out);
+    Float3 out = transformNormal(a, m44);
     EXPECT_FLOAT3_EQ(out, 33, 99, 183);
     
     const auto b = Float4(2, 3, 4, 1);
-    Float4 out4;
     const auto m4 = Matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1);
-    transformCoordinate(a, m4, out);
-    transform(b, m4, out4);
+    out = transformCoordinate(a, m4);
+    const auto out4 = transform(b, m4);
     EXPECT_FLOAT_EQ(out.x, out4.x / out4.w);
     EXPECT_FLOAT_EQ(out.y, out4.y / out4.w);
     EXPECT_FLOAT_EQ(out.z, out4.z / out4.w);
     
-    transformByQuat(a, Quaternion(), out);
+    out = transformByQuat(a, Quaternion());
     EXPECT_FLOAT3_EQ(a, out.x, out.y, out.z);
-    transformByQuat(a, Quaternion(2, 3, 4, 5), out);
+    out = transformByQuat(a, Quaternion(2, 3, 4, 5));
     EXPECT_FLOAT3_EQ(out, 108, 162, 216);
 }

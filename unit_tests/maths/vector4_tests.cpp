@@ -113,13 +113,12 @@ TEST(Vector4, scale) {
 
 TEST(Vector4, transform) {
     const auto a = Float4(2, 3, 4, 5);
-    Float4 out;
     const auto m4 = Matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0);
-    transform(a, m4, out);
+    Float4 out = transform(a, m4);
     EXPECT_FLOAT4_EQ(out, 2, 3, 9, 0);
     
-    transformByQuat(a, Quaternion(), out);
+    out = transformByQuat(a, Quaternion());
     EXPECT_FLOAT4_EQ(a, out.x, out.y, out.z, out.w);
-    transformByQuat(a, Quaternion(2, 3, 4, 5), out);
+    out = transformByQuat(a, Quaternion(2, 3, 4, 5));
     EXPECT_FLOAT4_EQ(out, 108, 162, 216, 5);
 }

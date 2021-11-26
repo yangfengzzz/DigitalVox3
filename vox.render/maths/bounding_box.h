@@ -111,12 +111,12 @@ struct BoundingBox {
      * @returns An array of points representing the eight corners of this bounding box
      */
     std::array<Float3, 8> getCorners() const {
-        const auto& minX = min.x;
-        const auto& minY = min.y;
-        const auto& minZ = min.z;
-        const auto& maxX = max.x;
-        const auto& maxY = max.y;
-        const auto& maxZ = max.z;
+        const auto &minX = min.x;
+        const auto &minY = min.y;
+        const auto &minZ = min.z;
+        const auto &maxX = max.x;
+        const auto &maxY = max.y;
+        const auto &maxZ = max.z;
         
         return {
             Float3(minX, maxY, maxZ),
@@ -157,7 +157,7 @@ VOX_INLINE BoundingBox transform(const BoundingBox &source, const Matrix &matrix
     Float3 center = source.getCenter();
     Float3 extent = source.getExtent();
     
-    transformCoordinate(center, matrix, center);
+    center = transformCoordinate(center, matrix);
     
     const auto &x = extent.x;
     const auto &y = extent.y;
