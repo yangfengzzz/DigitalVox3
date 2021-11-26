@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
+#define VOX_VOX_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
 
 #include "runtime/animation/animation.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Count translation, rotation or scale keyframes for a given track number. Use
@@ -39,5 +39,5 @@ int CountTranslationKeyframes(const Animation& _animation, int _track = -1);
 int CountRotationKeyframes(const Animation& _animation, int _track = -1);
 int CountScaleKeyframes(const Animation& _animation, int _track = -1);
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_ANIMATION_UTILS_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_ANIMATION_UTILS_H_

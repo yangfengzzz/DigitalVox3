@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_MATH_EX_H_
-#define OZZ_OZZ_BASE_MATHS_MATH_EX_H_
+#ifndef VOX_VOX_BASE_MATHS_MATH_EX_H_
+#define VOX_VOX_BASE_MATHS_MATH_EX_H_
 
 #include <cassert>
 #include <cmath>
@@ -34,42 +34,42 @@
 #include "platform.h"
 #include "math_constant.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 
 // Returns the linear interpolation of _a and _b with coefficient _f.
 // _f is not limited to range [0,1].
-OZZ_INLINE float Lerp(float _a, float _b, float _f) {
+VOX_INLINE float Lerp(float _a, float _b, float _f) {
     return (_b - _a) * _f + _a;
 }
 
 // Returns the minimum of _a and _b. Comparison's based on operator <.
 template <typename _Ty>
-OZZ_INLINE _Ty Min(_Ty _a, _Ty _b) {
+VOX_INLINE _Ty Min(_Ty _a, _Ty _b) {
     return (_a < _b) ? _a : _b;
 }
 
 // Returns the maximum of _a and _b. Comparison's based on operator <.
 template <typename _Ty>
-OZZ_INLINE _Ty Max(_Ty _a, _Ty _b) {
+VOX_INLINE _Ty Max(_Ty _a, _Ty _b) {
     return (_b < _a) ? _a : _b;
 }
 
 // Clamps _x between _a and _b. Comparison's based on operator <.
 // Result is unknown if _a is not less or equal to _b.
 template <typename _Ty>
-OZZ_INLINE _Ty Clamp(_Ty _a, _Ty _x, _Ty _b) {
+VOX_INLINE _Ty Clamp(_Ty _a, _Ty _x, _Ty _b) {
     const _Ty min = _x < _b ? _x : _b;
     return min < _a ? _a : min;
 }
 
 // Implements int selection, avoiding branching.
-OZZ_INLINE int Select(bool _b, int _true, int _false) {
+VOX_INLINE int Select(bool _b, int _true, int _false) {
     return _false ^ (-static_cast<int>(_b) & (_true ^ _false));
 }
 
 // Implements float selection, avoiding branching.
-OZZ_INLINE float Select(bool _b, float _true, float _false) {
+VOX_INLINE float Select(bool _b, float _true, float _false) {
     union {
         float f;
         int32_t i;
@@ -87,7 +87,7 @@ OZZ_INLINE float Select(bool _b, float _true, float _false) {
 
 // Implements pointer selection, avoiding branching.
 template <typename _Ty>
-OZZ_INLINE _Ty* Select(bool _b, _Ty* _true, _Ty* _false) {
+VOX_INLINE _Ty* Select(bool _b, _Ty* _true, _Ty* _false) {
     union {
         _Ty* p;
         intptr_t i;
@@ -105,7 +105,7 @@ OZZ_INLINE _Ty* Select(bool _b, _Ty* _true, _Ty* _false) {
 
 // Implements const pointer selection, avoiding branching.
 template <typename _Ty>
-OZZ_INLINE const _Ty* Select(bool _b, const _Ty* _true, const _Ty* _false) {
+VOX_INLINE const _Ty* Select(bool _b, const _Ty* _true, const _Ty* _false) {
     union {
         const _Ty* p;
         intptr_t i;
@@ -126,7 +126,7 @@ OZZ_INLINE const _Ty* Select(bool _b, const _Ty* _true, const _Ty* _false) {
  * @param r - The specified r
  * @returns The degree value
  */
-OZZ_INLINE float radianToDegree(float r) {
+VOX_INLINE float radianToDegree(float r) {
     return r * kRadianToDegree;
 }
 
@@ -135,15 +135,15 @@ OZZ_INLINE float radianToDegree(float r) {
  * @param d - The specified d
  * @returns The radian value
  */
-OZZ_INLINE float degreeToRadian(float d) {
+VOX_INLINE float degreeToRadian(float d) {
     return d * kDegreeToRadian;
 }
 
 template <typename T>
-OZZ_INLINE int sgn(T val) {
+VOX_INLINE int sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
 
 }  // namespace math
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_MATH_EX_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MATHS_MATH_EX_H_

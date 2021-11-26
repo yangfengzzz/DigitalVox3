@@ -10,7 +10,7 @@
 
 #include "component.h"
 
-namespace ozz {
+namespace vox {
 /**
  * Script class, used for logic writing.
  */

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_MATH_CONSTANT_H_
-#define OZZ_OZZ_BASE_MATHS_MATH_CONSTANT_H_
+#ifndef VOX_VOX_BASE_MATHS_MATH_CONSTANT_H_
+#define VOX_VOX_BASE_MATHS_MATH_CONSTANT_H_
 
-#ifndef INCLUDE_OZZ_MATH_CONSTANT_H_
-#define INCLUDE_OZZ_MATH_CONSTANT_H_
+#ifndef INCLUDE_VOX_MATH_CONSTANT_H_
+#define INCLUDE_VOX_MATH_CONSTANT_H_
 
-namespace ozz {
+namespace vox {
 namespace math {
 
 // Defines math trigonometric constants.
@@ -55,7 +55,7 @@ static const float kNormalizationToleranceEstSq = 2e-3f;
 // Defines the square orthogonalisation tolerance value.
 static const float kOrthogonalisationToleranceSq = 1e-16f;
 }  // namespace math
-}  // namespace ozz
+}  // namespace vox
 
-#endif  // INCLUDE_OZZ_MATH_CONSTANT_H_
-#endif  // OZZ_OZZ_BASE_MATHS_MATH_CONSTANT_H_
+#endif  // INCLUDE_VOX_MATH_CONSTANT_H_
+#endif  // VOX_VOX_BASE_MATHS_MATH_CONSTANT_H_

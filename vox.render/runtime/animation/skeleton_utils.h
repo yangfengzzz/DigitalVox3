@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,19 +25,19 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_UTILS_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_UTILS_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_SKELETON_UTILS_H_
+#define VOX_VOX_ANIMATION_RUNTIME_SKELETON_UTILS_H_
 
 #include "runtime/animation/skeleton.h"
 #include "maths/transform.h"
 
 #include <cassert>
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Get bind-pose of a skeleton joint.
-ozz::math::Transform GetJointLocalBindPose(const Skeleton& _skeleton,
+vox::math::Transform GetJointLocalBindPose(const Skeleton& _skeleton,
                                            int _joint);
 
 // Test if a joint is a leaf. _joint number must be in range [0, num joints].
@@ -86,5 +86,5 @@ inline _Fct IterateJointsDFReverse(const Skeleton& _skeleton, _Fct _fct) {
   return _fct;
 }
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_UTILS_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_SKELETON_UTILS_H_

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -36,7 +36,7 @@
 
 #include "runtime/animation/skeleton.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 LocalToModelJob::LocalToModelJob()
@@ -110,4 +110,4 @@ bool LocalToModelJob::Run() const {
   return true;
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

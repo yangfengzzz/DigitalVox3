@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_SOA_MATH_ARCHIVE_H_
-#define OZZ_OZZ_BASE_MATHS_SOA_MATH_ARCHIVE_H_
+#ifndef VOX_VOX_BASE_MATHS_SOA_MATH_ARCHIVE_H_
+#define VOX_VOX_BASE_MATHS_SOA_MATH_ARCHIVE_H_
 
 #include "io/archive_traits.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct SoaFloat2;
 struct SoaFloat3;
@@ -41,7 +41,7 @@ struct SoaFloat4x4;
 struct SoaTransform;
 }  // namespace math
 namespace io {
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat2)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat2)
 template <>
 struct Extern<math::SoaFloat2> {
   static void Save(OArchive& _archive, const math::SoaFloat2* _values,
@@ -50,7 +50,7 @@ struct Extern<math::SoaFloat2> {
                    uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat3)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat3)
 template <>
 struct Extern<math::SoaFloat3> {
   static void Save(OArchive& _archive, const math::SoaFloat3* _values,
@@ -59,7 +59,7 @@ struct Extern<math::SoaFloat3> {
                    uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat4)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat4)
 template <>
 struct Extern<math::SoaFloat4> {
   static void Save(OArchive& _archive, const math::SoaFloat4* _values,
@@ -68,7 +68,7 @@ struct Extern<math::SoaFloat4> {
                    uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SoaQuaternion)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SoaQuaternion)
 template <>
 struct Extern<math::SoaQuaternion> {
   static void Save(OArchive& _archive, const math::SoaQuaternion* _values,
@@ -77,7 +77,7 @@ struct Extern<math::SoaQuaternion> {
                    size_t _count, uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat4x4)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SoaFloat4x4)
 template <>
 struct Extern<math::SoaFloat4x4> {
   static void Save(OArchive& _archive, const math::SoaFloat4x4* _values,
@@ -86,7 +86,7 @@ struct Extern<math::SoaFloat4x4> {
                    size_t _count, uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SoaTransform)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SoaTransform)
 template <>
 struct Extern<math::SoaTransform> {
   static void Save(OArchive& _archive, const math::SoaTransform* _values,
@@ -95,5 +95,5 @@ struct Extern<math::SoaTransform> {
                    size_t _count, uint32_t _version);
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_SOA_MATH_ARCHIVE_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MATHS_SOA_MATH_ARCHIVE_H_

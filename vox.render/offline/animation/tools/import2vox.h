@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_H_
+#define VOX_VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_H_
 
 #include "containers/string.h"
 #include "containers/vector.h"
@@ -35,25 +35,25 @@
 #include "offline/animation/raw_skeleton.h"
 #include "offline/animation/raw_track.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 class Skeleton;
 
 namespace offline {
 
-// Defines ozz converter/importer interface.
-// OzzImporter implements a command line tool to convert any source data format
-// to ozz skeletons and animations. The tool exposes a set of global options
+// Defines vox converter/importer interface.
+// VoxImporter implements a command line tool to convert any source data format
+// to vox skeletons and animations. The tool exposes a set of global options
 // through the command line, and a json configuration file to tune import
 // settings. Reference json configuration is generated at
 // src\animation\offline\tools\reference.json.
 // To import a new source data format, one will implement the pure virtual
 // functions of this interface. All the conversions end error processing are
 // done by the tool.
-class OzzImporter {
+class VoxImporter {
  public:
-  virtual ~OzzImporter() {}
+  virtual ~VoxImporter() {}
 
   // Function operator that must be called with main() arguments to start import
   // process.
@@ -78,14 +78,14 @@ class OzzImporter {
 
   // Import a skeleton from the source data file.
   // Returning false will report and error.
-  virtual bool Import(ozz::animation::offline::RawSkeleton* _skeleton,
+  virtual bool Import(vox::animation::offline::RawSkeleton* _skeleton,
                       const NodeType& _types) = 0;
 
   // Animations management.
 
   // Gets the name of all the animations/clips/takes available from the source
   // data file.
-  typedef ozz::vector<ozz::string> AnimationNames;
+  typedef vox::vector<vox::string> AnimationNames;
   virtual AnimationNames GetAnimationNames() = 0;
 
   // Import animation "_animation_name" from the source data file.
@@ -93,7 +93,7 @@ class OzzImporter {
   // animations.
   // Returning false will report and error.
   virtual bool Import(const char* _animation_name,
-                      const ozz::animation::Skeleton& _skeleton,
+                      const vox::animation::Skeleton& _skeleton,
                       float _sampling_rate, RawAnimation* _animation) = 0;
 
   // Tracks / properties management.
@@ -101,14 +101,14 @@ class OzzImporter {
   // Defines properties, aka user-channel data: animations that aren't only
   // joint transforms.
   struct NodeProperty {
-    ozz::string name;
+    vox::string name;
 
     enum Type { kFloat1, kFloat2, kFloat3, kFloat4, kPoint, kVector };
     Type type;
   };
 
   // Get all properties available for a node.
-  typedef ozz::vector<NodeProperty> NodeProperties;
+  typedef vox::vector<NodeProperty> NodeProperties;
   virtual NodeProperties GetNodeProperties(const char* _node_name) = 0;
 
   // Imports a track of type 1, 2, 3 or 4 floats, for the triplet
@@ -128,10 +128,10 @@ class OzzImporter {
                       float _sampling_rate, RawFloat4Track* _track) = 0;
 
   // Build a filename from a wildcard string.
-  ozz::string BuildFilename(const char* _filename,
+  vox::string BuildFilename(const char* _filename,
                             const char* _data_name) const;
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_H_

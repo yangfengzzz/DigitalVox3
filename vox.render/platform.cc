@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -27,7 +27,7 @@
 
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 
 bool strmatch(const char* _str, const char* _pattern) {
   for (; *_pattern; ++_str, ++_pattern) {
@@ -51,4 +51,4 @@ bool strmatch(const char* _str, const char* _pattern) {
   }
   return !*_str && !*_pattern;
 }
-}  // namespace ozz
+}  // namespace vox

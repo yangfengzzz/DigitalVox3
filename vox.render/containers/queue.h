@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,23 +25,23 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_QUEUE_H_
-#define OZZ_OZZ_BASE_CONTAINERS_QUEUE_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_QUEUE_H_
+#define VOX_VOX_BASE_CONTAINERS_QUEUE_H_
 
 #include <queue>
 
 #include "deque.h"
 
-namespace ozz {
-// Redirects std::queue to ozz::queue in order to replace std default allocator
-// by ozz::StdAllocator.
+namespace vox {
+// Redirects std::queue to vox::queue in order to replace std default allocator
+// by vox::StdAllocator.
 template <class _Ty, class _Container = deque<_Ty>>
 using queue = std::queue<_Ty, _Container>;
 
-// Redirects std::priority_queue to ozz::priority_queue in order to replace std
-// default allocator by ozz::StdAllocator.
+// Redirects std::priority_queue to vox::priority_queue in order to replace std
+// default allocator by vox::StdAllocator.
 template <class _Ty, class _Container = deque<_Ty>,
           class _Pred = std::less<typename _Container::value_type>>
 using priority_queue = std::priority_queue<_Ty, _Container, _Pred>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_QUEUE_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_QUEUE_H_

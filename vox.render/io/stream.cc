@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,7 +35,7 @@
 #include "maths/math_ex.h"
 #include "memory/allocator.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 // Starts File implementation.
@@ -78,7 +78,7 @@ size_t File::Write(const void* _buffer, size_t _size) {
 
 int File::Seek(int _offset, Origin _origin) {
   int origins[] = {SEEK_CUR, SEEK_END, SEEK_SET};
-  if (_origin >= static_cast<int>(OZZ_ARRAY_SIZE(origins))) {
+  if (_origin >= static_cast<int>(VOX_ARRAY_SIZE(origins))) {
     return -1;
   }
   std::FILE* file = reinterpret_cast<std::FILE*>(file_);
@@ -115,7 +115,7 @@ MemoryStream::MemoryStream()
     : buffer_(nullptr), alloc_size_(0), end_(0), tell_(0) {}
 
 MemoryStream::~MemoryStream() {
-  ozz::memory::default_allocator()->Deallocate(buffer_);
+  vox::memory::default_allocator()->Deallocate(buffer_);
   buffer_ = nullptr;
 }
 
@@ -203,15 +203,15 @@ bool MemoryStream::Resize(size_t _size) {
     static_assert(
         (MemoryStream::kBufferSizeIncrement & (kBufferSizeIncrement - 1)) == 0,
         "kBufferSizeIncrement must be a power of 2");
-    const size_t new_size = ozz::Align(_size, kBufferSizeIncrement);
+    const size_t new_size = vox::Align(_size, kBufferSizeIncrement);
     char* new_buffer = reinterpret_cast<char*>(
-        ozz::memory::default_allocator()->Allocate(new_size, 16));
+        vox::memory::default_allocator()->Allocate(new_size, 16));
     std::memcpy(new_buffer, buffer_, alloc_size_);
-    ozz::memory::default_allocator()->Deallocate(buffer_);
+    vox::memory::default_allocator()->Deallocate(buffer_);
     buffer_ = new_buffer;
     alloc_size_ = new_size;
   }
   return _size == 0 || buffer_ != nullptr;
 }
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

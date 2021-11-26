@@ -8,7 +8,7 @@
 #ifndef layer_h
 #define layer_h
 
-namespace ozz {
+namespace vox {
 /**
  * Layer, used for bit operations.
  */

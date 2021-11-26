@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -39,9 +39,9 @@
 
 #include "gtest_math_helper.h"
 
-using ozz::animation::Skeleton;
-using ozz::animation::offline::RawSkeleton;
-using ozz::animation::offline::SkeletonBuilder;
+using vox::animation::Skeleton;
+using vox::animation::offline::RawSkeleton;
+using vox::animation::offline::SkeletonBuilder;
 
 TEST(Error, SkeletonBuilder) {
   // Instantiates a builder objects with default parameters.
@@ -53,7 +53,7 @@ TEST(Error, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 0);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 0);
   }
@@ -194,7 +194,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 1);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 1);
     EXPECT_EQ(skeleton->joint_parents()[0], Skeleton::kNoParent);
@@ -221,7 +221,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 2);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 2);
     for (int i = 0; i < skeleton->num_joints(); ++i) {
@@ -259,7 +259,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 3);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 3);
     for (int i = 0; i < skeleton->num_joints(); ++i) {
@@ -303,7 +303,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 4);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 4);
     for (int i = 0; i < skeleton->num_joints(); ++i) {
@@ -349,7 +349,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 4);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 4);
     for (int i = 0; i < skeleton->num_joints(); ++i) {
@@ -396,7 +396,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 5);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 5);
     for (int i = 0; i < skeleton->num_joints(); ++i) {
@@ -448,7 +448,7 @@ TEST(Build, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), 6);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
     EXPECT_EQ(skeleton->num_joints(), 6);
     for (int i = 0; i < skeleton->num_joints(); ++i) {
@@ -527,7 +527,7 @@ TEST(JointOrder, SkeletonBuilder) {
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 8);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
   EXPECT_EQ(skeleton->num_joints(), 8);
 
@@ -583,7 +583,7 @@ TEST(MultiRoots, SkeletonBuilder) {
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 6);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
   EXPECT_EQ(skeleton->num_joints(), 6);
   for (int i = 0; i < skeleton->num_joints(); i++) {
@@ -607,10 +607,10 @@ TEST(MultiRoots, SkeletonBuilder) {
 }
 
 TEST(BindPose, SkeletonBuilder) {
-  using ozz::math::Float3;
-  using ozz::math::Float4;
-  using ozz::math::Quaternion;
-  using ozz::math::Transform;
+  using vox::math::Float3;
+  using vox::math::Float4;
+  using vox::math::Quaternion;
+  using vox::math::Transform;
 
   // Instantiates a builder objects with default parameters.
   SkeletonBuilder builder;
@@ -646,17 +646,17 @@ TEST(BindPose, SkeletonBuilder) {
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 3);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   // Convert bind pose back to aos.
-  ozz::math::SimdFloat4 translations[4];
-  ozz::math::SimdFloat4 scales[4];
-  ozz::math::SimdFloat4 rotations[4];
-  const ozz::math::SoaTransform& bind_pose = skeleton->joint_bind_poses()[0];
-  ozz::math::Transpose3x4(&bind_pose.translation.x, translations);
-  ozz::math::Transpose4x4(&bind_pose.rotation.x, rotations);
-  ozz::math::Transpose3x4(&bind_pose.scale.x, scales);
+  vox::math::SimdFloat4 translations[4];
+  vox::math::SimdFloat4 scales[4];
+  vox::math::SimdFloat4 rotations[4];
+  const vox::math::SoaTransform& bind_pose = skeleton->joint_bind_poses()[0];
+  vox::math::Transpose3x4(&bind_pose.translation.x, translations);
+  vox::math::Transpose4x4(&bind_pose.rotation.x, rotations);
+  vox::math::Transpose3x4(&bind_pose.scale.x, scales);
 
   for (int i = 0; i < skeleton->num_joints(); ++i) {
     if (std::strcmp(skeleton->joint_names()[i], "j0") == 0) {
@@ -693,7 +693,7 @@ TEST(MaxJoints, SkeletonBuilder) {
     EXPECT_TRUE(raw_skeleton.Validate());
     EXPECT_EQ(raw_skeleton.num_joints(), Skeleton::kMaxJoints);
 
-    ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
     EXPECT_TRUE(skeleton);
   }
 

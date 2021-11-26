@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,19 +25,19 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_ANIMATION_OFFLINE_DECIMATE_H_
-#define OZZ_ANIMATION_OFFLINE_DECIMATE_H_
+#ifndef VOX_ANIMATION_OFFLINE_DECIMATE_H_
+#define VOX_ANIMATION_OFFLINE_DECIMATE_H_
 
-#ifndef OZZ_INCLUDE_PRIVATE_HEADER
+#ifndef VOX_INCLUDE_PRIVATE_HEADER
 #error "This header is private, it cannot be included from public headers."
-#endif  // OZZ_INCLUDE_PRIVATE_HEADER
+#endif  // VOX_INCLUDE_PRIVATE_HEADER
 
 #include "containers/stack.h"
 #include "containers/vector.h"
 
 #include <cassert>
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -61,10 +61,10 @@ void Decimate(const _Track& _src, const _Adapter& _adapter, float _tolerance,
 
   // Stack of segments to process.
   typedef std::pair<size_t, size_t> Segment;
-  ozz::stack<Segment> segments;
+  vox::stack<Segment> segments;
 
   // Bit vector of all points to included.
-  ozz::vector<bool> included(_src.size(), false);
+  vox::vector<bool> included(_src.size(), false);
 
   // Pushes segment made from first and last points.
   segments.push(Segment(0, _src.size() - 1));
@@ -132,5 +132,5 @@ void Decimate(const _Track& _src, const _Adapter& _adapter, float _tolerance,
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_ANIMATION_OFFLINE_DECIMATE_H_
+}  // namespace vox
+#endif  // VOX_ANIMATION_OFFLINE_DECIMATE_H_

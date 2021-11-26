@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_BOX_H_
-#define OZZ_OZZ_BASE_MATHS_BOX_H_
+#ifndef VOX_VOX_BASE_MATHS_BOX_H_
+#define VOX_VOX_BASE_MATHS_BOX_H_
 
 #include <cstddef>
 
 #include "maths/vec_float.h"
 #include "matrix.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 // Matrix forward declaration.
 struct Float4x4;
@@ -137,7 +137,7 @@ struct BoundingBox {
 
 // Merges two boxes _a and _b.
 // Both _a and _b can be invalid.
-OZZ_INLINE BoundingBox Merge(const BoundingBox &_a, const BoundingBox &_b) {
+VOX_INLINE BoundingBox Merge(const BoundingBox &_a, const BoundingBox &_b) {
     if (!_a.is_valid()) {
         return _b;
     } else if (!_b.is_valid()) {
@@ -152,7 +152,7 @@ OZZ_INLINE BoundingBox Merge(const BoundingBox &_a, const BoundingBox &_b) {
  * @param matrix - The transform to apply to the bounding box
  * @return out - The transformed bounding box
  */
-OZZ_INLINE BoundingBox transform(const BoundingBox &source, const Matrix &matrix) {
+VOX_INLINE BoundingBox transform(const BoundingBox &source, const Matrix &matrix) {
     // https://zeux.io/2010/10/17/aabb-from-obb-with-component-wise-abs/
     Float3 center = source.getCenter();
     Float3 extent = source.getExtent();
@@ -174,5 +174,5 @@ OZZ_INLINE BoundingBox transform(const BoundingBox &source, const Matrix &matrix
 // Compute box transformation by a matrix.
 BoundingBox TransformBox(const Float4x4 &_matrix, const BoundingBox &_box);
 }  // namespace math
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_BOX_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MATHS_BOX_H_

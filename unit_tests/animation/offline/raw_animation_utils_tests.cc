@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,13 +34,13 @@
 
 #include "offline/animation/raw_animation.h"
 
-using ozz::animation::offline::RawAnimation;
+using vox::animation::offline::RawAnimation;
 
 TEST(SamplingTrackEmpty, Utils) {
   RawAnimation::JointTrack track;
-  ozz::math::Transform output;
+  vox::math::Transform output;
 
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, 0.f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, 0.f, &output));
 
   EXPECT_FLOAT3_EQ(output.translation, 0.f, 0.f, 0.f);
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, 0.f, 0.f, 1.f);
@@ -52,101 +52,101 @@ TEST(SamplingTrackInvalid, Utils) {
   {
     RawAnimation::JointTrack track;
 
-    RawAnimation::TranslationKey t0 = {.9f, ozz::math::Float3(1.f, 2.f, 4.f)};
+    RawAnimation::TranslationKey t0 = {.9f, vox::math::Float3(1.f, 2.f, 4.f)};
     track.translations.push_back(t0);
-    RawAnimation::TranslationKey t1 = {.1f, ozz::math::Float3(2.f, 4.f, 8.f)};
+    RawAnimation::TranslationKey t1 = {.1f, vox::math::Float3(2.f, 4.f, 8.f)};
     track.translations.push_back(t1);
 
-    ozz::math::Transform output;
-    EXPECT_FALSE(ozz::animation::offline::SampleTrack(track, 0.f, &output));
+    vox::math::Transform output;
+    EXPECT_FALSE(vox::animation::offline::SampleTrack(track, 0.f, &output));
   }
 
   // Negative time
   {
     RawAnimation::JointTrack track;
 
-    RawAnimation::TranslationKey t0 = {-1.f, ozz::math::Float3(1.f, 2.f, 4.f)};
+    RawAnimation::TranslationKey t0 = {-1.f, vox::math::Float3(1.f, 2.f, 4.f)};
     track.translations.push_back(t0);
 
-    ozz::math::Transform output;
-    EXPECT_FALSE(ozz::animation::offline::SampleTrack(track, 0.f, &output));
+    vox::math::Transform output;
+    EXPECT_FALSE(vox::animation::offline::SampleTrack(track, 0.f, &output));
   }
 }
 
 TEST(SamplingTrack, Utils) {
   RawAnimation::JointTrack track;
 
-  RawAnimation::TranslationKey t0 = {.1f, ozz::math::Float3(1.f, 2.f, 4.f)};
+  RawAnimation::TranslationKey t0 = {.1f, vox::math::Float3(1.f, 2.f, 4.f)};
   track.translations.push_back(t0);
-  RawAnimation::TranslationKey t1 = {.9f, ozz::math::Float3(2.f, 4.f, 8.f)};
+  RawAnimation::TranslationKey t1 = {.9f, vox::math::Float3(2.f, 4.f, 8.f)};
   track.translations.push_back(t1);
 
   RawAnimation::RotationKey r0 = {
-      0.f, ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+      0.f, vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
   track.rotations.push_back(r0);
   RawAnimation::RotationKey r1 = {
       // /!\ Negated (other hemisphepre) quaternion
-      .5f, -ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      .5f, -vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   track.rotations.push_back(r1);
   RawAnimation::RotationKey r2 = {
-      1.f, ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      1.f, vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   track.rotations.push_back(r2);
 
-  RawAnimation::ScaleKey s0 = {.5f, ozz::math::Float3(-1.f, -2.f, -4.f)};
+  RawAnimation::ScaleKey s0 = {.5f, vox::math::Float3(-1.f, -2.f, -4.f)};
   track.scales.push_back(s0);
 
-  ozz::math::Transform output;
+  vox::math::Transform output;
 
   // t = -.1
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, -.1f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, -.1f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 1.f, 2.f, 4.f);
   EXPECT_QUATERNION_EQ(output.rotation, .70710677f, 0.f, 0.f, .70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t = 0
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, 0.f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, 0.f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 1.f, 2.f, 4.f);
   EXPECT_QUATERNION_EQ(output.rotation, .70710677f, 0.f, 0.f, .70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t = .1
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, .1f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, .1f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 1.f, 2.f, 4.f);
   EXPECT_QUATERNION_EQ(output.rotation, .6172133f, .1543033f, 0.f, .7715167f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t = .4999999
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, .4999999f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, .4999999f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 1.5f, 3.f, 6.f);
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, .70710677f, 0.f, .70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t = .5
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, .5f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, .5f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 1.5f, 3.f, 6.f);
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, .70710677f, 0.f, .70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t = .75
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, .75f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, .75f, &output));
   // Fixed up based on dot with previous quaternion
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, -.70710677f, 0.f, -.70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t= .9
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, .9f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, .9f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 2.f, 4.f, 8.f);
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, -.70710677f, 0.f, -.70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t= 1.
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, 1.f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, 1.f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 2.f, 4.f, 8.f);
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, .70710677f, 0.f, .70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
 
   // t= 1.1
-  ASSERT_TRUE(ozz::animation::offline::SampleTrack(track, 1.1f, &output));
+  ASSERT_TRUE(vox::animation::offline::SampleTrack(track, 1.1f, &output));
   EXPECT_FLOAT3_EQ(output.translation, 2.f, 4.f, 8.f);
   EXPECT_QUATERNION_EQ(output.rotation, 0.f, .70710677f, 0.f, .70710677f);
   EXPECT_FLOAT3_EQ(output.scale, -1.f, -2.f, -4.f);
@@ -158,35 +158,35 @@ TEST(SamplingAnimation, Utils) {
   raw_animation.duration = 2.f;
   raw_animation.tracks.resize(2);
 
-  RawAnimation::TranslationKey a = {.2f, ozz::math::Float3(-1.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey a = {.2f, vox::math::Float3(-1.f, 0.f, 0.f)};
   raw_animation.tracks[0].translations.push_back(a);
 
-  RawAnimation::TranslationKey b = {0.f, ozz::math::Float3(2.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey b = {0.f, vox::math::Float3(2.f, 0.f, 0.f)};
   raw_animation.tracks[1].translations.push_back(b);
-  RawAnimation::TranslationKey c = {0.2f, ozz::math::Float3(6.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey c = {0.2f, vox::math::Float3(6.f, 0.f, 0.f)};
   raw_animation.tracks[1].translations.push_back(c);
-  RawAnimation::TranslationKey d = {0.4f, ozz::math::Float3(8.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey d = {0.4f, vox::math::Float3(8.f, 0.f, 0.f)};
   raw_animation.tracks[1].translations.push_back(d);
 
-  ozz::math::Transform output[2];
+  vox::math::Transform output[2];
 
   // Too small
   {
-    ozz::math::Transform small[1];
+    vox::math::Transform small[1];
     EXPECT_FALSE(
-        ozz::animation::offline::SampleAnimation(raw_animation, 0.f, small));
+        vox::animation::offline::SampleAnimation(raw_animation, 0.f, small));
   }
 
   // Invalid, cos track are longer than duration
   {
     raw_animation.duration = .1f;
     EXPECT_FALSE(
-        ozz::animation::offline::SampleAnimation(raw_animation, 0.f, output));
+        vox::animation::offline::SampleAnimation(raw_animation, 0.f, output));
     raw_animation.duration = 2.f;
   }
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, -.1f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, -.1f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_QUATERNION_EQ(output[0].rotation, 0.f, 0.f, 0.f, 1.f);
   EXPECT_FLOAT3_EQ(output[0].scale, 1.f, 1.f, 1.f);
@@ -195,39 +195,39 @@ TEST(SamplingAnimation, Utils) {
   EXPECT_FLOAT3_EQ(output[1].scale, 1.f, 1.f, 1.f);
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, 0.f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, 0.f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_FLOAT3_EQ(output[1].translation, 2.f, 0.f, 0.f);
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, .2f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, .2f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_FLOAT3_EQ(output[1].translation, 6.f, 0.f, 0.f);
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, .3f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, .3f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_FLOAT3_EQ(output[1].translation, 7.f, 0.f, 0.f);
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, .4f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, .4f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_FLOAT3_EQ(output[1].translation, 8.f, 0.f, 0.f);
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, 2.f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, 2.f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_FLOAT3_EQ(output[1].translation, 8.f, 0.f, 0.f);
 
   ASSERT_TRUE(
-      ozz::animation::offline::SampleAnimation(raw_animation, 3.f, output));
+      vox::animation::offline::SampleAnimation(raw_animation, 3.f, output));
   EXPECT_FLOAT3_EQ(output[0].translation, -1.f, 0.f, 0.f);
   EXPECT_FLOAT3_EQ(output[1].translation, 8.f, 0.f, 0.f);
 }
 
 TEST(FixedRateSamplingTime, Utils) {
   {  // From 0
-    ozz::animation::offline::FixedRateSamplingTime it(1.f, 30.f);
+    vox::animation::offline::FixedRateSamplingTime it(1.f, 30.f);
     EXPECT_EQ(it.num_keys(), 31u);
 
     EXPECT_EQ(it.time(0), 0.f);
@@ -239,7 +239,7 @@ TEST(FixedRateSamplingTime, Utils) {
   }
 
   {  // Offset
-    ozz::animation::offline::FixedRateSamplingTime it(3.f, 100.f);
+    vox::animation::offline::FixedRateSamplingTime it(3.f, 100.f);
     EXPECT_EQ(it.num_keys(), 301u);
 
     EXPECT_EQ(it.time(0), 0.f);
@@ -250,7 +250,7 @@ TEST(FixedRateSamplingTime, Utils) {
   }
 
   {  // Ceil
-    ozz::animation::offline::FixedRateSamplingTime it(1.001f, 30.f);
+    vox::animation::offline::FixedRateSamplingTime it(1.001f, 30.f);
     EXPECT_EQ(it.num_keys(), 32u);
 
     EXPECT_EQ(it.time(0), 0.f);
@@ -262,7 +262,7 @@ TEST(FixedRateSamplingTime, Utils) {
   }
 
   {  // Long
-    ozz::animation::offline::FixedRateSamplingTime it(1000.f, 30.f);
+    vox::animation::offline::FixedRateSamplingTime it(1000.f, 30.f);
     EXPECT_EQ(it.num_keys(), 30001u);
 
     EXPECT_EQ(it.time(0), 0.f);

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,9 +32,9 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Transform;
+using vox::math::Transform;
 
-TEST(TransformConstant, ozz_math) {
+TEST(TransformConstant, vox_math) {
     EXPECT_FLOAT3_EQ(Transform::identity().translation, 0.f, 0.f, 0.f);
     EXPECT_QUATERNION_EQ(Transform::identity().rotation, 0.f, 0.f, 0.f, 1.f);
     EXPECT_FLOAT3_EQ(Transform::identity().scale, 1.f, 1.f, 1.f);

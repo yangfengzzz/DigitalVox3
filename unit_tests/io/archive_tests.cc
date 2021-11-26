@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -39,28 +39,28 @@
 TEST(Error, Archive) {
   {  // Invalid nullptr stream.
     EXPECT_ASSERTION(
-        void(ozz::io::OArchive(nullptr, ozz::GetNativeEndianness())),
+        void(vox::io::OArchive(nullptr, vox::GetNativeEndianness())),
         "valid opened stream");
-    EXPECT_ASSERTION(void(ozz::io::IArchive(nullptr)), "valid opened stream");
+    EXPECT_ASSERTION(void(vox::io::IArchive(nullptr)), "valid opened stream");
   }
   {  // Invalid not opened streams.
-    ozz::io::File stream("root_that_does_not_exist:/file.ozz", "r");
+    vox::io::File stream("root_that_does_not_exist:/file.vox", "r");
     EXPECT_ASSERTION(
-        void(ozz::io::OArchive(&stream, ozz::GetNativeEndianness())),
+        void(vox::io::OArchive(&stream, vox::GetNativeEndianness())),
         "valid opened stream");
-    EXPECT_ASSERTION(void(ozz::io::IArchive(&stream)), "valid opened stream");
+    EXPECT_ASSERTION(void(vox::io::IArchive(&stream)), "valid opened stream");
   }
 }
 
 TEST(Primitives, Archive) {
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
 
-    ozz::io::MemoryStream stream;
+    vox::io::MemoryStream stream;
     ASSERT_TRUE(stream.opened());
 
     // Write primitive types.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     const int8_t i8o = 46;
     o << i8o;
     const uint8_t ui8o = 46;
@@ -83,8 +83,8 @@ TEST(Primitives, Archive) {
     o << fo;
 
     // Read primitive types.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
     int8_t i8i;
     i >> i8i;
     EXPECT_EQ(i8i, i8o);
@@ -120,89 +120,89 @@ TEST(Primitives, Archive) {
 
 TEST(PrimitiveArrays, Archive) {
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
 
-    ozz::io::MemoryStream stream;
+    vox::io::MemoryStream stream;
     ASSERT_TRUE(stream.opened());
 
     // Write primitive types.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     const int8_t i8o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(i8o);
+    o << vox::io::MakeArray(i8o);
     const uint8_t ui8o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(ui8o);
+    o << vox::io::MakeArray(ui8o);
     const int16_t i16o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(i16o);
+    o << vox::io::MakeArray(i16o);
     const uint16_t ui16o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(ui16o);
+    o << vox::io::MakeArray(ui16o);
     const int32_t i32o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(i32o);
+    o << vox::io::MakeArray(i32o);
     const uint32_t ui32o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(ui32o);
+    o << vox::io::MakeArray(ui32o);
     const int64_t i64o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(i64o);
+    o << vox::io::MakeArray(i64o);
     const uint64_t ui64o[] = {46, 26, 14, 58, 99, 27};
-    o << ozz::io::MakeArray(ui64o);
+    o << vox::io::MakeArray(ui64o);
     const bool bo[] = {true, false, true};
-    o << ozz::io::MakeArray(bo);
+    o << vox::io::MakeArray(bo);
     const float fo[] = {46.f, 26.f, 14.f, 58.f, 99.f, 27.f};
-    o << ozz::io::MakeArray(fo);
+    o << vox::io::MakeArray(fo);
     const uint32_t* po_null = nullptr;
-    o << ozz::io::MakeArray(po_null, 0);
-    const ozz::span<const float> rfo(fo);
-    o << ozz::io::MakeArray(rfo);
+    o << vox::io::MakeArray(po_null, 0);
+    const vox::span<const float> rfo(fo);
+    o << vox::io::MakeArray(rfo);
 
     // Read primitive types.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
-    int8_t i8i[OZZ_ARRAY_SIZE(i8o)];
-    i >> ozz::io::MakeArray(i8i);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
+    int8_t i8i[VOX_ARRAY_SIZE(i8o)];
+    i >> vox::io::MakeArray(i8i);
     EXPECT_EQ(std::memcmp(i8i, i8o, sizeof(i8o)), 0);
-    uint8_t ui8i[OZZ_ARRAY_SIZE(ui8o)];
-    i >> ozz::io::MakeArray(ui8i);
+    uint8_t ui8i[VOX_ARRAY_SIZE(ui8o)];
+    i >> vox::io::MakeArray(ui8i);
     EXPECT_EQ(std::memcmp(ui8i, ui8o, sizeof(ui8o)), 0);
-    int16_t i16i[OZZ_ARRAY_SIZE(i16o)];
-    i >> ozz::io::MakeArray(i16i);
+    int16_t i16i[VOX_ARRAY_SIZE(i16o)];
+    i >> vox::io::MakeArray(i16i);
     EXPECT_EQ(std::memcmp(i16i, i16o, sizeof(i16o)), 0);
-    uint16_t ui16i[OZZ_ARRAY_SIZE(ui16o)];
-    i >> ozz::io::MakeArray(ui16i);
+    uint16_t ui16i[VOX_ARRAY_SIZE(ui16o)];
+    i >> vox::io::MakeArray(ui16i);
     EXPECT_EQ(std::memcmp(ui16i, ui16o, sizeof(ui16o)), 0);
-    int32_t i32i[OZZ_ARRAY_SIZE(i32o)];
-    i >> ozz::io::MakeArray(i32i);
+    int32_t i32i[VOX_ARRAY_SIZE(i32o)];
+    i >> vox::io::MakeArray(i32i);
     EXPECT_EQ(std::memcmp(i32i, i32o, sizeof(i32o)), 0);
-    uint32_t ui32i[OZZ_ARRAY_SIZE(ui32o)];
-    i >> ozz::io::MakeArray(ui32i);
+    uint32_t ui32i[VOX_ARRAY_SIZE(ui32o)];
+    i >> vox::io::MakeArray(ui32i);
     EXPECT_EQ(std::memcmp(ui32i, ui32o, sizeof(ui32o)), 0);
-    int64_t i64i[OZZ_ARRAY_SIZE(i64o)];
-    i >> ozz::io::MakeArray(i64i);
+    int64_t i64i[VOX_ARRAY_SIZE(i64o)];
+    i >> vox::io::MakeArray(i64i);
     EXPECT_EQ(std::memcmp(i64i, i64o, sizeof(i64o)), 0);
-    uint64_t ui64i[OZZ_ARRAY_SIZE(ui64o)];
-    i >> ozz::io::MakeArray(ui64i);
+    uint64_t ui64i[VOX_ARRAY_SIZE(ui64o)];
+    i >> vox::io::MakeArray(ui64i);
     EXPECT_EQ(std::memcmp(ui64i, ui64o, sizeof(ui64o)), 0);
-    bool bi[OZZ_ARRAY_SIZE(bo)];
-    i >> ozz::io::MakeArray(bi);
+    bool bi[VOX_ARRAY_SIZE(bo)];
+    i >> vox::io::MakeArray(bi);
     EXPECT_EQ(std::memcmp(bi, bo, sizeof(bo)), 0);
-    float fi[OZZ_ARRAY_SIZE(fo)];
-    i >> ozz::io::MakeArray(fi);
+    float fi[VOX_ARRAY_SIZE(fo)];
+    i >> vox::io::MakeArray(fi);
     EXPECT_EQ(std::memcmp(fi, fo, sizeof(fo)), 0);
     uint32_t* pi_null = nullptr;
-    i >> ozz::io::MakeArray(pi_null, 0);
-    float fi2[OZZ_ARRAY_SIZE(fo)];
-    ozz::span<float> rfi(fi2);
-    i >> ozz::io::MakeArray(rfi);
+    i >> vox::io::MakeArray(pi_null, 0);
+    float fi2[VOX_ARRAY_SIZE(fo)];
+    vox::span<float> rfi(fi2);
+    i >> vox::io::MakeArray(rfi);
     EXPECT_EQ(std::memcmp(rfi.data(), fo, sizeof(fo)), 0);
   }
 }
 
 TEST(Class, Archive) {
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
 
-    ozz::io::MemoryStream stream;
+    vox::io::MemoryStream stream;
     ASSERT_TRUE(stream.opened());
 
     // Write classes.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     const Intrusive oi(46);
     o << oi;
     const Intrusive oi_mutable(46);
@@ -213,8 +213,8 @@ TEST(Class, Archive) {
     o << oe_mutable;
 
     // Read classes.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
     Intrusive ii;
     i >> ii;
     EXPECT_EQ(ii.i, oi.i);
@@ -232,45 +232,45 @@ TEST(Class, Archive) {
 
 TEST(ClassArrays, Archive) {
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
 
-    ozz::io::MemoryStream stream;
+    vox::io::MemoryStream stream;
     ASSERT_TRUE(stream.opened());
 
     // Write classes.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     const Intrusive oi[12];
-    o << ozz::io::MakeArray(oi);
+    o << vox::io::MakeArray(oi);
     const Extrusive oe[] = {{46}, {58}, {14}, {26}, {99}};
-    o << ozz::io::MakeArray(oe);
+    o << vox::io::MakeArray(oe);
 
     // Read classes.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
-    Intrusive ii[OZZ_ARRAY_SIZE(oi)];
-    i >> ozz::io::MakeArray(ii);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
+    Intrusive ii[VOX_ARRAY_SIZE(oi)];
+    i >> vox::io::MakeArray(ii);
     EXPECT_EQ(std::memcmp(oi, ii, sizeof(oi)), 0);
-    Extrusive ie[OZZ_ARRAY_SIZE(oe)];
-    i >> ozz::io::MakeArray(ie);
+    Extrusive ie[VOX_ARRAY_SIZE(oe)];
+    i >> vox::io::MakeArray(ie);
     EXPECT_EQ(std::memcmp(oe, ie, sizeof(oe)), 0);
   }
 }
 
 TEST(Tag, Archive) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
   ASSERT_TRUE(stream.opened());
 
   // Writes to archive.
-  ozz::io::OArchive o(&stream, ozz::GetNativeEndianness());
+  vox::io::OArchive o(&stream, vox::GetNativeEndianness());
   Tagged1 ot;
   o << ot;
 
   // Reads from archive.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   // Tests and reads a wrong object (different tag).
-  OZZ_IF_DEBUG(Tagged2 it2);
+  VOX_IF_DEBUG(Tagged2 it2);
   EXPECT_FALSE(i.TestTag<Tagged2>());
   EXPECT_ASSERTION(i >> it2, "Type tag does not match archive content.");
 
@@ -281,20 +281,20 @@ TEST(Tag, Archive) {
 }
 
 TEST(TagEOF, Archive) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
   ASSERT_TRUE(stream.opened());
 
   // Writes to archive n elements.
   const int n_writes = 10;
-  ozz::io::OArchive o(&stream, ozz::GetNativeEndianness());
+  vox::io::OArchive o(&stream, vox::GetNativeEndianness());
   for (int i = 0; i < n_writes; ++i) {
     Tagged1 ot;
     o << ot;
   }
 
   // Reads from archive.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   EXPECT_FALSE(i.TestTag<Tagged2>());
 

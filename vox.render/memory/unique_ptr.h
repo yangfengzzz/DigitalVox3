@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,17 +25,17 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MEMORY_UNIQUE_PTR_H_
-#define OZZ_OZZ_BASE_MEMORY_UNIQUE_PTR_H_
+#ifndef VOX_VOX_BASE_MEMORY_UNIQUE_PTR_H_
+#define VOX_VOX_BASE_MEMORY_UNIQUE_PTR_H_
 
 #include "memory/allocator.h"
 
 #include <memory>
 #include <utility>
 
-namespace ozz {
+namespace vox {
 
-// Defaut deleter for ozz unique_ptr, uses redirected memory allocator.
+// Defaut deleter for vox unique_ptr, uses redirected memory allocator.
 template <typename _Ty>
 struct Deleter {
   Deleter() {}
@@ -44,18 +44,18 @@ struct Deleter {
   Deleter(const Deleter<_Up>&, _Ty* = nullptr) {}
 
   void operator()(_Ty* _ptr) const {
-    ozz::Delete(_ptr);
+    vox::Delete(_ptr);
   }
 };
 
-// Defines ozz::unique_ptr to use ozz default deleter.
-template <typename _Ty, typename _Deleter = ozz::Deleter<_Ty>>
+// Defines vox::unique_ptr to use vox default deleter.
+template <typename _Ty, typename _Deleter = vox::Deleter<_Ty>>
 using unique_ptr = std::unique_ptr<_Ty, _Deleter>;
 
-// Implements make_unique to use ozz redirected memory allocator.
+// Implements make_unique to use vox redirected memory allocator.
 template <typename _Ty, typename... _Args>
 unique_ptr<_Ty> make_unique(_Args&&... _args) {
   return unique_ptr<_Ty>(New<_Ty>(std::forward<_Args>(_args)...));
 }
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MEMORY_UNIQUE_PTR_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MEMORY_UNIQUE_PTR_H_

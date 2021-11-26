@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -33,13 +33,13 @@
 #include "offline/animation/raw_track.h"
 #include "offline/animation/track_builder.h"
 
-using ozz::animation::offline::RawFloat2Track;
-using ozz::animation::offline::RawFloat3Track;
-using ozz::animation::offline::RawFloat4Track;
-using ozz::animation::offline::RawFloatTrack;
-using ozz::animation::offline::RawQuaternionTrack;
-using ozz::animation::offline::RawTrackInterpolation;
-using ozz::animation::offline::TrackOptimizer;
+using vox::animation::offline::RawFloat2Track;
+using vox::animation::offline::RawFloat3Track;
+using vox::animation::offline::RawFloat4Track;
+using vox::animation::offline::RawFloatTrack;
+using vox::animation::offline::RawQuaternionTrack;
+using vox::animation::offline::RawTrackInterpolation;
+using vox::animation::offline::TrackOptimizer;
 
 TEST(Error, TrackOptimizer) {
   TrackOptimizer optimizer;
@@ -225,26 +225,26 @@ TEST(Float2, TrackOptimizer) {
 
   RawFloat2Track raw_track;
   const RawFloat2Track::Keyframe key0 = {RawTrackInterpolation::kLinear, 0.f,
-                                         ozz::math::Float2(6.9f, 0.f)};
+                                         vox::math::Float2(6.9f, 0.f)};
   raw_track.keyframes.push_back(key0);
   const RawFloat2Track::Keyframe key1 = {RawTrackInterpolation::kLinear, .25f,
-                                         ozz::math::Float2(4.6f, 0.f)};
+                                         vox::math::Float2(4.6f, 0.f)};
   raw_track.keyframes.push_back(key1);
   const RawFloat2Track::Keyframe key2 = {RawTrackInterpolation::kLinear, .5f,
-                                         ozz::math::Float2(2.3f, 0.f)};
+                                         vox::math::Float2(2.3f, 0.f)};
   raw_track.keyframes.push_back(key2);
   const RawFloat2Track::Keyframe key3 = {RawTrackInterpolation::kLinear,
                                          .500001f,
-                                         ozz::math::Float2(2.3000001f, 0.f)};
+                                         vox::math::Float2(2.3000001f, 0.f)};
   raw_track.keyframes.push_back(key3);
   const RawFloat2Track::Keyframe key4 = {RawTrackInterpolation::kLinear, .75f,
-                                         ozz::math::Float2(0.f, 0.f)};
+                                         vox::math::Float2(0.f, 0.f)};
   raw_track.keyframes.push_back(key4);
   const RawFloat2Track::Keyframe key5 = {RawTrackInterpolation::kLinear, .8f,
-                                         ozz::math::Float2(0.f, 1e-12f)};
+                                         vox::math::Float2(0.f, 1e-12f)};
   raw_track.keyframes.push_back(key5);
   const RawFloat2Track::Keyframe key6 = {RawTrackInterpolation::kLinear, 1.f,
-                                         ozz::math::Float2(-1e-12f, 0.f)};
+                                         vox::math::Float2(-1e-12f, 0.f)};
   raw_track.keyframes.push_back(key6);
 
   RawFloat2Track output;
@@ -266,26 +266,26 @@ TEST(Float3, TrackOptimizer) {
 
   RawFloat3Track raw_track;
   const RawFloat3Track::Keyframe key0 = {RawTrackInterpolation::kLinear, 0.f,
-                                         ozz::math::Float3(6.9f, 0.f, 0.f)};
+                                         vox::math::Float3(6.9f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key0);
   const RawFloat3Track::Keyframe key1 = {RawTrackInterpolation::kLinear, .25f,
-                                         ozz::math::Float3(4.6f, 0.f, 0.f)};
+                                         vox::math::Float3(4.6f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key1);
   const RawFloat3Track::Keyframe key2 = {RawTrackInterpolation::kLinear, .5f,
-                                         ozz::math::Float3(2.3f, 0.f, 0.f)};
+                                         vox::math::Float3(2.3f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key2);
   const RawFloat3Track::Keyframe key3 = {
       RawTrackInterpolation::kLinear, .500001f,
-      ozz::math::Float3(2.3000001f, 0.f, 0.f)};
+      vox::math::Float3(2.3000001f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key3);
   const RawFloat3Track::Keyframe key4 = {RawTrackInterpolation::kLinear, .75f,
-                                         ozz::math::Float3(0.f, 0.f, 0.f)};
+                                         vox::math::Float3(0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key4);
   const RawFloat3Track::Keyframe key5 = {RawTrackInterpolation::kLinear, .8f,
-                                         ozz::math::Float3(0.f, 0.f, 1e-12f)};
+                                         vox::math::Float3(0.f, 0.f, 1e-12f)};
   raw_track.keyframes.push_back(key5);
   const RawFloat3Track::Keyframe key6 = {RawTrackInterpolation::kLinear, 1.f,
-                                         ozz::math::Float3(0.f, -1e-12f, 0.f)};
+                                         vox::math::Float3(0.f, -1e-12f, 0.f)};
   raw_track.keyframes.push_back(key6);
 
   RawFloat3Track output;
@@ -310,30 +310,30 @@ TEST(Float4, TrackOptimizer) {
   RawFloat4Track raw_track;
   const RawFloat4Track::Keyframe key0 = {
       RawTrackInterpolation::kLinear, 0.f,
-      ozz::math::Float4(6.9f, 0.f, 0.f, 0.f)};
+      vox::math::Float4(6.9f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key0);
   const RawFloat4Track::Keyframe key1 = {
       RawTrackInterpolation::kLinear, .25f,
-      ozz::math::Float4(4.6f, 0.f, 0.f, 0.f)};
+      vox::math::Float4(4.6f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key1);
   const RawFloat4Track::Keyframe key2 = {
       RawTrackInterpolation::kLinear, .5f,
-      ozz::math::Float4(2.3f, 0.f, 0.f, 0.f)};
+      vox::math::Float4(2.3f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key2);
   const RawFloat4Track::Keyframe key3 = {
       RawTrackInterpolation::kLinear, .500001f,
-      ozz::math::Float4(2.3000001f, 0.f, 0.f, 0.f)};
+      vox::math::Float4(2.3000001f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key3);
   const RawFloat4Track::Keyframe key4 = {RawTrackInterpolation::kLinear, .75f,
-                                         ozz::math::Float4(0.f, 0.f, 0.f, 0.f)};
+                                         vox::math::Float4(0.f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key4);
   const RawFloat4Track::Keyframe key5 = {
       RawTrackInterpolation::kLinear, .8f,
-      ozz::math::Float4(0.f, 0.f, 0.f, 1e-12f)};
+      vox::math::Float4(0.f, 0.f, 0.f, 1e-12f)};
   raw_track.keyframes.push_back(key5);
   const RawFloat4Track::Keyframe key6 = {
       RawTrackInterpolation::kLinear, 1.f,
-      ozz::math::Float4(0.f, 0.f, 0.f, -1e-12f)};
+      vox::math::Float4(0.f, 0.f, 0.f, -1e-12f)};
   raw_track.keyframes.push_back(key6);
 
   RawFloat4Track output;
@@ -358,31 +358,31 @@ TEST(Quaternion, TrackOptimizer) {
   RawQuaternionTrack raw_track;
   const RawQuaternionTrack::Keyframe key0 = {
       RawTrackInterpolation::kLinear, 0.f,
-      ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+      vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key0);
   const RawQuaternionTrack::Keyframe key1 = {
       RawTrackInterpolation::kLinear, .1f,
-      ozz::math::Quaternion(.6172133f, .1543033f, 0.f, .7715167f)};  // NLerp
+      vox::math::Quaternion(.6172133f, .1543033f, 0.f, .7715167f)};  // NLerp
   raw_track.keyframes.push_back(key1);
   const RawQuaternionTrack::Keyframe key2 = {
       RawTrackInterpolation::kLinear, .5f,
-      ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key2);
   const RawQuaternionTrack::Keyframe key3 = {
       RawTrackInterpolation::kLinear, .500001f,
-      ozz::math::Quaternion(0.f, .70710676f, 0.f, .70710678f)};
+      vox::math::Quaternion(0.f, .70710676f, 0.f, .70710678f)};
   raw_track.keyframes.push_back(key3);
   const RawQuaternionTrack::Keyframe key4 = {
       RawTrackInterpolation::kLinear, .75f,
-      ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key4);
   const RawQuaternionTrack::Keyframe key5 = {
       RawTrackInterpolation::kLinear, .8f,
-      ozz::math::Quaternion(-0.f, -0.70710677f, -0.f, -.70710677f)};
+      vox::math::Quaternion(-0.f, -0.70710677f, -0.f, -.70710677f)};
   raw_track.keyframes.push_back(key5);
   const RawQuaternionTrack::Keyframe key6 = {
       RawTrackInterpolation::kLinear, 1.f,
-      ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key6);
 
   RawQuaternionTrack output;

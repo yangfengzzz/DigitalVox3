@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -37,15 +37,15 @@
 
 #include "runtime/animation/track.h"
 
-using ozz::animation::FloatTrack;
-using ozz::animation::Float2Track;
-using ozz::animation::Float3Track;
-using ozz::animation::Float4Track;
-using ozz::animation::QuaternionTrack;
-using ozz::animation::FloatTrackSamplingJob;
-using ozz::animation::offline::RawFloatTrack;
-using ozz::animation::offline::TrackBuilder;
-using ozz::animation::offline::RawTrackInterpolation;
+using vox::animation::FloatTrack;
+using vox::animation::Float2Track;
+using vox::animation::Float3Track;
+using vox::animation::Float4Track;
+using vox::animation::QuaternionTrack;
+using vox::animation::FloatTrackSamplingJob;
+using vox::animation::offline::RawFloatTrack;
+using vox::animation::offline::TrackBuilder;
+using vox::animation::offline::RawTrackInterpolation;
 
 TEST(JobValidity, TrackSamplingJob) {
   // Instantiates a builder objects with default parameters.
@@ -56,7 +56,7 @@ TEST(JobValidity, TrackSamplingJob) {
   EXPECT_TRUE(raw_float_track.Validate());
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
   ASSERT_TRUE(track);
 
   {  // Empty/default job
@@ -118,7 +118,7 @@ TEST(Bounds, TrackSamplingJob) {
   raw_float_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
   ASSERT_TRUE(track);
 
   // Samples to verify build output.
@@ -155,27 +155,27 @@ TEST(Float, TrackSamplingJob) {
   TrackBuilder builder;
   float result;
 
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kLinear, 0.f, 0.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f, 4.6f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kLinear, .7f, 9.2f};
   raw_track.keyframes.push_back(key2);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key3 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key3 = {
       RawTrackInterpolation::kLinear, .9f, 0.f};
   raw_track.keyframes.push_back(key3);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   // Samples to verify build output.
-  ozz::animation::FloatTrackSamplingJob sampling;
+  vox::animation::FloatTrackSamplingJob sampling;
   sampling.track = track.get();
   sampling.result = &result;
 
@@ -214,29 +214,29 @@ TEST(Float, TrackSamplingJob) {
 
 TEST(Float2, TrackSamplingJob) {
   TrackBuilder builder;
-  ozz::math::Float2 result;
+  vox::math::Float2 result;
 
-  ozz::animation::offline::RawFloat2Track raw_track;
+  vox::animation::offline::RawFloat2Track raw_track;
 
-  const ozz::animation::offline::RawFloat2Track::Keyframe key0 = {
-      RawTrackInterpolation::kLinear, 0.f, ozz::math::Float2(0.f, 0.f)};
+  const vox::animation::offline::RawFloat2Track::Keyframe key0 = {
+      RawTrackInterpolation::kLinear, 0.f, vox::math::Float2(0.f, 0.f)};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloat2Track::Keyframe key1 = {
-      RawTrackInterpolation::kStep, .5f, ozz::math::Float2(2.3f, 4.6f)};
+  const vox::animation::offline::RawFloat2Track::Keyframe key1 = {
+      RawTrackInterpolation::kStep, .5f, vox::math::Float2(2.3f, 4.6f)};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloat2Track::Keyframe key2 = {
-      RawTrackInterpolation::kLinear, .7f, ozz::math::Float2(4.6f, 9.2f)};
+  const vox::animation::offline::RawFloat2Track::Keyframe key2 = {
+      RawTrackInterpolation::kLinear, .7f, vox::math::Float2(4.6f, 9.2f)};
   raw_track.keyframes.push_back(key2);
-  const ozz::animation::offline::RawFloat2Track::Keyframe key3 = {
-      RawTrackInterpolation::kLinear, .9f, ozz::math::Float2(0.f, 0.f)};
+  const vox::animation::offline::RawFloat2Track::Keyframe key3 = {
+      RawTrackInterpolation::kLinear, .9f, vox::math::Float2(0.f, 0.f)};
   raw_track.keyframes.push_back(key3);
 
   // Builds track
-  ozz::unique_ptr<Float2Track> track(builder(raw_track));
+  vox::unique_ptr<Float2Track> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   // Samples to verify build output.
-  ozz::animation::Float2TrackSamplingJob sampling;
+  vox::animation::Float2TrackSamplingJob sampling;
   sampling.track = track.get();
   sampling.result = &result;
 
@@ -275,29 +275,29 @@ TEST(Float2, TrackSamplingJob) {
 
 TEST(Float3, TrackSamplingJob) {
   TrackBuilder builder;
-  ozz::math::Float3 result;
+  vox::math::Float3 result;
 
-  ozz::animation::offline::RawFloat3Track raw_track;
+  vox::animation::offline::RawFloat3Track raw_track;
 
-  const ozz::animation::offline::RawFloat3Track::Keyframe key0 = {
-      RawTrackInterpolation::kLinear, 0.f, ozz::math::Float3(0.f, 0.f, 0.f)};
+  const vox::animation::offline::RawFloat3Track::Keyframe key0 = {
+      RawTrackInterpolation::kLinear, 0.f, vox::math::Float3(0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloat3Track::Keyframe key1 = {
-      RawTrackInterpolation::kStep, .5f, ozz::math::Float3(0.f, 2.3f, 4.6f)};
+  const vox::animation::offline::RawFloat3Track::Keyframe key1 = {
+      RawTrackInterpolation::kStep, .5f, vox::math::Float3(0.f, 2.3f, 4.6f)};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloat3Track::Keyframe key2 = {
-      RawTrackInterpolation::kLinear, .7f, ozz::math::Float3(0.f, 4.6f, 9.2f)};
+  const vox::animation::offline::RawFloat3Track::Keyframe key2 = {
+      RawTrackInterpolation::kLinear, .7f, vox::math::Float3(0.f, 4.6f, 9.2f)};
   raw_track.keyframes.push_back(key2);
-  const ozz::animation::offline::RawFloat3Track::Keyframe key3 = {
-      RawTrackInterpolation::kLinear, .9f, ozz::math::Float3(0.f, 0.f, 0.f)};
+  const vox::animation::offline::RawFloat3Track::Keyframe key3 = {
+      RawTrackInterpolation::kLinear, .9f, vox::math::Float3(0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key3);
 
   // Builds track
-  ozz::unique_ptr<Float3Track> track(builder(raw_track));
+  vox::unique_ptr<Float3Track> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   // Samples to verify build output.
-  ozz::animation::Float3TrackSamplingJob sampling;
+  vox::animation::Float3TrackSamplingJob sampling;
   sampling.track = track.get();
   sampling.result = &result;
 
@@ -336,33 +336,33 @@ TEST(Float3, TrackSamplingJob) {
 
 TEST(Float4, TrackSamplingJob) {
   TrackBuilder builder;
-  ozz::math::Float4 result;
+  vox::math::Float4 result;
 
-  ozz::animation::offline::RawFloat4Track raw_track;
+  vox::animation::offline::RawFloat4Track raw_track;
 
-  const ozz::animation::offline::RawFloat4Track::Keyframe key0 = {
+  const vox::animation::offline::RawFloat4Track::Keyframe key0 = {
       RawTrackInterpolation::kLinear, 0.f,
-      ozz::math::Float4(0.f, 0.f, 0.f, 0.f)};
+      vox::math::Float4(0.f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloat4Track::Keyframe key1 = {
+  const vox::animation::offline::RawFloat4Track::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f,
-      ozz::math::Float4(0.f, 2.3f, 0.f, 4.6f)};
+      vox::math::Float4(0.f, 2.3f, 0.f, 4.6f)};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloat4Track::Keyframe key2 = {
+  const vox::animation::offline::RawFloat4Track::Keyframe key2 = {
       RawTrackInterpolation::kLinear, .7f,
-      ozz::math::Float4(0.f, 4.6f, 0.f, 9.2f)};
+      vox::math::Float4(0.f, 4.6f, 0.f, 9.2f)};
   raw_track.keyframes.push_back(key2);
-  const ozz::animation::offline::RawFloat4Track::Keyframe key3 = {
+  const vox::animation::offline::RawFloat4Track::Keyframe key3 = {
       RawTrackInterpolation::kLinear, .9f,
-      ozz::math::Float4(0.f, 0.f, 0.f, 0.f)};
+      vox::math::Float4(0.f, 0.f, 0.f, 0.f)};
   raw_track.keyframes.push_back(key3);
 
   // Builds track
-  ozz::unique_ptr<Float4Track> track(builder(raw_track));
+  vox::unique_ptr<Float4Track> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   // Samples to verify build output.
-  ozz::animation::Float4TrackSamplingJob sampling;
+  vox::animation::Float4TrackSamplingJob sampling;
   sampling.track = track.get();
   sampling.result = &result;
 
@@ -401,31 +401,31 @@ TEST(Float4, TrackSamplingJob) {
 
 TEST(Quaternion, TrackSamplingJob) {
   TrackBuilder builder;
-  ozz::math::Quaternion result;
+  vox::math::Quaternion result;
 
-  ozz::animation::offline::RawQuaternionTrack raw_track;
+  vox::animation::offline::RawQuaternionTrack raw_track;
 
-  const ozz::animation::offline::RawQuaternionTrack::Keyframe key0 = {
+  const vox::animation::offline::RawQuaternionTrack::Keyframe key0 = {
       RawTrackInterpolation::kLinear, 0.f,
-      ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+      vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawQuaternionTrack::Keyframe key1 = {
+  const vox::animation::offline::RawQuaternionTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f,
-      ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawQuaternionTrack::Keyframe key2 = {
+  const vox::animation::offline::RawQuaternionTrack::Keyframe key2 = {
       RawTrackInterpolation::kLinear, .7f,
-      ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+      vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
   raw_track.keyframes.push_back(key2);
-  const ozz::animation::offline::RawQuaternionTrack::Keyframe key3 = {
-      RawTrackInterpolation::kLinear, .9f, ozz::math::Quaternion::identity()};
+  const vox::animation::offline::RawQuaternionTrack::Keyframe key3 = {
+      RawTrackInterpolation::kLinear, .9f, vox::math::Quaternion::identity()};
   raw_track.keyframes.push_back(key3);
 
   // Builds track
-  ozz::unique_ptr<QuaternionTrack> track(builder(raw_track));
+  vox::unique_ptr<QuaternionTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
   // Samples to verify build output.
-  ozz::animation::QuaternionTrackSamplingJob sampling;
+  vox::animation::QuaternionTrackSamplingJob sampling;
   sampling.track = track.get();
   sampling.result = &result;
 

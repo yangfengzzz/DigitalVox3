@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -30,25 +30,25 @@
 #include "memory/allocator.h"
 
 TEST(Allocate, Memory) {
-  void* p = ozz::memory::default_allocator()->Allocate(12, 1024);
+  void* p = vox::memory::default_allocator()->Allocate(12, 1024);
   EXPECT_TRUE(p != nullptr);
-  EXPECT_TRUE(ozz::IsAligned(p, 1024));
+  EXPECT_TRUE(vox::IsAligned(p, 1024));
 
   // Fills allocated memory.
   memset(p, 0, 12);
 
-  ozz::memory::default_allocator()->Deallocate(p);
+  vox::memory::default_allocator()->Deallocate(p);
 }
 
 TEST(MallocCompliance, Memory) {
   {  // Allocating 0 byte gives a valid pointer.
-    void* p = ozz::memory::default_allocator()->Allocate(0, 1024);
+    void* p = vox::memory::default_allocator()->Allocate(0, 1024);
     EXPECT_TRUE(p != nullptr);
-    ozz::memory::default_allocator()->Deallocate(p);
+    vox::memory::default_allocator()->Deallocate(p);
   }
 
   {  // Freeing of a nullptr pointer is valid.
-    ozz::memory::default_allocator()->Deallocate(nullptr);
+    vox::memory::default_allocator()->Deallocate(nullptr);
   }
 }
 
@@ -88,31 +88,31 @@ struct AlignedInts {
 };
 
 TEST(NewDelete, Memory) {
-  AlignedInts* ai0 = ozz::New<AlignedInts>();
+  AlignedInts* ai0 = vox::New<AlignedInts>();
   ASSERT_TRUE(ai0 != nullptr);
   for (int i = 0; i < ai0->array_size; ++i) {
     EXPECT_EQ(ai0->array[i], i);
   }
-  ozz::Delete(ai0);
+  vox::Delete(ai0);
 
-  AlignedInts* ai1 = ozz::New<AlignedInts>(46);
+  AlignedInts* ai1 = vox::New<AlignedInts>(46);
   ASSERT_TRUE(ai1 != nullptr);
   EXPECT_EQ(ai1->array[0], 46);
   for (int i = 1; i < ai1->array_size; ++i) {
     EXPECT_EQ(ai1->array[i], i);
   }
-  ozz::Delete(ai1);
+  vox::Delete(ai1);
 
-  AlignedInts* ai2 = ozz::New<AlignedInts>(46, 69);
+  AlignedInts* ai2 = vox::New<AlignedInts>(46, 69);
   ASSERT_TRUE(ai2 != nullptr);
   EXPECT_EQ(ai2->array[0], 46);
   EXPECT_EQ(ai2->array[1], 69);
   for (int i = 2; i < ai2->array_size; ++i) {
     EXPECT_EQ(ai2->array[i], i);
   }
-  ozz::Delete(ai2);
+  vox::Delete(ai2);
 
-  AlignedInts* ai3 = ozz::New<AlignedInts>(46, 69, 58);
+  AlignedInts* ai3 = vox::New<AlignedInts>(46, 69, 58);
   ASSERT_TRUE(ai3 != nullptr);
   EXPECT_EQ(ai3->array[0], 46);
   EXPECT_EQ(ai3->array[1], 69);
@@ -120,10 +120,10 @@ TEST(NewDelete, Memory) {
   for (int i = 3; i < ai3->array_size; ++i) {
     EXPECT_EQ(ai3->array[i], i);
   }
-  ozz::Delete(ai3);
+  vox::Delete(ai3);
 }
 
-class TestAllocator : public ozz::memory::Allocator {
+class TestAllocator : public vox::memory::Allocator {
  public:
   TestAllocator() : hard_coded_address_(&hard_coded_address_) {}
 
@@ -142,13 +142,13 @@ class TestAllocator : public ozz::memory::Allocator {
 
 TEST(AllocatorOverride, Memory) {
   TestAllocator test_allocator;
-  ozz::memory::Allocator* previous =
-      ozz::memory::SetDefaulAllocator(&test_allocator);
-  ozz::memory::Allocator* current = ozz::memory::default_allocator();
+  vox::memory::Allocator* previous =
+      vox::memory::SetDefaulAllocator(&test_allocator);
+  vox::memory::Allocator* current = vox::memory::default_allocator();
 
   void* alloc = current->Allocate(1, 1);
   EXPECT_EQ(alloc, test_allocator.hard_coded_address());
   current->Deallocate(alloc);
 
-  EXPECT_EQ(ozz::memory::SetDefaulAllocator(previous), current);
+  EXPECT_EQ(vox::memory::SetDefaulAllocator(previous), current);
 }

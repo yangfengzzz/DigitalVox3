@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_STD_ALLOCATOR_H_
-#define OZZ_OZZ_BASE_CONTAINERS_STD_ALLOCATOR_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_STD_ALLOCATOR_H_
+#define VOX_VOX_BASE_CONTAINERS_STD_ALLOCATOR_H_
 
 #include <new>
 
 #include "memory/allocator.h"
 
-namespace ozz {
+namespace vox {
 // Define a STL allocator compliant allocator->
 template <typename _Ty>
 class StdAllocator {
@@ -101,5 +101,5 @@ inline bool operator!=(const StdAllocator<_Ty>&,
                        const StdAllocator<_Other>&) noexcept {
   return false;
 }
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_STD_ALLOCATOR_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_STD_ALLOCATOR_H_

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,7 +32,7 @@
 
 #include "memory/allocator.h"
 
-namespace ozz {
+namespace vox {
 namespace log {
 
 // Default log level initialization.
@@ -57,11 +57,11 @@ Out::Out() : Logger(std::cout, kStandard) {}
 Err::Err() : Logger(std::cerr, kStandard) {}
 
 Logger::Logger(std::ostream& _stream, Level _level)
-    : stream_(_level <= GetLevel() ? _stream : *ozz::New<std::ostringstream>()),
+    : stream_(_level <= GetLevel() ? _stream : *vox::New<std::ostringstream>()),
       local_stream_(&stream_ != &_stream) {}
 Logger::~Logger() {
   if (local_stream_) {
-      ozz::Delete(&stream_);
+      vox::Delete(&stream_);
   }
 }
 
@@ -76,4 +76,4 @@ FloatPrecision::~FloatPrecision() {
 }
 
 }  // namespace log
-}  // namespace ozz
+}  // namespace vox

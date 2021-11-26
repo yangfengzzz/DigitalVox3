@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_SKELETON_H_
+#define VOX_VOX_ANIMATION_RUNTIME_SKELETON_H_
 
 #include "io/archive_traits.h"
 #include "platform.h"
 #include "span.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 class IArchive;
 class OArchive;
@@ -106,8 +106,8 @@ class Skeleton {
 
   // Serialization functions.
   // Should not be called directly but through io::Archive << and >> operators.
-  void Save(ozz::io::OArchive& _archive) const;
-  void Load(ozz::io::IArchive& _archive, uint32_t _version);
+  void Save(vox::io::OArchive& _archive) const;
+  void Load(vox::io::IArchive& _archive, uint32_t _version);
 
  private:
   // Disables copy and assignation.
@@ -137,8 +137,8 @@ class Skeleton {
 }  // namespace animation
 
 namespace io {
-OZZ_IO_TYPE_VERSION(2, animation::Skeleton)
-OZZ_IO_TYPE_TAG("ozz-skeleton", animation::Skeleton)
+VOX_IO_TYPE_VERSION(2, animation::Skeleton)
+VOX_IO_TYPE_TAG("vox-skeleton", animation::Skeleton)
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_SKELETON_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_SKELETON_H_

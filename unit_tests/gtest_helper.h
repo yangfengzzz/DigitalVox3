@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_GTEST_HELPER_H_
-#define OZZ_OZZ_BASE_GTEST_HELPER_H_
+#ifndef VOX_VOX_BASE_GTEST_HELPER_H_
+#define VOX_VOX_BASE_GTEST_HELPER_H_
 
 #include <sstream>
 
@@ -93,22 +93,22 @@ inline int AbortHook(int, char*, int*) { exit(EXIT_FAILURE); }
 // Specialises EXPECT_EQ_LOG* for verbose clog output type.
 #define EXPECT_EQ_LOG_LOGV(_expression, _eq, _re) \
   EXPECT_EQ_LOG(_expression, _eq, std::clog,      \
-                ozz::log::kVerbose <= ozz::log::GetLevel() ? _re : nullptr)
+                vox::log::kVerbose <= vox::log::GetLevel() ? _re : nullptr)
 
 // Specialises EXPECT_EQ_LOG* for standard clog output type.
 #define EXPECT_EQ_LOG_LOG(_expression, _eq, _re) \
   EXPECT_EQ_LOG(_expression, _eq, std::clog,     \
-                ozz::log::kStandard <= ozz::log::GetLevel() ? _re : nullptr)
+                vox::log::kStandard <= vox::log::GetLevel() ? _re : nullptr)
 
 // Specialises EXPECT_EQ_LOG* for standard cout output type.
 #define EXPECT_EQ_LOG_OUT(_expression, _eq, _re) \
   EXPECT_EQ_LOG(_expression, _eq, std::cout,     \
-                ozz::log::kStandard <= ozz::log::GetLevel() ? _re : nullptr)
+                vox::log::kStandard <= vox::log::GetLevel() ? _re : nullptr)
 
 // Specialises EXPECT_EQ_LOG* for standard cerr output type.
 #define EXPECT_EQ_LOG_ERR(_expression, _eq, _re) \
   EXPECT_EQ_LOG(_expression, _eq, std::cerr,     \
-                ozz::log::kStandard <= ozz::log::GetLevel() ? _re : nullptr)
+                vox::log::kStandard <= vox::log::GetLevel() ? _re : nullptr)
 
 // EXPECT_EQ_LOG* executes _expression while redirecting _output (ex:
 // std::clog) and then expects that the output matched the regular expression
@@ -126,22 +126,22 @@ inline int AbortHook(int, char*, int*) { exit(EXIT_FAILURE); }
 // Specialises EXPECT_LOG* for verbose clog output type.
 #define EXPECT_LOG_LOGV(_expression, _re) \
   EXPECT_LOG(_expression, std::clog,      \
-             ozz::log::kVerbose <= ozz::log::GetLevel() ? _re : nullptr)
+             vox::log::kVerbose <= vox::log::GetLevel() ? _re : nullptr)
 
 // Specialises EXPECT_LOG* for standard clog output type.
 #define EXPECT_LOG_LOG(_expression, _re) \
   EXPECT_LOG(_expression, std::clog,     \
-             ozz::log::kStandard <= ozz::log::GetLevel() ? _re : nullptr)
+             vox::log::kStandard <= vox::log::GetLevel() ? _re : nullptr)
 
 // Specialises EXPECT_LOG* for standard cout output type.
 #define EXPECT_LOG_OUT(_expression, _re) \
   EXPECT_LOG(_expression, std::cout,     \
-             ozz::log::kStandard <= ozz::log::GetLevel() ? _re : nullptr)
+             vox::log::kStandard <= vox::log::GetLevel() ? _re : nullptr)
 
 // Specialises EXPECT_LOG* for standard cerr output type.
 #define EXPECT_LOG_ERR(_expression, _re) \
   EXPECT_LOG(_expression, std::cerr,     \
-             ozz::log::kStandard <= ozz::log::GetLevel() ? _re : nullptr)
+             vox::log::kStandard <= vox::log::GetLevel() ? _re : nullptr)
 
 namespace internal {
 class RedirectOuputTester {
@@ -172,4 +172,4 @@ class RedirectOuputTester {
   std::stringstream redirect_;
 };
 }  // namespace internal
-#endif  // OZZ_OZZ_BASE_GTEST_HELPER_H_
+#endif  // VOX_VOX_BASE_GTEST_HELPER_H_

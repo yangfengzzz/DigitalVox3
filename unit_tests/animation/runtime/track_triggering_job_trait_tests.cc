@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -39,11 +39,11 @@
 
 #include <algorithm>
 
-using ozz::animation::FloatTrack;
-using ozz::animation::TrackTriggeringJob;
-using ozz::animation::offline::RawFloatTrack;
-using ozz::animation::offline::RawTrackInterpolation;
-using ozz::animation::offline::TrackBuilder;
+using vox::animation::FloatTrack;
+using vox::animation::TrackTriggeringJob;
+using vox::animation::offline::RawFloatTrack;
+using vox::animation::offline::RawTrackInterpolation;
+using vox::animation::offline::TrackBuilder;
 
 namespace {
 bool IsRising(const TrackTriggeringJob::Edge& _edge) { return _edge.rising; }
@@ -52,21 +52,21 @@ bool IsRising(const TrackTriggeringJob::Edge& _edge) { return _edge.rising; }
 TEST(Algorithm, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   // Keyframe values oscillate in range [0,2].
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kStep, 0.f, 0.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f, 2.f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kStep, 1.f, 0.f};
   raw_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -80,13 +80,13 @@ TEST(Algorithm, TrackEdgeTriggerJob) {
   ASSERT_TRUE(job.Run());
 
   {  // copy
-    ozz::vector<TrackTriggeringJob::Edge> edges;
+    vox::vector<TrackTriggeringJob::Edge> edges;
     std::copy(iterator, job.end(), std::back_inserter(edges));
     EXPECT_EQ(edges.size(), 4u);
   }
 
   {  // count
-    ozz::vector<TrackTriggeringJob::Edge> edges;
+    vox::vector<TrackTriggeringJob::Edge> edges;
     std::iterator_traits<TrackTriggeringJob::Iterator>::difference_type count =
         std::count_if(iterator, job.end(), IsRising);
     EXPECT_EQ(count, 2);
@@ -97,12 +97,12 @@ TEST(Algorithm, TrackEdgeTriggerJob) {
   }
 
   {  // for_each
-    ozz::vector<TrackTriggeringJob::Edge> edges;
+    vox::vector<TrackTriggeringJob::Edge> edges;
     std::for_each(iterator, job.end(), IsRising);
   }
 
   {  // find_if
-    ozz::vector<TrackTriggeringJob::Edge> edges;
+    vox::vector<TrackTriggeringJob::Edge> edges;
     TrackTriggeringJob::Iterator it_if =
         std::find_if(iterator, job.end(), IsRising);
     EXPECT_TRUE(it_if->rising);

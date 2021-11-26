@@ -2797,7 +2797,7 @@ bool Value::operator!=(const Value& other) const { return !(*this == other); }
 const char* Value::asCString() const {
   JSON_ASSERT_MESSAGE(type_ == stringValue,
                       "in Json::Value::asCString(): requires stringValue");
-  if (value_.string_ == 0) return "";  // Modified for ozz
+  if (value_.string_ == 0) return "";  // Modified for vox
   unsigned this_len;
   char const* this_str;
   decodePrefixedString(this->allocated_, this->value_.string_, &this_len, &this_str);
@@ -3127,7 +3127,7 @@ Value& Value::operator[](ArrayIndex index) {
 
   ObjectValues::value_type defaultValue(key, nullRef);
   it = value_.map_->insert(it, defaultValue);
-  (*it).second.order_ = value_.map_->size(); // ozz: stores order of insertion
+  (*it).second.order_ = value_.map_->size(); // vox: stores order of insertion
   return (*it).second;
 }
 
@@ -3183,7 +3183,7 @@ Value& Value::resolveReference(const char* key) {
   ObjectValues::value_type defaultValue(actualKey, nullRef);
   it = value_.map_->insert(it, defaultValue);
   Value& value = (*it).second;
-  value.order_ = value_.map_->size(); // ozz: stores order of insertion
+  value.order_ = value_.map_->size(); // vox: stores order of insertion
   return value;
 }
 
@@ -3204,7 +3204,7 @@ Value& Value::resolveReference(char const* key, char const* cend)
   ObjectValues::value_type defaultValue(actualKey, nullRef);
   it = value_.map_->insert(it, defaultValue);
   Value& value = (*it).second;
-  value.order_ = value_.map_->size(); // ozz: stores order of insertion
+  value.order_ = value_.map_->size(); // vox: stores order of insertion
   return value;
 }
 
@@ -3380,7 +3380,7 @@ Value::Members Value::getMemberNames() const {
   if (type_ == nullValue)
     return Value::Members();
 
-  // ozz: sorts member names so that they are iterated in order then.
+  // vox: sorts member names so that they are iterated in order then.
   std::vector<ObjectValues::const_iterator> values;
   ObjectValues::const_iterator mit = value_.map_->begin();
   ObjectValues::const_iterator mitEnd = value_.map_->end();

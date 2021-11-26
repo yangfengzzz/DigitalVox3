@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -27,19 +27,19 @@
 
 #include <string.h>
 
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 #include "runtime/animation/skeleton.h"
 #include "io/stream.h"
 #include "memory/unique_ptr.h"
 
-class TestConverter : public ozz::animation::offline::OzzImporter {
+class TestConverter : public vox::animation::offline::VoxImporter {
  public:
   TestConverter() {}
   ~TestConverter() {}
 
  private:
   virtual bool Load(const char* _filename) {
-    file_ = ozz::make_unique<ozz::io::File>(_filename, "rb");
+    file_ = vox::make_unique<vox::io::File>(_filename, "rb");
     if (!file_->opened()) {
       file_.reset(nullptr);
       return false;
@@ -50,34 +50,34 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
     bool valid =
         file_->Read(buffer, sizeof(buffer)) >= sizeof(good_content) - 1 &&
         memcmp(buffer, good_content, sizeof(good_content) - 1) == 0;
-    file_->Seek(0, ozz::io::File::kSet);
+    file_->Seek(0, vox::io::File::kSet);
     return valid;
   }
 
-  virtual bool Import(ozz::animation::offline::RawSkeleton* _skeleton,
+  virtual bool Import(vox::animation::offline::RawSkeleton* _skeleton,
                       const NodeType& _types) {
     (void)_types;
     if (file_ && file_->opened()) {
       char buffer[256];
 
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content 1";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
           _skeleton->roots.resize(1);
-          ozz::animation::offline::RawSkeleton::Joint& root =
+          vox::animation::offline::RawSkeleton::Joint& root =
               _skeleton->roots[0];
           root.name = "root";
 
           root.children.resize(3);
-          ozz::animation::offline::RawSkeleton::Joint& joint0 =
+          vox::animation::offline::RawSkeleton::Joint& joint0 =
               root.children[0];
           joint0.name = "joint0";
-          ozz::animation::offline::RawSkeleton::Joint& joint1 =
+          vox::animation::offline::RawSkeleton::Joint& joint1 =
               root.children[1];
           joint1.name = "joint1";
-          ozz::animation::offline::RawSkeleton::Joint& joint2 =
+          vox::animation::offline::RawSkeleton::Joint& joint2 =
               root.children[2];
           joint2.name = "joint2";
 
@@ -85,12 +85,12 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
         }
       }
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content renamed";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
           _skeleton->roots.resize(1);
-          ozz::animation::offline::RawSkeleton::Joint& root =
+          vox::animation::offline::RawSkeleton::Joint& root =
               _skeleton->roots[0];
           root.name = "root";
 
@@ -98,24 +98,24 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
         }
       }
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] =
             "good content but not unique joint names";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
           _skeleton->roots.resize(1);
-          ozz::animation::offline::RawSkeleton::Joint& root =
+          vox::animation::offline::RawSkeleton::Joint& root =
               _skeleton->roots[0];
           root.name = "jointx";
 
           root.children.resize(3);
-          ozz::animation::offline::RawSkeleton::Joint& joint0 =
+          vox::animation::offline::RawSkeleton::Joint& joint0 =
               root.children[0];
           joint0.name = "joint0";
-          ozz::animation::offline::RawSkeleton::Joint& joint1 =
+          vox::animation::offline::RawSkeleton::Joint& joint1 =
               root.children[1];
           joint1.name = "joint1";
-          ozz::animation::offline::RawSkeleton::Joint& joint2 =
+          vox::animation::offline::RawSkeleton::Joint& joint2 =
               root.children[2];
           joint2.name = "jointx";
 
@@ -133,7 +133,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
       char buffer[256];
 
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content 0";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -142,7 +142,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
       }
 
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content 1";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -152,7 +152,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
       }
 
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content renamed";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -163,7 +163,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
 
       // Handles more than one animation per file.
       {
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content 2";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -178,16 +178,16 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
   }
 
   virtual bool Import(const char* _animation_name,
-                      const ozz::animation::Skeleton& _skeleton,
+                      const vox::animation::Skeleton& _skeleton,
                       float _sampling_rate,
-                      ozz::animation::offline::RawAnimation* _animation) {
+                      vox::animation::offline::RawAnimation* _animation) {
     (void)_sampling_rate;
     (void)_skeleton;
 
     if (file_ && file_->opened()) {
       char buffer[256];
       {  // Handles a single animation per file.
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content 1";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -199,7 +199,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
         }
       }
       {  // Handles a single animation per file that needs renaming.
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content renamed";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -211,7 +211,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
         }
       }
       {  // Handles more than one animation per file.
-        file_->Seek(0, ozz::io::File::kSet);
+        file_->Seek(0, vox::io::File::kSet);
         const char content[] = "good content 2";
         if (file_->Read(buffer, sizeof(buffer)) >= sizeof(content) - 1 &&
             memcmp(buffer, content, sizeof(content) - 1) == 0) {
@@ -248,7 +248,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name, NodeProperty::Type _track_type,
                       float _sampling_rate,
-                      ozz::animation::offline::RawFloatTrack* _track) {
+                      vox::animation::offline::RawFloatTrack* _track) {
     (void)_animation_name;
     (void)_track_type;
     (void)_sampling_rate;
@@ -265,7 +265,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name, NodeProperty::Type _track_type,
                       float _sampling_rate,
-                      ozz::animation::offline::RawFloat2Track* _track) {
+                      vox::animation::offline::RawFloat2Track* _track) {
     (void)_animation_name;
     (void)_track_type;
     (void)_sampling_rate;
@@ -281,7 +281,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name, NodeProperty::Type _track_type,
                       float _sampling_rate,
-                      ozz::animation::offline::RawFloat3Track* _track) {
+                      vox::animation::offline::RawFloat3Track* _track) {
     (void)_animation_name;
     (void)_track_type;
     (void)_sampling_rate;
@@ -297,7 +297,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name, NodeProperty::Type _track_type,
                       float _sampling_rate,
-                      ozz::animation::offline::RawFloat4Track* _track) {
+                      vox::animation::offline::RawFloat4Track* _track) {
     (void)_animation_name;
     (void)_track_type;
     (void)_sampling_rate;
@@ -310,7 +310,7 @@ class TestConverter : public ozz::animation::offline::OzzImporter {
     return found;
   }
 
-  ozz::unique_ptr<ozz::io::File> file_;
+  vox::unique_ptr<vox::io::File> file_;
 };
 
 int main(int _argc, const char** _argv) {

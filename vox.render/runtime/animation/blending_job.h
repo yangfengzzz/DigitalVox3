@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_BLENDING_JOB_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_BLENDING_JOB_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_BLENDING_JOB_H_
+#define VOX_VOX_ANIMATION_RUNTIME_BLENDING_JOB_H_
 
 #include "maths/simd_math.h"
 #include "span.h"
 
-namespace ozz {
+namespace vox {
 
 // Forward declaration of math structures.
 namespace math {
@@ -40,7 +40,7 @@ struct SoaTransform;
 
 namespace animation {
 
-// ozz::animation::BlendingJob is in charge of blending (mixing) multiple poses
+// vox::animation::BlendingJob is in charge of blending (mixing) multiple poses
 // (the result of a sampled animation) according to their respective weight,
 // into one output pose.
 // The number of transforms/joints blended by the job is defined by the number
@@ -124,15 +124,15 @@ struct BlendingJob {
   // by the skeleton that all the animations belongs to.
   // It is used when the accumulated weight for a bone on all layers is
   // less than the threshold value, in order to fall back on valid transforms.
-  span<const ozz::math::SoaTransform> bind_pose;
+  span<const vox::math::SoaTransform> bind_pose;
 
   // Job output.
   // The range of output transforms to be filled with blended layer
   // transforms during job execution.
   // Must be at least as big as the bind pose buffer, but only the number of
   // transforms defined by the bind pose buffer size will be processed.
-  span<ozz::math::SoaTransform> output;
+  span<vox::math::SoaTransform> output;
 };
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_BLENDING_JOB_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_BLENDING_JOB_H_

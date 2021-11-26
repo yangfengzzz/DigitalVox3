@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "import2ozz_config.h"
+#include "import2vox_config.h"
 
 #include <cstring>
 #include <fstream>
 #include <sstream>
 
-#include "import2ozz_anim.h"
-#include "import2ozz_track.h"
-#include "offline/animation/tools/import2ozz.h"
+#include "import2vox_anim.h"
+#include "import2vox_track.h"
+#include "offline/animation/tools/import2vox.h"
 
 #include "offline/animation/animation_optimizer.h"
 #include "offline/animation/track_optimizer.h"
@@ -45,34 +45,34 @@
 
 #include "json/json.h"
 
-bool ValidateExclusiveConfigOption(const ozz::options::Option& _option,
+bool ValidateExclusiveConfigOption(const vox::options::Option& _option,
                                    int _argc);
-OZZ_OPTIONS_DECLARE_STRING_FN(
+VOX_OPTIONS_DECLARE_STRING_FN(
     config, "Specifies input configuration string in json format", "", false,
     &ValidateExclusiveConfigOption)
-OZZ_OPTIONS_DECLARE_STRING_FN(
+VOX_OPTIONS_DECLARE_STRING_FN(
     config_file, "Specifies input configuration file in json format", "", false,
     &ValidateExclusiveConfigOption)
 
 // Validate exclusive config options.
-bool ValidateExclusiveConfigOption(const ozz::options::Option& _option,
+bool ValidateExclusiveConfigOption(const vox::options::Option& _option,
                                    int _argc) {
   (void)_option;
   (void)_argc;
   bool not_exclusive =
       OPTIONS_config_file.value()[0] != 0 && OPTIONS_config.value()[0] != 0;
   if (not_exclusive) {
-    ozz::log::Err() << "--config and --config_file are exclusive options."
+    vox::log::Err() << "--config and --config_file are exclusive options."
                     << std::endl;
   }
   return !not_exclusive;
 }
 
-OZZ_OPTIONS_DECLARE_STRING(
+VOX_OPTIONS_DECLARE_STRING(
     config_dump_reference,
     "Dumps reference json configuration to specified file.", "", false)
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 namespace {
@@ -239,7 +239,7 @@ bool SanitizeSkeletonImport(Json::Value& _root, bool _all_options) {
 }
 
 bool SanitizeSkeleton(Json::Value& _root, bool _all_options) {
-  MakeDefault(_root, "filename", "skeleton.ozz",
+  MakeDefault(_root, "filename", "skeleton.vox",
               "Specifies skeleton input/output filename. The file will be "
               "outputted if import is true. It will also be used as an input "
               "reference during animations import.");
@@ -282,7 +282,7 @@ bool SanitizeOptimizationSettings(Json::Value& _root, bool _all_options) {
 }
 
 bool SanitizeTrackImport(Json::Value& _root) {
-  MakeDefault(_root, "filename", "*.ozz",
+  MakeDefault(_root, "filename", "*.vox",
               "Specifies track output filename(s). Use a \'*\' character "
               "to specify part(s) of the filename that should be replaced by "
               "the track (aka \"joint_name-property_name\") name.");
@@ -297,7 +297,7 @@ bool SanitizeTrackImport(Json::Value& _root) {
               "(aka float3 with scene unit and axis conversion).");
   const char* type_name = _root["type"].asCString();
   if (!PropertyTypeConfig::IsValidEnumName(type_name)) {
-    ozz::log::Err() << "Invalid value \"" << type_name
+    vox::log::Err() << "Invalid value \"" << type_name
                     << "\" for import track type property. Type can be float1 "
                        "to float4, point and vector (aka float3 with scene "
                        "unit and axis conversion)."
@@ -317,7 +317,7 @@ bool SanitizeTrackMotion(Json::Value& _root) {
   MakeDefault(_root, "joint_name", "",
               "Name of the joint that contains the property to import. "
               "Wildcard characters '*' and '?' are supported.");
-  MakeDefault(_root, "output", "*.ozz",
+  MakeDefault(_root, "output", "*.vox",
               "Specifies track output file(s). Use a \'*\' character to "
               "specify part(s) of the filename that should be replaced by the "
               "joint_name.");
@@ -352,7 +352,7 @@ bool SanitizeAnimation(Json::Value& _root, bool _all_options) {
               "Specifies clip name (take) of the animation to import from the "
               "source file. Wildcard characters \'*\' and \'?\' are supported");
 
-  MakeDefault(_root, "filename", "*.ozz",
+  MakeDefault(_root, "filename", "*.vox",
               "Specifies animation output filename. Use a \'*\' character to "
               "specify part(s) of the filename that should be replaced by the "
               "clip name.");
@@ -369,7 +369,7 @@ bool SanitizeAnimation(Json::Value& _root, bool _all_options) {
 
   if (!AdditiveReference::IsValidEnumName(
           _root["additive_reference"].asCString())) {
-    ozz::log::Err() << "Invalid additive reference pose \""
+    vox::log::Err() << "Invalid additive reference pose \""
                     << _root["additive_reference"].asCString() << "\". \""
                     << "Can be \"animation\" to use the 1st animation keyframe "
                        "as reference, or \"skeleton\" to use skeleton bind "
@@ -417,10 +417,10 @@ bool SanitizeRoot(Json::Value& _root, bool _all_options) {
 }
 
 bool RecursiveCheck(const Json::Value& _root, const Json::Value& _expected,
-                    ozz::string _name) {
+                    vox::string _name) {
   if (!IsCompatibleType(_root.type(), _expected.type())) {
     // It's a failure to have a wrong member type.
-    ozz::log::Err() << "Invalid type \"" << JsonTypeToString(_root.type())
+    vox::log::Err() << "Invalid type \"" << JsonTypeToString(_root.type())
                     << "\" for json member \"" << _name << "\". \""
                     << JsonTypeToString(_expected.type()) << "\" expected."
                     << std::endl;
@@ -441,7 +441,7 @@ bool RecursiveCheck(const Json::Value& _root, const Json::Value& _expected,
     for (Json::Value::iterator it = _root.begin(); it != _root.end(); it++) {
       const std::string& name = it.name();
       if (!_expected.isMember(name)) {
-        ozz::log::Err() << "Invalid json member \""
+        vox::log::Err() << "Invalid json member \""
                         << _name + "." + name.c_str() << "\"." << std::endl;
         return false;
       }
@@ -464,10 +464,10 @@ std::string ToString(const Json::Value& _value) {
 
 bool DumpConfig(const char* _path, const Json::Value& _config) {
   if (_path[0] != 0) {
-    ozz::log::LogV() << "Opens config file to dump: " << _path << std::endl;
+    vox::log::LogV() << "Opens config file to dump: " << _path << std::endl;
     std::ofstream file(_path);
     if (!file.is_open()) {
-      ozz::log::Err() << "Failed to open config file to dump: \"" << _path
+      vox::log::Err() << "Failed to open config file to dump: \"" << _path
                       << "\"" << std::endl;
       return false;
     }
@@ -493,25 +493,25 @@ bool ProcessConfiguration(Json::Value* _config) {
   if (OPTIONS_config.value()[0] != 0) {
     config_string = OPTIONS_config.value();
   } else if (OPTIONS_config_file.value()[0] != 0) {
-    ozz::log::LogV() << "Opens config file: \"" << OPTIONS_config_file << "\"."
+    vox::log::LogV() << "Opens config file: \"" << OPTIONS_config_file << "\"."
                      << std::endl;
 
     std::ifstream file(OPTIONS_config_file.value());
     if (!file.is_open()) {
-      ozz::log::Err() << "Failed to open config file: \"" << OPTIONS_config_file
+      vox::log::Err() << "Failed to open config file: \"" << OPTIONS_config_file
                       << "\"." << std::endl;
       return false;
     }
     config_string.assign(std::istreambuf_iterator<char>(file),
                          std::istreambuf_iterator<char>());
   } else {
-    ozz::log::Log() << "No configuration provided, using default configuration."
+    vox::log::Log() << "No configuration provided, using default configuration."
                     << std::endl;
   }
 
   Json::Reader json_builder;
   if (!json_builder.parse(config_string, *_config, true)) {
-    ozz::log::Err() << "Error while parsing configuration string: "
+    vox::log::Err() << "Error while parsing configuration string: "
                     << json_builder.getFormattedErrorMessages() << std::endl;
     return false;
   }
@@ -534,9 +534,9 @@ bool ProcessConfiguration(Json::Value* _config) {
   }
 
   // Dumps the config to LogV now it's sanitized.
-  if (ozz::log::GetLevel() >= ozz::log::kVerbose) {
+  if (vox::log::GetLevel() >= vox::log::kVerbose) {
     const std::string& document = ToString(*_config);
-    ozz::log::LogV() << "Sanitized configuration:" << std::endl
+    vox::log::LogV() << "Sanitized configuration:" << std::endl
                      << document << std::endl;
   }
 
@@ -549,4 +549,4 @@ bool ProcessConfiguration(Json::Value* _config) {
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

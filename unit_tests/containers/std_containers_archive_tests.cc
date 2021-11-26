@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -36,20 +36,20 @@
 
 TEST(string, Archive) {
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
 
-    ozz::io::MemoryStream stream;
+    vox::io::MemoryStream stream;
     ASSERT_TRUE(stream.opened());
 
     // Writes.
-    ozz::io::OArchive o(&stream, endianess);
-    ozz::string empty_o;
+    vox::io::OArchive o(&stream, endianess);
+    vox::string empty_o;
     o << empty_o;
 
-    ozz::string small_o("Forty-six");
+    vox::string small_o("Forty-six");
     o << small_o;
 
-    ozz::string big_o(
+    vox::string big_o(
         "Forty-six is a Wedderburn-Etherington number, an "
         "enneagonal number and a centered triangular number. It is the sum of "
         "the totient function for the first twelve integers. 46 is the largest "
@@ -62,26 +62,26 @@ TEST(string, Archive) {
     o << big_o;
 
     // Rewrite for the string reuse test.
-    ozz::string reuse_o("Forty-six");
+    vox::string reuse_o("Forty-six");
     o << reuse_o;
 
     // Reads.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
 
-    ozz::string empty_i;
+    vox::string empty_i;
     i >> empty_i;
     EXPECT_STREQ(empty_o.c_str(), empty_i.c_str());
 
-    ozz::string small_i;
+    vox::string small_i;
     i >> small_i;
     EXPECT_STREQ(small_o.c_str(), small_i.c_str());
 
-    ozz::string big_i;
+    vox::string big_i;
     i >> big_i;
     EXPECT_STREQ(big_o.c_str(), big_i.c_str());
 
-    ozz::string reuse_i("already used string");
+    vox::string reuse_i("already used string");
     i >> reuse_i;
     EXPECT_STREQ(reuse_o.c_str(), reuse_i.c_str());
   }
@@ -89,52 +89,52 @@ TEST(string, Archive) {
 
 TEST(Vector, Archive) {
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
 
-    ozz::io::MemoryStream stream;
+    vox::io::MemoryStream stream;
     ASSERT_TRUE(stream.opened());
 
     // Writes.
-    ozz::io::OArchive o(&stream, endianess);
-    ozz::vector<int> empty_o;
+    vox::io::OArchive o(&stream, endianess);
+    vox::vector<int> empty_o;
     o << empty_o;
 
-    ozz::vector<int> small_o(5);
+    vox::vector<int> small_o(5);
     std::generate(small_o.begin(), small_o.end(), std::rand);
     o << small_o;
 
-    ozz::vector<int> big_o(1263);
+    vox::vector<int> big_o(1263);
     std::generate(big_o.begin(), big_o.end(), std::rand);
     o << big_o;
 
     // Rewrite for the Vector reuse test.
-    ozz::vector<int> reuse_o(46);
+    vox::vector<int> reuse_o(46);
     std::generate(reuse_o.begin(), reuse_o.end(), std::rand);
     o << reuse_o;
 
     // Reads.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
 
-    ozz::vector<int> empty_i;
+    vox::vector<int> empty_i;
     i >> empty_i;
     EXPECT_EQ(empty_i.size(), 0u);
 
-    ozz::vector<int> small_i;
+    vox::vector<int> small_i;
     i >> small_i;
     EXPECT_EQ(small_o.size(), small_i.size());
     for (size_t j = 0; j < empty_i.size(); ++j) {
       EXPECT_EQ(small_o[j], small_i[j]);
     }
 
-    ozz::vector<int> big_i;
+    vox::vector<int> big_i;
     i >> big_i;
     EXPECT_EQ(big_o.size(), big_i.size());
     for (size_t j = 0; j < big_i.size(); ++j) {
       EXPECT_EQ(big_o[j], big_i[j]);
     }
 
-    ozz::vector<int> reuse_i(3);
+    vox::vector<int> reuse_i(3);
     std::generate(reuse_i.begin(), reuse_i.end(), std::rand);
     i >> reuse_i;
     EXPECT_EQ(reuse_o.size(), reuse_i.size());

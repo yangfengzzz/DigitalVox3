@@ -14,14 +14,14 @@
 #include "maths/math_constant.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 /**
  * Modify a value from the gamma space to the linear space.
  * @param value - The value in gamma space
  * @returns The value in linear space
  */
-OZZ_INLINE float gammaToLinearSpace(float value) {
+VOX_INLINE float gammaToLinearSpace(float value) {
     // https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_sRGB.txt
     // https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB_decode.txt
     
@@ -36,7 +36,7 @@ OZZ_INLINE float gammaToLinearSpace(float value) {
  * @param value - The value in linear space
  * @returns The value in gamma space
  */
-OZZ_INLINE float linearToGammaSpace(float value) {
+VOX_INLINE float linearToGammaSpace(float value) {
     // https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_framebuffer_sRGB.txt
     // https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB_decode.txt
     
@@ -64,7 +64,7 @@ struct Color {
      * Modify components (r, g, b) of this color from gamma space to linear space.
      * @returns The color in linear space
      */
-    OZZ_INLINE Color toLinear() {
+    VOX_INLINE Color toLinear() {
         Color out = *this;
         out.r = gammaToLinearSpace(r);
         out.g = gammaToLinearSpace(g);
@@ -76,7 +76,7 @@ struct Color {
      * Modify components (r, g, b) of this color from linear space to gamma space.
      * @returns The color in gamma space
      */
-    OZZ_INLINE Color toGamma() {
+    VOX_INLINE Color toGamma() {
         Color out = *this;
         out.r = linearToGammaSpace(r);
         out.g = linearToGammaSpace(g);
@@ -85,7 +85,7 @@ struct Color {
     }
 };
 
-OZZ_INLINE bool operator==(const Color &left, const Color &right) {
+VOX_INLINE bool operator==(const Color &left, const Color &right) {
     return (
             (left.r == right.r) &&
             (left.g == right.g) &&
@@ -94,14 +94,14 @@ OZZ_INLINE bool operator==(const Color &left, const Color &right) {
             );
 }
 
-OZZ_INLINE Color operator+(const Color &left, const Color &right) {
+VOX_INLINE Color operator+(const Color &left, const Color &right) {
     return Color(left.r + right.r,
                  left.g + right.g,
                  left.b + right.b,
                  left.a + right.a);
 }
 
-OZZ_INLINE Color operator*(const Color &left, const float s) {
+VOX_INLINE Color operator*(const Color &left, const float s) {
     return Color(left.r * s,
                  left.g * s,
                  left.b * s,

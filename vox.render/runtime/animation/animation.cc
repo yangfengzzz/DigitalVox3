@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -37,10 +37,10 @@
 #include "memory/allocator.h"
 
 // Internal include file
-#define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
+#define VOX_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "animation_keyframe.h"
 
-namespace ozz {
+namespace vox {
 
 namespace animation {
 
@@ -98,7 +98,7 @@ size_t Animation::size() const {
   return size;
 }
 
-void Animation::Save(ozz::io::OArchive& _archive) const {
+void Animation::Save(vox::io::OArchive& _archive) const {
   _archive << duration_;
   _archive << static_cast<int32_t>(num_tracks_);
 
@@ -112,12 +112,12 @@ void Animation::Save(ozz::io::OArchive& _archive) const {
   const ptrdiff_t scale_count = scales_.size();
   _archive << static_cast<int32_t>(scale_count);
 
-  _archive << ozz::io::MakeArray(name_, name_len);
+  _archive << vox::io::MakeArray(name_, name_len);
 
   for (const Float3Key& key : translations_) {
     _archive << key.ratio;
     _archive << key.track;
-    _archive << ozz::io::MakeArray(key.value);
+    _archive << vox::io::MakeArray(key.value);
   }
 
   for (const QuaternionKey& key : rotations_) {
@@ -128,17 +128,17 @@ void Animation::Save(ozz::io::OArchive& _archive) const {
     _archive << largest;
     bool sign = key.sign;
     _archive << sign;
-    _archive << ozz::io::MakeArray(key.value);
+    _archive << vox::io::MakeArray(key.value);
   }
 
   for (const Float3Key& key : scales_) {
     _archive << key.ratio;
     _archive << key.track;
-    _archive << ozz::io::MakeArray(key.value);
+    _archive << vox::io::MakeArray(key.value);
   }
 }
 
-void Animation::Load(ozz::io::IArchive& _archive, uint32_t _version) {
+void Animation::Load(vox::io::IArchive& _archive, uint32_t _version) {
   // Destroy animation in case it was already used before.
   Deallocate();
   duration_ = 0.f;
@@ -169,14 +169,14 @@ void Animation::Load(ozz::io::IArchive& _archive, uint32_t _version) {
   Allocate(name_len, translation_count, rotation_count, scale_count);
 
   if (name_) {  // nullptr name_ is supported.
-    _archive >> ozz::io::MakeArray(name_, name_len);
+    _archive >> vox::io::MakeArray(name_, name_len);
     name_[name_len] = 0;
   }
 
   for (Float3Key& key : translations_) {
     _archive >> key.ratio;
     _archive >> key.track;
-    _archive >> ozz::io::MakeArray(key.value);
+    _archive >> vox::io::MakeArray(key.value);
   }
 
   for (QuaternionKey& key : rotations_) {
@@ -190,14 +190,14 @@ void Animation::Load(ozz::io::IArchive& _archive, uint32_t _version) {
     bool sign;
     _archive >> sign;
     key.sign = sign & 1;
-    _archive >> ozz::io::MakeArray(key.value);
+    _archive >> vox::io::MakeArray(key.value);
   }
 
   for (Float3Key& key : scales_) {
     _archive >> key.ratio;
     _archive >> key.track;
-    _archive >> ozz::io::MakeArray(key.value);
+    _archive >> vox::io::MakeArray(key.value);
   }
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

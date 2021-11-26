@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,28 +25,28 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_UNORDERED_SET_H_
-#define OZZ_OZZ_BASE_CONTAINERS_UNORDERED_SET_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_UNORDERED_SET_H_
+#define VOX_VOX_BASE_CONTAINERS_UNORDERED_SET_H_
 
 #include <unordered_set>
 
 #include "containers/std_allocator.h"
 
-namespace ozz {
-// Redirects std::unordered_set to ozz::UnorderedSet in order to replace std
-// default allocator by ozz::StdAllocator.
+namespace vox {
+// Redirects std::unordered_set to vox::UnorderedSet in order to replace std
+// default allocator by vox::StdAllocator.
 template <class _Key, class _Hash = std::hash<_Key>,
           class _KeyEqual = std::equal_to<_Key>,
-          class _Allocator = ozz::StdAllocator<_Key> >
+          class _Allocator = vox::StdAllocator<_Key> >
 using unordered_set =
     std::unordered_set<_Key, _Hash, _KeyEqual, _Allocator>;
 
-// Redirects std::unordered_multiset to ozz::UnorderedMultiSet in order to
-// replace std default allocator by ozz::StdAllocator.
+// Redirects std::unordered_multiset to vox::UnorderedMultiSet in order to
+// replace std default allocator by vox::StdAllocator.
 template <class _Key, class _Hash = std::hash<_Key>,
           class _KeyEqual = std::equal_to<_Key>,
-          class _Allocator = ozz::StdAllocator<_Key> >
+          class _Allocator = vox::StdAllocator<_Key> >
 using unordered_multiset =
     std::unordered_multiset<_Key, _Hash, _KeyEqual, _Allocator>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_UNORDERED_SET_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_UNORDERED_SET_H_

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <limits>
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -65,7 +65,7 @@ math::Float3 LerpScale(const math::Float3& _a, const math::Float3& _b,
 namespace {
 
 // The next functions are used to sample a RawAnimation. This feature is not
-// part of ozz sdk, as RawAnimation is a intermediate format used to build the
+// part of vox sdk, as RawAnimation is a intermediate format used to build the
 // runtime animation.
 
 // Less comparator, used by search algorithm to walk through track sorted
@@ -109,7 +109,7 @@ typename _Track::value_type::Value SampleComponent(const _Track& _track,
 }
 
 void SampleTrack_NoValidate(const RawAnimation::JointTrack& _track, float _time,
-                            ozz::math::Transform* _transform) {
+                            vox::math::Transform* _transform) {
   _transform->translation =
       SampleComponent(_track.translations, LerpTranslation, _time);
   _transform->rotation = SampleComponent(_track.rotations, LerpRotation, _time);
@@ -118,7 +118,7 @@ void SampleTrack_NoValidate(const RawAnimation::JointTrack& _track, float _time,
 }  // namespace
 
 bool SampleTrack(const RawAnimation::JointTrack& _track, float _time,
-                 ozz::math::Transform* _transform) {
+                 vox::math::Transform* _transform) {
   if (!_track.Validate(std::numeric_limits<float>::infinity())) {
     return false;
   }
@@ -128,7 +128,7 @@ bool SampleTrack(const RawAnimation::JointTrack& _track, float _time,
 }
 
 bool SampleAnimation(const RawAnimation& _animation, float _time,
-                     const span<ozz::math::Transform>& _transforms) {
+                     const span<vox::math::Transform>& _transforms) {
   if (!_animation.Validate()) {
     return false;
   }
@@ -149,4 +149,4 @@ FixedRateSamplingTime::FixedRateSamplingTime(float _duration, float _frequency)
 
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

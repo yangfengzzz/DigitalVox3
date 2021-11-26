@@ -14,7 +14,7 @@
 #include "maths/quaternion.h"
 #include "maths/matrix.h"
 
-namespace ozz {
+namespace vox {
 using namespace math;
 /**
  * Dirty flag of transform.

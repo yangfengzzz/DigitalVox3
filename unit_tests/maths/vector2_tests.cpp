@@ -12,7 +12,7 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Float2;
+using vox::math::Float2;
 
 TEST(Vector2, add) {
     const auto a = Float2(2, 3);
@@ -65,7 +65,7 @@ TEST(Vector2, distanceSquared) {
 
 TEST(Vector2, equals) {
     const auto a = Float2(1, 2);
-    const auto b = Float2(1 + ozz::math::kNormalizationToleranceSq * 0.9, 2);
+    const auto b = Float2(1 + vox::math::kNormalizationToleranceSq * 0.9, 2);
     
     EXPECT_FLOAT2_EQ(a, b.x, b.y);
 }

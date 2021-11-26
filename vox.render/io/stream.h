@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_IO_STREAM_H_
-#define OZZ_OZZ_BASE_IO_STREAM_H_
+#ifndef VOX_VOX_BASE_IO_STREAM_H_
+#define VOX_VOX_BASE_IO_STREAM_H_
 
 // Provides Stream interface used to read/write a memory buffer or a file with
 // Crt fread/fwrite/fseek/ftell like functions.
@@ -35,7 +35,7 @@
 
 #include <cstddef>
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 // Declares a stream access interface that conforms with CRT FILE API.
@@ -185,5 +185,5 @@ class MemoryStream : public Stream {
   int tell_;
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_IO_STREAM_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_IO_STREAM_H_

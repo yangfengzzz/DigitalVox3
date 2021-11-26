@@ -927,7 +927,7 @@ Json::Value obj_value(Json::objectValue); // {}
   iterator begin();
   iterator end();
 
-  // ozz
+  // vox
   size_t order() const { return order_; }
 
 private:
@@ -967,7 +967,7 @@ private:
                                // If not allocated_, string_ must be null-terminated.
   CommentInfo* comments_;
 
-  // ozz: stores order of insertion.
+  // vox: stores order of insertion.
   size_t order_;
 };
 

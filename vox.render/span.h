@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_SPAN_H_
-#define OZZ_OZZ_BASE_SPAN_H_
+#ifndef VOX_VOX_BASE_SPAN_H_
+#define VOX_VOX_BASE_SPAN_H_
 
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 
 // Defines a range [begin,end[ of objects ot type _Ty.
 template <typename _Ty>
@@ -160,12 +160,12 @@ inline span<char> as_writable_bytes(const span<char>& _span) {
 // reflect remain size.
 template <typename _Ty>
 inline span<_Ty> fill_span(span<char>& _src, size_t _count) {
-  assert(ozz::IsAligned(_src.data(), alignof(_Ty)) && "Invalid alignment.");
+  assert(vox::IsAligned(_src.data(), alignof(_Ty)) && "Invalid alignment.");
   const span<_Ty> ret = {reinterpret_cast<_Ty*>(_src.data()), _count};
   // Validity assertion is done by span constructor.
   _src = {reinterpret_cast<char*>(ret.end()), _src.end()};
   return ret;
 }
 
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_SPAN_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_SPAN_H_

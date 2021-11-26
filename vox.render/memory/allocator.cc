@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,7 +35,7 @@
 
 #include "maths/math_ex.h"
 
-namespace ozz {
+namespace vox {
 namespace memory {
 
 namespace {
@@ -62,7 +62,7 @@ class HeapAllocator : public Allocator {
     if (!unaligned) {
       return nullptr;
     }
-    char* aligned = ozz::Align(unaligned + sizeof(Header), _alignment);
+    char* aligned = vox::Align(unaligned + sizeof(Header), _alignment);
     assert(aligned + _size <= unaligned + to_allocate);  // Don't overrun.
     // Set the header
     Header* header = reinterpret_cast<Header*>(aligned - sizeof(Header));
@@ -108,4 +108,4 @@ Allocator* SetDefaulAllocator(Allocator* _allocator) {
   return previous;
 }
 }  // namespace memory
-}  // namespace ozz
+}  // namespace vox

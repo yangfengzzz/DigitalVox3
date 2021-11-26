@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,7 +34,7 @@
 #include "maths/math_ex.h"
 #include "maths/soa_transform.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 BlendingJob::Layer::Layer() : weight(0.f) {}
@@ -93,7 +93,7 @@ bool BlendingJob::Validate() const {
 namespace {
 
 // Macro that defines the process of blending the 1st pass.
-#define OZZ_BLEND_1ST_PASS(_in, _simd_weight, _out)     \
+#define VOX_BLEND_1ST_PASS(_in, _simd_weight, _out)     \
   do {                                                  \
     _out->translation = _in.translation * _simd_weight; \
     _out->rotation = _in.rotation * _simd_weight;       \
@@ -101,7 +101,7 @@ namespace {
   } while (void(0), 0)
 
 // Macro that defines the process of blending any pass but the first.
-#define OZZ_BLEND_N_PASS(_in, _simd_weight, _out)                              \
+#define VOX_BLEND_N_PASS(_in, _simd_weight, _out)                              \
   do {                                                                         \
     /* Blends translation. */                                                  \
     _out->translation = _out->translation + _in.translation * _simd_weight;    \
@@ -117,7 +117,7 @@ namespace {
   } while (void(0), 0)
 
 // Macro that defines the process of adding a pass.
-#define OZZ_ADD_PASS(_in, _simd_weight, _out)                                \
+#define VOX_ADD_PASS(_in, _simd_weight, _out)                                \
   do {                                                                       \
     _out.translation = _out.translation + _in.translation * _simd_weight;    \
     /* Interpolate quaternion between identity and src.rotation.*/           \
@@ -135,7 +135,7 @@ namespace {
   } while (void(0), 0)
 
 // Macro that defines the process of subtracting a pass.
-#define OZZ_SUB_PASS(_in, _simd_weight, _out)                                  \
+#define VOX_SUB_PASS(_in, _simd_weight, _out)                                  \
   do {                                                                         \
     _out.translation = _out.translation - _in.translation * _simd_weight;      \
     /* Interpolate quaternion between identity and src.rotation.*/             \
@@ -166,7 +166,7 @@ struct ProcessArgs {
         accumulated_weight(0.f) {
     // The range of all buffers has already been validated.
     assert(job.output.size() >= num_soa_joints);
-    assert(OZZ_ARRAY_SIZE(accumulated_weights) >= num_soa_joints);
+    assert(VOX_ARRAY_SIZE(accumulated_weights) >= num_soa_joints);
   }
 
   // Allocates enough space to store a accumulated weights per-joint.
@@ -234,7 +234,7 @@ void BlendLayers(ProcessArgs* _args) {
           const math::SimdFloat4 weight =
               layer_weight * math::Max0(layer.joint_weights[i]);
           _args->accumulated_weights[i] = weight;
-          OZZ_BLEND_1ST_PASS(src, weight, dest);
+          VOX_BLEND_1ST_PASS(src, weight, dest);
         }
       } else {
         for (size_t i = 0; i < _args->num_soa_joints; ++i) {
@@ -244,7 +244,7 @@ void BlendLayers(ProcessArgs* _args) {
               layer_weight * math::Max0(layer.joint_weights[i]);
           _args->accumulated_weights[i] =
               _args->accumulated_weights[i] + weight;
-          OZZ_BLEND_N_PASS(src, weight, dest);
+          VOX_BLEND_N_PASS(src, weight, dest);
         }
       }
     } else {
@@ -254,7 +254,7 @@ void BlendLayers(ProcessArgs* _args) {
           const math::SoaTransform& src = layer.transform[i];
           math::SoaTransform* dest = _args->job.output.begin() + i;
           _args->accumulated_weights[i] = layer_weight;
-          OZZ_BLEND_1ST_PASS(src, layer_weight, dest);
+          VOX_BLEND_1ST_PASS(src, layer_weight, dest);
         }
       } else {
         for (size_t i = 0; i < _args->num_soa_joints; ++i) {
@@ -262,7 +262,7 @@ void BlendLayers(ProcessArgs* _args) {
           math::SoaTransform* dest = _args->job.output.begin() + i;
           _args->accumulated_weights[i] =
               _args->accumulated_weights[i] + layer_weight;
-          OZZ_BLEND_N_PASS(src, layer_weight, dest);
+          VOX_BLEND_N_PASS(src, layer_weight, dest);
         }
       }
     }
@@ -301,7 +301,7 @@ void BlendBindPose(ProcessArgs* _args) {
         for (size_t i = 0; i < _args->num_soa_joints; ++i) {
           const math::SoaTransform& src = _args->job.bind_pose[i];
           math::SoaTransform* dest = _args->job.output.begin() + i;
-          OZZ_BLEND_N_PASS(src, simd_bp_weight, dest);
+          VOX_BLEND_N_PASS(src, simd_bp_weight, dest);
         }
       }
     }
@@ -321,7 +321,7 @@ void BlendBindPose(ProcessArgs* _args) {
           math::Max0(threshold - _args->accumulated_weights[i]);
       _args->accumulated_weights[i] =
           math::Max(threshold, _args->accumulated_weights[i]);
-      OZZ_BLEND_N_PASS(src, bp_weight, dest);
+      VOX_BLEND_N_PASS(src, bp_weight, dest);
     }
   }
 }
@@ -386,7 +386,7 @@ void AddLayers(ProcessArgs* _args) {
           const math::SimdFloat4 one_minus_weight = one - weight;
           const math::SoaFloat3 one_minus_weight_f3 = {
               one_minus_weight, one_minus_weight, one_minus_weight};
-          OZZ_ADD_PASS(src, weight, dest);
+          VOX_ADD_PASS(src, weight, dest);
         }
       } else {
         // This is a full layer.
@@ -397,7 +397,7 @@ void AddLayers(ProcessArgs* _args) {
         for (size_t i = 0; i < _args->num_soa_joints; ++i) {
           const math::SoaTransform& src = layer.transform[i];
           math::SoaTransform& dest = _args->job.output[i];
-          OZZ_ADD_PASS(src, layer_weight, dest);
+          VOX_ADD_PASS(src, layer_weight, dest);
         }
       }
     } else if (layer.weight < 0.f) {
@@ -413,7 +413,7 @@ void AddLayers(ProcessArgs* _args) {
           const math::SimdFloat4 weight =
               layer_weight * math::Max0(layer.joint_weights[i]);
           const math::SimdFloat4 one_minus_weight = one - weight;
-          OZZ_SUB_PASS(src, weight, dest);
+          VOX_SUB_PASS(src, weight, dest);
         }
       } else {
         // This is a full layer.
@@ -421,7 +421,7 @@ void AddLayers(ProcessArgs* _args) {
         for (size_t i = 0; i < _args->num_soa_joints; ++i) {
           const math::SoaTransform& src = layer.transform[i];
           math::SoaTransform& dest = _args->job.output[i];
-          OZZ_SUB_PASS(src, layer_weight, dest);
+          VOX_SUB_PASS(src, layer_weight, dest);
         }
       }
     } else {
@@ -454,4 +454,4 @@ bool BlendingJob::Run() const {
   return true;
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

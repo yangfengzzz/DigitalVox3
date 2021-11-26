@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,20 +32,20 @@
 #include "io/archive.h"
 #include "io/stream.h"
 
-using ozz::animation::offline::RawSkeleton;
+using vox::animation::offline::RawSkeleton;
 
 TEST(Empty, RawSkeletonSerialize) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   // Streams out.
-  ozz::io::OArchive o(&stream, ozz::GetNativeEndianness());
+  vox::io::OArchive o(&stream, vox::GetNativeEndianness());
 
   RawSkeleton o_skeleton;
   o << o_skeleton;
 
   // Streams in.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   RawSkeleton i_skeleton;
   i >> i_skeleton;
@@ -70,34 +70,34 @@ TEST(Filled, RawSkeletonSerialize) {
   o_skeleton.roots.resize(1);
   RawSkeleton::Joint& root = o_skeleton.roots[0];
   root.name = "root";
-  root.transform = ozz::math::Transform::identity();
+  root.transform = vox::math::Transform::identity();
   root.children.resize(2);
   root.children[0].name = "j0";
-  root.children[0].transform = ozz::math::Transform::identity();
+  root.children[0].transform = vox::math::Transform::identity();
   root.children[0].transform.translation.x = 46.f;
   root.children[1].name = "j1";
-  root.children[1].transform = ozz::math::Transform::identity();
+  root.children[1].transform = vox::math::Transform::identity();
   root.children[1].transform.scale.y = 99.f;
   root.children[0].children.resize(1);
   root.children[0].children[0].name = "j2";
-  root.children[0].children[0].transform = ozz::math::Transform::identity();
+  root.children[0].children[0].transform = vox::math::Transform::identity();
   root.children[0].children[0].transform.rotation =
-      ozz::math::Quaternion(0.f, 0.f, 1.f, 0.f);
+      vox::math::Quaternion(0.f, 0.f, 1.f, 0.f);
 
   EXPECT_TRUE(o_skeleton.Validate());
   EXPECT_EQ(o_skeleton.num_joints(), 4);
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << o_skeleton;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
 
     RawSkeleton i_skeleton;
     i >> i_skeleton;
@@ -158,10 +158,10 @@ TEST(AlreadyInitialized, RawSkeletonSerialize) {
   RawSkeleton o_skeleton;
   o_skeleton.roots.resize(1);
 
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   // Streams out.
-  ozz::io::OArchive o(&stream);
+  vox::io::OArchive o(&stream);
   o << o_skeleton;
 
   // Streams out a second time.
@@ -169,8 +169,8 @@ TEST(AlreadyInitialized, RawSkeletonSerialize) {
   o << o_skeleton;
 
   // Streams in.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   RawSkeleton i_skeleton;
   i >> i_skeleton;

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "import2ozz_skel.h"
+#include "import2vox_skel.h"
 
 #include <cstdlib>
 #include <cstring>
 #include <iomanip>
 
-#include "import2ozz_config.h"
+#include "import2vox_config.h"
 
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 
 #include "offline/animation/raw_skeleton.h"
 #include "offline/animation/skeleton_builder.h"
@@ -52,13 +52,13 @@
 
 #include "json/json.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 namespace {
 
 // Uses a set to detect names uniqueness.
-typedef ozz::set<const char*, ozz::str_less> Names;
+typedef vox::set<const char*, vox::str_less> Names;
 
 bool ValidateJointNamesUniquenessRecurse(
     const RawSkeleton::Joint::Children& _joints, Names* _names) {
@@ -66,7 +66,7 @@ bool ValidateJointNamesUniquenessRecurse(
     const RawSkeleton::Joint& joint = _joints[i];
     const char* name = joint.name.c_str();
     if (!_names->insert(name).second) {
-      ozz::log::Err()
+      vox::log::Err()
           << "Skeleton contains at least one non-unique joint name \"" << name
           << "\", which is not supported." << std::endl;
       return false;
@@ -85,11 +85,11 @@ bool ValidateJointNamesUniqueness(const RawSkeleton& _skeleton) {
 
 void LogHierarchy(const RawSkeleton::Joint::Children& _children,
                   int _depth = 0) {
-  const std::streamsize pres = ozz::log::LogV().stream().precision();
+  const std::streamsize pres = vox::log::LogV().stream().precision();
   for (size_t i = 0; i < _children.size(); ++i) {
     const RawSkeleton::Joint& joint = _children[i];
-    ozz::log::LogV() << std::setw(_depth) << std::setfill('.') << "";
-    ozz::log::LogV() << joint.name.c_str() << std::setprecision(4)
+    vox::log::LogV() << std::setw(_depth) << std::setfill('.') << "";
+    vox::log::LogV() << joint.name.c_str() << std::setprecision(4)
                      << " t: " << joint.transform.translation.x << ", "
                      << joint.transform.translation.y << ", "
                      << joint.transform.translation.z
@@ -104,25 +104,25 @@ void LogHierarchy(const RawSkeleton::Joint::Children& _children,
     // Recurse
     LogHierarchy(joint.children, _depth + 1);
   }
-  ozz::log::LogV() << std::setprecision(static_cast<int>(pres));
+  vox::log::LogV() << std::setprecision(static_cast<int>(pres));
 }
 }  // namespace
 
-bool ImportSkeleton(const Json::Value& _config, OzzImporter* _importer,
-                    const ozz::Endianness _endianness) {
+bool ImportSkeleton(const Json::Value& _config, VoxImporter* _importer,
+                    const vox::Endianness _endianness) {
   const Json::Value& skeleton_config = _config["skeleton"];
   const Json::Value& import_config = skeleton_config["import"];
 
   // First check that we're actually expecting to import a skeleton.
   if (!import_config["enable"].asBool()) {
-    ozz::log::Log() << "Skeleton build disabled, import will be skipped."
+    vox::log::Log() << "Skeleton build disabled, import will be skipped."
                     << std::endl;
     return true;
   }
 
   // Setup node types import properties.
   const Json::Value& types_config = import_config["types"];
-  OzzImporter::NodeType types = {0};
+  VoxImporter::NodeType types = {0};
   types.skeleton = types_config["skeleton"].asBool();
   types.marker = types_config["marker"].asBool();
   types.camera = types_config["camera"].asBool();
@@ -132,12 +132,12 @@ bool ImportSkeleton(const Json::Value& _config, OzzImporter* _importer,
 
   RawSkeleton raw_skeleton;
   if (!_importer->Import(&raw_skeleton, types)) {
-    ozz::log::Err() << "Failed to import skeleton." << std::endl;
+    vox::log::Err() << "Failed to import skeleton." << std::endl;
     return false;
   }
 
   // Log skeleton hierarchy
-  if (ozz::log::GetLevel() == ozz::log::kVerbose) {
+  if (vox::log::GetLevel() == vox::log::kVerbose) {
     LogHierarchy(raw_skeleton.roots);
   }
 
@@ -152,11 +152,11 @@ bool ImportSkeleton(const Json::Value& _config, OzzImporter* _importer,
   unique_ptr<Skeleton> skeleton;
   if (!import_config["raw"].asBool()) {
     // Builds runtime skeleton.
-    ozz::log::Log() << "Builds runtime skeleton." << std::endl;
+    vox::log::Log() << "Builds runtime skeleton." << std::endl;
     SkeletonBuilder builder;
     skeleton = builder(raw_skeleton);
     if (!skeleton) {
-      ozz::log::Err() << "Failed to build runtime skeleton." << std::endl;
+      vox::log::Err() << "Failed to build runtime skeleton." << std::endl;
       return false;
     }
   }
@@ -167,26 +167,26 @@ bool ImportSkeleton(const Json::Value& _config, OzzImporter* _importer,
   // file on the disk.
   {
     const char* filename = skeleton_config["filename"].asCString();
-    ozz::log::Log() << "Opens output file: " << filename << std::endl;
-    ozz::io::File file(filename, "wb");
+    vox::log::Log() << "Opens output file: " << filename << std::endl;
+    vox::io::File file(filename, "wb");
     if (!file.opened()) {
-      ozz::log::Err() << "Failed to open output file: \"" << filename << "\"."
+      vox::log::Err() << "Failed to open output file: \"" << filename << "\"."
                       << std::endl;
       return false;
     }
 
     // Initializes output archive.
-    ozz::io::OArchive archive(&file, _endianness);
+    vox::io::OArchive archive(&file, _endianness);
 
     // Fills output archive with the skeleton.
     if (import_config["raw"].asBool()) {
-      ozz::log::Log() << "Outputs RawSkeleton to binary archive." << std::endl;
+      vox::log::Log() << "Outputs RawSkeleton to binary archive." << std::endl;
       archive << raw_skeleton;
     } else {
-      ozz::log::Log() << "Outputs Skeleton to binary archive." << std::endl;
+      vox::log::Log() << "Outputs Skeleton to binary archive." << std::endl;
       archive << *skeleton;
     }
-    ozz::log::Log() << "Skeleton binary archive successfully outputted."
+    vox::log::Log() << "Skeleton binary archive successfully outputted."
                     << std::endl;
   }
 
@@ -194,4 +194,4 @@ bool ImportSkeleton(const Json::Value& _config, OzzImporter* _importer,
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

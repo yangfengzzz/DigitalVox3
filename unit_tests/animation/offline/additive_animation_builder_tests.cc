@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,8 +35,8 @@
 
 #include "offline/animation/raw_animation.h"
 
-using ozz::animation::offline::AdditiveAnimationBuilder;
-using ozz::animation::offline::RawAnimation;
+using vox::animation::offline::AdditiveAnimationBuilder;
+using vox::animation::offline::RawAnimation;
 
 TEST(Error, AdditiveAnimationBuilder) {
   AdditiveAnimationBuilder builder;
@@ -73,7 +73,7 @@ TEST(Error, AdditiveAnimationBuilder) {
     output.duration = -1.f;
     output.tracks.resize(1);
 
-    ozz::span<ozz::math::Transform> empty_ref_pose_range;
+    vox::span<vox::math::Transform> empty_ref_pose_range;
 
     EXPECT_FALSE(builder(input, empty_ref_pose_range, &output));
     EXPECT_FLOAT_EQ(output.duration, RawAnimation().duration);
@@ -97,16 +97,16 @@ TEST(Build, AdditiveAnimationBuilder) {
   // 1 key at the beginning
   {
     const RawAnimation::TranslationKey key = {0.f,
-                                              ozz::math::Float3(2.f, 3.f, 4.f)};
+                                              vox::math::Float3(2.f, 3.f, 4.f)};
     input.tracks[1].translations.push_back(key);
   }
   {
     const RawAnimation::RotationKey key = {
-        0.f, ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+        0.f, vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
     input.tracks[1].rotations.push_back(key);
   }
   {
-    const RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(5.f, 6.f, 7.f)};
+    const RawAnimation::ScaleKey key = {0.f, vox::math::Float3(5.f, 6.f, 7.f)};
     input.tracks[1].scales.push_back(key);
   }
 
@@ -114,25 +114,25 @@ TEST(Build, AdditiveAnimationBuilder) {
   // 2 keys after the beginning
   {
     const RawAnimation::TranslationKey key0 = {
-        .5f, ozz::math::Float3(2.f, 3.f, 4.f)};
+        .5f, vox::math::Float3(2.f, 3.f, 4.f)};
     input.tracks[2].translations.push_back(key0);
     const RawAnimation::TranslationKey key1 = {
-        .7f, ozz::math::Float3(20.f, 30.f, 40.f)};
+        .7f, vox::math::Float3(20.f, 30.f, 40.f)};
     input.tracks[2].translations.push_back(key1);
   }
   {
     const RawAnimation::RotationKey key0 = {
-        .5f, ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+        .5f, vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
     input.tracks[2].rotations.push_back(key0);
     const RawAnimation::RotationKey key1 = {
-        .7f, ozz::math::Quaternion(-.70710677f, 0.f, 0.f, .70710677f)};
+        .7f, vox::math::Quaternion(-.70710677f, 0.f, 0.f, .70710677f)};
     input.tracks[2].rotations.push_back(key1);
   }
   {
-    const RawAnimation::ScaleKey key0 = {.5f, ozz::math::Float3(5.f, 6.f, 7.f)};
+    const RawAnimation::ScaleKey key0 = {.5f, vox::math::Float3(5.f, 6.f, 7.f)};
     input.tracks[2].scales.push_back(key0);
     const RawAnimation::ScaleKey key1 = {.7f,
-                                         ozz::math::Float3(50.f, 60.f, 70.f)};
+                                         vox::math::Float3(50.f, 60.f, 70.f)};
     input.tracks[2].scales.push_back(key1);
   }
 
@@ -209,16 +209,16 @@ TEST(BuildRefPose, AdditiveAnimationBuilder) {
   // 1 key at the beginning
   {
     const RawAnimation::TranslationKey key = {0.f,
-                                              ozz::math::Float3(2.f, 3.f, 4.f)};
+                                              vox::math::Float3(2.f, 3.f, 4.f)};
     input.tracks[1].translations.push_back(key);
   }
   {
     const RawAnimation::RotationKey key = {
-        0.f, ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+        0.f, vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
     input.tracks[1].rotations.push_back(key);
   }
   {
-    const RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(5.f, 6.f, 7.f)};
+    const RawAnimation::ScaleKey key = {0.f, vox::math::Float3(5.f, 6.f, 7.f)};
     input.tracks[1].scales.push_back(key);
   }
 
@@ -226,43 +226,43 @@ TEST(BuildRefPose, AdditiveAnimationBuilder) {
   // 2 keys after the beginning
   {
     const RawAnimation::TranslationKey key0 = {
-        .5f, ozz::math::Float3(2.f, 3.f, 4.f)};
+        .5f, vox::math::Float3(2.f, 3.f, 4.f)};
     input.tracks[2].translations.push_back(key0);
     const RawAnimation::TranslationKey key1 = {
-        .7f, ozz::math::Float3(20.f, 30.f, 40.f)};
+        .7f, vox::math::Float3(20.f, 30.f, 40.f)};
     input.tracks[2].translations.push_back(key1);
   }
   {
     const RawAnimation::RotationKey key0 = {
-        .5f, ozz::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
+        .5f, vox::math::Quaternion(.70710677f, 0.f, 0.f, .70710677f)};
     input.tracks[2].rotations.push_back(key0);
     const RawAnimation::RotationKey key1 = {
-        .7f, ozz::math::Quaternion(-.70710677f, 0.f, 0.f, .70710677f)};
+        .7f, vox::math::Quaternion(-.70710677f, 0.f, 0.f, .70710677f)};
     input.tracks[2].rotations.push_back(key1);
   }
   {
-    const RawAnimation::ScaleKey key0 = {.5f, ozz::math::Float3(5.f, 6.f, 7.f)};
+    const RawAnimation::ScaleKey key0 = {.5f, vox::math::Float3(5.f, 6.f, 7.f)};
     input.tracks[2].scales.push_back(key0);
     const RawAnimation::ScaleKey key1 = {.7f,
-                                         ozz::math::Float3(50.f, 60.f, 70.f)};
+                                         vox::math::Float3(50.f, 60.f, 70.f)};
     input.tracks[2].scales.push_back(key1);
   }
 
   // Builds animation with a custom refpose & very little tolerance
   {
-    ozz::math::Transform ref_pose[3];
-    ref_pose[0] = ozz::math::Transform::identity();
-    ref_pose[1].translation = ozz::math::Float3(1.f, 1.f, 1.f);
+    vox::math::Transform ref_pose[3];
+    ref_pose[0] = vox::math::Transform::identity();
+    ref_pose[1].translation = vox::math::Float3(1.f, 1.f, 1.f);
     ref_pose[1].rotation =
-        ozz::math::Quaternion(0.f, 0.f, .70710677f, .70710677f);
-    ref_pose[1].scale = ozz::math::Float3(1.f, -1.f, 2.f);
+        vox::math::Quaternion(0.f, 0.f, .70710677f, .70710677f);
+    ref_pose[1].scale = vox::math::Float3(1.f, -1.f, 2.f);
     ref_pose[2].translation = input.tracks[2].translations[0].value;
     ref_pose[2].rotation = input.tracks[2].rotations[0].value;
     ref_pose[2].scale = input.tracks[2].scales[0].value;
 
     RawAnimation output;
     ASSERT_TRUE(
-        builder(input, ozz::span<ozz::math::Transform>(ref_pose), &output));
+        builder(input, vox::span<vox::math::Transform>(ref_pose), &output));
     EXPECT_EQ(output.num_tracks(), 3);
 
     // 1st track.

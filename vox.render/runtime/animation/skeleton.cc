@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -36,7 +36,7 @@
 #include "maths/soa_transform.h"
 #include "memory/allocator.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 Skeleton::Skeleton() {}
@@ -96,7 +96,7 @@ void Skeleton::Deallocate() {
   joint_parents_ = {};
 }
 
-void Skeleton::Save(ozz::io::OArchive& _archive) const {
+void Skeleton::Save(vox::io::OArchive& _archive) const {
   const int32_t num_joints = this->num_joints();
 
   // Early out if skeleton's empty.
@@ -112,12 +112,12 @@ void Skeleton::Save(ozz::io::OArchive& _archive) const {
     chars_count += (std::strlen(joint_names_[i]) + 1) * sizeof(char);
   }
   _archive << static_cast<int32_t>(chars_count);
-  _archive << ozz::io::MakeArray(joint_names_[0], chars_count);
-  _archive << ozz::io::MakeArray(joint_parents_);
-  _archive << ozz::io::MakeArray(joint_bind_poses_);
+  _archive << vox::io::MakeArray(joint_names_[0], chars_count);
+  _archive << vox::io::MakeArray(joint_parents_);
+  _archive << vox::io::MakeArray(joint_bind_poses_);
 }
 
-void Skeleton::Load(ozz::io::IArchive& _archive, uint32_t _version) {
+void Skeleton::Load(vox::io::IArchive& _archive, uint32_t _version) {
   // Deallocate skeleton in case it was already used before.
   Deallocate();
 
@@ -143,7 +143,7 @@ void Skeleton::Load(ozz::io::IArchive& _archive, uint32_t _version) {
   char* cursor = Allocate(chars_count, num_joints);
 
   // Reads name's buffer, they are all contiguous in the same buffer.
-  _archive >> ozz::io::MakeArray(cursor, chars_count);
+  _archive >> vox::io::MakeArray(cursor, chars_count);
 
   // Fixes up array of pointers. Stops at num_joints - 1, so that it doesn't
   // read memory past the end of the buffer.
@@ -154,8 +154,8 @@ void Skeleton::Load(ozz::io::IArchive& _archive, uint32_t _version) {
   // num_joints is > 0, as this was tested at the beginning of the function.
   joint_names_[num_joints - 1] = cursor;
 
-  _archive >> ozz::io::MakeArray(joint_parents_);
-  _archive >> ozz::io::MakeArray(joint_bind_poses_);
+  _archive >> vox::io::MakeArray(joint_parents_);
+  _archive >> vox::io::MakeArray(joint_bind_poses_);
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

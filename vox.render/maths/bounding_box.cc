@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -33,7 +33,7 @@
 #include "maths/simd_math.h"
 #include "bounding_sphere.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 
 BoundingBox::BoundingBox()
@@ -92,4 +92,4 @@ BoundingBox TransformBox(const Float4x4 &_matrix, const BoundingBox &_box) {
 }
 
 }  // namespace math
-}  // namespace ozz
+}  // namespace vox

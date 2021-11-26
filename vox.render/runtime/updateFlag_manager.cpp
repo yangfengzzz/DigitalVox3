@@ -7,7 +7,7 @@
 
 #include "updateFlag_manager.h"
 
-namespace ozz {
+namespace vox {
 std::unique_ptr<UpdateFlag> UpdateFlagManager::registration() {
     return std::make_unique<UpdateFlag>(this);
 }

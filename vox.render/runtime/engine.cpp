@@ -7,4 +7,4 @@
 
 #include "engine.h"
 
-namespace ozz {}
+namespace vox {}

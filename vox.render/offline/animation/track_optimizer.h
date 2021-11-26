@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,10 +25,10 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_TRACK_OPTIMIZER_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_TRACK_OPTIMIZER_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_TRACK_OPTIMIZER_H_
+#define VOX_VOX_ANIMATION_OFFLINE_TRACK_OPTIMIZER_H_
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -67,5 +67,5 @@ class TrackOptimizer {
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_TRACK_OPTIMIZER_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_TRACK_OPTIMIZER_H_

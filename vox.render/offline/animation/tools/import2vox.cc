@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 
 #include "json/json.h"
 
@@ -33,99 +33,99 @@
 #include <cstdlib>
 #include <cstring>
 
-#include "import2ozz_anim.h"
-#include "import2ozz_config.h"
-#include "import2ozz_skel.h"
+#include "import2vox_anim.h"
+#include "import2vox_config.h"
+#include "import2vox_skel.h"
 #include "io/stream.h"
 #include "log.h"
 #include "options/options.h"
 
 // Declares command line options.
-OZZ_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)
+VOX_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)
 
-static bool ValidateEndianness(const ozz::options::Option& _option,
+static bool ValidateEndianness(const vox::options::Option& _option,
                                int /*_argc*/) {
-  const ozz::options::StringOption& option =
-      static_cast<const ozz::options::StringOption&>(_option);
+  const vox::options::StringOption& option =
+      static_cast<const vox::options::StringOption&>(_option);
   bool valid = std::strcmp(option.value(), "native") == 0 ||
                std::strcmp(option.value(), "little") == 0 ||
                std::strcmp(option.value(), "big") == 0;
   if (!valid) {
-    ozz::log::Err() << "Invalid endianness option \"" << option << "\""
+    vox::log::Err() << "Invalid endianness option \"" << option << "\""
                     << std::endl;
   }
   return valid;
 }
 
-OZZ_OPTIONS_DECLARE_STRING_FN(
+VOX_OPTIONS_DECLARE_STRING_FN(
     endian,
     "Selects output endianness mode. Can be \"native\" (same as current "
     "platform), \"little\" or \"big\".",
     "native", false, &ValidateEndianness)
 
-ozz::Endianness InitializeEndianness() {
+vox::Endianness InitializeEndianness() {
   // Initializes output endianness from options.
-  ozz::Endianness endianness = ozz::GetNativeEndianness();
+  vox::Endianness endianness = vox::GetNativeEndianness();
   if (std::strcmp(OPTIONS_endian, "little") == 0) {
-    endianness = ozz::kLittleEndian;
+    endianness = vox::kLittleEndian;
   } else if (std::strcmp(OPTIONS_endian, "big") == 0) {
-    endianness = ozz::kBigEndian;
+    endianness = vox::kBigEndian;
   }
-  ozz::log::LogV() << (endianness == ozz::kLittleEndian ? "Little" : "Big")
+  vox::log::LogV() << (endianness == vox::kLittleEndian ? "Little" : "Big")
                    << " endian output binary format selected." << std::endl;
   return endianness;
 }
 
-static bool ValidateLogLevel(const ozz::options::Option& _option,
+static bool ValidateLogLevel(const vox::options::Option& _option,
                              int /*_argc*/) {
-  const ozz::options::StringOption& option =
-      static_cast<const ozz::options::StringOption&>(_option);
+  const vox::options::StringOption& option =
+      static_cast<const vox::options::StringOption&>(_option);
   bool valid = std::strcmp(option.value(), "verbose") == 0 ||
                std::strcmp(option.value(), "standard") == 0 ||
                std::strcmp(option.value(), "silent") == 0;
   if (!valid) {
-    ozz::log::Err() << "Invalid log level option \"" << option << "\""
+    vox::log::Err() << "Invalid log level option \"" << option << "\""
                     << std::endl;
   }
   return valid;
 }
 
-OZZ_OPTIONS_DECLARE_STRING_FN(
+VOX_OPTIONS_DECLARE_STRING_FN(
     log_level,
     "Selects log level. Can be \"silent\", \"standard\" or \"verbose\".",
     "standard", false, &ValidateLogLevel)
 
 void InitializeLogLevel() {
-  ozz::log::Level log_level = ozz::log::GetLevel();
+  vox::log::Level log_level = vox::log::GetLevel();
   if (std::strcmp(OPTIONS_log_level, "silent") == 0) {
-    log_level = ozz::log::kSilent;
+    log_level = vox::log::kSilent;
   } else if (std::strcmp(OPTIONS_log_level, "standard") == 0) {
-    log_level = ozz::log::kStandard;
+    log_level = vox::log::kStandard;
   } else if (std::strcmp(OPTIONS_log_level, "verbose") == 0) {
-    log_level = ozz::log::kVerbose;
+    log_level = vox::log::kVerbose;
   }
-  ozz::log::SetLevel(log_level);
-  ozz::log::LogV() << "Verbose log level activated." << std::endl;
+  vox::log::SetLevel(log_level);
+  vox::log::LogV() << "Verbose log level activated." << std::endl;
 }
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
-int OzzImporter::operator()(int _argc, const char** _argv) {
+int VoxImporter::operator()(int _argc, const char** _argv) {
   // Parses arguments.
-  ozz::options::ParseResult parse_result = ozz::options::ParseCommandLine(
+  vox::options::ParseResult parse_result = vox::options::ParseCommandLine(
       _argc, _argv, "2.0",
-      "Imports skeleton and animations from a file and converts it to ozz "
+      "Imports skeleton and animations from a file and converts it to vox "
       "binary raw or runtime data format.");
-  if (parse_result != ozz::options::kSuccess) {
-    return parse_result == ozz::options::kExitSuccess ? EXIT_SUCCESS
+  if (parse_result != vox::options::kSuccess) {
+    return parse_result == vox::options::kExitSuccess ? EXIT_SUCCESS
                                                       : EXIT_FAILURE;
   }
 
   // Initialize general executable options.
   InitializeLogLevel();
-  const ozz::Endianness endianness = InitializeEndianness();
+  const vox::Endianness endianness = InitializeEndianness();
 
   Json::Value config;
   if (!ProcessConfiguration(&config)) {
@@ -134,16 +134,16 @@ int OzzImporter::operator()(int _argc, const char** _argv) {
   }
 
   // Ensures file to import actually exist.
-  if (!ozz::io::File::Exist(OPTIONS_file)) {
-    ozz::log::Err() << "File \"" << OPTIONS_file << "\" doesn't exist."
+  if (!vox::io::File::Exist(OPTIONS_file)) {
+    vox::log::Err() << "File \"" << OPTIONS_file << "\" doesn't exist."
                     << std::endl;
     return EXIT_FAILURE;
   }
 
   // Imports animations from the document.
-  ozz::log::Log() << "Importing file \"" << OPTIONS_file << "\"" << std::endl;
+  vox::log::Log() << "Importing file \"" << OPTIONS_file << "\"" << std::endl;
   if (!Load(OPTIONS_file)) {
-    ozz::log::Err() << "Failed to import file \"" << OPTIONS_file << "\"."
+    vox::log::Err() << "Failed to import file \"" << OPTIONS_file << "\"."
                     << std::endl;
     return EXIT_FAILURE;
   }
@@ -161,17 +161,17 @@ int OzzImporter::operator()(int _argc, const char** _argv) {
   return EXIT_SUCCESS;
 }
 
-ozz::string OzzImporter::BuildFilename(const char* _filename,
+vox::string VoxImporter::BuildFilename(const char* _filename,
                                        const char* _data_name) const {
   // Fixup invalid characters for a path.
-  ozz::string data_name(_data_name);
+  vox::string data_name(_data_name);
   for (const char c : {'<', '>', ':', '/', '\\', '|', '?', '*'}) {
     std::replace(data_name.begin(), data_name.end(), c, '_');
   }
 
   // Replaces asterisk with data_name
   bool used = false;
-  ozz::string output(_filename);
+  vox::string output(_filename);
   for (size_t asterisk = output.find('*'); asterisk != std::string::npos;
        used = true, asterisk = output.find('*')) {
     output.replace(asterisk, 1, data_name);
@@ -179,7 +179,7 @@ ozz::string OzzImporter::BuildFilename(const char* _filename,
 
   // Displays a log only if data name was renamed and used as a filename.
   if (used && data_name != _data_name) {
-    ozz::log::Log() << "Resource name \"" << _data_name
+    vox::log::Log() << "Resource name \"" << _data_name
                     << "\" was changed to \"" << data_name
                     << "\" in order to be used as a valid filename."
                     << std::endl;
@@ -188,4 +188,4 @@ ozz::string OzzImporter::BuildFilename(const char* _filename,
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

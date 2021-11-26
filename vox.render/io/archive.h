@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_IO_ARCHIVE_H_
-#define OZZ_OZZ_BASE_IO_ARCHIVE_H_
+#ifndef VOX_VOX_BASE_IO_ARCHIVE_H_
+#define VOX_VOX_BASE_IO_ARCHIVE_H_
 
 // Provides input (IArchive) and output (OArchive) serialization containers.
 // Archive are similar to c++ iostream. Data can be saved to a OArchive with
@@ -34,10 +34,10 @@
 // Primitive data types are simply saved/loaded to/from archives, while struct
 // and class are saved/loaded through Save/Load intrusive or non-intrusive
 // functions:
-// - The intrusive function prototypes are "void Save(ozz::io::OArchive*) const"
-// and "void Load(ozz::io::IArchive*)".
+// - The intrusive function prototypes are "void Save(vox::io::OArchive*) const"
+// and "void Load(vox::io::IArchive*)".
 // - The non-intrusive functions allow to work on arrays of objects. They must
-// be implemented in ozz::io namespace, by specializing the following template
+// be implemented in vox::io namespace, by specializing the following template
 // struct:
 // template <typename _Ty>
 // struct Extern {
@@ -47,21 +47,21 @@
 // };
 //
 // Arrays of struct/class or primitive types can be saved/loaded with the
-// helper function ozz::io::MakeArray() that is then streamed in or out using
-// << and >> archive operators: archive << ozz::io::MakeArray(my_array, count);
+// helper function vox::io::MakeArray() that is then streamed in or out using
+// << and >> archive operators: archive << vox::io::MakeArray(my_array, count);
 //
-// Versioning can be done using OZZ_IO_TYPE_VERSION macros. Type version
+// Versioning can be done using VOX_IO_TYPE_VERSION macros. Type version
 // is saved in the OArchive, and is given back to Load functions to allow to
 // manually handle version modifications. Versioning can be disabled using
-// OZZ_IO_TYPE_NOT_VERSIONABLE like macros. It can not be re-enabled afterward.
+// VOX_IO_TYPE_NOT_VERSIONABLE like macros. It can not be re-enabled afterward.
 //
-// Objects can be assigned a tag using OZZ_IO_TYPE_TAG macros. A tag allows to
+// Objects can be assigned a tag using VOX_IO_TYPE_TAG macros. A tag allows to
 // check the type of the next object to read from an archive. An automatic
 // assertion check is performed for each object that has a tag. It can also be
 // done manually to ensure an archive has the expected content.
 //
 // Endianness (big-endian or little-endian) can be specified while constructing
-// an output archive (ozz::io::OArchive). Input archives automatically handle
+// an output archive (vox::io::OArchive). Input archives automatically handle
 // endianness conversion if the native platform endian mode differs from the
 // archive one.
 //
@@ -87,7 +87,7 @@
 
 #include "io/archive_traits.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 namespace internal {
 // Defines Tagger helper object struct.
@@ -126,25 +126,25 @@ class OArchive {
   }
 
 // Primitive type saving.
-#define OZZ_IO_PRIMITIVE_TYPE(_type)                             \
+#define VOX_IO_PRIMITIVE_TYPE(_type)                             \
   void operator<<(_type _v) {                                     \
     _type v = endian_swap_ ? EndianSwapper<_type>::Swap(_v) : _v; \
-    OZZ_IF_DEBUG(size_t size =) stream_->Write(&v, sizeof(v));    \
+    VOX_IF_DEBUG(size_t size =) stream_->Write(&v, sizeof(v));    \
     assert(size == sizeof(v));                                    \
   }
 
-  OZZ_IO_PRIMITIVE_TYPE(char)
-  OZZ_IO_PRIMITIVE_TYPE(int8_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint8_t)
-  OZZ_IO_PRIMITIVE_TYPE(int16_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint16_t)
-  OZZ_IO_PRIMITIVE_TYPE(int32_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint32_t)
-  OZZ_IO_PRIMITIVE_TYPE(int64_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint64_t)
-  OZZ_IO_PRIMITIVE_TYPE(bool)
-  OZZ_IO_PRIMITIVE_TYPE(float)
-#undef OZZ_IO_PRIMITIVE_TYPE
+  VOX_IO_PRIMITIVE_TYPE(char)
+  VOX_IO_PRIMITIVE_TYPE(int8_t)
+  VOX_IO_PRIMITIVE_TYPE(uint8_t)
+  VOX_IO_PRIMITIVE_TYPE(int16_t)
+  VOX_IO_PRIMITIVE_TYPE(uint16_t)
+  VOX_IO_PRIMITIVE_TYPE(int32_t)
+  VOX_IO_PRIMITIVE_TYPE(uint32_t)
+  VOX_IO_PRIMITIVE_TYPE(int64_t)
+  VOX_IO_PRIMITIVE_TYPE(uint64_t)
+  VOX_IO_PRIMITIVE_TYPE(bool)
+  VOX_IO_PRIMITIVE_TYPE(float)
+#undef VOX_IO_PRIMITIVE_TYPE
 
   // Returns output stream.
   Stream* stream() const { return stream_; }
@@ -190,7 +190,7 @@ class IArchive {
   template <typename _Ty>
   void operator>>(_Ty& _ty) {
     // Only uses tag validation for assertions, as reading cannot fail.
-    OZZ_IF_DEBUG(bool valid =) internal::Tagger<const _Ty>::Validate(*this);
+    VOX_IF_DEBUG(bool valid =) internal::Tagger<const _Ty>::Validate(*this);
     assert(valid && "Type tag does not match archive content.");
 
     // Loads instance.
@@ -199,26 +199,26 @@ class IArchive {
   }
 
 // Primitive type loading.
-#define OZZ_IO_PRIMITIVE_TYPE(_type)                         \
+#define VOX_IO_PRIMITIVE_TYPE(_type)                         \
   void operator>>(_type& _v) {                                \
     _type v;                                                  \
-    OZZ_IF_DEBUG(size_t size =) stream_->Read(&v, sizeof(v)); \
+    VOX_IF_DEBUG(size_t size =) stream_->Read(&v, sizeof(v)); \
     assert(size == sizeof(v));                                \
     _v = endian_swap_ ? EndianSwapper<_type>::Swap(v) : v;    \
   }
 
-  OZZ_IO_PRIMITIVE_TYPE(char)
-  OZZ_IO_PRIMITIVE_TYPE(int8_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint8_t)
-  OZZ_IO_PRIMITIVE_TYPE(int16_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint16_t)
-  OZZ_IO_PRIMITIVE_TYPE(int32_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint32_t)
-  OZZ_IO_PRIMITIVE_TYPE(int64_t)
-  OZZ_IO_PRIMITIVE_TYPE(uint64_t)
-  OZZ_IO_PRIMITIVE_TYPE(bool)
-  OZZ_IO_PRIMITIVE_TYPE(float)
-#undef OZZ_IO_PRIMITIVE_TYPE
+  VOX_IO_PRIMITIVE_TYPE(char)
+  VOX_IO_PRIMITIVE_TYPE(int8_t)
+  VOX_IO_PRIMITIVE_TYPE(uint8_t)
+  VOX_IO_PRIMITIVE_TYPE(int16_t)
+  VOX_IO_PRIMITIVE_TYPE(uint16_t)
+  VOX_IO_PRIMITIVE_TYPE(int32_t)
+  VOX_IO_PRIMITIVE_TYPE(uint32_t)
+  VOX_IO_PRIMITIVE_TYPE(int64_t)
+  VOX_IO_PRIMITIVE_TYPE(uint64_t)
+  VOX_IO_PRIMITIVE_TYPE(bool)
+  VOX_IO_PRIMITIVE_TYPE(float)
+#undef VOX_IO_PRIMITIVE_TYPE
 
   template <typename _Ty>
   bool TestTag() {
@@ -254,17 +254,17 @@ class IArchive {
 };
 
 // Primitive type are not versionable.
-OZZ_IO_TYPE_NOT_VERSIONABLE(char)
-OZZ_IO_TYPE_NOT_VERSIONABLE(int8_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(uint8_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(int16_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(uint16_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(int32_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(uint32_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(int64_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(uint64_t)
-OZZ_IO_TYPE_NOT_VERSIONABLE(bool)
-OZZ_IO_TYPE_NOT_VERSIONABLE(float)
+VOX_IO_TYPE_NOT_VERSIONABLE(char)
+VOX_IO_TYPE_NOT_VERSIONABLE(int8_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(uint8_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(int16_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(uint16_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(int32_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(uint32_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(int64_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(uint64_t)
+VOX_IO_TYPE_NOT_VERSIONABLE(bool)
+VOX_IO_TYPE_NOT_VERSIONABLE(float)
 
 // Default loading and saving external implementation.
 template <typename _Ty>
@@ -283,15 +283,15 @@ struct Extern {
 };
 
 // Wrapper for dynamic array serialization.
-// Must be used through ozz::io::MakeArray.
+// Must be used through vox::io::MakeArray.
 namespace internal {
 template <typename _Ty>
 struct Array {
-  OZZ_INLINE void Save(OArchive& _archive) const {
-    ozz::io::Extern<_Ty>::Save(_archive, array, count);
+  VOX_INLINE void Save(OArchive& _archive) const {
+    vox::io::Extern<_Ty>::Save(_archive, array, count);
   }
-  OZZ_INLINE void Load(IArchive& _archive, uint32_t _version) const {
-    ozz::io::Extern<_Ty>::Load(_archive, array, count, _version);
+  VOX_INLINE void Load(IArchive& _archive, uint32_t _version) const {
+    vox::io::Extern<_Ty>::Load(_archive, array, count, _version);
   }
   _Ty* array;
   size_t count;
@@ -299,8 +299,8 @@ struct Array {
 // Specialize for const _Ty which can only be saved.
 template <typename _Ty>
 struct Array<const _Ty> {
-  OZZ_INLINE void Save(OArchive& _archive) const {
-    ozz::io::Extern<_Ty>::Save(_archive, array, count);
+  VOX_INLINE void Save(OArchive& _archive) const {
+    vox::io::Extern<_Ty>::Save(_archive, array, count);
   }
   const _Ty* array;
   size_t count;
@@ -314,7 +314,7 @@ struct Version<const Array<_Ty>> {
 };
 
 // Specializes Array Save/Load for primitive types.
-#define OZZ_IO_PRIMITIVE_TYPE(_type)                                       \
+#define VOX_IO_PRIMITIVE_TYPE(_type)                                       \
   template <>                                                               \
   inline void Array<const _type>::Save(OArchive& _archive) const {          \
     if (_archive.endian_swap()) {                                           \
@@ -324,7 +324,7 @@ struct Version<const Array<_Ty>> {
         _archive << array[i];                                               \
       }                                                                     \
     } else {                                                                \
-      OZZ_IF_DEBUG(size_t size =)                                           \
+      VOX_IF_DEBUG(size_t size =)                                           \
       _archive.SaveBinary(array, count * sizeof(_type));                    \
       assert(size == count * sizeof(_type));                                \
     }                                                                       \
@@ -339,7 +339,7 @@ struct Version<const Array<_Ty>> {
         _archive << array[i];                                               \
       }                                                                     \
     } else {                                                                \
-      OZZ_IF_DEBUG(size_t size =)                                           \
+      VOX_IF_DEBUG(size_t size =)                                           \
       _archive.SaveBinary(array, count * sizeof(_type));                    \
       assert(size == count * sizeof(_type));                                \
     }                                                                       \
@@ -348,7 +348,7 @@ struct Version<const Array<_Ty>> {
   template <>                                                               \
   inline void Array<_type>::Load(IArchive& _archive, uint32_t /*_version*/) \
       const {                                                               \
-    OZZ_IF_DEBUG(size_t size =)                                             \
+    VOX_IF_DEBUG(size_t size =)                                             \
     _archive.LoadBinary(array, count * sizeof(_type));                      \
     assert(size == count * sizeof(_type));                                  \
     if (_archive.endian_swap()) { /*Can swap in-place.*/                    \
@@ -356,49 +356,49 @@ struct Version<const Array<_Ty>> {
     }                                                                       \
   }
 
-OZZ_IO_PRIMITIVE_TYPE(char)
-OZZ_IO_PRIMITIVE_TYPE(int8_t)
-OZZ_IO_PRIMITIVE_TYPE(uint8_t)
-OZZ_IO_PRIMITIVE_TYPE(int16_t)
-OZZ_IO_PRIMITIVE_TYPE(uint16_t)
-OZZ_IO_PRIMITIVE_TYPE(int32_t)
-OZZ_IO_PRIMITIVE_TYPE(uint32_t)
-OZZ_IO_PRIMITIVE_TYPE(int64_t)
-OZZ_IO_PRIMITIVE_TYPE(uint64_t)
-OZZ_IO_PRIMITIVE_TYPE(bool)
-OZZ_IO_PRIMITIVE_TYPE(float)
-#undef OZZ_IO_PRIMITIVE_TYPE
+VOX_IO_PRIMITIVE_TYPE(char)
+VOX_IO_PRIMITIVE_TYPE(int8_t)
+VOX_IO_PRIMITIVE_TYPE(uint8_t)
+VOX_IO_PRIMITIVE_TYPE(int16_t)
+VOX_IO_PRIMITIVE_TYPE(uint16_t)
+VOX_IO_PRIMITIVE_TYPE(int32_t)
+VOX_IO_PRIMITIVE_TYPE(uint32_t)
+VOX_IO_PRIMITIVE_TYPE(int64_t)
+VOX_IO_PRIMITIVE_TYPE(uint64_t)
+VOX_IO_PRIMITIVE_TYPE(bool)
+VOX_IO_PRIMITIVE_TYPE(float)
+#undef VOX_IO_PRIMITIVE_TYPE
 }  // namespace internal
 
 // Utility function that instantiates Array wrapper.
 template <typename _Ty>
-OZZ_INLINE const internal::Array<_Ty> MakeArray(_Ty* _array, size_t _count) {
+VOX_INLINE const internal::Array<_Ty> MakeArray(_Ty* _array, size_t _count) {
   const internal::Array<_Ty> array = {_array, _count};
   return array;
 }
 template <typename _Ty>
-OZZ_INLINE const internal::Array<const _Ty> MakeArray(const _Ty* _array,
+VOX_INLINE const internal::Array<const _Ty> MakeArray(const _Ty* _array,
                                                       size_t _count) {
   const internal::Array<const _Ty> array = {_array, _count};
   return array;
 }
 template <typename _Ty>
-OZZ_INLINE const internal::Array<_Ty> MakeArray(span<_Ty> _array) {
+VOX_INLINE const internal::Array<_Ty> MakeArray(span<_Ty> _array) {
   const internal::Array<_Ty> array = {_array.data(), _array.size()};
   return array;
 }
 template <typename _Ty>
-OZZ_INLINE const internal::Array<const _Ty> MakeArray(span<const _Ty> _array) {
+VOX_INLINE const internal::Array<const _Ty> MakeArray(span<const _Ty> _array) {
   const internal::Array<const _Ty> array = {_array.data(), _array.size()};
   return array;
 }
 template <typename _Ty, size_t _count>
-OZZ_INLINE const internal::Array<_Ty> MakeArray(_Ty (&_array)[_count]) {
+VOX_INLINE const internal::Array<_Ty> MakeArray(_Ty (&_array)[_count]) {
   const internal::Array<_Ty> array = {_array, _count};
   return array;
 }
 template <typename _Ty, size_t _count>
-OZZ_INLINE const internal::Array<const _Ty> MakeArray(
+VOX_INLINE const internal::Array<const _Ty> MakeArray(
     const _Ty (&_array)[_count]) {
   const internal::Array<const _Ty> array = {_array, _count};
   return array;
@@ -410,7 +410,7 @@ template <typename _Ty>
 struct Tagger<_Ty, true> {
   static void Write(OArchive& _archive) {
     typedef internal::Tag<const _Ty> Tag;
-    OZZ_IF_DEBUG(size_t size =)
+    VOX_IF_DEBUG(size_t size =)
     _archive.SaveBinary(Tag::Get(), Tag::kTagLength);
     assert(size == Tag::kTagLength);
   }
@@ -436,5 +436,5 @@ struct Tagger<_Ty, false> {
 };
 }  // namespace internal
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_IO_ARCHIVE_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_IO_ARCHIVE_H_

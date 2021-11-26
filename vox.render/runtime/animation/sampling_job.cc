@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -36,10 +36,10 @@
 #include "memory/allocator.h"
 
 // Internal include file
-#define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
+#define VOX_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "animation_keyframe.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 namespace internal {
@@ -78,7 +78,7 @@ namespace {
 // Loops through the sorted key frames and update cache structure.
 template <typename _Key>
 void UpdateCacheCursor(float _ratio, int _num_soa_tracks,
-                       const ozz::span<const _Key>& _keys, int* _cursor,
+                       const vox::span<const _Key>& _keys, int* _cursor,
                        int* _cache, unsigned char* _outdated) {
   assert(_num_soa_tracks >= 1);
   const int num_tracks = _num_soa_tracks * 4;
@@ -142,7 +142,7 @@ void UpdateCacheCursor(float _ratio, int _num_soa_tracks,
 
 template <typename _Key, typename _InterpKey, typename _Decompress>
 void UpdateInterpKeyframes(int _num_soa_tracks,
-                           const ozz::span<const _Key>& _keys,
+                           const vox::span<const _Key>& _keys,
                            const int* _interp, uint8_t* _outdated,
                            _InterpKey* _interp_keys,
                            const _Decompress& _decompress) {
@@ -449,4 +449,4 @@ void SamplingCache::Invalidate() {
   scale_cursor_ = 0;
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

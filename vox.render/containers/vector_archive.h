@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,17 +25,17 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
-#define OZZ_OZZ_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
+#define VOX_VOX_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
 
 #include "containers/vector.h"
 #include "io/archive.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 
-OZZ_IO_TYPE_NOT_VERSIONABLE_T2(class _Ty, class _Allocator,
+VOX_IO_TYPE_NOT_VERSIONABLE_T2(class _Ty, class _Allocator,
                                std::vector<_Ty, _Allocator>)
 
 template <class _Ty, class _Allocator>
@@ -48,7 +48,7 @@ struct Extern<std::vector<_Ty, _Allocator>> {
       const uint32_t size = static_cast<uint32_t>(vector.size());
       _archive << size;
       if (size > 0) {
-        _archive << ozz::io::MakeArray(&vector[0], size);
+        _archive << vox::io::MakeArray(&vector[0], size);
       }
     }
   }
@@ -62,11 +62,11 @@ struct Extern<std::vector<_Ty, _Allocator>> {
       _archive >> size;
       vector.resize(size);
       if (size > 0) {
-        _archive >> ozz::io::MakeArray(&vector[0], size);
+        _archive >> vox::io::MakeArray(&vector[0], size);
       }
     }
   }
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_VECTOR_ARCHIVE_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_VECTOR_ARCHIVE_H_

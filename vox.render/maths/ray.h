@@ -16,7 +16,7 @@
 #include "vec_float.h"
 #include <optional>
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct Plane;
 struct BoundingSphere;

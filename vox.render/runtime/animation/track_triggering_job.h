@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
+#define VOX_VOX_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
 
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 class FloatTrack;
@@ -157,5 +157,5 @@ inline TrackTriggeringJob::Iterator TrackTriggeringJob::end() const {
   return Iterator(this, Iterator::End());
 }
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_H_

@@ -13,9 +13,9 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Float4;
-using ozz::math::Matrix;
-using ozz::math::Quaternion;
+using vox::math::Float4;
+using vox::math::Matrix;
+using vox::math::Quaternion;
 
 TEST(Vector4, add) {
     const auto a = Float4(2, 3, 4, 1);
@@ -66,7 +66,7 @@ TEST(Vector4, distance) {
 
 TEST(Vector4, equals) {
     const auto a = Float4(1, 2, 3, 4);
-    const auto b = Float4(1 + ozz::math::kNormalizationToleranceSq * 0.9, 2, 3, 4);
+    const auto b = Float4(1 + vox::math::kNormalizationToleranceSq * 0.9, 2, 3, 4);
     
     EXPECT_FLOAT4_EQ(a, b.x, b.y, b.z, b.w);
 }

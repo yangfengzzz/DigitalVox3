@@ -13,10 +13,10 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Matrix3x3;
-using ozz::math::Matrix;
-using ozz::math::Quaternion;
-using ozz::math::Float2;
+using vox::math::Matrix3x3;
+using vox::math::Matrix;
+using vox::math::Quaternion;
+using vox::math::Float2;
 
 TEST(Matrix3x3, add) {
     const auto a = Matrix3x3(1, 2, 3, 4, 5, 6, 7, 8, 9);

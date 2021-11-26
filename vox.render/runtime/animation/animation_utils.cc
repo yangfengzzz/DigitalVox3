@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -28,10 +28,10 @@
 #include "runtime/animation/animation_utils.h"
 
 // Internal include file
-#define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
+#define VOX_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "animation_keyframe.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 template <typename _Key>
@@ -59,4 +59,4 @@ int CountScaleKeyframes(const Animation& _animation, int _track) {
   return CountKeyframesImpl(_animation.scales(), _track);
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

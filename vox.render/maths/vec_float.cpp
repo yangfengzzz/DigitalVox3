@@ -9,7 +9,7 @@
 #include "matrix.h"
 #include "quaternion.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 void transformNormal(const Float3& v, const Matrix& m, Float3& out) {
     const auto& x = v.x;

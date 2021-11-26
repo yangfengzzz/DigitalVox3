@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,35 +25,35 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_TRACK_H_
-#define OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_TRACK_H_
+#ifndef VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_TRACK_H_
+#define VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_TRACK_H_
 
 #include "endianness.h"
 #include "platform.h"
 
-#include "import2ozz_config.h"
-#include "offline/animation/tools/import2ozz.h"
+#include "import2vox_config.h"
+#include "offline/animation/tools/import2vox.h"
 
 namespace Json {
 class Value;
 }
 
-namespace ozz {
+namespace vox {
 namespace animation {
 class Skeleton;
 namespace offline {
 
-class OzzImporter;
-bool ProcessTracks(OzzImporter& _importer, const char* _animation_name,
+class VoxImporter;
+bool ProcessTracks(VoxImporter& _importer, const char* _animation_name,
                    const Skeleton& _skeleton, const Json::Value& _config,
-                   const ozz::Endianness _endianness);
+                   const vox::Endianness _endianness);
 
 // Property type enum to config string conversions.
 struct PropertyTypeConfig
-    : JsonEnum<PropertyTypeConfig, OzzImporter::NodeProperty::Type> {
+    : JsonEnum<PropertyTypeConfig, VoxImporter::NodeProperty::Type> {
   static EnumNames GetNames();
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_TRACK_H_
+}  // namespace vox
+#endif  // VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_TRACK_H_

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,17 +25,17 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_STACK_H_
-#define OZZ_OZZ_BASE_CONTAINERS_STACK_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_STACK_H_
+#define VOX_VOX_BASE_CONTAINERS_STACK_H_
 
 #include <stack>
 
 #include "deque.h"
 
-namespace ozz {
-// Redirects std::stack to ozz::stack in order to replace std default allocator
-// by ozz::StdAllocator.
-template <class _Ty, class _Container = typename ozz::deque<_Ty>>
+namespace vox {
+// Redirects std::stack to vox::stack in order to replace std default allocator
+// by vox::StdAllocator.
+template <class _Ty, class _Container = typename vox::deque<_Ty>>
 using stack = std::stack<_Ty, _Container>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_STACK_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_STACK_H_

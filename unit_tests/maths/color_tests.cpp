@@ -13,7 +13,7 @@
 #include "gtest_math_helper.h"
 #include <random>
 
-using ozz::math::Color;
+using vox::math::Color;
 
 TEST(Color, Constructor) {
     const auto color1 = Color(1, 0.5, 0.5, 1);

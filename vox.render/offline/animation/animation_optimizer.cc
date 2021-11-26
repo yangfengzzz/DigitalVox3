@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,7 +32,7 @@
 #include <functional>
 
 // Internal include file
-#define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
+#define VOX_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "decimate.h"
 #include "offline/animation/raw_animation.h"
 #include "offline/animation/raw_animation_utils.h"
@@ -43,7 +43,7 @@
 #include "maths/math_constant.h"
 #include "maths/math_ex.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -90,7 +90,7 @@ struct HierarchyBuilder {
   };
 
   // Defines the length of a joint hierarchy (of all child).
-  ozz::vector<Spec> specs;
+  vox::vector<Spec> specs;
 
  private:
   // Extracts maximum translations and scales for each track/joint.
@@ -298,4 +298,4 @@ bool AnimationOptimizer::operator()(const RawAnimation& _input,
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

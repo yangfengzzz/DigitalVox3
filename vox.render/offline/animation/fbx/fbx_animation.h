@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,17 +25,17 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
+#define VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
 
 #include "offline/animation/fbx/fbx.h"
 
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 
 #include "containers/string.h"
 #include "containers/vector.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 class Skeleton;
@@ -51,40 +51,40 @@ struct RawquaternionTrack;
 
 namespace fbx {
 
-OzzImporter::AnimationNames GetAnimationNames(FbxSceneLoader& _scene_loader);
+VoxImporter::AnimationNames GetAnimationNames(FbxSceneLoader& _scene_loader);
 
 bool ExtractAnimation(const char* _animation_name,
                       FbxSceneLoader& _scene_loader, const Skeleton& _skeleton,
                       float _sampling_rate, RawAnimation* _animation);
 
-OzzImporter::NodeProperties GetNodeProperties(FbxSceneLoader& _scene_loader,
+VoxImporter::NodeProperties GetNodeProperties(FbxSceneLoader& _scene_loader,
                                               const char* _node_name);
 
 bool ExtractTrack(const char* _animation_name, const char* _node_name,
                   const char* _track_name,
-                  OzzImporter::NodeProperty::Type _type,
+                  VoxImporter::NodeProperty::Type _type,
                   FbxSceneLoader& _scene_loader, float _sampling_rate,
                   RawFloatTrack* _track);
 
 bool ExtractTrack(const char* _animation_name, const char* _node_name,
                   const char* _track_name,
-                  OzzImporter::NodeProperty::Type _type,
+                  VoxImporter::NodeProperty::Type _type,
                   FbxSceneLoader& _scene_loader, float _sampling_rate,
                   RawFloat2Track* _track);
 
 bool ExtractTrack(const char* _animation_name, const char* _node_name,
                   const char* _track_name,
-                  OzzImporter::NodeProperty::Type _type,
+                  VoxImporter::NodeProperty::Type _type,
                   FbxSceneLoader& _scene_loader, float _sampling_rate,
                   RawFloat3Track* _track);
 
 bool ExtractTrack(const char* _animation_name, const char* _node_name,
                   const char* _track_name,
-                  OzzImporter::NodeProperty::Type _type,
+                  VoxImporter::NodeProperty::Type _type,
                   FbxSceneLoader& _scene_loader, float _sampling_rate,
                   RawFloat4Track* _track);
 }  // namespace fbx
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_ANIMATION_H_

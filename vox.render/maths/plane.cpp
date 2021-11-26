@@ -7,7 +7,7 @@
 
 #include "plane.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 Plane Plane::fromPoints(const Float3 &point0, const Float3 &point1, const Float3 &point2) {
     const auto &x0 = point0.x;

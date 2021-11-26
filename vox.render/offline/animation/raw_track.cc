@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,11 +35,11 @@
 #include "containers/string_archive.h"
 #include "containers/vector_archive.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 // Can be declared locally as it's only referenced from this file.
-OZZ_IO_TYPE_VERSION_T1(1, typename _ValueType,
+VOX_IO_TYPE_VERSION_T1(1, typename _ValueType,
                        animation::offline::RawTrackKeyframe<_ValueType>)
 
 template <typename _ValueType>
@@ -119,4 +119,4 @@ template struct RawTrack<math::Quaternion>;
 }  // namespace internal
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

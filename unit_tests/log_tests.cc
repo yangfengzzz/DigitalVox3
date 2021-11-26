@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,34 +35,34 @@ int TestFunction(std::ostream& _stream, const char* _log) {
   return 46;
 }
 
-void TestLogLevel(ozz::log::Level _level) {
-  ozz::log::SetLevel(_level);
+void TestLogLevel(vox::log::Level _level) {
+  vox::log::SetLevel(_level);
 
-  EXPECT_LOG_LOGV(TestFunction(ozz::log::LogV(), "logv"), "logv");
-  EXPECT_LOG_LOG(TestFunction(ozz::log::Log(), "log"), "log");
-  EXPECT_LOG_OUT(TestFunction(ozz::log::Out(), "out"), "out");
-  EXPECT_LOG_ERR(TestFunction(ozz::log::Err(), "err"), "err");
+  EXPECT_LOG_LOGV(TestFunction(vox::log::LogV(), "logv"), "logv");
+  EXPECT_LOG_LOG(TestFunction(vox::log::Log(), "log"), "log");
+  EXPECT_LOG_OUT(TestFunction(vox::log::Out(), "out"), "out");
+  EXPECT_LOG_ERR(TestFunction(vox::log::Err(), "err"), "err");
 
-  EXPECT_EQ_LOG_LOGV(TestFunction(ozz::log::LogV(), "logv"), 46, "logv");
-  EXPECT_EQ_LOG_LOG(TestFunction(ozz::log::Log(), "log"), 46, "log");
-  EXPECT_EQ_LOG_OUT(TestFunction(ozz::log::Out(), "out"), 46, "out");
-  EXPECT_EQ_LOG_ERR(TestFunction(ozz::log::Err(), "err"), 46, "err");
+  EXPECT_EQ_LOG_LOGV(TestFunction(vox::log::LogV(), "logv"), 46, "logv");
+  EXPECT_EQ_LOG_LOG(TestFunction(vox::log::Log(), "log"), 46, "log");
+  EXPECT_EQ_LOG_OUT(TestFunction(vox::log::Out(), "out"), 46, "out");
+  EXPECT_EQ_LOG_ERR(TestFunction(vox::log::Err(), "err"), 46, "err");
 }
 
-TEST(Silent, Log) { TestLogLevel(ozz::log::kSilent); }
+TEST(Silent, Log) { TestLogLevel(vox::log::kSilent); }
 
-TEST(Standard, Log) { TestLogLevel(ozz::log::kStandard); }
+TEST(Standard, Log) { TestLogLevel(vox::log::kStandard); }
 
-TEST(Verbose, Log) { TestLogLevel(ozz::log::kVerbose); }
+TEST(Verbose, Log) { TestLogLevel(vox::log::kVerbose); }
 
 TEST(FloatPrecision, Log) {
   const float number = 46.9352099f;
-  ozz::log::Log log;
+  vox::log::Log log;
 
-  ozz::log::FloatPrecision mod0(log, 0);
+  vox::log::FloatPrecision mod0(log, 0);
   EXPECT_LOG_LOG(log << number << '-' << std::endl, "47-");
   {
-    ozz::log::FloatPrecision mod2(log, 2);
+    vox::log::FloatPrecision mod2(log, 2);
     EXPECT_LOG_LOG(log << number << '-' << std::endl, "46.94-");
   }
   EXPECT_LOG_LOG(log << number << '-' << std::endl, "47-");

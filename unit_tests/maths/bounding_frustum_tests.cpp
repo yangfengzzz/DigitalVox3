@@ -13,7 +13,7 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using namespace ozz::math;
+using namespace vox::math;
 
 class BoundingFrustumTest : public testing::Test {
 public:

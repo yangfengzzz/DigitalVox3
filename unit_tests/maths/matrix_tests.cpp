@@ -12,9 +12,9 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Float3;
-using ozz::math::Matrix;
-using ozz::math::Quaternion;
+using vox::math::Float3;
+using vox::math::Matrix;
+using vox::math::Quaternion;
 
 TEST(Matrix, multiply) {
     const auto a = Matrix(1, 2, 3.3, 4, 5, 6, 7, 8, 9, 10.9, 11, 12, 13, 14, 15, 16);

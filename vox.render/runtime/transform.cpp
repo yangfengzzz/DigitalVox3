@@ -7,6 +7,6 @@
 
 #include "transform.h"
 
-namespace ozz {
+namespace vox {
 
 }

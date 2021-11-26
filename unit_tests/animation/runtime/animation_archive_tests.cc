@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -41,22 +41,22 @@
 #include "offline/animation/animation_builder.h"
 #include "offline/animation/raw_animation.h"
 
-using ozz::animation::Animation;
-using ozz::animation::offline::RawAnimation;
-using ozz::animation::offline::AnimationBuilder;
+using vox::animation::Animation;
+using vox::animation::offline::RawAnimation;
+using vox::animation::offline::AnimationBuilder;
 
 TEST(Empty, AnimationSerialize) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   // Streams out.
-  ozz::io::OArchive o(&stream, ozz::GetNativeEndianness());
+  vox::io::OArchive o(&stream, vox::GetNativeEndianness());
 
   Animation o_animation;
   o << o_animation;
 
   // Streams in.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   Animation i_animation;
   i >> i_animation;
@@ -66,24 +66,24 @@ TEST(Empty, AnimationSerialize) {
 
 TEST(Filled, AnimationSerialize) {
   // Builds a valid animation.
-  ozz::unique_ptr<Animation> o_animation;
+  vox::unique_ptr<Animation> o_animation;
   {
     RawAnimation raw_animation;
     raw_animation.duration = 1.f;
     raw_animation.tracks.resize(1);
 
     RawAnimation::TranslationKey t_key0 = {0.f,
-                                           ozz::math::Float3(93.f, 58.f, 46.f)};
+                                           vox::math::Float3(93.f, 58.f, 46.f)};
     raw_animation.tracks[0].translations.push_back(t_key0);
     RawAnimation::TranslationKey t_key1 = {.9f,
-                                           ozz::math::Float3(46.f, 58.f, 93.f)};
+                                           vox::math::Float3(46.f, 58.f, 93.f)};
     raw_animation.tracks[0].translations.push_back(t_key1);
 
     RawAnimation::RotationKey r_key = {
-        0.7f, ozz::math::Quaternion(0.f, 1.f, 0.f, 0.f)};
+        0.7f, vox::math::Quaternion(0.f, 1.f, 0.f, 0.f)};
     raw_animation.tracks[0].rotations.push_back(r_key);
 
-    RawAnimation::ScaleKey s_key = {0.1f, ozz::math::Float3(99.f, 26.f, 14.f)};
+    RawAnimation::ScaleKey s_key = {0.1f, vox::math::Float3(99.f, 26.f, 14.f)};
     raw_animation.tracks[0].scales.push_back(s_key);
 
     AnimationBuilder builder;
@@ -92,16 +92,16 @@ TEST(Filled, AnimationSerialize) {
   }
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << *o_animation;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
 
     Animation i_animation;
     i >> i_animation;
@@ -111,9 +111,9 @@ TEST(Filled, AnimationSerialize) {
     EXPECT_EQ(o_animation->size(), i_animation.size());
 
     // Needs to sample to test the animation.
-    ozz::animation::SamplingJob job;
-    ozz::animation::SamplingCache cache(1);
-    ozz::math::SoaTransform output[1];
+    vox::animation::SamplingJob job;
+    vox::animation::SamplingCache cache(1);
+    vox::math::SoaTransform output[1];
     job.animation = o_animation.get();
     job.cache = &cache;
     job.output = output;
@@ -145,17 +145,17 @@ TEST(Filled, AnimationSerialize) {
 }
 
 TEST(AlreadyInitialized, AnimationSerialize) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   {
-    ozz::io::OArchive o(&stream);
+    vox::io::OArchive o(&stream);
 
     RawAnimation raw_animation;
     raw_animation.duration = 1.f;
     raw_animation.tracks.resize(1);
 
     AnimationBuilder builder;
-    ozz::unique_ptr<Animation> o_animation(builder(raw_animation));
+    vox::unique_ptr<Animation> o_animation(builder(raw_animation));
     ASSERT_TRUE(o_animation);
     o << *o_animation;
 
@@ -168,8 +168,8 @@ TEST(AlreadyInitialized, AnimationSerialize) {
 
   {
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
 
     // Reads and check the first animation.
     Animation i_animation;

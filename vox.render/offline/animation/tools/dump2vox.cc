@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,11 +25,11 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 
-// Mocks OzzImporter so it can be used to dump default and reference
+// Mocks VoxImporter so it can be used to dump default and reference
 // configurations.
-class DumpConverter : public ozz::animation::offline::OzzImporter {
+class DumpConverter : public vox::animation::offline::VoxImporter {
  public:
   DumpConverter() {}
   ~DumpConverter() {}
@@ -37,14 +37,14 @@ class DumpConverter : public ozz::animation::offline::OzzImporter {
  private:
   virtual bool Load(const char*) { return true; }
 
-  virtual bool Import(ozz::animation::offline::RawSkeleton*, const NodeType&) {
+  virtual bool Import(vox::animation::offline::RawSkeleton*, const NodeType&) {
     return true;
   }
 
   virtual AnimationNames GetAnimationNames() { return AnimationNames(); }
 
-  virtual bool Import(const char*, const ozz::animation::Skeleton&, float,
-                      ozz::animation::offline::RawAnimation*) {
+  virtual bool Import(const char*, const vox::animation::Skeleton&, float,
+                      vox::animation::offline::RawAnimation*) {
     return true;
   }
 
@@ -53,21 +53,21 @@ class DumpConverter : public ozz::animation::offline::OzzImporter {
   }
 
   virtual bool Import(const char*, const char*, const char*, NodeProperty::Type,
-                      float, ozz::animation::offline::RawFloatTrack*) {
+                      float, vox::animation::offline::RawFloatTrack*) {
     return true;
   }
 
   virtual bool Import(const char*, const char*, const char*, NodeProperty::Type,
-                      float, ozz::animation::offline::RawFloat2Track*) {
+                      float, vox::animation::offline::RawFloat2Track*) {
     return true;
   }
 
   virtual bool Import(const char*, const char*, const char*, NodeProperty::Type,
-                      float, ozz::animation::offline::RawFloat3Track*) {
+                      float, vox::animation::offline::RawFloat3Track*) {
     return true;
   }
   virtual bool Import(const char*, const char*, const char*, NodeProperty::Type,
-                      float, ozz::animation::offline::RawFloat4Track*) {
+                      float, vox::animation::offline::RawFloat4Track*) {
     return true;
   }
 };

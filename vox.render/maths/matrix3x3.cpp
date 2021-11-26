@@ -8,7 +8,7 @@
 #include "matrix3x3.h"
 #include "matrix.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 void Matrix3x3::setValueByMatrix(const Matrix& a) {
     const auto& ae = a.elements;

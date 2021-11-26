@@ -7,6 +7,6 @@
 
 #include "script.h"
 
-namespace ozz {
+namespace vox {
 
 }

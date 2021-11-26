@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,25 +25,25 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_STRING_ARCHIVE_H_
-#define OZZ_OZZ_BASE_CONTAINERS_STRING_ARCHIVE_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_STRING_ARCHIVE_H_
+#define VOX_VOX_BASE_CONTAINERS_STRING_ARCHIVE_H_
 
 #include "containers/string.h"
 #include "io/archive_traits.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(ozz::string)
+VOX_IO_TYPE_NOT_VERSIONABLE(vox::string)
 
 template <>
-struct Extern<ozz::string> {
-  static void Save(OArchive& _archive, const ozz::string* _values,
+struct Extern<vox::string> {
+  static void Save(OArchive& _archive, const vox::string* _values,
                    size_t _count);
-  static void Load(IArchive& _archive, ozz::string* _values, size_t _count,
+  static void Load(IArchive& _archive, vox::string* _values, size_t _count,
                    uint32_t _version);
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_STRING_ARCHIVE_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_STRING_ARCHIVE_H_

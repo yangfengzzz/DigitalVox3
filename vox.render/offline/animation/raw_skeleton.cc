@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -29,7 +29,7 @@
 
 #include "runtime/animation/skeleton.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -60,4 +60,4 @@ int RawSkeleton::num_joints() const {
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

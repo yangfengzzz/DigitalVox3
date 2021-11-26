@@ -8,7 +8,7 @@
 #include "bounding_frustum.h"
 #include "collision_util.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 BoundingFrustum::BoundingFrustum(std::optional<Matrix> matrix) {
     near = Plane();

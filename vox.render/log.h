@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_LOG_H_
-#define OZZ_OZZ_BASE_LOG_H_
+#ifndef VOX_VOX_BASE_LOG_H_
+#define VOX_VOX_BASE_LOG_H_
 
 #include <iostream>
 
@@ -37,10 +37,10 @@
 // Proposes a logging interface that redirects logs to std::cout, clog and cerr
 // output streams. This interface adds a logging level functionality (kSilent,
 // kStandard, kVerbose) to the std API, which can be set using
-// ozz::log::GetLevel function.
-// Usage conforms to std stream usage: ozz::log::Log() << "something to log."...
+// vox::log::GetLevel function.
+// Usage conforms to std stream usage: vox::log::Log() << "something to log."...
 
-namespace ozz {
+namespace vox {
 namespace log {
 
 enum Level {
@@ -148,5 +148,5 @@ class FloatPrecision {
   std::ostream& stream_;
 };
 }  // namespace log
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_LOG_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_LOG_H_

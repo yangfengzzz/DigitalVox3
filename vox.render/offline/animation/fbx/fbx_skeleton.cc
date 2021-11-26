@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -31,7 +31,7 @@
 
 #include "log.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 namespace fbx {
@@ -40,7 +40,7 @@ namespace {
 
 enum RecurseReturn { kError, kSkeletonFound, kNoSkeleton };
 
-bool IsTypeSelected(const OzzImporter::NodeType& _types,
+bool IsTypeSelected(const VoxImporter::NodeType& _types,
                     FbxNodeAttribute::EType _node_type) {
   // Early out to accept any node type
   if (_types.any) {
@@ -92,7 +92,7 @@ bool IsTypeSelected(const OzzImporter::NodeType& _types,
 }
 
 RecurseReturn RecurseNode(FbxNode* _node, FbxSystemConverter* _converter,
-                          const OzzImporter::NodeType& _types,
+                          const VoxImporter::NodeType& _types,
                           RawSkeleton* _skeleton, RawSkeleton::Joint* _parent,
                           FbxAMatrix _parent_global_inv) {
   bool skeleton_found = false;
@@ -121,7 +121,7 @@ RecurseReturn RecurseNode(FbxNode* _node, FbxSystemConverter* _converter,
     const FbxAMatrix node_local = _parent_global_inv * node_global;
 
     if (!_converter->ConvertTransform(node_local, &this_joint->transform)) {
-      ozz::log::Err() << "Failed to extract skeleton transform for joint \""
+      vox::log::Err() << "Failed to extract skeleton transform for joint \""
                       << this_joint->name << "\"." << std::endl;
       return kError;
     }
@@ -147,16 +147,16 @@ RecurseReturn RecurseNode(FbxNode* _node, FbxSystemConverter* _converter,
 }  // namespace
 
 bool ExtractSkeleton(FbxSceneLoader& _loader,
-                     const OzzImporter::NodeType& _types,
+                     const VoxImporter::NodeType& _types,
                      RawSkeleton* _skeleton) {
   RecurseReturn ret =
       RecurseNode(_loader.scene()->GetRootNode(), _loader.converter(), _types,
                   _skeleton, nullptr, FbxAMatrix());
   if (ret == kNoSkeleton) {
-    ozz::log::Err() << "No skeleton found in Fbx scene." << std::endl;
+    vox::log::Err() << "No skeleton found in Fbx scene." << std::endl;
     return false;
   } else if (ret == kError) {
-    ozz::log::Err() << "Failed to extract skeleton." << std::endl;
+    vox::log::Err() << "Failed to extract skeleton." << std::endl;
     return false;
   }
   return true;
@@ -164,4 +164,4 @@ bool ExtractSkeleton(FbxSceneLoader& _loader,
 }  // namespace fbx
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

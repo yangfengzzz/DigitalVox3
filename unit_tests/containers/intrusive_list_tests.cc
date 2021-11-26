@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -45,8 +45,8 @@
 #include "gtest_helper.h"
 
 // using-declaration of IntrusiveList type and its options
-using ozz::containers::IntrusiveList;
-using ozz::containers::Option;
+using vox::containers::IntrusiveList;
+using vox::containers::Option;
 
 // Test whether assertion compliance tests can be ran on the container specified
 // as template argument.
@@ -131,23 +131,23 @@ void BindTypes() {
   _Test<std::list<TestObj1<>>>()();
 
   // kAuto link mode
-  typedef Option<ozz::containers::LinkMode::kAuto, 0> _OptionsAuto0;
+  typedef Option<vox::containers::LinkMode::kAuto, 0> _OptionsAuto0;
   typedef TestObj1<_OptionsAuto0> AutoTestObj0;
   _Test<IntrusiveList<AutoTestObj0, _OptionsAuto0>>()();
 
   // kSafe link mode
-  typedef Option<ozz::containers::LinkMode::kSafe, 0> _OptionsSafe0;
+  typedef Option<vox::containers::LinkMode::kSafe, 0> _OptionsSafe0;
   typedef TestObj1<_OptionsSafe0> SafeTestObj0;
   _Test<IntrusiveList<SafeTestObj0, _OptionsSafe0>>()();
 
   // kUnsafe link mode
-  typedef Option<ozz::containers::LinkMode::kUnsafe, 0> _OptionsUnsafe0;
+  typedef Option<vox::containers::LinkMode::kUnsafe, 0> _OptionsUnsafe0;
   typedef TestObj1<_OptionsUnsafe0> UnsafeTestObj0;
   _Test<IntrusiveList<UnsafeTestObj0, _OptionsUnsafe0>>()();
 
   // Auto link mode and safe link mode of a single object in two different
   // lists.
-  typedef Option<ozz::containers::LinkMode::kSafe, 1> _OptionsSafe1;
+  typedef Option<vox::containers::LinkMode::kSafe, 1> _OptionsSafe1;
   typedef TestObj2<_OptionsAuto0, _OptionsSafe1> LocalTestObj01;
   _Test<IntrusiveList<LocalTestObj01, _OptionsSafe1>>()();
 }
@@ -1508,7 +1508,7 @@ TEST(ComplianceAlgorithm, IntrusiveList) { BindTypes<ComplianceAlgorithm>(); }
 
 // Tests IntrusiveList kSafe linkMode specific behavior.
 TEST(SafeLink, IntrusiveList) {
-  typedef Option<ozz::containers::LinkMode::kSafe> LocalOptions;
+  typedef Option<vox::containers::LinkMode::kSafe> LocalOptions;
   typedef TestObj1<LocalOptions> LocalTestObj;
   typedef IntrusiveList<LocalTestObj, LocalOptions> List;
 
@@ -1554,7 +1554,7 @@ TEST(SafeLink, IntrusiveList) {
 
 // Tests IntrusiveList kAuto linkMode specific behavior.
 TEST(AutoLink, IntrusiveList) {
-  typedef Option<ozz::containers::LinkMode::kAuto> LocalOptions;
+  typedef Option<vox::containers::LinkMode::kAuto> LocalOptions;
   typedef TestObj1<LocalOptions> LocalTestObj;
   typedef IntrusiveList<LocalTestObj, LocalOptions> List;
 
@@ -1604,7 +1604,7 @@ TEST(AutoLink, IntrusiveList) {
 
 // Tests IntrusiveList kUnsafe linkMode specific behavior.
 TEST(UnsafeLink, IntrusiveList) {
-  typedef Option<ozz::containers::LinkMode::kUnsafe> LocalOptions;
+  typedef Option<vox::containers::LinkMode::kUnsafe> LocalOptions;
   typedef TestObj1<LocalOptions> LocalTestObj;
   typedef IntrusiveList<LocalTestObj, LocalOptions> List;
 

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_LIST_H_
-#define OZZ_OZZ_BASE_CONTAINERS_LIST_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_LIST_H_
+#define VOX_VOX_BASE_CONTAINERS_LIST_H_
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -42,10 +42,10 @@
 
 #include "containers/std_allocator.h"
 
-namespace ozz {
-// Redirects std::list to ozz::list in order to replace std default allocator by
-// ozz::StdAllocator.
-template <class _Ty, class _Allocator = ozz::StdAllocator<_Ty>>
+namespace vox {
+// Redirects std::list to vox::list in order to replace std default allocator by
+// vox::StdAllocator.
+template <class _Ty, class _Allocator = vox::StdAllocator<_Ty>>
 using list = std::list<_Ty, _Allocator>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_LIST_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_LIST_H_

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,17 +34,17 @@
 #include "maths/soa_transform.h"
 #include "memory/unique_ptr.h"
 
-using ozz::animation::LocalToModelJob;
-using ozz::animation::Skeleton;
-using ozz::animation::offline::RawSkeleton;
-using ozz::animation::offline::SkeletonBuilder;
+using vox::animation::LocalToModelJob;
+using vox::animation::Skeleton;
+using vox::animation::offline::RawSkeleton;
+using vox::animation::offline::SkeletonBuilder;
 
 TEST(JobValidity, LocalToModel) {
   RawSkeleton raw_skeleton;
   SkeletonBuilder builder;
 
   // Empty skeleton.
-  ozz::unique_ptr<Skeleton> empty_skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> empty_skeleton(builder(raw_skeleton));
   ASSERT_TRUE(empty_skeleton);
 
   // Adds 2 joints.
@@ -53,12 +53,12 @@ TEST(JobValidity, LocalToModel) {
   root.name = "root";
   root.children.resize(1);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
-  ozz::math::SoaTransform input[2] = {ozz::math::SoaTransform::identity(),
-                                      ozz::math::SoaTransform::identity()};
-  ozz::math::Float4x4 output[5];
+  vox::math::SoaTransform input[2] = {vox::math::SoaTransform::identity(),
+                                      vox::math::SoaTransform::identity()};
+  vox::math::Float4x4 output[5];
 
   // Default job
   {
@@ -130,9 +130,9 @@ TEST(JobValidity, LocalToModel) {
   // Valid job with root matrix.
   {
     LocalToModelJob job;
-    const ozz::math::SimdFloat4 v =
-        ozz::math::simd_float4::Load(4.f, 3.f, 2.f, 1.f);
-    ozz::math::Float4x4 world = ozz::math::Float4x4::Translation(v);
+    const vox::math::SimdFloat4 v =
+        vox::math::simd_float4::Load(4.f, 3.f, 2.f, 1.f);
+    vox::math::Float4x4 world = vox::math::Float4x4::Translation(v);
     job.skeleton = skeleton.get();
     job.root = &world;
     job.input = input;
@@ -230,36 +230,36 @@ TEST(Transformation, LocalToModel) {
   EXPECT_EQ(raw_skeleton.num_joints(), 6);
 
   SkeletonBuilder builder;
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   // Initializes an input transformation.
-  ozz::math::SoaTransform input[2] = {
+  vox::math::SoaTransform input[2] = {
       // Stores up to 8 inputs, needs 6.
-      {{ozz::math::simd_float4::Load(2.f, 0.f, 1.f, -2.f),
-        ozz::math::simd_float4::Load(2.f, 0.f, 2.f, -2.f),
-        ozz::math::simd_float4::Load(2.f, 0.f, 4.f, -2.f)},
-       {ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(1.f, .70710677f, 1.f, 1.f)},
-       {ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 10.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 10.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 10.f)}},
-      {{ozz::math::simd_float4::Load(12.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(46.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(-12.f, 0.f, 0.f, 0.f)},
-       {ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f)},
-       {ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f)}}};
+      {{vox::math::simd_float4::Load(2.f, 0.f, 1.f, -2.f),
+        vox::math::simd_float4::Load(2.f, 0.f, 2.f, -2.f),
+        vox::math::simd_float4::Load(2.f, 0.f, 4.f, -2.f)},
+       {vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(1.f, .70710677f, 1.f, 1.f)},
+       {vox::math::simd_float4::Load(1.f, 1.f, 1.f, 10.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 1.f, 10.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 1.f, 10.f)}},
+      {{vox::math::simd_float4::Load(12.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(46.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(-12.f, 0.f, 0.f, 0.f)},
+       {vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f)},
+       {vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
+        vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
+        vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f)}}};
 
   {
     // Prepares the job with root == nullptr (default identity matrix)
-    ozz::math::Float4x4 output[6];
+    vox::math::Float4x4 output[6];
     LocalToModelJob job;
     job.skeleton = skeleton.get();
     job.input = input;
@@ -282,10 +282,10 @@ TEST(Transformation, LocalToModel) {
 
   {
     // Prepares the job with root == Translation(4,3,2,1)
-    ozz::math::Float4x4 output[6];
-    const ozz::math::SimdFloat4 v =
-        ozz::math::simd_float4::Load(4.f, 3.f, 2.f, 1.f);
-    ozz::math::Float4x4 world = ozz::math::Float4x4::Translation(v);
+    vox::math::Float4x4 output[6];
+    const vox::math::SimdFloat4 v =
+        vox::math::simd_float4::Load(4.f, 3.f, 2.f, 1.f);
+    vox::math::Float4x4 world = vox::math::Float4x4::Translation(v);
     LocalToModelJob job;
     job.skeleton = skeleton.get();
     job.root = &world;
@@ -347,40 +347,40 @@ TEST(TransformationFromTo, LocalToModel) {
   EXPECT_EQ(raw_skeleton.num_joints(), 8);
 
   SkeletonBuilder builder;
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   // Initializes an input transformation.
-  ozz::math::SoaTransform input[2] = {
+  vox::math::SoaTransform input[2] = {
       // Stores up to 8 inputs, needs 7.
       //                             j0   j1   j2    j3
-      {{ozz::math::simd_float4::Load(2.f, 0.f, -2.f, 1.f),
-        ozz::math::simd_float4::Load(2.f, 0.f, -2.f, 2.f),
-        ozz::math::simd_float4::Load(2.f, 0.f, -2.f, 4.f)},
-       {ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(1.f, .70710677f, 1.f, 1.f)},
-       {ozz::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f)}},
+      {{vox::math::simd_float4::Load(2.f, 0.f, -2.f, 1.f),
+        vox::math::simd_float4::Load(2.f, 0.f, -2.f, 2.f),
+        vox::math::simd_float4::Load(2.f, 0.f, -2.f, 4.f)},
+       {vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(1.f, .70710677f, 1.f, 1.f)},
+       {vox::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f)}},
       //                             j4    j5   j6   j7.
-      {{ozz::math::simd_float4::Load(12.f, 0.f, 3.f, 6.f),
-        ozz::math::simd_float4::Load(46.f, 0.f, 4.f, 7.f),
-        ozz::math::simd_float4::Load(-12.f, 0.f, 5.f, 8.f)},
-       {ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f)},
-       {ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f)}}};
+      {{vox::math::simd_float4::Load(12.f, 0.f, 3.f, 6.f),
+        vox::math::simd_float4::Load(46.f, 0.f, 4.f, 7.f),
+        vox::math::simd_float4::Load(-12.f, 0.f, 5.f, 8.f)},
+       {vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f)},
+       {vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
+        vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
+        vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f)}}};
 
-  ozz::math::Float4x4 output[8];
+  vox::math::Float4x4 output[8];
   LocalToModelJob job_full;
   {  // Intialize whole hierarchy output
     job_full.skeleton = skeleton.get();
-    job_full.from = ozz::animation::Skeleton::kNoParent;
+    job_full.from = vox::animation::Skeleton::kNoParent;
     job_full.input = input;
     job_full.output = output;
     EXPECT_TRUE(job_full.Validate());
@@ -405,7 +405,7 @@ TEST(TransformationFromTo, LocalToModel) {
 
   {  // Updates from j0, j7 shouldn't be updated
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -435,7 +435,7 @@ TEST(TransformationFromTo, LocalToModel) {
 
   {  // Updates from j7, j0-6 shouldn't be updated
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -466,7 +466,7 @@ TEST(TransformationFromTo, LocalToModel) {
   {  // Updates from j1, j1-2 should be updated
     EXPECT_TRUE(job_full.Run());
     output[1] = output[2] = output[3] = output[4] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
+        output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -497,7 +497,7 @@ TEST(TransformationFromTo, LocalToModel) {
   {  // Updates from j3, j3-6 should be updated
     EXPECT_TRUE(job_full.Run());
     output[1] = output[2] = output[3] = output[4] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
+        output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -528,7 +528,7 @@ TEST(TransformationFromTo, LocalToModel) {
   {  // Updates from j5, j5 should only be updated
     EXPECT_TRUE(job_full.Run());
     output[0] = output[1] = output[2] = output[3] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
+        output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -559,7 +559,7 @@ TEST(TransformationFromTo, LocalToModel) {
   {  // Updates from j6, j6 should only be updated
     EXPECT_TRUE(job_full.Run());
     output[0] = output[1] = output[2] = output[4] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
+        output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -589,7 +589,7 @@ TEST(TransformationFromTo, LocalToModel) {
 
   {  // Updates from j0 to j2,
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -620,7 +620,7 @@ TEST(TransformationFromTo, LocalToModel) {
 
   {  // Updates from j0 to j6, j7 shouldn't be updated
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -651,7 +651,7 @@ TEST(TransformationFromTo, LocalToModel) {
 
   {  // Updates from j0 to past end, j7 shouldn't be updated
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -682,7 +682,7 @@ TEST(TransformationFromTo, LocalToModel) {
 
   {  // Updates from j0 to nowehere, nothing should be updated
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -714,7 +714,7 @@ TEST(TransformationFromTo, LocalToModel) {
   {  // Updates from out-of-range value, nothing should be updated
     EXPECT_TRUE(job_full.Run());
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = output[7] = ozz::math::Float4x4::identity();
+        output[6] = output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -782,40 +782,40 @@ TEST(TransformationFromToExclude, LocalToModel) {
   EXPECT_EQ(raw_skeleton.num_joints(), 8);
 
   SkeletonBuilder builder;
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   // Initializes an input transformation.
-  ozz::math::SoaTransform input[2] = {
+  vox::math::SoaTransform input[2] = {
       // Stores up to 8 inputs, needs 7.
       //                             j0   j1   j2    j3
-      {{ozz::math::simd_float4::Load(2.f, 0.f, -2.f, 1.f),
-        ozz::math::simd_float4::Load(2.f, 0.f, -2.f, 2.f),
-        ozz::math::simd_float4::Load(2.f, 0.f, -2.f, 4.f)},
-       {ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(1.f, .70710677f, 1.f, 1.f)},
-       {ozz::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f)}},
+      {{vox::math::simd_float4::Load(2.f, 0.f, -2.f, 1.f),
+        vox::math::simd_float4::Load(2.f, 0.f, -2.f, 2.f),
+        vox::math::simd_float4::Load(2.f, 0.f, -2.f, 4.f)},
+       {vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(1.f, .70710677f, 1.f, 1.f)},
+       {vox::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 10.f, 1.f)}},
       //                             j4    j5   j6   j7.
-      {{ozz::math::simd_float4::Load(12.f, 0.f, 3.f, 6.f),
-        ozz::math::simd_float4::Load(46.f, 0.f, 4.f, 7.f),
-        ozz::math::simd_float4::Load(-12.f, 0.f, 5.f, 8.f)},
-       {ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-        ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f)},
-       {ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
-        ozz::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f)}}};
+      {{vox::math::simd_float4::Load(12.f, 0.f, 3.f, 6.f),
+        vox::math::simd_float4::Load(46.f, 0.f, 4.f, 7.f),
+        vox::math::simd_float4::Load(-12.f, 0.f, 5.f, 8.f)},
+       {vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+        vox::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f)},
+       {vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
+        vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f),
+        vox::math::simd_float4::Load(1.f, -.1f, 1.f, 1.f)}}};
 
-  ozz::math::Float4x4 output[8];
+  vox::math::Float4x4 output[8];
   LocalToModelJob job_full;
   {  // Intialize whole hierarchy output
     job_full.skeleton = skeleton.get();
-    job_full.from = ozz::animation::Skeleton::kNoParent;
+    job_full.from = vox::animation::Skeleton::kNoParent;
     job_full.from_excluded = true;
     job_full.input = input;
     job_full.output = output;
@@ -840,10 +840,10 @@ TEST(TransformationFromToExclude, LocalToModel) {
   }
 
   {  // Updates from j0 excluded, j7 shouldn't be updated
-    output[0] = ozz::math::Float4x4::Scaling(
-        ozz::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
+    output[0] = vox::math::Float4x4::Scaling(
+        vox::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
     output[1] = output[2] = output[3] = output[4] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
+        output[7] = vox::math::Float4x4::identity();
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -875,9 +875,9 @@ TEST(TransformationFromToExclude, LocalToModel) {
   {  // Updates from j1 exclude, j2 should be updated
     EXPECT_TRUE(job_full.Run());
     output[0] = output[2] = output[3] = output[4] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
-    output[1] = ozz::math::Float4x4::Scaling(
-        ozz::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
+        output[7] = vox::math::Float4x4::identity();
+    output[1] = vox::math::Float4x4::Scaling(
+        vox::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -909,9 +909,9 @@ TEST(TransformationFromToExclude, LocalToModel) {
   {  // Updates from j2 excluded, no joint should be updated
     EXPECT_TRUE(job_full.Run());
     output[0] = output[1] = output[3] = output[4] = output[5] = output[6] =
-        output[7] = ozz::math::Float4x4::identity();
-    output[2] = ozz::math::Float4x4::Scaling(
-        ozz::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
+        output[7] = vox::math::Float4x4::identity();
+    output[2] = vox::math::Float4x4::Scaling(
+        vox::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -942,9 +942,9 @@ TEST(TransformationFromToExclude, LocalToModel) {
 
   {  // Updates from j7 excluded, no joint should be updated
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[6] = ozz::math::Float4x4::identity();
-    output[7] = ozz::math::Float4x4::Scaling(
-        ozz::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
+        output[6] = vox::math::Float4x4::identity();
+    output[7] = vox::math::Float4x4::Scaling(
+        vox::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();
@@ -976,9 +976,9 @@ TEST(TransformationFromToExclude, LocalToModel) {
   {  // Updates from j6 excluded, no joint should be updated
     EXPECT_TRUE(job_full.Run());
     output[0] = output[1] = output[2] = output[3] = output[4] = output[5] =
-        output[7] = ozz::math::Float4x4::identity();
-    output[6] = ozz::math::Float4x4::Scaling(
-        ozz::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
+        output[7] = vox::math::Float4x4::identity();
+    output[6] = vox::math::Float4x4::Scaling(
+        vox::math::simd_float4::Load(2.f, 2.f, 2.f, 0.f));
 
     LocalToModelJob job;
     job.skeleton = skeleton.get();

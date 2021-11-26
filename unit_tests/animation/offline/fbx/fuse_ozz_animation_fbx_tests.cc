@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -28,6 +28,6 @@
 #include "offline/animation/fbx/fbx.h"
 
 int main(int, const char**) {
-  ozz::animation::offline::fbx::FbxManagerInstance instance;
+  vox::animation::offline::fbx::FbxManagerInstance instance;
   return EXIT_SUCCESS;
 }

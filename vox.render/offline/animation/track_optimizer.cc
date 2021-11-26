@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -31,7 +31,7 @@
 #include <cstddef>
 
 // Internal include file
-#define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
+#define VOX_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "decimate.h"
 
 #include "maths/math_ex.h"
@@ -41,7 +41,7 @@
 // Needs runtime track to access TrackPolicy.
 #include "runtime/animation/track.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -127,4 +127,4 @@ bool TrackOptimizer::operator()(const RawQuaternionTrack& _input,
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

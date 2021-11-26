@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,43 +25,43 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_ANIMATION_OFFLINE_FBX_FBX2OZZ_H_
-#define OZZ_ANIMATION_OFFLINE_FBX_FBX2OZZ_H_
+#ifndef VOX_ANIMATION_OFFLINE_FBX_FBX2VOX_H_
+#define VOX_ANIMATION_OFFLINE_FBX_FBX2VOX_H_
 
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 
 #include "offline/animation/fbx/fbx.h"
 
-// fbx2ozz is a command line tool that converts an animation imported from a
-// fbx document to ozz runtime format.
+// fbx2vox is a command line tool that converts an animation imported from a
+// fbx document to vox runtime format.
 //
-// fbx2ozz extracts animated joints from a fbx document. Only the animated
-// joints whose names match those of the ozz runtime skeleton given as argument
+// fbx2vox extracts animated joints from a fbx document. Only the animated
+// joints whose names match those of the vox runtime skeleton given as argument
 // are selected. Keyframes are then optimized, based on command line settings,
-// and serialized as a runtime animation to an ozz binary archive.
+// and serialized as a runtime animation to an vox binary archive.
 //
-// Use fbx2ozz integrated help command (fbx2ozz --help) for more details
+// Use fbx2vox integrated help command (fbx2vox --help) for more details
 // about available arguments.
 
-class Fbx2OzzImporter : public ozz::animation::offline::OzzImporter {
+class Fbx2VoxImporter : public vox::animation::offline::VoxImporter {
  public:
-  Fbx2OzzImporter();
-  ~Fbx2OzzImporter();
+  Fbx2VoxImporter();
+  ~Fbx2VoxImporter();
 
  private:
   virtual bool Load(const char* _filename);
 
   // Skeleton management
-  virtual bool Import(ozz::animation::offline::RawSkeleton* _skeleton,
+  virtual bool Import(vox::animation::offline::RawSkeleton* _skeleton,
                       const NodeType& _types);
 
   // Animation management
   virtual AnimationNames GetAnimationNames();
 
   virtual bool Import(const char* _animation_name,
-                      const ozz::animation::Skeleton& _skeleton,
+                      const vox::animation::Skeleton& _skeleton,
                       float _sampling_rate,
-                      ozz::animation::offline::RawAnimation* _animation);
+                      vox::animation::offline::RawAnimation* _animation);
 
   // Track management
   virtual NodeProperties GetNodeProperties(const char* _node_name);
@@ -69,26 +69,26 @@ class Fbx2OzzImporter : public ozz::animation::offline::OzzImporter {
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name,
                       NodeProperty::Type _expected_type, float _sampling_rate,
-                      ozz::animation::offline::RawFloatTrack* _track);
+                      vox::animation::offline::RawFloatTrack* _track);
 
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name,
                       NodeProperty::Type _expected_type, float _sampling_rate,
-                      ozz::animation::offline::RawFloat2Track* _track);
+                      vox::animation::offline::RawFloat2Track* _track);
 
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name,
                       NodeProperty::Type _expected_type, float _sampling_rate,
-                      ozz::animation::offline::RawFloat3Track* _track);
+                      vox::animation::offline::RawFloat3Track* _track);
 
   virtual bool Import(const char* _animation_name, const char* _node_name,
                       const char* _track_name,
                       NodeProperty::Type _expected_type, float _sampling_rate,
-                      ozz::animation::offline::RawFloat4Track* _track);
+                      vox::animation::offline::RawFloat4Track* _track);
 
   // Fbx internal helpers
-  ozz::animation::offline::fbx::FbxManagerInstance fbx_manager_;
-  ozz::animation::offline::fbx::FbxAnimationIOSettings settings_;
-  ozz::animation::offline::fbx::FbxSceneLoader* scene_loader_;
+  vox::animation::offline::fbx::FbxManagerInstance fbx_manager_;
+  vox::animation::offline::fbx::FbxAnimationIOSettings settings_;
+  vox::animation::offline::fbx::FbxSceneLoader* scene_loader_;
 };
-#endif  // OZZ_ANIMATION_OFFLINE_FBX_FBX2OZZ_H_
+#endif  // VOX_ANIMATION_OFFLINE_FBX_FBX2VOX_H_

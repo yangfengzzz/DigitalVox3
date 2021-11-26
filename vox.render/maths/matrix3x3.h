@@ -15,20 +15,20 @@
 #include "platform.h"
 #include "quaternion.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct Matrix;
 struct Matrix3x3;
 
-OZZ_INLINE Matrix3x3 invert(const Matrix3x3 &a);
+VOX_INLINE Matrix3x3 invert(const Matrix3x3 &a);
 
-OZZ_INLINE Matrix3x3 rotate(const Matrix3x3 &a, float r);
+VOX_INLINE Matrix3x3 rotate(const Matrix3x3 &a, float r);
 
-OZZ_INLINE Matrix3x3 scale(const Matrix3x3 &m, const Float2 &s);
+VOX_INLINE Matrix3x3 scale(const Matrix3x3 &m, const Float2 &s);
 
-OZZ_INLINE Matrix3x3 translate(const Matrix3x3 &m, const Float2 &translation);
+VOX_INLINE Matrix3x3 translate(const Matrix3x3 &m, const Float2 &translation);
 
-OZZ_INLINE Matrix3x3 transpose(const Matrix3x3 &a);
+VOX_INLINE Matrix3x3 transpose(const Matrix3x3 &a);
 
 // Represents a 3x3 mathematical matrix.
 struct Matrix3x3 {
@@ -39,7 +39,7 @@ struct Matrix3x3 {
      * @param quaternion - The quaternion used to calculate the matrix
      * @return out - The calculated rotation matrix
      */
-    static OZZ_INLINE Matrix3x3 rotationQuaternion(const Quaternion &quaternion) {
+    static VOX_INLINE Matrix3x3 rotationQuaternion(const Quaternion &quaternion) {
         const auto &x = quaternion.x;
         const auto &y = quaternion.y;
         const auto &z = quaternion.z;
@@ -75,7 +75,7 @@ struct Matrix3x3 {
      * @param s - The scale vector
      * @return  out - The calculated matrix
      */
-    static OZZ_INLINE Matrix3x3 scaling(const Float2 &s) {
+    static VOX_INLINE Matrix3x3 scaling(const Float2 &s) {
         return Matrix3x3(s.x,
                          0,
                          0,
@@ -94,7 +94,7 @@ struct Matrix3x3 {
      * @param translation - The translation vector
      * @return out - The calculated matrix
      */
-    static OZZ_INLINE Matrix3x3 translation(const Float2 &translation) {
+    static VOX_INLINE Matrix3x3 translation(const Float2 &translation) {
         return Matrix3x3(1,
                          0,
                          0,
@@ -121,7 +121,7 @@ struct Matrix3x3 {
      * @param m32 - Default 0 column 3, row 2
      * @param m33 - Default 1 column 3, row 3
      */
-    OZZ_INLINE Matrix3x3(float m11 = 1,
+    VOX_INLINE Matrix3x3(float m11 = 1,
                          float m12 = 0,
                          float m13 = 0,
                          float m21 = 0,
@@ -156,7 +156,7 @@ struct Matrix3x3 {
      * Calculate a determinant of this matrix.
      * @returns The determinant of this matrix
      */
-    OZZ_INLINE float determinant() const {
+    VOX_INLINE float determinant() const {
         auto &e = elements;
         
         const auto &a11 = e[0],
@@ -179,7 +179,7 @@ struct Matrix3x3 {
     /**
      * Identity this matrix.
      */
-    OZZ_INLINE void identity() {
+    VOX_INLINE void identity() {
         auto &e = elements;
         
         e[0] = 1;
@@ -199,7 +199,7 @@ struct Matrix3x3 {
      * Invert the matrix.
      */
     void invert() {
-        *this = ::ozz::math::invert(*this);
+        *this = ::vox::math::invert(*this);
     }
     
     /**
@@ -207,7 +207,7 @@ struct Matrix3x3 {
      * @param r - The rotation angle in radians
      */
     void rotate(float r) {
-        *this = ::ozz::math::rotate(*this, r);
+        *this = ::vox::math::rotate(*this, r);
     }
     
     /**
@@ -215,7 +215,7 @@ struct Matrix3x3 {
      * @param s - The given vector
      */
     void scale(const Float2 &s) {
-        *this = ::ozz::math::scale(*this, s);
+        *this = ::vox::math::scale(*this, s);
     }
     
     /**
@@ -223,18 +223,18 @@ struct Matrix3x3 {
      * @param translation - The given vector
      */
     void translate(const Float2 &translation) {
-        *this = ::ozz::math::translate(*this, translation);
+        *this = ::vox::math::translate(*this, translation);
     }
     
     /**
      * Calculate the transpose of this matrix.
      */
     void transpose() {
-        *this = ::ozz::math::transpose(*this);
+        *this = ::vox::math::transpose(*this);
     }
 };
 
-OZZ_INLINE Matrix3x3 operator+(const Matrix3x3 &left, const Matrix3x3 &right) {
+VOX_INLINE Matrix3x3 operator+(const Matrix3x3 &left, const Matrix3x3 &right) {
     const auto &le = left.elements;
     const auto &re = right.elements;
     Matrix3x3 out;
@@ -254,7 +254,7 @@ OZZ_INLINE Matrix3x3 operator+(const Matrix3x3 &left, const Matrix3x3 &right) {
     return out;
 }
 
-OZZ_INLINE Matrix3x3 operator-(const Matrix3x3 &left, const Matrix3x3 &right) {
+VOX_INLINE Matrix3x3 operator-(const Matrix3x3 &left, const Matrix3x3 &right) {
     const auto &le = left.elements;
     const auto &re = right.elements;
     Matrix3x3 out;
@@ -274,7 +274,7 @@ OZZ_INLINE Matrix3x3 operator-(const Matrix3x3 &left, const Matrix3x3 &right) {
     return out;
 }
 
-OZZ_INLINE Matrix3x3 operator*(const Matrix3x3 &left, const Matrix3x3 &right) {
+VOX_INLINE Matrix3x3 operator*(const Matrix3x3 &left, const Matrix3x3 &right) {
     const auto &le = left.elements;
     const auto &re = right.elements;
     Matrix3x3 out;
@@ -315,7 +315,7 @@ OZZ_INLINE Matrix3x3 operator*(const Matrix3x3 &left, const Matrix3x3 &right) {
     return out;
 }
 
-OZZ_INLINE bool operator==(const Matrix3x3 &left, const Matrix3x3 &right) {
+VOX_INLINE bool operator==(const Matrix3x3 &left, const Matrix3x3 &right) {
     const auto &le = left.elements;
     const auto &re = right.elements;
     
@@ -339,7 +339,7 @@ OZZ_INLINE bool operator==(const Matrix3x3 &left, const Matrix3x3 &right) {
  * @param t - The blend amount where 0 returns start and 1 end
  * @return out - The result of linear blending between two matrices
  */
-OZZ_INLINE Matrix3x3 lerp(const Matrix3x3 &start, const Matrix3x3 &end, float t) {
+VOX_INLINE Matrix3x3 lerp(const Matrix3x3 &start, const Matrix3x3 &end, float t) {
     const auto &se = start.elements;
     const auto &ee = end.elements;
     const auto inv = 1.0 - t;
@@ -363,7 +363,7 @@ OZZ_INLINE Matrix3x3 lerp(const Matrix3x3 &start, const Matrix3x3 &end, float t)
  * @param a - The matrix whose inverse is to be calculated
  * @return out - The inverse of the specified matrix
  */
-OZZ_INLINE Matrix3x3 invert(const Matrix3x3 &a) {
+VOX_INLINE Matrix3x3 invert(const Matrix3x3 &a) {
     const auto &ae = a.elements;
     const auto &a11 = ae[0],
     a12 = ae[1],
@@ -412,7 +412,7 @@ Matrix3x3 normalMatrix(const Matrix &mat4);
  * @param r - The rotation angle in radians
  * @return out - The rotated matrix
  */
-OZZ_INLINE Matrix3x3 rotate(const Matrix3x3 &a, float r) {
+VOX_INLINE Matrix3x3 rotate(const Matrix3x3 &a, float r) {
     const auto &ae = a.elements;
     const auto s = std::sin(r);
     const auto c = std::cos(r);
@@ -446,7 +446,7 @@ OZZ_INLINE Matrix3x3 rotate(const Matrix3x3 &a, float r) {
  * @param s - The given vector
  * @return out - The scaled matrix
  */
-OZZ_INLINE Matrix3x3 scale(const Matrix3x3 &m, const Float2 &s) {
+VOX_INLINE Matrix3x3 scale(const Matrix3x3 &m, const Float2 &s) {
     const auto &x = s.x;
     const auto &y = s.y;
     const auto &ae = m.elements;
@@ -470,7 +470,7 @@ OZZ_INLINE Matrix3x3 scale(const Matrix3x3 &m, const Float2 &s) {
  * @param translation - The given vector
  * @return out - The translated matrix
  */
-OZZ_INLINE Matrix3x3 translate(const Matrix3x3 &m, const Float2 &translation) {
+VOX_INLINE Matrix3x3 translate(const Matrix3x3 &m, const Float2 &translation) {
     const auto &x = translation.x;
     const auto &y = translation.y;
     const auto &ae = m.elements;
@@ -503,7 +503,7 @@ OZZ_INLINE Matrix3x3 translate(const Matrix3x3 &m, const Float2 &translation) {
  * @param a - The specified matrix
  * @return out - The transpose of the specified matrix
  */
-OZZ_INLINE Matrix3x3 transpose(const Matrix3x3 &a) {
+VOX_INLINE Matrix3x3 transpose(const Matrix3x3 &a) {
     const auto &ae = a.elements;
     return Matrix3x3(ae[0],
                      ae[3],

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,22 +25,22 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "import2ozz_anim.h"
+#include "import2vox_anim.h"
 
 #include "json/json.h"
 
 #include <cstdlib>
 #include <cstring>
 
-#include "import2ozz_config.h"
-#include "import2ozz_track.h"
+#include "import2vox_config.h"
+#include "import2vox_track.h"
 #include "offline/animation/additive_animation_builder.h"
 #include "offline/animation/animation_builder.h"
 #include "offline/animation/animation_optimizer.h"
 #include "offline/animation/raw_animation.h"
 #include "offline/animation/raw_skeleton.h"
 #include "offline/animation/skeleton_builder.h"
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 #include "runtime/animation/animation.h"
 #include "runtime/animation/skeleton.h"
 #include "io/archive.h"
@@ -50,7 +50,7 @@
 #include "memory/unique_ptr.h"
 #include "options/options.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 namespace {
@@ -80,47 +80,47 @@ void DisplaysOptimizationstatistics(const RawAnimation& _non_optimized,
       opt_rotations != 0 ? 1.f * non_opt_rotations / opt_rotations : 0.f;
   float scale_ratio = opt_scales != 0 ? 1.f * non_opt_scales / opt_scales : 0.f;
 
-  ozz::log::LogV log;
-  ozz::log::FloatPrecision precision_scope(log, 1);
+  vox::log::LogV log;
+  vox::log::FloatPrecision precision_scope(log, 1);
   log << "Optimization stage results:" << std::endl;
   log << " - Translations: " << translation_ratio << ":1" << std::endl;
   log << " - Rotations: " << rotation_ratio << ":1" << std::endl;
   log << " - Scales: " << scale_ratio << ":1" << std::endl;
 }
 
-unique_ptr<ozz::animation::Skeleton> LoadSkeleton(const char* _path) {
-  // Reads the skeleton from the binary ozz stream.
-  unique_ptr<ozz::animation::Skeleton> skeleton;
+unique_ptr<vox::animation::Skeleton> LoadSkeleton(const char* _path) {
+  // Reads the skeleton from the binary vox stream.
+  unique_ptr<vox::animation::Skeleton> skeleton;
   {
     if (*_path == 0) {
-      ozz::log::Err() << "Missing input skeleton file from json config."
+      vox::log::Err() << "Missing input skeleton file from json config."
                       << std::endl;
       return nullptr;
     }
-    ozz::log::LogV() << "Opens input skeleton ozz binary file: " << _path
+    vox::log::LogV() << "Opens input skeleton vox binary file: " << _path
                      << std::endl;
-    ozz::io::File file(_path, "rb");
+    vox::io::File file(_path, "rb");
     if (!file.opened()) {
-      ozz::log::Err() << "Failed to open input skeleton ozz binary file: \""
+      vox::log::Err() << "Failed to open input skeleton vox binary file: \""
                       << _path << "\"" << std::endl;
       return nullptr;
     }
-    ozz::io::IArchive archive(&file);
+    vox::io::IArchive archive(&file);
 
     // File could contain a RawSkeleton or a Skeleton.
     if (archive.TestTag<RawSkeleton>()) {
-      ozz::log::LogV() << "Reading RawSkeleton from file." << std::endl;
+      vox::log::LogV() << "Reading RawSkeleton from file." << std::endl;
 
       // Reading the skeleton cannot file.
       RawSkeleton raw_skeleton;
       archive >> raw_skeleton;
 
       // Builds runtime skeleton.
-      ozz::log::LogV() << "Builds runtime skeleton." << std::endl;
+      vox::log::LogV() << "Builds runtime skeleton." << std::endl;
       SkeletonBuilder builder;
       skeleton = builder(raw_skeleton);
       if (!skeleton) {
-        ozz::log::Err() << "Failed to build runtime skeleton." << std::endl;
+        vox::log::Err() << "Failed to build runtime skeleton." << std::endl;
         return nullptr;
       }
     } else if (archive.TestTag<Skeleton>()) {
@@ -129,7 +129,7 @@ unique_ptr<ozz::animation::Skeleton> LoadSkeleton(const char* _path) {
       skeleton = make_unique<Skeleton>();
       archive >> *skeleton;
     } else {
-      ozz::log::Err() << "Failed to read input skeleton from binary file: "
+      vox::log::Err() << "Failed to read input skeleton from binary file: "
                       << _path << std::endl;
       return nullptr;
     }
@@ -158,9 +158,9 @@ vector<math::Transform> SkeletonBindPoseSoAToAoS(const Skeleton& _skeleton) {
   return transforms;
 }
 
-bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
+bool Export(VoxImporter& _importer, const RawAnimation& _input_animation,
             const Skeleton& _skeleton, const Json::Value& _config,
-            const ozz::Endianness _endianness) {
+            const vox::Endianness _endianness) {
   // Raw animation to build and output. Initial setup is just a copy.
   RawAnimation raw_animation = _input_animation;
 
@@ -168,7 +168,7 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
   // Must be done before converting to additive, to be sure hierarchy length is
   // valid when optimizing.
   if (_config["optimize"].asBool()) {
-    ozz::log::Log() << "Optimizing animation." << std::endl;
+    vox::log::Log() << "Optimizing animation." << std::endl;
     AnimationOptimizer optimizer;
 
     // Setup optimizer from config parameters.
@@ -195,7 +195,7 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
         if (strmatch(joint_name, name_pattern)) {
           found = true;
 
-          ozz::log::LogV() << "Found joint \"" << joint_name
+          vox::log::LogV() << "Found joint \"" << joint_name
                            << "\" matching pattern \"" << name_pattern
                            << "\" for joint optimization setting override."
                            << std::endl;
@@ -204,14 +204,14 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
           const bool newly =
               optimizer.joints_setting_override.insert(entry).second;
           if (!newly) {
-            ozz::log::Log() << "Redundant optimization setting for pattern \""
+            vox::log::Log() << "Redundant optimization setting for pattern \""
                             << name_pattern << "\"" << std::endl;
           }
         }
       }
 
       if (!found) {
-        ozz::log::Log()
+        vox::log::Log()
             << "No joint found for optimization setting for pattern \""
             << name_pattern << "\"" << std::endl;
       }
@@ -219,7 +219,7 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
 
     RawAnimation raw_optimized_animation;
     if (!optimizer(raw_animation, _skeleton, &raw_optimized_animation)) {
-      ozz::log::Err() << "Failed to optimize animation." << std::endl;
+      vox::log::Err() << "Failed to optimize animation." << std::endl;
       return false;
     }
 
@@ -229,13 +229,13 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
     // Brings data back to the raw animation.
     raw_animation = raw_optimized_animation;
   } else {
-    ozz::log::LogV() << "Optimization for animation \"" << _input_animation.name
+    vox::log::LogV() << "Optimization for animation \"" << _input_animation.name
                      << "\" is disabled." << std::endl;
   }
 
   // Make delta animation if requested.
   if (_config["additive"].asBool()) {
-    ozz::log::Log() << "Makes additive animation." << std::endl;
+    vox::log::Log() << "Makes additive animation." << std::endl;
 
     AdditiveAnimationBuilder additive_builder;
     RawAnimation raw_additive;
@@ -256,7 +256,7 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
     }
 
     if (!succeeded) {
-      ozz::log::Err() << "Failed to make additive animation." << std::endl;
+      vox::log::Err() << "Failed to make additive animation." << std::endl;
       return false;
     }
 
@@ -267,11 +267,11 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
   // Builds runtime animation.
   unique_ptr<Animation> animation;
   if (!_config["raw"].asBool()) {
-    ozz::log::Log() << "Builds runtime animation." << std::endl;
+    vox::log::Log() << "Builds runtime animation." << std::endl;
     AnimationBuilder builder;
     animation = builder(raw_animation);
     if (!animation) {
-      ozz::log::Err() << "Failed to build runtime animation." << std::endl;
+      vox::log::Err() << "Failed to build runtime animation." << std::endl;
       return false;
     }
   }
@@ -282,48 +282,48 @@ bool Export(OzzImporter& _importer, const RawAnimation& _input_animation,
     // as it would leave an invalid file on the disk.
 
     // Builds output filename.
-    ozz::string filename = _importer.BuildFilename(
+    vox::string filename = _importer.BuildFilename(
         _config["filename"].asCString(), raw_animation.name.c_str());
 
-    ozz::log::LogV() << "Opens output file: \"" << filename << "\""
+    vox::log::LogV() << "Opens output file: \"" << filename << "\""
                      << std::endl;
-    ozz::io::File file(filename.c_str(), "wb");
+    vox::io::File file(filename.c_str(), "wb");
     if (!file.opened()) {
-      ozz::log::Err() << "Failed to open output file: \"" << filename << "\""
+      vox::log::Err() << "Failed to open output file: \"" << filename << "\""
                       << std::endl;
       return false;
     }
 
     // Initializes output archive.
-    ozz::io::OArchive archive(&file, _endianness);
+    vox::io::OArchive archive(&file, _endianness);
 
     // Fills output archive with the animation.
     if (_config["raw"].asBool()) {
-      ozz::log::Log() << "Outputs RawAnimation to binary archive." << std::endl;
+      vox::log::Log() << "Outputs RawAnimation to binary archive." << std::endl;
       archive << raw_animation;
     } else {
-      ozz::log::Log() << "Outputs Animation to binary archive." << std::endl;
+      vox::log::Log() << "Outputs Animation to binary archive." << std::endl;
       archive << *animation;
     }
   }
 
-  ozz::log::LogV() << "Animation binary archive successfully outputted."
+  vox::log::LogV() << "Animation binary archive successfully outputted."
                    << std::endl;
 
   return true;
 }  // namespace
 
-bool ProcessAnimation(OzzImporter& _importer, const char* _animation_name,
+bool ProcessAnimation(VoxImporter& _importer, const char* _animation_name,
                       const Skeleton& _skeleton, const Json::Value& _config,
-                      const ozz::Endianness _endianness) {
+                      const vox::Endianness _endianness) {
   RawAnimation animation;
 
-  ozz::log::Log() << "Extracting animation \"" << _animation_name << "\""
+  vox::log::Log() << "Extracting animation \"" << _animation_name << "\""
                   << std::endl;
 
   if (!_importer.Import(_animation_name, _skeleton,
                         _config["sampling_rate"].asFloat(), &animation)) {
-    ozz::log::Err() << "Failed to import animation \"" << _animation_name
+    vox::log::Err() << "Failed to import animation \"" << _animation_name
                     << "\"" << std::endl;
     return false;
   } else {
@@ -337,29 +337,29 @@ bool ProcessAnimation(OzzImporter& _importer, const char* _animation_name,
 
 AdditiveReference::EnumNames AdditiveReference::GetNames() {
   static const char* kNames[] = {"animation", "skeleton"};
-  const EnumNames enum_names = {OZZ_ARRAY_SIZE(kNames), kNames};
+  const EnumNames enum_names = {VOX_ARRAY_SIZE(kNames), kNames};
   return enum_names;
 }
 
-bool ImportAnimations(const Json::Value& _config, OzzImporter* _importer,
-                      const ozz::Endianness _endianness) {
+bool ImportAnimations(const Json::Value& _config, VoxImporter* _importer,
+                      const vox::Endianness _endianness) {
   const Json::Value& skeleton_config = _config["skeleton"];
   const Json::Value& animations_config = _config["animations"];
 
   if (animations_config.size() == 0) {
-    ozz::log::Log() << "Configuration contains no animation import "
+    vox::log::Log() << "Configuration contains no animation import "
                        "definition, animations import will be skipped."
                     << std::endl;
     return true;
   }
 
   // Get all available animation names.
-  const OzzImporter::AnimationNames& import_animation_names =
+  const VoxImporter::AnimationNames& import_animation_names =
       _importer->GetAnimationNames();
 
   // Are there animations available
   if (import_animation_names.empty()) {
-    ozz::log::Err() << "No animation found." << std::endl;
+    vox::log::Err() << "No animation found." << std::endl;
     return true;
   }
 
@@ -378,7 +378,7 @@ bool ImportAnimations(const Json::Value& _config, OzzImporter* _importer,
     const char* clip_match = animation_config["clip"].asCString();
 
     if (*clip_match == 0) {
-      ozz::log::Log() << "No clip name provided. Animation import "
+      vox::log::Log() << "No clip name provided. Animation import "
                          "will be skipped."
                       << std::endl;
       continue;
@@ -403,7 +403,7 @@ bool ImportAnimations(const Json::Value& _config, OzzImporter* _importer,
     }
     // Don't display any message if no animation is supposed to be imported.
     if (!matched && *clip_match != 0) {
-      ozz::log::Log() << "No matching animation found for \"" << clip_match
+      vox::log::Log() << "No matching animation found for \"" << clip_match
                       << "\"." << std::endl;
     }
   }
@@ -412,4 +412,4 @@ bool ImportAnimations(const Json::Value& _config, OzzImporter* _importer,
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

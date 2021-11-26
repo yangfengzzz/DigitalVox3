@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,36 +25,26 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_ANIM_H_
-#define OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_ANIM_H_
+#ifndef VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_SKEL_H_
+#define VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_SKEL_H_
 
 #include "endianness.h"
 #include "platform.h"
-
-#include "import2ozz_config.h"
-#include "offline/animation/tools/import2ozz.h"
 
 namespace Json {
 class Value;
 }
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
-class OzzImporter;
-bool ImportAnimations(const Json::Value& _config, OzzImporter* _importer,
-                      const ozz::Endianness _endianness);
+class VoxImporter;
 
-// Additive reference enum to config string conversions.
-struct AdditiveReferenceEnum {
-  enum Value { kAnimation, kSkeleton };
-};
-struct AdditiveReference
-    : JsonEnum<AdditiveReference, AdditiveReferenceEnum::Value> {
-  static EnumNames GetNames();
-};
+bool ImportSkeleton(const Json::Value& _config, VoxImporter* _importer,
+                    const vox::Endianness _endianness);
+
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_ANIMATION_OFFLINE_TOOLS_IMPORT2OZZ_ANIM_H_
+}  // namespace vox
+#endif  // VOX_ANIMATION_OFFLINE_TOOLS_IMPORT2VOX_SKEL_H_

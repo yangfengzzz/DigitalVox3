@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -29,7 +29,7 @@
 
 #include <cassert>
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 // OArchive implementation.
@@ -54,4 +54,4 @@ IArchive::IArchive(Stream* _stream) : stream_(_stream), endian_swap_(false) {
   endian_swap_ = endianness != GetNativeEndianness();
 }
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

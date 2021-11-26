@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,17 +34,17 @@
 #include "gtest_math_helper.h"
 #include "memory/unique_ptr.h"
 
-using ozz::animation::FloatTrack;
-using ozz::animation::TrackTriggeringJob;
-using ozz::animation::offline::RawFloatTrack;
-using ozz::animation::offline::RawTrackInterpolation;
-using ozz::animation::offline::TrackBuilder;
+using vox::animation::FloatTrack;
+using vox::animation::TrackTriggeringJob;
+using vox::animation::offline::RawFloatTrack;
+using vox::animation::offline::RawTrackInterpolation;
+using vox::animation::offline::TrackBuilder;
 
 TEST(JobValidity, TrackTriggeringJob) {
   // Builds track
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
   TrackBuilder builder;
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   {  // Default is invalid
@@ -112,8 +112,8 @@ TEST(Empty, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
   // Builds track
-  ozz::animation::offline::RawFloatTrack raw_track;
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::animation::offline::RawFloatTrack raw_track;
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -131,21 +131,21 @@ TEST(Empty, TrackEdgeTriggerJob) {
 TEST(Iterator, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   // Keyframe values oscillate in range [0,2].
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kStep, 0.f, 0.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f, 2.f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kStep, 1.f, 0.f};
   raw_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -270,21 +270,21 @@ TEST(Iterator, TrackEdgeTriggerJob) {
 TEST(NoRange, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   // Keyframe values oscillate in range [0,2].
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kStep, 0.f, 0.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f, 2.f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kStep, 1.f, 0.f};
   raw_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -353,7 +353,7 @@ size_t CountEdges(TrackTriggeringJob::Iterator _begin,
 void TestEdgesExpectationBackward(TrackTriggeringJob::Iterator _fw_iterator,
                                   const TrackTriggeringJob& _fw_job) {
   // Compute forward edges;
-  ozz::vector<TrackTriggeringJob::Edge> fw_edges;
+  vox::vector<TrackTriggeringJob::Edge> fw_edges;
   for (; _fw_iterator != _fw_job.end(); ++_fw_iterator) {
     fw_edges.push_back(*_fw_iterator);
   }
@@ -367,7 +367,7 @@ void TestEdgesExpectationBackward(TrackTriggeringJob::Iterator _fw_iterator,
 
   // Compare forward and backward iterations.
   ASSERT_EQ(fw_edges.size(), CountEdges(bw_iterator, bw_job.end()));
-  for (ozz::vector<TrackTriggeringJob::Edge>::const_reverse_iterator fw_rit =
+  for (vox::vector<TrackTriggeringJob::Edge>::const_reverse_iterator fw_rit =
            fw_edges.rbegin();
        fw_rit != fw_edges.rend(); ++fw_rit, ++bw_iterator) {
     EXPECT_FLOAT_EQ(fw_rit->ratio, bw_iterator->ratio);
@@ -376,12 +376,12 @@ void TestEdgesExpectationBackward(TrackTriggeringJob::Iterator _fw_iterator,
 }
 
 void TestEdgesExpectation(
-    const ozz::animation::offline::RawFloatTrack& _raw_track, float _threshold,
+    const vox::animation::offline::RawFloatTrack& _raw_track, float _threshold,
     const TrackTriggeringJob::Edge* _expected, size_t _size) {
   assert(_size >= 2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(TrackBuilder()(_raw_track));
+  vox::unique_ptr<FloatTrack> track(TrackBuilder()(_raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -926,7 +926,7 @@ void TestEdgesExpectation(
 
 template <size_t _size>
 inline void TestEdgesExpectation(
-    const ozz::animation::offline::RawFloatTrack& _raw_track, float _threshold,
+    const vox::animation::offline::RawFloatTrack& _raw_track, float _threshold,
     const TrackTriggeringJob::Edge (&_expected)[_size]) {
   static_assert(_size >= 2, "Minimum 2 edges.");
   TestEdgesExpectation(_raw_track, _threshold, _expected, _size);
@@ -934,16 +934,16 @@ inline void TestEdgesExpectation(
 
 TEST(SquareStep, TrackEdgeTriggerJob) {
   {  // Rising edge at t = 0.5
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kStep, 0.f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kStep, .5f, 2.f};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
         RawTrackInterpolation::kStep, 1.f, 0.f};
     raw_track.keyframes.push_back(key2);
 
@@ -953,13 +953,13 @@ TEST(SquareStep, TrackEdgeTriggerJob) {
   }
 
   {  // Rising edge at t = 0.6, no falling edge at end
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kStep, 0.f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kStep, .6f, 2.f};
     raw_track.keyframes.push_back(key1);
 
@@ -969,13 +969,13 @@ TEST(SquareStep, TrackEdgeTriggerJob) {
   }
 
   {  // Falling edge at t = 0.5
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kStep, 0.f, 2.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kStep, .5f, 0.f};
     raw_track.keyframes.push_back(key1);
 
@@ -985,16 +985,16 @@ TEST(SquareStep, TrackEdgeTriggerJob) {
   }
 
   {  // Negative values
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [-1,1].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kStep, 0.f, -1.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kStep, .5f, 1.f};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
         RawTrackInterpolation::kStep, 1.f, -1.f};
     raw_track.keyframes.push_back(key2);
 
@@ -1004,21 +1004,21 @@ TEST(SquareStep, TrackEdgeTriggerJob) {
   }
 
   {  // More edges
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kStep, .0f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kStep, .2f, 2.f};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
         RawTrackInterpolation::kStep, .3f, 0.f};
     raw_track.keyframes.push_back(key2);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key3 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key3 = {
         RawTrackInterpolation::kStep, .4f, 1.f};
     raw_track.keyframes.push_back(key3);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key4 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key4 = {
         RawTrackInterpolation::kStep, .5f, 0.f};
     raw_track.keyframes.push_back(key4);
 
@@ -1033,16 +1033,16 @@ TEST(SquareStep, TrackEdgeTriggerJob) {
 
 TEST(Linear, TrackEdgeTriggerJob) {
   {  // Higher point at t = 0.5
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kLinear, 0.f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kLinear, .5f, 2.f};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
         RawTrackInterpolation::kLinear, 1.f, 0.f};
     raw_track.keyframes.push_back(key2);
 
@@ -1059,13 +1059,13 @@ TEST(Linear, TrackEdgeTriggerJob) {
   }
 
   {  // Higher point at t = 0.5
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kLinear, 0.f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kLinear, .5f, 2.f};
     raw_track.keyframes.push_back(key1);
 
@@ -1074,13 +1074,13 @@ TEST(Linear, TrackEdgeTriggerJob) {
   }
 
   {  // Negative values
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [-1,1].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kLinear, 0.f, -1.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kLinear, .5f, 1.f};
     raw_track.keyframes.push_back(key1);
 
@@ -1091,16 +1091,16 @@ TEST(Linear, TrackEdgeTriggerJob) {
 
 TEST(Mixed, TrackEdgeTriggerJob) {
   {  // Higher point at t = 0.5
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kStep, 0.f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kLinear, .5f, 2.f};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
         RawTrackInterpolation::kLinear, 1.f, 0.f};
     raw_track.keyframes.push_back(key2);
 
@@ -1115,16 +1115,16 @@ TEST(Mixed, TrackEdgeTriggerJob) {
   }
 
   {  // Higher point at t = 0.5
-    ozz::animation::offline::RawFloatTrack raw_track;
+    vox::animation::offline::RawFloatTrack raw_track;
 
     // Keyframe values oscillate in range [0,2].
-    const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
         RawTrackInterpolation::kLinear, 0.f, 0.f};
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
         RawTrackInterpolation::kStep, .5f, 2.f};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+    const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
         RawTrackInterpolation::kLinear, 1.f, 0.f};
     raw_track.keyframes.push_back(key2);
 
@@ -1143,21 +1143,21 @@ TEST(StepThreshold, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
   // Rising edge at t = 0.5
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   // Keyframe values oscillate in range [-1,1].
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kStep, 0.f, -1.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f, 1.f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kStep, 1.f, -1.f};
   raw_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -1240,21 +1240,21 @@ TEST(StepThresholdBool, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
   // Rising edge at t = 0.5
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   // Keyframe values oscillate in range [0,1].
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kStep, 0.f, 0.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kStep, .5f, 1.f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kStep, 1.f, 0.f};
   raw_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;
@@ -1309,21 +1309,21 @@ TEST(LinearThreshold, TrackEdgeTriggerJob) {
   TrackBuilder builder;
 
   // Rising edge at t = 0.5
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   // Keyframe values oscillate in range [-1,1].
-  const ozz::animation::offline::RawFloatTrack::Keyframe key0 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key0 = {
       RawTrackInterpolation::kLinear, 0.f, -1.f};
   raw_track.keyframes.push_back(key0);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key1 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key1 = {
       RawTrackInterpolation::kLinear, .5f, 1.f};
   raw_track.keyframes.push_back(key1);
-  const ozz::animation::offline::RawFloatTrack::Keyframe key2 = {
+  const vox::animation::offline::RawFloatTrack::Keyframe key2 = {
       RawTrackInterpolation::kLinear, 1.f, -1.f};
   raw_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_track));
   ASSERT_TRUE(track);
 
   TrackTriggeringJob job;

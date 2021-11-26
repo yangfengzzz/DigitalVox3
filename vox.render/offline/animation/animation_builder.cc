@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -40,10 +40,10 @@
 #include "memory/allocator.h"
 
 // Internal include file
-#define OZZ_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
+#define VOX_INCLUDE_PRIVATE_HEADER  // Allows to include private headers.
 #include "animation_keyframe.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 namespace {
@@ -126,8 +126,8 @@ void CopyRaw(const _SrcTrack& _src, uint16_t _track, float _duration,
 }
 
 template <typename _SortingKey>
-void CopyToAnimation(ozz::vector<_SortingKey>* _src,
-                     ozz::span<Float3Key>* _dest, float _inv_duration) {
+void CopyToAnimation(vox::vector<_SortingKey>* _src,
+                     vox::span<Float3Key>* _dest, float _inv_duration) {
   const size_t src_count = _src->size();
   if (!src_count) {
     return;
@@ -142,9 +142,9 @@ void CopyToAnimation(ozz::vector<_SortingKey>* _src,
     Float3Key& key = (*_dest)[i];
     key.ratio = src[i].key.time * _inv_duration;
     key.track = src[i].track;
-    key.value[0] = ozz::math::FloatToHalf(src[i].key.value.x);
-    key.value[1] = ozz::math::FloatToHalf(src[i].key.value.y);
-    key.value[2] = ozz::math::FloatToHalf(src[i].key.value.z);
+    key.value[0] = vox::math::FloatToHalf(src[i].key.value.x);
+    key.value[1] = vox::math::FloatToHalf(src[i].key.value.y);
+    key.value[2] = vox::math::FloatToHalf(src[i].key.value.z);
   }
 }
 
@@ -153,14 +153,14 @@ bool LessAbs(float _left, float _right) {
   return std::abs(_left) < std::abs(_right);
 }
 
-// Compresses quaternion to ozz::animation::RotationKey format.
+// Compresses quaternion to vox::animation::RotationKey format.
 // The 3 smallest components of the quaternion are quantized to 16 bits
 // integers, while the largest is recomputed thanks to quaternion normalization
 // property (x^2+y^2+z^2+w^2 = 1). Because the 3 components are the 3 smallest,
 // their value cannot be greater than sqrt(2)/2. Thus quantization quality is
 // improved by pre-multiplying each componenent by sqrt(2).
-void CompressQuat(const ozz::math::Quaternion& _src,
-                  ozz::animation::QuaternionKey* _dest) {
+void CompressQuat(const vox::math::Quaternion& _src,
+                  vox::animation::QuaternionKey* _dest) {
   // Finds the largest quaternion component.
   const float quat[4] = {_src.x, _src.y, _src.z, _src.w};
   const size_t largest = std::max_element(quat, quat + 4, LessAbs) - quat;
@@ -185,8 +185,8 @@ void CompressQuat(const ozz::math::Quaternion& _src,
 // Specialize for rotations in order to normalize quaternions.
 // Consecutive opposite quaternions are also fixed up in order to avoid checking
 // for the smallest path during the NLerp runtime algorithm.
-void CopyToAnimation(ozz::vector<SortingRotationKey>* _src,
-                     ozz::span<QuaternionKey>* _dest, float _inv_duration) {
+void CopyToAnimation(vox::vector<SortingRotationKey>* _src,
+                     vox::span<QuaternionKey>* _dest, float _inv_duration) {
   const size_t src_count = _src->size();
   if (!src_count) {
     return;
@@ -275,11 +275,11 @@ unique_ptr<Animation> AnimationBuilder::operator()(
     rotations += raw_track.rotations.size() + 2;        // needs to add the
     scales += raw_track.scales.size() + 2;              // first and last keys.
   }
-  ozz::vector<SortingTranslationKey> sorting_translations;
+  vox::vector<SortingTranslationKey> sorting_translations;
   sorting_translations.reserve(translations);
-  ozz::vector<SortingRotationKey> sorting_rotations;
+  vox::vector<SortingRotationKey> sorting_rotations;
   sorting_rotations.reserve(rotations);
-  ozz::vector<SortingScaleKey> sorting_scales;
+  vox::vector<SortingScaleKey> sorting_scales;
   sorting_scales.reserve(scales);
 
   // Filters RawAnimation keys and copies them to the output sorting structure.
@@ -325,4 +325,4 @@ unique_ptr<Animation> AnimationBuilder::operator()(
 }
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

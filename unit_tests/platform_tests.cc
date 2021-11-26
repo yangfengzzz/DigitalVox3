@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -47,7 +47,7 @@ struct Misc {
   int i;
 };
 
-// Declares an aligned structure in order to test OZZ_ALIGN and AlignOf.
+// Declares an aligned structure in order to test VOX_ALIGN and AlignOf.
 struct Aligned {
   alignas(128) char c;
 };
@@ -66,24 +66,24 @@ TEST(Alignment, Platform) {
 TEST(IntegerAlignment, Platform) {
   {
     short s = 0x1234;
-    int aligned_s = ozz::Align(s, 128);
+    int aligned_s = vox::Align(s, 128);
     EXPECT_TRUE(aligned_s == 0x1280);
-    EXPECT_TRUE(ozz::IsAligned(aligned_s, 128));
+    EXPECT_TRUE(vox::IsAligned(aligned_s, 128));
   }
 
   {
     int i = 0x00a01234;
-    int aligned_i = ozz::Align(i, 1024);
+    int aligned_i = vox::Align(i, 1024);
     EXPECT_TRUE(aligned_i == 0x00a01400);
-    EXPECT_TRUE(ozz::IsAligned(aligned_i, 1024));
+    EXPECT_TRUE(vox::IsAligned(aligned_i, 1024));
   }
 }
 
 TEST(PointerAlignment, Platform) {
   void* p = reinterpret_cast<void*>(0x00a01234);
-  void* aligned_p = ozz::Align(p, 1024);
+  void* aligned_p = vox::Align(p, 1024);
   EXPECT_TRUE(aligned_p == reinterpret_cast<void*>(0x00a01400));
-  EXPECT_TRUE(ozz::IsAligned(aligned_p, 1024));
+  EXPECT_TRUE(vox::IsAligned(aligned_p, 1024));
 }
 
 TEST(TypeSize, Platform) {
@@ -121,60 +121,60 @@ TEST(TypeSize, Platform) {
 }
 
 TEST(DebudNDebug, Platform) {
-  OZZ_IF_DEBUG(assert(true));
-  OZZ_IF_NDEBUG(assert(false));
+  VOX_IF_DEBUG(assert(true));
+  VOX_IF_NDEBUG(assert(false));
 }
 
 TEST(ArraySize, Platform) {
   int ai[46];
   (void)ai;
-  static_assert(OZZ_ARRAY_SIZE(ai) == 46, "Unexpected array size");
+  static_assert(VOX_ARRAY_SIZE(ai) == 46, "Unexpected array size");
 
   char ac[] = "forty six";
   (void)ac;
-  static_assert(OZZ_ARRAY_SIZE(ac) == 10, "Unexpected array size");
+  static_assert(VOX_ARRAY_SIZE(ac) == 10, "Unexpected array size");
 }
 
 TEST(StrMatch, Platform) {
-  EXPECT_TRUE(ozz::strmatch("a", "a"));
-  EXPECT_FALSE(ozz::strmatch("a", "b"));
-  EXPECT_TRUE(ozz::strmatch("a", "a*"));
-  EXPECT_FALSE(ozz::strmatch("a", "a?"));
-  EXPECT_TRUE(ozz::strmatch("ab", "a?"));
-  EXPECT_TRUE(ozz::strmatch("ab", "?b"));
-  EXPECT_FALSE(ozz::strmatch("ab", "a"));
-  EXPECT_TRUE(ozz::strmatch("ab", "ab"));
-  EXPECT_TRUE(ozz::strmatch("", ""));
-  EXPECT_TRUE(ozz::strmatch("", "*"));
-  EXPECT_FALSE(ozz::strmatch("", "?"));
-  EXPECT_FALSE(ozz::strmatch("ab", ""));
-  EXPECT_FALSE(ozz::strmatch("ab", "?"));
-  EXPECT_TRUE(ozz::strmatch("ab", "??"));
-  EXPECT_TRUE(ozz::strmatch("a*b", "a*b"));
-  EXPECT_TRUE(ozz::strmatch("a*b", "a?b"));
-  EXPECT_TRUE(ozz::strmatch("ab", "ab*"));
-  EXPECT_TRUE(ozz::strmatch("ab", "a*"));
-  EXPECT_TRUE(ozz::strmatch("ab", "*b"));
-  EXPECT_TRUE(ozz::strmatch("ab", "a*b"));
-  EXPECT_TRUE(ozz::strmatch("acb", "a*b"));
-  EXPECT_FALSE(ozz::strmatch("abc", "a*b"));
-  EXPECT_TRUE(ozz::strmatch("abcdef", "a*c*"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "a*c.*"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "abc.def"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "abc.def***"));
-  EXPECT_FALSE(ozz::strmatch("abc.def", "abc.def?"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "abc?def"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "a*c?*"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "a*.*"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "a*c.*e?"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "*"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "*.*"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "???.???"));
-  EXPECT_FALSE(ozz::strmatch("abc.def", "??.???"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "*??.???"));
-  EXPECT_TRUE(ozz::strmatch("abc.def", "*??.??*"));
+  EXPECT_TRUE(vox::strmatch("a", "a"));
+  EXPECT_FALSE(vox::strmatch("a", "b"));
+  EXPECT_TRUE(vox::strmatch("a", "a*"));
+  EXPECT_FALSE(vox::strmatch("a", "a?"));
+  EXPECT_TRUE(vox::strmatch("ab", "a?"));
+  EXPECT_TRUE(vox::strmatch("ab", "?b"));
+  EXPECT_FALSE(vox::strmatch("ab", "a"));
+  EXPECT_TRUE(vox::strmatch("ab", "ab"));
+  EXPECT_TRUE(vox::strmatch("", ""));
+  EXPECT_TRUE(vox::strmatch("", "*"));
+  EXPECT_FALSE(vox::strmatch("", "?"));
+  EXPECT_FALSE(vox::strmatch("ab", ""));
+  EXPECT_FALSE(vox::strmatch("ab", "?"));
+  EXPECT_TRUE(vox::strmatch("ab", "??"));
+  EXPECT_TRUE(vox::strmatch("a*b", "a*b"));
+  EXPECT_TRUE(vox::strmatch("a*b", "a?b"));
+  EXPECT_TRUE(vox::strmatch("ab", "ab*"));
+  EXPECT_TRUE(vox::strmatch("ab", "a*"));
+  EXPECT_TRUE(vox::strmatch("ab", "*b"));
+  EXPECT_TRUE(vox::strmatch("ab", "a*b"));
+  EXPECT_TRUE(vox::strmatch("acb", "a*b"));
+  EXPECT_FALSE(vox::strmatch("abc", "a*b"));
+  EXPECT_TRUE(vox::strmatch("abcdef", "a*c*"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "a*c.*"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "abc.def"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "abc.def***"));
+  EXPECT_FALSE(vox::strmatch("abc.def", "abc.def?"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "abc?def"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "a*c?*"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "a*.*"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "a*c.*e?"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "*"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "*.*"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "???.???"));
+  EXPECT_FALSE(vox::strmatch("abc.def", "??.???"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "*??.???"));
+  EXPECT_TRUE(vox::strmatch("abc.def", "*??.??*"));
   EXPECT_TRUE(
-      ozz::strmatch("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      vox::strmatch("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                     "aaaaaaaaaaaaaaa",
                     "*a*??????a?????????a???????????????"));
 }

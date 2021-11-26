@@ -10,7 +10,7 @@
 
 #include <memory>
 
-namespace ozz {
+namespace vox {
 class Engine {
     
 };

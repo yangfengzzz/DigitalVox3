@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,9 +32,9 @@
 #include "maths/math_ex.h"
 #include "maths/simd_quaternion.h"
 
-using namespace ozz::math;
+using namespace vox::math;
 
-namespace ozz {
+namespace vox {
 namespace animation {
 IKAimJob::IKAimJob()
     : target(simd_float4::zero()),
@@ -52,7 +52,7 @@ bool IKAimJob::Validate() const {
   bool valid = true;
   valid &= joint != nullptr;
   valid &= joint_correction != nullptr;
-  valid &= ozz::math::AreAllTrue1(ozz::math::IsNormalizedEst3(forward));
+  valid &= vox::math::AreAllTrue1(vox::math::IsNormalizedEst3(forward));
   return valid;
 }
 
@@ -68,7 +68,7 @@ bool ComputeOffsettedForward(_SimdFloat4 _forward, _SimdFloat4 _offset,
                              _SimdFloat4 _target,
                              SimdFloat4* _offsetted_forward) {
   // AO is projected offset vector onto the normalized forward vector.
-  assert(ozz::math::AreAllTrue1(ozz::math::IsNormalizedEst3(_forward)));
+  assert(vox::math::AreAllTrue1(vox::math::IsNormalizedEst3(_forward)));
   const SimdFloat4 AOl = Dot3(_forward, _offset);
 
   // Compute square length of ac using Pythagorean theorem.
@@ -103,7 +103,7 @@ bool IKAimJob::Run() const {
   using math::SimdFloat4;
   using math::SimdQuaternion;
 
-  // If matrices aren't invertible, they'll be all 0 (ozz::math
+  // If matrices aren't invertible, they'll be all 0 (vox::math
   // implementation), which will result in identity correction quaternions.
   SimdInt4 invertible;
   const Float4x4 inv_joint = Invert(*joint, &invertible);
@@ -219,4 +219,4 @@ bool IKAimJob::Run() const {
   return true;
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

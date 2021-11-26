@@ -15,7 +15,7 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using namespace ozz::math;
+using namespace vox::math;
 
 TEST(Ray, ray_plane) {
     const auto ray = Ray(Float3(0, 0, 0), Float3(0, 1, 0));

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_IK_TWO_BONE_JOB_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_IK_TWO_BONE_JOB_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_IK_TWO_BONE_JOB_H_
+#define VOX_VOX_ANIMATION_RUNTIME_IK_TWO_BONE_JOB_H_
 
 #include "platform.h"
 
 #include "maths/simd_math.h"
 
-namespace ozz {
+namespace vox {
 // Forward declaration of math structures.
 namespace math {
 struct SimdQuaternion;
@@ -40,7 +40,7 @@ struct SimdQuaternion;
 
 namespace animation {
 
-// ozz::animation::IKTwoBoneJob performs inverse kinematic on a three joints
+// vox::animation::IKTwoBoneJob performs inverse kinematic on a three joints
 // chain (two bones).
 // The job computes the transformations (rotations) that needs to be applied to
 // the first two joints of the chain (named start and middle joints) such that
@@ -124,5 +124,5 @@ struct IKTwoBoneJob {
   bool* reached;
 };
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_IK_TWO_BONE_JOB_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_IK_TWO_BONE_JOB_H_

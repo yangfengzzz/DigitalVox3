@@ -12,7 +12,7 @@
 #include <vector>
 #include "updateFlag.h"
 
-namespace ozz {
+namespace vox {
 class UpdateFlagManager {
 public:
     std::unique_ptr<UpdateFlag> registration();

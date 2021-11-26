@@ -8,7 +8,7 @@
 #include "updateFlag.h"
 #include "updateFlag_manager.h"
 
-namespace ozz {
+namespace vox {
 UpdateFlag::UpdateFlag(UpdateFlagManager *_flags) : _flags(_flags) {
     _flags->_updateFlags.push_back(this);
 }

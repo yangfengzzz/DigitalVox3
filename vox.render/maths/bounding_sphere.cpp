@@ -8,7 +8,7 @@
 #include "bounding_sphere.h"
 #include "bounding_box.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 BoundingSphere BoundingSphere::fromBox(const BoundingBox &box) {
     BoundingSphere out;

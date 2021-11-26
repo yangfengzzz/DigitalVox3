@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,24 +25,24 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_SET_H_
-#define OZZ_OZZ_BASE_CONTAINERS_SET_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_SET_H_
+#define VOX_VOX_BASE_CONTAINERS_SET_H_
 
 #include <set>
 
 #include "containers/std_allocator.h"
 
-namespace ozz {
-// Redirects std::set to ozz::set in order to replace std default allocator by
-// ozz::StdAllocator.
+namespace vox {
+// Redirects std::set to vox::set in order to replace std default allocator by
+// vox::StdAllocator.
 template <class _Key, class _Pred = std::less<_Key>,
-          class _Allocator = ozz::StdAllocator<_Key>>
+          class _Allocator = vox::StdAllocator<_Key>>
 using set = std::set<_Key, _Pred, _Allocator>;
 
-// Redirects std::multiset to ozz::multiset in order to replace std default
-// allocator by ozz::StdAllocator.
+// Redirects std::multiset to vox::multiset in order to replace std default
+// allocator by vox::StdAllocator.
 template <class _Key, class _Pred = std::less<_Key>,
-          class _Allocator = ozz::StdAllocator<_Key>>
+          class _Allocator = vox::StdAllocator<_Key>>
 using multiset = std::multiset<_Key, _Pred, _Allocator>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_SET_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_SET_H_

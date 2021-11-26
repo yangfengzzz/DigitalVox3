@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_RAW_ANIMATION_H_
+#define VOX_VOX_ANIMATION_OFFLINE_RAW_ANIMATION_H_
 
 #include "containers/string.h"
 #include "containers/vector.h"
@@ -34,7 +34,7 @@
 #include "maths/quaternion.h"
 #include "maths/vec_float.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -111,11 +111,11 @@ struct RawAnimation {
   // Defines a track of key frames for a bone, including translation, rotation
   // and scale.
   struct JointTrack {
-    typedef ozz::vector<TranslationKey> Translations;
+    typedef vox::vector<TranslationKey> Translations;
     Translations translations;
-    typedef ozz::vector<RotationKey> Rotations;
+    typedef vox::vector<RotationKey> Rotations;
     Rotations rotations;
-    typedef ozz::vector<ScaleKey> Scales;
+    typedef vox::vector<ScaleKey> Scales;
     Scales scales;
 
     // Validates track. See RawAnimation::Validate for more details.
@@ -129,20 +129,20 @@ struct RawAnimation {
 
   // Stores per joint JointTrack, ie: per joint animation key-frames.
   // tracks_.size() gives the number of animated joints.
-  ozz::vector<JointTrack> tracks;
+  vox::vector<JointTrack> tracks;
 
   // The duration of the animation. All the keys of a valid RawAnimation are in
   // the range [0,duration].
   float duration;
 
   // Name of the animation.
-  ozz::string name;
+  vox::string name;
 };
 }  // namespace offline
 }  // namespace animation
 namespace io {
-OZZ_IO_TYPE_VERSION(3, animation::offline::RawAnimation)
-OZZ_IO_TYPE_TAG("ozz-raw_animation", animation::offline::RawAnimation)
+VOX_IO_TYPE_VERSION(3, animation::offline::RawAnimation)
+VOX_IO_TYPE_TAG("vox-raw_animation", animation::offline::RawAnimation)
 
 // Should not be called directly but through io::Archive << and >> operators.
 template <>
@@ -155,5 +155,5 @@ struct Extern<animation::offline::RawAnimation> {
                    uint32_t _version);
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_RAW_ANIMATION_H_

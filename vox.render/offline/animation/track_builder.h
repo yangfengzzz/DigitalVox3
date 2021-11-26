@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_TRACK_BUILDER_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_TRACK_BUILDER_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_TRACK_BUILDER_H_
+#define VOX_VOX_ANIMATION_OFFLINE_TRACK_BUILDER_H_
 
 #include "memory/unique_ptr.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Forward declares the runtime tracks type.
@@ -60,18 +60,18 @@ class TrackBuilder {
   // Raw*Track::Validate() for more details about failure reasons.
   // The track is returned as an unique_ptr as ownership is given back to the
   // caller.
-  ozz::unique_ptr<FloatTrack> operator()(const RawFloatTrack& _input) const;
-  ozz::unique_ptr<Float2Track> operator()(const RawFloat2Track& _input) const;
-  ozz::unique_ptr<Float3Track> operator()(const RawFloat3Track& _input) const;
-  ozz::unique_ptr<Float4Track> operator()(const RawFloat4Track& _input) const;
-  ozz::unique_ptr<QuaternionTrack> operator()(
+  vox::unique_ptr<FloatTrack> operator()(const RawFloatTrack& _input) const;
+  vox::unique_ptr<Float2Track> operator()(const RawFloat2Track& _input) const;
+  vox::unique_ptr<Float3Track> operator()(const RawFloat3Track& _input) const;
+  vox::unique_ptr<Float4Track> operator()(const RawFloat4Track& _input) const;
+  vox::unique_ptr<QuaternionTrack> operator()(
       const RawQuaternionTrack& _input) const;
 
  private:
   template <typename _RawTrack, typename _Track>
-  ozz::unique_ptr<_Track> Build(const _RawTrack& _input) const;
+  vox::unique_ptr<_Track> Build(const _RawTrack& _input) const;
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_TRACK_BUILDER_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_TRACK_BUILDER_H_

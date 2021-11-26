@@ -15,7 +15,7 @@
 #include "platform.h"
 #include "vec_float.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct Plane;
 
@@ -53,7 +53,7 @@ struct Plane {
      * Normalize the normal vector of this plane.
      */
     void normalize() {
-        *this = ::ozz::math::normalize(*this);
+        *this = ::vox::math::normalize(*this);
     }
 };
 

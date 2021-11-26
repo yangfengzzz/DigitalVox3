@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_SOA_TRANSFORM_H_
-#define OZZ_OZZ_BASE_MATHS_SOA_TRANSFORM_H_
+#ifndef VOX_VOX_BASE_MATHS_SOA_TRANSFORM_H_
+#define VOX_VOX_BASE_MATHS_SOA_TRANSFORM_H_
 
 #include "maths/soa_float.h"
 #include "maths/soa_quaternion.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 
 // Stores an affine transformation with separate translation, rotation and scale
@@ -42,12 +42,12 @@ struct SoaTransform {
   SoaQuaternion rotation;
   SoaFloat3 scale;
 
-  static OZZ_INLINE SoaTransform identity() {
+  static VOX_INLINE SoaTransform identity() {
     const SoaTransform ret = {SoaFloat3::zero(), SoaQuaternion::identity(),
                               SoaFloat3::one()};
     return ret;
   }
 };
 }  // namespace math
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_SOA_TRANSFORM_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MATHS_SOA_TRANSFORM_H_

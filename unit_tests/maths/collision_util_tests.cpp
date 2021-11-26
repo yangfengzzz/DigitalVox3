@@ -17,7 +17,7 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using namespace ozz::math;
+using namespace vox::math;
 
 class CollisionUtilTest : public testing::Test {
 public:

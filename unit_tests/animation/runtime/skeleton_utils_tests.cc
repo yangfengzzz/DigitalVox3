@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -39,9 +39,9 @@
 #include "runtime/animation/skeleton_utils.h"
 #include "memory/unique_ptr.h"
 
-using ozz::animation::Skeleton;
-using ozz::animation::offline::RawSkeleton;
-using ozz::animation::offline::SkeletonBuilder;
+using vox::animation::Skeleton;
+using vox::animation::offline::RawSkeleton;
+using vox::animation::offline::SkeletonBuilder;
 
 TEST(JointBindPose, SkeletonUtils) {
   // Instantiates a builder objects with default parameters.
@@ -51,27 +51,27 @@ TEST(JointBindPose, SkeletonUtils) {
   raw_skeleton.roots.resize(1);
   RawSkeleton::Joint& r = raw_skeleton.roots[0];
   r.name = "r0";
-  r.transform.translation = ozz::math::Float3::x_axis();
-  r.transform.rotation = ozz::math::Quaternion::identity();
-  r.transform.scale = ozz::math::Float3::zero();
+  r.transform.translation = vox::math::Float3::x_axis();
+  r.transform.rotation = vox::math::Quaternion::identity();
+  r.transform.scale = vox::math::Float3::zero();
 
   r.children.resize(2);
   RawSkeleton::Joint& c0 = r.children[0];
   c0.name = "j0";
-  c0.transform.translation = ozz::math::Float3::y_axis();
-  c0.transform.rotation = -ozz::math::Quaternion::identity();
-  c0.transform.scale = -ozz::math::Float3::one();
+  c0.transform.translation = vox::math::Float3::y_axis();
+  c0.transform.rotation = -vox::math::Quaternion::identity();
+  c0.transform.scale = -vox::math::Float3::one();
 
   RawSkeleton::Joint& c1 = r.children[1];
   c1.name = "j1";
-  c1.transform.translation = ozz::math::Float3::z_axis();
-  c1.transform.rotation = Conjugate(ozz::math::Quaternion::identity());
-  c1.transform.scale = ozz::math::Float3::one();
+  c1.transform.translation = vox::math::Float3::z_axis();
+  c1.transform.rotation = Conjugate(vox::math::Quaternion::identity());
+  c1.transform.scale = vox::math::Float3::one();
 
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 3);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
   EXPECT_EQ(skeleton->num_joints(), 3);
 
@@ -79,17 +79,17 @@ TEST(JointBindPose, SkeletonUtils) {
   EXPECT_ASSERTION(GetJointLocalBindPose(*skeleton, 3),
                    "Joint index out of range.");
 
-  const ozz::math::Transform bind_pose0 = GetJointLocalBindPose(*skeleton, 0);
+  const vox::math::Transform bind_pose0 = GetJointLocalBindPose(*skeleton, 0);
   EXPECT_FLOAT3_EQ(bind_pose0.translation, 1.f, 0.f, 0.f);
   EXPECT_QUATERNION_EQ(bind_pose0.rotation, 0.f, 0.f, 0.f, 1.f);
   EXPECT_FLOAT3_EQ(bind_pose0.scale, 0.f, 0.f, 0.f);
 
-  const ozz::math::Transform bind_pose1 = GetJointLocalBindPose(*skeleton, 1);
+  const vox::math::Transform bind_pose1 = GetJointLocalBindPose(*skeleton, 1);
   EXPECT_FLOAT3_EQ(bind_pose1.translation, 0.f, 1.f, 0.f);
   EXPECT_QUATERNION_EQ(bind_pose1.rotation, 0.f, 0.f, 0.f, -1.f);
   EXPECT_FLOAT3_EQ(bind_pose1.scale, -1.f, -1.f, -1.f);
 
-  const ozz::math::Transform bind_pose2 = GetJointLocalBindPose(*skeleton, 2);
+  const vox::math::Transform bind_pose2 = GetJointLocalBindPose(*skeleton, 2);
   EXPECT_FLOAT3_EQ(bind_pose2.translation, 0.f, 0.f, 1.f);
   EXPECT_QUATERNION_EQ(bind_pose2.rotation, -0.f, -0.f, -0.f, 1.f);
   EXPECT_FLOAT3_EQ(bind_pose2.scale, 1.f, 1.f, 1.f);
@@ -118,7 +118,7 @@ class IterateDFFailTester {
 
 class IterateDFTester {
  public:
-  IterateDFTester(const ozz::animation::Skeleton* _skeleton, int _start)
+  IterateDFTester(const vox::animation::Skeleton* _skeleton, int _start)
       : skeleton_(_skeleton), start_(_start), num_iterations_(0) {}
 
   void operator()(int _current, int _parent) {
@@ -132,7 +132,7 @@ class IterateDFTester {
 
  private:
   // Iterated skeleton.
-  const ozz::animation::Skeleton* skeleton_;
+  const vox::animation::Skeleton* skeleton_;
 
   // First joint to explore.
   int start_;
@@ -176,7 +176,7 @@ TEST(InterateDF, SkeletonUtils) {
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 10);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
   EXPECT_EQ(skeleton->num_joints(), 10);
 
@@ -250,9 +250,9 @@ TEST(InterateDF, SkeletonUtils) {
 }
 
 TEST(InterateDFEmpty, SkeletonUtils) {
-  ozz::animation::Skeleton empty;
+  vox::animation::Skeleton empty;
   IterateJointsDF(empty, IterateDFFailTester(),
-                  ozz::animation::Skeleton::kNoParent);
+                  vox::animation::Skeleton::kNoParent);
   IterateJointsDF(empty, IterateDFFailTester(), 0);
 }
 
@@ -260,21 +260,21 @@ namespace {
 
 class IterateDFReverseTester {
  public:
-  IterateDFReverseTester(const ozz::animation::Skeleton* _skeleton)
+  IterateDFReverseTester(const vox::animation::Skeleton* _skeleton)
       : skeleton_(_skeleton), num_iterations_(0) {}
 
   void operator()(int _current, int _parent) {
     if (num_iterations_ == 0) {
-      EXPECT_TRUE(ozz::animation::IsLeaf(*skeleton_, _current));
+      EXPECT_TRUE(vox::animation::IsLeaf(*skeleton_, _current));
     }
 
     // A joint is traversed once.
-    ozz::vector<int>::const_iterator itc =
+    vox::vector<int>::const_iterator itc =
         std::find(processed_joints_.begin(), processed_joints_.end(), _current);
     EXPECT_TRUE(itc == processed_joints_.end());
 
     // A parent can't be traversed before a child.
-    ozz::vector<int>::const_iterator itp =
+    vox::vector<int>::const_iterator itp =
         std::find(processed_joints_.begin(), processed_joints_.end(), _parent);
     EXPECT_TRUE(itp == processed_joints_.end());
 
@@ -291,13 +291,13 @@ class IterateDFReverseTester {
 
  private:
   // Iterated skeleton.
-  const ozz::animation::Skeleton* skeleton_;
+  const vox::animation::Skeleton* skeleton_;
 
   // Number of iterations completed.
   int num_iterations_;
 
   // Already processed joints
-  ozz::vector<int> processed_joints_;
+  vox::vector<int> processed_joints_;
 };
 }  // namespace
 
@@ -335,7 +335,7 @@ TEST(InterateDFReverse, SkeletonUtils) {
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 10);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
   EXPECT_EQ(skeleton->num_joints(), 10);
 
@@ -394,14 +394,14 @@ TEST(IsLeaf, SkeletonUtils) {
   EXPECT_TRUE(raw_skeleton.Validate());
   EXPECT_EQ(raw_skeleton.num_joints(), 10);
 
-  ozz::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
   EXPECT_EQ(skeleton->num_joints(), 10);
 
   // Out of bound
   EXPECT_ASSERTION(IsLeaf(*skeleton, 10), "_joint index out of range");
   EXPECT_ASSERTION(IsLeaf(*skeleton, 93), "_joint index out of range");
-  EXPECT_ASSERTION(IsLeaf(*skeleton, ozz::animation::Skeleton::kNoParent),
+  EXPECT_ASSERTION(IsLeaf(*skeleton, vox::animation::Skeleton::kNoParent),
                    "_joint index out of range");
 
   EXPECT_FALSE(IsLeaf(*skeleton, 0));

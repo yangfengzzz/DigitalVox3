@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,7 +35,7 @@
 #include "maths/math_ex.h"
 #include "memory/allocator.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 namespace internal {
@@ -99,22 +99,22 @@ size_t Track<_ValueType>::size() const {
 }
 
 template <typename _ValueType>
-void Track<_ValueType>::Save(ozz::io::OArchive& _archive) const {
+void Track<_ValueType>::Save(vox::io::OArchive& _archive) const {
   uint32_t num_keys = static_cast<uint32_t>(ratios_.size());
   _archive << num_keys;
 
   const size_t name_len = name_ ? std::strlen(name_) : 0;
   _archive << static_cast<int32_t>(name_len);
 
-  _archive << ozz::io::MakeArray(ratios_);
-  _archive << ozz::io::MakeArray(values_);
-  _archive << ozz::io::MakeArray(steps_);
+  _archive << vox::io::MakeArray(ratios_);
+  _archive << vox::io::MakeArray(values_);
+  _archive << vox::io::MakeArray(steps_);
 
-  _archive << ozz::io::MakeArray(name_, name_len);
+  _archive << vox::io::MakeArray(name_, name_len);
 }
 
 template <typename _ValueType>
-void Track<_ValueType>::Load(ozz::io::IArchive& _archive, uint32_t _version) {
+void Track<_ValueType>::Load(vox::io::IArchive& _archive, uint32_t _version) {
   // Destroy animation in case it was already used before.
   Deallocate();
 
@@ -131,12 +131,12 @@ void Track<_ValueType>::Load(ozz::io::IArchive& _archive, uint32_t _version) {
 
   Allocate(num_keys, name_len);
 
-  _archive >> ozz::io::MakeArray(ratios_);
-  _archive >> ozz::io::MakeArray(values_);
-  _archive >> ozz::io::MakeArray(steps_);
+  _archive >> vox::io::MakeArray(ratios_);
+  _archive >> vox::io::MakeArray(values_);
+  _archive >> vox::io::MakeArray(steps_);
 
   if (name_) {  // nullptr name_ is supported.
-    _archive >> ozz::io::MakeArray(name_, name_len);
+    _archive >> vox::io::MakeArray(name_, name_len);
     name_[name_len] = 0;
   }
 }
@@ -150,4 +150,4 @@ template class Track<math::Quaternion>;
 
 }  // namespace internal
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

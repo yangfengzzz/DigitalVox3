@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,25 +34,25 @@
 
 #include "gtest_math_helper.h"
 
-using ozz::animation::offline::RawFloatTrack;
-using ozz::animation::offline::RawFloat2Track;
-using ozz::animation::offline::RawFloat3Track;
-using ozz::animation::offline::RawFloat4Track;
-using ozz::animation::offline::RawQuaternionTrack;
-using ozz::animation::offline::RawTrackInterpolation;
+using vox::animation::offline::RawFloatTrack;
+using vox::animation::offline::RawFloat2Track;
+using vox::animation::offline::RawFloat3Track;
+using vox::animation::offline::RawFloat4Track;
+using vox::animation::offline::RawQuaternionTrack;
+using vox::animation::offline::RawTrackInterpolation;
 
 TEST(Empty, RawTrackSerialize) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   // Streams out.
-  ozz::io::OArchive o(&stream, ozz::GetNativeEndianness());
+  vox::io::OArchive o(&stream, vox::GetNativeEndianness());
 
   RawFloatTrack o_track;
   o << o_track;
 
   // Streams in.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   RawFloatTrack i_track;
   i >> i_track;
@@ -76,16 +76,16 @@ TEST(Filled, RawTrackSerialize) {
   EXPECT_EQ(o_track.keyframes.size(), 2u);
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << o_track;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive ia(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive ia(&stream);
 
     RawFloatTrack i_track;
     ia >> i_track;
@@ -108,10 +108,10 @@ TEST(Filled, RawTrackSerialize) {
 TEST(AlreadyInitialized, RawTrackSerialize) {
   RawFloatTrack o_track;
 
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   // Streams out.
-  ozz::io::OArchive o(&stream);
+  vox::io::OArchive o(&stream);
   o_track.name = "test track";
   o << o_track;
 
@@ -121,8 +121,8 @@ TEST(AlreadyInitialized, RawTrackSerialize) {
   o << o_track;
 
   // Streams in.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   RawFloatTrack i_track;
   i >> i_track;
@@ -139,26 +139,26 @@ TEST(Float2, RawTrackSerialize) {
   o_track.name = "test track";
 
   const RawFloat2Track::Keyframe first_key = {
-      RawTrackInterpolation::kLinear, .5f, ozz::math::Float2(46.f, 99.f)};
+      RawTrackInterpolation::kLinear, .5f, vox::math::Float2(46.f, 99.f)};
   o_track.keyframes.push_back(first_key);
   const RawFloat2Track::Keyframe second_key = {
-      RawTrackInterpolation::kLinear, .7f, ozz::math::Float2(16.f, 93.f)};
+      RawTrackInterpolation::kLinear, .7f, vox::math::Float2(16.f, 93.f)};
   o_track.keyframes.push_back(second_key);
 
   EXPECT_TRUE(o_track.Validate());
   EXPECT_EQ(o_track.keyframes.size(), 2u);
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << o_track;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive ia(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive ia(&stream);
 
     RawFloat2Track i_track;
     ia >> i_track;
@@ -182,26 +182,26 @@ TEST(Float3, RawTrackSerialize) {
   RawFloat3Track o_track;
 
   const RawFloat3Track::Keyframe first_key = {
-      RawTrackInterpolation::kLinear, .5f, ozz::math::Float3(46.f, 99.f, 25.f)};
+      RawTrackInterpolation::kLinear, .5f, vox::math::Float3(46.f, 99.f, 25.f)};
   o_track.keyframes.push_back(first_key);
   const RawFloat3Track::Keyframe second_key = {
-      RawTrackInterpolation::kLinear, .7f, ozz::math::Float3(16.f, 93.f, 4.f)};
+      RawTrackInterpolation::kLinear, .7f, vox::math::Float3(16.f, 93.f, 4.f)};
   o_track.keyframes.push_back(second_key);
 
   EXPECT_TRUE(o_track.Validate());
   EXPECT_EQ(o_track.keyframes.size(), 2u);
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << o_track;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive ia(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive ia(&stream);
 
     RawFloat3Track i_track;
     ia >> i_track;
@@ -225,27 +225,27 @@ TEST(Float4, RawTrackSerialize) {
 
   const RawFloat4Track::Keyframe first_key = {
       RawTrackInterpolation::kLinear, .5f,
-      ozz::math::Float4(46.f, 99.f, 25.f, 5.f)};
+      vox::math::Float4(46.f, 99.f, 25.f, 5.f)};
   o_track.keyframes.push_back(first_key);
   const RawFloat4Track::Keyframe second_key = {
       RawTrackInterpolation::kLinear, .7f,
-      ozz::math::Float4(16.f, 93.f, 4.f, 46.f)};
+      vox::math::Float4(16.f, 93.f, 4.f, 46.f)};
   o_track.keyframes.push_back(second_key);
 
   EXPECT_TRUE(o_track.Validate());
   EXPECT_EQ(o_track.keyframes.size(), 2u);
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << o_track;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive ia(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive ia(&stream);
 
     RawFloat4Track i_track;
     ia >> i_track;
@@ -269,27 +269,27 @@ TEST(Quaternion, RawTrackSerialize) {
 
   const RawQuaternionTrack::Keyframe first_key = {
       RawTrackInterpolation::kLinear, .5f,
-      ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+      vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
   o_track.keyframes.push_back(first_key);
   const RawQuaternionTrack::Keyframe second_key = {
       RawTrackInterpolation::kLinear, .7f,
-      ozz::math::Quaternion(.6172133f, .1543033f, 0.f, .7715167f)};
+      vox::math::Quaternion(.6172133f, .1543033f, 0.f, .7715167f)};
   o_track.keyframes.push_back(second_key);
 
   EXPECT_TRUE(o_track.Validate());
   EXPECT_EQ(o_track.keyframes.size(), 2u);
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << o_track;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive ia(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive ia(&stream);
 
     RawQuaternionTrack i_track;
     ia >> i_track;

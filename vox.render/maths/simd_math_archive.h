@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,16 +25,16 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_SIMD_MATH_ARCHIVE_H_
-#define OZZ_OZZ_BASE_MATHS_SIMD_MATH_ARCHIVE_H_
+#ifndef VOX_VOX_BASE_MATHS_SIMD_MATH_ARCHIVE_H_
+#define VOX_VOX_BASE_MATHS_SIMD_MATH_ARCHIVE_H_
 
 #include "io/archive_traits.h"
 #include "maths/simd_math.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SimdFloat4)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SimdFloat4)
 template <>
 struct Extern<math::SimdFloat4> {
   static void Save(OArchive& _archive, const math::SimdFloat4* _values,
@@ -43,7 +43,7 @@ struct Extern<math::SimdFloat4> {
                    uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::SimdInt4)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::SimdInt4)
 template <>
 struct Extern<math::SimdInt4> {
   static void Save(OArchive& _archive, const math::SimdInt4* _values,
@@ -52,7 +52,7 @@ struct Extern<math::SimdInt4> {
                    uint32_t _version);
 };
 
-OZZ_IO_TYPE_NOT_VERSIONABLE(math::Float4x4)
+VOX_IO_TYPE_NOT_VERSIONABLE(math::Float4x4)
 template <>
 struct Extern<math::Float4x4> {
   static void Save(OArchive& _archive, const math::Float4x4* _values,
@@ -61,5 +61,5 @@ struct Extern<math::Float4x4> {
                    uint32_t _version);
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_SIMD_MATH_ARCHIVE_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MATHS_SIMD_MATH_ARCHIVE_H_

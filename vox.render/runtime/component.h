@@ -10,7 +10,7 @@
 
 #include "engine_object.h"
 
-namespace ozz {
+namespace vox {
 class Entity;
 /**
  * The base class of the components.

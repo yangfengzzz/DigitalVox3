@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MEMORY_ALLOCATOR_H_
-#define OZZ_OZZ_BASE_MEMORY_ALLOCATOR_H_
+#ifndef VOX_VOX_BASE_MEMORY_ALLOCATOR_H_
+#define VOX_VOX_BASE_MEMORY_ALLOCATOR_H_
 
 #include <cstddef>
 #include <new>
@@ -34,7 +34,7 @@
 
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace memory {
 
 // Forwards declare Allocator class.
@@ -43,7 +43,7 @@ class Allocator;
 // Defines the default allocator accessor.
 Allocator* default_allocator();
 
-// Set the default allocator, used for all dynamic allocation inside ozz.
+// Set the default allocator, used for all dynamic allocation inside vox.
 // Returns current memory allocator, such that in can be restored if needed.
 Allocator* SetDefaulAllocator(Allocator* _allocator);
 
@@ -71,8 +71,8 @@ class Allocator {
 };
 }  // namespace memory
 
-// ozz replacement for c++ operator new with, used to allocate with an
-// ozz::memory::Allocator. Delete must be used to deallocate such object.
+// vox replacement for c++ operator new with, used to allocate with an
+// vox::memory::Allocator. Delete must be used to deallocate such object.
 // It can be used for constructor with no argument:
 // Type* object = New<Type>();
 // or any number of argument:
@@ -95,5 +95,5 @@ void Delete(_Ty* _object) {
   }
 }
 
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MEMORY_ALLOCATOR_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MEMORY_ALLOCATOR_H_

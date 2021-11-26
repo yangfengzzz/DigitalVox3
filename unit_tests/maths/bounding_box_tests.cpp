@@ -13,10 +13,10 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::BoundingBox;
-using ozz::math::Float3;
-using ozz::math::BoundingSphere;
-using ozz::math::Matrix;
+using vox::math::BoundingBox;
+using vox::math::Float3;
+using vox::math::BoundingSphere;
+using vox::math::Matrix;
 
 TEST(BoundingBox, Constructor) {
     // Create a same box by different param.

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_ANIMATION_OPTIMIZER_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_ANIMATION_OPTIMIZER_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_ANIMATION_OPTIMIZER_H_
+#define VOX_VOX_ANIMATION_OFFLINE_ANIMATION_OPTIMIZER_H_
 
 #include "containers/map.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Forward declare runtime skeleton type.
@@ -94,10 +94,10 @@ class AnimationOptimizer {
   Setting setting;
 
   // Per joint override of optimization settings.
-  typedef ozz::map<int, Setting> JointsSetting;
+  typedef vox::map<int, Setting> JointsSetting;
   JointsSetting joints_setting_override;
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_ANIMATION_OPTIMIZER_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_ANIMATION_OPTIMIZER_H_

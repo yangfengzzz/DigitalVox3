@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -33,7 +33,7 @@
 #include "containers/string_archive.h"
 #include "containers/vector_archive.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 void Extern<animation::offline::RawSkeleton>::Save(
@@ -56,7 +56,7 @@ void Extern<animation::offline::RawSkeleton>::Load(
 
 // RawSkeleton::Joint' version can be declared locally as it will be saved from
 // this cpp file only.
-OZZ_IO_TYPE_VERSION(1, animation::offline::RawSkeleton::Joint)
+VOX_IO_TYPE_VERSION(1, animation::offline::RawSkeleton::Joint)
 
 template <>
 struct Extern<animation::offline::RawSkeleton::Joint> {
@@ -83,4 +83,4 @@ struct Extern<animation::offline::RawSkeleton::Joint> {
   }
 };
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

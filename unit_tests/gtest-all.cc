@@ -34,7 +34,7 @@
 // Sometimes it's desirable to build Google Test by compiling a single file.
 // This file serves this purpose.
 
-// ozz(gblanc)
+// vox(gblanc)
 #ifdef _MSC_VER
 #pragma warning(disable:4702)  // Disables "unreachable code warning"
 #endif //  _MSC_VER

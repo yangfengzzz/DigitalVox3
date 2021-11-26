@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_TRACK_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_TRACK_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_TRACK_H_
+#define VOX_VOX_ANIMATION_RUNTIME_TRACK_H_
 
 #include "io/archive_traits.h"
 #include "platform.h"
@@ -35,7 +35,7 @@
 #include "maths/quaternion.h"
 #include "maths/vec_float.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Forward declares the TrackBuilder, used to instantiate a Track.
@@ -48,8 +48,8 @@ namespace internal {
 // The runtime track data structure exists for 1 to 4 float types (FloatTrack,
 // ..., Float4Track) and quaternions (QuaternionTrack). See RawTrack for more
 // details on track content. The runtime track data structure is optimized for
-// the processing of ozz::animation::TrackSamplingJob and
-// ozz::animation::TrackTriggeringJob. Keyframe ratios, values and interpolation
+// the processing of vox::animation::TrackSamplingJob and
+// vox::animation::TrackTriggeringJob. Keyframe ratios, values and interpolation
 // mode are all store as separate buffers in order to access the cache
 // coherently. Ratios are usually accessed/read alone from the jobs that all
 // start by looking up the keyframes to interpolate indeed.
@@ -74,8 +74,8 @@ class Track {
 
   // Serialization functions.
   // Should not be called directly but through io::Archive << and >> operators.
-  void Save(ozz::io::OArchive& _archive) const;
-  void Load(ozz::io::IArchive& _archive, uint32_t _version);
+  void Save(vox::io::OArchive& _archive) const;
+  void Load(vox::io::IArchive& _archive, uint32_t _version);
 
  private:
   // Disables copy and assignation.
@@ -154,16 +154,16 @@ class QuaternionTrack : public internal::Track<math::Quaternion> {};
 
 }  // namespace animation
 namespace io {
-OZZ_IO_TYPE_VERSION(1, animation::FloatTrack)
-OZZ_IO_TYPE_TAG("ozz-float_track", animation::FloatTrack)
-OZZ_IO_TYPE_VERSION(1, animation::Float2Track)
-OZZ_IO_TYPE_TAG("ozz-float2_track", animation::Float2Track)
-OZZ_IO_TYPE_VERSION(1, animation::Float3Track)
-OZZ_IO_TYPE_TAG("ozz-float3_track", animation::Float3Track)
-OZZ_IO_TYPE_VERSION(1, animation::Float4Track)
-OZZ_IO_TYPE_TAG("ozz-float4_track", animation::Float4Track)
-OZZ_IO_TYPE_VERSION(1, animation::QuaternionTrack)
-OZZ_IO_TYPE_TAG("ozz-quat_track", animation::QuaternionTrack)
+VOX_IO_TYPE_VERSION(1, animation::FloatTrack)
+VOX_IO_TYPE_TAG("vox-float_track", animation::FloatTrack)
+VOX_IO_TYPE_VERSION(1, animation::Float2Track)
+VOX_IO_TYPE_TAG("vox-float2_track", animation::Float2Track)
+VOX_IO_TYPE_VERSION(1, animation::Float3Track)
+VOX_IO_TYPE_TAG("vox-float3_track", animation::Float3Track)
+VOX_IO_TYPE_VERSION(1, animation::Float4Track)
+VOX_IO_TYPE_TAG("vox-float4_track", animation::Float4Track)
+VOX_IO_TYPE_VERSION(1, animation::QuaternionTrack)
+VOX_IO_TYPE_TAG("vox-quat_track", animation::QuaternionTrack)
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_TRACK_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_TRACK_H_

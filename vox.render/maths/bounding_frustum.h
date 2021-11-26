@@ -18,7 +18,7 @@
 #include "bounding_box.h"
 #include <optional>
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct BoundingFrustum {
     /** The near plane of this frustum. */

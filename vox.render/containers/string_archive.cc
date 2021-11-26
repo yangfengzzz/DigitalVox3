@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -30,17 +30,17 @@
 #include "io/archive.h"
 #include "maths/math_ex.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 void Extern<string>::Save(OArchive& _archive, const string* _values,
                           size_t _count) {
   for (size_t i = 0; i < _count; i++) {
-    const ozz::string& string = _values[i];
+    const vox::string& string = _values[i];
 
     // Get size excluding null terminating character.
     uint32_t size = static_cast<uint32_t>(string.size());
     _archive << size;
-    _archive << ozz::io::MakeArray(string.c_str(), size);
+    _archive << vox::io::MakeArray(string.c_str(), size);
   }
 }
 
@@ -48,7 +48,7 @@ void Extern<string>::Load(IArchive& _archive, string* _values, size_t _count,
                           uint32_t _version) {
   (void)_version;
   for (size_t i = 0; i < _count; i++) {
-    ozz::string& string = _values[i];
+    vox::string& string = _values[i];
 
     // Ensure an existing string is reseted.
     string.clear();
@@ -62,8 +62,8 @@ void Extern<string>::Load(IArchive& _archive, string* _values, size_t _count,
     for (size_t to_read = size; to_read != 0;) {
       // Read from the archive to the local temporary buffer.
       const size_t to_read_this_loop =
-          math::Min(to_read, OZZ_ARRAY_SIZE(buffer));
-      _archive >> ozz::io::MakeArray(buffer, to_read_this_loop);
+          math::Min(to_read, VOX_ARRAY_SIZE(buffer));
+      _archive >> vox::io::MakeArray(buffer, to_read_this_loop);
       to_read -= to_read_this_loop;
 
       // Append to the string.
@@ -72,4 +72,4 @@ void Extern<string>::Load(IArchive& _archive, string* _values, size_t _count,
   }
 }
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

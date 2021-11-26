@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,11 +34,11 @@
 #include "maths/soa_transform.h"
 #include "memory/unique_ptr.h"
 
-using ozz::animation::Animation;
-using ozz::animation::SamplingCache;
-using ozz::animation::SamplingJob;
-using ozz::animation::offline::AnimationBuilder;
-using ozz::animation::offline::RawAnimation;
+using vox::animation::Animation;
+using vox::animation::SamplingCache;
+using vox::animation::SamplingJob;
+using vox::animation::offline::AnimationBuilder;
+using vox::animation::offline::RawAnimation;
 
 TEST(JobValidity, SamplingJob) {
   RawAnimation raw_animation;
@@ -46,7 +46,7 @@ TEST(JobValidity, SamplingJob) {
   raw_animation.tracks.resize(1);
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
   // Allocates cache.
@@ -67,7 +67,7 @@ TEST(JobValidity, SamplingJob) {
   }
 
   {  // Invalid animation.
-    ozz::math::SoaTransform output[1];
+    vox::math::SoaTransform output[1];
 
     SamplingJob job;
     job.cache = &cache;
@@ -77,7 +77,7 @@ TEST(JobValidity, SamplingJob) {
   }
 
   {  // Invalid cache.
-    ozz::math::SoaTransform output[1];
+    vox::math::SoaTransform output[1];
 
     SamplingJob job;
     job.animation = animation.get();
@@ -88,7 +88,7 @@ TEST(JobValidity, SamplingJob) {
 
   {  // Invalid cache size.
     SamplingCache zero_cache(0);
-    ozz::math::SoaTransform output[1];
+    vox::math::SoaTransform output[1];
 
     SamplingJob job;
     job.animation = animation.get();
@@ -99,19 +99,19 @@ TEST(JobValidity, SamplingJob) {
   }
 
   {  // Invalid job with smaller output.
-    ozz::math::SoaTransform* output = nullptr;
+    vox::math::SoaTransform* output = nullptr;
     SamplingJob job;
     job.ratio =
         2155.f;  // Any time ratio can be set, it's clamped in unit interval.
     job.animation = animation.get();
     job.cache = &cache;
-    job.output = ozz::span<ozz::math::SoaTransform>(output, size_t(0));
+    job.output = vox::span<vox::math::SoaTransform>(output, size_t(0));
     EXPECT_FALSE(job.Validate());
     EXPECT_FALSE(job.Run());
   }
 
   {  // Valid job.
-    ozz::math::SoaTransform output[1];
+    vox::math::SoaTransform output[1];
     SamplingJob job;
     job.ratio = 2155.f;  // Any time can be set.
     job.animation = animation.get();
@@ -123,7 +123,7 @@ TEST(JobValidity, SamplingJob) {
 
   {  // Valid job with bigger cache.
     SamplingCache big_cache(2);
-    ozz::math::SoaTransform output[1];
+    vox::math::SoaTransform output[1];
     SamplingJob job;
     job.ratio = 2155.f;  // Any time can be set.
     job.animation = animation.get();
@@ -134,7 +134,7 @@ TEST(JobValidity, SamplingJob) {
   }
 
   {  // Valid job with bigger output.
-    ozz::math::SoaTransform output[2];
+    vox::math::SoaTransform output[2];
     SamplingJob job;
     job.ratio = 2155.f;  // Any time can be set.
     job.animation = animation.get();
@@ -145,7 +145,7 @@ TEST(JobValidity, SamplingJob) {
   }
 
   {  // Default animation.
-    ozz::math::SoaTransform output[1];
+    vox::math::SoaTransform output[1];
     Animation default_animation;
     SamplingJob job;
     job.animation = &default_animation;
@@ -212,37 +212,37 @@ TEST(Sampling, SamplingJob) {
       {.0000001f,
        {-1.f, 0.f, 2.f, 7.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f}}};
 
-  RawAnimation::TranslationKey a = {.2f, ozz::math::Float3(-1.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey a = {.2f, vox::math::Float3(-1.f, 0.f, 0.f)};
   raw_animation.tracks[0].translations.push_back(a);
 
-  RawAnimation::TranslationKey b = {0.f, ozz::math::Float3(2.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey b = {0.f, vox::math::Float3(2.f, 0.f, 0.f)};
   raw_animation.tracks[2].translations.push_back(b);
-  RawAnimation::TranslationKey c = {0.2f, ozz::math::Float3(6.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey c = {0.2f, vox::math::Float3(6.f, 0.f, 0.f)};
   raw_animation.tracks[2].translations.push_back(c);
-  RawAnimation::TranslationKey d = {0.4f, ozz::math::Float3(8.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey d = {0.4f, vox::math::Float3(8.f, 0.f, 0.f)};
   raw_animation.tracks[2].translations.push_back(d);
-  RawAnimation::TranslationKey e = {0.6f, ozz::math::Float3(10.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey e = {0.6f, vox::math::Float3(10.f, 0.f, 0.f)};
   raw_animation.tracks[2].translations.push_back(e);
-  RawAnimation::TranslationKey f = {1.f, ozz::math::Float3(11.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey f = {1.f, vox::math::Float3(11.f, 0.f, 0.f)};
   raw_animation.tracks[2].translations.push_back(f);
 
-  RawAnimation::TranslationKey g = {0.2f, ozz::math::Float3(7.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey g = {0.2f, vox::math::Float3(7.f, 0.f, 0.f)};
   raw_animation.tracks[3].translations.push_back(g);
-  RawAnimation::TranslationKey h = {0.6f, ozz::math::Float3(9.f, 0.f, 0.f)};
+  RawAnimation::TranslationKey h = {0.6f, vox::math::Float3(9.f, 0.f, 0.f)};
   raw_animation.tracks[3].translations.push_back(h);
 
   // Builds animation
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform output[1];
 
   SamplingJob job;
   job.animation = animation.get();
   job.cache = &cache;
   job.output = output;
 
-  for (size_t i = 0; i < OZZ_ARRAY_SIZE(result); ++i) {
+  for (size_t i = 0; i < VOX_ARRAY_SIZE(result); ++i) {
     memset(output, 0xde, sizeof(output));
     job.ratio = result[i].sample_time / animation->duration();
     EXPECT_TRUE(job.Validate());
@@ -269,11 +269,11 @@ TEST(SamplingNoTrack, SamplingJob) {
   SamplingCache cache(1);
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
-  ozz::math::SoaTransform test_output[1];
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform test_output[1];
+  vox::math::SoaTransform output[1];
   memset(test_output, 0xde, sizeof(test_output));
   memset(output, 0xde, sizeof(output));
 
@@ -297,10 +297,10 @@ TEST(Sampling1Track0Key, SamplingJob) {
   SamplingCache cache(1);
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform output[1];
 
   SamplingJob job;
   job.animation = animation.get();
@@ -330,14 +330,14 @@ TEST(Sampling1Track1Key, SamplingJob) {
   SamplingCache cache(1);
 
   const RawAnimation::TranslationKey tkey = {.3f,
-                                             ozz::math::Float3(1.f, -1.f, 5.f)};
+                                             vox::math::Float3(1.f, -1.f, 5.f)};
   raw_animation.tracks[0].translations.push_back(tkey);  // Adds a key.
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform output[1];
 
   SamplingJob job;
   job.animation = animation.get();
@@ -367,17 +367,17 @@ TEST(Sampling1Track2Keys, SamplingJob) {
   SamplingCache cache(1);
 
   const RawAnimation::TranslationKey tkey0 = {.5f,
-                                              ozz::math::Float3(1.f, 2.f, 4.f)};
+                                              vox::math::Float3(1.f, 2.f, 4.f)};
   raw_animation.tracks[0].translations.push_back(tkey0);  // Adds a key.
   const RawAnimation::TranslationKey tkey1 = {.8f,
-                                              ozz::math::Float3(2.f, 4.f, 8.f)};
+                                              vox::math::Float3(2.f, 4.f, 8.f)};
   raw_animation.tracks[0].translations.push_back(tkey1);  // Adds a key.
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform output[1];
   memset(output, 0xde, sizeof(output));
 
   SamplingJob job;
@@ -451,39 +451,39 @@ TEST(Sampling4Track2Keys, SamplingJob) {
   SamplingCache cache(1);
 
   const RawAnimation::TranslationKey tkey00 = {
-      .5f, ozz::math::Float3(1.f, 2.f, 4.f)};
+      .5f, vox::math::Float3(1.f, 2.f, 4.f)};
   raw_animation.tracks[0].translations.push_back(tkey00);  // Adds a key.
   const RawAnimation::TranslationKey tkey01 = {
-      .8f, ozz::math::Float3(2.f, 4.f, 8.f)};
+      .8f, vox::math::Float3(2.f, 4.f, 8.f)};
   raw_animation.tracks[0].translations.push_back(tkey01);  // Adds a key.
 
   // This quaternion will be negated as the builder ensures that the first key
   // is in identity quaternion hemisphere.
   const RawAnimation::RotationKey rkey10 = {
-      0.f, ozz::math::Quaternion(0.f, 0.f, 0.f, -1.f)};
+      0.f, vox::math::Quaternion(0.f, 0.f, 0.f, -1.f)};
   raw_animation.tracks[1].rotations.push_back(rkey10);  // Adds a key.
   const RawAnimation::RotationKey rkey11 = {
-      1.f, ozz::math::Quaternion(0.f, 1.f, 0.f, 0.f)};
+      1.f, vox::math::Quaternion(0.f, 1.f, 0.f, 0.f)};
   raw_animation.tracks[1].rotations.push_back(rkey11);  // Adds a key.
 
-  const RawAnimation::ScaleKey skey20 = {.5f, ozz::math::Float3(0.f, 0.f, 0.f)};
+  const RawAnimation::ScaleKey skey20 = {.5f, vox::math::Float3(0.f, 0.f, 0.f)};
   raw_animation.tracks[2].scales.push_back(skey20);  // Adds a key.
   const RawAnimation::ScaleKey skey21 = {.8f,
-                                         ozz::math::Float3(-1.f, -1.f, -1.f)};
+                                         vox::math::Float3(-1.f, -1.f, -1.f)};
   raw_animation.tracks[2].scales.push_back(skey21);  // Adds a key.
 
   const RawAnimation::TranslationKey tkey30 = {
-      0.f, ozz::math::Float3(-1.f, -2.f, -4.f)};
+      0.f, vox::math::Float3(-1.f, -2.f, -4.f)};
   raw_animation.tracks[3].translations.push_back(tkey30);  // Adds a key.
   const RawAnimation::TranslationKey tkey31 = {
-      1.f, ozz::math::Float3(-2.f, -4.f, -8.f)};
+      1.f, vox::math::Float3(-2.f, -4.f, -8.f)};
   raw_animation.tracks[3].translations.push_back(tkey31);  // Adds a key.
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform output[1];
   memset(output, 0xde, sizeof(output));
 
   SamplingJob job;
@@ -535,11 +535,11 @@ TEST(Cache, SamplingJob) {
   raw_animation.tracks[0].translations.push_back(empty_key);
 
   SamplingCache cache(1);
-  ozz::unique_ptr<Animation> animations[2];
+  vox::unique_ptr<Animation> animations[2];
 
   {
     const RawAnimation::TranslationKey tkey = {
-        .3f, ozz::math::Float3(1.f, -1.f, 5.f)};
+        .3f, vox::math::Float3(1.f, -1.f, 5.f)};
     raw_animation.tracks[0].translations[0] = tkey;
 
     AnimationBuilder builder;
@@ -548,7 +548,7 @@ TEST(Cache, SamplingJob) {
   }
   {
     const RawAnimation::TranslationKey tkey = {
-        .3f, ozz::math::Float3(-1.f, 1.f, -5.f)};
+        .3f, vox::math::Float3(-1.f, 1.f, -5.f)};
     raw_animation.tracks[0].translations[0] = tkey;
 
     AnimationBuilder builder;
@@ -556,7 +556,7 @@ TEST(Cache, SamplingJob) {
     ASSERT_TRUE(animations[1]);
   }
 
-  ozz::math::SoaTransform output[1];
+  vox::math::SoaTransform output[1];
 
   SamplingJob job;
   job.animation = animations[0].get();
@@ -612,13 +612,13 @@ TEST(CacheResize, SamplingJob) {
   raw_animation.tracks.resize(7);
 
   AnimationBuilder builder;
-  ozz::unique_ptr<Animation> animation(builder(raw_animation));
+  vox::unique_ptr<Animation> animation(builder(raw_animation));
   ASSERT_TRUE(animation);
 
   // Empty cache by default
   SamplingCache cache;
 
-  ozz::math::SoaTransform output[7];
+  vox::math::SoaTransform output[7];
 
   SamplingJob job;
   job.animation = animation.get();

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -28,7 +28,7 @@
 #include "offline/animation/raw_animation.h"
 #include "runtime/animation/skeleton.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -39,7 +39,7 @@ namespace {
 // Implements key frames' time range and ordering checks.
 // See AnimationBuilder::Create for more details.
 template <typename _Key>
-static bool ValidateTrack(const typename ozz::vector<_Key>& _track,
+static bool ValidateTrack(const typename vox::vector<_Key>& _track,
                           float _duration) {
   float previous_time = -1.f;
   for (size_t k = 0; k < _track.size(); ++k) {
@@ -99,4 +99,4 @@ size_t RawAnimation::size() const {
 
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

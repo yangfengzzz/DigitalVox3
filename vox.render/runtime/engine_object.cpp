@@ -7,7 +7,7 @@
 
 #include "engine_object.h"
 
-namespace ozz {
+namespace vox {
 int EngineObject::_instanceIdCounter = 0;
 
 int EngineObject::getInstanceId(){

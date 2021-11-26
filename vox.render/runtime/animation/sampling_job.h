@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_SAMPLING_JOB_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_SAMPLING_JOB_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_SAMPLING_JOB_H_
+#define VOX_VOX_ANIMATION_RUNTIME_SAMPLING_JOB_H_
 
 #include "platform.h"
 #include "span.h"
 
-namespace ozz {
+namespace vox {
 
 // Forward declaration of math structures.
 namespace math {
@@ -89,7 +89,7 @@ struct SamplingJob {
   // then remaining SoaTransform are left unchanged.
   // If there are more joints in the animation, then the last joints are not
   // sampled.
-  span<ozz::math::SoaTransform> output;
+  span<vox::math::SoaTransform> output;
 };
 
 namespace internal {
@@ -177,5 +177,5 @@ class SamplingCache {
   uint8_t* outdated_scales_;
 };
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_SAMPLING_JOB_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_SAMPLING_JOB_H_

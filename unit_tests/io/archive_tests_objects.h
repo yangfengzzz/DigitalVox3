@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,23 +25,23 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_TEST_BASE_IO_ARCHIVE_TESTS_OBJECTS_H_
-#define OZZ_TEST_BASE_IO_ARCHIVE_TESTS_OBJECTS_H_
+#ifndef VOX_TEST_BASE_IO_ARCHIVE_TESTS_OBJECTS_H_
+#define VOX_TEST_BASE_IO_ARCHIVE_TESTS_OBJECTS_H_
 
 #include "io/archive_traits.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 class OArchive;
 class IArchive;
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox
 
 struct Intrusive {
   explicit Intrusive(int32_t _i = 12) : i(_i) {}
-  void Save(ozz::io::OArchive& _archive) const;
-  void Load(ozz::io::IArchive& _archive, uint32_t _version);
+  void Save(vox::io::OArchive& _archive) const;
+  void Load(vox::io::IArchive& _archive, uint32_t _version);
   int32_t i;
 };
 
@@ -49,13 +49,13 @@ struct Extrusive {
   uint64_t i;
 };
 
-namespace ozz {
+namespace vox {
 namespace io {
 // Give Intrusive type a version.
-OZZ_IO_TYPE_VERSION(46, Intrusive)
+VOX_IO_TYPE_VERSION(46, Intrusive)
 
 // Extrusive is not versionable.
-OZZ_IO_TYPE_NOT_VERSIONABLE(Extrusive)
+VOX_IO_TYPE_NOT_VERSIONABLE(Extrusive)
 
 // Specializes Extrusive type external Save and Load functions.
 template <>
@@ -65,26 +65,26 @@ struct Extern<Extrusive> {
                    uint32_t _version);
 };
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox
 
 class Tagged1 {
  public:
-  void Save(ozz::io::OArchive& _archive) const;
-  void Load(ozz::io::IArchive& _archive, uint32_t _version);
+  void Save(vox::io::OArchive& _archive) const;
+  void Load(vox::io::IArchive& _archive, uint32_t _version);
 };
 
 class Tagged2 {
  public:
-  void Save(ozz::io::OArchive& _archive) const;
-  void Load(ozz::io::IArchive& _archive, uint32_t _version);
+  void Save(vox::io::OArchive& _archive) const;
+  void Load(vox::io::IArchive& _archive, uint32_t _version);
 };
 
-namespace ozz {
+namespace vox {
 namespace io {
-OZZ_IO_TYPE_NOT_VERSIONABLE(Tagged1)
-OZZ_IO_TYPE_TAG("tagged1", Tagged1)
-OZZ_IO_TYPE_NOT_VERSIONABLE(Tagged2)
-OZZ_IO_TYPE_TAG("tagged2", Tagged2)
+VOX_IO_TYPE_NOT_VERSIONABLE(Tagged1)
+VOX_IO_TYPE_TAG("tagged1", Tagged1)
+VOX_IO_TYPE_NOT_VERSIONABLE(Tagged2)
+VOX_IO_TYPE_TAG("tagged2", Tagged2)
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_TEST_BASE_IO_ARCHIVE_TESTS_OBJECTS_H_
+}  // namespace vox
+#endif  // VOX_TEST_BASE_IO_ARCHIVE_TESTS_OBJECTS_H_

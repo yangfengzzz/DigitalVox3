@@ -882,7 +882,7 @@ struct _RTL_CRITICAL_SECTION;
 // this macro to 0 to prevent Google Test from using tuple (any
 // feature depending on tuple with be disabled in this mode).
 
-// ozz(gblanc): Disables tr1/tuple if it's not already specified
+// vox(gblanc): Disables tr1/tuple if it's not already specified
 #ifndef GTEST_HAS_TR1_TUPLE
 # define GTEST_HAS_TR1_TUPLE 0
 #endif  // GTEST_HAS_TR1_TUPLE

@@ -13,7 +13,7 @@
 #include "layer.h"
 #include "transform.h"
 
-namespace ozz {
+namespace vox {
 /**
  * Entity, be used as components container.
  */

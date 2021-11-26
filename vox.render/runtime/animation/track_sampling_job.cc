@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,7 +32,7 @@
 #include <algorithm>
 #include <cassert>
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace internal {
 
@@ -101,4 +101,4 @@ template struct TrackSamplingJob<Float4Track>;
 template struct TrackSamplingJob<QuaternionTrack>;
 }  // namespace internal
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

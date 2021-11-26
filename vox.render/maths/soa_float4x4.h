@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_SOA_FLOAT4X4_H_
-#define OZZ_OZZ_BASE_MATHS_SOA_FLOAT4X4_H_
+#ifndef VOX_VOX_BASE_MATHS_SOA_FLOAT4X4_H_
+#define VOX_VOX_BASE_MATHS_SOA_FLOAT4X4_H_
 
 #include <cassert>
 
@@ -34,7 +34,7 @@
 #include "maths/soa_quaternion.h"
 #include "platform.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 
 // Declare the 4x4 soa matrix type. Uses the column major convention where the
@@ -48,7 +48,7 @@ struct SoaFloat4x4 {
   SoaFloat4 cols[4];
 
   // Returns the identity matrix.
-  static OZZ_INLINE SoaFloat4x4 identity() {
+  static VOX_INLINE SoaFloat4x4 identity() {
     const SimdFloat4 zero = simd_float4::zero();
     const SimdFloat4 one = simd_float4::one();
     SoaFloat4x4 ret = {{{one, zero, zero, zero},
@@ -60,7 +60,7 @@ struct SoaFloat4x4 {
 
   // Returns a scaling matrix that scales along _v.
   // _v.w is ignored.
-  static OZZ_INLINE SoaFloat4x4 Scaling(const SoaFloat4& _v) {
+  static VOX_INLINE SoaFloat4x4 Scaling(const SoaFloat4& _v) {
     const SimdFloat4 zero = simd_float4::zero();
     const SimdFloat4 one = simd_float4::one();
     const SoaFloat4x4 ret = {{{_v.x, zero, zero, zero},
@@ -72,7 +72,7 @@ struct SoaFloat4x4 {
 
   // Returns the rotation matrix built from quaternion defined by x, y, z and w
   // components of _v.
-  static OZZ_INLINE SoaFloat4x4 FromQuaternion(const SoaQuaternion& _q) {
+  static VOX_INLINE SoaFloat4x4 FromQuaternion(const SoaQuaternion& _q) {
     assert(AreAllTrue(IsNormalizedEst(_q)));
 
     const SimdFloat4 zero = simd_float4::zero();
@@ -99,7 +99,7 @@ struct SoaFloat4x4 {
 
   // Returns the affine transformation matrix built from split translation,
   // rotation (quaternion) and scale.
-  static OZZ_INLINE SoaFloat4x4 FromAffine(const SoaFloat3& _translation,
+  static VOX_INLINE SoaFloat4x4 FromAffine(const SoaFloat3& _translation,
                                            const SoaQuaternion& _quaternion,
                                            const SoaFloat3& _scale) {
     assert(AreAllTrue(IsNormalizedEst(_quaternion)));
@@ -131,7 +131,7 @@ struct SoaFloat4x4 {
 };
 
 // Returns the transpose of matrix _m.
-OZZ_INLINE SoaFloat4x4 Transpose(const SoaFloat4x4& _m) {
+VOX_INLINE SoaFloat4x4 Transpose(const SoaFloat4x4& _m) {
   const SoaFloat4x4 ret = {
       {{_m.cols[0].x, _m.cols[1].x, _m.cols[2].x, _m.cols[3].x},
        {_m.cols[0].y, _m.cols[1].y, _m.cols[2].y, _m.cols[3].y},
@@ -144,7 +144,7 @@ OZZ_INLINE SoaFloat4x4 Transpose(const SoaFloat4x4& _m) {
 // If _invertible is not nullptr, each component will be set to true if its
 // respective matrix is invertible. If _invertible is nullptr, then an assert is
 // triggered in case any of the 4 matrices isn't invertible.
-OZZ_INLINE SoaFloat4x4 Invert(const SoaFloat4x4& _m,
+VOX_INLINE SoaFloat4x4 Invert(const SoaFloat4x4& _m,
                               SimdInt4* _invertible = nullptr) {
   const SoaFloat4* cols = _m.cols;
   const SimdFloat4 a00 = cols[2].z * cols[3].w - cols[3].z * cols[2].w;
@@ -208,7 +208,7 @@ OZZ_INLINE SoaFloat4x4 Invert(const SoaFloat4x4& _m,
 
 // Scales matrix _m along the axis defined by _v components.
 // _v.w is ignored.
-OZZ_INLINE SoaFloat4x4 Scale(const SoaFloat4x4& _m, const SoaFloat4& _v) {
+VOX_INLINE SoaFloat4x4 Scale(const SoaFloat4x4& _m, const SoaFloat4& _v) {
   const SoaFloat4x4 ret = {{{_m.cols[0].x * _v.x, _m.cols[0].y * _v.x,
                              _m.cols[0].z * _v.x, _m.cols[0].w * _v.x},
                             {_m.cols[1].x * _v.y, _m.cols[1].y * _v.y,
@@ -219,12 +219,12 @@ OZZ_INLINE SoaFloat4x4 Scale(const SoaFloat4x4& _m, const SoaFloat4& _v) {
   return ret;
 }
 }  // namespace math
-}  // namespace ozz
+}  // namespace vox
 
 // Computes the multiplication of matrix Float4x4 and vector  _v.
-OZZ_INLINE ozz::math::SoaFloat4 operator*(const ozz::math::SoaFloat4x4& _m,
-                                          const ozz::math::SoaFloat4& _v) {
-  const ozz::math::SoaFloat4 ret = {
+VOX_INLINE vox::math::SoaFloat4 operator*(const vox::math::SoaFloat4x4& _m,
+                                          const vox::math::SoaFloat4& _v) {
+  const vox::math::SoaFloat4 ret = {
       _m.cols[0].x * _v.x + _m.cols[1].x * _v.y + _m.cols[2].x * _v.z +
           _m.cols[3].x * _v.w,
       _m.cols[0].y * _v.x + _m.cols[1].y * _v.y + _m.cols[2].y * _v.z +
@@ -237,17 +237,17 @@ OZZ_INLINE ozz::math::SoaFloat4 operator*(const ozz::math::SoaFloat4x4& _m,
 }
 
 // Computes the multiplication of two matrices _a and _b.
-OZZ_INLINE ozz::math::SoaFloat4x4 operator*(const ozz::math::SoaFloat4x4& _a,
-                                            const ozz::math::SoaFloat4x4& _b) {
-  const ozz::math::SoaFloat4x4 ret = {
+VOX_INLINE vox::math::SoaFloat4x4 operator*(const vox::math::SoaFloat4x4& _a,
+                                            const vox::math::SoaFloat4x4& _b) {
+  const vox::math::SoaFloat4x4 ret = {
       {_a * _b.cols[0], _a * _b.cols[1], _a * _b.cols[2], _a * _b.cols[3]}};
   return ret;
 }
 
 // Computes the per element addition of two matrices _a and _b.
-OZZ_INLINE ozz::math::SoaFloat4x4 operator+(const ozz::math::SoaFloat4x4& _a,
-                                            const ozz::math::SoaFloat4x4& _b) {
-  const ozz::math::SoaFloat4x4 ret = {
+VOX_INLINE vox::math::SoaFloat4x4 operator+(const vox::math::SoaFloat4x4& _a,
+                                            const vox::math::SoaFloat4x4& _b) {
+  const vox::math::SoaFloat4x4 ret = {
       {{_a.cols[0].x + _b.cols[0].x, _a.cols[0].y + _b.cols[0].y,
         _a.cols[0].z + _b.cols[0].z, _a.cols[0].w + _b.cols[0].w},
        {_a.cols[1].x + _b.cols[1].x, _a.cols[1].y + _b.cols[1].y,
@@ -260,9 +260,9 @@ OZZ_INLINE ozz::math::SoaFloat4x4 operator+(const ozz::math::SoaFloat4x4& _a,
 }
 
 // Computes the per element subtraction of two matrices _a and _b.
-OZZ_INLINE ozz::math::SoaFloat4x4 operator-(const ozz::math::SoaFloat4x4& _a,
-                                            const ozz::math::SoaFloat4x4& _b) {
-  const ozz::math::SoaFloat4x4 ret = {
+VOX_INLINE vox::math::SoaFloat4x4 operator-(const vox::math::SoaFloat4x4& _a,
+                                            const vox::math::SoaFloat4x4& _b) {
+  const vox::math::SoaFloat4x4 ret = {
       {{_a.cols[0].x - _b.cols[0].x, _a.cols[0].y - _b.cols[0].y,
         _a.cols[0].z - _b.cols[0].z, _a.cols[0].w - _b.cols[0].w},
        {_a.cols[1].x - _b.cols[1].x, _a.cols[1].y - _b.cols[1].y,
@@ -273,4 +273,4 @@ OZZ_INLINE ozz::math::SoaFloat4x4 operator-(const ozz::math::SoaFloat4x4& _a,
         _a.cols[3].z - _b.cols[3].z, _a.cols[3].w - _b.cols[3].w}}};
   return ret;
 }
-#endif  // OZZ_OZZ_BASE_MATHS_SOA_FLOAT4X4_H_
+#endif  // VOX_VOX_BASE_MATHS_SOA_FLOAT4X4_H_

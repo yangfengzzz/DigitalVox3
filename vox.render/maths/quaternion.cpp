@@ -8,7 +8,7 @@
 #include "quaternion.h"
 #include "matrix3x3.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 Quaternion Quaternion::rotationMatrix3x3(const Matrix3x3& m){
     Quaternion out;

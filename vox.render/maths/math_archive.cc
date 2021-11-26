@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -36,7 +36,7 @@
 #include "maths/transform.h"
 #include "maths/vec_float.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 void Extern<math::Float2>::Save(OArchive& _archive, const math::Float2* _values,
                                 size_t _count) {
@@ -122,4 +122,4 @@ void Extern<math::RectInt>::Load(IArchive& _archive, math::RectInt* _values,
     _archive >> MakeArray(&_values->left, 4 * _count);
 }
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

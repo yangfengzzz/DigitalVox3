@@ -8,7 +8,7 @@
 #include "ray.h"
 #include "collision_util.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 Ray::Ray(std::optional<Float3> origin, std::optional<Float3> direction) {
     if (origin) {

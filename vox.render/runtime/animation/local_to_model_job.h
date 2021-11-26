@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_LOCAL_TO_MODEL_JOB_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_LOCAL_TO_MODEL_JOB_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_LOCAL_TO_MODEL_JOB_H_
+#define VOX_VOX_ANIMATION_RUNTIME_LOCAL_TO_MODEL_JOB_H_
 
 #include "platform.h"
 #include "span.h"
 
-namespace ozz {
+namespace vox {
 
 // Forward declaration math structures.
 namespace math {
@@ -82,10 +82,10 @@ struct LocalToModelJob {
   // The root matrix will multiply to every model space matrices, default nullptr
   // means an identity matrix. This can be used to directly compute world-space
   // transforms for example.
-  const ozz::math::Float4x4* root;
+  const vox::math::Float4x4* root;
 
   // Defines "from" which joint the local-to-model conversion should start.
-  // Default value is ozz::Skeleton::kNoParent, meaning the whole hierarchy is
+  // Default value is vox::Skeleton::kNoParent, meaning the whole hierarchy is
   // updated. This parameter can be used to optimize update by limiting
   // conversion to part of the joint hierarchy. Note that "from" parent should
   // be a valid matrix, as it is going to be used as part of "from" joint
@@ -95,7 +95,7 @@ struct LocalToModelJob {
   // Defines "to" which joint the local-to-model conversion should go, "to"
   // included. Update will end before "to" joint is reached if "to" is not part
   // of the hierarchy starting from "from". Default value is
-  // ozz::animation::Skeleton::kMaxJoints, meaning the hierarchy (starting from
+  // vox::animation::Skeleton::kMaxJoints, meaning the hierarchy (starting from
   // "from") is updated to the last joint.
   int to;
 
@@ -108,13 +108,13 @@ struct LocalToModelJob {
   bool from_excluded;
 
   // The input range that store local transforms.
-  span<const ozz::math::SoaTransform> input;
+  span<const vox::math::SoaTransform> input;
 
   // Job output.
 
   // The output range to be filled with model-space matrices.
-  span<ozz::math::Float4x4> output;
+  span<vox::math::Float4x4> output;
 };
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_LOCAL_TO_MODEL_JOB_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_RUNTIME_LOCAL_TO_MODEL_JOB_H_

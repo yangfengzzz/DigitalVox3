@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_MAP_H_
-#define OZZ_OZZ_BASE_CONTAINERS_MAP_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_MAP_H_
+#define VOX_VOX_BASE_CONTAINERS_MAP_H_
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -42,11 +42,11 @@
 
 #include "containers/std_allocator.h"
 
-namespace ozz {
-// Redirects std::map to ozz::map in order to replace std default allocator by
-// ozz::StdAllocator.
+namespace vox {
+// Redirects std::map to vox::map in order to replace std default allocator by
+// vox::StdAllocator.
 template <class _Key, class _Ty, class _Pred = std::less<_Key>,
-          class _Allocator = ozz::StdAllocator<std::pair<const _Key, _Ty>>>
+          class _Allocator = vox::StdAllocator<std::pair<const _Key, _Ty>>>
 using map = std::map<_Key, _Ty, _Pred, _Allocator>;
 
 // Implements a string comparator that can be used by std algorithm like maps.
@@ -58,13 +58,13 @@ struct str_less {
 
 // Specializes std::map to use c-string as a key.
 template <class _Ty, class _Allocator =
-                         ozz::StdAllocator<std::pair<const char* const, _Ty>>>
+                         vox::StdAllocator<std::pair<const char* const, _Ty>>>
 using cstring_map = std::map<const char*, _Ty, str_less, _Allocator>;
 
-// Redirects std::multimap to ozz::MultiMap in order to replace std default
-// allocator by ozz::StdAllocator.
+// Redirects std::multimap to vox::MultiMap in order to replace std default
+// allocator by vox::StdAllocator.
 template <class _Key, class _Ty, class _Pred = std::less<_Key>,
-          class _Allocator = ozz::StdAllocator<std::pair<const _Key, _Ty>>>
+          class _Allocator = vox::StdAllocator<std::pair<const _Key, _Ty>>>
 using multimap = std::multimap<_Key, _Ty, _Pred, _Allocator>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_MAP_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_MAP_H_

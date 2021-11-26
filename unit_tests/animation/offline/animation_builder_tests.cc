@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -39,9 +39,9 @@
 #include "runtime/animation/sampling_job.h"
 #include "runtime/animation/skeleton.h"
 
-using ozz::animation::Animation;
-using ozz::animation::offline::AnimationBuilder;
-using ozz::animation::offline::RawAnimation;
+using vox::animation::Animation;
+using vox::animation::offline::AnimationBuilder;
+using vox::animation::offline::RawAnimation;
 
 TEST(Error, AnimationBuilder) {
   // Instantiates a builder objects with default parameters.
@@ -70,7 +70,7 @@ TEST(Error, AnimationBuilder) {
   {  // Building an animation with too much tracks fails.
     RawAnimation raw_animation;
     raw_animation.duration = 1.f;
-    raw_animation.tracks.resize(ozz::animation::Skeleton::kMaxJoints + 1);
+    raw_animation.tracks.resize(vox::animation::Skeleton::kMaxJoints + 1);
     EXPECT_FALSE(raw_animation.Validate());
 
     // Builds animation
@@ -83,18 +83,18 @@ TEST(Error, AnimationBuilder) {
     EXPECT_TRUE(raw_animation.Validate());
 
     // Builds animation
-    ozz::unique_ptr<Animation> anim(builder(raw_animation));
+    vox::unique_ptr<Animation> anim(builder(raw_animation));
     EXPECT_TRUE(anim);
   }
 
   {  // Building an animation with max joints succeeds.
     RawAnimation raw_animation;
-    raw_animation.tracks.resize(ozz::animation::Skeleton::kMaxJoints);
-    EXPECT_EQ(raw_animation.num_tracks(), ozz::animation::Skeleton::kMaxJoints);
+    raw_animation.tracks.resize(vox::animation::Skeleton::kMaxJoints);
+    EXPECT_EQ(raw_animation.num_tracks(), vox::animation::Skeleton::kMaxJoints);
     EXPECT_TRUE(raw_animation.Validate());
 
     // Builds animation
-    ozz::unique_ptr<Animation> anim(builder(raw_animation));
+    vox::unique_ptr<Animation> anim(builder(raw_animation));
     EXPECT_TRUE(anim);
   }
 }
@@ -109,9 +109,9 @@ TEST(Build, AnimationBuilder) {
     raw_animation.tracks.resize(1);
 
     // Adds 2 unordered keys
-    RawAnimation::TranslationKey first_key = {.8f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey first_key = {.8f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(first_key);
-    RawAnimation::TranslationKey second_key = {.2f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey second_key = {.2f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(second_key);
 
     // Builds animation
@@ -124,7 +124,7 @@ TEST(Build, AnimationBuilder) {
     raw_animation.tracks.resize(1);
 
     // Adds a key with a time greater than animation duration.
-    RawAnimation::TranslationKey first_key = {2.f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey first_key = {2.f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(first_key);
 
     // Builds animation
@@ -137,9 +137,9 @@ TEST(Build, AnimationBuilder) {
     raw_animation.tracks.resize(2);
 
     // Adds 2 unsorted keys.
-    RawAnimation::TranslationKey first_key = {0.7f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey first_key = {0.7f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(first_key);
-    RawAnimation::TranslationKey second_key = {0.1f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey second_key = {0.1f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(second_key);
 
     // Builds animation
@@ -152,7 +152,7 @@ TEST(Build, AnimationBuilder) {
     raw_animation.tracks.resize(2);
 
     // Adds 2 unsorted keys.
-    RawAnimation::TranslationKey key = {0.7f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey key = {0.7f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(key);
     raw_animation.tracks[0].translations.push_back(key);
 
@@ -166,7 +166,7 @@ TEST(Build, AnimationBuilder) {
     raw_animation.tracks.resize(46);
 
     // Builds animation
-    ozz::unique_ptr<Animation> anim(builder(raw_animation));
+    vox::unique_ptr<Animation> anim(builder(raw_animation));
     EXPECT_TRUE(anim);
     EXPECT_EQ(anim->duration(), 46.f);
     EXPECT_EQ(anim->num_tracks(), 46);
@@ -177,11 +177,11 @@ TEST(Build, AnimationBuilder) {
     raw_animation.duration = 46.f;
     raw_animation.tracks.resize(1);
 
-    RawAnimation::TranslationKey first_key = {0.7f, ozz::math::Float3::zero()};
+    RawAnimation::TranslationKey first_key = {0.7f, vox::math::Float3::zero()};
     raw_animation.tracks[0].translations.push_back(first_key);
 
     // Builds animation
-    ozz::unique_ptr<Animation> anim(builder(raw_animation));
+    vox::unique_ptr<Animation> anim(builder(raw_animation));
     EXPECT_TRUE(anim);
     EXPECT_EQ(anim->duration(), 46.f);
     EXPECT_EQ(anim->num_tracks(), 1);
@@ -198,7 +198,7 @@ TEST(Name, AnimationBuilder) {
     raw_animation.tracks.resize(46);
 
     // Builds animation
-    ozz::unique_ptr<Animation> anim(builder(raw_animation));
+    vox::unique_ptr<Animation> anim(builder(raw_animation));
     EXPECT_TRUE(anim);
 
     // Should
@@ -212,7 +212,7 @@ TEST(Name, AnimationBuilder) {
     raw_animation.name = "46";
 
     // Builds animation
-    ozz::unique_ptr<Animation> anim(builder(raw_animation));
+    vox::unique_ptr<Animation> anim(builder(raw_animation));
     EXPECT_TRUE(anim);
 
     // Should
@@ -246,62 +246,62 @@ TEST(Sort, AnimationBuilder) {
     // 3 - 3  7 10 13    15
 
     RawAnimation::TranslationKey a = {0.f * raw_animation.duration,
-                                      ozz::math::Float3(1.f, 0.f, 0.f)};
+                                      vox::math::Float3(1.f, 0.f, 0.f)};
     raw_animation.tracks[0].translations.push_back(a);
     RawAnimation::TranslationKey b = {.4f * raw_animation.duration,
-                                      ozz::math::Float3(3.f, 0.f, 0.f)};
+                                      vox::math::Float3(3.f, 0.f, 0.f)};
     raw_animation.tracks[0].translations.push_back(b);
 
     RawAnimation::TranslationKey c = {0.f * raw_animation.duration,
-                                      ozz::math::Float3(2.f, 0.f, 0.f)};
+                                      vox::math::Float3(2.f, 0.f, 0.f)};
     raw_animation.tracks[1].translations.push_back(c);
     RawAnimation::TranslationKey d = {0.2f * raw_animation.duration,
-                                      ozz::math::Float3(6.f, 0.f, 0.f)};
+                                      vox::math::Float3(6.f, 0.f, 0.f)};
     raw_animation.tracks[1].translations.push_back(d);
     RawAnimation::TranslationKey e = {0.4f * raw_animation.duration,
-                                      ozz::math::Float3(8.f, 0.f, 0.f)};
+                                      vox::math::Float3(8.f, 0.f, 0.f)};
     raw_animation.tracks[1].translations.push_back(e);
 
     RawAnimation::TranslationKey f = {0.f * raw_animation.duration,
-                                      ozz::math::Float3(12.f, 0.f, 0.f)};
+                                      vox::math::Float3(12.f, 0.f, 0.f)};
     raw_animation.tracks[2].translations.push_back(f);
     RawAnimation::TranslationKey g = {.2f * raw_animation.duration,
-                                      ozz::math::Float3(11.f, 0.f, 0.f)};
+                                      vox::math::Float3(11.f, 0.f, 0.f)};
     raw_animation.tracks[2].translations.push_back(g);
     RawAnimation::TranslationKey h = {.6f * raw_animation.duration,
-                                      ozz::math::Float3(9.f, 0.f, 0.f)};
+                                      vox::math::Float3(9.f, 0.f, 0.f)};
     raw_animation.tracks[2].translations.push_back(h);
     RawAnimation::TranslationKey i = {.8f * raw_animation.duration,
-                                      ozz::math::Float3(7.f, 0.f, 0.f)};
+                                      vox::math::Float3(7.f, 0.f, 0.f)};
     raw_animation.tracks[2].translations.push_back(i);
     RawAnimation::TranslationKey j = {1.f * raw_animation.duration,
-                                      ozz::math::Float3(5.f, 0.f, 0.f)};
+                                      vox::math::Float3(5.f, 0.f, 0.f)};
     raw_animation.tracks[2].translations.push_back(j);
 
     RawAnimation::TranslationKey k = {0.f * raw_animation.duration,
-                                      ozz::math::Float3(1.f, 0.f, 0.f)};
+                                      vox::math::Float3(1.f, 0.f, 0.f)};
     raw_animation.tracks[3].translations.push_back(k);
     RawAnimation::TranslationKey l = {.2f * raw_animation.duration,
-                                      ozz::math::Float3(2.f, 0.f, 0.f)};
+                                      vox::math::Float3(2.f, 0.f, 0.f)};
     raw_animation.tracks[3].translations.push_back(l);
     RawAnimation::TranslationKey m = {.4f * raw_animation.duration,
-                                      ozz::math::Float3(3.f, 0.f, 0.f)};
+                                      vox::math::Float3(3.f, 0.f, 0.f)};
     raw_animation.tracks[3].translations.push_back(m);
     RawAnimation::TranslationKey n = {.6f * raw_animation.duration,
-                                      ozz::math::Float3(4.f, 0.f, 0.f)};
+                                      vox::math::Float3(4.f, 0.f, 0.f)};
     raw_animation.tracks[3].translations.push_back(n);
 
     // Builds animation
-    ozz::unique_ptr<Animation> animation(builder(raw_animation));
+    vox::unique_ptr<Animation> animation(builder(raw_animation));
     ASSERT_TRUE(animation);
 
     // Duration must be maintained.
     EXPECT_EQ(animation->duration(), raw_animation.duration);
 
     // Needs to sample to test the animation.
-    ozz::animation::SamplingJob job;
-    ozz::animation::SamplingCache cache(1);
-    ozz::math::SoaTransform output[1];
+    vox::animation::SamplingJob job;
+    vox::animation::SamplingCache cache(1);
+    vox::math::SoaTransform output[1];
     job.animation = animation.get();
     job.cache = &cache;
     job.output = output;

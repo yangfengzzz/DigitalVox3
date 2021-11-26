@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,12 +32,12 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::SoaFloat3;
-using ozz::math::SoaFloat4;
-using ozz::math::SoaFloat4x4;
-using ozz::math::SoaQuaternion;
+using vox::math::SoaFloat3;
+using vox::math::SoaFloat4;
+using vox::math::SoaFloat4x4;
+using vox::math::SoaQuaternion;
 
-TEST(SoaFloat4x4Constant, ozz_soa_math) {
+TEST(SoaFloat4x4Constant, vox_soa_math) {
     const SoaFloat4x4 identity = SoaFloat4x4::identity();
     EXPECT_SOAFLOAT4x4_EQ(identity, 1.f, 1.f, 1.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f,
                           0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
@@ -47,62 +47,62 @@ TEST(SoaFloat4x4Constant, ozz_soa_math) {
                           0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f);
 }
 
-TEST(SoaFloat4x4Arithmetic, ozz_soa_math) {
+TEST(SoaFloat4x4Arithmetic, vox_soa_math) {
     const SoaFloat4x4 m0 = {
-        {{ozz::math::simd_float4::Load(0.f, 1.f, 0.f, 0.f),
-            ozz::math::simd_float4::Load(1.f, 0.f, 0.f, 0.f),
-            ozz::math::simd_float4::Load(2.f, 0.f, 0.f, -1.f),
-            ozz::math::simd_float4::Load(3.f, 0.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(4.f, 0.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(5.f, 1.f, 0.f, 1.f),
-                ozz::math::simd_float4::Load(6.f, 0.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(7.f, 0.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(8.f, 0.f, 0.f, 1.f),
-                ozz::math::simd_float4::Load(9.f, 0.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(10.f, 1.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(11.f, 0.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(12.f, 0.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(13.f, 0.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(14.f, 0.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(15.f, 1.f, 0.f, 1.f)}}};
+        {{vox::math::simd_float4::Load(0.f, 1.f, 0.f, 0.f),
+            vox::math::simd_float4::Load(1.f, 0.f, 0.f, 0.f),
+            vox::math::simd_float4::Load(2.f, 0.f, 0.f, -1.f),
+            vox::math::simd_float4::Load(3.f, 0.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(4.f, 0.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(5.f, 1.f, 0.f, 1.f),
+                vox::math::simd_float4::Load(6.f, 0.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(7.f, 0.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(8.f, 0.f, 0.f, 1.f),
+                vox::math::simd_float4::Load(9.f, 0.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(10.f, 1.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(11.f, 0.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(12.f, 0.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(13.f, 0.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(14.f, 0.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(15.f, 1.f, 0.f, 1.f)}}};
     const SoaFloat4x4 m1 = {
-        {{ozz::math::simd_float4::Load(-0.f, 0.f, 0.f, 1.f),
-            ozz::math::simd_float4::Load(-1.f, -1.f, 0.f, 0.f),
-            ozz::math::simd_float4::Load(-2.f, 2.f, -1.f, 0.f),
-            ozz::math::simd_float4::Load(-3.f, 3.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(-4.f, -4.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(-5.f, 5.f, 1.f, 1.f),
-                ozz::math::simd_float4::Load(-6.f, 6.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(-7.f, -7.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(-8.f, 8.f, 1.f, 0.f),
-                ozz::math::simd_float4::Load(-9.f, -9.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(-10.f, -10.f, 0.f, 1.f),
-                ozz::math::simd_float4::Load(-11.f, 11.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(-12.f, -12.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(-13.f, 13.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(-14.f, -14.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(-15.f, 15.f, 1.f, 1.f)}}};
+        {{vox::math::simd_float4::Load(-0.f, 0.f, 0.f, 1.f),
+            vox::math::simd_float4::Load(-1.f, -1.f, 0.f, 0.f),
+            vox::math::simd_float4::Load(-2.f, 2.f, -1.f, 0.f),
+            vox::math::simd_float4::Load(-3.f, 3.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(-4.f, -4.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(-5.f, 5.f, 1.f, 1.f),
+                vox::math::simd_float4::Load(-6.f, 6.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(-7.f, -7.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(-8.f, 8.f, 1.f, 0.f),
+                vox::math::simd_float4::Load(-9.f, -9.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(-10.f, -10.f, 0.f, 1.f),
+                vox::math::simd_float4::Load(-11.f, 11.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(-12.f, -12.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(-13.f, 13.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(-14.f, -14.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(-15.f, 15.f, 1.f, 1.f)}}};
     const SoaFloat4x4 m2 = {
-        {{ozz::math::simd_float4::Load(2.f, 0.f, 0.f, 1.f),
-            ozz::math::simd_float4::Load(0.f, -1.f, 0.f, 0.f),
-            ozz::math::simd_float4::Load(0.f, 2.f, -1.f, 0.f),
-            ozz::math::simd_float4::Load(0.f, 3.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(0.f, -4.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(0.f, 5.f, 1.f, 1.f),
-                ozz::math::simd_float4::Load(-2.f, 6.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(0.f, -7.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(0.f, 8.f, 1.f, 0.f),
-                ozz::math::simd_float4::Load(3.f, -9.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(0.f, -10.f, 0.f, 1.f),
-                ozz::math::simd_float4::Load(0.f, 11.f, 0.f, 0.f)},
-            {ozz::math::simd_float4::Load(0.f, -12.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(46.f, 13.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(12.f, -14.f, 0.f, 0.f),
-                ozz::math::simd_float4::Load(1.f, 15.f, 1.f, 1.f)}}};
-    const SoaFloat4 v = {ozz::math::simd_float4::Load(0.f, 1.f, -2.f, 3.f),
-        ozz::math::simd_float4::Load(-1.f, 2.f, 5.f, 46.f),
-        ozz::math::simd_float4::Load(-2.f, 3.f, 7.f, -1.f),
-        ozz::math::simd_float4::Load(-3.f, 4.f, 0.f, 1.f)};
+        {{vox::math::simd_float4::Load(2.f, 0.f, 0.f, 1.f),
+            vox::math::simd_float4::Load(0.f, -1.f, 0.f, 0.f),
+            vox::math::simd_float4::Load(0.f, 2.f, -1.f, 0.f),
+            vox::math::simd_float4::Load(0.f, 3.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(0.f, -4.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(0.f, 5.f, 1.f, 1.f),
+                vox::math::simd_float4::Load(-2.f, 6.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(0.f, -7.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(0.f, 8.f, 1.f, 0.f),
+                vox::math::simd_float4::Load(3.f, -9.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(0.f, -10.f, 0.f, 1.f),
+                vox::math::simd_float4::Load(0.f, 11.f, 0.f, 0.f)},
+            {vox::math::simd_float4::Load(0.f, -12.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(46.f, 13.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(12.f, -14.f, 0.f, 0.f),
+                vox::math::simd_float4::Load(1.f, 15.f, 1.f, 1.f)}}};
+    const SoaFloat4 v = {vox::math::simd_float4::Load(0.f, 1.f, -2.f, 3.f),
+        vox::math::simd_float4::Load(-1.f, 2.f, 5.f, 46.f),
+        vox::math::simd_float4::Load(-2.f, 3.f, 7.f, -1.f),
+        vox::math::simd_float4::Load(-3.f, 4.f, 0.f, 1.f)};
     const SoaFloat4 mul_vector = m0 * v;
     EXPECT_SOAFLOAT4_EQ(mul_vector, -56.f, 1.f, 0.f, -1.f, -62.f, 2.f, 0.f, 46,
                         -68.f, 3.f, 0.f, -3.f, -74.f, 4.f, 0.f, 1.f);
@@ -168,7 +168,7 @@ TEST(SoaFloat4x4Arithmetic, ozz_soa_math) {
     // EXPECT_ASSERTION(Invert(m0), "Matrix is not invertible");
     
     // Invertible
-    ozz::math::SimdInt4 invertible;
+    vox::math::SimdInt4 invertible;
     EXPECT_SOAFLOAT4x4_EQ(
                           Invert(m2, &invertible), .5f, .216667f, 0.f, 1.f, 0.f, 2.75f, 0.f, 0.f,
                           0.f, 1.6f, 1.f, 0.f, 0.f, .066666f, 0.f, 0.f, 0.f, .2f, 0.f, 0.f, 0.f,
@@ -181,7 +181,7 @@ TEST(SoaFloat4x4Arithmetic, ozz_soa_math) {
     // Non invertible
     EXPECT_ASSERTION(Invert(m0), "Matrix is not invertible");
     
-    ozz::math::SimdInt4 not_invertible;
+    vox::math::SimdInt4 not_invertible;
     EXPECT_SOAFLOAT4x4_EQ(
                           Invert(m0, &not_invertible), 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
                           0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 1.f,
@@ -191,28 +191,28 @@ TEST(SoaFloat4x4Arithmetic, ozz_soa_math) {
     EXPECT_SIMDINT_EQ(not_invertible, 0, 0xffffffff, 0, 0xffffffff);
 }
 
-TEST(SoaFloat4x4Scale, ozz_soa_math) {
+TEST(SoaFloat4x4Scale, vox_soa_math) {
     const SoaFloat4x4 m0 = {
-        {{ozz::math::simd_float4::Load(0.f, 1.f, 0.f, 0.f),
-            ozz::math::simd_float4::Load(1.f, 0.f, -1.f, 0.f),
-            ozz::math::simd_float4::Load(2.f, 0.f, 2.f, -1.f),
-            ozz::math::simd_float4::Load(3.f, 0.f, 3.f, 0.f)},
-            {ozz::math::simd_float4::Load(4.f, 0.f, -4.f, 0.f),
-                ozz::math::simd_float4::Load(5.f, 1.f, 5.f, 1.f),
-                ozz::math::simd_float4::Load(6.f, 0.f, 6.f, 0.f),
-                ozz::math::simd_float4::Load(7.f, 0.f, -7.f, 0.f)},
-            {ozz::math::simd_float4::Load(8.f, 0.f, 8.f, 1.f),
-                ozz::math::simd_float4::Load(9.f, 0.f, -9.f, 0.f),
-                ozz::math::simd_float4::Load(10.f, 1.f, -10.f, 0.f),
-                ozz::math::simd_float4::Load(11.f, 0.f, 11.f, 0.f)},
-            {ozz::math::simd_float4::Load(12.f, 0.f, -12.f, 0.f),
-                ozz::math::simd_float4::Load(13.f, 0.f, 13.f, 0.f),
-                ozz::math::simd_float4::Load(14.f, 0.f, -14.f, 0.f),
-                ozz::math::simd_float4::Load(15.f, 1.f, 15.f, 1.f)}}};
-    const SoaFloat4 v = {ozz::math::simd_float4::Load(0.f, 1.f, -2.f, 3.f),
-        ozz::math::simd_float4::Load(-1.f, 2.f, 5.f, 46.f),
-        ozz::math::simd_float4::Load(-2.f, 3.f, 7.f, -1.f),
-        ozz::math::simd_float4::Load(-3.f, 4.f, 0.f, 1.f)};
+        {{vox::math::simd_float4::Load(0.f, 1.f, 0.f, 0.f),
+            vox::math::simd_float4::Load(1.f, 0.f, -1.f, 0.f),
+            vox::math::simd_float4::Load(2.f, 0.f, 2.f, -1.f),
+            vox::math::simd_float4::Load(3.f, 0.f, 3.f, 0.f)},
+            {vox::math::simd_float4::Load(4.f, 0.f, -4.f, 0.f),
+                vox::math::simd_float4::Load(5.f, 1.f, 5.f, 1.f),
+                vox::math::simd_float4::Load(6.f, 0.f, 6.f, 0.f),
+                vox::math::simd_float4::Load(7.f, 0.f, -7.f, 0.f)},
+            {vox::math::simd_float4::Load(8.f, 0.f, 8.f, 1.f),
+                vox::math::simd_float4::Load(9.f, 0.f, -9.f, 0.f),
+                vox::math::simd_float4::Load(10.f, 1.f, -10.f, 0.f),
+                vox::math::simd_float4::Load(11.f, 0.f, 11.f, 0.f)},
+            {vox::math::simd_float4::Load(12.f, 0.f, -12.f, 0.f),
+                vox::math::simd_float4::Load(13.f, 0.f, 13.f, 0.f),
+                vox::math::simd_float4::Load(14.f, 0.f, -14.f, 0.f),
+                vox::math::simd_float4::Load(15.f, 1.f, 15.f, 1.f)}}};
+    const SoaFloat4 v = {vox::math::simd_float4::Load(0.f, 1.f, -2.f, 3.f),
+        vox::math::simd_float4::Load(-1.f, 2.f, 5.f, 46.f),
+        vox::math::simd_float4::Load(-2.f, 3.f, 7.f, -1.f),
+        vox::math::simd_float4::Load(-3.f, 4.f, 0.f, 1.f)};
     
     const SoaFloat4x4 scaling = SoaFloat4x4::Scaling(v);
     EXPECT_SOAFLOAT4x4_EQ(scaling, 0.f, 1.f, -2.f, 3.f, 0.f, 0.f, 0.f, 0.f, 0.f,
@@ -241,13 +241,13 @@ TEST(SoaFloat4x4Scale, ozz_soa_math) {
                           -14.f, 0.f, 15.f, 1.f, 15.f, 1.f);
 }
 
-TEST(SoaFloat4x4Rotate, ozz_soa_math) {
+TEST(SoaFloat4x4Rotate, vox_soa_math) {
 #ifndef NDEBUG
     const SoaQuaternion unormalized =
-    SoaQuaternion::Load(ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-                        ozz::math::simd_float4::Load(0.f, 0.f, 1.f, 0.f),
-                        ozz::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
-                        ozz::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f));
+    SoaQuaternion::Load(vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+                        vox::math::simd_float4::Load(0.f, 0.f, 1.f, 0.f),
+                        vox::math::simd_float4::Load(0.f, 0.f, 0.f, 0.f),
+                        vox::math::simd_float4::Load(1.f, 1.f, 1.f, 1.f));
 #endif  // NDEBUG
     EXPECT_ASSERTION(SoaFloat4x4::FromQuaternion(unormalized), "IsNormalized");
     
@@ -260,10 +260,10 @@ TEST(SoaFloat4x4Rotate, ozz_soa_math) {
                           1.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
                           0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f);
     const SoaQuaternion quaternion = SoaQuaternion::Load(
-                                                         ozz::math::simd_float4::Load(.70710677f, 0.f, 0.f, -.382683432f),
-                                                         ozz::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
-                                                         ozz::math::simd_float4::Load(.70710677f, 0.f, 0.f, 0.f),
-                                                         ozz::math::simd_float4::Load(0.f, .70710677f, 1.f, .9238795f));
+                                                         vox::math::simd_float4::Load(.70710677f, 0.f, 0.f, -.382683432f),
+                                                         vox::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
+                                                         vox::math::simd_float4::Load(.70710677f, 0.f, 0.f, 0.f),
+                                                         vox::math::simd_float4::Load(0.f, .70710677f, 1.f, .9238795f));
     const SoaFloat4x4 matrix = SoaFloat4x4::FromQuaternion(quaternion);
     EXPECT_SOAFLOAT4x4_EQ(
                           matrix, 0.f, 0.f, 1.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, -1.f, 0.f, 0.f, 0.f,
@@ -273,7 +273,7 @@ TEST(SoaFloat4x4Rotate, ozz_soa_math) {
                           0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f);
 }
 
-TEST(SoaFloat4x4Affine, ozz_soa_math) {
+TEST(SoaFloat4x4Affine, vox_soa_math) {
     const SoaFloat4x4 identity = SoaFloat4x4::FromAffine(
                                                          SoaFloat3::zero(), SoaQuaternion::identity(), SoaFloat3::one());
     EXPECT_SOAFLOAT4x4_EQ(identity, 1.f, 1.f, 1.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f,
@@ -283,18 +283,18 @@ TEST(SoaFloat4x4Affine, ozz_soa_math) {
                           1.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
                           0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f, 1.f);
     const SoaFloat3 translation =
-    SoaFloat3::Load(ozz::math::simd_float4::Load(0.f, 46.f, 7.f, -12.f),
-                    ozz::math::simd_float4::Load(0.f, 12.f, 7.f, -46.f),
-                    ozz::math::simd_float4::Load(0.f, 0.f, 7.f, 46.f));
+    SoaFloat3::Load(vox::math::simd_float4::Load(0.f, 46.f, 7.f, -12.f),
+                    vox::math::simd_float4::Load(0.f, 12.f, 7.f, -46.f),
+                    vox::math::simd_float4::Load(0.f, 0.f, 7.f, 46.f));
     const SoaFloat3 scale =
-    SoaFloat3::Load(ozz::math::simd_float4::Load(1.f, 1.f, -1.f, 0.1f),
-                    ozz::math::simd_float4::Load(1.f, 2.f, -1.f, 0.1f),
-                    ozz::math::simd_float4::Load(1.f, 3.f, -1.f, 0.1f));
+    SoaFloat3::Load(vox::math::simd_float4::Load(1.f, 1.f, -1.f, 0.1f),
+                    vox::math::simd_float4::Load(1.f, 2.f, -1.f, 0.1f),
+                    vox::math::simd_float4::Load(1.f, 3.f, -1.f, 0.1f));
     const SoaQuaternion quaternion = SoaQuaternion::Load(
-                                                         ozz::math::simd_float4::Load(.70710677f, 0.f, 0.f, -.382683432f),
-                                                         ozz::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
-                                                         ozz::math::simd_float4::Load(.70710677f, 0.f, 0.f, 0.f),
-                                                         ozz::math::simd_float4::Load(0.f, .70710677f, 1.f, .9238795f));
+                                                         vox::math::simd_float4::Load(.70710677f, 0.f, 0.f, -.382683432f),
+                                                         vox::math::simd_float4::Load(0.f, .70710677f, 0.f, 0.f),
+                                                         vox::math::simd_float4::Load(.70710677f, 0.f, 0.f, 0.f),
+                                                         vox::math::simd_float4::Load(0.f, .70710677f, 1.f, .9238795f));
     const SoaFloat4x4 matrix =
     SoaFloat4x4::FromAffine(translation, quaternion, scale);
     EXPECT_SOAFLOAT4x4_EQ(

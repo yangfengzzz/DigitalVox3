@@ -12,7 +12,7 @@
 #include <optional>
 #include "maths/vec_float.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct BoundingBox;
 

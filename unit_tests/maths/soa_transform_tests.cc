@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,9 +32,9 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::SoaTransform;
+using vox::math::SoaTransform;
 
-TEST(SoaTransformConstant, ozz_soa_math) {
+TEST(SoaTransformConstant, vox_soa_math) {
     EXPECT_SOAFLOAT3_EQ(SoaTransform::identity().translation, 0.f, 0.f, 0.f, 0.f,
                         0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f);
     EXPECT_SOAQUATERNION_EQ(SoaTransform::identity().rotation, 0.f, 0.f, 0.f, 0.f,

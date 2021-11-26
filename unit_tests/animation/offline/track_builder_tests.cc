@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -38,15 +38,15 @@
 
 #include <limits>
 
-using ozz::animation::FloatTrack;
-using ozz::animation::Float2Track;
-using ozz::animation::Float3Track;
-using ozz::animation::Float4Track;
-using ozz::animation::QuaternionTrack;
-using ozz::animation::FloatTrackSamplingJob;
-using ozz::animation::offline::RawFloatTrack;
-using ozz::animation::offline::RawTrackInterpolation;
-using ozz::animation::offline::TrackBuilder;
+using vox::animation::FloatTrack;
+using vox::animation::Float2Track;
+using vox::animation::Float3Track;
+using vox::animation::Float4Track;
+using vox::animation::QuaternionTrack;
+using vox::animation::FloatTrackSamplingJob;
+using vox::animation::offline::RawFloatTrack;
+using vox::animation::offline::RawTrackInterpolation;
+using vox::animation::offline::TrackBuilder;
 
 TEST(Default, TrackBuilder) {
   // Instantiates a builder objects with default parameters.
@@ -57,7 +57,7 @@ TEST(Default, TrackBuilder) {
     EXPECT_TRUE(raw_float_track.Validate());
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
   }
 }
@@ -119,7 +119,7 @@ TEST(Build, TrackBuilder) {
     EXPECT_TRUE(raw_float_track.Validate());
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
   }
 }
@@ -131,7 +131,7 @@ TEST(Name, TrackBuilder) {
   {  // No name
     RawFloatTrack raw_float_track;
 
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     EXPECT_STREQ(track->name(), "");
@@ -141,7 +141,7 @@ TEST(Name, TrackBuilder) {
     RawFloatTrack raw_float_track;
     raw_float_track.name = "test name";
 
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     EXPECT_STREQ(track->name(), raw_float_track.name.c_str());
@@ -155,7 +155,7 @@ TEST(Build0Keys, TrackBuilder) {
   RawFloatTrack raw_float_track;
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
   EXPECT_TRUE(track);
 
   // Samples to verify build output.
@@ -181,7 +181,7 @@ TEST(BuildLinear, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -210,7 +210,7 @@ TEST(BuildLinear, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -239,7 +239,7 @@ TEST(BuildLinear, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -271,7 +271,7 @@ TEST(BuildLinear, TrackBuilder) {
     raw_float_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -314,7 +314,7 @@ TEST(BuildLinear, TrackBuilder) {
     raw_float_track.keyframes.push_back(key3);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -361,7 +361,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -390,7 +390,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -419,7 +419,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -448,7 +448,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(first_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -480,7 +480,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -531,7 +531,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(third_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -584,7 +584,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -627,7 +627,7 @@ TEST(BuildStep, TrackBuilder) {
     raw_float_track.keyframes.push_back(third_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
@@ -691,7 +691,7 @@ TEST(BuildMixed, TrackBuilder) {
   raw_float_track.keyframes.push_back(key2);
 
   // Builds track
-  ozz::unique_ptr<FloatTrack> track(builder(raw_float_track));
+  vox::unique_ptr<FloatTrack> track(builder(raw_float_track));
   EXPECT_TRUE(track);
 
   // Samples to verify build output.
@@ -734,16 +734,16 @@ TEST(BuildMixed, TrackBuilder) {
 
 TEST(Float, TrackBuilder) {
   TrackBuilder builder;
-  ozz::animation::offline::RawFloatTrack raw_track;
+  vox::animation::offline::RawFloatTrack raw_track;
 
   {
     // Default value for quaternion is identity.
-    ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
     float result;
-    ozz::animation::FloatTrackSamplingJob sampling;
+    vox::animation::FloatTrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -753,20 +753,20 @@ TEST(Float, TrackBuilder) {
   }
 
   {
-    const ozz::animation::offline::RawFloatTrack::Keyframe first_key = {
+    const vox::animation::offline::RawFloatTrack::Keyframe first_key = {
         RawTrackInterpolation::kLinear, .5f, 23.f};
     raw_track.keyframes.push_back(first_key);
-    const ozz::animation::offline::RawFloatTrack::Keyframe second_key = {
+    const vox::animation::offline::RawFloatTrack::Keyframe second_key = {
         RawTrackInterpolation::kLinear, .7f, 46.f};
     raw_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<FloatTrack> track(builder(raw_track));
+    vox::unique_ptr<FloatTrack> track(builder(raw_track));
     ASSERT_TRUE(track);
 
     // Samples to verify build output.
     float result;
-    ozz::animation::FloatTrackSamplingJob sampling;
+    vox::animation::FloatTrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -794,16 +794,16 @@ TEST(Float, TrackBuilder) {
 
 TEST(Float2, TrackBuilder) {
   TrackBuilder builder;
-  ozz::animation::offline::RawFloat2Track raw_track;
+  vox::animation::offline::RawFloat2Track raw_track;
 
   {
     // Default value for quaternion is identity.
-    ozz::unique_ptr<Float2Track> track(builder(raw_track));
+    vox::unique_ptr<Float2Track> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Float2 result;
-    ozz::animation::Float2TrackSamplingJob sampling;
+    vox::math::Float2 result;
+    vox::animation::Float2TrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -813,20 +813,20 @@ TEST(Float2, TrackBuilder) {
   }
 
   {
-    const ozz::animation::offline::RawFloat2Track::Keyframe first_key = {
-        RawTrackInterpolation::kLinear, .5f, ozz::math::Float2(0.f, 23.f)};
+    const vox::animation::offline::RawFloat2Track::Keyframe first_key = {
+        RawTrackInterpolation::kLinear, .5f, vox::math::Float2(0.f, 23.f)};
     raw_track.keyframes.push_back(first_key);
-    const ozz::animation::offline::RawFloat2Track::Keyframe second_key = {
-        RawTrackInterpolation::kLinear, .7f, ozz::math::Float2(23.f, 46.f)};
+    const vox::animation::offline::RawFloat2Track::Keyframe second_key = {
+        RawTrackInterpolation::kLinear, .7f, vox::math::Float2(23.f, 46.f)};
     raw_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<Float2Track> track(builder(raw_track));
+    vox::unique_ptr<Float2Track> track(builder(raw_track));
     ASSERT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Float2 result;
-    ozz::animation::Float2TrackSamplingJob sampling;
+    vox::math::Float2 result;
+    vox::animation::Float2TrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -854,16 +854,16 @@ TEST(Float2, TrackBuilder) {
 
 TEST(Float3, TrackBuilder) {
   TrackBuilder builder;
-  ozz::animation::offline::RawFloat3Track raw_track;
+  vox::animation::offline::RawFloat3Track raw_track;
 
   {
     // Default value for quaternion is identity.
-    ozz::unique_ptr<Float3Track> track(builder(raw_track));
+    vox::unique_ptr<Float3Track> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Float3 result;
-    ozz::animation::Float3TrackSamplingJob sampling;
+    vox::math::Float3 result;
+    vox::animation::Float3TrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -873,22 +873,22 @@ TEST(Float3, TrackBuilder) {
   }
 
   {
-    const ozz::animation::offline::RawFloat3Track::Keyframe first_key = {
+    const vox::animation::offline::RawFloat3Track::Keyframe first_key = {
         RawTrackInterpolation::kLinear, .5f,
-        ozz::math::Float3(0.f, 23.f, 46.f)};
+        vox::math::Float3(0.f, 23.f, 46.f)};
     raw_track.keyframes.push_back(first_key);
-    const ozz::animation::offline::RawFloat3Track::Keyframe second_key = {
+    const vox::animation::offline::RawFloat3Track::Keyframe second_key = {
         RawTrackInterpolation::kLinear, .7f,
-        ozz::math::Float3(23.f, 46.f, 92.f)};
+        vox::math::Float3(23.f, 46.f, 92.f)};
     raw_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<Float3Track> track(builder(raw_track));
+    vox::unique_ptr<Float3Track> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Float3 result;
-    ozz::animation::Float3TrackSamplingJob sampling;
+    vox::math::Float3 result;
+    vox::animation::Float3TrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -916,16 +916,16 @@ TEST(Float3, TrackBuilder) {
 
 TEST(Float4, TrackBuilder) {
   TrackBuilder builder;
-  ozz::animation::offline::RawFloat4Track raw_track;
+  vox::animation::offline::RawFloat4Track raw_track;
 
   {
     // Default value for quaternion is identity.
-    ozz::unique_ptr<Float4Track> track(builder(raw_track));
+    vox::unique_ptr<Float4Track> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Float4 result;
-    ozz::animation::Float4TrackSamplingJob sampling;
+    vox::math::Float4 result;
+    vox::animation::Float4TrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -935,22 +935,22 @@ TEST(Float4, TrackBuilder) {
   }
 
   {
-    const ozz::animation::offline::RawFloat4Track::Keyframe first_key = {
+    const vox::animation::offline::RawFloat4Track::Keyframe first_key = {
         RawTrackInterpolation::kLinear, .5f,
-        ozz::math::Float4(0.f, 23.f, 46.f, 5.f)};
+        vox::math::Float4(0.f, 23.f, 46.f, 5.f)};
     raw_track.keyframes.push_back(first_key);
-    const ozz::animation::offline::RawFloat4Track::Keyframe second_key = {
+    const vox::animation::offline::RawFloat4Track::Keyframe second_key = {
         RawTrackInterpolation::kLinear, .7f,
-        ozz::math::Float4(23.f, 46.f, 92.f, 25.f)};
+        vox::math::Float4(23.f, 46.f, 92.f, 25.f)};
     raw_track.keyframes.push_back(second_key);
 
     // Builds track
-    ozz::unique_ptr<Float4Track> track(builder(raw_track));
+    vox::unique_ptr<Float4Track> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Float4 result;
-    ozz::animation::Float4TrackSamplingJob sampling;
+    vox::math::Float4 result;
+    vox::animation::Float4TrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -978,16 +978,16 @@ TEST(Float4, TrackBuilder) {
 
 TEST(Quaternion, TrackBuilder) {
   TrackBuilder builder;
-  ozz::animation::offline::RawQuaternionTrack raw_track;
+  vox::animation::offline::RawQuaternionTrack raw_track;
 
   {
     // Default value for quaternion is identity.
-    ozz::unique_ptr<QuaternionTrack> track(builder(raw_track));
+    vox::unique_ptr<QuaternionTrack> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Quaternion result;
-    ozz::animation::QuaternionTrackSamplingJob sampling;
+    vox::math::Quaternion result;
+    vox::animation::QuaternionTrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 
@@ -997,28 +997,28 @@ TEST(Quaternion, TrackBuilder) {
   }
 
   {
-    const ozz::animation::offline::RawQuaternionTrack::Keyframe key0 = {
+    const vox::animation::offline::RawQuaternionTrack::Keyframe key0 = {
         RawTrackInterpolation::kLinear, .5f,
-        ozz::math::Quaternion(
+        vox::math::Quaternion(
             -.70710677f, -0.f, -0.f,
             -.70710677f)};  // Will be opposed to be on the other hemisphere
     raw_track.keyframes.push_back(key0);
-    const ozz::animation::offline::RawQuaternionTrack::Keyframe key1 = {
+    const vox::animation::offline::RawQuaternionTrack::Keyframe key1 = {
         RawTrackInterpolation::kLinear, .7f,
-        ozz::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
+        vox::math::Quaternion(0.f, .70710677f, 0.f, .70710677f)};
     raw_track.keyframes.push_back(key1);
-    const ozz::animation::offline::RawQuaternionTrack::Keyframe key2 = {
+    const vox::animation::offline::RawQuaternionTrack::Keyframe key2 = {
         RawTrackInterpolation::kLinear, .8f,
-        ozz::math::Quaternion(-0.f, -.70710677f, -0.f, -.70710677f)};
+        vox::math::Quaternion(-0.f, -.70710677f, -0.f, -.70710677f)};
     raw_track.keyframes.push_back(key2);
 
     // Builds track
-    ozz::unique_ptr<QuaternionTrack> track(builder(raw_track));
+    vox::unique_ptr<QuaternionTrack> track(builder(raw_track));
     EXPECT_TRUE(track);
 
     // Samples to verify build output.
-    ozz::math::Quaternion result;
-    ozz::animation::QuaternionTrackSamplingJob sampling;
+    vox::math::Quaternion result;
+    vox::animation::QuaternionTrackSamplingJob sampling;
     sampling.track = track.get();
     sampling.result = &result;
 

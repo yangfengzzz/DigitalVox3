@@ -17,7 +17,7 @@
 #include "enums/containment_type.h"
 #include "enums/planeIntersection_type.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct Plane;
 struct BoundingBox;

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,17 +25,17 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_STRING_H_
-#define OZZ_OZZ_BASE_CONTAINERS_STRING_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_STRING_H_
+#define VOX_VOX_BASE_CONTAINERS_STRING_H_
 
 #include <string>
 
 #include "containers/std_allocator.h"
 
-namespace ozz {
-// Redirects std::basic_string to ozz::string in order to replace std default
-// allocator by ozz::StdAllocator.
+namespace vox {
+// Redirects std::basic_string to vox::string in order to replace std default
+// allocator by vox::StdAllocator.
 using string =
-    std::basic_string<char, std::char_traits<char>, ozz::StdAllocator<char>>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_STRING_H_
+    std::basic_string<char, std::char_traits<char>, vox::StdAllocator<char>>;
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_STRING_H_

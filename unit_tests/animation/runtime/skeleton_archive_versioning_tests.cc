@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,18 +35,18 @@
 #include "log.h"
 #include "options/options.h"
 
-OZZ_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)
-OZZ_OPTIONS_DECLARE_INT(joints, "Number of joints", 0, true)
-OZZ_OPTIONS_DECLARE_STRING(root_name, "Name of the root joint", "", true)
+VOX_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)
+VOX_OPTIONS_DECLARE_INT(joints, "Number of joints", 0, true)
+VOX_OPTIONS_DECLARE_STRING(root_name, "Name of the root joint", "", true)
 
 int main(int _argc, char** _argv) {
   // Parses arguments.
   testing::InitGoogleTest(&_argc, _argv);
-  ozz::options::ParseResult parse_result = ozz::options::ParseCommandLine(
+  vox::options::ParseResult parse_result = vox::options::ParseCommandLine(
       _argc, _argv, "1.0",
       "Test Skeleton archive versioning retrocompatibility");
-  if (parse_result != ozz::options::kSuccess) {
-    return parse_result == ozz::options::kExitSuccess ? EXIT_SUCCESS
+  if (parse_result != vox::options::kSuccess) {
+    return parse_result == vox::options::kExitSuccess ? EXIT_SUCCESS
                                                       : EXIT_FAILURE;
   }
 
@@ -56,15 +56,15 @@ int main(int _argc, char** _argv) {
 TEST(Versioning, SkeletonSerialize) {
   // Open the file.
   const char* filename = OPTIONS_file;
-  ozz::io::File file(filename, "rb");
+  vox::io::File file(filename, "rb");
   ASSERT_TRUE(file.opened());
 
   // Open archive and test object tag.
-  ozz::io::IArchive archive(&file);
-  ASSERT_TRUE(archive.TestTag<ozz::animation::Skeleton>());
+  vox::io::IArchive archive(&file);
+  ASSERT_TRUE(archive.TestTag<vox::animation::Skeleton>());
 
   // Read the object.
-  ozz::animation::Skeleton skeleton;
+  vox::animation::Skeleton skeleton;
   archive >> skeleton;
 
   // More testing

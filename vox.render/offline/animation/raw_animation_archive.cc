@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -34,7 +34,7 @@
 #include "containers/vector_archive.h"
 #include "log.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 void Extern<animation::offline::RawAnimation>::Save(
@@ -67,7 +67,7 @@ void Extern<animation::offline::RawAnimation>::Load(
 // RawAnimation::*Keys' version can be declared locally as it will be saved from
 // this cpp file only.
 
-OZZ_IO_TYPE_VERSION(1, animation::offline::RawAnimation::JointTrack)
+VOX_IO_TYPE_VERSION(1, animation::offline::RawAnimation::JointTrack)
 
 template <>
 struct Extern<animation::offline::RawAnimation::JointTrack> {
@@ -94,7 +94,7 @@ struct Extern<animation::offline::RawAnimation::JointTrack> {
   }
 };
 
-OZZ_IO_TYPE_VERSION(1, animation::offline::RawAnimation::TranslationKey)
+VOX_IO_TYPE_VERSION(1, animation::offline::RawAnimation::TranslationKey)
 
 template <>
 struct Extern<animation::offline::RawAnimation::TranslationKey> {
@@ -120,7 +120,7 @@ struct Extern<animation::offline::RawAnimation::TranslationKey> {
   }
 };
 
-OZZ_IO_TYPE_VERSION(1, animation::offline::RawAnimation::RotationKey)
+VOX_IO_TYPE_VERSION(1, animation::offline::RawAnimation::RotationKey)
 
 template <>
 struct Extern<animation::offline::RawAnimation::RotationKey> {
@@ -145,7 +145,7 @@ struct Extern<animation::offline::RawAnimation::RotationKey> {
   }
 };
 
-OZZ_IO_TYPE_VERSION(1, animation::offline::RawAnimation::ScaleKey)
+VOX_IO_TYPE_VERSION(1, animation::offline::RawAnimation::ScaleKey)
 
 template <>
 struct Extern<animation::offline::RawAnimation::ScaleKey> {
@@ -170,4 +170,4 @@ struct Extern<animation::offline::RawAnimation::ScaleKey> {
   }
 };
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

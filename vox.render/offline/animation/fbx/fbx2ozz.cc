@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,29 +25,29 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "fbx2ozz.h"
+#include "fbx2vox.h"
 
 #include "log.h"
 
 int main(int _argc, const char** _argv) {
-  Fbx2OzzImporter converter;
+  Fbx2VoxImporter converter;
   return converter(_argc, _argv);
 }
 
-Fbx2OzzImporter::Fbx2OzzImporter()
+Fbx2VoxImporter::Fbx2VoxImporter()
     : settings_(fbx_manager_), scene_loader_(nullptr) {}
 
-Fbx2OzzImporter::~Fbx2OzzImporter() { ozz::Delete(scene_loader_); }
+Fbx2VoxImporter::~Fbx2VoxImporter() { vox::Delete(scene_loader_); }
 
-bool Fbx2OzzImporter::Load(const char* _filename) {
-  ozz::Delete(scene_loader_);
-  scene_loader_ = ozz::New<ozz::animation::offline::fbx::FbxSceneLoader>(
+bool Fbx2VoxImporter::Load(const char* _filename) {
+  vox::Delete(scene_loader_);
+  scene_loader_ = vox::New<vox::animation::offline::fbx::FbxSceneLoader>(
       _filename, "", fbx_manager_, settings_);
 
   if (!scene_loader_->scene()) {
-    ozz::log::Err() << "Failed to import file " << _filename << "."
+    vox::log::Err() << "Failed to import file " << _filename << "."
                     << std::endl;
-    ozz::Delete(scene_loader_);
+    vox::Delete(scene_loader_);
     scene_loader_ = nullptr;
     return false;
   }

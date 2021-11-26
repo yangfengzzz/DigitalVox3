@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
+#define VOX_VOX_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
 
 #include "maths/transform.h"
 #include "memory/unique_ptr.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Forward declares the runtime skeleton type.
@@ -50,10 +50,10 @@ class SkeletonBuilder {
   // RawSkeleton::Validate() for more details about failure reasons.
   // The skeleton is returned as an unique_ptr as ownership is given back to the
   // caller.
-  ozz::unique_ptr<ozz::animation::Skeleton> operator()(
+  vox::unique_ptr<vox::animation::Skeleton> operator()(
       const RawSkeleton& _raw_skeleton) const;
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_SKELETON_BUILDER_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_SKELETON_BUILDER_H_

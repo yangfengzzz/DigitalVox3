@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -26,15 +26,15 @@
 //----------------------------------------------------------------------------//
 
 #//---------------------------------------------------------------------------//
-// Initial gltf2ozz implementation author: Alexander Dzhoganov                //
-// https://github.com/guillaumeblanc/ozz-animation/pull/70                    //
+// Initial gltf2vox implementation author: Alexander Dzhoganov                //
+// https://github.com/guillaumeblanc/vox-animation/pull/70                    //
 //----------------------------------------------------------------------------//
 
 #include <cassert>
 #include <cstring>
 
 #include "offline/animation/raw_animation_utils.h"
-#include "offline/animation/tools/import2ozz.h"
+#include "offline/animation/tools/import2vox.h"
 #include "runtime/animation/skeleton.h"
 #include "containers/map.h"
 #include "containers/set.h"
@@ -67,7 +67,7 @@ namespace {
 template <typename _VectorType>
 bool FixupNames(_VectorType& _data, const char* _pretty_name,
                 const char* _prefix_name) {
-  ozz::set<std::string> names;
+  vox::set<std::string> names;
   for (size_t i = 0; i < _data.size(); ++i) {
     bool renamed = false;
     typename _VectorType::const_reference data = _data[i];
@@ -94,7 +94,7 @@ bool FixupNames(_VectorType& _data, const char* _pretty_name,
     }
 
     if (renamed) {
-      ozz::log::LogV() << _pretty_name << " #" << i << " with name \""
+      vox::log::LogV() << _pretty_name << " #" << i << " with name \""
                        << data.name << "\" was renamed to \"" << name
                        << "\" in order to avoid duplicates." << std::endl;
 
@@ -109,17 +109,17 @@ bool FixupNames(_VectorType& _data, const char* _pretty_name,
 // Returns the address of a gltf buffer given an accessor.
 // Performs basic checks to ensure the data is in the correct format
 template <typename T>
-ozz::span<const T> BufferView(const tinygltf::Model& _model,
+vox::span<const T> BufferView(const tinygltf::Model& _model,
                               const tinygltf::Accessor& _accessor) {
   const int32_t component_size =
       tinygltf::GetComponentSizeInBytes(_accessor.componentType);
   const int32_t element_size =
       component_size * tinygltf::GetTypeSizeInBytes(_accessor.type);
   if (element_size != sizeof(T)) {
-    ozz::log::Err() << "Invalid buffer view access. Expected element size '"
+    vox::log::Err() << "Invalid buffer view access. Expected element size '"
                     << sizeof(T) << " got " << element_size << " instead."
                     << std::endl;
-    return ozz::span<const T>();
+    return vox::span<const T>();
   }
 
   const tinygltf::BufferView& bufferView =
@@ -127,16 +127,16 @@ ozz::span<const T> BufferView(const tinygltf::Model& _model,
   const tinygltf::Buffer& buffer = _model.buffers[bufferView.buffer];
   const T* begin = reinterpret_cast<const T*>(
       buffer.data.data() + bufferView.byteOffset + _accessor.byteOffset);
-  return ozz::span<const T>(begin, _accessor.count);
+  return vox::span<const T>(begin, _accessor.count);
 }
 
 // Samples a linear animation channel
-// There is an exact mapping between gltf and ozz keyframes so we just copy
+// There is an exact mapping between gltf and vox keyframes so we just copy
 // everything over.
 template <typename _KeyframesType>
 bool SampleLinearChannel(const tinygltf::Model& _model,
                          const tinygltf::Accessor& _output,
-                         const ozz::span<const float>& _timestamps,
+                         const vox::span<const float>& _timestamps,
                          _KeyframesType* _keyframes) {
   const size_t gltf_keys_count = _output.count;
 
@@ -146,11 +146,11 @@ bool SampleLinearChannel(const tinygltf::Model& _model,
   }
 
   typedef typename _KeyframesType::value_type::Value ValueType;
-  const ozz::span<const ValueType> values =
+  const vox::span<const ValueType> values =
       BufferView<ValueType>(_model, _output);
   if (values.size_bytes() / sizeof(ValueType) != gltf_keys_count ||
       _timestamps.size() != gltf_keys_count) {
-    ozz::log::Err() << "gltf format error, inconsistent number of keys."
+    vox::log::Err() << "gltf format error, inconsistent number of keys."
                     << std::endl;
     return false;
   }
@@ -165,11 +165,11 @@ bool SampleLinearChannel(const tinygltf::Model& _model,
 }
 
 // Samples a step animation channel
-// There are twice-1 as many ozz keyframes as gltf keyframes
+// There are twice-1 as many vox keyframes as gltf keyframes
 template <typename _KeyframesType>
 bool SampleStepChannel(const tinygltf::Model& _model,
                        const tinygltf::Accessor& _output,
-                       const ozz::span<const float>& _timestamps,
+                       const vox::span<const float>& _timestamps,
                        _KeyframesType* _keyframes) {
   const size_t gltf_keys_count = _output.count;
 
@@ -179,11 +179,11 @@ bool SampleStepChannel(const tinygltf::Model& _model,
   }
 
   typedef typename _KeyframesType::value_type::Value ValueType;
-  const ozz::span<const ValueType> values =
+  const vox::span<const ValueType> values =
       BufferView<ValueType>(_model, _output);
   if (values.size_bytes() / sizeof(ValueType) != gltf_keys_count ||
       _timestamps.size() != gltf_keys_count) {
-    ozz::log::Err() << "gltf format error, inconsistent number of keys."
+    vox::log::Err() << "gltf format error, inconsistent number of keys."
                     << std::endl;
     return false;
   }
@@ -243,7 +243,7 @@ T SampleHermiteSpline(float _alpha, const T& p0, const T& m0, const T& p1,
 template <typename _KeyframesType>
 bool SampleCubicSplineChannel(const tinygltf::Model& _model,
                               const tinygltf::Accessor& _output,
-                              const ozz::span<const float>& _timestamps,
+                              const vox::span<const float>& _timestamps,
                               float _sampling_rate, float _duration,
                               _KeyframesType* _keyframes) {
   (void)_duration;
@@ -257,18 +257,18 @@ bool SampleCubicSplineChannel(const tinygltf::Model& _model,
   }
 
   typedef typename _KeyframesType::value_type::Value ValueType;
-  const ozz::span<const ValueType> values =
+  const vox::span<const ValueType> values =
       BufferView<ValueType>(_model, _output);
   if (values.size_bytes() / (sizeof(ValueType) * 3) != gltf_keys_count ||
       _timestamps.size() != gltf_keys_count) {
-    ozz::log::Err() << "gltf format error, inconsistent number of keys."
+    vox::log::Err() << "gltf format error, inconsistent number of keys."
                     << std::endl;
     return false;
   }
 
   // Iterate keyframes at _sampling_rate steps, between first and last time
   // stamps.
-  ozz::animation::offline::FixedRateSamplingTime fixed_it(
+  vox::animation::offline::FixedRateSamplingTime fixed_it(
       _timestamps[gltf_keys_count - 1] - _timestamps[0], _sampling_rate);
   _keyframes->resize(fixed_it.num_keys());
   size_t cubic_key0 = 0;
@@ -307,7 +307,7 @@ template <typename _KeyframesType>
 bool SampleChannel(const tinygltf::Model& _model,
                    const std::string& _interpolation,
                    const tinygltf::Accessor& _output,
-                   const ozz::span<const float>& _timestamps,
+                   const vox::span<const float>& _timestamps,
                    float _sampling_rate, float _duration,
                    _KeyframesType* _keyframes) {
   bool valid = false;
@@ -319,7 +319,7 @@ bool SampleChannel(const tinygltf::Model& _model,
     valid = SampleCubicSplineChannel(_model, _output, _timestamps,
                                      _sampling_rate, _duration, _keyframes);
   } else {
-    ozz::log::Err() << "Invalid or unknown interpolation type '"
+    vox::log::Err() << "Invalid or unknown interpolation type '"
                     << _interpolation << "'." << std::endl;
     valid = false;
   }
@@ -332,7 +332,7 @@ bool SampleChannel(const tinygltf::Model& _model,
                              return _a.time < _b.time;
                            });
     if (!valid) {
-      ozz::log::Log()
+      vox::log::Log()
           << "gltf format error, keyframes are not sorted in increasing order."
           << std::endl;
     }
@@ -348,7 +348,7 @@ bool SampleChannel(const tinygltf::Model& _model,
     if (new_end != _keyframes->end()) {
       _keyframes->erase(new_end, _keyframes->end());
 
-      ozz::log::Log() << "gltf format error, keyframe times are not unique. "
+      vox::log::Log() << "gltf format error, keyframe times are not unique. "
                          "Imported data were modified to remove keyframes at "
                          "consecutive equivalent times."
                       << std::endl;
@@ -357,15 +357,15 @@ bool SampleChannel(const tinygltf::Model& _model,
   return valid;
 }
 
-ozz::animation::offline::RawAnimation::TranslationKey
+vox::animation::offline::RawAnimation::TranslationKey
 CreateTranslationBindPoseKey(const tinygltf::Node& _node) {
-  ozz::animation::offline::RawAnimation::TranslationKey key;
+  vox::animation::offline::RawAnimation::TranslationKey key;
   key.time = 0.0f;
 
   if (_node.translation.empty()) {
-    key.value = ozz::math::Float3::zero();
+    key.value = vox::math::Float3::zero();
   } else {
-    key.value = ozz::math::Float3(static_cast<float>(_node.translation[0]),
+    key.value = vox::math::Float3(static_cast<float>(_node.translation[0]),
                                   static_cast<float>(_node.translation[1]),
                                   static_cast<float>(_node.translation[2]));
   }
@@ -373,15 +373,15 @@ CreateTranslationBindPoseKey(const tinygltf::Node& _node) {
   return key;
 }
 
-ozz::animation::offline::RawAnimation::RotationKey CreateRotationBindPoseKey(
+vox::animation::offline::RawAnimation::RotationKey CreateRotationBindPoseKey(
     const tinygltf::Node& _node) {
-  ozz::animation::offline::RawAnimation::RotationKey key;
+  vox::animation::offline::RawAnimation::RotationKey key;
   key.time = 0.0f;
 
   if (_node.rotation.empty()) {
-    key.value = ozz::math::Quaternion::identity();
+    key.value = vox::math::Quaternion::identity();
   } else {
-    key.value = ozz::math::Quaternion(static_cast<float>(_node.rotation[0]),
+    key.value = vox::math::Quaternion(static_cast<float>(_node.rotation[0]),
                                       static_cast<float>(_node.rotation[1]),
                                       static_cast<float>(_node.rotation[2]),
                                       static_cast<float>(_node.rotation[3]));
@@ -389,15 +389,15 @@ ozz::animation::offline::RawAnimation::RotationKey CreateRotationBindPoseKey(
   return key;
 }
 
-ozz::animation::offline::RawAnimation::ScaleKey CreateScaleBindPoseKey(
+vox::animation::offline::RawAnimation::ScaleKey CreateScaleBindPoseKey(
     const tinygltf::Node& _node) {
-  ozz::animation::offline::RawAnimation::ScaleKey key;
+  vox::animation::offline::RawAnimation::ScaleKey key;
   key.time = 0.0f;
 
   if (_node.scale.empty()) {
-    key.value = ozz::math::Float3::one();
+    key.value = vox::math::Float3::one();
   } else {
-    key.value = ozz::math::Float3(static_cast<float>(_node.scale[0]),
+    key.value = vox::math::Float3(static_cast<float>(_node.scale[0]),
                                   static_cast<float>(_node.scale[1]),
                                   static_cast<float>(_node.scale[2]));
   }
@@ -406,55 +406,55 @@ ozz::animation::offline::RawAnimation::ScaleKey CreateScaleBindPoseKey(
 
 // Creates the default transform for a gltf node
 bool CreateNodeTransform(const tinygltf::Node& _node,
-                         ozz::math::Transform* _transform) {
-  *_transform = ozz::math::Transform::identity();
+                         vox::math::Transform* _transform) {
+  *_transform = vox::math::Transform::identity();
 
   if (!_node.matrix.empty()) {
-    const ozz::math::Float4x4 matrix = {
-        {ozz::math::simd_float4::Load(static_cast<float>(_node.matrix[0]),
+    const vox::math::Float4x4 matrix = {
+        {vox::math::simd_float4::Load(static_cast<float>(_node.matrix[0]),
                                       static_cast<float>(_node.matrix[1]),
                                       static_cast<float>(_node.matrix[2]),
                                       static_cast<float>(_node.matrix[3])),
-         ozz::math::simd_float4::Load(static_cast<float>(_node.matrix[4]),
+         vox::math::simd_float4::Load(static_cast<float>(_node.matrix[4]),
                                       static_cast<float>(_node.matrix[5]),
                                       static_cast<float>(_node.matrix[6]),
                                       static_cast<float>(_node.matrix[7])),
-         ozz::math::simd_float4::Load(static_cast<float>(_node.matrix[8]),
+         vox::math::simd_float4::Load(static_cast<float>(_node.matrix[8]),
                                       static_cast<float>(_node.matrix[9]),
                                       static_cast<float>(_node.matrix[10]),
                                       static_cast<float>(_node.matrix[11])),
-         ozz::math::simd_float4::Load(static_cast<float>(_node.matrix[12]),
+         vox::math::simd_float4::Load(static_cast<float>(_node.matrix[12]),
                                       static_cast<float>(_node.matrix[13]),
                                       static_cast<float>(_node.matrix[14]),
                                       static_cast<float>(_node.matrix[15]))}};
-    ozz::math::SimdFloat4 translation, rotation, scale;
+    vox::math::SimdFloat4 translation, rotation, scale;
     if (ToAffine(matrix, &translation, &rotation, &scale)) {
-      ozz::math::Store3PtrU(translation, &_transform->translation.x);
-      ozz::math::StorePtrU(translation, &_transform->rotation.x);
-      ozz::math::Store3PtrU(translation, &_transform->scale.x);
+      vox::math::Store3PtrU(translation, &_transform->translation.x);
+      vox::math::StorePtrU(translation, &_transform->rotation.x);
+      vox::math::Store3PtrU(translation, &_transform->scale.x);
       return true;
     }
 
-    ozz::log::Err() << "Failed to extract transformation from node \""
+    vox::log::Err() << "Failed to extract transformation from node \""
                     << _node.name << "\"." << std::endl;
     return false;
   }
 
   if (!_node.translation.empty()) {
     _transform->translation =
-        ozz::math::Float3(static_cast<float>(_node.translation[0]),
+        vox::math::Float3(static_cast<float>(_node.translation[0]),
                           static_cast<float>(_node.translation[1]),
                           static_cast<float>(_node.translation[2]));
   }
   if (!_node.rotation.empty()) {
     _transform->rotation =
-        ozz::math::Quaternion(static_cast<float>(_node.rotation[0]),
+        vox::math::Quaternion(static_cast<float>(_node.rotation[0]),
                               static_cast<float>(_node.rotation[1]),
                               static_cast<float>(_node.rotation[2]),
                               static_cast<float>(_node.rotation[3]));
   }
   if (!_node.scale.empty()) {
-    _transform->scale = ozz::math::Float3(static_cast<float>(_node.scale[0]),
+    _transform->scale = vox::math::Float3(static_cast<float>(_node.scale[0]),
                                           static_cast<float>(_node.scale[1]),
                                           static_cast<float>(_node.scale[2]));
   }
@@ -463,7 +463,7 @@ bool CreateNodeTransform(const tinygltf::Node& _node,
 }
 }  // namespace
 
-class GltfImporter : public ozz::animation::offline::OzzImporter {
+class GltfImporter : public vox::animation::offline::VoxImporter {
  public:
   GltfImporter() {
     // We don't care about image data but we have to provide this callback
@@ -491,7 +491,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
           m_loader.LoadBinaryFromFile(&m_model, &errors, &warnings, _filename);
     } else {
       if (std::strcmp(ext, "gltf") != 0) {
-        ozz::log::Log() << "Unknown file extension '" << ext
+        vox::log::Log() << "Unknown file extension '" << ext
                         << "', assuming a JSON-formatted gltf." << std::endl;
       }
 
@@ -501,15 +501,15 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
 
     // Prints any errors or warnings emitted by the loader
     if (!warnings.empty()) {
-      ozz::log::Log() << "glTF parsing warnings: " << warnings << std::endl;
+      vox::log::Log() << "glTF parsing warnings: " << warnings << std::endl;
     }
 
     if (!errors.empty()) {
-      ozz::log::Err() << "glTF parsing errors: " << errors << std::endl;
+      vox::log::Err() << "glTF parsing errors: " << errors << std::endl;
     }
 
     if (success) {
-      ozz::log::Log() << "glTF parsed successfully." << std::endl;
+      vox::log::Log() << "glTF parsed successfully." << std::endl;
     }
 
     if (success) {
@@ -532,7 +532,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
       return skin.skeleton;
     }
 
-    ozz::map<int, int> parents;
+    vox::map<int, int> parents;
     for (int node : skin.joints) {
       for (int child : m_model.nodes[node].children) {
         parents[child] = node;
@@ -547,12 +547,12 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     return root;
   }
 
-  bool Import(ozz::animation::offline::RawSkeleton* _skeleton,
+  bool Import(vox::animation::offline::RawSkeleton* _skeleton,
               const NodeType& _types) override {
     (void)_types;
 
     if (m_model.scenes.empty()) {
-      ozz::log::Err() << "No scenes found." << std::endl;
+      vox::log::Err() << "No scenes found." << std::endl;
       return false;
     }
 
@@ -565,19 +565,19 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     }
 
     tinygltf::Scene& scene = m_model.scenes[defaultScene];
-    ozz::log::LogV() << "Importing from default scene #" << defaultScene
+    vox::log::LogV() << "Importing from default scene #" << defaultScene
                      << " with name \"" << scene.name << "\"." << std::endl;
 
     if (scene.nodes.empty()) {
-      ozz::log::Err() << "Scene has no node." << std::endl;
+      vox::log::Err() << "Scene has no node." << std::endl;
       return false;
     }
 
     // Get all the skins belonging to this scene
-    ozz::vector<int> roots;
-    ozz::vector<tinygltf::Skin> skins = GetSkinsForScene(scene);
+    vox::vector<int> roots;
+    vox::vector<tinygltf::Skin> skins = GetSkinsForScene(scene);
     if (skins.empty()) {
-      ozz::log::Log() << "No skin exists in the scene, the whole scene graph "
+      vox::log::Log() << "No skin exists in the scene, the whole scene graph "
                          "will be considered as a skeleton."
                       << std::endl;
       // Uses all scene nodes.
@@ -586,7 +586,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
       }
     } else {
       if (skins.size() > 1) {
-        ozz::log::Log() << "Multiple skins exist in the scene, they will all "
+        vox::log::Log() << "Multiple skins exist in the scene, they will all "
                            "be exported to a single skeleton."
                         << std::endl;
       }
@@ -609,7 +609,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     _skeleton->roots.resize(roots.size());
     for (size_t i = 0; i < roots.size(); ++i) {
       const tinygltf::Node& root_node = m_model.nodes[roots[i]];
-      ozz::animation::offline::RawSkeleton::Joint& root_joint =
+      vox::animation::offline::RawSkeleton::Joint& root_joint =
           _skeleton->roots[i];
       if (!ImportNode(root_node, &root_joint)) {
         return false;
@@ -617,7 +617,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     }
 
     if (!_skeleton->Validate()) {
-      ozz::log::Err() << "Output skeleton failed validation. This is likely an "
+      vox::log::Err() << "Output skeleton failed validation. This is likely an "
                          "implementation issue."
                       << std::endl;
       return false;
@@ -628,7 +628,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
 
   // Recursively import a node's children
   bool ImportNode(const tinygltf::Node& _node,
-                  ozz::animation::offline::RawSkeleton::Joint* _joint) {
+                  vox::animation::offline::RawSkeleton::Joint* _joint) {
     // Names joint.
     _joint->name = _node.name.c_str();
 
@@ -643,7 +643,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     // Fills each child information.
     for (size_t i = 0; i < _node.children.size(); ++i) {
       const tinygltf::Node& child_node = m_model.nodes[_node.children[i]];
-      ozz::animation::offline::RawSkeleton::Joint& child_joint =
+      vox::animation::offline::RawSkeleton::Joint& child_joint =
           _joint->children[i];
 
       if (!ImportNode(child_node, &child_joint)) {
@@ -667,14 +667,14 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
   }
 
   bool Import(const char* _animation_name,
-              const ozz::animation::Skeleton& skeleton, float _sampling_rate,
-              ozz::animation::offline::RawAnimation* _animation) override {
+              const vox::animation::Skeleton& skeleton, float _sampling_rate,
+              vox::animation::offline::RawAnimation* _animation) override {
     if (_sampling_rate == 0.0f) {
       _sampling_rate = 30.0f;
 
       static bool samplingRateWarn = false;
       if (!samplingRateWarn) {
-        ozz::log::LogV() << "The animation sampling rate is set to 0 "
+        vox::log::LogV() << "The animation sampling rate is set to 0 "
                             "(automatic) but glTF does not carry scene frame "
                             "rate information. Assuming a sampling rate of "
                          << _sampling_rate << "hz." << std::endl;
@@ -702,9 +702,9 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
 
     // gltf stores animations by splitting them in channels
     // where each channel targets a node's property i.e. translation, rotation
-    // or scale. ozz expects animations to be stored per joint so we create a
+    // or scale. vox expects animations to be stored per joint so we create a
     // map where we record the associated channels for each joint
-    ozz::cstring_map<std::vector<const tinygltf::AnimationChannel*>>
+    vox::cstring_map<std::vector<const tinygltf::AnimationChannel*>>
         channels_per_joint;
 
     for (const tinygltf::AnimationChannel& channel : gltf_animation->channels) {
@@ -728,7 +728,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
 
     // For each joint get all its associated channels, sample them and record
     // the samples in the joint track
-    const ozz::span<const char* const> joint_names = skeleton.joint_names();
+    const vox::span<const char* const> joint_names = skeleton.joint_names();
     for (int i = 0; i < num_joints; i++) {
       auto& channels = channels_per_joint[joint_names[i]];
       auto& track = _animation->tracks[i];
@@ -758,13 +758,13 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
       }
     }
 
-    ozz::log::LogV() << "Processed animation '" << _animation->name
+    vox::log::LogV() << "Processed animation '" << _animation->name
                      << "' (tracks: " << _animation->tracks.size()
                      << ", duration: " << _animation->duration << "s)."
                      << std::endl;
 
     if (!_animation->Validate()) {
-      ozz::log::Err() << "Animation '" << _animation->name
+      vox::log::Err() << "Animation '" << _animation->name
                       << "' failed validation." << std::endl;
       return false;
     }
@@ -775,10 +775,10 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
   bool SampleAnimationChannel(
       const tinygltf::Model& _model, const tinygltf::AnimationSampler& _sampler,
       const std::string& _target_path, float _sampling_rate, float* _duration,
-      ozz::animation::offline::RawAnimation::JointTrack* _track) {
+      vox::animation::offline::RawAnimation::JointTrack* _track) {
     // Validate interpolation type.
     if (_sampler.interpolation.empty()) {
-      ozz::log::Err() << "Invalid sampler interpolation." << std::endl;
+      vox::log::Err() << "Invalid sampler interpolation." << std::endl;
       return false;
     }
 
@@ -802,7 +802,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     assert(_output.type == TINYGLTF_TYPE_VEC3 ||
            _output.type == TINYGLTF_TYPE_VEC4);
 
-    const ozz::span<const float> timestamps = BufferView<float>(_model, input);
+    const vox::span<const float> timestamps = BufferView<float>(_model, input);
     if (timestamps.empty()) {
       return true;
     }
@@ -820,7 +820,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
       if (valid) {
         // Normalize quaternions.
         for (auto& key : _track->rotations) {
-          key.value = ozz::math::Normalize(key.value);
+          key.value = vox::math::Normalize(key.value);
         }
       }
     } else if (_target_path == "scale") {
@@ -835,10 +835,10 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
   }
 
   // Returns all skins belonging to a given gltf scene
-  ozz::vector<tinygltf::Skin> GetSkinsForScene(
+  vox::vector<tinygltf::Skin> GetSkinsForScene(
       const tinygltf::Scene& _scene) const {
-    ozz::set<int> open;
-    ozz::set<int> found;
+    vox::set<int> open;
+    vox::set<int> found;
 
     for (int nodeIndex : _scene.nodes) {
       open.insert(nodeIndex);
@@ -855,7 +855,7 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
       }
     }
 
-    ozz::vector<tinygltf::Skin> skins;
+    vox::vector<tinygltf::Skin> skins;
     for (const tinygltf::Skin& skin : m_model.skins) {
       if (!skin.joints.empty() && found.find(skin.joints[0]) != found.end()) {
         skins.push_back(skin);
@@ -880,19 +880,19 @@ class GltfImporter : public ozz::animation::offline::OzzImporter {
     return NodeProperties();
   }
   bool Import(const char*, const char*, const char*, NodeProperty::Type, float,
-              ozz::animation::offline::RawFloatTrack*) override {
+              vox::animation::offline::RawFloatTrack*) override {
     return false;
   }
   bool Import(const char*, const char*, const char*, NodeProperty::Type, float,
-              ozz::animation::offline::RawFloat2Track*) override {
+              vox::animation::offline::RawFloat2Track*) override {
     return false;
   }
   bool Import(const char*, const char*, const char*, NodeProperty::Type, float,
-              ozz::animation::offline::RawFloat3Track*) override {
+              vox::animation::offline::RawFloat3Track*) override {
     return false;
   }
   bool Import(const char*, const char*, const char*, NodeProperty::Type, float,
-              ozz::animation::offline::RawFloat4Track*) override {
+              vox::animation::offline::RawFloat4Track*) override {
     return false;
   }
 

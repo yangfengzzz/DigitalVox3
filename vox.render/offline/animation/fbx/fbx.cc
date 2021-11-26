@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -31,7 +31,7 @@
 #include "maths/transform.h"
 #include "memory/allocator.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 namespace fbx {
@@ -41,7 +41,7 @@ FbxManagerInstance::FbxManagerInstance() : fbx_manager_(nullptr) {
   fbx_manager_ = FbxManager::Create();
 
   // Logs SDK version.
-  ozz::log::Log() << "FBX importer version " << fbx_manager_->GetVersion()
+  vox::log::Log() << "FBX importer version " << fbx_manager_->GetVersion()
                   << "." << std::endl;
 }
 
@@ -81,7 +81,7 @@ FbxSceneLoader::FbxSceneLoader(const char* _filename, const char* _password,
                                const FbxDefaultIOSettings& _io_settings)
     : scene_(nullptr), converter_(nullptr) {
   // Create an importer.
-  FbxImporter* importer = FbxImporter::Create(_manager, "ozz file importer");
+  FbxImporter* importer = FbxImporter::Create(_manager, "vox file importer");
   const bool initialized = importer->Initialize(_filename, -1, _io_settings);
 
   ImportScene(importer, initialized, _password, _manager, _io_settings);
@@ -95,7 +95,7 @@ FbxSceneLoader::FbxSceneLoader(FbxStream* _stream, const char* _password,
                                const FbxDefaultIOSettings& _io_settings)
     : scene_(nullptr), converter_(nullptr) {
   // Create an importer.
-  FbxImporter* importer = FbxImporter::Create(_manager, "ozz stream importer");
+  FbxImporter* importer = FbxImporter::Create(_manager, "vox stream importer");
   const bool initialized =
       importer->Initialize(_stream, nullptr, -1, _io_settings);
 
@@ -116,21 +116,21 @@ void FbxSceneLoader::ImportScene(FbxImporter* _importer,
   if (!_initialized)  // Problem with the file to be imported.
   {
     const FbxString error = _importer->GetStatus().GetErrorString();
-    ozz::log::Err() << "FbxImporter initialization failed with error: "
+    vox::log::Err() << "FbxImporter initialization failed with error: "
                     << error.Buffer() << std::endl;
 
     if (_importer->GetStatus().GetCode() == FbxStatus::eInvalidFileVersion) {
-      ozz::log::Err() << "FBX file version is " << major << "." << minor << "."
+      vox::log::Err() << "FBX file version is " << major << "." << minor << "."
                       << revision << "." << std::endl;
     }
   } else {
     if (_importer->IsFBX()) {
-      ozz::log::Log() << "FBX file version is " << major << "." << minor << "."
+      vox::log::Log() << "FBX file version is " << major << "." << minor << "."
                       << revision << "." << std::endl;
     }
 
     // Load the scene.
-    scene_ = FbxScene::Create(_manager, "ozz scene");
+    scene_ = FbxScene::Create(_manager, "vox scene");
     bool imported = _importer->Import(scene_);
 
     if (!imported &&  // The import file may have a password
@@ -143,7 +143,7 @@ void FbxSceneLoader::ImportScene(FbxImporter* _importer,
 
       if (!imported &&
           _importer->GetStatus().GetCode() == FbxStatus::ePasswordError) {
-        ozz::log::Err() << "Incorrect password." << std::endl;
+        vox::log::Err() << "Incorrect password." << std::endl;
 
         // scene_ will be destroyed because imported is false.
       }
@@ -171,16 +171,16 @@ FbxSceneLoader::~FbxSceneLoader() {
   }
 
   if (converter_) {
-    ozz::Delete(converter_);
+    vox::Delete(converter_);
     converter_ = nullptr;
   }
 }
 
 namespace {
-ozz::math::Float4x4 BuildAxisSystemMatrix(const FbxAxisSystem& _system) {
+vox::math::Float4x4 BuildAxisSystemMatrix(const FbxAxisSystem& _system) {
   int sign;
-  ozz::math::SimdFloat4 up = ozz::math::simd_float4::y_axis();
-  ozz::math::SimdFloat4 at = ozz::math::simd_float4::z_axis();
+  vox::math::SimdFloat4 up = vox::math::simd_float4::y_axis();
+  vox::math::SimdFloat4 at = vox::math::simd_float4::z_axis();
 
   // The EUpVector specifies which axis has the up and down direction in the
   // system (typically this is the Y or Z axis). The sign of the EUpVector is
@@ -232,15 +232,15 @@ ozz::math::Float4x4 BuildAxisSystemMatrix(const FbxAxisSystem& _system) {
   // parameter to determine the direction of the third axis just as the
   // EUpVector sign. It determines if the axis system is right-handed or
   // left-handed just as the enum values.
-  ozz::math::SimdFloat4 right;
+  vox::math::SimdFloat4 right;
   if (_system.GetCoorSystem() == FbxAxisSystem::eRightHanded) {
     right = math::Cross3(up, at);
   } else {
     right = math::Cross3(at, up);
   }
 
-  const ozz::math::Float4x4 matrix = {
-      {right, up, at, ozz::math::simd_float4::w_axis()}};
+  const vox::math::Float4x4 matrix = {
+      {right, up, at, vox::math::simd_float4::w_axis()}};
 
   return matrix;
 }
@@ -263,17 +263,17 @@ FbxSystemConverter::FbxSystemConverter(const FbxAxisSystem& _from_axis,
 }
 
 math::Float4x4 FbxSystemConverter::ConvertMatrix(const FbxAMatrix& _m) const {
-  const ozz::math::Float4x4 m = {{
-      ozz::math::simd_float4::Load(
+  const vox::math::Float4x4 m = {{
+      vox::math::simd_float4::Load(
           static_cast<float>(_m[0][0]), static_cast<float>(_m[0][1]),
           static_cast<float>(_m[0][2]), static_cast<float>(_m[0][3])),
-      ozz::math::simd_float4::Load(
+      vox::math::simd_float4::Load(
           static_cast<float>(_m[1][0]), static_cast<float>(_m[1][1]),
           static_cast<float>(_m[1][2]), static_cast<float>(_m[1][3])),
-      ozz::math::simd_float4::Load(
+      vox::math::simd_float4::Load(
           static_cast<float>(_m[2][0]), static_cast<float>(_m[2][1]),
           static_cast<float>(_m[2][2]), static_cast<float>(_m[2][3])),
-      ozz::math::simd_float4::Load(
+      vox::math::simd_float4::Load(
           static_cast<float>(_m[3][0]), static_cast<float>(_m[3][1]),
           static_cast<float>(_m[3][2]), static_cast<float>(_m[3][3])),
   }};
@@ -308,7 +308,7 @@ bool FbxSystemConverter::ConvertTransform(const FbxAMatrix& _m,
 
   math::SimdFloat4 translation, rotation, scale;
   if (ToAffine(matrix, &translation, &rotation, &scale)) {
-    ozz::math::Transform transform;
+    vox::math::Transform transform;
     math::Store3PtrU(translation, &_transform->translation.x);
     math::StorePtrU(math::Normalize4(rotation), &_transform->rotation.x);
     math::Store3PtrU(scale, &_transform->scale.x);
@@ -316,10 +316,10 @@ bool FbxSystemConverter::ConvertTransform(const FbxAMatrix& _m,
   }
 
   // Failed to decompose matrix, reset transform to identity.
-  *_transform = ozz::math::Transform::identity();
+  *_transform = vox::math::Transform::identity();
   return false;
 }
 }  // namespace fbx
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

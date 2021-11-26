@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -33,9 +33,9 @@
 #include "maths/math_ex.h"
 #include "maths/simd_quaternion.h"
 
-using namespace ozz::math;
+using namespace vox::math;
 
-namespace ozz {
+namespace vox {
 namespace animation {
 IKTwoBoneJob::IKTwoBoneJob()
     : target(math::simd_float4::zero()),
@@ -55,7 +55,7 @@ bool IKTwoBoneJob::Validate() const {
   bool valid = true;
   valid &= start_joint && mid_joint && end_joint;
   valid &= start_joint_correction && mid_joint_correction;
-  valid &= ozz::math::AreAllTrue1(ozz::math::IsNormalizedEst3(mid_axis));
+  valid &= vox::math::AreAllTrue1(vox::math::IsNormalizedEst3(mid_axis));
   return valid;
 }
 
@@ -70,7 +70,7 @@ struct IKConstantSetup {
     m_one = Xor(one, mask_sign);
 
     // Computes inverse matrices required to change to start and mid spaces.
-    // If matrices aren't invertible, they'll be all 0 (ozz::math
+    // If matrices aren't invertible, they'll be all 0 (vox::math
     // implementation), which will result in identity correction quaternions.
     SimdInt4 invertible;
     (void)invertible;
@@ -260,19 +260,19 @@ SimdQuaternion ComputeStartJoint(const IKTwoBoneJob& _job,
   SimdQuaternion start_rot_ss = end_to_target_rot_ss;
   if (AreAllTrue1(CmpGt(_start_target_ss_len2, simd_float4::zero()))) {
     // Computes each plane normal.
-    const ozz::math::SimdFloat4 ref_plane_normal_ss =
+    const vox::math::SimdFloat4 ref_plane_normal_ss =
         Cross3(_start_target_ss, pole_ss);
-    const ozz::math::SimdFloat4 ref_plane_normal_ss_len2 =
-        ozz::math::Length3Sqr(ref_plane_normal_ss);
+    const vox::math::SimdFloat4 ref_plane_normal_ss_len2 =
+        vox::math::Length3Sqr(ref_plane_normal_ss);
     // Computes joint chain plane normal, which is the same as mid joint axis
     // (same triangle).
-    const ozz::math::SimdFloat4 mid_axis_ss =
+    const vox::math::SimdFloat4 mid_axis_ss =
         TransformVector(_setup.inv_start_joint,
                         TransformVector(*_job.mid_joint, _job.mid_axis));
-    const ozz::math::SimdFloat4 joint_plane_normal_ss =
+    const vox::math::SimdFloat4 joint_plane_normal_ss =
         TransformVector(end_to_target_rot_ss, mid_axis_ss);
-    const ozz::math::SimdFloat4 joint_plane_normal_ss_len2 =
-        ozz::math::Length3Sqr(joint_plane_normal_ss);
+    const vox::math::SimdFloat4 joint_plane_normal_ss_len2 =
+        vox::math::Length3Sqr(joint_plane_normal_ss);
     // Computes all reciprocal square roots at once.
     const SimdFloat4 rsqrts =
         RSqrtEstNR(SetZ(SetY(_start_target_ss_len2, ref_plane_normal_ss_len2),
@@ -280,7 +280,7 @@ SimdQuaternion ComputeStartJoint(const IKTwoBoneJob& _job,
 
     // Computes angle cosine between the 2 normalized normals.
     const SimdFloat4 rotate_plane_cos_angle =
-        ozz::math::Dot3(ref_plane_normal_ss * SplatY(rsqrts),
+        vox::math::Dot3(ref_plane_normal_ss * SplatY(rsqrts),
                         joint_plane_normal_ss * SplatZ(rsqrts));
 
     // Computes rotation axis, which is either start_target_ss or
@@ -389,4 +389,4 @@ bool IKTwoBoneJob::Run() const {
   return true;
 }
 }  // namespace animation
-}  // namespace ozz
+}  // namespace vox

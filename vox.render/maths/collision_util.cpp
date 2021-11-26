@@ -10,7 +10,7 @@
 #include "bounding_sphere.h"
 #include "ray.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 namespace collision_util {
 float distancePlaneAndPoint(const Plane &plane, const Float3 &point) {

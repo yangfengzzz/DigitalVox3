@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -40,11 +40,11 @@
 #include "offline/animation/skeleton_builder.h"
 #include "runtime/animation/skeleton.h"
 
-using ozz::animation::Skeleton;
-using ozz::animation::offline::AnimationOptimizer;
-using ozz::animation::offline::RawAnimation;
-using ozz::animation::offline::RawSkeleton;
-using ozz::animation::offline::SkeletonBuilder;
+using vox::animation::Skeleton;
+using vox::animation::offline::AnimationOptimizer;
+using vox::animation::offline::RawAnimation;
+using vox::animation::offline::RawSkeleton;
+using vox::animation::offline::SkeletonBuilder;
 
 TEST(Error, AnimationOptimizer) {
   AnimationOptimizer optimizer;
@@ -62,7 +62,7 @@ TEST(Error, AnimationOptimizer) {
     RawSkeleton raw_skeleton;
     raw_skeleton.roots.resize(1);
     SkeletonBuilder skeleton_builder;
-    ozz::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
+    vox::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
     ASSERT_TRUE(skeleton);
 
     RawAnimation input;
@@ -97,7 +97,7 @@ TEST(Name, AnimationOptimizer) {
   // Prepares a skeleton.
   RawSkeleton raw_skeleton;
   SkeletonBuilder skeleton_builder;
-  ozz::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   AnimationOptimizer optimizer;
@@ -122,7 +122,7 @@ TEST(Optimize, AnimationOptimizer) {
   raw_skeleton.roots[0].children[0].children.resize(1);
   raw_skeleton.roots[0].children[0].children[0].children.resize(2);
   SkeletonBuilder skeleton_builder;
-  ozz::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   // Disable non hierarchical optimizations
@@ -137,42 +137,42 @@ TEST(Optimize, AnimationOptimizer) {
 
   // Translations on track 0.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(4.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(4.f, 0.f, 0.f)};
     input.tracks[0].translations.push_back(key);
   }
 
   // Translations on track 1.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(0.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(0.f, 0.f, 0.f)};
     input.tracks[1].translations.push_back(key);
   }
 
   // Translations on track 2.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(5.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(5.f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
   {
-    RawAnimation::TranslationKey key = {.1f, ozz::math::Float3(6.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {.1f, vox::math::Float3(6.f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
   {  // Creates an variation.
-    RawAnimation::TranslationKey key = {.2f, ozz::math::Float3(7.1f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {.2f, vox::math::Float3(7.1f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
   {
-    RawAnimation::TranslationKey key = {.3f, ozz::math::Float3(8.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {.3f, vox::math::Float3(8.f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
 
   // Translations on track 3.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(16.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(16.f, 0.f, 0.f)};
     input.tracks[3].translations.push_back(key);
   }
   // Translations on track 4.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(32.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(32.f, 0.f, 0.f)};
     input.tracks[4].translations.push_back(key);
   }
 
@@ -211,7 +211,7 @@ TEST(Optimize, AnimationOptimizer) {
   // Introduces a 10x scaling upstream that amplifies error
   // Scaling on track 0
   {
-    RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(10.f, 0.f, 0.f)};
+    RawAnimation::ScaleKey key = {0.f, vox::math::Float3(10.f, 0.f, 0.f)};
     input.tracks[0].scales.push_back(key);
   }
 
@@ -242,7 +242,7 @@ TEST(Optimize, AnimationOptimizer) {
 
   // Introduces a -10x scaling upstream that amplifies error
   // Scaling on track 0
-  { input.tracks[0].scales[0].value = ozz::math::Float3(0.f, -10.f, 0.f); }
+  { input.tracks[0].scales[0].value = vox::math::Float3(0.f, -10.f, 0.f); }
 
   // High translation tolerance -> keys aren't interpolated because of scale
   // effect.
@@ -277,7 +277,7 @@ TEST(Optimize, AnimationOptimizer) {
 
   // Compenstate scale on next joint
   {
-    RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(.1f, 0.f, 0.f)};
+    RawAnimation::ScaleKey key = {0.f, vox::math::Float3(.1f, 0.f, 0.f)};
     input.tracks[1].scales.push_back(key);
   }
 
@@ -299,7 +299,7 @@ TEST(Optimize, AnimationOptimizer) {
 
   // Introduces a .1x scaling upstream that amplifies error
   // Scaling on track 0
-  { input.tracks[0].scales[0].value = ozz::math::Float3(0.f, 0.f, .1f); }
+  { input.tracks[0].scales[0].value = vox::math::Float3(0.f, 0.f, .1f); }
 
   // High translation tolerance -> keys aren't interpolated because of scale
   // effect.
@@ -338,19 +338,19 @@ TEST(Optimize, AnimationOptimizer) {
   // Rotations on track 0.
   {
     RawAnimation::RotationKey key = {
-        0.f, ozz::math::Quaternion::FromEuler(0.f, 0.f, 0.f)};
+        0.f, vox::math::Quaternion::FromEuler(0.f, 0.f, 0.f)};
     input.tracks[0].rotations.push_back(key);
   }
   {                                     // Include error
     const float angle_error = 2.5e-3f;  // creates an arc of .1m at 40m.
     RawAnimation::RotationKey key = {
-        .1f, ozz::math::Quaternion::FromEuler(ozz::math::kPi_4 + angle_error,
+        .1f, vox::math::Quaternion::FromEuler(vox::math::kPi_4 + angle_error,
                                               0.f, 0.f)};
     input.tracks[0].rotations.push_back(key);
   }
   {
     RawAnimation::RotationKey key = {
-        .2f, ozz::math::Quaternion::FromEuler(ozz::math::kPi_2, 0.f, 0.f)};
+        .2f, vox::math::Quaternion::FromEuler(vox::math::kPi_2, 0.f, 0.f)};
     input.tracks[0].rotations.push_back(key);
   }
 
@@ -410,7 +410,7 @@ TEST(Optimize, AnimationOptimizer) {
   // Introduces a .1x scaling upstream that lowers error
   // Scaling on track 0
   {
-    RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(0.f, .1f, 0.f)};
+    RawAnimation::ScaleKey key = {0.f, vox::math::Float3(0.f, .1f, 0.f)};
     input.tracks[1].scales.push_back(key);
   }
 
@@ -459,7 +459,7 @@ TEST(OptimizeOverride, AnimationOptimizer) {
   raw_skeleton.roots[0].children[0].children.resize(1);
   raw_skeleton.roots[0].children[0].children[0].children.resize(2);
   SkeletonBuilder skeleton_builder;
-  ozz::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
+  vox::unique_ptr<Skeleton> skeleton(skeleton_builder(raw_skeleton));
   ASSERT_TRUE(skeleton);
 
   // Disable non hierarchical optimizations
@@ -475,63 +475,63 @@ TEST(OptimizeOverride, AnimationOptimizer) {
 
   // Translations on track 0.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(.4f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(.4f, 0.f, 0.f)};
     input.tracks[0].translations.push_back(key);
   }
 
   // Rotations on track 0.
   {
     RawAnimation::RotationKey key = {
-        0.f, ozz::math::Quaternion::FromEuler(0.f, 0.f, 0.f)};
+        0.f, vox::math::Quaternion::FromEuler(0.f, 0.f, 0.f)};
     input.tracks[1].rotations.push_back(key);
   }
   {                                   // Includes an error that
     const float angle_error = 1e-3f;  // creates an arc of 1mm at 1m.
     RawAnimation::RotationKey key = {
-        .1f, ozz::math::Quaternion::FromEuler(ozz::math::kPi_4 + angle_error,
+        .1f, vox::math::Quaternion::FromEuler(vox::math::kPi_4 + angle_error,
                                               0.f, 0.f)};
     input.tracks[1].rotations.push_back(key);
   }
   {
     RawAnimation::RotationKey key = {
-        .2f, ozz::math::Quaternion::FromEuler(ozz::math::kPi_2, 0.f, 0.f)};
+        .2f, vox::math::Quaternion::FromEuler(vox::math::kPi_2, 0.f, 0.f)};
     input.tracks[1].rotations.push_back(key);
   }
 
   // Translations on track 1.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(0.f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(0.f, 0.f, 0.f)};
     input.tracks[1].translations.push_back(key);
   }
 
   // Translations on track 2.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(.05f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(.05f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
   {
-    RawAnimation::TranslationKey key = {.1f, ozz::math::Float3(.06f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {.1f, vox::math::Float3(.06f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
   {  // Creates a variation.
     const float trans_err = 5e-4f;
     RawAnimation::TranslationKey key = {
-        .2f, ozz::math::Float3(.07f + trans_err, 0.f, 0.f)};
+        .2f, vox::math::Float3(.07f + trans_err, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
   {
-    RawAnimation::TranslationKey key = {.3f, ozz::math::Float3(.08f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {.3f, vox::math::Float3(.08f, 0.f, 0.f)};
     input.tracks[2].translations.push_back(key);
   }
 
   // Translations on track 3.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(.16f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(.16f, 0.f, 0.f)};
     input.tracks[3].translations.push_back(key);
   }
   // Translations on track 4.
   {
-    RawAnimation::TranslationKey key = {0.f, ozz::math::Float3(.32f, 0.f, 0.f)};
+    RawAnimation::TranslationKey key = {0.f, vox::math::Float3(.32f, 0.f, 0.f)};
     input.tracks[4].translations.push_back(key);
   }
 
@@ -621,7 +621,7 @@ TEST(OptimizeOverride, AnimationOptimizer) {
 
   // Scale at root affects rotation and translation.
   {
-    RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(.1f, 2.f, .1f)};
+    RawAnimation::ScaleKey key = {0.f, vox::math::Float3(.1f, 2.f, .1f)};
     input.tracks[0].scales.push_back(key);
 
     RawAnimation output;
@@ -647,7 +647,7 @@ TEST(OptimizeOverride, AnimationOptimizer) {
 
   // Scale at leaf doesn't affect anything but the leaf.
   {
-    RawAnimation::ScaleKey key = {0.f, ozz::math::Float3(.1f, 2.f, .1f)};
+    RawAnimation::ScaleKey key = {0.f, vox::math::Float3(.1f, 2.f, .1f)};
     input.tracks[4].scales.push_back(key);
 
     RawAnimation output;

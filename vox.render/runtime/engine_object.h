@@ -10,7 +10,7 @@
 
 #include "engine.h"
 
-namespace ozz {
+namespace vox {
 class EngineObject {
 public:
     /** Engine unique id. */

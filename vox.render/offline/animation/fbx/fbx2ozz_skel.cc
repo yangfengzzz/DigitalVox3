@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "fbx2ozz.h"
+#include "fbx2vox.h"
 
 #include "offline/animation/fbx/fbx.h"
 #include "offline/animation/fbx/fbx_skeleton.h"
@@ -34,22 +34,22 @@
 
 #include "log.h"
 
-bool Fbx2OzzImporter::Import(ozz::animation::offline::RawSkeleton* _skeleton,
+bool Fbx2VoxImporter::Import(vox::animation::offline::RawSkeleton* _skeleton,
                              const NodeType& _types) {
   if (!_skeleton) {
     return false;
   }
 
   // Reset skeleton.
-  *_skeleton = ozz::animation::offline::RawSkeleton();
+  *_skeleton = vox::animation::offline::RawSkeleton();
 
   if (!scene_loader_) {
     return false;
   }
 
-  if (!ozz::animation::offline::fbx::ExtractSkeleton(*scene_loader_, _types,
+  if (!vox::animation::offline::fbx::ExtractSkeleton(*scene_loader_, _types,
                                                      _skeleton)) {
-    ozz::log::Err() << "Fbx skeleton extraction failed." << std::endl;
+    vox::log::Err() << "Fbx skeleton extraction failed." << std::endl;
     return false;
   }
 

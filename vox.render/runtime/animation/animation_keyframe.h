@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_
-#define OZZ_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_
+#ifndef VOX_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_
+#define VOX_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_
 
 #include "platform.h"
-#ifndef OZZ_INCLUDE_PRIVATE_HEADER
+#ifndef VOX_INCLUDE_PRIVATE_HEADER
 #error "This header is private, it cannot be included from public headers."
-#endif  // OZZ_INCLUDE_PRIVATE_HEADER
+#endif  // VOX_INCLUDE_PRIVATE_HEADER
 
-namespace ozz {
+namespace vox {
 namespace animation {
 
 // Define animation key frame types (translation, rotation, scale). Every type
@@ -76,5 +76,5 @@ struct QuaternionKey {
 };
 
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_
+}  // namespace vox
+#endif  // VOX_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_

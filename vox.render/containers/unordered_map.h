@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_UNORDERED_MAP_H_
-#define OZZ_OZZ_BASE_CONTAINERS_UNORDERED_MAP_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_UNORDERED_MAP_H_
+#define VOX_VOX_BASE_CONTAINERS_UNORDERED_MAP_H_
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -41,22 +41,22 @@
 
 #include "containers/std_allocator.h"
 
-namespace ozz {
+namespace vox {
 
-// Redirects std::unordered_map to ozz::unordered_map in order to replace std
-// default allocator by ozz::StdAllocator.
+// Redirects std::unordered_map to vox::unordered_map in order to replace std
+// default allocator by vox::StdAllocator.
 template <class _Key, class _Ty, class _Hash = std::hash<_Key>,
           class _KeyEqual = std::equal_to<_Key>,
-          class _Allocator = ozz::StdAllocator<std::pair<const _Key, _Ty>>>
+          class _Allocator = vox::StdAllocator<std::pair<const _Key, _Ty>>>
 using unordered_map =
     std::unordered_map<_Key, _Ty, _Hash, _KeyEqual, _Allocator>;
 
-// Redirects std::unordered_multimap to ozz::UnorderedMultiMap in order to
-// replace std default allocator by ozz::StdAllocator.
+// Redirects std::unordered_multimap to vox::UnorderedMultiMap in order to
+// replace std default allocator by vox::StdAllocator.
 template <class _Key, class _Ty, class _Hash = std::hash<_Key>,
           class _KeyEqual = std::equal_to<_Key>,
-          class _Allocator = ozz::StdAllocator<std::pair<const _Key, _Ty>>>
+          class _Allocator = vox::StdAllocator<std::pair<const _Key, _Ty>>>
 using unordered_multimap =
     std::unordered_multimap<_Key, _Ty, _Hash, _KeyEqual, _Allocator>;
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_CONTAINERS_UNORDERED_MAP_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_CONTAINERS_UNORDERED_MAP_H_

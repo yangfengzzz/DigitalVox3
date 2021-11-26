@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -40,7 +40,7 @@
 #include "span.h"
 
 TEST(Vector, Containers) {
-  typedef ozz::vector<int> Container;
+  typedef vox::vector<int> Container;
   Container container;
   container.push_back(1);
   container.insert(container.begin(), 0);
@@ -55,7 +55,7 @@ TEST(Vector, Containers) {
 }
 
 TEST(VectorExtensions, Containers) {
-  typedef ozz::vector<int> Container;
+  typedef vox::vector<int> Container;
   Container container;
   int* null = nullptr;
 
@@ -93,7 +93,7 @@ TEST(VectorExtensions, Containers) {
 }
 
 TEST(Deque, Containers) {
-  typedef ozz::deque<int> Container;
+  typedef vox::deque<int> Container;
   Container container;
   container.push_back(1);
   container.push_front(0);
@@ -107,7 +107,7 @@ TEST(Deque, Containers) {
 }
 
 TEST(List, Containers) {
-  typedef ozz::list<int> Container;
+  typedef vox::list<int> Container;
   Container container;
   container.push_back(1);
   container.push_front(0);
@@ -120,7 +120,7 @@ TEST(List, Containers) {
 }
 
 TEST(Stack, Containers) {
-  typedef ozz::stack<int> Container;
+  typedef vox::stack<int> Container;
   Container container;
   container.push(1);
   container.push(2);
@@ -134,7 +134,7 @@ TEST(Stack, Containers) {
 
 TEST(Queue, Containers) {
   {
-    typedef ozz::queue<int> Container;
+    typedef vox::queue<int> Container;
     Container container;
     container.push(1);
     container.push(2);
@@ -147,7 +147,7 @@ TEST(Queue, Containers) {
     Container container2 = std::move(container);
   }
   {
-    typedef ozz::priority_queue<int> Container;
+    typedef vox::priority_queue<int> Container;
     Container container;
     container.push(1);
     container.push(2);
@@ -163,7 +163,7 @@ TEST(Queue, Containers) {
 
 TEST(Set, Containers) {
   {
-    typedef ozz::set<int> Container;
+    typedef vox::set<int> Container;
     Container container;
     EXPECT_TRUE(container.insert('c').second);
     EXPECT_TRUE(container.insert('a').second);
@@ -179,7 +179,7 @@ TEST(Set, Containers) {
     Container container2 = std::move(container);
   }
   {
-    typedef ozz::multiset<int> Container;
+    typedef vox::multiset<int> Container;
     Container container;
     container.insert('c');
     container.insert('a');
@@ -198,7 +198,7 @@ TEST(Set, Containers) {
 
 TEST(UnorderedSet, Containers) {
   {
-    typedef ozz::unordered_set<int> Container;
+    typedef vox::unordered_set<int> Container;
     Container container;
     EXPECT_TRUE(container.insert('c').second);
     EXPECT_TRUE(container.insert('a').second);
@@ -211,7 +211,7 @@ TEST(UnorderedSet, Containers) {
     container.clear();
   }
   {
-    typedef ozz::unordered_multiset<int> Container;
+    typedef vox::unordered_multiset<int> Container;
     Container container;
     container.insert('c');
     container.insert('a');
@@ -229,7 +229,7 @@ TEST(UnorderedSet, Containers) {
 
 TEST(Map, Containers) {
   {
-    typedef ozz::map<char, int> Container;
+    typedef vox::map<char, int> Container;
     Container container;
     container['a'] = -3;
     container['c'] = -1;
@@ -246,7 +246,7 @@ TEST(Map, Containers) {
     Container container2 = std::move(container);
   }
   {
-    typedef ozz::multimap<char, int> Container;
+    typedef vox::multimap<char, int> Container;
     Container container;
     container.insert(std::pair<char, int>('a', -3));
     container.insert(std::pair<char, int>('c', -1));
@@ -266,7 +266,7 @@ TEST(Map, Containers) {
 
 TEST(UnorderedMap, Containers) {
   {
-    typedef ozz::unordered_map<char, int> Container;
+    typedef vox::unordered_map<char, int> Container;
     Container container;
     container['a'] = -3;
     container['c'] = -1;
@@ -281,7 +281,7 @@ TEST(UnorderedMap, Containers) {
     container.clear();
   }
   {
-    typedef ozz::unordered_multimap<char, int> Container;
+    typedef vox::unordered_multimap<char, int> Container;
     Container container;
     container.insert(std::pair<char, int>('a', -3));
     container.insert(std::pair<char, int>('c', -1));
@@ -300,7 +300,7 @@ TEST(UnorderedMap, Containers) {
 }
 
 TEST(string, Containers) {
-  typedef ozz::string string;
+  typedef vox::string string;
   string str;
   EXPECT_EQ(str.size(), 0u);
   str += "a string";

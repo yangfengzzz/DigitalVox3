@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,10 +25,10 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_MATHS_RECT_H_
-#define OZZ_OZZ_BASE_MATHS_RECT_H_
+#ifndef VOX_VOX_BASE_MATHS_RECT_H_
+#define VOX_VOX_BASE_MATHS_RECT_H_
 
-namespace ozz {
+namespace vox {
 namespace math {
 
 // Defines a rectangle by the integer coordinates of its lower-left and
@@ -95,5 +95,5 @@ struct RectFloat {
   float height;
 };
 }  // namespace math
-}  // namespace ozz
-#endif  // OZZ_OZZ_BASE_MATHS_RECT_H_
+}  // namespace vox
+#endif  // VOX_VOX_BASE_MATHS_RECT_H_

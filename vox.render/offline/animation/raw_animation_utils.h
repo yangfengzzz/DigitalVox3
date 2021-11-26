@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
+#define VOX_VOX_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
 
 #include "offline/animation/raw_animation.h"
 
 #include "maths/transform.h"
 #include "span.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -50,19 +50,19 @@ math::Float3 LerpScale(const math::Float3& _a, const math::Float3& _b,
                        float _alpha);
 
 // Samples a RawAnimation track. This function shall be used for offline
-// purpose. Use ozz::animation::Animation and ozz::animation::SamplingJob for
+// purpose. Use vox::animation::Animation and vox::animation::SamplingJob for
 // runtime purpose.
 // Returns false if track is invalid.
 bool SampleTrack(const RawAnimation::JointTrack& _track, float _time,
-                 ozz::math::Transform* _transform);
+                 vox::math::Transform* _transform);
 
 // Samples a RawAnimation. This function shall be used for offline
-// purpose. Use ozz::animation::Animation and ozz::animation::SamplingJob for
+// purpose. Use vox::animation::Animation and vox::animation::SamplingJob for
 // runtime purpose.
 // _animation must be valid.
 // Returns false output range is too small or animation is invalid.
 bool SampleAnimation(const RawAnimation& _animation, float _time,
-                     const span<ozz::math::Transform>& _transforms);
+                     const span<vox::math::Transform>& _transforms);
 
 // Implement fixed rate keyframe time iteration. This utility purpose is to
 // ensure that sampling goes strictly from 0 to duration, and that period
@@ -75,7 +75,7 @@ class FixedRateSamplingTime {
 
   float time(size_t _key) const {
     assert(_key < num_keys_);
-    return ozz::math::Min(_key * period_, duration_);
+    return vox::math::Min(_key * period_, duration_);
   }
 
   size_t num_keys() const { return num_keys_; }
@@ -87,5 +87,5 @@ class FixedRateSamplingTime {
 };
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_RAW_ANIMATION_UTILS_H_

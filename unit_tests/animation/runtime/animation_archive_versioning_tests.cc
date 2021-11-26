@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -35,19 +35,19 @@
 #include "log.h"
 #include "options/options.h"
 
-OZZ_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)
-OZZ_OPTIONS_DECLARE_INT(tracks, "Number of tracks", 0, true)
-OZZ_OPTIONS_DECLARE_FLOAT(duration, "Duration", 0.f, true)
-OZZ_OPTIONS_DECLARE_STRING(name, "Name", "", true)
+VOX_OPTIONS_DECLARE_STRING(file, "Specifies input file", "", true)
+VOX_OPTIONS_DECLARE_INT(tracks, "Number of tracks", 0, true)
+VOX_OPTIONS_DECLARE_FLOAT(duration, "Duration", 0.f, true)
+VOX_OPTIONS_DECLARE_STRING(name, "Name", "", true)
 
 int main(int _argc, char** _argv) {
   // Parses arguments.
   testing::InitGoogleTest(&_argc, _argv);
-  ozz::options::ParseResult parse_result = ozz::options::ParseCommandLine(
+  vox::options::ParseResult parse_result = vox::options::ParseCommandLine(
       _argc, _argv, "1.0",
       "Test Animation archive versioning retrocompatibility");
-  if (parse_result != ozz::options::kSuccess) {
-    return parse_result == ozz::options::kExitSuccess ? EXIT_SUCCESS
+  if (parse_result != vox::options::kSuccess) {
+    return parse_result == vox::options::kExitSuccess ? EXIT_SUCCESS
                                                       : EXIT_FAILURE;
   }
 
@@ -57,15 +57,15 @@ int main(int _argc, char** _argv) {
 TEST(Versioning, AnimationSerialize) {
   // Open the file.
   const char* filename = OPTIONS_file;
-  ozz::io::File file(filename, "rb");
+  vox::io::File file(filename, "rb");
   ASSERT_TRUE(file.opened());
 
   // Open archive and test object tag.
-  ozz::io::IArchive archive(&file);
-  ASSERT_TRUE(archive.TestTag<ozz::animation::Animation>());
+  vox::io::IArchive archive(&file);
+  ASSERT_TRUE(archive.TestTag<vox::animation::Animation>());
 
   // Read the object.
-  ozz::animation::Animation animation;
+  vox::animation::Animation animation;
   archive >> animation;
 
   // More testing

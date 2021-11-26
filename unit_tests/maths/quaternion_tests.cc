@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,15 +32,15 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Float3;
-using ozz::math::Float4;
-using ozz::math::Quaternion;
+using vox::math::Float3;
+using vox::math::Float4;
+using vox::math::Quaternion;
 
-TEST(QuaternionConstant, ozz_math) {
+TEST(QuaternionConstant, vox_math) {
     EXPECT_QUATERNION_EQ(Quaternion::identity(), 0.f, 0.f, 0.f, 1.f);
 }
 
-TEST(QuaternionAxisAngle, ozz_math) {
+TEST(QuaternionAxisAngle, vox_math) {
     // Expect assertions from invalid inputs
     EXPECT_ASSERTION(Quaternion::FromAxisAngle(Float3::zero(), 0.f),
                      "axis is not normalized");
@@ -53,26 +53,26 @@ TEST(QuaternionAxisAngle, ozz_math) {
     
     // Other axis angles
     EXPECT_QUATERNION_EQ(
-                         Quaternion::FromAxisAngle(Float3::y_axis(), ozz::math::kPi_2), 0.f,
+                         Quaternion::FromAxisAngle(Float3::y_axis(), vox::math::kPi_2), 0.f,
                          .70710677f, 0.f, .70710677f);
     EXPECT_FLOAT4_EQ(ToAxisAngle(Quaternion(0.f, .70710677f, 0.f, .70710677f)),
-                     0.f, 1.f, 0.f, ozz::math::kPi_2);
+                     0.f, 1.f, 0.f, vox::math::kPi_2);
     
     EXPECT_QUATERNION_EQ(
-                         Quaternion::FromAxisAngle(Float3::y_axis(), -ozz::math::kPi_2), 0.f,
+                         Quaternion::FromAxisAngle(Float3::y_axis(), -vox::math::kPi_2), 0.f,
                          -.70710677f, 0.f, .70710677f);
     EXPECT_QUATERNION_EQ(
-                         Quaternion::FromAxisAngle(-Float3::y_axis(), ozz::math::kPi_2), 0.f,
+                         Quaternion::FromAxisAngle(-Float3::y_axis(), vox::math::kPi_2), 0.f,
                          -.70710677f, 0.f, .70710677f);
     EXPECT_FLOAT4_EQ(ToAxisAngle(Quaternion(0.f, -.70710677f, 0.f, .70710677f)),
-                     0.f, -1.f, 0.f, ozz::math::kPi_2);
+                     0.f, -1.f, 0.f, vox::math::kPi_2);
     
     EXPECT_QUATERNION_EQ(
-                         Quaternion::FromAxisAngle(Float3::y_axis(), 3.f * ozz::math::kPi_4), 0.f,
+                         Quaternion::FromAxisAngle(Float3::y_axis(), 3.f * vox::math::kPi_4), 0.f,
                          0.923879504f, 0.f, 0.382683426f);
     EXPECT_FLOAT4_EQ(
                      ToAxisAngle(Quaternion(0.f, 0.923879504f, 0.f, 0.382683426f)), 0.f, 1.f,
-                     0.f, 3.f * ozz::math::kPi_4);
+                     0.f, 3.f * vox::math::kPi_4);
     
     EXPECT_QUATERNION_EQ(
                          Quaternion::FromAxisAngle(Float3(.819865f, .033034f, -.571604f), 1.123f),
@@ -82,7 +82,7 @@ TEST(QuaternionAxisAngle, ozz_math) {
                      .819865f, .033034f, -.571604f, 1.123f);
 }
 
-TEST(QuaternionAxisCosAngle, ozz_math) {
+TEST(QuaternionAxisCosAngle, vox_math) {
     // Expect assertions from invalid inputs
     EXPECT_ASSERTION(Quaternion::FromAxisCosAngle(Float3::zero(), 0.f),
                      "axis is not normalized");
@@ -97,14 +97,14 @@ TEST(QuaternionAxisCosAngle, ozz_math) {
     
     // Other axis angles
     EXPECT_QUATERNION_EQ(Quaternion::FromAxisCosAngle(Float3::y_axis(),
-                                                      std::cos(ozz::math::kPi_2)),
+                                                      std::cos(vox::math::kPi_2)),
                          0.f, .70710677f, 0.f, .70710677f);
     EXPECT_QUATERNION_EQ(Quaternion::FromAxisCosAngle(-Float3::y_axis(),
-                                                      std::cos(ozz::math::kPi_2)),
+                                                      std::cos(vox::math::kPi_2)),
                          0.f, -.70710677f, 0.f, .70710677f);
     
     EXPECT_QUATERNION_EQ(Quaternion::FromAxisCosAngle(
-                                                      Float3::y_axis(), std::cos(3.f * ozz::math::kPi_4)),
+                                                      Float3::y_axis(), std::cos(3.f * vox::math::kPi_4)),
                          0.f, 0.923879504f, 0.f, 0.382683426f);
     
     EXPECT_QUATERNION_EQ(
@@ -113,41 +113,41 @@ TEST(QuaternionAxisCosAngle, ozz_math) {
                          .4365425f, .017589169f, -.30435428f, .84645736f);
 }
 
-TEST(QuaternionQuaternionEuler, ozz_math) {
+TEST(QuaternionQuaternionEuler, vox_math) {
     // Identity
     EXPECT_QUATERNION_EQ(Quaternion::FromEuler(0.f, 0.f, 0.f), 0.f, 0.f, 0.f,
                          1.f);
     EXPECT_FLOAT3_EQ(ToEuler(Quaternion::identity()), 0.f, 0.f, 0.f);
     
     // Heading
-    EXPECT_QUATERNION_EQ(Quaternion::FromEuler(ozz::math::kPi_2, 0.f, 0.f), 0.f,
+    EXPECT_QUATERNION_EQ(Quaternion::FromEuler(vox::math::kPi_2, 0.f, 0.f), 0.f,
                          .70710677f, 0.f, .70710677f);
     EXPECT_FLOAT3_EQ(ToEuler(Quaternion(0.f, .70710677f, 0.f, .70710677f)),
-                     ozz::math::kPi_2, 0.f, 0.f);
+                     vox::math::kPi_2, 0.f, 0.f);
     
     // Elevation
-    EXPECT_QUATERNION_EQ(Quaternion::FromEuler(0.f, ozz::math::kPi_2, 0.f), 0.f,
+    EXPECT_QUATERNION_EQ(Quaternion::FromEuler(0.f, vox::math::kPi_2, 0.f), 0.f,
                          0.f, .70710677f, .70710677f);
     EXPECT_FLOAT3_EQ(ToEuler(Quaternion(0.f, 0.f, .70710677f, .70710677f)), 0.f,
-                     ozz::math::kPi_2, 0.f);
+                     vox::math::kPi_2, 0.f);
     
     // Bank
-    EXPECT_QUATERNION_EQ(Quaternion::FromEuler(0.f, 0.f, ozz::math::kPi_2),
+    EXPECT_QUATERNION_EQ(Quaternion::FromEuler(0.f, 0.f, vox::math::kPi_2),
                          .70710677f, 0.f, 0.f, .70710677f);
     EXPECT_FLOAT3_EQ(ToEuler(Quaternion(.70710677f, 0.f, 0.f, .70710677f)), 0.f,
-                     0.f, ozz::math::kPi_2);
+                     0.f, vox::math::kPi_2);
     
     // Any rotation
     EXPECT_QUATERNION_EQ(
-                         Quaternion::FromEuler(ozz::math::kPi / 4.f, -ozz::math::kPi / 6.f,
-                                               ozz::math::kPi_2),
+                         Quaternion::FromEuler(vox::math::kPi / 4.f, -vox::math::kPi / 6.f,
+                                               vox::math::kPi_2),
                          .56098551f, .092295974f, -0.43045932f, .70105737f);
     EXPECT_FLOAT3_EQ(
                      ToEuler(Quaternion(.56098551f, .092295974f, -0.43045932f, .70105737f)),
-                     ozz::math::kPi / 4.f, -ozz::math::kPi / 6.f, ozz::math::kPi_2);
+                     vox::math::kPi / 4.f, -vox::math::kPi / 6.f, vox::math::kPi_2);
 }
 
-TEST(QuaternionFromVectors, ozz_math) {
+TEST(QuaternionFromVectors, vox_math) {
     // Returns identity for a 0 length vector
     EXPECT_QUATERNION_EQ(
                          Quaternion::FromVectors(Float3::zero(), Float3::x_axis()), 0.f, 0.f, 0.f,
@@ -233,7 +233,7 @@ TEST(QuaternionFromVectors, ozz_math) {
                          0.f, -0.707106769f, 0.707106769f, 0);
 }
 
-TEST(QuaternionFromUnitVectors, ozz_math) {
+TEST(QuaternionFromUnitVectors, vox_math) {
     // assert 0 length vectors
     EXPECT_ASSERTION(
                      Quaternion::FromUnitVectors(Float3::zero(), Float3::x_axis()),
@@ -309,22 +309,22 @@ TEST(QuaternionFromUnitVectors, ozz_math) {
                          0.f, -0.707106769f, 0.707106769f, 0);
 }
 
-TEST(QuaternionCompare, ozz_math) {
+TEST(QuaternionCompare, vox_math) {
     EXPECT_TRUE(Quaternion::identity() == Quaternion(0.f, 0.f, 0.f, 1.f));
     EXPECT_TRUE(Quaternion::identity() != Quaternion(1.f, 0.f, 0.f, 0.f));
     EXPECT_TRUE(Compare(Quaternion::identity(), Quaternion::identity(), std::cos(.5f * 0.f)));
     EXPECT_TRUE(Compare(Quaternion::identity(),
-                        Quaternion::FromEuler(0.f, 0.f, ozz::math::kPi / 100.f),
-                        std::cos(.5f * ozz::math::kPi / 50.f)));
+                        Quaternion::FromEuler(0.f, 0.f, vox::math::kPi / 100.f),
+                        std::cos(.5f * vox::math::kPi / 50.f)));
     EXPECT_TRUE(Compare(Quaternion::identity(),
-                        -Quaternion::FromEuler(0.f, 0.f, ozz::math::kPi / 100.f),
-                        std::cos(.5f * ozz::math::kPi / 50.f)));
+                        -Quaternion::FromEuler(0.f, 0.f, vox::math::kPi / 100.f),
+                        std::cos(.5f * vox::math::kPi / 50.f)));
     EXPECT_FALSE(Compare(Quaternion::identity(),
-                         Quaternion::FromEuler(0.f, 0.f, ozz::math::kPi / 100.f),
-                         std::cos(.5f * ozz::math::kPi / 200.f)));
+                         Quaternion::FromEuler(0.f, 0.f, vox::math::kPi / 100.f),
+                         std::cos(.5f * vox::math::kPi / 200.f)));
 }
 
-TEST(QuaternionArithmetic, ozz_math) {
+TEST(QuaternionArithmetic, vox_math) {
     const Quaternion a(.70710677f, 0.f, 0.f, .70710677f);
     const Quaternion b(0.f, .70710677f, 0.f, .70710677f);
     const Quaternion c(0.f, .70710677f, 0.f, -.70710677f);
@@ -436,7 +436,7 @@ TEST(QuaternionArithmetic, ozz_math) {
     EXPECT_FLOAT_EQ(dot, .5f);
 }
 
-TEST(QuaternionTransformVector, ozz_math) {
+TEST(QuaternionTransformVector, vox_math) {
     // 0 length
     EXPECT_FLOAT3_EQ(
                      TransformVector(Quaternion::FromAxisAngle(Float3::y_axis(), 0.f),
@@ -449,21 +449,21 @@ TEST(QuaternionTransformVector, ozz_math) {
                                      Float3::z_axis()),
                      0, 0, 1);
     EXPECT_FLOAT3_EQ(TransformVector(Quaternion::FromAxisAngle(Float3::y_axis(),
-                                                               ozz::math::kPi_2),
+                                                               vox::math::kPi_2),
                                      Float3::y_axis()),
                      0, 1, 0);
     EXPECT_FLOAT3_EQ(TransformVector(Quaternion::FromAxisAngle(Float3::y_axis(),
-                                                               ozz::math::kPi_2),
+                                                               vox::math::kPi_2),
                                      Float3::x_axis()),
                      0, 0, -1);
     EXPECT_FLOAT3_EQ(TransformVector(Quaternion::FromAxisAngle(Float3::y_axis(),
-                                                               ozz::math::kPi_2),
+                                                               vox::math::kPi_2),
                                      Float3::z_axis()),
                      1, 0, 0);
     
     // Non unit
     EXPECT_FLOAT3_EQ(TransformVector(Quaternion::FromAxisAngle(Float3::z_axis(),
-                                                               ozz::math::kPi_2),
+                                                               vox::math::kPi_2),
                                      Float3::x_axis() * 2),
                      0, 2, 0);
 }

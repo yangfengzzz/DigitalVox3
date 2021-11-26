@@ -13,9 +13,9 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-using ozz::math::Float3;
-using ozz::math::Quaternion;
-using ozz::math::Matrix3x3;
+using vox::math::Float3;
+using vox::math::Quaternion;
+using vox::math::Matrix3x3;
 
 TEST(Quaternion, add) {
     const auto a = Quaternion(2, 3, 4, 1);
@@ -47,7 +47,7 @@ TEST(Quaternion, dot) {
 
 TEST(Quaternion, equals) {
     const auto a = Quaternion(1, 2, 3, 4);
-    const auto b = Quaternion(1 + ozz::math::kNormalizationToleranceSq * 0.9, 2, 3, 4);
+    const auto b = Quaternion(1 + vox::math::kNormalizationToleranceSq * 0.9, 2, 3, 4);
     
     EXPECT_QUATERNION_EQ(a, b.x, b.y, b.z, b.w);
 }

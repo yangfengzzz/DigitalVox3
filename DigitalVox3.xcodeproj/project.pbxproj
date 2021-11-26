@@ -360,17 +360,17 @@
 		04CE3743274D0EB900204B8E /* raw_track.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = raw_track.cc; sourceTree = "<group>"; };
 		04CE3744274D0EB900204B8E /* track_builder.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = track_builder.cc; sourceTree = "<group>"; };
 		04CE3745274D0EB900204B8E /* raw_animation_archive.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = raw_animation_archive.cc; sourceTree = "<group>"; };
-		04CE3752274D0F1700204B8E /* import2ozz_skel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2ozz_skel.h; sourceTree = "<group>"; };
-		04CE3753274D0F1700204B8E /* import2ozz_anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2ozz_anim.h; sourceTree = "<group>"; };
-		04CE3754274D0F1700204B8E /* import2ozz_skel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2ozz_skel.cc; sourceTree = "<group>"; };
-		04CE3755274D0F1700204B8E /* import2ozz_anim.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2ozz_anim.cc; sourceTree = "<group>"; };
-		04CE3756274D0F1700204B8E /* dump2ozz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dump2ozz.cc; sourceTree = "<group>"; };
-		04CE3757274D0F1700204B8E /* import2ozz_config.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2ozz_config.cc; sourceTree = "<group>"; };
-		04CE3758274D0F1700204B8E /* import2ozz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2ozz.h; sourceTree = "<group>"; };
-		04CE3759274D0F1700204B8E /* import2ozz_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2ozz_config.h; sourceTree = "<group>"; };
-		04CE375A274D0F1700204B8E /* import2ozz_track.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2ozz_track.cc; sourceTree = "<group>"; };
-		04CE375B274D0F1700204B8E /* import2ozz_track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2ozz_track.h; sourceTree = "<group>"; };
-		04CE375C274D0F1700204B8E /* import2ozz.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2ozz.cc; sourceTree = "<group>"; };
+		04CE3752274D0F1700204B8E /* import2vox_skel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2vox_skel.h; sourceTree = "<group>"; };
+		04CE3753274D0F1700204B8E /* import2vox_anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2vox_anim.h; sourceTree = "<group>"; };
+		04CE3754274D0F1700204B8E /* import2vox_skel.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2vox_skel.cc; sourceTree = "<group>"; };
+		04CE3755274D0F1700204B8E /* import2vox_anim.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2vox_anim.cc; sourceTree = "<group>"; };
+		04CE3756274D0F1700204B8E /* dump2vox.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dump2vox.cc; sourceTree = "<group>"; };
+		04CE3757274D0F1700204B8E /* import2vox_config.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2vox_config.cc; sourceTree = "<group>"; };
+		04CE3758274D0F1700204B8E /* import2vox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2vox.h; sourceTree = "<group>"; };
+		04CE3759274D0F1700204B8E /* import2vox_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2vox_config.h; sourceTree = "<group>"; };
+		04CE375A274D0F1700204B8E /* import2vox_track.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2vox_track.cc; sourceTree = "<group>"; };
+		04CE375B274D0F1700204B8E /* import2vox_track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = import2vox_track.h; sourceTree = "<group>"; };
+		04CE375C274D0F1700204B8E /* import2vox.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = import2vox.cc; sourceTree = "<group>"; };
 		04CE3763274D0F5000204B8E /* fbx_skeleton.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fbx_skeleton.cc; sourceTree = "<group>"; };
 		04CE3764274D0F5000204B8E /* fbx2ozz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fbx2ozz.h; sourceTree = "<group>"; };
 		04CE3765274D0F5000204B8E /* fbx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fbx.h; sourceTree = "<group>"; };
@@ -781,17 +781,17 @@
 			children = (
 				04CE3778274D125D00204B8E /* json */,
 				04CE377B274D127C00204B8E /* jsoncpp.cpp */,
-				04CE3756274D0F1700204B8E /* dump2ozz.cc */,
-				04CE3758274D0F1700204B8E /* import2ozz.h */,
-				04CE375C274D0F1700204B8E /* import2ozz.cc */,
-				04CE3759274D0F1700204B8E /* import2ozz_config.h */,
-				04CE3757274D0F1700204B8E /* import2ozz_config.cc */,
-				04CE3752274D0F1700204B8E /* import2ozz_skel.h */,
-				04CE3754274D0F1700204B8E /* import2ozz_skel.cc */,
-				04CE3753274D0F1700204B8E /* import2ozz_anim.h */,
-				04CE3755274D0F1700204B8E /* import2ozz_anim.cc */,
-				04CE375B274D0F1700204B8E /* import2ozz_track.h */,
-				04CE375A274D0F1700204B8E /* import2ozz_track.cc */,
+				04CE3756274D0F1700204B8E /* dump2vox.cc */,
+				04CE3758274D0F1700204B8E /* import2vox.h */,
+				04CE375C274D0F1700204B8E /* import2vox.cc */,
+				04CE3759274D0F1700204B8E /* import2vox_config.h */,
+				04CE3757274D0F1700204B8E /* import2vox_config.cc */,
+				04CE3752274D0F1700204B8E /* import2vox_skel.h */,
+				04CE3754274D0F1700204B8E /* import2vox_skel.cc */,
+				04CE3753274D0F1700204B8E /* import2vox_anim.h */,
+				04CE3755274D0F1700204B8E /* import2vox_anim.cc */,
+				04CE375B274D0F1700204B8E /* import2vox_track.h */,
+				04CE375A274D0F1700204B8E /* import2vox_track.cc */,
 			);
 			path = tools;
 			sourceTree = "<group>";

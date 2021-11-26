@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_TRAIT_H_
-#define OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_TRAIT_H_
+#ifndef VOX_VOX_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_TRAIT_H_
+#define VOX_VOX_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_TRAIT_H_
 
 // Defines iterator traits required to use TrackTriggeringJob::Iterator
 // with stl algorithms.
@@ -40,12 +40,12 @@
 // Specializes std::iterator_traits.
 namespace std {
 template <>
-struct iterator_traits<ozz::animation::TrackTriggeringJob::Iterator> {
+struct iterator_traits<vox::animation::TrackTriggeringJob::Iterator> {
   typedef ptrdiff_t difference_type;
-  typedef ozz::animation::TrackTriggeringJob::Edge value_type;
-  typedef const ozz::animation::TrackTriggeringJob::Edge* pointer;
-  typedef const ozz::animation::TrackTriggeringJob::Edge& reference;
+  typedef vox::animation::TrackTriggeringJob::Edge value_type;
+  typedef const vox::animation::TrackTriggeringJob::Edge* pointer;
+  typedef const vox::animation::TrackTriggeringJob::Edge& reference;
   typedef forward_iterator_tag iterator_category;
 };
 }  // namespace std
-#endif  // OZZ_OZZ_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_TRAIT_H_
+#endif  // VOX_VOX_ANIMATION_RUNTIME_TRACK_TRIGGERING_JOB_TRAIT_H_

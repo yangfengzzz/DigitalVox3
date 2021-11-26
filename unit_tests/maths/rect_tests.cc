@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -31,8 +31,8 @@
 
 #include "gtest_helper.h"
 
-TEST(RectInt, ozz_math) {
-    ozz::math::RectInt rect(10, 20, 30, 40);
+TEST(RectInt, vox_math) {
+    vox::math::RectInt rect(10, 20, 30, 40);
     
     EXPECT_EQ(rect.right(), 40);
     EXPECT_EQ(rect.top(), 60);
@@ -46,8 +46,8 @@ TEST(RectInt, ozz_math) {
     EXPECT_FALSE(rect.is_inside(39, 60));
 }
 
-TEST(RectFloat, ozz_math) {
-    ozz::math::RectFloat rect(10.f, 20.f, 30.f, 40.f);
+TEST(RectFloat, vox_math) {
+    vox::math::RectFloat rect(10.f, 20.f, 30.f, 40.f);
     
     EXPECT_FLOAT_EQ(rect.right(), 40.f);
     EXPECT_FLOAT_EQ(rect.top(), 60.f);

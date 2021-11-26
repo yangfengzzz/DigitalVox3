@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -31,30 +31,30 @@
 
 #include "io/archive.h"
 
-void Intrusive::Save(ozz::io::OArchive& _archive) const { _archive << i; }
+void Intrusive::Save(vox::io::OArchive& _archive) const { _archive << i; }
 
-void Intrusive::Load(ozz::io::IArchive& _archive, uint32_t _version) {
+void Intrusive::Load(vox::io::IArchive& _archive, uint32_t _version) {
   EXPECT_EQ(_version, 46u);
   _archive >> i;
 }
 
-namespace ozz {
+namespace vox {
 namespace io {
 
 // Specializes Extrusive type external Save and Load functions.
 void Extern<Extrusive>::Save(OArchive& _archive, const Extrusive* _test,
                              size_t _count) {
-  _archive << ozz::io::MakeArray(&_test->i, _count);
+  _archive << vox::io::MakeArray(&_test->i, _count);
 }
 void Extern<Extrusive>::Load(IArchive& _archive, Extrusive* _test,
                              size_t _count, uint32_t _version) {
   EXPECT_EQ(_version, 0u);
-  _archive >> ozz::io::MakeArray(&_test->i, _count);
+  _archive >> vox::io::MakeArray(&_test->i, _count);
 }
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox
 
-void Tagged1::Save(ozz::io::OArchive& /*_archive*/) const {}
-void Tagged1::Load(ozz::io::IArchive& /*_archive*/, uint32_t /*_version*/) {}
-void Tagged2::Save(ozz::io::OArchive& /*_archive*/) const {}
-void Tagged2::Load(ozz::io::IArchive& /*_archive*/, uint32_t /*_version*/) {}
+void Tagged1::Save(vox::io::OArchive& /*_archive*/) const {}
+void Tagged1::Load(vox::io::IArchive& /*_archive*/, uint32_t /*_version*/) {}
+void Tagged2::Save(vox::io::OArchive& /*_archive*/) const {}
+void Tagged2::Load(vox::io::IArchive& /*_archive*/, uint32_t /*_version*/) {}

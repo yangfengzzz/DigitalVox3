@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_RAW_SKELETON_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_RAW_SKELETON_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_RAW_SKELETON_H_
+#define VOX_VOX_ANIMATION_OFFLINE_RAW_SKELETON_H_
 
 #include "containers/string.h"
 #include "containers/vector.h"
 #include "io/archive_traits.h"
 #include "maths/transform.h"
 
-namespace ozz {
+namespace vox {
 namespace animation {
 namespace offline {
 
@@ -57,13 +57,13 @@ struct RawSkeleton {
   // Offline skeleton joint type.
   struct Joint {
     // Type of the list of children joints.
-    typedef ozz::vector<Joint> Children;
+    typedef vox::vector<Joint> Children;
 
     // Children joints.
     Children children;
 
     // The name of the joint.
-    ozz::string name;
+    vox::string name;
 
     // Joint bind pose transformation in local space.
     math::Transform transform;
@@ -71,7 +71,7 @@ struct RawSkeleton {
 
   // Tests for *this validity.
   // Returns true on success or false on failure if the number of joints exceeds
-  // ozz::Skeleton::kMaxJoints.
+  // vox::Skeleton::kMaxJoints.
   bool Validate() const;
 
   // Returns the number of joints of *this animation.
@@ -134,8 +134,8 @@ inline _Fct IterateJointsBF(const RawSkeleton& _skeleton, _Fct _fct) {
 }  // namespace offline
 }  // namespace animation
 namespace io {
-OZZ_IO_TYPE_VERSION(1, animation::offline::RawSkeleton)
-OZZ_IO_TYPE_TAG("ozz-raw_skeleton", animation::offline::RawSkeleton)
+VOX_IO_TYPE_VERSION(1, animation::offline::RawSkeleton)
+VOX_IO_TYPE_TAG("vox-raw_skeleton", animation::offline::RawSkeleton)
 
 // Should not be called directly but through io::Archive << and >> operators.
 template <>
@@ -148,5 +148,5 @@ struct Extern<animation::offline::RawSkeleton> {
                    uint32_t _version);
 };
 }  // namespace io
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_RAW_SKELETON_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_RAW_SKELETON_H_

@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -33,7 +33,7 @@
 #include "maths/soa_quaternion.h"
 #include "maths/soa_transform.h"
 
-namespace ozz {
+namespace vox {
 namespace io {
 void Extern<math::SoaFloat2>::Save(OArchive& _archive,
                                    const math::SoaFloat2* _values,
@@ -112,4 +112,4 @@ void Extern<math::SoaTransform>::Load(IArchive& _archive,
                         10 * 4 * _count);
 }
 }  // namespace io
-}  // namespace ozz
+}  // namespace vox

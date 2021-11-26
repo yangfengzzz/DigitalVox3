@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_BASE_CONTAINERS_INTRUSIVE_LIST_H_
-#define OZZ_OZZ_BASE_CONTAINERS_INTRUSIVE_LIST_H_
+#ifndef VOX_VOX_BASE_CONTAINERS_INTRUSIVE_LIST_H_
+#define VOX_VOX_BASE_CONTAINERS_INTRUSIVE_LIST_H_
 
 #include <cassert>
 #include <cstddef>
 #include <iterator>
 
-namespace ozz {
+namespace vox {
 namespace containers {
 
 // Enumerate all the link modes that can be used.
@@ -435,7 +435,7 @@ class IntrusiveListIterator {
  private:
   // Grants the right to IntrusiveList to access node() function.
   template <typename, typename>
-  friend class ozz::containers::IntrusiveList;
+  friend class vox::containers::IntrusiveList;
 
   // Get the node currently pointed by the iterator.
   // *this iterator must be initialized, but can point a list end node.
@@ -1113,16 +1113,16 @@ inline bool IntrusiveNodeList::_is_ordered(_Pred _pred) const {
 }
 }  // namespace internal
 }  // namespace containers
-}  // namespace ozz
+}  // namespace vox
 
 // Specialization of the std::swap algorithm for the IntusiveList class.
 // Does not need to be implemented in std namespace thanks to ADL.
 template <typename _Ty, typename _Option>
-inline void swap(ozz::containers::IntrusiveList<_Ty, _Option>&
+inline void swap(vox::containers::IntrusiveList<_Ty, _Option>&
                      _left,  // NOLINT Don't want to #include <algorithm>
-                 ozz::containers::IntrusiveList<_Ty, _Option>& _right) {
+                 vox::containers::IntrusiveList<_Ty, _Option>& _right) {
   _left.swap(_right);
 }
 
 // Undefines local macros
-#endif  // OZZ_OZZ_BASE_CONTAINERS_INTRUSIVE_LIST_H_
+#endif  // VOX_VOX_BASE_CONTAINERS_INTRUSIVE_LIST_H_

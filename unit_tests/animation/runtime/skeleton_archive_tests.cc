@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -39,22 +39,22 @@
 
 #include "memory/unique_ptr.h"
 
-using ozz::animation::Skeleton;
-using ozz::animation::offline::RawSkeleton;
-using ozz::animation::offline::SkeletonBuilder;
+using vox::animation::Skeleton;
+using vox::animation::offline::RawSkeleton;
+using vox::animation::offline::SkeletonBuilder;
 
 TEST(Empty, SkeletonSerialize) {
-  ozz::io::MemoryStream stream;
+  vox::io::MemoryStream stream;
 
   // Streams out.
-  ozz::io::OArchive o(&stream, ozz::GetNativeEndianness());
+  vox::io::OArchive o(&stream, vox::GetNativeEndianness());
 
   Skeleton o_skeleton;
   o << o_skeleton;
 
   // Streams in.
-  stream.Seek(0, ozz::io::Stream::kSet);
-  ozz::io::IArchive i(&stream);
+  stream.Seek(0, vox::io::Stream::kSet);
+  vox::io::IArchive i(&stream);
 
   Skeleton i_skeleton;
   i >> i_skeleton;
@@ -63,7 +63,7 @@ TEST(Empty, SkeletonSerialize) {
 }
 
 TEST(Filled, SkeletonSerialize) {
-  ozz::unique_ptr<Skeleton> o_skeleton;
+  vox::unique_ptr<Skeleton> o_skeleton;
   /* Builds output skeleton.
    3 joints
 
@@ -92,16 +92,16 @@ TEST(Filled, SkeletonSerialize) {
   }
 
   for (int e = 0; e < 2; ++e) {
-    ozz::Endianness endianess = e == 0 ? ozz::kBigEndian : ozz::kLittleEndian;
-    ozz::io::MemoryStream stream;
+    vox::Endianness endianess = e == 0 ? vox::kBigEndian : vox::kLittleEndian;
+    vox::io::MemoryStream stream;
 
     // Streams out.
-    ozz::io::OArchive o(&stream, endianess);
+    vox::io::OArchive o(&stream, endianess);
     o << *o_skeleton;
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive ia(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive ia(&stream);
 
     Skeleton i_skeleton;
     ia >> i_skeleton;
@@ -114,21 +114,21 @@ TEST(Filled, SkeletonSerialize) {
       EXPECT_STREQ(i_skeleton.joint_names()[i], o_skeleton->joint_names()[i]);
     }
     for (int i = 0; i < (i_skeleton.num_joints() + 3) / 4; ++i) {
-      EXPECT_TRUE(ozz::math::AreAllTrue(
+      EXPECT_TRUE(vox::math::AreAllTrue(
           i_skeleton.joint_bind_poses()[i].translation ==
           o_skeleton->joint_bind_poses()[i].translation));
-      EXPECT_TRUE(ozz::math::AreAllTrue(
+      EXPECT_TRUE(vox::math::AreAllTrue(
           i_skeleton.joint_bind_poses()[i].rotation ==
           o_skeleton->joint_bind_poses()[i].rotation));
       EXPECT_TRUE(
-          ozz::math::AreAllTrue(i_skeleton.joint_bind_poses()[i].scale ==
+          vox::math::AreAllTrue(i_skeleton.joint_bind_poses()[i].scale ==
                                 o_skeleton->joint_bind_poses()[i].scale));
     }
   }
 }
 
 TEST(AlreadyInitialized, SkeletonSerialize) {
-  ozz::unique_ptr<Skeleton> o_skeleton[2];
+  vox::unique_ptr<Skeleton> o_skeleton[2];
   /* Builds output skeleton.
    3 joints
 
@@ -155,14 +155,14 @@ TEST(AlreadyInitialized, SkeletonSerialize) {
 
   {
     // Streams out.
-    ozz::io::MemoryStream stream;
-    ozz::io::OArchive o(&stream);
+    vox::io::MemoryStream stream;
+    vox::io::OArchive o(&stream);
     o << *o_skeleton[0];
     o << *o_skeleton[1];
 
     // Streams in.
-    stream.Seek(0, ozz::io::Stream::kSet);
-    ozz::io::IArchive i(&stream);
+    stream.Seek(0, vox::io::Stream::kSet);
+    vox::io::IArchive i(&stream);
 
     // Reads and check the first skeleton.
     Skeleton i_skeleton;

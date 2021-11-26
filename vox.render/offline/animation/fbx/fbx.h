@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,15 +25,15 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_H_
-#define OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_H_
+#ifndef VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_H_
+#define VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_H_
 
 #include <fbxsdk.h>
 
 #include "maths/simd_math.h"
 #include "maths/transform.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct Transform;
 }  // namespace math
@@ -89,7 +89,7 @@ class FbxSkeletonIOSettings : public FbxDefaultIOSettings {
 };
 
 // Implements axis system and unit system conversion helper, from any Fbx system
-// to ozz system (FbxAxisSystem::eYAxis, FbxAxisSystem::eParityOdd,
+// to vox system (FbxAxisSystem::eYAxis, FbxAxisSystem::eParityOdd,
 // FbxAxisSystem::eRightHanded, meter).
 // While Fbx sdk FbxAxisSystem::ConvertScene and FbxSystem::ConvertScene only
 // affect scene root, this class functions can be used to bake nodes, vertices,
@@ -100,28 +100,28 @@ class FbxSystemConverter {
   FbxSystemConverter(const FbxAxisSystem& _from_axis,
                      const FbxSystemUnit& _from_unit);
 
-  // Converts a fbx matrix to an ozz Float4x4 matrix, in ozz axis and unit
+  // Converts a fbx matrix to an vox Float4x4 matrix, in vox axis and unit
   // systems, using _m' = C * _m * (C-1) operation.
   math::Float4x4 ConvertMatrix(const FbxAMatrix& _m) const;
 
-  // Converts fbx matrix to an ozz transform, in ozz axis and unit systems,
+  // Converts fbx matrix to an vox transform, in vox axis and unit systems,
   // using _m' = C * _m * (C-1) operation.
   // Can return false if matrix isn't affine.
   bool ConvertTransform(const FbxAMatrix& _m,
                         math::Transform* _transform) const;
 
-  // Converts fbx FbxVector4 point to an ozz Float3, in ozz axis and unit
+  // Converts fbx FbxVector4 point to an vox Float3, in vox axis and unit
   // systems, using _p' = C * _p operation.
   math::Float3 ConvertPoint(const FbxVector4& _p) const;
 
-  // Converts fbx FbxVector4 vector to an ozz Float3, in ozz axis and unit
+  // Converts fbx FbxVector4 vector to an vox Float3, in vox axis and unit
   // systems, using _p' = ((C-1)-T) * _p operation. Normals are converted
   // using the inverse transpose matrix to support non-uniform scale
   // transformations.
   math::Float3 ConvertVector(const FbxVector4& _p) const;
 
  private:
-  // The matrix used to convert from "from" axis/unit to ozz coordinate system
+  // The matrix used to convert from "from" axis/unit to vox coordinate system
   // base.
   math::Float4x4 convert_;
 
@@ -166,5 +166,5 @@ class FbxSceneLoader {
 }  // namespace fbx
 }  // namespace offline
 }  // namespace animation
-}  // namespace ozz
-#endif  // OZZ_OZZ_ANIMATION_OFFLINE_FBX_FBX_H_
+}  // namespace vox
+#endif  // VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_H_

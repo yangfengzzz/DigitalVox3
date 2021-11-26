@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -32,67 +32,67 @@
 
 #include "gtest_helper.h"
 
-TEST(Trigonometry, ozz_math_ex) {
-    EXPECT_FLOAT_EQ(ozz::math::kPi, 3.1415926535897932384626433832795f);
-    EXPECT_FLOAT_EQ(ozz::math::kPi * ozz::math::kRadianToDegree, 180.f);
-    EXPECT_FLOAT_EQ(180.f * ozz::math::kDegreeToRadian, ozz::math::kPi);
+TEST(Trigonometry, vox_math_ex) {
+    EXPECT_FLOAT_EQ(vox::math::kPi, 3.1415926535897932384626433832795f);
+    EXPECT_FLOAT_EQ(vox::math::kPi * vox::math::kRadianToDegree, 180.f);
+    EXPECT_FLOAT_EQ(180.f * vox::math::kDegreeToRadian, vox::math::kPi);
 }
 
-TEST(FloatArithmetic, ozz_math_ex) {
-    EXPECT_FLOAT_EQ(ozz::math::Lerp(0.f, 1.f, 0.f), 0.f);
-    EXPECT_FLOAT_EQ(ozz::math::Lerp(0.f, 1.f, 1.f), 1.f);
-    EXPECT_FLOAT_EQ(ozz::math::Lerp(0.f, 1.f, .3f), .3f);
-    EXPECT_FLOAT_EQ(ozz::math::Lerp(0.f, 1.f, 12.f), 12.f);
-    EXPECT_FLOAT_EQ(ozz::math::Lerp(0.f, 1.f, -12.f), -12.f);
+TEST(FloatArithmetic, vox_math_ex) {
+    EXPECT_FLOAT_EQ(vox::math::Lerp(0.f, 1.f, 0.f), 0.f);
+    EXPECT_FLOAT_EQ(vox::math::Lerp(0.f, 1.f, 1.f), 1.f);
+    EXPECT_FLOAT_EQ(vox::math::Lerp(0.f, 1.f, .3f), .3f);
+    EXPECT_FLOAT_EQ(vox::math::Lerp(0.f, 1.f, 12.f), 12.f);
+    EXPECT_FLOAT_EQ(vox::math::Lerp(0.f, 1.f, -12.f), -12.f);
 }
 
-TEST(FloatComparison, ozz_math_ex) {
+TEST(FloatComparison, vox_math_ex) {
     const float a = {.5f};
     const float b = {4.f};
     const float c = {2.f};
     
-    const float min = ozz::math::Min(a, b);
+    const float min = vox::math::Min(a, b);
     EXPECT_FLOAT_EQ(min, a);
     
-    const float max = ozz::math::Max(a, b);
+    const float max = vox::math::Max(a, b);
     EXPECT_FLOAT_EQ(max, b);
     
-    const float clamp = ozz::math::Clamp(a, c, b);
+    const float clamp = vox::math::Clamp(a, c, b);
     EXPECT_FLOAT_EQ(clamp, c);
     
-    const float clamp0 = ozz::math::Clamp(a, b, c);
+    const float clamp0 = vox::math::Clamp(a, b, c);
     EXPECT_FLOAT_EQ(clamp0, c);
     
-    const float clamp1 = ozz::math::Clamp(c, a, b);
+    const float clamp1 = vox::math::Clamp(c, a, b);
     EXPECT_FLOAT_EQ(clamp1, c);
 }
 
-TEST(Select, ozz_math_ex) {
+TEST(Select, vox_math_ex) {
     int a = -27, b = 46;
     int *pa = &a, *pb = &b;
     int *cpa = &a, *cpb = &b;
     
     {  // Integer select
-        EXPECT_EQ(ozz::math::Select(true, a, b), a);
-        EXPECT_EQ(ozz::math::Select(true, b, a), b);
-        EXPECT_EQ(ozz::math::Select(false, a, b), b);
+        EXPECT_EQ(vox::math::Select(true, a, b), a);
+        EXPECT_EQ(vox::math::Select(true, b, a), b);
+        EXPECT_EQ(vox::math::Select(false, a, b), b);
     }
     
     {  // Float select
-        EXPECT_FLOAT_EQ(ozz::math::Select(true, 46.f, 27.f), 46.f);
-        EXPECT_FLOAT_EQ(ozz::math::Select(false, 99.f, 46.f), 46.f);
+        EXPECT_FLOAT_EQ(vox::math::Select(true, 46.f, 27.f), 46.f);
+        EXPECT_FLOAT_EQ(vox::math::Select(false, 99.f, 46.f), 46.f);
     }
     
     {  // Pointer select
-        EXPECT_EQ(ozz::math::Select(true, pa, pb), pa);
-        EXPECT_EQ(ozz::math::Select(true, pb, pa), pb);
-        EXPECT_EQ(ozz::math::Select(false, pa, pb), pb);
+        EXPECT_EQ(vox::math::Select(true, pa, pb), pa);
+        EXPECT_EQ(vox::math::Select(true, pb, pa), pb);
+        EXPECT_EQ(vox::math::Select(false, pa, pb), pb);
     }
     
     {  // Const pointer select
-        EXPECT_EQ(ozz::math::Select(true, cpa, cpb), cpa);
-        EXPECT_EQ(ozz::math::Select(true, cpb, cpa), cpb);
-        EXPECT_EQ(ozz::math::Select(false, cpa, cpb), cpb);
-        EXPECT_EQ(ozz::math::Select(false, pa, cpb), cpb);
+        EXPECT_EQ(vox::math::Select(true, cpa, cpb), cpa);
+        EXPECT_EQ(vox::math::Select(true, cpb, cpa), cpb);
+        EXPECT_EQ(vox::math::Select(false, cpa, cpb), cpb);
+        EXPECT_EQ(vox::math::Select(false, pa, cpb), cpb);
     }
 }
