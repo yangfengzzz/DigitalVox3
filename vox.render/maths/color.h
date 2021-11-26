@@ -101,7 +101,7 @@ OZZ_INLINE Color operator+(const Color &left, const Color &right) {
                  left.a + right.a);
 }
 
-OZZ_INLINE Color operator+(const Color &left, const float s) {
+OZZ_INLINE Color operator*(const Color &left, const float s) {
     return Color(left.r * s,
                  left.g * s,
                  left.b * s,

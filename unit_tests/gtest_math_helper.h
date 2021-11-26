@@ -107,6 +107,20 @@ inline void ExpectTrue(bool _b) {
 
 // Macro for testing ozz::math::Float4 members with x, y, z, w float values,
 // using EXPECT_FLOAT_EQ internally.
+#define EXPECT_COLOR_EQ(_expected, _r, _g, _b, _a) \
+                                                    \
+  do {                                              \
+    SCOPED_TRACE("");                               \
+    const ozz::math::Color expected(_expected);    \
+    ExpectFloatNear(expected.r, _r);                \
+    ExpectFloatNear(expected.g, _g);                \
+    ExpectFloatNear(expected.b, _b);                \
+    ExpectFloatNear(expected.a, _a);                \
+                                                    \
+  } while (void(0), 0)
+
+// Macro for testing ozz::math::Float4 members with x, y, z, w float values,
+// using EXPECT_FLOAT_EQ internally.
 #define EXPECT_FLOAT4_EQ(_expected, _x, _y, _z, _w) \
                                                     \
   do {                                              \
