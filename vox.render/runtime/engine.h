@@ -9,10 +9,12 @@
 #define engine_hpp
 
 #include <memory>
+#include "components_manager.h"
 
 namespace vox {
 class Engine {
-    
+public:
+    ComponentsManager _componentsManager;
 };
 
 using EnginePtr = std::shared_ptr<Engine>;

@@ -40,6 +40,8 @@
 		041610072750A577006CD384 /* script.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610052750A577006CD384 /* script.h */; };
 		0416100A2750A720006CD384 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610082750A720006CD384 /* scene.cpp */; };
 		0416100B2750A720006CD384 /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610092750A720006CD384 /* scene.h */; };
+		0416100E2750E1A9006CD384 /* components_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416100C2750E1A9006CD384 /* components_manager.cpp */; };
+		0416100F2750E1A9006CD384 /* components_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416100D2750E1A9006CD384 /* components_manager.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -239,6 +241,8 @@
 		041610052750A577006CD384 /* script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
 		041610082750A720006CD384 /* scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
 		041610092750A720006CD384 /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
+		0416100C2750E1A9006CD384 /* components_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = components_manager.cpp; sourceTree = "<group>"; };
+		0416100D2750E1A9006CD384 /* components_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = components_manager.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -753,6 +757,8 @@
 				04160FF3275094B1006CD384 /* layer.h */,
 				04160FF02750944F006CD384 /* entity.h */,
 				04160FEF2750944F006CD384 /* entity.cpp */,
+				0416100D2750E1A9006CD384 /* components_manager.h */,
+				0416100C2750E1A9006CD384 /* components_manager.cpp */,
 				04160FF52750955C006CD384 /* component.h */,
 				04160FF42750955C006CD384 /* component.cpp */,
 				04160FF92750963B006CD384 /* transform.h */,
@@ -1058,6 +1064,7 @@
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
+				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1215,6 +1222,7 @@
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,
 				04160FED27509277006CD384 /* engine_object.cpp in Sources */,
 				04CE37EF274D167F00204B8E /* animation_optimizer.cc in Sources */,
+				0416100E2750E1A9006CD384 /* components_manager.cpp in Sources */,
 				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,

@@ -8,17 +8,21 @@
 #ifndef engine_object_hpp
 #define engine_object_hpp
 
-#include "engine.h"
+#include <memory>
 
 namespace vox {
+class Engine;
+
+using EnginePtr = std::shared_ptr<Engine>;
+
 class EngineObject {
 public:
     EngineObject(EnginePtr engine);
-
+    
     /** Engine unique id. */
     int instanceId();
     
-    EnginePtr engine();    
+    EnginePtr engine();
     
 protected:
     /** Engine to which the object belongs. */

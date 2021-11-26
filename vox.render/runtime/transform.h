@@ -263,6 +263,8 @@ public:
     
     
 private:
+    friend class Entity;
+    
     void _parentChange();
     
     /**

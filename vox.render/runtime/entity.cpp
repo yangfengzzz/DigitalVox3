@@ -7,12 +7,13 @@
 
 #include "entity.h"
 #include "scene.h"
+#include "engine.h"
 
 namespace vox {
-EntityPtr Entity::_findChildByName(EntityPtr root, const std::string& name) {
-    const auto& children = root->_children;
+EntityPtr Entity::_findChildByName(EntityPtr root, const std::string &name) {
+    const auto &children = root->_children;
     for (size_t i = children.size() - 1; i >= 0; i--) {
-        const auto& child = children[i];
+        const auto &child = children[i];
         if (child->name == name) {
             return child;
         }
@@ -22,7 +23,7 @@ EntityPtr Entity::_findChildByName(EntityPtr root, const std::string& name) {
 
 void Entity::_traverseSetOwnerScene(EntityPtr entity, std::optional<std::weak_ptr<Scene>> scene) {
     entity->_scene = scene;
-    const auto& children = entity->_children;
+    const auto &children = entity->_children;
     for (size_t i = entity->_children.size() - 1; i >= 0; i--) {
         _traverseSetOwnerScene(children[i], scene);
     }
@@ -41,7 +42,7 @@ void Entity::setIsActive(bool value) {
     if (value != _isActive) {
         _isActive = value;
         if (value) {
-            const auto& parent = _parent;
+            const auto &parent = _parent;
             if ((parent->lock() != nullptr && parent->lock()->_isActiveInHierarchy)
                 || (_isRoot && _scene->lock()->_isActiveInEngine)) {
                 _processActive();
@@ -119,12 +120,12 @@ EntityPtr Entity::getChild(int index) {
     return _children[index];
 }
 
-EntityPtr Entity::findByName(const std::string& name) {
-    const auto& children = _children;
+EntityPtr Entity::findByName(const std::string &name) {
+    const auto &children = _children;
     const auto child = Entity::_findChildByName(EntityPtr(this), name);
     if (child) return child;
     for (size_t i = children.size() - 1; i >= 0; i--) {
-        const auto& child = children[i];
+        const auto &child = children[i];
         const auto grandson = child->findByName(name);
         if (grandson) {
             return grandson;
@@ -133,7 +134,7 @@ EntityPtr Entity::findByName(const std::string& name) {
     return nullptr;
 }
 
-EntityPtr Entity::createChild(const std::string& name) {
+EntityPtr Entity::createChild(const std::string &name) {
     auto child = std::make_shared<Entity>(engine(), name);
     child->layer = layer;
     child->setParent(EntityPtr(this));
@@ -141,9 +142,9 @@ EntityPtr Entity::createChild(const std::string& name) {
 }
 
 void Entity::clearChildren() {
-    auto& children = _children;
+    auto &children = _children;
     for (size_t i = children.size() - 1; i >= 0; i--) {
-        const auto& child = children[i];
+        const auto &child = children[i];
         child->_parent = std::nullopt;
         if (child->_isActiveInHierarchy) {
             child->_processInActive();
@@ -159,16 +160,16 @@ EntityPtr Entity::clone() {
     cloneEntity->_isActive = _isActive;
     cloneEntity->transform->setLocalMatrix(transform->localMatrix());
     
-    const auto& children = _children;
+    const auto &children = _children;
     for (size_t i = 0, len = _children.size(); i < len; i++) {
-        const auto& child = children[i];
+        const auto &child = children[i];
         cloneEntity->addChild(child->clone());
     }
     
-    const auto& components = _components;
+    const auto &components = _components;
     for (size_t i = 0, n = components.size(); i < n; i++) {
-        const auto& sourceComp = components[i];
-        if (!(dynamic_cast<Transform*>(sourceComp.get()))) {
+        const auto &sourceComp = components[i];
+        if (!(dynamic_cast<Transform *>(sourceComp.get()))) {
             // TODO
         }
     }
@@ -177,47 +178,49 @@ EntityPtr Entity::clone() {
 }
 
 void Entity::destroy() {
-    auto& abilityArray = _components;
+    auto &abilityArray = _components;
     for (size_t i = abilityArray.size() - 1; i >= 0; i--) {
         abilityArray[i]->destroy();
     }
     _components.clear();
     
-    const auto& children = _children;
+    const auto &children = _children;
     for (size_t i = children.size() - 1; i >= 0; i--) {
         children[i]->destroy();
     }
     _children.clear();
     
     if (_parent != std::nullopt) {
-        auto& parentChildren = _parent->lock()->_children;
+        auto &parentChildren = _parent->lock()->_children;
         parentChildren.erase(std::remove(parentChildren.begin(),
                                          parentChildren.end(), EntityPtr(this)), parentChildren.end());
     }
     _parent = std::nullopt;
 }
 
-void Entity::_removeComponent(Component* component) {
+void Entity::_removeComponent(Component *component) {
     // ComponentsDependencies._removeCheck(this, component.constructor as any);
-    auto& components = _components;
-    components.erase(std::remove(components.begin(),
-                                 components.end(), component), components.end());
+    auto &components = _components;
+    components.erase(std::remove_if(components.begin(),
+                                    components.end(), [&](const std::unique_ptr<Component> &x) {
+        return x.get() == component;
+    }), components.end());
 }
 
-void Entity::_addScript(Script* script) {
+void Entity::_addScript(Script *script) {
     script->_entityCacheIndex = _scripts.size();
     _scripts.push_back(script);
 }
 
-void Entity::_removeScript(Script* script) {
+void Entity::_removeScript(Script *script) {
     std::remove(_scripts.begin(), _scripts.end(), script);
     script->_entityCacheIndex = -1;
 }
 
 EntityPtr Entity::_removeFromParent() {
-    const auto& oldParent = _parent;
+    const auto &oldParent = _parent;
     if (oldParent != std::nullopt) {
-        auto& oldParentChildren = oldParent->lock()->_children;
+        auto &oldParentChildren = oldParent->lock()->_children;
         oldParentChildren.erase(std::remove(oldParentChildren.begin(),
                                             oldParentChildren.end(), EntityPtr(this)), oldParentChildren.end());
         _parent = std::nullopt;
@@ -235,6 +238,55 @@ void Entity::_processInActive() {
     _activeChangedComponents = _engine->_componentsManager.getActiveChangedTempList();
     _setInActiveInHierarchy(_activeChangedComponents);
     _setActiveComponents(false);
+}
+
+void Entity::_setActiveComponents(bool isActive) {
+    auto &activeChangedComponents = _activeChangedComponents;
+    for (size_t i = 0, length = activeChangedComponents.size(); i < length; ++i) {
+        activeChangedComponents[i]->_setActive(isActive);
+    }
+    _engine->_componentsManager.putActiveChangedTempList(activeChangedComponents);
+    _activeChangedComponents.clear();
+}
+
+void Entity::_setActiveInHierarchy(std::vector<Component *> &activeChangedComponents) {
+    _isActiveInHierarchy = true;
+    auto &components = _components;
+    for (size_t i = components.size() - 1; i >= 0; i--) {
+        activeChangedComponents.push_back(components[i].get());
+    }
+    const auto &children = _children;
+    for (size_t i = children.size() - 1; i >= 0; i--) {
+        const auto &child = children[i];
+        if (child->isActive()) {
+            child->_setActiveInHierarchy(activeChangedComponents);
+        }
+    }
+}
+
+void Entity::_setInActiveInHierarchy(std::vector<Component *> &activeChangedComponents) {
+    _isActiveInHierarchy = false;
+    auto &components = _components;
+    for (size_t i = components.size() - 1; i >= 0; i--) {
+        activeChangedComponents.push_back(components[i].get());
+    }
+    auto &children = _children;
+    for (size_t i = children.size() - 1; i >= 0; i--) {
+        const auto &child = children[i];
+        if (child->isActive()) {
+            child->_setInActiveInHierarchy(activeChangedComponents);
+        }
+    }
+}
+
+void Entity::_setTransformDirty() {
+    if (transform) {
+        transform->_parentChange();
+    } else {
+        for (size_t i = 0, len = _children.size(); i < len; i++) {
+            _children[i]->_setTransformDirty();
+        }
+    }
 }
 
 }
