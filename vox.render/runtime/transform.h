@@ -9,16 +9,13 @@
 #define transform_hpp
 
 #include "component.h"
+#include "updateFlag_manager.h"
+#include "maths/vec_float.h"
+#include "maths/quaternion.h"
+#include "maths/matrix.h"
 
 namespace ozz {
-/**
- * Used to implement transformation related functions.
- */
-class Transform : public Component {
-    
-    
-};
-
+using namespace math;
 /**
  * Dirty flag of transform.
  */
@@ -44,6 +41,42 @@ enum TransformFlag {
     WmWpWs = 0xa4,
     /** WorldMatrix | WorldPosition | WorldEuler | WorldQuat | WorldScale */
     WmWpWeWqWs = 0xbc
+};
+
+/**
+ * Used to implement transformation related functions.
+ */
+class Transform : public Component {
+public:
+    /**
+     * Local position.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Float3 getPosition() {
+        return _position;
+    }
+    
+    void setPosition(const Float3& value) {
+        _position = value;
+        // _setDirtyFlagTrue(TransformFlag::LocalMatrix);
+        // _updateWorldPositionFlag();
+    }
+    
+private:
+    Float3 _position;
+    Float3 _rotation;
+    Quaternion _rotationQuaternion;
+    Float3 _scale = Float3(1, 1, 1);
+    Float3 _worldPosition;
+    Float3 _worldRotation;
+    Quaternion _worldRotationQuaternion;
+    Float3 _lossyWorldScale = Float3(1, 1, 1);
+    Matrix _localMatrix;
+    Matrix _worldMatrix;
+    UpdateFlagManager _updateFlagManager;
+    bool _isParentDirty = true;
+    Transform* _parentTransformCache = nullptr;
+    TransformFlag _dirtyFlag = TransformFlag::WmWpWeWqWs;
 };
 
 
