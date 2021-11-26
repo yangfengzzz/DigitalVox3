@@ -36,6 +36,8 @@
 		04160FFF275096FD006CD384 /* updateFlag.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FFD275096FD006CD384 /* updateFlag.h */; };
 		041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610002750973C006CD384 /* updateFlag_manager.cpp */; };
 		041610032750973C006CD384 /* updateFlag_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610012750973C006CD384 /* updateFlag_manager.h */; };
+		041610062750A577006CD384 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610042750A577006CD384 /* script.cpp */; };
+		041610072750A577006CD384 /* script.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610052750A577006CD384 /* script.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -231,6 +233,8 @@
 		04160FFD275096FD006CD384 /* updateFlag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = updateFlag.h; sourceTree = "<group>"; };
 		041610002750973C006CD384 /* updateFlag_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = updateFlag_manager.cpp; sourceTree = "<group>"; };
 		041610012750973C006CD384 /* updateFlag_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = updateFlag_manager.h; sourceTree = "<group>"; };
+		041610042750A577006CD384 /* script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = script.cpp; sourceTree = "<group>"; };
+		041610052750A577006CD384 /* script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -738,6 +742,10 @@
 				04160FEB27509277006CD384 /* engine_object.cpp */,
 				04160FE8275091FA006CD384 /* engine.h */,
 				04160FE7275091FA006CD384 /* engine.cpp */,
+				04160FFD275096FD006CD384 /* updateFlag.h */,
+				04160FFC275096FD006CD384 /* updateFlag.cpp */,
+				041610012750973C006CD384 /* updateFlag_manager.h */,
+				041610002750973C006CD384 /* updateFlag_manager.cpp */,
 				04160FF3275094B1006CD384 /* layer.h */,
 				04160FF02750944F006CD384 /* entity.h */,
 				04160FEF2750944F006CD384 /* entity.cpp */,
@@ -745,10 +753,8 @@
 				04160FF42750955C006CD384 /* component.cpp */,
 				04160FF92750963B006CD384 /* transform.h */,
 				04160FF82750963B006CD384 /* transform.cpp */,
-				04160FFD275096FD006CD384 /* updateFlag.h */,
-				04160FFC275096FD006CD384 /* updateFlag.cpp */,
-				041610012750973C006CD384 /* updateFlag_manager.h */,
-				041610002750973C006CD384 /* updateFlag_manager.cpp */,
+				041610052750A577006CD384 /* script.h */,
+				041610042750A577006CD384 /* script.cpp */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1035,6 +1041,7 @@
 				04160FF72750955C006CD384 /* component.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
+				041610072750A577006CD384 /* script.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
@@ -1194,6 +1201,7 @@
 				04CE38CC274E678400204B8E /* quaternion.cpp in Sources */,
 				04160FD1274F7079006CD384 /* ray.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
+				041610062750A577006CD384 /* script.cpp in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
 				04160FF12750944F006CD384 /* entity.cpp in Sources */,
