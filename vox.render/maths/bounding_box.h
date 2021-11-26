@@ -106,6 +106,30 @@ struct BoundingBox {
         return out;
     }
     
+    /**
+     * Get the eight corners of this bounding box.
+     * @returns An array of points representing the eight corners of this bounding box
+     */
+    std::array<Float3, 8> getCorners() const {
+        const auto& minX = min.x;
+        const auto& minY = min.y;
+        const auto& minZ = min.z;
+        const auto& maxX = max.x;
+        const auto& maxY = max.y;
+        const auto& maxZ = max.z;
+        
+        return {
+            Float3(minX, maxY, maxZ),
+            Float3(maxX, maxY, maxZ),
+            Float3(maxX, minY, maxZ),
+            Float3(minX, minY, maxZ),
+            Float3(minX, maxY, minZ),
+            Float3(maxX, maxY, minZ),
+            Float3(maxX, minY, minZ),
+            Float3(minX, minY, minZ)
+        };
+    }
+    
     // Box's min and max bounds.
     Float3 min;
     Float3 max;

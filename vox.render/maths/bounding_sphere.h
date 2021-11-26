@@ -9,7 +9,7 @@
 #define bounding_sphere_hpp
 
 #include <cstddef>
-
+#include <optional>
 #include "maths/vec_float.h"
 
 namespace ozz {
@@ -22,7 +22,10 @@ struct BoundingSphere {
     /** The radius of the sphere. */
     float radius = 0;
     
-    BoundingSphere() : center(Float3()), radius(0) {
+    BoundingSphere(std::optional<Float3> center = std::nullopt, float radius = 0): radius(radius) {
+        if (center) {
+            this->center = center.value();
+        }
     }
     
     // Constructs the smallest box that contains the _count points _points.
