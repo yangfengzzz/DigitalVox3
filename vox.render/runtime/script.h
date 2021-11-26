@@ -43,6 +43,8 @@ class Script : public Component {
     virtual void onLateUpdate(float deltaTime) {}
     
 private:
+    friend class Entity;
+    
     bool _started = false;
     ssize_t _onStartIndex = -1;
     ssize_t _onUpdateIndex = -1;

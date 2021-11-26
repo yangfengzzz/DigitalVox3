@@ -98,11 +98,12 @@ public:
     template<typename T>
     T* getComponent() {
         for (size_t i = _components.size() - 1; i >= 0; i--) {
-            const auto& component = _components[i];
-            if (std::dynamic_pointer_cast<T>(component) != nullptr) {
+            T* component = dynamic_cast<T*>(_components[i].get());
+            if (component) {
                 return component;
             }
         }
+        return nullptr;
     }
     
     /**
@@ -113,8 +114,8 @@ public:
     std::vector<T*> getComponents() {
         std::vector<T*> results;
         for (size_t i = _components.size() - 1; i >= 0; i--) {
-            const auto& component = _components[i];
-            if (std::dynamic_pointer_cast<T>(component) != nullptr) {
+            T* component = dynamic_cast<T*>(_components[i].get());
+            if (component) {
                 results.push_back(component);
             }
         }
@@ -127,7 +128,8 @@ public:
      */
     template<typename T>
     std::vector<T*> getComponentsIncludeChildren() {
-        std::vector<T*> results = _getComponentsInChildren<T>();
+        std::vector<T*> results;
+        _getComponentsInChildren<T>(results);
         return results;
     }
     
@@ -206,8 +208,8 @@ private:
     template<typename T>
     void _getComponentsInChildren(std::vector<T*>& results) {
         for (size_t i = _components.size() - 1; i >= 0; i--) {
-            const auto& component = _components[i];
-            if (std::dynamic_pointer_cast<T>(component) != nullptr) {
+            T* component = dynamic_cast<T*>(_components[i].get());
+            if (component) {
                 results.push_back(component);
             }
         }
