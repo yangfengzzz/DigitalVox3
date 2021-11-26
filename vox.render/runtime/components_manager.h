@@ -19,14 +19,29 @@ class Script;
  */
 class ComponentsManager {
 public:
-    std::vector<Component *> getActiveChangedTempList() {
-        return _componentsContainerPool.size() ? *(_componentsContainerPool.end() - 1) : std::vector<Component *>{};
-    }
+    void addOnStartScript(Script* script);
     
-    void putActiveChangedTempList(std::vector<Component *> &componentContainer) {
-        componentContainer.clear();
-        _componentsContainerPool.push_back(componentContainer);
-    }
+    void removeOnStartScript(Script* script);
+    
+    void addOnUpdateScript(Script* script);
+    
+    void removeOnUpdateScript(Script* script);
+    
+    void addOnLateUpdateScript(Script* script);
+
+    void removeOnLateUpdateScript(Script* script);
+    
+public:
+    void callScriptOnStart();
+    
+    void callScriptOnUpdate(float deltaTime);
+    
+    void callScriptOnLateUpdate(float deltaTime);
+    
+public:
+    std::vector<Component *> getActiveChangedTempList();
+    
+    void putActiveChangedTempList(std::vector<Component *> &componentContainer);
     
 private:
     // Script

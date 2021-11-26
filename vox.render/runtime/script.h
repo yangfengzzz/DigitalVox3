@@ -44,6 +44,7 @@ class Script : public Component {
     
 private:
     friend class Entity;
+    friend class ComponentsManager;
     
     bool _started = false;
     ssize_t _onStartIndex = -1;
