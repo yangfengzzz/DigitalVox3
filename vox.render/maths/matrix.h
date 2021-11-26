@@ -258,9 +258,9 @@ struct Matrix {
      */
     static OZZ_INLINE Matrix lookAt(const Float3 &eye, const Float3 &target, const Float3 &up) {
         Float3 zAxis = eye - target;
-        Normalize(zAxis);
-        Float3 xAxis = up - zAxis;
-        Normalize(xAxis);
+        zAxis = Normalize(zAxis);
+        Float3 xAxis = Cross(up, zAxis);
+        xAxis = Normalize(xAxis);
         Float3 yAxis = Cross(zAxis, xAxis);
         
         return Matrix(xAxis.x,
