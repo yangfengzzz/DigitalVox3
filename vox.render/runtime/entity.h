@@ -192,6 +192,7 @@ public:
 private:
     friend class Transform;
     friend class Component;
+    friend class Scene;
     
     void _removeComponent(Component* component);
     

@@ -164,6 +164,8 @@
 		04CE38DC274E8C2D00204B8E /* plane.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38DA274E8C2D00204B8E /* plane.h */; };
 		04CE38E3274FC42E00204B8E /* quat_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E1274FC42E00204B8E /* quat_tests.cpp */; };
 		04CE38E5274FD28C00204B8E /* matrix_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E4274FD28C00204B8E /* matrix_tests.cpp */; };
+		04CE38E8275103BC00204B8E /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E6275103BC00204B8E /* scene_manager.cpp */; };
+		04CE38E9275103BC00204B8E /* scene_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38E7275103BC00204B8E /* scene_manager.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -474,6 +476,8 @@
 		04CE38DA274E8C2D00204B8E /* plane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plane.h; sourceTree = "<group>"; };
 		04CE38E1274FC42E00204B8E /* quat_tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = quat_tests.cpp; sourceTree = "<group>"; };
 		04CE38E4274FD28C00204B8E /* matrix_tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_tests.cpp; sourceTree = "<group>"; };
+		04CE38E6275103BC00204B8E /* scene_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene_manager.cpp; sourceTree = "<group>"; };
+		04CE38E7275103BC00204B8E /* scene_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_manager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,6 +771,8 @@
 				041610042750A577006CD384 /* script.cpp */,
 				041610092750A720006CD384 /* scene.h */,
 				041610082750A720006CD384 /* scene.cpp */,
+				04CE38E7275103BC00204B8E /* scene_manager.h */,
+				04CE38E6275103BC00204B8E /* scene_manager.cpp */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1066,6 +1072,7 @@
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
+				04CE38E9275103BC00204B8E /* scene_manager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +1194,7 @@
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
+				04CE38E8275103BC00204B8E /* scene_manager.cpp in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
 				04CE37B8274D167E00204B8E /* simd_math.cc in Sources */,

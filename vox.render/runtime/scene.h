@@ -21,9 +21,73 @@ public:
     /** Scene name. */
     std::string name;
     
+    /**
+     * Create scene.
+     * @param engine - Engine
+     * @param name - Name
+     */
+    Scene(EnginePtr engine, std::string name = "");
+    
+    /**
+     * Count of root entities.
+     */
+    size_t rootEntitiesCount();
+    
+    /**
+     * Root entity collection.
+     */
+    const std::vector<EntityPtr> rootEntities();
+    
+    /**
+     * Whether it's destroyed.
+     */
+    bool destroyed();
+    
+    /**
+     * Create root entity.
+     * @param name - Entity name
+     * @returns Entity
+     */
+    EntityPtr createRootEntity(std::string name = "");
+    
+    /**
+     * Append an entity.
+     * @param entity - The root entity to add
+     */
+    void addRootEntity(EntityPtr entity);
+    
+    /**
+     * Remove an entity.
+     * @param entity - The root entity to remove
+     */
+    void removeRootEntity(EntityPtr entity);
+    
+    /**
+     * Get root entity from index.
+     * @param index - Index
+     * @returns Entity
+     */
+    EntityPtr getRootEntity(size_t index = 0);
+    
+    /**
+     * Find entity globally by name.
+     * @param name - Entity name
+     * @returns Entity
+     */
+    EntityPtr findEntityByName(const std::string& name);
+    
+    /**
+     * Destroy this scene.
+     */
+    void destroy();
+    
 private:
     friend class Entity;
     
+    void _processActive(bool active);
+    
+    void _removeEntity(EntityPtr entity);
+
     bool _isActiveInEngine = false;
     bool _destroyed = false;
     std::vector<EntityPtr> _rootEntities;
