@@ -34,6 +34,325 @@ OZZ_INLINE Matrix transpose(const Matrix &a);
 struct Matrix {
     std::array<float, 16> elements;
     
+    /**
+     * Calculate a rotation matrix from a quaternion.
+     * @param quaternion - The quaternion used to calculate the matrix
+     * @return out - The calculated rotation matrix
+     */
+    static OZZ_INLINE Matrix rotationQuaternion(const Quaternion &quaternion) {
+        const auto &x = quaternion.x;
+        const auto &y = quaternion.y;
+        const auto &z = quaternion.z;
+        const auto &w = quaternion.w;
+        
+        auto x2 = x + x;
+        auto y2 = y + y;
+        auto z2 = z + z;
+        
+        auto xx = x * x2;
+        auto yx = y * x2;
+        auto yy = y * y2;
+        auto zx = z * x2;
+        auto zy = z * y2;
+        auto zz = z * z2;
+        auto wx = w * x2;
+        auto wy = w * y2;
+        auto wz = w * z2;
+        
+        return Matrix(1 - yy - zz,
+                      yx + wz,
+                      zx - wy,
+                      0,
+                      
+                      yx - wz,
+                      1 - xx - zz,
+                      zy + wx,
+                      0,
+                      
+                      zx + wy,
+                      zy - wx,
+                      1 - xx - yy,
+                      0,
+                      
+                      0,
+                      0,
+                      0,
+                      1);
+    }
+
+    /**
+     * Calculate a matrix rotates around an arbitrary axis.
+     * @param axis - The axis
+     * @param r - The rotation angle in radians
+     * @return out - The matrix after rotate
+     */
+    static OZZ_INLINE Matrix rotationAxisAngle(const Float3 &axis, float r) {
+        auto x = axis.x;
+        auto y = axis.y;
+        auto z = axis.z;
+        float len = std::sqrt(x * x + y * y + z * z);
+        float s, c, t;
+        
+        if (std::abs(len) < kNormalizationToleranceSq) {
+            return Matrix();
+        }
+        
+        len = 1 / len;
+        x *= len;
+        y *= len;
+        z *= len;
+        
+        s = std::sin(r);
+        c = std::cos(r);
+        t = 1 - c;
+        
+        // Perform rotation-specific matrix multiplication
+        return Matrix(x * x * t + c,
+                      y * x * t + z * s,
+                      z * x * t - y * s,
+                      0,
+                      
+                      x * y * t - z * s,
+                      y * y * t + c,
+                      z * y * t + x * s,
+                      0,
+                      
+                      x * z * t + y * s,
+                      y * z * t - x * s,
+                      z * z * t + c,
+                      0,
+                      
+                      0,
+                      0,
+                      0,
+                      1);
+    }
+
+    /**
+     * Calculate a matrix from a quaternion and a translation.
+     * @param quaternion - The quaternion used to calculate the matrix
+     * @param translation - The translation used to calculate the matrix
+     * @return out - The calculated matrix
+     */
+    static OZZ_INLINE Matrix rotationTranslation(const Quaternion &quaternion, const Float3 &translation) {
+        auto out = rotationQuaternion(quaternion);
+        auto &oe = out.elements;
+        oe[12] = translation.x;
+        oe[13] = translation.y;
+        oe[14] = translation.z;
+        return out;
+    }
+
+    /**
+     * Calculate an affine matrix.
+     * @param scale - The scale used to calculate matrix
+     * @param rotation - The rotation used to calculate matrix
+     * @param translation - The translation used to calculate matrix
+     * @return out - The calculated matrix
+     */
+    static OZZ_INLINE Matrix affineTransformation(const Float3 &scale, const Quaternion &rotation, const Float3 &translation) {
+        const auto &x = rotation.x;
+        const auto &y = rotation.y;
+        const auto &z = rotation.z;
+        const auto &w = rotation.w;
+        
+        auto x2 = x + x;
+        auto y2 = y + y;
+        auto z2 = z + z;
+        
+        auto xx = x * x2;
+        auto xy = x * y2;
+        auto xz = x * z2;
+        auto yy = y * y2;
+        auto yz = y * z2;
+        auto zz = z * z2;
+        auto wx = w * x2;
+        auto wy = w * y2;
+        auto wz = w * z2;
+        auto sx = scale.x;
+        auto sy = scale.y;
+        auto sz = scale.z;
+        
+        return Matrix((1 - (yy + zz)) * sx,
+                      (xy + wz) * sx,
+                      (xz - wy) * sx,
+                      0,
+                      
+                      (xy - wz) * sy,
+                      (1 - (xx + zz)) * sy,
+                      (yz + wx) * sy,
+                      0,
+                      
+                      (xz + wy) * sz,
+                      (yz - wx) * sz,
+                      (1 - (xx + yy)) * sz,
+                      0,
+                      
+                      translation.x,
+                      translation.y,
+                      translation.z,
+                      1);
+    }
+
+    /**
+     * Calculate a matrix from scale vector.
+     * @param s - The scale vector
+     * @return out - The calculated matrix
+     */
+    static OZZ_INLINE Matrix scaling(const Float3 &s) {
+        return Matrix(s.x,
+                      0,
+                      0,
+                      0,
+                      
+                      0,
+                      s.y,
+                      0,
+                      0,
+                      
+                      0,
+                      0,
+                      s.z,
+                      0,
+                      
+                      0,
+                      0,
+                      0,
+                      1);
+    }
+
+    /**
+     * Calculate a matrix from translation vector.
+     * @param translation - The translation vector
+     * @return out - The calculated matrix
+     */
+    static OZZ_INLINE Matrix translation(const Float3 &translation) {
+        return Matrix(1,
+                      0,
+                      0,
+                      0,
+                      
+                      0,
+                      1,
+                      0,
+                      0,
+                      
+                      0,
+                      0,
+                      1,
+                      0,
+                      
+                      translation.x,
+                      translation.y,
+                      translation.z,
+                      1);
+    }
+
+    
+    /**
+     * Calculate a right-handed look-at matrix.
+     * @param eye - The position of the viewer's eye
+     * @param target - The camera look-at target
+     * @param up - The camera's up vector
+     * @return out - The calculated look-at matrix
+     */
+    static OZZ_INLINE Matrix lookAt(const Float3 &eye, const Float3 &target, const Float3 &up) {
+        Float3 zAxis = eye - target;
+        Normalize(zAxis);
+        Float3 xAxis = up - zAxis;
+        Normalize(xAxis);
+        Float3 yAxis = Cross(zAxis, xAxis);
+        
+        return Matrix(xAxis.x,
+                      yAxis.x,
+                      zAxis.x,
+                      0,
+                      
+                      xAxis.y,
+                      yAxis.y,
+                      zAxis.y,
+                      0,
+                      
+                      xAxis.z,
+                      yAxis.z,
+                      zAxis.z,
+                      0,
+                      
+                      -Dot(xAxis, eye),
+                      -Dot(yAxis, eye),
+                      -Dot(zAxis, eye),
+                      1);
+    }
+
+    /**
+     * Calculate an orthographic projection matrix.
+     * @param left - The left edge of the viewing
+     * @param right - The right edge of the viewing
+     * @param bottom - The bottom edge of the viewing
+     * @param top - The top edge of the viewing
+     * @param near - The depth of the near plane
+     * @param far - The depth of the far plane
+     * @return out - The calculated orthographic projection matrix
+     */
+    static OZZ_INLINE Matrix ortho(float left, float right, float bottom, float top, float near, float far) {
+        auto lr = 1 / (left - right);
+        auto bt = 1 / (bottom - top);
+        auto nf = 1 / (near - far);
+        
+        return Matrix(-2 * lr,
+                      0,
+                      0,
+                      0,
+                      
+                      0,
+                      -2 * bt,
+                      0,
+                      0,
+                      
+                      0,
+                      0,
+                      2 * nf,
+                      0,
+                      
+                      (left + right) * lr,
+                      (top + bottom) * bt,
+                      (far + near) * nf,
+                      1);
+    }
+
+    /**
+     * Calculate a perspective projection matrix.
+     * @param fovy - Field of view in the y direction, in radians
+     * @param aspect - Aspect ratio, defined as view space width divided by height
+     * @param near - The depth of the near plane
+     * @param far - The depth of the far plane
+     * @return out - The calculated perspective projection matrix
+     */
+    static OZZ_INLINE Matrix perspective(float fovy, float aspect, float near, float far) {
+        auto f = 1.0 / std::tan(fovy / 2);
+        auto nf = 1 / (near - far);
+        
+        return Matrix(f / aspect,
+                      0,
+                      0,
+                      0,
+                      
+                      0,
+                      f,
+                      0,
+                      0,
+                      
+                      0,
+                      0,
+                      (far + near) * nf,
+                      -1,
+                      
+                      0,
+                      0,
+                      2 * far * near * nf,
+                      0);
+    }
+    
     OZZ_INLINE Matrix(float m11 = 1,
                       float m12 = 0,
                       float m13 = 0,
@@ -421,220 +740,6 @@ OZZ_INLINE Matrix Lerp(const Matrix &start, const Matrix &end, float t) {
 }
 
 /**
- * Calculate a rotation matrix from a quaternion.
- * @param quaternion - The quaternion used to calculate the matrix
- * @return out - The calculated rotation matrix
- */
-OZZ_INLINE Matrix rotationQuaternion(const Quaternion &quaternion) {
-    const auto &x = quaternion.x;
-    const auto &y = quaternion.y;
-    const auto &z = quaternion.z;
-    const auto &w = quaternion.w;
-    
-    auto x2 = x + x;
-    auto y2 = y + y;
-    auto z2 = z + z;
-    
-    auto xx = x * x2;
-    auto yx = y * x2;
-    auto yy = y * y2;
-    auto zx = z * x2;
-    auto zy = z * y2;
-    auto zz = z * z2;
-    auto wx = w * x2;
-    auto wy = w * y2;
-    auto wz = w * z2;
-    
-    return Matrix(1 - yy - zz,
-                  yx + wz,
-                  zx - wy,
-                  0,
-                  
-                  yx - wz,
-                  1 - xx - zz,
-                  zy + wx,
-                  0,
-                  
-                  zx + wy,
-                  zy - wx,
-                  1 - xx - yy,
-                  0,
-                  
-                  0,
-                  0,
-                  0,
-                  1);
-}
-
-/**
- * Calculate a matrix rotates around an arbitrary axis.
- * @param axis - The axis
- * @param r - The rotation angle in radians
- * @return out - The matrix after rotate
- */
-OZZ_INLINE Matrix rotationAxisAngle(const Float3 &axis, float r) {
-    auto x = axis.x;
-    auto y = axis.y;
-    auto z = axis.z;
-    float len = std::sqrt(x * x + y * y + z * z);
-    float s, c, t;
-    
-    if (std::abs(len) < kNormalizationToleranceSq) {
-        return Matrix();
-    }
-    
-    len = 1 / len;
-    x *= len;
-    y *= len;
-    z *= len;
-    
-    s = std::sin(r);
-    c = std::cos(r);
-    t = 1 - c;
-    
-    // Perform rotation-specific matrix multiplication
-    return Matrix(x * x * t + c,
-                  y * x * t + z * s,
-                  z * x * t - y * s,
-                  0,
-                  
-                  x * y * t - z * s,
-                  y * y * t + c,
-                  z * y * t + x * s,
-                  0,
-                  
-                  x * z * t + y * s,
-                  y * z * t - x * s,
-                  z * z * t + c,
-                  0,
-                  
-                  0,
-                  0,
-                  0,
-                  1);
-}
-
-/**
- * Calculate a matrix from a quaternion and a translation.
- * @param quaternion - The quaternion used to calculate the matrix
- * @param translation - The translation used to calculate the matrix
- * @return out - The calculated matrix
- */
-OZZ_INLINE Matrix rotationTranslation(const Quaternion &quaternion, const Float3 &translation) {
-    auto out = rotationQuaternion(quaternion);
-    auto &oe = out.elements;
-    oe[12] = translation.x;
-    oe[13] = translation.y;
-    oe[14] = translation.z;
-    return out;
-}
-
-/**
- * Calculate an affine matrix.
- * @param scale - The scale used to calculate matrix
- * @param rotation - The rotation used to calculate matrix
- * @param translation - The translation used to calculate matrix
- * @return out - The calculated matrix
- */
-OZZ_INLINE Matrix affineTransformation(const Float3 &scale, const Quaternion &rotation, const Float3 &translation) {
-    const auto &x = rotation.x;
-    const auto &y = rotation.y;
-    const auto &z = rotation.z;
-    const auto &w = rotation.w;
-    
-    auto x2 = x + x;
-    auto y2 = y + y;
-    auto z2 = z + z;
-    
-    auto xx = x * x2;
-    auto xy = x * y2;
-    auto xz = x * z2;
-    auto yy = y * y2;
-    auto yz = y * z2;
-    auto zz = z * z2;
-    auto wx = w * x2;
-    auto wy = w * y2;
-    auto wz = w * z2;
-    auto sx = scale.x;
-    auto sy = scale.y;
-    auto sz = scale.z;
-    
-    return Matrix((1 - (yy + zz)) * sx,
-                  (xy + wz) * sx,
-                  (xz - wy) * sx,
-                  0,
-                  
-                  (xy - wz) * sy,
-                  (1 - (xx + zz)) * sy,
-                  (yz + wx) * sy,
-                  0,
-                  
-                  (xz + wy) * sz,
-                  (yz - wx) * sz,
-                  (1 - (xx + yy)) * sz,
-                  0,
-                  
-                  translation.x,
-                  translation.y,
-                  translation.z,
-                  1);
-}
-
-/**
- * Calculate a matrix from scale vector.
- * @param s - The scale vector
- * @return out - The calculated matrix
- */
-OZZ_INLINE Matrix scaling(const Float3 &s) {
-    return Matrix(s.x,
-                  0,
-                  0,
-                  0,
-                  
-                  0,
-                  s.y,
-                  0,
-                  0,
-                  
-                  0,
-                  0,
-                  s.z,
-                  0,
-                  
-                  0,
-                  0,
-                  0,
-                  1);
-}
-
-/**
- * Calculate a matrix from translation vector.
- * @param translation - The translation vector
- * @return out - The calculated matrix
- */
-OZZ_INLINE Matrix translation(const Float3 &translation) {
-    return Matrix(1,
-                  0,
-                  0,
-                  0,
-                  
-                  0,
-                  1,
-                  0,
-                  0,
-                  
-                  0,
-                  0,
-                  1,
-                  0,
-                  
-                  translation.x,
-                  translation.y,
-                  translation.z,
-                  1);
-}
-
-/**
  * Calculate the inverse of the specified matrix.
  * @param a - The matrix whose inverse is to be calculated
  * @return out - The inverse of the specified matrix
@@ -697,110 +802,6 @@ OZZ_INLINE Matrix invert(const Matrix &a) {
                   (a11 * b09 - a12 * b07 + a13 * b06) * det,
                   (a42 * b01 - a41 * b03 - a43 * b00) * det,
                   (a31 * b03 - a32 * b01 + a33 * b00) * det);
-}
-
-/**
- * Calculate a right-handed look-at matrix.
- * @param eye - The position of the viewer's eye
- * @param target - The camera look-at target
- * @param up - The camera's up vector
- * @return out - The calculated look-at matrix
- */
-OZZ_INLINE Matrix lookAt(const Float3 &eye, const Float3 &target, const Float3 &up) {
-    Float3 zAxis = eye - target;
-    Normalize(zAxis);
-    Float3 xAxis = up - zAxis;
-    Normalize(xAxis);
-    Float3 yAxis = Cross(zAxis, xAxis);
-    
-    return Matrix(xAxis.x,
-                  yAxis.x,
-                  zAxis.x,
-                  0,
-                  
-                  xAxis.y,
-                  yAxis.y,
-                  zAxis.y,
-                  0,
-                  
-                  xAxis.z,
-                  yAxis.z,
-                  zAxis.z,
-                  0,
-                  
-                  -Dot(xAxis, eye),
-                  -Dot(yAxis, eye),
-                  -Dot(zAxis, eye),
-                  1);
-}
-
-/**
- * Calculate an orthographic projection matrix.
- * @param left - The left edge of the viewing
- * @param right - The right edge of the viewing
- * @param bottom - The bottom edge of the viewing
- * @param top - The top edge of the viewing
- * @param near - The depth of the near plane
- * @param far - The depth of the far plane
- * @return out - The calculated orthographic projection matrix
- */
-OZZ_INLINE Matrix ortho(float left, float right, float bottom, float top, float near, float far) {
-    auto lr = 1 / (left - right);
-    auto bt = 1 / (bottom - top);
-    auto nf = 1 / (near - far);
-    
-    return Matrix(-2 * lr,
-                  0,
-                  0,
-                  0,
-                  
-                  0,
-                  -2 * bt,
-                  0,
-                  0,
-                  
-                  0,
-                  0,
-                  2 * nf,
-                  0,
-                  
-                  (left + right) * lr,
-                  (top + bottom) * bt,
-                  (far + near) * nf,
-                  1);
-}
-
-/**
- * Calculate a perspective projection matrix.
- * @param fovy - Field of view in the y direction, in radians
- * @param aspect - Aspect ratio, defined as view space width divided by height
- * @param near - The depth of the near plane
- * @param far - The depth of the far plane
- * @return out - The calculated perspective projection matrix
- */
-OZZ_INLINE Matrix perspective(float fovy, float aspect, float near, float far) {
-    auto f = 1.0 / std::tan(fovy / 2);
-    auto nf = 1 / (near - far);
-    
-    return Matrix(f / aspect,
-                  0,
-                  0,
-                  0,
-                  
-                  0,
-                  f,
-                  0,
-                  0,
-                  
-                  0,
-                  0,
-                  (far + near) * nf,
-                  -1,
-                  
-                  0,
-                  0,
-                  2 * far * near * nf,
-                  0);
 }
 
 /**
