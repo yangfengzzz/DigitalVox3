@@ -43,28 +43,28 @@ struct Ray {
      * @param plane - The specified plane
      * @returns The distance from this ray to the specified plane if intersecting, -1 otherwise
      */
-    float intersectPlane(const Plane &plane);
+    float intersectPlane(const Plane &plane) const;
     
     /**
      * Check if this ray intersects the specified sphere.
      * @param sphere - The specified sphere
      * @returns The distance from this ray to the specified sphere if intersecting, -1 otherwise
      */
-    float intersectSphere(const BoundingSphere &sphere);
+    float intersectSphere(const BoundingSphere &sphere) const;
     
     /**
      * Check if this ray intersects the specified box (AABB).
      * @param box - The specified box
      * @returns The distance from this ray to the specified box if intersecting, -1 otherwise
      */
-    float intersectBox(const BoundingBox &box);
+    float intersectBox(const BoundingBox &box) const;
     
     /**
      * The coordinates of the specified distance from the origin in the ray direction.
      * @param distance - The specified distance
      * @return out - The coordinates as an output parameter
      */
-    Float3 getPoint(float distance);
+    Float3 getPoint(float distance) const;
 };
 
 }
