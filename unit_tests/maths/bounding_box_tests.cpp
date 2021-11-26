@@ -114,3 +114,31 @@ TEST(BoundingBox, getCorners) {
         EXPECT_FLOAT3_EQ(corners[i], expectedCorners[i].x, expectedCorners[i].y, expectedCorners[i].z);
     }
 }
+
+TEST(BoundingSphere, Constructor) {
+    // Create a same sphere by different param.
+    const Float3 points[] = {
+        Float3(0, 0, 0),
+        Float3(-1, 0, 0),
+        Float3(0, 0, 0),
+        Float3(0, 1, 0),
+        Float3(1, 1, 1),
+        Float3(0, 0, 1),
+        Float3(-1, -0.5, -0.5),
+        Float3(0, -0.5, -0.5),
+        Float3(1, 0, -1),
+        Float3(0, -1, 0)
+    };
+    const auto sphere1 = BoundingSphere(points, sizeof(Float3), 10);
+    
+    const auto box = BoundingBox(Float3(-1, -1, -1), Float3(1, 1, 1));
+    const auto sphere2 = BoundingSphere::fromBox(box);
+    
+    const auto& center1 = sphere1.center;
+    const auto& radius1 = sphere1.radius;
+    const auto& center2 = sphere2.center;
+    const auto& radius2 = sphere2.radius;
+    
+    EXPECT_FLOAT3_EQ(center1, center2.x, center2.y, center2.z);
+    EXPECT_FLOAT_EQ(radius1, radius2);
+}
