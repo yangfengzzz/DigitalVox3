@@ -94,7 +94,7 @@ public:
     template<typename T>
     T* addComponent() {
         // ComponentsDependencies._addCheck(this, type);
-        const auto component = std::make_unique<T>(this);
+        auto component = std::make_unique<T>(this);
         T* componentPtr = component.get();
         _components.emplace_back(std::move(component));
         if (_isActiveInHierarchy) {
@@ -233,6 +233,8 @@ private:
     
     std::weak_ptr<Entity> _parent;
     std::vector<Component*> _activeChangedComponents;
+    
+    std::unique_ptr<UpdateFlag> _inverseWorldMatFlag;
 };
 
 }

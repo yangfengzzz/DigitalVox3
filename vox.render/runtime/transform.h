@@ -13,6 +13,7 @@
 #include "maths/vec_float.h"
 #include "maths/quaternion.h"
 #include "maths/matrix.h"
+#include <optional>
 
 namespace vox {
 using namespace math;
@@ -48,21 +49,280 @@ enum TransformFlag {
  */
 class Transform : public Component {
 public:
+    Transform(Entity* entity);
+    
     /**
      * Local position.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
-    Float3 getPosition() {
-        return _position;
-    }
+    Float3 position();
+    void setPosition(const Float3& value);
     
-    void setPosition(const Float3& value) {
-        _position = value;
-        // _setDirtyFlagTrue(TransformFlag::LocalMatrix);
-        // _updateWorldPositionFlag();
-    }
+    /**
+     * World position.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Float3 worldPosition();
+    void setWorldPosition(const Float3& value);
+    
+    /**
+     * Local rotation, defining the rotation value in degrees.
+     * Rotations are performed around the Y axis, the X axis, and the Z axis, in that order.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Float3 rotation();
+    void setRotation(const Float3& value);
+    
+    /**
+     * World rotation, defining the rotation value in degrees.
+     * Rotations are performed around the Y axis, the X axis, and the Z axis, in that order.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Float3 worldRotation();
+    void setWorldRotation(const Float3& value);
+    
+    /**
+     * Local rotation, defining the rotation by using a unit quaternion.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Quaternion rotationQuaternion();
+    void setRotationQuaternion(const Quaternion& value);
+    
+    /**
+     * World rotation, defining the rotation by using a unit quaternion.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Quaternion worldRotationQuaternion();
+    void setWorldRotationQuaternion(const Quaternion& value);
+    
+    /**
+     * Local scaling.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Float3 scale();
+    void setScale(const Float3& value);
+    
+    /**
+     * Local lossy scaling.
+     * @remarks The value obtained may not be correct under certain conditions(for example, the parent node has scaling,
+     * and the child node has a rotation), the scaling will be tilted. Vector3 cannot be used to correctly represent the scaling. Must use Matrix3x3.
+     */
+    Float3 lossyWorldScale();
+    
+    /**
+     * Local matrix.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Matrix localMatrix();
+    void setLocalMatrix(const Matrix& value);
+    
+    /**
+     * World matrix.
+     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
+     */
+    Matrix worldMatrix();
+    void setWorldMatrix(const Matrix& value);
+    
+    /**
+     * Set local position by X, Y, Z value.
+     * @param x - X coordinate
+     * @param y - Y coordinate
+     * @param z - Z coordinate
+     */
+    void setPosition(float x, float y, float z);
+    
+    /**
+     * Set local rotation by the X, Y, Z components of the euler angle, unit in degrees.
+     * Rotations are performed around the Y axis, the X axis, and the Z axis, in that order.
+     * @param x - The angle of rotation around the X axis
+     * @param y - The angle of rotation around the Y axis
+     * @param z - The angle of rotation around the Z axis
+     */
+    void setRotation(float x, float y, float z);
+    
+    /**
+     * Set local rotation by the X, Y, Z, and W components of the quaternion.
+     * @param x - X component of quaternion
+     * @param y - Y component of quaternion
+     * @param z - Z component of quaternion
+     * @param w - W component of quaternion
+     */
+    void setRotationQuaternion(float x, float y, float z, float w);
+    
+    /**
+     * Set local scaling by scaling values along X, Y, Z axis.
+     * @param x - Scaling along X axis
+     * @param y - Scaling along Y axis
+     * @param z - Scaling along Z axis
+     */
+    void setScale(float x, float y, float z);
+    
+    /**
+     * Set world position by X, Y, Z value.
+     * @param x - X coordinate
+     * @param y - Y coordinate
+     * @param z - Z coordinate
+     */
+    void setWorldPosition(float x, float y, float z);
+    
+    /**
+     * Set world rotation by the X, Y, Z components of the euler angle, unit in degrees, Yaw/Pitch/Roll sequence.
+     * @param x - The angle of rotation around the X axis
+     * @param y - The angle of rotation around the Y axis
+     * @param z - The angle of rotation around the Z axis
+     */
+    void setWorldRotation(float x, float y, float z);
+    
+    /**
+     * Set local rotation by the X, Y, Z, and W components of the quaternion.
+     * @param x - X component of quaternion
+     * @param y - Y component of quaternion
+     * @param z - Z component of quaternion
+     * @param w - W component of quaternion
+     */
+    void setWorldRotationQuaternion(float x, float y, float z, float w);
+    
+    /**
+     * Get the forward direction in world space.
+     * @returns Forward vector
+     */
+    Float3 worldForward();
+    
+    /**
+     * Get the right direction in world space.
+     * @returns Right vector
+     */
+    Float3 getWorldRight();
+    
+    /**
+     * Get the up direction in world space.
+     * @returns Up vector
+     */
+    Float3 getWorldUp();
+    
+    /**
+     * Translate along the passed Vector3.
+     * @param translation - Direction and distance of translation
+     * @param relativeToLocal - Relative to local space
+     */
+    void translate(const Float3& translation, std::optional<bool> relativeToLocal = std::nullopt);
+    
+    /**
+     * Translate along the passed X, Y, Z value.
+     * @param x - Translate direction and distance along x axis
+     * @param y - Translate direction and distance along y axis
+     * @param z - Translate direction and distance along z axis
+     * @param relativeToLocal - Relative to local space
+     */
+    void translate(float x, float y, float z, std::optional<bool> relativeToLocal = std::nullopt);
+    
+    /**
+     * Rotate around the passed Vector3.
+     * @param rotation - Euler angle in degrees
+     * @param relativeToLocal - Relative to local space
+     */
+    void rotate(const Float3& rotation, std::optional<bool> relativeToLocal = std::nullopt);
+    
+    /**
+     * Rotate around the passed Vector3.
+     * @param x - Rotation along x axis, in degrees
+     * @param y - Rotation along y axis, in degrees
+     * @param z - Rotation along z axis, in degrees
+     * @param relativeToLocal - Relative to local space
+     */
+    void rotate(float x, float y, float z, std::optional<bool> relativeToLocal = std::nullopt);
+    
+    /**
+     * Rotate around the specified axis according to the specified angle.
+     * @param axis - Rotate axis
+     * @param angle - Rotate angle in degrees
+     * @param relativeToLocal - Relative to local space
+     */
+    void rotateByAxis(const Float3& axis, float angle, bool relativeToLocal = true);
+    
+    /**
+     * Rotate and ensure that the world front vector points to the target world position.
+     * @param worldPosition - Target world position
+     * @param worldUp - Up direction in world space, default is Vector3(0, 1, 0)
+     */
+    void lookAt(const Float3& worldPosition, std::optional<Float3> worldUp = std::nullopt);
+    
+    /**
+     * Register world transform change flag.
+     * @returns Change flag
+     */
+    std::unique_ptr<UpdateFlag> registerWorldChangeFlag() const;
+    
     
 private:
+    void _parentChange();
+    
+    /**
+     * Get worldMatrix: Will trigger the worldMatrix update of itself and all parent entities.
+     * Get worldPosition: Will trigger the worldMatrix, local position update of itself and the worldMatrix update of all parent entities.
+     * In summary, any update of related variables will cause the dirty mark of one of the full process (worldMatrix or worldRotationQuaternion) to be false.
+     */
+    void _updateWorldPositionFlag();
+    
+    /**
+     * Get worldMatrix: Will trigger the worldMatrix update of itself and all parent entities.
+     * Get worldPosition: Will trigger the worldMatrix, local position update of itself and the worldMatrix update of all parent entities.
+     * Get worldRotationQuaternion: Will trigger the world rotation (in quaternion) update of itself and all parent entities.
+     * Get worldRotation: Will trigger the world rotation(in euler and quaternion) update of itself and world rotation(in quaternion) update of all parent entities.
+     * In summary, any update of related variables will cause the dirty mark of one of the full process (worldMatrix or worldRotationQuaternion) to be false.
+     */
+    void _updateWorldRotationFlag();
+    
+    /**
+     * Get worldMatrix: Will trigger the worldMatrix update of itself and all parent entities.
+     * Get worldPosition: Will trigger the worldMatrix, local position update of itself and the worldMatrix update of all parent entities.
+     * Get worldRotationQuaternion: Will trigger the world rotation (in quaternion) update of itself and all parent entities.
+     * Get worldRotation: Will trigger the world rotation(in euler and quaternion) update of itself and world rotation(in quaternion) update of all parent entities.
+     * In summary, any update of related variables will cause the dirty mark of one of the full process (worldMatrix or worldRotationQuaternion) to be false.
+     */
+    void _updateWorldPositionAndRotationFlag();
+    
+    /**
+     * Get worldMatrix: Will trigger the worldMatrix update of itself and all parent entities.
+     * Get worldPosition: Will trigger the worldMatrix, local position update of itself and the worldMatrix update of all parent entities.
+     * Get worldScale: Will trigger the scaling update of itself and all parent entities.
+     * In summary, any update of related variables will cause the dirty mark of one of the full process (worldMatrix) to be false.
+     */
+    void _updateWorldScaleFlag();
+    
+    /**
+     * Get worldMatrix: Will trigger the worldMatrix update of itself and all parent entities.
+     * Get worldPosition: Will trigger the worldMatrix, local position update of itself and the worldMatrix update of all parent entities.
+     * Get worldScale: Will trigger the scaling update of itself and all parent entities.
+     * In summary, any update of related variables will cause the dirty mark of one of the full process (worldMatrix) to be false.
+     */
+    void _updateWorldPositionAndScaleFlag();
+    
+    /**
+     * Update all world transform property dirty flag, the principle is the same as above.
+     */
+    void _updateAllWorldFlag();
+    
+    Transform* _getParentTransform();
+    
+    Matrix3x3 _getScaleMatrix();
+    
+    bool _isContainDirtyFlags(TransformFlag targetDirtyFlags);
+    
+    bool _isContainDirtyFlag(TransformFlag type);
+    
+    bool _setDirtyFlagTrue(TransformFlag type);
+    
+    bool _setDirtyFlagFalse(TransformFlag type);
+    
+    bool _worldAssociatedChange(TransformFlag type);
+    
+    void _rotateByQuat(const Quaternion& rotateQuat, bool relativeToLocal);
+    
+    void _translate(const Float3& translation, bool relativeToLocal = true);
+    
+    void _rotateXYZ(float x, float y, float z, bool relativeToLocal = true);
+    
     Float3 _position;
     Float3 _rotation;
     Quaternion _rotationQuaternion;

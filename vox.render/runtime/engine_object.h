@@ -13,12 +13,12 @@
 namespace vox {
 class EngineObject {
 public:
-    /** Engine unique id. */
-    int getInstanceId();
-    
-    EnginePtr getEngine();
-    
     EngineObject(EnginePtr engine);
+
+    /** Engine unique id. */
+    int instanceId();
+    
+    EnginePtr engine();    
     
 protected:
     /** Engine to which the object belongs. */

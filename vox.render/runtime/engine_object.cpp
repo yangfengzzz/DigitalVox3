@@ -10,16 +10,16 @@
 namespace vox {
 int EngineObject::_instanceIdCounter = 0;
 
-int EngineObject::getInstanceId(){
+EngineObject::EngineObject(EnginePtr engine):_engine(engine) {
+}
+
+int EngineObject::instanceId(){
     ++EngineObject::_instanceIdCounter;
     return EngineObject::_instanceIdCounter;
 }
 
-EnginePtr EngineObject::getEngine() {
+EnginePtr EngineObject::engine() {
     return _engine;
-}
-
-EngineObject::EngineObject(EnginePtr engine):_engine(engine) {
 }
 
 }

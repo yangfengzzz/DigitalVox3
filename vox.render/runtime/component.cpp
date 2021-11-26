@@ -9,5 +9,6 @@
 #include "entity.h"
 
 namespace vox {
-
+Component::Component(Entity* entity):EngineObject(entity->engine()), _entity(entity) {
+}
 }
