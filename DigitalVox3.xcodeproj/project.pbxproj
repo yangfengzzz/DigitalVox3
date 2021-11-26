@@ -166,6 +166,8 @@
 		04CE38E5274FD28C00204B8E /* matrix_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E4274FD28C00204B8E /* matrix_tests.cpp */; };
 		04CE38E8275103BC00204B8E /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38E6275103BC00204B8E /* scene_manager.cpp */; };
 		04CE38E9275103BC00204B8E /* scene_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38E7275103BC00204B8E /* scene_manager.h */; };
+		04CE38EC27510A8000204B8E /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38EA27510A8000204B8E /* camera.cpp */; };
+		04CE38ED27510A8000204B8E /* camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38EB27510A8000204B8E /* camera.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -478,6 +480,12 @@
 		04CE38E4274FD28C00204B8E /* matrix_tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_tests.cpp; sourceTree = "<group>"; };
 		04CE38E6275103BC00204B8E /* scene_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene_manager.cpp; sourceTree = "<group>"; };
 		04CE38E7275103BC00204B8E /* scene_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_manager.h; sourceTree = "<group>"; };
+		04CE38EA27510A8000204B8E /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		04CE38EB27510A8000204B8E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		04CE38EF27510AD700204B8E /* background_mode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = background_mode.h; sourceTree = "<group>"; };
+		04CE38F027510AF200204B8E /* camera_clear_flags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera_clear_flags.h; sourceTree = "<group>"; };
+		04CE38F127510B0700204B8E /* color_space.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_space.h; sourceTree = "<group>"; };
+		04CE38F227510EAE00204B8E /* textureCube_face.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textureCube_face.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,6 +757,7 @@
 		04CE3704274D0E0100204B8E /* runtime */ = {
 			isa = PBXGroup;
 			children = (
+				04CE38EE27510AC600204B8E /* enums */,
 				04CE3702274D0DEC00204B8E /* animation */,
 				04160FEC27509277006CD384 /* engine_object.h */,
 				04160FEB27509277006CD384 /* engine_object.cpp */,
@@ -773,6 +782,8 @@
 				041610082750A720006CD384 /* scene.cpp */,
 				04CE38E7275103BC00204B8E /* scene_manager.h */,
 				04CE38E6275103BC00204B8E /* scene_manager.cpp */,
+				04CE38EB27510A8000204B8E /* camera.h */,
+				04CE38EA27510A8000204B8E /* camera.cpp */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1047,6 +1058,17 @@
 			path = fbx;
 			sourceTree = "<group>";
 		};
+		04CE38EE27510AC600204B8E /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				04CE38EF27510AD700204B8E /* background_mode.h */,
+				04CE38F027510AF200204B8E /* camera_clear_flags.h */,
+				04CE38F127510B0700204B8E /* color_space.h */,
+				04CE38F227510EAE00204B8E /* textureCube_face.h */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1063,6 +1085,7 @@
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
+				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				0416100B2750A720006CD384 /* scene.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
@@ -1222,6 +1245,7 @@
 				04CE37E7274D167F00204B8E /* raw_animation_utils.cc in Sources */,
 				04CE38CC274E678400204B8E /* quaternion.cpp in Sources */,
 				04160FD1274F7079006CD384 /* ray.cpp in Sources */,
+				04CE38EC27510A8000204B8E /* camera.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
 				041610062750A577006CD384 /* script.cpp in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
