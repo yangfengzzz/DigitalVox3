@@ -32,7 +32,7 @@ namespace collision_util {
  * @param point - The point
  * @returns The distance from a point to a plane
  */
-float distancePlaneAndPoint(const Plane& plane, const Float3& point);
+float distancePlaneAndPoint(const Plane &plane, const Float3 &point);
 
 /**
  * Get the intersection type between a plane and a point.
@@ -40,7 +40,7 @@ float distancePlaneAndPoint(const Plane& plane, const Float3& point);
  * @param point - The point
  * @returns The intersection type
  */
-PlaneIntersectionType intersectsPlaneAndPoint(const Plane& plane, const Float3& point);
+PlaneIntersectionType intersectsPlaneAndPoint(const Plane &plane, const Float3 &point);
 
 /**
  * Get the intersection type between a plane and a box (AABB).
@@ -48,14 +48,15 @@ PlaneIntersectionType intersectsPlaneAndPoint(const Plane& plane, const Float3& 
  * @param box - The box
  * @returns The intersection type
  */
-PlaneIntersectionType intersectsPlaneAndBox(const Plane& plane, const BoundingBox& box);
+PlaneIntersectionType intersectsPlaneAndBox(const Plane &plane, const BoundingBox &box);
+
 /**
  * Get the intersection type between a plane and a sphere.
  * @param plane - The plane
  * @param sphere - The sphere
  * @returns The intersection type
  */
-PlaneIntersectionType intersectsPlaneAndSphere(const Plane& plane, const BoundingSphere& sphere);
+PlaneIntersectionType intersectsPlaneAndSphere(const Plane &plane, const BoundingSphere &sphere);
 
 /**
  * Get the intersection type between a ray and a plane.
@@ -63,7 +64,7 @@ PlaneIntersectionType intersectsPlaneAndSphere(const Plane& plane, const Boundin
  * @param plane - The plane
  * @returns The distance from ray to plane if intersecting, -1 otherwise
  */
-float intersectsRayAndPlane(const Ray& ray, const Plane& plane);
+float intersectsRayAndPlane(const Ray &ray, const Plane &plane);
 
 /**
  * Get the intersection type between a ray and a box (AABB).
@@ -71,7 +72,7 @@ float intersectsRayAndPlane(const Ray& ray, const Plane& plane);
  * @param box - The box
  * @returns The distance from ray to box if intersecting, -1 otherwise
  */
-float intersectsRayAndBox(const Ray& ray, const BoundingBox& box);
+float intersectsRayAndBox(const Ray &ray, const BoundingBox &box);
 
 /**
  * Get the intersection type between a ray and a sphere.
@@ -79,7 +80,7 @@ float intersectsRayAndBox(const Ray& ray, const BoundingBox& box);
  * @param sphere - The sphere
  * @returns The distance from ray to sphere if intersecting, -1 otherwise
  */
-float intersectsRayAndSphere(const Ray& ray, const BoundingSphere& sphere);
+float intersectsRayAndSphere(const Ray &ray, const BoundingSphere &sphere);
 
 /**
  * Check whether the boxes intersect.
@@ -87,7 +88,7 @@ float intersectsRayAndSphere(const Ray& ray, const BoundingSphere& sphere);
  * @param boxB - The second box to check
  * @returns True if the boxes intersect, false otherwise
  */
-bool intersectsBoxAndBox(const BoundingBox& boxA, const BoundingBox& boxB);
+bool intersectsBoxAndBox(const BoundingBox &boxA, const BoundingBox &boxB);
 
 /**
  * Check whether the spheres intersect.
@@ -95,7 +96,7 @@ bool intersectsBoxAndBox(const BoundingBox& boxA, const BoundingBox& boxB);
  * @param sphereB - The second sphere to check
  * @returns True if the spheres intersect, false otherwise
  */
-bool intersectsSphereAndSphere(const BoundingSphere& sphereA, const BoundingSphere& sphereB);
+bool intersectsSphereAndSphere(const BoundingSphere &sphereA, const BoundingSphere &sphereB);
 
 /**
  * Check whether the sphere and the box intersect.
@@ -103,7 +104,7 @@ bool intersectsSphereAndSphere(const BoundingSphere& sphereA, const BoundingSphe
  * @param box - The box to check
  * @returns True if the sphere and the box intersect, false otherwise
  */
-bool intersectsSphereAndBox(const BoundingSphere& sphere, const BoundingBox& box);
+bool intersectsSphereAndBox(const BoundingSphere &sphere, const BoundingBox &box);
 
 /**
  * Get whether or not a specified bounding box intersects with this frustum (Contains or Intersects).
@@ -111,7 +112,7 @@ bool intersectsSphereAndBox(const BoundingSphere& sphere, const BoundingBox& box
  * @param box - The box
  * @returns True if bounding box intersects with this frustum, false otherwise
  */
-bool intersectsFrustumAndBox(const BoundingFrustum& frustum, const BoundingBox& box);
+bool intersectsFrustumAndBox(const BoundingFrustum &frustum, const BoundingBox &box);
 
 /**
  * Get the containment type between a frustum and a box (AABB).
@@ -119,7 +120,7 @@ bool intersectsFrustumAndBox(const BoundingFrustum& frustum, const BoundingBox& 
  * @param box - The box
  * @returns The containment type
  */
-ContainmentType frustumContainsBox(const BoundingFrustum& frustum, const BoundingBox& box);
+ContainmentType frustumContainsBox(const BoundingFrustum &frustum, const BoundingBox &box);
 
 /**
  * Get the containment type between a frustum and a sphere.
@@ -127,7 +128,7 @@ ContainmentType frustumContainsBox(const BoundingFrustum& frustum, const Boundin
  * @param sphere - The sphere
  * @returns The containment type
  */
-ContainmentType frustumContainsSphere(const BoundingFrustum& frustum, const BoundingSphere& sphere);
+ContainmentType frustumContainsSphere(const BoundingFrustum &frustum, const BoundingSphere &sphere);
 
 }
 }

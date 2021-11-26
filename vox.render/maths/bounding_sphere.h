@@ -22,12 +22,13 @@ struct BoundingSphere {
     /** The radius of the sphere. */
     float radius = 0;
     
-    BoundingSphere():center(Float3()), radius(0) {}
+    BoundingSphere() : center(Float3()), radius(0) {
+    }
     
     // Constructs the smallest box that contains the _count points _points.
     // _stride is the number of bytes between points, it must be greater or
     // equal to sizeof(Float3).
-    BoundingSphere(const Float3* _points, size_t _stride, size_t _count) {
+    BoundingSphere(const Float3 *_points, size_t _stride, size_t _count) {
         Float3 _center;
         
         // Calculate the center of the sphere.
@@ -53,7 +54,7 @@ struct BoundingSphere {
      * @param box - The given box
      * @return out - The calculated bounding sphere
      */
-    static BoundingSphere fromBox(const BoundingBox& box);
+    static BoundingSphere fromBox(const BoundingBox &box);
 };
 
 

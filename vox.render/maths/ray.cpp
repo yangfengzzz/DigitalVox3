@@ -20,21 +20,22 @@ Ray::Ray(std::optional<Float3> origin, std::optional<Float3> direction) {
     }
 }
 
-float Ray::intersectPlane(const Plane& plane) {
+float Ray::intersectPlane(const Plane &plane) {
     return collision_util::intersectsRayAndPlane(*this, plane);
 }
 
-float Ray::intersectSphere(const BoundingSphere& sphere) {
+float Ray::intersectSphere(const BoundingSphere &sphere) {
     return collision_util::intersectsRayAndSphere(*this, sphere);
 }
 
-float Ray::intersectBox(const BoundingBox& box) {
+float Ray::intersectBox(const BoundingBox &box) {
     return collision_util::intersectsRayAndBox(*this, box);
 }
 
-void Ray::getPoint(float distance, Float3& out) {
-    out = direction * distance;
+Float3 Ray::getPoint(float distance) {
+    auto out = direction * distance;
     out = out + origin;
+    return out;
 }
 
 }

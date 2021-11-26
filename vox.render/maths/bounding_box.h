@@ -45,23 +45,25 @@ struct BoundingBox {
     BoundingBox();
     
     // Constructs a box with the specified _min and _max bounds.
-    BoundingBox(const Float3& _min, const Float3& _max) : min(_min), max(_max) {}
+    BoundingBox(const Float3 &_min, const Float3 &_max) : min(_min), max(_max) {
+    }
     
     // Constructs the smallest box that contains the _count points _points.
     // _stride is the number of bytes between points.
-    explicit BoundingBox(const Float3& _point) : min(_point), max(_point) {}
+    explicit BoundingBox(const Float3 &_point) : min(_point), max(_point) {
+    }
     
     // Constructs the smallest box that contains the _count points _points.
     // _stride is the number of bytes between points, it must be greater or
     // equal to sizeof(Float3).
-    BoundingBox(const Float3* _points, size_t _stride, size_t _count);
+    BoundingBox(const Float3 *_points, size_t _stride, size_t _count);
     
     /**
      * Calculate a bounding box from the center point and the extent of the bounding box.
      * @param center - The center point
      * @param extent - The extent of the bounding box
      */
-    static BoundingBox fromCenterAndExtent(const Float3& center, const Float3& extent) {
+    static BoundingBox fromCenterAndExtent(const Float3 &center, const Float3 &extent) {
         BoundingBox out;
         out.min = center - extent;
         out.max = center + extent;
@@ -72,13 +74,17 @@ struct BoundingBox {
      * Calculate a bounding box from a given sphere.
      * @param sphere - The given sphere
      */
-    static BoundingBox fromSphere(const BoundingSphere& sphere);
+    static BoundingBox fromSphere(const BoundingSphere &sphere);
     
     // Tests whether *this is a valid box.
-    bool is_valid() const { return min <= max; }
+    bool is_valid() const {
+        return min <= max;
+    }
     
     // Tests whether _p is within box bounds.
-    bool is_inside(const Float3& _p) const { return _p >= min && _p <= max; }
+    bool is_inside(const Float3 &_p) const {
+        return _p >= min && _p <= max;
+    }
     
     /**
      * Get the center point of this bounding box.
@@ -107,7 +113,7 @@ struct BoundingBox {
 
 // Merges two boxes _a and _b.
 // Both _a and _b can be invalid.
-OZZ_INLINE BoundingBox Merge(const BoundingBox& _a, const BoundingBox& _b) {
+OZZ_INLINE BoundingBox Merge(const BoundingBox &_a, const BoundingBox &_b) {
     if (!_a.is_valid()) {
         return _b;
     } else if (!_b.is_valid()) {
@@ -120,30 +126,29 @@ OZZ_INLINE BoundingBox Merge(const BoundingBox& _a, const BoundingBox& _b) {
  * Transform a bounding box.
  * @param source - The original bounding box
  * @param matrix - The transform to apply to the bounding box
- * @param out - The transformed bounding box
+ * @return out - The transformed bounding box
  */
-OZZ_INLINE void transform(const BoundingBox& source, const Matrix& matrix, BoundingBox& out) {
+OZZ_INLINE BoundingBox transform(const BoundingBox &source, const Matrix &matrix) {
     // https://zeux.io/2010/10/17/aabb-from-obb-with-component-wise-abs/
     Float3 center = source.getCenter();
     Float3 extent = source.getExtent();
     
     transformCoordinate(center, matrix, center);
     
-    const auto& x = extent.x;
-    const auto& y = extent.y;
-    const auto& z = extent.z;
-    const auto& e = matrix.elements;
+    const auto &x = extent.x;
+    const auto &y = extent.y;
+    const auto &z = extent.z;
+    const auto &e = matrix.elements;
     extent.x = std::abs(x * e[0]) + std::abs(y * e[4]) + std::abs(z * e[8]);
     extent.y = std::abs(x * e[1]) + std::abs(y * e[5]) + std::abs(z * e[9]);
     extent.z = std::abs(x * e[2]) + std::abs(y * e[6]) + std::abs(z * e[10]);
     
     // set min、max
-    out.min = center - extent;
-    out.max = center + extent;
+    return BoundingBox(center - extent, center + extent);
 }
 
 // Compute box transformation by a matrix.
-BoundingBox TransformBox(const Float4x4& _matrix, const BoundingBox& _box);
+BoundingBox TransformBox(const Float4x4 &_matrix, const BoundingBox &_box);
 }  // namespace math
 }  // namespace ozz
 #endif  // OZZ_OZZ_BASE_MATHS_BOX_H_

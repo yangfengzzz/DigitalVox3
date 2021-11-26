@@ -13,11 +13,11 @@
 namespace ozz {
 namespace math {
 namespace collision_util {
-float distancePlaneAndPoint(const Plane& plane, const Float3& point) {
+float distancePlaneAndPoint(const Plane &plane, const Float3 &point) {
     return Dot(plane.normal, point) + plane.distance;
 }
 
-PlaneIntersectionType intersectsPlaneAndPoint(const Plane& plane, const Float3& point) {
+PlaneIntersectionType intersectsPlaneAndPoint(const Plane &plane, const Float3 &point) {
     const auto distance = collision_util::distancePlaneAndPoint(plane, point);
     if (distance > 0) {
         return PlaneIntersectionType::Front;
@@ -28,10 +28,10 @@ PlaneIntersectionType intersectsPlaneAndPoint(const Plane& plane, const Float3& 
     return PlaneIntersectionType::Intersecting;
 }
 
-PlaneIntersectionType intersectsPlaneAndBox(const Plane& plane, const BoundingBox& box) {
-    const auto& min = box.min;
-    const auto& max = box.max;
-    const auto& normal = plane.normal;
+PlaneIntersectionType intersectsPlaneAndBox(const Plane &plane, const BoundingBox &box) {
+    const auto &min = box.min;
+    const auto &max = box.max;
+    const auto &normal = plane.normal;
     Float3 front;
     Float3 back;
     
@@ -68,9 +68,9 @@ PlaneIntersectionType intersectsPlaneAndBox(const Plane& plane, const BoundingBo
     return PlaneIntersectionType::Intersecting;
 }
 
-PlaneIntersectionType intersectsPlaneAndSphere(const Plane& plane, const BoundingSphere& sphere) {
-    const auto& center = sphere.center;
-    const auto& radius = sphere.radius;
+PlaneIntersectionType intersectsPlaneAndSphere(const Plane &plane, const BoundingSphere &sphere) {
+    const auto &center = sphere.center;
+    const auto &radius = sphere.radius;
     const auto distance = collision_util::distancePlaneAndPoint(plane, center);
     if (distance > radius) {
         return PlaneIntersectionType::Front;
@@ -81,8 +81,8 @@ PlaneIntersectionType intersectsPlaneAndSphere(const Plane& plane, const Boundin
     return PlaneIntersectionType::Intersecting;
 }
 
-float intersectsRayAndPlane(const Ray& ray, const Plane& plane) {
-    const auto& normal = plane.normal;
+float intersectsRayAndPlane(const Ray &ray, const Plane &plane) {
+    const auto &normal = plane.normal;
     
     const auto dir = Dot(normal, ray.direction);
     // Parallel
@@ -104,17 +104,17 @@ float intersectsRayAndPlane(const Ray& ray, const Plane& plane) {
     return distance;
 }
 
-float intersectsRayAndBox(const Ray& ray, const BoundingBox& box) {
-    const auto& origin = ray.origin;
-    const auto& direction = ray.direction;
-    const auto& min = box.min;
-    const auto& max = box.max;
-    const auto& dirX = direction.x;
-    const auto& dirY = direction.y;
-    const auto& dirZ = direction.z;
-    const auto& oriX = origin.x;
-    const auto& oriY = origin.y;
-    const auto& oriZ = origin.z;
+float intersectsRayAndBox(const Ray &ray, const BoundingBox &box) {
+    const auto &origin = ray.origin;
+    const auto &direction = ray.direction;
+    const auto &min = box.min;
+    const auto &max = box.max;
+    const auto &dirX = direction.x;
+    const auto &dirY = direction.y;
+    const auto &dirZ = direction.z;
+    const auto &oriX = origin.x;
+    const auto &oriY = origin.y;
+    const auto &oriZ = origin.z;
     float distance = 0;
     float tmax = std::numeric_limits<float>::max();
     
@@ -190,11 +190,11 @@ float intersectsRayAndBox(const Ray& ray, const BoundingBox& box) {
     return distance;
 }
 
-float intersectsRayAndSphere(const Ray& ray, const BoundingSphere& sphere) {
-    const auto& origin = ray.origin;
-    const auto& direction = ray.direction;
-    const auto& center = sphere.center;
-    const auto& radius = sphere.radius;
+float intersectsRayAndSphere(const Ray &ray, const BoundingSphere &sphere) {
+    const auto &origin = ray.origin;
+    const auto &direction = ray.direction;
+    const auto &center = sphere.center;
+    const auto &radius = sphere.radius;
     
     Float3 m = origin - center;
     const auto b = Dot(m, direction);
@@ -217,7 +217,7 @@ float intersectsRayAndSphere(const Ray& ray, const BoundingSphere& sphere) {
     return distance;
 }
 
-bool intersectsBoxAndBox(const BoundingBox& boxA, const BoundingBox& boxB){
+bool intersectsBoxAndBox(const BoundingBox &boxA, const BoundingBox &boxB) {
     if (boxA.min.x > boxB.max.x || boxB.min.x > boxA.max.x) {
         return false;
     }
@@ -229,15 +229,15 @@ bool intersectsBoxAndBox(const BoundingBox& boxA, const BoundingBox& boxB){
     return !(boxA.min.z > boxB.max.z || boxB.min.z > boxA.max.z);
 }
 
-bool intersectsSphereAndSphere(const BoundingSphere& sphereA, const BoundingSphere& sphereB) {
+bool intersectsSphereAndSphere(const BoundingSphere &sphereA, const BoundingSphere &sphereB) {
     const auto radiisum = sphereA.radius + sphereB.radius;
     return LengthSqr(sphereA.center - sphereB.center) < radiisum * radiisum;
 }
 
-bool intersectsSphereAndBox(const BoundingSphere& sphere, const BoundingBox& box) {
-    const auto& center = sphere.center;
-    const auto& max = box.max;
-    const auto& min = box.min;
+bool intersectsSphereAndBox(const BoundingSphere &sphere, const BoundingBox &box) {
+    const auto &center = sphere.center;
+    const auto &max = box.max;
+    const auto &min = box.min;
     
     Float3 closestPoint = Float3(std::max(min.x, std::min(center.x, max.x)),
                                  std::max(min.y, std::min(center.y, max.y)),
@@ -247,14 +247,14 @@ bool intersectsSphereAndBox(const BoundingSphere& sphere, const BoundingBox& box
     return distance <= sphere.radius * sphere.radius;
 }
 
-bool intersectsFrustumAndBox(const BoundingFrustum& frustum, const BoundingBox& box) {
-    const auto& min = box.min;
-    const auto& max = box.max;
+bool intersectsFrustumAndBox(const BoundingFrustum &frustum, const BoundingBox &box) {
+    const auto &min = box.min;
+    const auto &max = box.max;
     Float3 back;
     
     for (int i = 0; i < 6; ++i) {
         const auto plane = frustum.getPlane(i);
-        const auto& normal = plane.normal;
+        const auto &normal = plane.normal;
         
         back.x = normal.x >= 0 ? min.x : max.x;
         back.y = normal.y >= 0 ? min.y : max.y;
@@ -267,16 +267,16 @@ bool intersectsFrustumAndBox(const BoundingFrustum& frustum, const BoundingBox& 
     return true;
 }
 
-ContainmentType frustumContainsBox(const BoundingFrustum& frustum, const BoundingBox& box) {
-    const auto& min = box.min;
-    const auto& max = box.max;
+ContainmentType frustumContainsBox(const BoundingFrustum &frustum, const BoundingBox &box) {
+    const auto &min = box.min;
+    const auto &max = box.max;
     Float3 front;
     Float3 back;
     auto result = ContainmentType::Contains;
     
     for (int i = 0; i < 6; ++i) {
         const auto plane = frustum.getPlane(i);
-        const auto& normal = plane.normal;
+        const auto &normal = plane.normal;
         
         if (normal.x >= 0) {
             front.x = max.x;
@@ -312,7 +312,7 @@ ContainmentType frustumContainsBox(const BoundingFrustum& frustum, const Boundin
     return result;
 }
 
-ContainmentType frustumContainsSphere(const BoundingFrustum& frustum, const BoundingSphere& sphere) {
+ContainmentType frustumContainsSphere(const BoundingFrustum &frustum, const BoundingSphere &sphere) {
     auto result = ContainmentType::Contains;
     
     for (int i = 0; i < 6; ++i) {

@@ -57,21 +57,21 @@ struct BoundingFrustum {
      * Update all planes from the given matrix.
      * @param matrix - The given view-projection matrix
      */
-    void calculateFromMatrix(const Matrix& matrix);
+    void calculateFromMatrix(const Matrix &matrix);
     
     /**
      * Get whether or not a specified bounding box intersects with this frustum (Contains or Intersects).
      * @param box - The box for testing
      * @returns True if bounding box intersects with this frustum, false otherwise
      */
-    bool intersectsBox(const BoundingBox& box);
+    bool intersectsBox(const BoundingBox &box);
     
     /**
      * Get whether or not a specified bounding sphere intersects with this frustum (Contains or Intersects).
      * @param sphere - The sphere for testing
      * @returns True if bounding sphere intersects with this frustum, false otherwise
      */
-    bool intersectsSphere(const BoundingSphere& sphere);
+    bool intersectsSphere(const BoundingSphere &sphere);
 };
 
 }

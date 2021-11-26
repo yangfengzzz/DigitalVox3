@@ -56,8 +56,9 @@ struct Color {
     /** The alpha component of the color, 0~1. */
     float a;
     
-    Color(float r = 1, float g = 1, float b = 1, float a = 1):
-    r(r), g(g), b(b), a(a){}
+    Color(float r = 1, float g = 1, float b = 1, float a = 1) :
+    r(r), g(g), b(b), a(a) {
+    }
     
     /**
      * Modify components (r, g, b) of this color from gamma space to linear space.
@@ -84,7 +85,7 @@ struct Color {
     }
 };
 
-OZZ_INLINE bool operator==(const Color& left, const Color& right) {
+OZZ_INLINE bool operator==(const Color &left, const Color &right) {
     return (
             (left.r == right.r) &&
             (left.g == right.g) &&
@@ -93,14 +94,14 @@ OZZ_INLINE bool operator==(const Color& left, const Color& right) {
             );
 }
 
-OZZ_INLINE Color operator+(const Color& left, const Color& right) {
+OZZ_INLINE Color operator+(const Color &left, const Color &right) {
     return Color(left.r + right.r,
                  left.g + right.g,
                  left.b + right.b,
                  left.a + right.a);
 }
 
-OZZ_INLINE Color operator+(const Color& left, const float s) {
+OZZ_INLINE Color operator+(const Color &left, const float s) {
     return Color(left.r * s,
                  left.g * s,
                  left.b * s,
