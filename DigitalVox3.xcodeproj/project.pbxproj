@@ -26,6 +26,12 @@
 		04160FEA275091FA006CD384 /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FE8275091FA006CD384 /* engine.h */; };
 		04160FED27509277006CD384 /* engine_object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FEB27509277006CD384 /* engine_object.cpp */; };
 		04160FEE27509277006CD384 /* engine_object.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FEC27509277006CD384 /* engine_object.h */; };
+		04160FF12750944F006CD384 /* entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FEF2750944F006CD384 /* entity.cpp */; };
+		04160FF22750944F006CD384 /* entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FF02750944F006CD384 /* entity.h */; };
+		04160FF62750955C006CD384 /* component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FF42750955C006CD384 /* component.cpp */; };
+		04160FF72750955C006CD384 /* component.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FF52750955C006CD384 /* component.h */; };
+		04160FFA2750963B006CD384 /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FF82750963B006CD384 /* transform.cpp */; };
+		04160FFB2750963B006CD384 /* transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 04160FF92750963B006CD384 /* transform.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -210,6 +216,13 @@
 		04160FE8275091FA006CD384 /* engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
 		04160FEB27509277006CD384 /* engine_object.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_object.cpp; sourceTree = "<group>"; };
 		04160FEC27509277006CD384 /* engine_object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_object.h; sourceTree = "<group>"; };
+		04160FEF2750944F006CD384 /* entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = entity.cpp; sourceTree = "<group>"; };
+		04160FF02750944F006CD384 /* entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entity.h; sourceTree = "<group>"; };
+		04160FF3275094B1006CD384 /* layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = layer.h; sourceTree = "<group>"; };
+		04160FF42750955C006CD384 /* component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = component.cpp; sourceTree = "<group>"; };
+		04160FF52750955C006CD384 /* component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = component.h; sourceTree = "<group>"; };
+		04160FF82750963B006CD384 /* transform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
+		04160FF92750963B006CD384 /* transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transform.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -717,6 +730,13 @@
 				04160FEB27509277006CD384 /* engine_object.cpp */,
 				04160FE8275091FA006CD384 /* engine.h */,
 				04160FE7275091FA006CD384 /* engine.cpp */,
+				04160FF3275094B1006CD384 /* layer.h */,
+				04160FF02750944F006CD384 /* entity.h */,
+				04160FEF2750944F006CD384 /* entity.cpp */,
+				04160FF52750955C006CD384 /* component.h */,
+				04160FF42750955C006CD384 /* component.cpp */,
+				04160FF92750963B006CD384 /* transform.h */,
+				04160FF82750963B006CD384 /* transform.cpp */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1000,12 +1020,15 @@
 			files = (
 				04CE38DC274E8C2D00204B8E /* plane.h in Headers */,
 				04160FEE27509277006CD384 /* engine_object.h in Headers */,
+				04160FF72750955C006CD384 /* component.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
+				04160FFB2750963B006CD384 /* transform.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
+				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
 			);
@@ -1122,6 +1145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CE3790274D167E00204B8E /* platform.cc in Sources */,
+				04160FF62750955C006CD384 /* component.cpp in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
@@ -1156,6 +1180,7 @@
 				04160FD1274F7079006CD384 /* ray.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
+				04160FF12750944F006CD384 /* entity.cpp in Sources */,
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,
 				04160FED27509277006CD384 /* engine_object.cpp in Sources */,
 				04CE37EF274D167F00204B8E /* animation_optimizer.cc in Sources */,
@@ -1175,6 +1200,7 @@
 				04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */,
 				04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */,
 				04CE3821274D168000204B8E /* imgui_impl_metal.mm in Sources */,
+				04160FFA2750963B006CD384 /* transform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
