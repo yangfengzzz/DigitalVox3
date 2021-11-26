@@ -38,6 +38,8 @@
 		041610032750973C006CD384 /* updateFlag_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610012750973C006CD384 /* updateFlag_manager.h */; };
 		041610062750A577006CD384 /* script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610042750A577006CD384 /* script.cpp */; };
 		041610072750A577006CD384 /* script.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610052750A577006CD384 /* script.h */; };
+		0416100A2750A720006CD384 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610082750A720006CD384 /* scene.cpp */; };
+		0416100B2750A720006CD384 /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610092750A720006CD384 /* scene.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -235,6 +237,8 @@
 		041610012750973C006CD384 /* updateFlag_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = updateFlag_manager.h; sourceTree = "<group>"; };
 		041610042750A577006CD384 /* script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = script.cpp; sourceTree = "<group>"; };
 		041610052750A577006CD384 /* script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = script.h; sourceTree = "<group>"; };
+		041610082750A720006CD384 /* scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
+		041610092750A720006CD384 /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -755,6 +759,8 @@
 				04160FF82750963B006CD384 /* transform.cpp */,
 				041610052750A577006CD384 /* script.h */,
 				041610042750A577006CD384 /* script.cpp */,
+				041610092750A720006CD384 /* scene.h */,
+				041610082750A720006CD384 /* scene.cpp */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1045,6 +1051,7 @@
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
+				0416100B2750A720006CD384 /* scene.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
@@ -1216,6 +1223,7 @@
 				04CE3806274D167F00204B8E /* fbx.cc in Sources */,
 				04CE3808274D167F00204B8E /* fbx_skeleton.cc in Sources */,
 				04CE380A274D167F00204B8E /* fbx_animation.cc in Sources */,
+				0416100A2750A720006CD384 /* scene.cpp in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
 				04CE3817274D167F00204B8E /* imgui_tables.cpp in Sources */,
