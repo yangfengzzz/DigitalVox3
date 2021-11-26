@@ -10,7 +10,24 @@
 
 namespace ozz {
 namespace math {
-OZZ_INLINE Matrix3x3 normalMatrix(const Matrix &mat4) {
+void Matrix3x3::setValueByMatrix(const Matrix& a) {
+    const auto& ae = a.elements;
+    auto& e = elements;
+    
+    e[0] = ae[0];
+    e[1] = ae[1];
+    e[2] = ae[2];
+    
+    e[3] = ae[4];
+    e[4] = ae[5];
+    e[5] = ae[6];
+    
+    e[6] = ae[8];
+    e[7] = ae[9];
+    e[8] = ae[10];
+}
+
+Matrix3x3 normalMatrix(const Matrix &mat4) {
     const auto &ae = mat4.elements;
     const auto &a11 = ae[0],
     a12 = ae[1],

@@ -84,6 +84,27 @@ inline void ExpectTrue(bool _b) {
                                                     \
   } while (void(0), 0)
 
+// Macro for testing ozz::math::Matrix members with x, y, z, w float values,
+// using EXPECT_FLOAT_EQ internally.
+#define EXPECT_MATRIX3X3_EQ(_expected, _x0, _x1, _x2, \
+                                    _y0, _y1, _y2,    \
+                                    _z0, _z1, _z2)    \
+                                                    \
+  do {                                              \
+    SCOPED_TRACE("");                               \
+    const ozz::math::Matrix3x3 expected(_expected); \
+    ExpectFloatNear(expected.elements[0], _x0);     \
+    ExpectFloatNear(expected.elements[1], _x1);     \
+    ExpectFloatNear(expected.elements[2], _x2);     \
+    ExpectFloatNear(expected.elements[3], _y0);     \
+    ExpectFloatNear(expected.elements[4], _y1);     \
+    ExpectFloatNear(expected.elements[5], _y2);     \
+    ExpectFloatNear(expected.elements[6], _z0);     \
+    ExpectFloatNear(expected.elements[7], _z1);     \
+    ExpectFloatNear(expected.elements[8], _z2);     \
+                                                    \
+  } while (void(0), 0)
+
 // Macro for testing ozz::math::Float4 members with x, y, z, w float values,
 // using EXPECT_FLOAT_EQ internally.
 #define EXPECT_FLOAT4_EQ(_expected, _x, _y, _z, _w) \

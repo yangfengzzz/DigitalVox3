@@ -69,7 +69,7 @@ struct Matrix3x3 {
                          zy - wx,
                          1 - xx - yy);
     }
-
+    
     /**
      * Calculate a matrix from scale vector.
      * @param s - The scale vector
@@ -88,7 +88,7 @@ struct Matrix3x3 {
                          0,
                          1);
     }
-
+    
     /**
      * Calculate a matrix from translation vector.
      * @param translation - The translation vector
@@ -107,7 +107,7 @@ struct Matrix3x3 {
                          translation.y,
                          1);
     }
-
+    
     
     /**
      * Constructor of 3*3 matrix.
@@ -146,10 +146,17 @@ struct Matrix3x3 {
     }
     
     /**
+     * Set the value of this 3x3 matrix by the specified 4x4 matrix.
+     * upper-left principle
+     * @param a - The specified 4x4 matrix
+     */
+    void setValueByMatrix(const Matrix& a);
+    
+    /**
      * Calculate a determinant of this matrix.
      * @returns The determinant of this matrix
      */
-    OZZ_INLINE float determinant() {
+    OZZ_INLINE float determinant() const {
         auto &e = elements;
         
         const auto &a11 = e[0],
@@ -397,7 +404,8 @@ OZZ_INLINE Matrix3x3 invert(const Matrix3x3 &a) {
  * @param mat4 - The 4x4 matrix
  * @return out - THe 3x3 normal matrix
  */
-OZZ_INLINE Matrix3x3 normalMatrix(const Matrix &mat4);
+Matrix3x3 normalMatrix(const Matrix &mat4);
+
 /**
  * The specified matrix rotates around an angle.
  * @param a - The specified matrix
