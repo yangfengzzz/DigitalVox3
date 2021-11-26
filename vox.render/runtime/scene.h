@@ -13,6 +13,8 @@
 #include "entity.h"
 
 namespace vox {
+class Camera;
+
 /**
  * Scene.
  */
@@ -83,11 +85,17 @@ public:
     
 private:
     friend class Entity;
+    friend class Camera;
+    
+    void _attachRenderCamera(Camera* camera);
+    
+    void _detachRenderCamera(Camera* camera);
     
     void _processActive(bool active);
     
     void _removeEntity(EntityPtr entity);
 
+    std::vector<Camera*> _activeCameras;
     bool _isActiveInEngine = false;
     bool _destroyed = false;
     std::vector<EntityPtr> _rootEntities;

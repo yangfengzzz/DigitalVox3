@@ -83,7 +83,7 @@ public:
      * Viewport, normalized expression, the upper left corner is (0, 0), and the lower right corner is (1, 1).
      * @remarks Re-assignment is required after modification to ensure that the modification takes effect.
      */
-    Float4 viewport();
+    Float4 viewport() const;
     
     void setViewport(const Float4& value);
     

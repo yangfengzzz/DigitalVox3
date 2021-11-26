@@ -59,7 +59,7 @@ void Camera::setAspectRatio(float value) {
     _projMatChange();
 }
 
-Float4 Camera::viewport() {
+Float4 Camera::viewport() const {
     return _viewport;
 }
 
@@ -130,6 +130,150 @@ bool Camera::enableHDR() {
 
 void Camera::setEnableHDR(bool value) {
     assert(false && "not implementation");
+}
+
+void Camera::resetProjectionMatrix() {
+    _isProjMatSetting = false;
+    _projMatChange();
+}
+
+void Camera::resetAspectRatio() {
+    _customAspectRatio = std::nullopt;
+    _projMatChange();
+}
+
+Float4 Camera::worldToViewportPoint(const Float3& point) {
+    auto tempMat4 = projectionMatrix() * viewMatrix();
+    auto tempVec4 = Float4(point.x, point.y, point.z, 1.0);
+    tempVec4 = transform(tempVec4, tempMat4);
+    
+    const auto w = tempVec4.w;
+    const auto nx = tempVec4.x / w;
+    const auto ny = tempVec4.y / w;
+    const auto nz = tempVec4.z / w;
+    
+    // Transform of coordinate axis.
+    return Float4((nx + 1.0) * 0.5, (1.0 - ny) * 0.5, nz, w);
+}
+
+Float3 Camera::viewportToWorldPoint(const Float3& point) {
+    return _innerViewportToWorldPoint(point, invViewProjMat());
+}
+
+Ray Camera::viewportPointToRay(const Float2& point) {
+    Ray out;
+    // Use the intersection of the near clipping plane as the origin point.
+    Float3 clipPoint = Float3(point.x, point.y, 0);
+    out.origin = viewportToWorldPoint(clipPoint);
+    // Use the intersection of the far clipping plane as the origin point.
+    clipPoint.z = 1.0;
+    Float3 farPoint = _innerViewportToWorldPoint(clipPoint, _invViewProjMat);
+    out.direction = farPoint - out.origin;
+    out.direction = Normalize(out.direction);
+    
+    return out;
+}
+
+Float2 Camera::screenToViewportPoint(const Float2& point) {
+    const auto& canvas = engine()->canvas();
+    const Float4 viewport = this->viewport();
+    return Float2((point.x / canvas.width() - viewport.x) / viewport.z,
+                  (point.y / canvas.height() - viewport.y) / viewport.w);
+}
+
+Float3 Camera::screenToViewportPoint(const Float3& point) {
+    const auto& canvas = engine()->canvas();
+    const Float4 viewport = this->viewport();
+    return Float3((point.x / canvas.width() - viewport.x) / viewport.z,
+                  (point.y / canvas.height() - viewport.y) / viewport.w, 0);
+}
+
+Float2 Camera::viewportToScreenPoint(const Float2& point) {
+    const auto& canvas = engine()->canvas();
+    const Float4 viewport = this->viewport();
+    return Float2((viewport.x + point.x * viewport.z) * canvas.width(),
+                  (viewport.y + point.y * viewport.w) * canvas.height());
+}
+
+Float3 Camera::viewportToScreenPoint(const Float3& point) {
+    const auto& canvas = engine()->canvas();
+    const Float4 viewport = this->viewport();
+    return Float3((viewport.x + point.x * viewport.z) * canvas.width(),
+                  (viewport.y + point.y * viewport.w) * canvas.height(), 0);
+}
+
+Float4 Camera::viewportToScreenPoint(const Float4& point) {
+    const auto& canvas = engine()->canvas();
+    const Float4 viewport = this->viewport();
+    return Float4((viewport.x + point.x * viewport.z) * canvas.width(),
+                  (viewport.y + point.y * viewport.w) * canvas.height(), 0, 0);
+}
+
+Float4 Camera::worldToScreenPoint(const Float3& point) {
+    auto out = worldToViewportPoint(point);
+    return viewportToScreenPoint(out);
+}
+
+Float3 Camera::screenToWorldPoint(const Float3&  point) {
+    auto out = screenToViewportPoint(point);
+    return viewportToWorldPoint(out);
+}
+
+Ray Camera::screenPointToRay(const Float2& point) {
+    Float2 viewportPoint = screenToViewportPoint(point);
+    return viewportPointToRay(viewportPoint);
+}
+
+void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+    
+}
+
+void Camera::_onActive() {
+    entity()->scene()->_attachRenderCamera(this);
+}
+
+void Camera::_onInActive() {
+    entity()->scene()->_detachRenderCamera(this);
+}
+
+void Camera::_onDestroy() {
+    _isInvViewProjDirty->destroy();
+    _isViewMatrixDirty->destroy();
+}
+
+void Camera::_projMatChange() {
+    _isFrustumProjectDirty = true;
+    _isProjectionDirty = true;
+    _isInvProjMatDirty = true;
+    _isInvViewProjDirty->flag = true;
+}
+
+Float3 Camera::_innerViewportToWorldPoint(const Float3& point, const Matrix& invViewProjMat) {
+    // Depth is a normalized value, 0 is nearPlane, 1 is farClipPlane.
+    const auto depth = point.z * 2 - 1;
+    // Transform to clipping space matrix
+    Float4 clipPoint = Float4(point.x * 2 - 1, 1 - point.y * 2, depth, 1);
+    clipPoint = transform(clipPoint, invViewProjMat);
+    const auto invW = 1.0 / clipPoint.w;
+    return Float3(clipPoint.x * invW,
+                  clipPoint.y * invW,
+                  clipPoint.z * invW);
+}
+
+Matrix Camera::invViewProjMat() {
+    if (_isInvViewProjDirty->flag) {
+        _isInvViewProjDirty->flag = false;
+        _invViewProjMat = _transform->worldMatrix() * inverseProjectionMatrix();
+    }
+    return _invViewProjMat;
+}
+
+Matrix Camera::inverseProjectionMatrix() {
+    if (_isInvProjMatDirty) {
+        _isInvProjMatDirty = false;
+        _inverseProjectionMatrix = invert(projectionMatrix());
+    }
+    return _inverseProjectionMatrix;
 }
 
 }

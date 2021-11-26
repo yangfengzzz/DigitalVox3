@@ -7,6 +7,8 @@
 
 #include "scene.h"
 #include "engine.h"
+#include "camera.h"
+#include "log.h"
 
 namespace vox {
 Scene::Scene(EnginePtr engine, std::string name):EngineObject(engine), name(name) {
@@ -108,6 +110,22 @@ void Scene::destroy() {
     }
     _rootEntities.clear();
     _destroyed = true;
+}
+
+void Scene::_attachRenderCamera(Camera* camera) {
+    auto iter = std::find(_activeCameras.begin(), _activeCameras.end(), camera);
+    if (iter == _activeCameras.end()) {
+        _activeCameras.push_back(camera);
+    } else {
+        log::Log() << "Camera already attached." << std::endl;
+    }
+}
+
+void Scene::_detachRenderCamera(Camera* camera) {
+    auto iter = std::find(_activeCameras.begin(), _activeCameras.end(), camera);
+    if (iter != _activeCameras.end()) {
+        _activeCameras.erase(iter);
+    }
 }
 
 void Scene::_processActive(bool active) {
