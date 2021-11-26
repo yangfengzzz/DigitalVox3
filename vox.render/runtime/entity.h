@@ -9,6 +9,7 @@
 #define entity_hpp
 
 #include <string>
+#include <optional>
 
 #include "engine_object.h"
 #include "layer.h"
@@ -42,50 +43,37 @@ public:
     /**
      * Whether to activate locally.
      */
-    bool isActive() {
-        return _isActive;
-    }
+    bool isActive();
     
     void setIsActive(bool value);
     
     /**
      * Whether it is active in the hierarchy.
      */
-    bool isActiveInHierarchy() {
-        return _isActiveInHierarchy;
-    }
+    bool isActiveInHierarchy();
     
     /**
      * The parent entity.
      */
-    EntityPtr parent() {
-        return _parent.lock();
-    }
+    EntityPtr parent();
     
-    void setParent(EntityPtr entity) {
-    }
+    void setParent(EntityPtr entity);
     
     
     /**
      * Number of the children entities
      */
-    size_t childCount() {
-        return _children.size();
-    }
+    size_t childCount();
     
     /**
      * The scene the entity belongs to.
      */
-    ScenePtr scene() {
-        return _scene.lock();
-    }
+    ScenePtr scene();
     
     /**
      * The children entities
      */
-    const std::vector<EntityPtr> children() const {
-        return _children;
-    }
+    const std::vector<EntityPtr> children() const;
     
     /**
      * Add component based on the component type.
@@ -108,21 +96,40 @@ public:
      * @returns    The first component which match type.
      */
     template<typename T>
-    T* getComponent();
+    T* getComponent() {
+        for (size_t i = _components.size() - 1; i >= 0; i--) {
+            const auto& component = _components[i];
+            if (std::dynamic_pointer_cast<T>(component) != nullptr) {
+                return component;
+            }
+        }
+    }
     
     /**
      * Get components which match the type.
      * @returns    The components which match type.
      */
     template<typename T>
-    std::vector<T*> getComponents();
+    std::vector<T*> getComponents() {
+        std::vector<T*> results;
+        for (size_t i = _components.size() - 1; i >= 0; i--) {
+            const auto& component = _components[i];
+            if (std::dynamic_pointer_cast<T>(component) != nullptr) {
+                results.push_back(component);
+            }
+        }
+        return results;
+    }
     
     /**
      * Get the components which match the type of the entity and it's children.
      * @returns    The components collection which match the type.
      */
     template<typename T>
-    std::vector<T*> getComponentsIncludeChildren();
+    std::vector<T*> getComponentsIncludeChildren() {
+        std::vector<T*> results = _getComponentsInChildren<T>();
+        return results;
+    }
     
     /**
      * Add child entity.
@@ -197,7 +204,17 @@ private:
     void _processInActive();
     
     template<typename T>
-    void _getComponentsInChildren(std::vector<T*>& results);
+    void _getComponentsInChildren(std::vector<T*>& results) {
+        for (size_t i = _components.size() - 1; i >= 0; i--) {
+            const auto& component = _components[i];
+            if (std::dynamic_pointer_cast<T>(component) != nullptr) {
+                results.push_back(component);
+            }
+        }
+        for (size_t i = _children.size() - 1; i >= 0; i--) {
+            _children[i]->_getComponentsInChildren(results);
+        }
+    }
     
     void _setActiveComponents(bool isActive);
     
@@ -207,34 +224,19 @@ private:
     
     void _setTransformDirty();
     
-    static EntityPtr _findChildByName(EntityPtr root, const std::string& name) {
-        const auto& children = root->_children;
-        for (size_t i = children.size() - 1; i >= 0; i--) {
-            const auto& child = children[i];
-            if (child->name == name) {
-                return child;
-            }
-        }
-        return nullptr;
-    }
+    static EntityPtr _findChildByName(EntityPtr root, const std::string& name);
     
-    static void _traverseSetOwnerScene(EntityPtr entity, std::weak_ptr<Scene> scene) {
-        entity->_scene = scene;
-        const auto& children = entity->_children;
-        for (size_t i = entity->_children.size() - 1; i >= 0; i--) {
-            _traverseSetOwnerScene(children[i], scene);
-        }
-    }
+    static void _traverseSetOwnerScene(EntityPtr entity, std::optional<std::weak_ptr<Scene>> scene);
     
     bool _isActiveInHierarchy = false;
     std::vector<std::unique_ptr<Component>> _components;
     std::vector<Script*> _scripts;
     std::vector<EntityPtr> _children;
-    std::weak_ptr<Scene> _scene;
+    std::optional<std::weak_ptr<Scene>> _scene;
     bool _isRoot = false;
     bool _isActive = true;
     
-    std::weak_ptr<Entity> _parent;
+    std::optional<std::weak_ptr<Entity>> _parent;
     std::vector<Component*> _activeChangedComponents;
     
     std::unique_ptr<UpdateFlag> _inverseWorldMatFlag;
