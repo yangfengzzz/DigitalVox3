@@ -19,11 +19,16 @@
 namespace ozz {
 namespace math {
 struct Matrix;
-OZZ_INLINE void invert(const Matrix& a, Matrix& out);
-OZZ_INLINE void rotateAxisAngle(const Matrix& m, const Float3& axis, float r, Matrix& out);
-OZZ_INLINE void scale(const Matrix& m, const Float3& s, Matrix& out);
-OZZ_INLINE void translate(const Matrix& m, const Float3& v, Matrix& out);
-OZZ_INLINE void transpose(const Matrix& a, Matrix& out);
+
+OZZ_INLINE Matrix invert(const Matrix &a);
+
+OZZ_INLINE Matrix rotateAxisAngle(const Matrix &m, const Float3 &axis, float r);
+
+OZZ_INLINE Matrix scale(const Matrix &m, const Float3 &s);
+
+OZZ_INLINE Matrix translate(const Matrix &m, const Float3 &v);
+
+OZZ_INLINE Matrix transpose(const Matrix &a);
 
 // Represents a 4x4 mathematical matrix.
 struct Matrix {
@@ -45,7 +50,7 @@ struct Matrix {
                       float m42 = 0,
                       float m43 = 0,
                       float m44 = 1) {
-        auto& e = elements;
+        auto &e = elements;
         
         e[0] = m11;
         e[1] = m12;
@@ -73,21 +78,21 @@ struct Matrix {
      * @returns The determinant of this matrix
      */
     OZZ_INLINE float determinant() {
-        const auto& e = elements;
+        const auto &e = elements;
         
-        const auto& a11 = e[0],
+        const auto &a11 = e[0],
         a12 = e[1],
         a13 = e[2],
         a14 = e[3];
-        const auto& a21 = e[4],
+        const auto &a21 = e[4],
         a22 = e[5],
         a23 = e[6],
         a24 = e[7];
-        const auto& a31 = e[8],
+        const auto &a31 = e[8],
         a32 = e[9],
         a33 = e[10],
         a34 = e[11];
-        const auto& a41 = e[12],
+        const auto &a41 = e[12],
         a42 = e[13],
         a43 = e[14],
         a44 = e[15];
@@ -116,24 +121,24 @@ struct Matrix {
      * @param scale - Scale vector as an output parameter
      * @returns True if this matrix can be decomposed, false otherwise
      */
-    bool decompose(Float3& translation, Quaternion& rotation, Float3& scale) {
+    bool decompose(Float3 &translation, Quaternion &rotation, Float3 &scale) {
         Matrix3x3 rm;
         
-        const auto& e = elements;
-        auto& rme = rm.elements;
+        const auto &e = elements;
+        auto &rme = rm.elements;
         
-        const auto& m11 = e[0];
-        const auto& m12 = e[1];
-        const auto& m13 = e[2];
-        const auto& m14 = e[3];
-        const auto& m21 = e[4];
-        const auto& m22 = e[5];
-        const auto& m23 = e[6];
-        const auto& m24 = e[7];
-        const auto& m31 = e[8];
-        const auto& m32 = e[9];
-        const auto& m33 = e[10];
-        const auto& m34 = e[11];
+        const auto &m11 = e[0];
+        const auto &m12 = e[1];
+        const auto &m13 = e[2];
+        const auto &m14 = e[3];
+        const auto &m21 = e[4];
+        const auto &m22 = e[5];
+        const auto &m23 = e[6];
+        const auto &m24 = e[7];
+        const auto &m31 = e[8];
+        const auto &m32 = e[9];
+        const auto &m33 = e[10];
+        const auto &m34 = e[11];
         
         translation.x = e[12];
         translation.y = e[13];
@@ -179,78 +184,62 @@ struct Matrix {
     
     /**
      * Get rotation from this matrix.
-     * @param out - Rotation quaternion as an output parameter
+     * @return out - Rotation quaternion as an output parameter
      */
-    void getRotation(Quaternion& out) {
-        const auto& e = elements;
+    Quaternion getRotation() {
+        const auto &e = elements;
         auto trace = e[0] + e[5] + e[10];
         
         if (trace > kNormalizationToleranceSq) {
             auto S = std::sqrt(trace + 1.0) * 2;
-            out.w = 0.25 * S;
-            out.x = (e[6] - e[9]) / S;
-            out.y = (e[8] - e[2]) / S;
-            out.z = (e[1] - e[4]) / S;
+            return Quaternion((e[6] - e[9]) / S, (e[8] - e[2]) / S, (e[1] - e[4]) / S, 0.25 * S);
         } else if (e[0] > e[5] && e[0] > e[10]) {
             auto S = std::sqrt(1.0 + e[0] - e[5] - e[10]) * 2;
-            out.w = (e[6] - e[9]) / S;
-            out.x = 0.25 * S;
-            out.y = (e[1] + e[4]) / S;
-            out.z = (e[8] + e[2]) / S;
+            return Quaternion(0.25 * S, (e[1] + e[4]) / S, (e[8] + e[2]) / S, (e[6] - e[9]) / S);
         } else if (e[5] > e[10]) {
             auto S = std::sqrt(1.0 + e[5] - e[0] - e[10]) * 2;
-            out.w = (e[8] - e[2]) / S;
-            out.x = (e[1] + e[4]) / S;
-            out.y = 0.25 * S;
-            out.z = (e[6] + e[9]) / S;
+            return Quaternion((e[1] + e[4]) / S, 0.25 * S, (e[6] + e[9]) / S, (e[8] - e[2]) / S);
         } else {
             auto S = std::sqrt(1.0 + e[10] - e[0] - e[5]) * 2;
-            out.w = (e[1] - e[4]) / S;
-            out.x = (e[8] + e[2]) / S;
-            out.y = (e[6] + e[9]) / S;
-            out.z = 0.25 * S;
+            return Quaternion((e[8] + e[2]) / S, (e[6] + e[9]) / S, 0.25 * S, (e[1] - e[4]) / S);
         }
     }
     
     /**
      * Get scale from this matrix.
-     * @param out - Scale vector as an output parameter
+     * @return out - Scale vector as an output parameter
      */
-    void getScaling(Float3& out) {
-        //getScale()
-        const auto& e = elements;
-        const auto& m11 = e[0],
+    Float3 getScaling() {
+        const auto &e = elements;
+        const auto &m11 = e[0],
         m12 = e[1],
         m13 = e[2];
-        const auto& m21 = e[4],
+        const auto &m21 = e[4],
         m22 = e[5],
         m23 = e[6];
-        const auto& m31 = e[8],
+        const auto &m31 = e[8],
         m32 = e[9],
         m33 = e[10];
         
-        out.x = std::sqrt(m11 * m11 + m12 * m12 + m13 * m13);
-        out.y = std::sqrt(m21 * m21 + m22 * m22 + m23 * m23);
-        out.z = std::sqrt(m31 * m31 + m32 * m32 + m33 * m33);
+        return Float3(std::sqrt(m11 * m11 + m12 * m12 + m13 * m13),
+                      std::sqrt(m21 * m21 + m22 * m22 + m23 * m23),
+                      std::sqrt(m31 * m31 + m32 * m32 + m33 * m33));
     }
     
     /**
      * Get translation from this matrix.
-     * @param out - Translation vector as an output parameter
+     * @return out - Translation vector as an output parameter
      */
-    void getTranslation(Float3& out) {
-        const auto& e = elements;
-        
-        out.x = e[12];
-        out.y = e[13];
-        out.z = e[14];
+    Float3 getTranslation() {
+        const auto &e = elements;
+        return Float3(e[12], e[13], e[14]);
     }
     
     /**
      * Identity this matrix.
      */
     void identity() {
-        auto& e = elements;
+        auto &e = elements;
         
         e[0] = 1;
         e[1] = 0;
@@ -277,7 +266,7 @@ struct Matrix {
      * Invert the matrix.
      */
     void invert() {
-        ::ozz::math::invert(*this, *this);
+        *this = ::ozz::math::invert(*this);
     }
     
     /**
@@ -285,70 +274,70 @@ struct Matrix {
      * @param axis - The axis
      * @param r - The rotation angle in radians
      */
-    void rotateAxisAngle(const Float3& axis, float r) {
-        ::ozz::math::rotateAxisAngle(*this, axis, r, *this);
+    void rotateAxisAngle(const Float3 &axis, float r) {
+        *this = ::ozz::math::rotateAxisAngle(*this, axis, r);
     }
     
     /**
      * Scale this matrix by a given vector.
      * @param s - The given vector
      */
-    void scale(const Float3& s) {
-        ::ozz::math::scale(*this, s, *this);
+    void scale(const Float3 &s) {
+        *this = ::ozz::math::scale(*this, s);
     }
     
     /**
      * Translate this matrix by a given vector.
      * @param v - The given vector
      */
-    void translate(const Float3& v) {
-        ::ozz::math::translate(*this, v, *this);
+    void translate(const Float3 &v) {
+        *this = ::ozz::math::translate(*this, v);
     }
     
     /**
      * Calculate the transpose of this matrix.
      */
     void transpose() {
-        ::ozz::math::transpose(*this, *this);
+        *this = ::ozz::math::transpose(*this);
     }
 };
 
-OZZ_INLINE Matrix operator*(const Matrix& left, const Matrix& right) {
-    const auto& le = left.elements;
-    const auto& re = right.elements;
+OZZ_INLINE Matrix operator*(const Matrix &left, const Matrix &right) {
+    const auto &le = left.elements;
+    const auto &re = right.elements;
     Matrix out;
-    auto& oe = out.elements;
+    auto &oe = out.elements;
     
-    const auto& l11 = le[0],
+    const auto &l11 = le[0],
     l12 = le[1],
     l13 = le[2],
     l14 = le[3];
-    const auto& l21 = le[4],
+    const auto &l21 = le[4],
     l22 = le[5],
     l23 = le[6],
     l24 = le[7];
-    const auto& l31 = le[8],
+    const auto &l31 = le[8],
     l32 = le[9],
     l33 = le[10],
     l34 = le[11];
-    const auto& l41 = le[12],
+    const auto &l41 = le[12],
     l42 = le[13],
     l43 = le[14],
     l44 = le[15];
     
-    const auto& r11 = re[0],
+    const auto &r11 = re[0],
     r12 = re[1],
     r13 = re[2],
     r14 = re[3];
-    const auto& r21 = re[4],
+    const auto &r21 = re[4],
     r22 = re[5],
     r23 = re[6],
     r24 = re[7];
-    const auto& r31 = re[8],
+    const auto &r31 = re[8],
     r32 = re[9],
     r33 = re[10],
     r34 = re[11];
-    const auto& r41 = re[12],
+    const auto &r41 = re[12],
     r42 = re[13],
     r43 = re[14],
     r44 = re[15];
@@ -375,9 +364,9 @@ OZZ_INLINE Matrix operator*(const Matrix& left, const Matrix& right) {
     return out;
 }
 
-OZZ_INLINE bool operator==(const Matrix& left, const Matrix& right) {
-    const auto& le = left.elements;
-    const auto& re = right.elements;
+OZZ_INLINE bool operator==(const Matrix &left, const Matrix &right) {
+    const auto &le = left.elements;
+    const auto &re = right.elements;
     
     return
     (le[0] == re[0]) &&
@@ -403,46 +392,44 @@ OZZ_INLINE bool operator==(const Matrix& left, const Matrix& right) {
  * @param start - The first matrix
  * @param end - The second matrix
  * @param t - The blend amount where 0 returns start and 1 end
- * @param out - The result of linear blending between two matrices
+ * @return out - The result of linear blending between two matrices
  */
-OZZ_INLINE void Lerp(const Matrix& start, const Matrix& end, float t, Matrix& out) {
-    const auto& se = start.elements;
-    const auto& ee = end.elements;
-    auto& oe = out.elements;
+OZZ_INLINE Matrix Lerp(const Matrix &start, const Matrix &end, float t) {
+    const auto &se = start.elements;
+    const auto &ee = end.elements;
     const auto inv = 1.0 - t;
     
-    oe[0] = se[0] * inv + ee[0] * t;
-    oe[1] = se[1] * inv + ee[1] * t;
-    oe[2] = se[2] * inv + ee[2] * t;
-    oe[3] = se[3] * inv + ee[3] * t;
-    
-    oe[4] = se[4] * inv + ee[4] * t;
-    oe[5] = se[5] * inv + ee[5] * t;
-    oe[6] = se[6] * inv + ee[6] * t;
-    oe[7] = se[7] * inv + ee[7] * t;
-    
-    oe[8] = se[8] * inv + ee[8] * t;
-    oe[9] = se[9] * inv + ee[9] * t;
-    oe[10] = se[10] * inv + ee[10] * t;
-    oe[11] = se[11] * inv + ee[11] * t;
-    
-    oe[12] = se[12] * inv + ee[12] * t;
-    oe[13] = se[13] * inv + ee[13] * t;
-    oe[14] = se[14] * inv + ee[14] * t;
-    oe[15] = se[15] * inv + ee[15] * t;
+    return Matrix(se[0] * inv + ee[0] * t,
+                  se[1] * inv + ee[1] * t,
+                  se[2] * inv + ee[2] * t,
+                  se[3] * inv + ee[3] * t,
+                  
+                  se[4] * inv + ee[4] * t,
+                  se[5] * inv + ee[5] * t,
+                  se[6] * inv + ee[6] * t,
+                  se[7] * inv + ee[7] * t,
+                  
+                  se[8] * inv + ee[8] * t,
+                  se[9] * inv + ee[9] * t,
+                  se[10] * inv + ee[10] * t,
+                  se[11] * inv + ee[11] * t,
+                  
+                  se[12] * inv + ee[12] * t,
+                  se[13] * inv + ee[13] * t,
+                  se[14] * inv + ee[14] * t,
+                  se[15] * inv + ee[15] * t);
 }
 
 /**
  * Calculate a rotation matrix from a quaternion.
  * @param quaternion - The quaternion used to calculate the matrix
- * @reparamturn out - The calculated rotation matrix
+ * @return out - The calculated rotation matrix
  */
-OZZ_INLINE void rotationQuaternion(const Quaternion& quaternion, Matrix& out) {
-    auto& oe = out.elements;
-    const auto& x = quaternion.x;
-    const auto& y = quaternion.y;
-    const auto& z = quaternion.z;
-    const auto& w = quaternion.w;
+OZZ_INLINE Matrix rotationQuaternion(const Quaternion &quaternion) {
+    const auto &x = quaternion.x;
+    const auto &y = quaternion.y;
+    const auto &z = quaternion.z;
+    const auto &w = quaternion.w;
     
     auto x2 = x + x;
     auto y2 = y + y;
@@ -458,35 +445,34 @@ OZZ_INLINE void rotationQuaternion(const Quaternion& quaternion, Matrix& out) {
     auto wy = w * y2;
     auto wz = w * z2;
     
-    oe[0] = 1 - yy - zz;
-    oe[1] = yx + wz;
-    oe[2] = zx - wy;
-    oe[3] = 0;
-    
-    oe[4] = yx - wz;
-    oe[5] = 1 - xx - zz;
-    oe[6] = zy + wx;
-    oe[7] = 0;
-    
-    oe[8] = zx + wy;
-    oe[9] = zy - wx;
-    oe[10] = 1 - xx - yy;
-    oe[11] = 0;
-    
-    oe[12] = 0;
-    oe[13] = 0;
-    oe[14] = 0;
-    oe[15] = 1;
+    return Matrix(1 - yy - zz,
+                  yx + wz,
+                  zx - wy,
+                  0,
+                  
+                  yx - wz,
+                  1 - xx - zz,
+                  zy + wx,
+                  0,
+                  
+                  zx + wy,
+                  zy - wx,
+                  1 - xx - yy,
+                  0,
+                  
+                  0,
+                  0,
+                  0,
+                  1);
 }
 
 /**
  * Calculate a matrix rotates around an arbitrary axis.
  * @param axis - The axis
  * @param r - The rotation angle in radians
- * @param out - The matrix after rotate
+ * @return out - The matrix after rotate
  */
-OZZ_INLINE void rotationAxisAngle(const Float3& axis, float r, Matrix& out) {
-    auto& oe = out.elements;
+OZZ_INLINE Matrix rotationAxisAngle(const Float3 &axis, float r) {
     auto x = axis.x;
     auto y = axis.y;
     auto z = axis.z;
@@ -494,7 +480,7 @@ OZZ_INLINE void rotationAxisAngle(const Float3& axis, float r, Matrix& out) {
     float s, c, t;
     
     if (std::abs(len) < kNormalizationToleranceSq) {
-        return;
+        return Matrix();
     }
     
     len = 1 / len;
@@ -507,40 +493,40 @@ OZZ_INLINE void rotationAxisAngle(const Float3& axis, float r, Matrix& out) {
     t = 1 - c;
     
     // Perform rotation-specific matrix multiplication
-    oe[0] = x * x * t + c;
-    oe[1] = y * x * t + z * s;
-    oe[2] = z * x * t - y * s;
-    oe[3] = 0;
-    
-    oe[4] = x * y * t - z * s;
-    oe[5] = y * y * t + c;
-    oe[6] = z * y * t + x * s;
-    oe[7] = 0;
-    
-    oe[8] = x * z * t + y * s;
-    oe[9] = y * z * t - x * s;
-    oe[10] = z * z * t + c;
-    oe[11] = 0;
-    
-    oe[12] = 0;
-    oe[13] = 0;
-    oe[14] = 0;
-    oe[15] = 1;
+    return Matrix(x * x * t + c,
+                  y * x * t + z * s,
+                  z * x * t - y * s,
+                  0,
+                  
+                  x * y * t - z * s,
+                  y * y * t + c,
+                  z * y * t + x * s,
+                  0,
+                  
+                  x * z * t + y * s,
+                  y * z * t - x * s,
+                  z * z * t + c,
+                  0,
+                  
+                  0,
+                  0,
+                  0,
+                  1);
 }
 
 /**
  * Calculate a matrix from a quaternion and a translation.
  * @param quaternion - The quaternion used to calculate the matrix
  * @param translation - The translation used to calculate the matrix
- * @param out - The calculated matrix
+ * @return out - The calculated matrix
  */
-OZZ_INLINE void rotationTranslation(const Quaternion& quaternion, const Float3& translation, Matrix& out) {
-    rotationQuaternion(quaternion, out);
-    
-    auto& oe = out.elements;
+OZZ_INLINE Matrix rotationTranslation(const Quaternion &quaternion, const Float3 &translation) {
+    auto out = rotationQuaternion(quaternion);
+    auto &oe = out.elements;
     oe[12] = translation.x;
     oe[13] = translation.y;
     oe[14] = translation.z;
+    return out;
 }
 
 /**
@@ -548,14 +534,13 @@ OZZ_INLINE void rotationTranslation(const Quaternion& quaternion, const Float3& 
  * @param scale - The scale used to calculate matrix
  * @param rotation - The rotation used to calculate matrix
  * @param translation - The translation used to calculate matrix
- * @param out - The calculated matrix
+ * @return out - The calculated matrix
  */
-OZZ_INLINE void affineTransformation(const Float3& scale, const Quaternion& rotation, const Float3& translation, Matrix& out) {
-    auto& oe = out.elements;
-    const auto& x = rotation.x;
-    const auto& y = rotation.y;
-    const auto& z = rotation.z;
-    const auto& w = rotation.w;
+OZZ_INLINE Matrix affineTransformation(const Float3 &scale, const Quaternion &rotation, const Float3 &translation) {
+    const auto &x = rotation.x;
+    const auto &y = rotation.y;
+    const auto &z = rotation.z;
+    const auto &w = rotation.w;
     
     auto x2 = x + x;
     auto y2 = y + y;
@@ -574,105 +559,102 @@ OZZ_INLINE void affineTransformation(const Float3& scale, const Quaternion& rota
     auto sy = scale.y;
     auto sz = scale.z;
     
-    oe[0] = (1 - (yy + zz)) * sx;
-    oe[1] = (xy + wz) * sx;
-    oe[2] = (xz - wy) * sx;
-    oe[3] = 0;
-    
-    oe[4] = (xy - wz) * sy;
-    oe[5] = (1 - (xx + zz)) * sy;
-    oe[6] = (yz + wx) * sy;
-    oe[7] = 0;
-    
-    oe[8] = (xz + wy) * sz;
-    oe[9] = (yz - wx) * sz;
-    oe[10] = (1 - (xx + yy)) * sz;
-    oe[11] = 0;
-    
-    oe[12] = translation.x;
-    oe[13] = translation.y;
-    oe[14] = translation.z;
-    oe[15] = 1;
+    return Matrix((1 - (yy + zz)) * sx,
+                  (xy + wz) * sx,
+                  (xz - wy) * sx,
+                  0,
+                  
+                  (xy - wz) * sy,
+                  (1 - (xx + zz)) * sy,
+                  (yz + wx) * sy,
+                  0,
+                  
+                  (xz + wy) * sz,
+                  (yz - wx) * sz,
+                  (1 - (xx + yy)) * sz,
+                  0,
+                  
+                  translation.x,
+                  translation.y,
+                  translation.z,
+                  1);
 }
 
 /**
  * Calculate a matrix from scale vector.
  * @param s - The scale vector
- * @param out - The calculated matrix
+ * @return out - The calculated matrix
  */
-OZZ_INLINE void scaling(const Float3& s, Matrix& out) {
-    auto& oe = out.elements;
-    oe[0] = s.x;
-    oe[1] = 0;
-    oe[2] = 0;
-    oe[3] = 0;
-    
-    oe[4] = 0;
-    oe[5] = s.y;
-    oe[6] = 0;
-    oe[7] = 0;
-    
-    oe[8] = 0;
-    oe[9] = 0;
-    oe[10] = s.z;
-    oe[11] = 0;
-    
-    oe[12] = 0;
-    oe[13] = 0;
-    oe[14] = 0;
-    oe[15] = 1;
+OZZ_INLINE Matrix scaling(const Float3 &s) {
+    return Matrix(s.x,
+                  0,
+                  0,
+                  0,
+                  
+                  0,
+                  s.y,
+                  0,
+                  0,
+                  
+                  0,
+                  0,
+                  s.z,
+                  0,
+                  
+                  0,
+                  0,
+                  0,
+                  1);
 }
 
 /**
  * Calculate a matrix from translation vector.
  * @param translation - The translation vector
- * @param out - The calculated matrix
+ * @return out - The calculated matrix
  */
-OZZ_INLINE void translation(const Float3& translation, Matrix& out) {
-    auto& oe = out.elements;
-    oe[0] = 1;
-    oe[1] = 0;
-    oe[2] = 0;
-    oe[3] = 0;
-    
-    oe[4] = 0;
-    oe[5] = 1;
-    oe[6] = 0;
-    oe[7] = 0;
-    
-    oe[8] = 0;
-    oe[9] = 0;
-    oe[10] = 1;
-    oe[11] = 0;
-    
-    oe[12] = translation.x;
-    oe[13] = translation.y;
-    oe[14] = translation.z;
-    oe[15] = 1;
+OZZ_INLINE Matrix translation(const Float3 &translation) {
+    return Matrix(1,
+                  0,
+                  0,
+                  0,
+                  
+                  0,
+                  1,
+                  0,
+                  0,
+                  
+                  0,
+                  0,
+                  1,
+                  0,
+                  
+                  translation.x,
+                  translation.y,
+                  translation.z,
+                  1);
 }
 
 /**
  * Calculate the inverse of the specified matrix.
  * @param a - The matrix whose inverse is to be calculated
- * @param out - The inverse of the specified matrix
+ * @return out - The inverse of the specified matrix
  */
-OZZ_INLINE void invert(const Matrix& a, Matrix& out) {
-    const auto& ae = a.elements;
-    auto& oe = out.elements;
+OZZ_INLINE Matrix invert(const Matrix &a) {
+    const auto &ae = a.elements;
     
-    const auto& a11 = ae[0],
+    const auto &a11 = ae[0],
     a12 = ae[1],
     a13 = ae[2],
     a14 = ae[3];
-    const auto& a21 = ae[4],
+    const auto &a21 = ae[4],
     a22 = ae[5],
     a23 = ae[6],
     a24 = ae[7];
-    const  auto& a31 = ae[8],
+    const auto &a31 = ae[8],
     a32 = ae[9],
     a33 = ae[10],
     a34 = ae[11];
-    const  auto& a41 = ae[12],
+    const auto &a41 = ae[12],
     a42 = ae[13],
     a43 = ae[14],
     a44 = ae[15];
@@ -692,29 +674,29 @@ OZZ_INLINE void invert(const Matrix& a, Matrix& out) {
     
     auto det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
     if (!det) {
-        return;
+        return Matrix();
     }
     det = 1.0 / det;
     
-    oe[0] = (a22 * b11 - a23 * b10 + a24 * b09) * det;
-    oe[1] = (a13 * b10 - a12 * b11 - a14 * b09) * det;
-    oe[2] = (a42 * b05 - a43 * b04 + a44 * b03) * det;
-    oe[3] = (a33 * b04 - a32 * b05 - a34 * b03) * det;
-    
-    oe[4] = (a23 * b08 - a21 * b11 - a24 * b07) * det;
-    oe[5] = (a11 * b11 - a13 * b08 + a14 * b07) * det;
-    oe[6] = (a43 * b02 - a41 * b05 - a44 * b01) * det;
-    oe[7] = (a31 * b05 - a33 * b02 + a34 * b01) * det;
-    
-    oe[8] = (a21 * b10 - a22 * b08 + a24 * b06) * det;
-    oe[9] = (a12 * b08 - a11 * b10 - a14 * b06) * det;
-    oe[10] = (a41 * b04 - a42 * b02 + a44 * b00) * det;
-    oe[11] = (a32 * b02 - a31 * b04 - a34 * b00) * det;
-    
-    oe[12] = (a22 * b07 - a21 * b09 - a23 * b06) * det;
-    oe[13] = (a11 * b09 - a12 * b07 + a13 * b06) * det;
-    oe[14] = (a42 * b01 - a41 * b03 - a43 * b00) * det;
-    oe[15] = (a31 * b03 - a32 * b01 + a33 * b00) * det;
+    return Matrix((a22 * b11 - a23 * b10 + a24 * b09) * det,
+                  (a13 * b10 - a12 * b11 - a14 * b09) * det,
+                  (a42 * b05 - a43 * b04 + a44 * b03) * det,
+                  (a33 * b04 - a32 * b05 - a34 * b03) * det,
+                  
+                  (a23 * b08 - a21 * b11 - a24 * b07) * det,
+                  (a11 * b11 - a13 * b08 + a14 * b07) * det,
+                  (a43 * b02 - a41 * b05 - a44 * b01) * det,
+                  (a31 * b05 - a33 * b02 + a34 * b01) * det,
+                  
+                  (a21 * b10 - a22 * b08 + a24 * b06) * det,
+                  (a12 * b08 - a11 * b10 - a14 * b06) * det,
+                  (a41 * b04 - a42 * b02 + a44 * b00) * det,
+                  (a32 * b02 - a31 * b04 - a34 * b00) * det,
+                  
+                  (a22 * b07 - a21 * b09 - a23 * b06) * det,
+                  (a11 * b09 - a12 * b07 + a13 * b06) * det,
+                  (a42 * b01 - a41 * b03 - a43 * b00) * det,
+                  (a31 * b03 - a32 * b01 + a33 * b00) * det);
 }
 
 /**
@@ -722,35 +704,34 @@ OZZ_INLINE void invert(const Matrix& a, Matrix& out) {
  * @param eye - The position of the viewer's eye
  * @param target - The camera look-at target
  * @param up - The camera's up vector
- * @param out - The calculated look-at matrix
+ * @return out - The calculated look-at matrix
  */
-OZZ_INLINE void lookAt(const Float3& eye, const Float3& target, const Float3& up, Matrix& out) {
-    auto& oe = out.elements;
+OZZ_INLINE Matrix lookAt(const Float3 &eye, const Float3 &target, const Float3 &up) {
     Float3 zAxis = eye - target;
     Normalize(zAxis);
     Float3 xAxis = up - zAxis;
     Normalize(xAxis);
     Float3 yAxis = Cross(zAxis, xAxis);
     
-    oe[0] = xAxis.x;
-    oe[1] = yAxis.x;
-    oe[2] = zAxis.x;
-    oe[3] = 0;
-    
-    oe[4] = xAxis.y;
-    oe[5] = yAxis.y;
-    oe[6] = zAxis.y;
-    oe[7] = 0;
-    
-    oe[8] = xAxis.z;
-    oe[9] = yAxis.z;
-    oe[10] = zAxis.z;
-    oe[11] = 0;
-    
-    oe[12] = -Dot(xAxis, eye);
-    oe[13] = -Dot(yAxis, eye);
-    oe[14] = -Dot(zAxis, eye);
-    oe[15] = 1;
+    return Matrix(xAxis.x,
+                  yAxis.x,
+                  zAxis.x,
+                  0,
+                  
+                  xAxis.y,
+                  yAxis.y,
+                  zAxis.y,
+                  0,
+                  
+                  xAxis.z,
+                  yAxis.z,
+                  zAxis.z,
+                  0,
+                  
+                  -Dot(xAxis, eye),
+                  -Dot(yAxis, eye),
+                  -Dot(zAxis, eye),
+                  1);
 }
 
 /**
@@ -761,33 +742,32 @@ OZZ_INLINE void lookAt(const Float3& eye, const Float3& target, const Float3& up
  * @param top - The top edge of the viewing
  * @param near - The depth of the near plane
  * @param far - The depth of the far plane
- * @param out - The calculated orthographic projection matrix
+ * @return out - The calculated orthographic projection matrix
  */
-OZZ_INLINE void ortho(float left, float right, float bottom, float top, float near, float far, Matrix& out) {
-    auto& oe = out.elements;
+OZZ_INLINE Matrix ortho(float left, float right, float bottom, float top, float near, float far) {
     auto lr = 1 / (left - right);
     auto bt = 1 / (bottom - top);
     auto nf = 1 / (near - far);
     
-    oe[0] = -2 * lr;
-    oe[1] = 0;
-    oe[2] = 0;
-    oe[3] = 0;
-    
-    oe[4] = 0;
-    oe[5] = -2 * bt;
-    oe[6] = 0;
-    oe[7] = 0;
-    
-    oe[8] = 0;
-    oe[9] = 0;
-    oe[10] = 2 * nf;
-    oe[11] = 0;
-    
-    oe[12] = (left + right) * lr;
-    oe[13] = (top + bottom) * bt;
-    oe[14] = (far + near) * nf;
-    oe[15] = 1;
+    return Matrix(-2 * lr,
+                  0,
+                  0,
+                  0,
+                  
+                  0,
+                  -2 * bt,
+                  0,
+                  0,
+                  
+                  0,
+                  0,
+                  2 * nf,
+                  0,
+                  
+                  (left + right) * lr,
+                  (top + bottom) * bt,
+                  (far + near) * nf,
+                  1);
 }
 
 /**
@@ -796,32 +776,31 @@ OZZ_INLINE void ortho(float left, float right, float bottom, float top, float ne
  * @param aspect - Aspect ratio, defined as view space width divided by height
  * @param near - The depth of the near plane
  * @param far - The depth of the far plane
- * @param out - The calculated perspective projection matrix
+ * @return out - The calculated perspective projection matrix
  */
-OZZ_INLINE void perspective(float fovy, float aspect, float near, float far,  Matrix& out) {
-    auto& oe = out.elements;
+OZZ_INLINE Matrix perspective(float fovy, float aspect, float near, float far) {
     auto f = 1.0 / std::tan(fovy / 2);
     auto nf = 1 / (near - far);
     
-    oe[0] = f / aspect;
-    oe[1] = 0;
-    oe[2] = 0;
-    oe[3] = 0;
-    
-    oe[4] = 0;
-    oe[5] = f;
-    oe[6] = 0;
-    oe[7] = 0;
-    
-    oe[8] = 0;
-    oe[9] = 0;
-    oe[10] = (far + near) * nf;
-    oe[11] = -1;
-    
-    oe[12] = 0;
-    oe[13] = 0;
-    oe[14] = 2 * far * near * nf;
-    oe[15] = 0;
+    return Matrix(f / aspect,
+                  0,
+                  0,
+                  0,
+                  
+                  0,
+                  f,
+                  0,
+                  0,
+                  
+                  0,
+                  0,
+                  (far + near) * nf,
+                  -1,
+                  
+                  0,
+                  0,
+                  2 * far * near * nf,
+                  0);
 }
 
 /**
@@ -829,20 +808,21 @@ OZZ_INLINE void perspective(float fovy, float aspect, float near, float far,  Ma
  * @param m - The specified matrix
  * @param axis - The axis
  * @param r - The rotation angle in radians
- * @param out - The rotated matrix
+ * @return out - The rotated matrix
  */
-OZZ_INLINE void rotateAxisAngle(const Matrix& m, const Float3& axis, float r, Matrix& out) {
+OZZ_INLINE Matrix rotateAxisAngle(const Matrix &m, const Float3 &axis, float r) {
     auto x = axis.x;
     auto y = axis.y;
     auto z = axis.z;
     auto len = std::sqrt(x * x + y * y + z * z);
     
     if (std::abs(len) < kNormalizationToleranceSq) {
-        return;
+        return Matrix();
     }
     
-    const auto& me = m.elements;
-    auto& oe = out.elements;
+    const auto &me = m.elements;
+    Matrix out = m;
+    auto &oe = out.elements;
     
     len = 1 / len;
     x *= len;
@@ -853,15 +833,15 @@ OZZ_INLINE void rotateAxisAngle(const Matrix& m, const Float3& axis, float r, Ma
     auto c = std::cos(r);
     auto t = 1 - c;
     
-    const auto& a11 = me[0],
+    const auto &a11 = me[0],
     a12 = me[1],
     a13 = me[2],
     a14 = me[3];
-    const auto& a21 = me[4],
+    const auto &a21 = me[4],
     a22 = me[5],
     a23 = me[6],
     a24 = me[7];
-    const auto& a31 = me[8],
+    const auto &a31 = me[8],
     a32 = me[9],
     a33 = me[10],
     a34 = me[11];
@@ -892,148 +872,120 @@ OZZ_INLINE void rotateAxisAngle(const Matrix& m, const Float3& axis, float r, Ma
     oe[9] = a12 * b31 + a22 * b32 + a32 * b33;
     oe[10] = a13 * b31 + a23 * b32 + a33 * b33;
     oe[11] = a14 * b31 + a24 * b32 + a34 * b33;
-    
-    if (&m != &out) {
-        // If the source and destination differ, copy the unchanged last row
-        oe[12] = me[12];
-        oe[13] = me[13];
-        oe[14] = me[14];
-        oe[15] = me[15];
-    }
+    return out;
 }
 
 /**
  * Scale a matrix by a given vector.
  * @param m - The matrix
  * @param s - The given vector
- * @param out - The scaled matrix
+ * @return out - The scaled matrix
  */
-OZZ_INLINE void scale(const Matrix& m, const Float3& s, Matrix& out) {
-    const auto& me = m.elements;
-    auto& oe = out.elements;
-    const auto& x = s.x;
-    const auto& y = s.y;
-    const auto& z = s.z;
+OZZ_INLINE Matrix scale(const Matrix &m, const Float3 &s) {
+    const auto &me = m.elements;
+    const auto &x = s.x;
+    const auto &y = s.y;
+    const auto &z = s.z;
     
-    oe[0] = me[0] * x;
-    oe[1] = me[1] * x;
-    oe[2] = me[2] * x;
-    oe[3] = me[3] * x;
-    
-    oe[4] = me[4] * y;
-    oe[5] = me[5] * y;
-    oe[6] = me[6] * y;
-    oe[7] = me[7] * y;
-    
-    oe[8] = me[8] * z;
-    oe[9] = me[9] * z;
-    oe[10] = me[10] * z;
-    oe[11] = me[11] * z;
-    
-    oe[12] = me[12];
-    oe[13] = me[13];
-    oe[14] = me[14];
-    oe[15] = me[15];
+    return Matrix(me[0] * x,
+                  me[1] * x,
+                  me[2] * x,
+                  me[3] * x,
+                  
+                  me[4] * y,
+                  me[5] * y,
+                  me[6] * y,
+                  me[7] * y,
+                  
+                  me[8] * z,
+                  me[9] * z,
+                  me[10] * z,
+                  me[11] * z,
+                  
+                  me[12],
+                  me[13],
+                  me[14],
+                  me[15]);
 }
 
 /**
  * Translate a matrix by a given vector.
  * @param m - The matrix
  * @param v - The given vector
- * @param out - The translated matrix
+ * @return out - The translated matrix
  */
-OZZ_INLINE void translate(const Matrix& m, const Float3& v, Matrix& out) {
-    const auto& me = m.elements;
-    auto& oe = out.elements;
-    const auto& x = v.x;
-    const auto& y = v.y;
-    const auto& z = v.z;
+OZZ_INLINE Matrix translate(const Matrix &m, const Float3 &v) {
+    const auto &me = m.elements;
+    Matrix out = m;
+    auto &oe = out.elements;
+    const auto &x = v.x;
+    const auto &y = v.y;
+    const auto &z = v.z;
     
-    if (&m == &out) {
-        oe[12] = me[0] * x + me[4] * y + me[8] * z + me[12];
-        oe[13] = me[1] * x + me[5] * y + me[9] * z + me[13];
-        oe[14] = me[2] * x + me[6] * y + me[10] * z + me[14];
-        oe[15] = me[3] * x + me[7] * y + me[11] * z + me[15];
-    } else {
-        const auto& a11 = me[0],
-        a12 = me[1],
-        a13 = me[2],
-        a14 = me[3];
-        const auto& a21 = me[4],
-        a22 = me[5],
-        a23 = me[6],
-        a24 = me[7];
-        const auto& a31 = me[8],
-        a32 = me[9],
-        a33 = me[10],
-        a34 = me[11];
-        
-        oe[0] = a11; oe[1] = a12; oe[2] = a13; oe[3] = a14;
-        oe[4] = a21; oe[5] = a22; oe[6] = a23; oe[7] = a24;
-        oe[8] = a31; oe[9] = a32; oe[10] = a33; oe[11] = a34;
-        
-        oe[12] = a11 * x + a21 * y + a31 * z + me[12];
-        oe[13] = a12 * x + a22 * y + a32 * z + me[13];
-        oe[14] = a13 * x + a23 * y + a33 * z + me[14];
-        oe[15] = a14 * x + a24 * y + a34 * z + me[15];
-    }
+    const auto &a11 = me[0],
+    a12 = me[1],
+    a13 = me[2],
+    a14 = me[3];
+    const auto &a21 = me[4],
+    a22 = me[5],
+    a23 = me[6],
+    a24 = me[7];
+    const auto &a31 = me[8],
+    a32 = me[9],
+    a33 = me[10],
+    a34 = me[11];
+    
+    oe[0] = a11;
+    oe[1] = a12;
+    oe[2] = a13;
+    oe[3] = a14;
+    oe[4] = a21;
+    oe[5] = a22;
+    oe[6] = a23;
+    oe[7] = a24;
+    oe[8] = a31;
+    oe[9] = a32;
+    oe[10] = a33;
+    oe[11] = a34;
+    
+    oe[12] = a11 * x + a21 * y + a31 * z + me[12];
+    oe[13] = a12 * x + a22 * y + a32 * z + me[13];
+    oe[14] = a13 * x + a23 * y + a33 * z + me[14];
+    oe[15] = a14 * x + a24 * y + a34 * z + me[15];
+    return out;
 }
 
 /**
  * Calculate the transpose of the specified matrix.
  * @param a - The specified matrix
- * @param out - The transpose of the specified matrix
+ * @return out - The transpose of the specified matrix
  */
-OZZ_INLINE void transpose(const Matrix& a, Matrix& out) {
-    const auto& ae = a.elements;
-    auto& oe = out.elements;
+OZZ_INLINE Matrix transpose(const Matrix &a) {
+    const auto &ae = a.elements;
+    Matrix out = a;
+    auto &oe = out.elements;
     
-    if (&out == &a) {
-        const auto& a12 = ae[1];
-        const auto& a13 = ae[2];
-        const auto& a14 = ae[3];
-        const auto& a23 = ae[6];
-        const auto& a24 = ae[7];
-        const auto& a34 = ae[11];
-        
-        oe[1] = ae[4];
-        oe[2] = ae[8];
-        oe[3] = ae[12];
-        
-        oe[4] = a12;
-        oe[6] = ae[9];
-        oe[7] = ae[13];
-        
-        oe[8] = a13;
-        oe[9] = a23;
-        oe[11] = ae[14];
-        
-        oe[12] = a14;
-        oe[13] = a24;
-        oe[14] = a34;
-    } else {
-        oe[0] = ae[0];
-        oe[1] = ae[4];
-        oe[2] = ae[8];
-        oe[3] = ae[12];
-        
-        oe[4] = ae[1];
-        oe[5] = ae[5];
-        oe[6] = ae[9];
-        oe[7] = ae[13];
-        
-        oe[8] = ae[2];
-        oe[9] = ae[6];
-        oe[10] = ae[10];
-        oe[11] = ae[14];
-        
-        oe[12] = ae[3];
-        oe[13] = ae[7];
-        oe[14] = ae[11];
-        oe[15] = ae[15];
-    }
+    oe[0] = ae[0];
+    oe[1] = ae[4];
+    oe[2] = ae[8];
+    oe[3] = ae[12];
+    
+    oe[4] = ae[1];
+    oe[5] = ae[5];
+    oe[6] = ae[9];
+    oe[7] = ae[13];
+    
+    oe[8] = ae[2];
+    oe[9] = ae[6];
+    oe[10] = ae[10];
+    oe[11] = ae[14];
+    
+    oe[12] = ae[3];
+    oe[13] = ae[7];
+    oe[14] = ae[11];
+    oe[15] = ae[15];
+    return out;
 }
-
 
 }
 }
