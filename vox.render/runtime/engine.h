@@ -12,6 +12,7 @@
 #include "components_manager.h"
 #include "scene_manager.h"
 #include "canvas.h"
+#include "timer.h"
 
 namespace vox {
 class Engine {
@@ -25,7 +26,7 @@ public:
      * The canvas to use for rendering.
      */
     Canvas canvas() {
-      return _canvas;
+        return _canvas;
     }
     
     /**
@@ -35,14 +36,39 @@ public:
         return _sceneManager;
     }
     
+    /**
+     * Get the Time class.
+     */
+    Timer timer() {
+        return _timer;
+    }
+    
+public:
+    /**
+     * Execution engine loop.
+     */
+    void run();
+    
+    /**
+     * Resume the engine.
+     */
+    void resume();
+    
+    /**
+     * Update the engine loop manually. If you call engine.run(), you generally don't need to call this function.
+     */
+    void update();
+    
 protected:
+    void _render(ScenePtr scene);
+    
     Canvas _canvas;
-
+    
 private:
     SceneManager _sceneManager = SceneManager(this);
     int _vSyncCount = 1;
     float _targetFrameRate = 60;
-    //    private _time: Time = new Time();
+    Timer _timer = Timer();
     bool _isPaused = true;
     int _requestId;
     int _timeoutId;

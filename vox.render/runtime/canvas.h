@@ -46,6 +46,17 @@ public:
      */
     void resizeByClientSize(float pixelRatio);
     
+public:
+    bool should_close();
+
+    void process_events();
+
+    void close();
+
+    float get_dpi_factor() const;
+
+    float get_content_scale_factor() const;
+    
 private:
     GLFWwindow* window;
     

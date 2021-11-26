@@ -84,6 +84,7 @@ public:
     void destroy();
     
 private:
+    friend class Engine;
     friend class Entity;
     friend class Camera;
     
