@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/animation_optimizer.h"
+#include "offline/animation/animation_optimizer.h"
 
 #include "gtest.h"
 
@@ -33,12 +33,12 @@
 
 #include "memory/unique_ptr.h"
 
-#include "animation/offline/animation_builder.h"
-#include "animation/offline/raw_animation.h"
+#include "offline/animation/animation_builder.h"
+#include "offline/animation/raw_animation.h"
 
-#include "animation/offline/raw_skeleton.h"
-#include "animation/offline/skeleton_builder.h"
-#include "animation/runtime/skeleton.h"
+#include "offline/animation/raw_skeleton.h"
+#include "offline/animation/skeleton_builder.h"
+#include "runtime/animation/skeleton.h"
 
 using ozz::animation::Skeleton;
 using ozz::animation::offline::AnimationOptimizer;

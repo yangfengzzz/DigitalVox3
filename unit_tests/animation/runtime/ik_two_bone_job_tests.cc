@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/runtime/ik_two_bone_job.h"
+#include "runtime/animation/ik_two_bone_job.h"
 
 #include "maths/quaternion.h"
 #include "maths/simd_math.h"

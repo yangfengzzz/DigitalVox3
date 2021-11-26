@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/runtime/ik_aim_job.h"
+#include "runtime/animation/ik_aim_job.h"
 
 #include "maths/quaternion.h"
 #include "maths/simd_math.h"

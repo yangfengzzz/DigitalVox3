@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/fbx/fbx.h"
+#include "offline/animation/fbx/fbx.h"
 
 int main(int, const char**) {
   ozz::animation::offline::fbx::FbxManagerInstance instance;

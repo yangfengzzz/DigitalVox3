@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/animation_builder.h"
+#include "offline/animation/animation_builder.h"
 
 #include "gtest.h"
 #include "gtest_math_helper.h"
@@ -33,11 +33,11 @@
 #include "maths/soa_transform.h"
 #include "memory/unique_ptr.h"
 
-#include "animation/offline/raw_animation.h"
+#include "offline/animation/raw_animation.h"
 
-#include "animation/runtime/animation.h"
-#include "animation/runtime/sampling_job.h"
-#include "animation/runtime/skeleton.h"
+#include "runtime/animation/animation.h"
+#include "runtime/animation/sampling_job.h"
+#include "runtime/animation/skeleton.h"
 
 using ozz::animation::Animation;
 using ozz::animation::offline::AnimationBuilder;

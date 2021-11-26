@@ -26,10 +26,10 @@
 //----------------------------------------------------------------------------//
 
 #include "gtest.h"
-#include "animation/offline/raw_skeleton.h"
-#include "animation/offline/skeleton_builder.h"
-#include "animation/runtime/local_to_model_job.h"
-#include "animation/runtime/skeleton.h"
+#include "offline/animation/raw_skeleton.h"
+#include "offline/animation/skeleton_builder.h"
+#include "runtime/animation/local_to_model_job.h"
+#include "runtime/animation/skeleton.h"
 #include "gtest_math_helper.h"
 #include "maths/soa_transform.h"
 #include "memory/unique_ptr.h"

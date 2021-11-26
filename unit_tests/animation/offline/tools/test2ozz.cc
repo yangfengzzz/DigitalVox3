@@ -27,8 +27,8 @@
 
 #include <string.h>
 
-#include "animation/offline/tools/import2ozz.h"
-#include "animation/runtime/skeleton.h"
+#include "offline/animation/tools/import2ozz.h"
+#include "runtime/animation/skeleton.h"
 #include "io/stream.h"
 #include "memory/unique_ptr.h"
 

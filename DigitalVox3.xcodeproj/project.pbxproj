@@ -478,6 +478,39 @@
 			path = enums;
 			sourceTree = "<group>";
 		};
+		04160FE627509026006CD384 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				04CE3742274D0EB900204B8E /* raw_skeleton.h */,
+				04CE3741274D0EB900204B8E /* raw_skeleton.cc */,
+				04CE373C274D0EB900204B8E /* raw_skeleton_archive.cc */,
+				04CE3732274D0EB900204B8E /* skeleton_builder.h */,
+				04CE372F274D0EB900204B8E /* skeleton_builder.cc */,
+				04CE3737274D0EB900204B8E /* raw_animation.h */,
+				04CE373B274D0EB900204B8E /* raw_animation.cc */,
+				04CE373F274D0EB900204B8E /* raw_animation_utils.cc */,
+				04CE3739274D0EB900204B8E /* raw_animation_utils.h */,
+				04CE3745274D0EB900204B8E /* raw_animation_archive.cc */,
+				04CE3735274D0EB900204B8E /* animation_builder.h */,
+				04CE373D274D0EB900204B8E /* animation_builder.cc */,
+				04CE3730274D0EB900204B8E /* additive_animation_builder.h */,
+				04CE373A274D0EB900204B8E /* additive_animation_builder.cc */,
+				04CE3740274D0EB900204B8E /* animation_optimizer.h */,
+				04CE3734274D0EB900204B8E /* animation_optimizer.cc */,
+				04CE373E274D0EB900204B8E /* decimate.h */,
+				04CE3733274D0EB900204B8E /* raw_track.h */,
+				04CE3743274D0EB900204B8E /* raw_track.cc */,
+				04CE3736274D0EB900204B8E /* track_builder.h */,
+				04CE3744274D0EB900204B8E /* track_builder.cc */,
+				04CE3738274D0EB900204B8E /* track_optimizer.h */,
+				04CE3731274D0EB900204B8E /* track_optimizer.cc */,
+				04CE3706274D0E1800204B8E /* tools */,
+				04CE3705274D0E0E00204B8E /* fbx */,
+				04CE3707274D0E3500204B8E /* gltf */,
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
@@ -630,48 +663,6 @@
 		04CE3702274D0DEC00204B8E /* animation */ = {
 			isa = PBXGroup;
 			children = (
-				04CE3704274D0E0100204B8E /* runtime */,
-				04CE3703274D0DF800204B8E /* offline */,
-			);
-			path = animation;
-			sourceTree = "<group>";
-		};
-		04CE3703274D0DF800204B8E /* offline */ = {
-			isa = PBXGroup;
-			children = (
-				04CE3742274D0EB900204B8E /* raw_skeleton.h */,
-				04CE3741274D0EB900204B8E /* raw_skeleton.cc */,
-				04CE373C274D0EB900204B8E /* raw_skeleton_archive.cc */,
-				04CE3732274D0EB900204B8E /* skeleton_builder.h */,
-				04CE372F274D0EB900204B8E /* skeleton_builder.cc */,
-				04CE3737274D0EB900204B8E /* raw_animation.h */,
-				04CE373B274D0EB900204B8E /* raw_animation.cc */,
-				04CE373F274D0EB900204B8E /* raw_animation_utils.cc */,
-				04CE3739274D0EB900204B8E /* raw_animation_utils.h */,
-				04CE3745274D0EB900204B8E /* raw_animation_archive.cc */,
-				04CE3735274D0EB900204B8E /* animation_builder.h */,
-				04CE373D274D0EB900204B8E /* animation_builder.cc */,
-				04CE3730274D0EB900204B8E /* additive_animation_builder.h */,
-				04CE373A274D0EB900204B8E /* additive_animation_builder.cc */,
-				04CE3740274D0EB900204B8E /* animation_optimizer.h */,
-				04CE3734274D0EB900204B8E /* animation_optimizer.cc */,
-				04CE373E274D0EB900204B8E /* decimate.h */,
-				04CE3733274D0EB900204B8E /* raw_track.h */,
-				04CE3743274D0EB900204B8E /* raw_track.cc */,
-				04CE3736274D0EB900204B8E /* track_builder.h */,
-				04CE3744274D0EB900204B8E /* track_builder.cc */,
-				04CE3738274D0EB900204B8E /* track_optimizer.h */,
-				04CE3731274D0EB900204B8E /* track_optimizer.cc */,
-				04CE3706274D0E1800204B8E /* tools */,
-				04CE3705274D0E0E00204B8E /* fbx */,
-				04CE3707274D0E3500204B8E /* gltf */,
-			);
-			path = offline;
-			sourceTree = "<group>";
-		};
-		04CE3704274D0E0100204B8E /* runtime */ = {
-			isa = PBXGroup;
-			children = (
 				04CE3712274D0E5300204B8E /* skeleton.h */,
 				04CE3722274D0E5400204B8E /* skeleton.cc */,
 				04CE3718274D0E5400204B8E /* skeleton_utils.h */,
@@ -698,6 +689,22 @@
 				04CE3711274D0E5300204B8E /* track_triggering_job.h */,
 				04CE3717274D0E5400204B8E /* track_triggering_job.cc */,
 				04CE3709274D0E5300204B8E /* track_triggering_job_trait.h */,
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
+		04CE3703274D0DF800204B8E /* offline */ = {
+			isa = PBXGroup;
+			children = (
+				04160FE627509026006CD384 /* animation */,
+			);
+			path = offline;
+			sourceTree = "<group>";
+		};
+		04CE3704274D0E0100204B8E /* runtime */ = {
+			isa = PBXGroup;
+			children = (
+				04CE3702274D0DEC00204B8E /* animation */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -772,8 +779,9 @@
 				04CE36BD274D0C0E00204B8E /* containers */,
 				04CE36BB274D0BF200204B8E /* maths */,
 				04CE3701274D0DB800204B8E /* geometry */,
-				04CE3702274D0DEC00204B8E /* animation */,
 				04CE3826274D178600204B8E /* gui */,
+				04CE3704274D0E0100204B8E /* runtime */,
+				04CE3703274D0DF800204B8E /* offline */,
 			);
 			path = vox.render;
 			sourceTree = "<group>";

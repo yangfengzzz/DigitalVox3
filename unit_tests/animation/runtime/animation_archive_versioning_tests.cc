@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/runtime/animation.h"
+#include "runtime/animation/animation.h"
 
 #include "gtest.h"
 

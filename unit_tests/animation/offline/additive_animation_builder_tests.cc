@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/additive_animation_builder.h"
+#include "offline/animation/additive_animation_builder.h"
 
 #include "gtest.h"
 
@@ -33,7 +33,7 @@
 #include "maths/math_constant.h"
 #include "maths/transform.h"
 
-#include "animation/offline/raw_animation.h"
+#include "offline/animation/raw_animation.h"
 
 using ozz::animation::offline::AdditiveAnimationBuilder;
 using ozz::animation::offline::RawAnimation;

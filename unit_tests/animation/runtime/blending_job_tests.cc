@@ -26,7 +26,7 @@
 //----------------------------------------------------------------------------//
 
 #include "gtest.h"
-#include "animation/runtime/blending_job.h"
+#include "runtime/animation/blending_job.h"
 #include "gtest_math_helper.h"
 #include "maths/soa_transform.h"
 

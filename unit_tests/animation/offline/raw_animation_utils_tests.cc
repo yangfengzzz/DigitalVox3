@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/raw_animation_utils.h"
+#include "offline/animation/raw_animation_utils.h"
 
 #include "gtest.h"
 #include "gtest_helper.h"
 
 #include "gtest_math_helper.h"
 
-#include "animation/offline/raw_animation.h"
+#include "offline/animation/raw_animation.h"
 
 using ozz::animation::offline::RawAnimation;
 

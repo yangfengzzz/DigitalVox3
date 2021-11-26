@@ -25,12 +25,12 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/runtime/skeleton.h"
+#include "runtime/animation/skeleton.h"
 
 #include "gtest.h"
 
-#include "animation/offline/raw_skeleton.h"
-#include "animation/offline/skeleton_builder.h"
+#include "offline/animation/raw_skeleton.h"
+#include "offline/animation/skeleton_builder.h"
 
 #include "io/archive.h"
 #include "io/stream.h"

@@ -25,17 +25,17 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/runtime/track_sampling_job.h"
+#include "runtime/animation/track_sampling_job.h"
 
 #include "gtest.h"
 
 #include "gtest_math_helper.h"
 #include "memory/unique_ptr.h"
 
-#include "animation/offline/raw_track.h"
-#include "animation/offline/track_builder.h"
+#include "offline/animation/raw_track.h"
+#include "offline/animation/track_builder.h"
 
-#include "animation/runtime/track.h"
+#include "runtime/animation/track.h"
 
 using ozz::animation::FloatTrack;
 using ozz::animation::Float2Track;

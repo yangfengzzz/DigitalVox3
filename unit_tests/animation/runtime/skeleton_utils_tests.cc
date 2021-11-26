@@ -25,8 +25,8 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/raw_skeleton.h"
-#include "animation/offline/skeleton_builder.h"
+#include "offline/animation/raw_skeleton.h"
+#include "offline/animation/skeleton_builder.h"
 
 #include <algorithm>
 #include <cstring>
@@ -35,8 +35,8 @@
 #include "gtest_helper.h"
 #include "gtest_math_helper.h"
 
-#include "animation/runtime/skeleton.h"
-#include "animation/runtime/skeleton_utils.h"
+#include "runtime/animation/skeleton.h"
+#include "runtime/animation/skeleton_utils.h"
 #include "memory/unique_ptr.h"
 
 using ozz::animation::Skeleton;

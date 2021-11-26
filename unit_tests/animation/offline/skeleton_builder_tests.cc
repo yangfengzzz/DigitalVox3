@@ -25,14 +25,14 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/raw_skeleton.h"
-#include "animation/offline/skeleton_builder.h"
+#include "offline/animation/raw_skeleton.h"
+#include "offline/animation/skeleton_builder.h"
 
 #include <cstring>
 
 #include "gtest.h"
 
-#include "animation/runtime/skeleton.h"
+#include "runtime/animation/skeleton.h"
 #include "maths/simd_math.h"
 #include "maths/soa_transform.h"
 #include "memory/unique_ptr.h"

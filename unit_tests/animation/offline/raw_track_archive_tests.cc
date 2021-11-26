@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "animation/offline/raw_track.h"
+#include "offline/animation/raw_track.h"
 
 #include "gtest.h"
 
