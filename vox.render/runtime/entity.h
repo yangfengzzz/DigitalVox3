@@ -31,7 +31,7 @@ public:
     /** The layer the entity belongs to. */
     Layer layer = Layer::Layer0;
     /** Transform component. */
-    const Transform* transform;
+    Transform* transform;
     
     /**
      * Create a entity.
@@ -181,6 +181,8 @@ public:
     void destroy();
     
 private:
+    friend class Transform;
+    
     void _removeComponent(Component* component);
     
     void _addScript(Script* script);

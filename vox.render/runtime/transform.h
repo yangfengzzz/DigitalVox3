@@ -13,7 +13,6 @@
 #include "maths/vec_float.h"
 #include "maths/quaternion.h"
 #include "maths/matrix.h"
-#include <optional>
 
 namespace vox {
 using namespace math;
@@ -49,21 +48,23 @@ enum TransformFlag {
  */
 class Transform : public Component {
 public:
-    Transform(Entity* entity);
+    Transform(Entity *entity);
     
     /**
      * Local position.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Float3 position();
-    void setPosition(const Float3& value);
+    
+    void setPosition(const Float3 &value);
     
     /**
      * World position.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Float3 worldPosition();
-    void setWorldPosition(const Float3& value);
+    
+    void setWorldPosition(const Float3 &value);
     
     /**
      * Local rotation, defining the rotation value in degrees.
@@ -71,7 +72,8 @@ public:
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Float3 rotation();
-    void setRotation(const Float3& value);
+    
+    void setRotation(const Float3 &value);
     
     /**
      * World rotation, defining the rotation value in degrees.
@@ -79,28 +81,32 @@ public:
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Float3 worldRotation();
-    void setWorldRotation(const Float3& value);
+    
+    void setWorldRotation(const Float3 &value);
     
     /**
      * Local rotation, defining the rotation by using a unit quaternion.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Quaternion rotationQuaternion();
-    void setRotationQuaternion(const Quaternion& value);
+    
+    void setRotationQuaternion(const Quaternion &value);
     
     /**
      * World rotation, defining the rotation by using a unit quaternion.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Quaternion worldRotationQuaternion();
-    void setWorldRotationQuaternion(const Quaternion& value);
+    
+    void setWorldRotationQuaternion(const Quaternion &value);
     
     /**
      * Local scaling.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Float3 scale();
-    void setScale(const Float3& value);
+    
+    void setScale(const Float3 &value);
     
     /**
      * Local lossy scaling.
@@ -114,14 +120,16 @@ public:
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Matrix localMatrix();
-    void setLocalMatrix(const Matrix& value);
+    
+    void setLocalMatrix(const Matrix &value);
     
     /**
      * World matrix.
      * @remarks Need to re-assign after modification to ensure that the modification takes effect.
      */
     Matrix worldMatrix();
-    void setWorldMatrix(const Matrix& value);
+    
+    void setWorldMatrix(const Matrix &value);
     
     /**
      * Set local position by X, Y, Z value.
@@ -205,7 +213,7 @@ public:
      * @param translation - Direction and distance of translation
      * @param relativeToLocal - Relative to local space
      */
-    void translate(const Float3& translation, std::optional<bool> relativeToLocal = std::nullopt);
+    void translate(const Float3 &translation, bool relativeToLocal = true);
     
     /**
      * Translate along the passed X, Y, Z value.
@@ -214,14 +222,14 @@ public:
      * @param z - Translate direction and distance along z axis
      * @param relativeToLocal - Relative to local space
      */
-    void translate(float x, float y, float z, std::optional<bool> relativeToLocal = std::nullopt);
+    void translate(float x, float y, float z, bool relativeToLocal = true);
     
     /**
      * Rotate around the passed Vector3.
      * @param rotation - Euler angle in degrees
      * @param relativeToLocal - Relative to local space
      */
-    void rotate(const Float3& rotation, std::optional<bool> relativeToLocal = std::nullopt);
+    void rotate(const Float3 &rotation, bool relativeToLocal = true);
     
     /**
      * Rotate around the passed Vector3.
@@ -230,7 +238,7 @@ public:
      * @param z - Rotation along z axis, in degrees
      * @param relativeToLocal - Relative to local space
      */
-    void rotate(float x, float y, float z, std::optional<bool> relativeToLocal = std::nullopt);
+    void rotate(float x, float y, float z, bool relativeToLocal = true);
     
     /**
      * Rotate around the specified axis according to the specified angle.
@@ -238,20 +246,20 @@ public:
      * @param angle - Rotate angle in degrees
      * @param relativeToLocal - Relative to local space
      */
-    void rotateByAxis(const Float3& axis, float angle, bool relativeToLocal = true);
+    void rotateByAxis(const Float3 &axis, float angle, bool relativeToLocal = true);
     
     /**
      * Rotate and ensure that the world front vector points to the target world position.
      * @param worldPosition - Target world position
      * @param worldUp - Up direction in world space, default is Vector3(0, 1, 0)
      */
-    void lookAt(const Float3& worldPosition, std::optional<Float3> worldUp = std::nullopt);
+    void lookAt(const Float3 &worldPosition, const Float3 &worldUp = Float3(0, 1, 0));
     
     /**
      * Register world transform change flag.
      * @returns Change flag
      */
-    std::unique_ptr<UpdateFlag> registerWorldChangeFlag() const;
+    std::unique_ptr<UpdateFlag> registerWorldChangeFlag();
     
     
 private:
@@ -303,23 +311,23 @@ private:
      */
     void _updateAllWorldFlag();
     
-    Transform* _getParentTransform();
+    Transform *_getParentTransform();
     
     Matrix3x3 _getScaleMatrix();
     
-    bool _isContainDirtyFlags(TransformFlag targetDirtyFlags);
+    bool _isContainDirtyFlags(int targetDirtyFlags);
     
-    bool _isContainDirtyFlag(TransformFlag type);
+    bool _isContainDirtyFlag(int type);
     
-    bool _setDirtyFlagTrue(TransformFlag type);
+    void _setDirtyFlagTrue(int type);
     
-    bool _setDirtyFlagFalse(TransformFlag type);
+    void _setDirtyFlagFalse(int type);
     
-    bool _worldAssociatedChange(TransformFlag type);
+    void _worldAssociatedChange(int type);
     
-    void _rotateByQuat(const Quaternion& rotateQuat, bool relativeToLocal);
+    void _rotateByQuat(const Quaternion &rotateQuat, bool relativeToLocal);
     
-    void _translate(const Float3& translation, bool relativeToLocal = true);
+    void _translate(const Float3 &translation, bool relativeToLocal = true);
     
     void _rotateXYZ(float x, float y, float z, bool relativeToLocal = true);
     
@@ -335,8 +343,8 @@ private:
     Matrix _worldMatrix;
     UpdateFlagManager _updateFlagManager;
     bool _isParentDirty = true;
-    Transform* _parentTransformCache = nullptr;
-    TransformFlag _dirtyFlag = TransformFlag::WmWpWeWqWs;
+    Transform *_parentTransformCache = nullptr;
+    int _dirtyFlag = TransformFlag::WmWpWeWqWs;
 };
 
 
