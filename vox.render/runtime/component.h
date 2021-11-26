@@ -12,20 +12,23 @@
 
 namespace vox {
 class Entity;
+
 class Scene;
+
 using ScenePtr = std::shared_ptr<Scene>;
 
 /**
  * The base class of the components.
  */
-class Component :public EngineObject {
+class Component : public EngineObject {
 public:
-    Component(Entity* entity);
+    Component(Entity *entity);
     
     /**
      * Indicates whether the component is enabled.
      */
     bool enabled();
+    
     void setEnabled(bool value);
     
     /**
@@ -36,7 +39,7 @@ public:
     /**
      * The entity which the component belongs to.
      */
-    Entity* entity();
+    Entity *entity();
     
     /**
      * The scene which the component's entity belongs to.
@@ -49,20 +52,26 @@ public:
     void destroy();
     
 public:
-    virtual void _onAwake(){}
-    virtual void _onEnable(){}
-    virtual void _onDisable(){}
-    virtual void _onDestroy(){}
-    virtual void _onActive(){}
-    virtual void _onInActive(){}
+    virtual void _onAwake() {}
+    
+    virtual void _onEnable() {}
+    
+    virtual void _onDisable() {}
+    
+    virtual void _onDestroy() {}
+    
+    virtual void _onActive() {}
+    
+    virtual void _onInActive() {}
     
 protected:
     friend class Entity;
+    
     void _setActive(bool value);
-
-    Entity* _entity;
+    
+    Entity *_entity;
     bool _destroyed = false;
-        
+    
 private:
     bool _enabled = true;
     bool _awoken = false;
