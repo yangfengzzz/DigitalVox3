@@ -15,9 +15,9 @@
 using ozz::math::Float2;
 
 TEST(Vector2, add) {
-    const auto a =  Float2(2, 3);
-    const auto b =  Float2(-3, 5);
-    const auto out =  a + b;
+    const auto a = Float2(2, 3);
+    const auto b = Float2(-3, 5);
+    const auto out = a + b;
     EXPECT_FLOAT2_EQ(out, -1, 8);
 }
 

@@ -32,31 +32,31 @@
 #include "gtest_helper.h"
 
 TEST(RectInt, ozz_math) {
-  ozz::math::RectInt rect(10, 20, 30, 40);
-
-  EXPECT_EQ(rect.right(), 40);
-  EXPECT_EQ(rect.top(), 60);
-
-  EXPECT_TRUE(rect.is_inside(10, 20));
-  EXPECT_TRUE(rect.is_inside(39, 59));
-
-  EXPECT_FALSE(rect.is_inside(9, 20));
-  EXPECT_FALSE(rect.is_inside(10, 19));
-  EXPECT_FALSE(rect.is_inside(40, 59));
-  EXPECT_FALSE(rect.is_inside(39, 60));
+    ozz::math::RectInt rect(10, 20, 30, 40);
+    
+    EXPECT_EQ(rect.right(), 40);
+    EXPECT_EQ(rect.top(), 60);
+    
+    EXPECT_TRUE(rect.is_inside(10, 20));
+    EXPECT_TRUE(rect.is_inside(39, 59));
+    
+    EXPECT_FALSE(rect.is_inside(9, 20));
+    EXPECT_FALSE(rect.is_inside(10, 19));
+    EXPECT_FALSE(rect.is_inside(40, 59));
+    EXPECT_FALSE(rect.is_inside(39, 60));
 }
 
 TEST(RectFloat, ozz_math) {
-  ozz::math::RectFloat rect(10.f, 20.f, 30.f, 40.f);
-
-  EXPECT_FLOAT_EQ(rect.right(), 40.f);
-  EXPECT_FLOAT_EQ(rect.top(), 60.f);
-
-  EXPECT_TRUE(rect.is_inside(10.f, 20.f));
-  EXPECT_TRUE(rect.is_inside(39.f, 59.f));
-
-  EXPECT_FALSE(rect.is_inside(9.f, 20.f));
-  EXPECT_FALSE(rect.is_inside(10.f, 19.f));
-  EXPECT_FALSE(rect.is_inside(40.f, 59.f));
-  EXPECT_FALSE(rect.is_inside(39.f, 60.f));
+    ozz::math::RectFloat rect(10.f, 20.f, 30.f, 40.f);
+    
+    EXPECT_FLOAT_EQ(rect.right(), 40.f);
+    EXPECT_FLOAT_EQ(rect.top(), 60.f);
+    
+    EXPECT_TRUE(rect.is_inside(10.f, 20.f));
+    EXPECT_TRUE(rect.is_inside(39.f, 59.f));
+    
+    EXPECT_FALSE(rect.is_inside(9.f, 20.f));
+    EXPECT_FALSE(rect.is_inside(10.f, 19.f));
+    EXPECT_FALSE(rect.is_inside(40.f, 59.f));
+    EXPECT_FALSE(rect.is_inside(39.f, 60.f));
 }

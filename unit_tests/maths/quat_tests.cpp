@@ -20,7 +20,7 @@ using ozz::math::Matrix3x3;
 TEST(Quaternion, add) {
     const auto a = Quaternion(2, 3, 4, 1);
     const auto b = Quaternion(-3, 5, 0, 2);
-    const auto out =  a + b;
+    const auto out = a + b;
     EXPECT_QUATERNION_EQ(out, -1, 8, 4, 3);
 }
 

@@ -35,11 +35,11 @@
 using ozz::math::SoaTransform;
 
 TEST(SoaTransformConstant, ozz_soa_math) {
-  EXPECT_SOAFLOAT3_EQ(SoaTransform::identity().translation, 0.f, 0.f, 0.f, 0.f,
-                      0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f);
-  EXPECT_SOAQUATERNION_EQ(SoaTransform::identity().rotation, 0.f, 0.f, 0.f, 0.f,
-                          0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f,
-                          1.f);
-  EXPECT_SOAFLOAT3_EQ(SoaTransform::identity().scale, 1.f, 1.f, 1.f, 1.f, 1.f,
-                      1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.f);
+    EXPECT_SOAFLOAT3_EQ(SoaTransform::identity().translation, 0.f, 0.f, 0.f, 0.f,
+                        0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f);
+    EXPECT_SOAQUATERNION_EQ(SoaTransform::identity().rotation, 0.f, 0.f, 0.f, 0.f,
+                            0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f,
+                            1.f);
+    EXPECT_SOAFLOAT3_EQ(SoaTransform::identity().scale, 1.f, 1.f, 1.f, 1.f, 1.f,
+                        1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.f);
 }

@@ -39,12 +39,12 @@ TEST(BoundingBox, Constructor) {
     const auto sphere = BoundingSphere(Float3(0, 0, 0), 1);
     const auto box3 = BoundingBox::fromSphere(sphere);
     
-    const auto& min1 = box1.min;
-    const auto& max1 = box1.max;
-    const auto& min2 = box2.min;
-    const auto& max2 = box2.max;
-    const auto& min3 = box3.min;
-    const auto& max3 = box3.max;
+    const auto &min1 = box1.min;
+    const auto &max1 = box1.max;
+    const auto &min2 = box2.min;
+    const auto &max2 = box2.max;
+    const auto &min3 = box3.min;
+    const auto &max3 = box3.max;
     
     EXPECT_FLOAT3_EQ(min1, min2.x, min2.y, min2.z);
     EXPECT_FLOAT3_EQ(max1, max2.x, max2.y, max2.z);
@@ -91,12 +91,12 @@ TEST(BoundingBox, getExtent) {
 TEST(BoundingBox, getCorners) {
     const auto min = Float3(-1, -1, -1);
     const auto max = Float3(3, 3, 3);
-    const auto& minX = min.x;
-    const auto& minY = min.y;
-    const auto& minZ = min.z;
-    const auto& maxX = max.x;
-    const auto& maxY = max.y;
-    const auto& maxZ = max.z;
+    const auto &minX = min.x;
+    const auto &minY = min.y;
+    const auto &minZ = min.z;
+    const auto &maxX = max.x;
+    const auto &maxY = max.y;
+    const auto &maxZ = max.z;
     const Float3 expectedCorners[] = {
         Float3(minX, maxY, maxZ),
         Float3(maxX, maxY, maxZ),
@@ -134,10 +134,10 @@ TEST(BoundingSphere, Constructor) {
     const auto box = BoundingBox(Float3(-1, -1, -1), Float3(1, 1, 1));
     const auto sphere2 = BoundingSphere::fromBox(box);
     
-    const auto& center1 = sphere1.center;
-    const auto& radius1 = sphere1.radius;
-    const auto& center2 = sphere2.center;
-    const auto& radius2 = sphere2.radius;
+    const auto &center1 = sphere1.center;
+    const auto &radius1 = sphere1.radius;
+    const auto &center2 = sphere2.center;
+    const auto &radius2 = sphere2.radius;
     
     EXPECT_FLOAT3_EQ(center1, center2.x, center2.y, center2.z);
     EXPECT_FLOAT_EQ(radius1, radius2);

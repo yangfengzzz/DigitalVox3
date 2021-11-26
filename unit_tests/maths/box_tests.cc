@@ -100,7 +100,7 @@ TEST(BoxTransform, ozz_math) {
     EXPECT_FLOAT3_EQ(ia.max, 4.f, 5.f, 6.f);
     
     const ozz::math::BoundingBox ta =
-    TransformBox(ozz::math::Float4x4::Translation(ozz::math::simd_float4::Load(2.f, -2.f, 3.f, 0.f)),a);
+    TransformBox(ozz::math::Float4x4::Translation(ozz::math::simd_float4::Load(2.f, -2.f, 3.f, 0.f)), a);
     EXPECT_FLOAT3_EQ(ta.min, 3.f, 0.f, 6.f);
     EXPECT_FLOAT3_EQ(ta.max, 6.f, 3.f, 9.f);
     

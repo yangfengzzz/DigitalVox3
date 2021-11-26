@@ -77,7 +77,7 @@ TEST(Plane, Constructor) {
     const auto point3 = Float3(1, 1, 0);
     auto plane1 = Plane::fromPoints(point1, point2, point3);
     auto plane2 = Plane(Float3(0, 1, 0), -1);
-
+    
     EXPECT_EQ(plane1.distance, plane2.distance);
     plane1.normalize();
     plane2.normalize();
