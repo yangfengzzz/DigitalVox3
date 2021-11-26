@@ -168,6 +168,8 @@
 		04CE38E9275103BC00204B8E /* scene_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38E7275103BC00204B8E /* scene_manager.h */; };
 		04CE38EC27510A8000204B8E /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38EA27510A8000204B8E /* camera.cpp */; };
 		04CE38ED27510A8000204B8E /* camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38EB27510A8000204B8E /* camera.h */; };
+		04CE38F62751131C00204B8E /* canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38F42751131C00204B8E /* canvas.cpp */; };
+		04CE38F72751131C00204B8E /* canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38F52751131C00204B8E /* canvas.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,6 +488,8 @@
 		04CE38F027510AF200204B8E /* camera_clear_flags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera_clear_flags.h; sourceTree = "<group>"; };
 		04CE38F127510B0700204B8E /* color_space.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_space.h; sourceTree = "<group>"; };
 		04CE38F227510EAE00204B8E /* textureCube_face.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textureCube_face.h; sourceTree = "<group>"; };
+		04CE38F42751131C00204B8E /* canvas.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = canvas.cpp; sourceTree = "<group>"; };
+		04CE38F52751131C00204B8E /* canvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = canvas.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -784,6 +788,8 @@
 				04CE38E6275103BC00204B8E /* scene_manager.cpp */,
 				04CE38EB27510A8000204B8E /* camera.h */,
 				04CE38EA27510A8000204B8E /* camera.cpp */,
+				04CE38F52751131C00204B8E /* canvas.h */,
+				04CE38F42751131C00204B8E /* canvas.cpp */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1093,6 +1099,7 @@
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
+				04CE38F72751131C00204B8E /* canvas.h in Headers */,
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
 				04CE38E9275103BC00204B8E /* scene_manager.h in Headers */,
@@ -1212,6 +1219,7 @@
 				04CE3790274D167E00204B8E /* platform.cc in Sources */,
 				04160FF62750955C006CD384 /* component.cpp in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
+				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,

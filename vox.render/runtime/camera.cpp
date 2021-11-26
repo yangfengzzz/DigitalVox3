@@ -7,6 +7,7 @@
 
 #include "camera.h"
 #include "entity.h"
+#include "engine.h"
 
 namespace vox {
 Camera::Camera(Entity* entity):Component(entity) {
@@ -45,7 +46,12 @@ void Camera::setFieldOfView(float value) {
 }
 
 float Camera::aspectRatio() {
-    
+    const auto& canvas = _entity->engine()->canvas();
+    if (_customAspectRatio == std::nullopt) {
+        return (canvas.width() * _viewport.z) / (canvas.height() * _viewport.w);
+    } else {
+        return _customAspectRatio.value();
+    }
 }
 
 void Camera::setAspectRatio(float value) {
@@ -96,7 +102,26 @@ void Camera::setProjectionMatrix(const Matrix& value) {
 }
 
 Matrix Camera::projectionMatrix() {
-    
+    const auto& canvas = _entity->engine()->canvas();
+    if ((!_isProjectionDirty || _isProjMatSetting) &&
+        _lastAspectSize.x == canvas.width() &&
+        _lastAspectSize.y == canvas.height()) {
+        return _projectionMatrix;
+    }
+    _isProjectionDirty = false;
+    _lastAspectSize.x = canvas.width();
+    _lastAspectSize.y = canvas.height();
+    if (!_isOrthographic) {
+        _projectionMatrix = Matrix::perspective(degreeToRadian(_fieldOfView),
+                                                aspectRatio(),
+                                                _nearClipPlane,
+                                                _farClipPlane);
+    } else {
+        const auto width = _orthographicSize * aspectRatio();
+        const auto height = _orthographicSize;
+        _projectionMatrix = Matrix::ortho(-width, width, -height, height, _nearClipPlane, _farClipPlane);
+    }
+    return _projectionMatrix;
 }
 
 bool Camera::enableHDR() {
