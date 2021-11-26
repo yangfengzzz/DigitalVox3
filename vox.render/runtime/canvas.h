@@ -47,17 +47,18 @@ public:
     void resizeByClientSize(float pixelRatio);
     
 public:
-    bool should_close();
+    bool shouldClose();
 
-    void process_events();
+    void processEvents();
 
     void close();
 
-    float get_dpi_factor() const;
+    float getDpiFactor() const;
 
-    float get_content_scale_factor() const;
+    float getContentScaleFactor() const;
     
 private:
+    friend class MetalRenderer;
     GLFWwindow* window;
     
     int _width;

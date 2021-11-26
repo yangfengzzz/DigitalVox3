@@ -19,7 +19,7 @@ void Engine::resume() {
     _isPaused = false;
     timer().reset();
     
-    while (!_canvas.should_close()) {
+    while (!_canvas.shouldClose()) {
         update();
     }
 }

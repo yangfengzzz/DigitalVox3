@@ -172,6 +172,8 @@
 		04CE38F72751131C00204B8E /* canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38F52751131C00204B8E /* canvas.h */; };
 		04CE38FA2751992C00204B8E /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38F82751992C00204B8E /* timer.cpp */; };
 		04CE38FB2751992C00204B8E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38F92751992C00204B8E /* timer.h */; };
+		04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38FD27519FB500204B8E /* metal_renderer.mm */; };
+		04CE390027519FB500204B8E /* metal_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38FE27519FB500204B8E /* metal_renderer.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -494,6 +496,8 @@
 		04CE38F52751131C00204B8E /* canvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = canvas.h; sourceTree = "<group>"; };
 		04CE38F82751992C00204B8E /* timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		04CE38F92751992C00204B8E /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
+		04CE38FD27519FB500204B8E /* metal_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = metal_renderer.mm; sourceTree = "<group>"; };
+		04CE38FE27519FB500204B8E /* metal_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = metal_renderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -766,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				04CE38EE27510AC600204B8E /* enums */,
+				04CE38FC27519FA200204B8E /* rhi-metal */,
 				04CE3702274D0DEC00204B8E /* animation */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
@@ -1081,6 +1086,15 @@
 			path = enums;
 			sourceTree = "<group>";
 		};
+		04CE38FC27519FA200204B8E /* rhi-metal */ = {
+			isa = PBXGroup;
+			children = (
+				04CE38FE27519FB500204B8E /* metal_renderer.h */,
+				04CE38FD27519FB500204B8E /* metal_renderer.mm */,
+			);
+			path = "rhi-metal";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1106,6 +1120,7 @@
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
+				04CE390027519FB500204B8E /* metal_renderer.h in Headers */,
 				04CE38F72751131C00204B8E /* canvas.h in Headers */,
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
@@ -1282,6 +1297,7 @@
 				0416100A2750A720006CD384 /* scene.cpp in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
+				04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */,
 				04CE3817274D167F00204B8E /* imgui_tables.cpp in Sources */,
 				04CE3818274D167F00204B8E /* imgui_widgets.cpp in Sources */,
 				04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */,

@@ -58,11 +58,11 @@ void Canvas::setScale(const Float2& value) {
 void Canvas::resizeByClientSize(float pixelRatio) {
 }
 
-bool Canvas::should_close() {
+bool Canvas::shouldClose() {
     return glfwWindowShouldClose(window);
 }
 
-void Canvas::process_events() {
+void Canvas::processEvents() {
     glfwPollEvents();
 }
 
@@ -70,7 +70,7 @@ void Canvas::close() {
     glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-float Canvas::get_dpi_factor() const {
+float Canvas::getDpiFactor() const {
     auto primary_monitor = glfwGetPrimaryMonitor();
     auto vidmode         = glfwGetVideoMode(primary_monitor);
     
@@ -86,7 +86,7 @@ float Canvas::get_dpi_factor() const {
     return dpi_factor;
 }
 
-float Canvas::get_content_scale_factor() const {
+float Canvas::getContentScaleFactor() const {
     int fb_width, fb_height;
     glfwGetFramebufferSize(window, &fb_width, &fb_height);
     int win_width, win_height;
