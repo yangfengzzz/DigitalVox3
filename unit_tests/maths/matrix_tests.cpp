@@ -221,3 +221,37 @@ TEST(Matrix, transpose) {
     const auto out = transpose(a);
     EXPECT_MATRIX_EQ(out, 1, 5, 9, 13, 2, 6, 10.9, 14, 3.3, 7, 11, 15, 4, 8, 12, 16);
 }
+
+TEST(Matrix, determinant) {
+    const auto a = Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10.9, 11, 12, 13, 14, 15, 16);
+    EXPECT_FLOAT_EQ(a.determinant(), -6.1035156e-05);
+}
+
+TEST(Matrix, decompose) {
+    const auto a = Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10.9, 11, 12, 13, 14, 15, 16);
+    // const a = new Matrix(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
+    auto pos = Float3();
+    auto quat = Quaternion();
+    auto scale = Float3();
+    
+    a.decompose(pos, quat, scale);
+    EXPECT_FLOAT3_EQ(pos, 13, 14, 15);
+    EXPECT_QUATERNION_EQ(quat, 0.01879039477474769, -0.09554131404261303, 0.01844761344901482, 0.783179537258594);
+    EXPECT_FLOAT3_EQ(scale, 3.7416573867739413, 10.488088481701515, 17.91116946723357);
+}
+
+TEST(Matrix, getXXX) {
+    const auto a = Matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10.9, 11, 12, 13, 14, 15, 16);
+    
+    // getRotation
+    auto quat = a.getRotation();
+    EXPECT_QUATERNION_EQ(quat, -0.44736068104759547, 0.6882472016116852, -0.3441236008058426, 2.179449471770337);
+    
+    // getScaling
+    auto scale = a.getScaling();
+    EXPECT_FLOAT3_EQ(scale, 3.7416573867739413, 10.488088481701515, 17.911169699380327);
+    
+    // getTranslation
+    auto translation = a.getTranslation();
+    EXPECT_FLOAT3_EQ(translation, 13, 14, 15);
+}

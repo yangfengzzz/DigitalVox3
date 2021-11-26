@@ -396,7 +396,7 @@ struct Matrix {
      * Calculate a determinant of this matrix.
      * @returns The determinant of this matrix
      */
-    OZZ_INLINE float determinant() {
+    OZZ_INLINE float determinant() const {
         const auto &e = elements;
         
         const auto &a11 = e[0],
@@ -440,7 +440,7 @@ struct Matrix {
      * @param scale - Scale vector as an output parameter
      * @returns True if this matrix can be decomposed, false otherwise
      */
-    bool decompose(Float3 &translation, Quaternion &rotation, Float3 &scale) {
+    bool decompose(Float3 &translation, Quaternion &rotation, Float3 &scale) const {
         Matrix3x3 rm;
         
         const auto &e = elements;
@@ -505,7 +505,7 @@ struct Matrix {
      * Get rotation from this matrix.
      * @return out - Rotation quaternion as an output parameter
      */
-    Quaternion getRotation() {
+    Quaternion getRotation() const {
         const auto &e = elements;
         auto trace = e[0] + e[5] + e[10];
         
@@ -528,7 +528,7 @@ struct Matrix {
      * Get scale from this matrix.
      * @return out - Scale vector as an output parameter
      */
-    Float3 getScaling() {
+    Float3 getScaling() const {
         const auto &e = elements;
         const auto &m11 = e[0],
         m12 = e[1],
@@ -549,7 +549,7 @@ struct Matrix {
      * Get translation from this matrix.
      * @return out - Translation vector as an output parameter
      */
-    Float3 getTranslation() {
+    Float3 getTranslation() const {
         const auto &e = elements;
         return Float3(e[12], e[13], e[14]);
     }
