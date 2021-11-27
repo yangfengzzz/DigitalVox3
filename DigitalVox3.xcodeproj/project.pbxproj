@@ -219,6 +219,8 @@
 		04CE39652752661F00204B8E /* render_queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39632752661F00204B8E /* render_queue.h */; };
 		04CE3968275268BB00204B8E /* render_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3966275268BB00204B8E /* render_pass.mm */; };
 		04CE3969275268BB00204B8E /* render_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE3967275268BB00204B8E /* render_pass.h */; };
+		04CE396C27526AEE00204B8E /* basic_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE396A27526AEE00204B8E /* basic_render_pipeline.mm */; };
+		04CE396D27526AEE00204B8E /* basic_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE396B27526AEE00204B8E /* basic_render_pipeline.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -593,6 +595,8 @@
 		04CE39632752661F00204B8E /* render_queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_queue.h; sourceTree = "<group>"; };
 		04CE3966275268BB00204B8E /* render_pass.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = render_pass.mm; sourceTree = "<group>"; };
 		04CE3967275268BB00204B8E /* render_pass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_pass.h; sourceTree = "<group>"; };
+		04CE396A27526AEE00204B8E /* basic_render_pipeline.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = basic_render_pipeline.mm; sourceTree = "<group>"; };
+		04CE396B27526AEE00204B8E /* basic_render_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = basic_render_pipeline.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1300,6 +1304,8 @@
 				04CE39622752661F00204B8E /* render_queue.mm */,
 				04CE3967275268BB00204B8E /* render_pass.h */,
 				04CE3966275268BB00204B8E /* render_pass.mm */,
+				04CE396B27526AEE00204B8E /* basic_render_pipeline.h */,
+				04CE396A27526AEE00204B8E /* basic_render_pipeline.mm */,
 			);
 			path = render_pipeline;
 			sourceTree = "<group>";
@@ -1356,6 +1362,7 @@
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04CE392A2751B3D900204B8E /* renderTarget_blend_state.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
+				04CE396D27526AEE00204B8E /* basic_render_pipeline.h in Headers */,
 				04CE38E9275103BC00204B8E /* scene_manager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1502,6 +1509,7 @@
 				04CE37D4274D167F00204B8E /* blending_job.cc in Sources */,
 				04CE37D6274D167F00204B8E /* ik_aim_job.cc in Sources */,
 				04CE37D8274D167F00204B8E /* ik_two_bone_job.cc in Sources */,
+				04CE396C27526AEE00204B8E /* basic_render_pipeline.mm in Sources */,
 				04CE39392751CF3B00204B8E /* stencil_state.mm in Sources */,
 				04CE37DA274D167F00204B8E /* track.cc in Sources */,
 				04CE37DC274D167F00204B8E /* track_sampling_job.cc in Sources */,
