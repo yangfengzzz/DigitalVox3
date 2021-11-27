@@ -50,7 +50,7 @@ public:
     
     void _setVertexBuffer(int index, MeshBuffer buffer);
     
-private:
+protected:
     /// Name.
     std::string name;
     /// The bounding volume of the mesh.
