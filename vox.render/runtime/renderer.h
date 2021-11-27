@@ -40,7 +40,7 @@ public:
     /// The bounding volume of the renderer.
     BoundingBox bounds();
     
-    Renderer(EntityPtr entity);
+    Renderer(Entity* entity);
     
     void _onEnable() override;
     
@@ -48,11 +48,11 @@ public:
     
     void _onDestroy() override;
     
-    void _render(const Camera& camera);
+    virtual void _render(const Camera& camera) = 0;
     
-    void _updateBounds(const BoundingBox& worldBounds);
+    virtual void _updateBounds(const BoundingBox& worldBounds) = 0;
     
-    void update(float deltaTime);
+    virtual void update(float deltaTime) = 0;
     
 public:
     //MARK:- Material Methods
@@ -61,12 +61,12 @@ public:
     /// will create an instance material to ensure that it is unique to the renderer.
     /// - Parameter index: Material index
     /// - Returns: Instance material
-    MaterialPtr getInstanceMaterial(int index = 0);
+    MaterialPtr getInstanceMaterial(size_t index = 0);
     
     /// Get the first material by index.
     /// - Parameter index: Material index
     /// - Returns: Material
-    MaterialPtr getMaterial(int index = 0);
+    MaterialPtr getMaterial(size_t index = 0);
     
     /// Set the first material.
     /// - Parameter material: The first material
@@ -76,7 +76,7 @@ public:
     /// - Parameters:
     ///   - index: Material index
     ///   - material: The material
-    void setMaterial(int index, MaterialPtr material);
+    void setMaterial(size_t index, MaterialPtr material);
     
     /// Get all instance materials.
     /// - Remark: Calling this function for the first time after the material is set
@@ -103,7 +103,7 @@ private:
     
     void _updateShaderData(const RenderContext& context);
     
-    MaterialPtr _createInstanceMaterial(const MaterialPtr& material, int index);
+    MaterialPtr _createInstanceMaterial(const MaterialPtr& material, size_t index);
     
     float _distanceForSort = 0;
     int _onUpdateIndex = -1;
@@ -117,7 +117,7 @@ private:
     std::vector<std::shared_ptr<Material>> _materials;
     
     // @ignoreClone
-    UpdateFlag _transformChangeFlag;
+    std::unique_ptr<UpdateFlag> _transformChangeFlag;
     // @deepClone
     BoundingBox _bounds = BoundingBox();
     // @ignoreClone
