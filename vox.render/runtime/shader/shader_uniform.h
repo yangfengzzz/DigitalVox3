@@ -10,6 +10,7 @@
 
 #include <Metal/Metal.h>
 #include <string>
+#include <vector>
 
 namespace vox {
 /// Shader uniform。
@@ -18,6 +19,12 @@ public:
     std::string name;
     int propertyId;
     int location;
+};
+
+/// Shader uniform block.
+class ShaderUniformBlock {
+    std::vector<ShaderUniform> constUniforms;
+    std::vector<ShaderUniform> textureUniforms;
 };
 
 }

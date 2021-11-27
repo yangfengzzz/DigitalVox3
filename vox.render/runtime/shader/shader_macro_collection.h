@@ -28,6 +28,7 @@ struct ShaderMacroCollection {
                                 ShaderMacroCollection& result);
 
 private:
+    friend class ShaderProgram;
     std::unordered_map<MacroName, std::pair<int, MTLDataType>> _value;
 };
     

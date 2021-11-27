@@ -10,6 +10,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <optional>
 #include "shader_property.h"
 #include "shader_program.h"
 #include "shader_macro_collection.h"
@@ -50,7 +51,7 @@ private:
     static std::unordered_map<std::string, std::unique_ptr<Shader>> _shaderMap;
     static std::unordered_map<std::string, ShaderProperty> _propertyNameMap;
     
-    static ShaderDataGroup _getShaderPropertyGroup(const std::string& propertyName);
+    static std::optional<ShaderDataGroup> _getShaderPropertyGroup(const std::string& propertyName);
     
     ShaderProgram _getShaderProgram(EnginePtr engine, ShaderMacroCollection macroCollection);
 

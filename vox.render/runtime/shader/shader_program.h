@@ -9,13 +9,32 @@
 #define shader_program_hpp
 
 #import <Metal/Metal.h>
+#include "shader_macro_collection.h"
 
 namespace vox {
 /// Shader program, corresponding to the GPU shader program.
 class ShaderProgram {
 public:
+    id<MTLFunction> vertexShader();
+    id<MTLFunction> fragmentShader();
+
+    /// Whether this shader program is valid.
+    bool isValid();
+    
+    ShaderProgram(id<MTLLibrary> library, const std::string& vertexSource, const std::string& fragmentSource,
+                  const ShaderMacroCollection& macroInfo);
+
     
 private:
+    MTLFunctionConstantValues* makeFunctionConstants(const ShaderMacroCollection& macroInfo);
+
+    /// init and link program with shader.
+    /// - Parameters:
+    ///   - vertexSource: vertex name
+    ///   - fragmentSource: fragment name
+    void _createProgram(const std::string& vertexSource, const std::string& fragmentSource,
+                        const ShaderMacroCollection& macroInfo);
+    
     static int _counter;
     int ID;
     bool _isValid;

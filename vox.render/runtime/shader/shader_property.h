@@ -19,7 +19,8 @@ struct ShaderProperty {
     
 private:
     friend class ShaderData;
-    
+    friend class Shader;
+
     static int _propertyNameCounter;
     int _uniqueId;
     ShaderDataGroup _group;
