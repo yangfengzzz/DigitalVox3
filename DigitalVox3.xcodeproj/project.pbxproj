@@ -215,6 +215,8 @@
 		04CE395D27525E2500204B8E /* render_context.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE395B27525E2500204B8E /* render_context.h */; };
 		04CE396027525EC700204B8E /* render_element.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE395E27525EC700204B8E /* render_element.mm */; };
 		04CE396127525EC700204B8E /* render_element.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE395F27525EC700204B8E /* render_element.h */; };
+		04CE39642752661F00204B8E /* render_queue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39622752661F00204B8E /* render_queue.mm */; };
+		04CE39652752661F00204B8E /* render_queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39632752661F00204B8E /* render_queue.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -585,6 +587,8 @@
 		04CE395B27525E2500204B8E /* render_context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_context.h; sourceTree = "<group>"; };
 		04CE395E27525EC700204B8E /* render_element.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = render_element.mm; sourceTree = "<group>"; };
 		04CE395F27525EC700204B8E /* render_element.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_element.h; sourceTree = "<group>"; };
+		04CE39622752661F00204B8E /* render_queue.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = render_queue.mm; sourceTree = "<group>"; };
+		04CE39632752661F00204B8E /* render_queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_queue.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1288,6 +1292,8 @@
 				04CE395A27525E2500204B8E /* render_context.mm */,
 				04CE395F27525EC700204B8E /* render_element.h */,
 				04CE395E27525EC700204B8E /* render_element.mm */,
+				04CE39632752661F00204B8E /* render_queue.h */,
+				04CE39622752661F00204B8E /* render_queue.mm */,
 			);
 			path = render_pipeline;
 			sourceTree = "<group>";
@@ -1339,6 +1345,7 @@
 				04CE390027519FB500204B8E /* metal_renderer.h in Headers */,
 				04CE38F72751131C00204B8E /* canvas.h in Headers */,
 				04CE39322751CDAB00204B8E /* raster_state.h in Headers */,
+				04CE39652752661F00204B8E /* render_queue.h in Headers */,
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04CE392A2751B3D900204B8E /* renderTarget_blend_state.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
@@ -1493,6 +1500,7 @@
 				04CE37DE274D167F00204B8E /* track_triggering_job.cc in Sources */,
 				04CE39312751CDAB00204B8E /* raster_state.mm in Sources */,
 				04CE38DB274E8C2D00204B8E /* plane.cpp in Sources */,
+				04CE39642752661F00204B8E /* render_queue.mm in Sources */,
 				04CE37E1274D167F00204B8E /* raw_skeleton.cc in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,

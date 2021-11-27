@@ -94,6 +94,8 @@ public:
     
     
 private:
+    friend class RenderQueue;
+    
     static ShaderProperty _localMatrixProperty;
     static ShaderProperty _worldMatrixProperty;
     static ShaderProperty _mvMatrixProperty;
