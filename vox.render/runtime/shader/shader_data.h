@@ -45,7 +45,8 @@ public:
 private:
     friend class Camera;
     friend class Material;
-
+    friend class Renderer;
+    
     ShaderData(ShaderDataGroup group);
     
     ShaderDataGroup _group;

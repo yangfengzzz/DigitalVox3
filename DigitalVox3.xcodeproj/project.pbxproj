@@ -209,6 +209,12 @@
 		04CE394B2751E3E600204B8E /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39492751E3E600204B8E /* shader.h */; };
 		04CE39532752589700204B8E /* material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39512752589700204B8E /* material.mm */; };
 		04CE39542752589700204B8E /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39522752589700204B8E /* material.h */; };
+		04CE3957275259FA00204B8E /* renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3955275259FA00204B8E /* renderer.mm */; };
+		04CE3958275259FA00204B8E /* renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE3956275259FA00204B8E /* renderer.h */; };
+		04CE395C27525E2500204B8E /* render_context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE395A27525E2500204B8E /* render_context.mm */; };
+		04CE395D27525E2500204B8E /* render_context.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE395B27525E2500204B8E /* render_context.h */; };
+		04CE396027525EC700204B8E /* render_element.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE395E27525EC700204B8E /* render_element.mm */; };
+		04CE396127525EC700204B8E /* render_element.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE395F27525EC700204B8E /* render_element.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -573,6 +579,12 @@
 		04CE39502752587300204B8E /* render_queue_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_queue_type.h; sourceTree = "<group>"; };
 		04CE39512752589700204B8E /* material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = material.mm; sourceTree = "<group>"; };
 		04CE39522752589700204B8E /* material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		04CE3955275259FA00204B8E /* renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = renderer.mm; sourceTree = "<group>"; };
+		04CE3956275259FA00204B8E /* renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
+		04CE395A27525E2500204B8E /* render_context.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = render_context.mm; sourceTree = "<group>"; };
+		04CE395B27525E2500204B8E /* render_context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_context.h; sourceTree = "<group>"; };
+		04CE395E27525EC700204B8E /* render_element.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = render_element.mm; sourceTree = "<group>"; };
+		04CE395F27525EC700204B8E /* render_element.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_element.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -851,6 +863,7 @@
 				04CE390E2751AE4A00204B8E /* shader */,
 				04CE39132751AF0800204B8E /* mesh */,
 				04CE394C2752581000204B8E /* material */,
+				04CE395927525E0700204B8E /* render_pipeline */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
 				04160FEC27509277006CD384 /* engine_object.h */,
@@ -878,6 +891,8 @@
 				04CE38E6275103BC00204B8E /* scene_manager.mm */,
 				04CE38EB27510A8000204B8E /* camera.h */,
 				04CE38EA27510A8000204B8E /* camera.mm */,
+				04CE3956275259FA00204B8E /* renderer.h */,
+				04CE3955275259FA00204B8E /* renderer.mm */,
 				04CE38F52751131C00204B8E /* canvas.h */,
 				04CE38F42751131C00204B8E /* canvas.cpp */,
 			);
@@ -1266,6 +1281,17 @@
 			path = enums;
 			sourceTree = "<group>";
 		};
+		04CE395927525E0700204B8E /* render_pipeline */ = {
+			isa = PBXGroup;
+			children = (
+				04CE395B27525E2500204B8E /* render_context.h */,
+				04CE395A27525E2500204B8E /* render_context.mm */,
+				04CE395F27525EC700204B8E /* render_element.h */,
+				04CE395E27525EC700204B8E /* render_element.mm */,
+			);
+			path = render_pipeline;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1286,10 +1312,12 @@
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
 				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
 				04CE39212751B2C500204B8E /* shader_property.h in Headers */,
+				04CE396127525EC700204B8E /* render_element.h in Headers */,
 				04CE39472751D82F00204B8E /* shader_uniform.h in Headers */,
 				041610072750A577006CD384 /* script.h in Headers */,
 				04CE394B2751E3E600204B8E /* shader.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
+				04CE3958275259FA00204B8E /* renderer.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
@@ -1298,6 +1326,7 @@
 				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
 				04CE39172751AF3800204B8E /* mesh.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
+				04CE395D27525E2500204B8E /* render_context.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
 				04CE39542752589700204B8E /* material.h in Headers */,
@@ -1449,10 +1478,12 @@
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
+				04CE3957275259FA00204B8E /* renderer.mm in Sources */,
 				04CE37CE274D167E00204B8E /* animation_utils.cc in Sources */,
 				04CE37D0274D167E00204B8E /* local_to_model_job.cc in Sources */,
 				04CE39352751CE9D00204B8E /* depth_state.mm in Sources */,
 				04CE37D2274D167F00204B8E /* sampling_job.cc in Sources */,
+				04CE395C27525E2500204B8E /* render_context.mm in Sources */,
 				04CE37D4274D167F00204B8E /* blending_job.cc in Sources */,
 				04CE37D6274D167F00204B8E /* ik_aim_job.cc in Sources */,
 				04CE37D8274D167F00204B8E /* ik_two_bone_job.cc in Sources */,
@@ -1501,6 +1532,7 @@
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
+				04CE396027525EC700204B8E /* render_element.mm in Sources */,
 				04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */,
 				04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */,
 				04CE3817274D167F00204B8E /* imgui_tables.cpp in Sources */,
