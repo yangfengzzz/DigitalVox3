@@ -17,6 +17,10 @@
 namespace vox {
 class Camera;
 
+class RenderPipelineState;
+
+struct SubMesh;
+
 /// Metal renderer.
 class MetalRenderer {
 public:
@@ -26,37 +30,54 @@ public:
     id <MTLDevice> device;
     // var resouceCache: ResourceCache!
     id <MTLCommandQueue> commandQueue;
-    id<MTLLibrary> library;
+    id <MTLLibrary> library;
     
-    id<MTLCommandBuffer> commandBuffer;
-    id<MTLRenderCommandEncoder> renderEncoder;
-    MTLRenderPassDescriptor* renderPassDescriptor;
+    id <MTLCommandBuffer> commandBuffer;
+    id <MTLRenderCommandEncoder> renderEncoder;
+    MTLRenderPassDescriptor *renderPassDescriptor;
     
     // todo delete
     MTLPixelFormat colorPixelFormat;
-    id<MTLSamplerState> samplerState;
+    id <MTLSamplerState> samplerState;
     
     void reinit(Canvas canvas);
     
-    id<MTLSamplerState> buildSamplerState();
+    id <MTLSamplerState> buildSamplerState();
     
 public:
     void begin();
-
+    
     void end();
     
-    void activeRenderTarget(MTLRenderPassDescriptor* renderTarget);
+    void activeRenderTarget(MTLRenderPassDescriptor *renderTarget);
     
     void clearRenderTarget(int clearFlags = CameraClearFlags::Depth | CameraClearFlags::DepthColor,
                            Color clearColor = Color(0.45f, 0.55f, 0.60f, 1.00f));
     
-    void beginRenderPass(MTLRenderPassDescriptor* renderTarget, Camera* camera, int mipLevel= 0);
+    void beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camera *camera, int mipLevel = 0);
     
     void endRenderPass();
     
+public:
+    void setRenderPipelineState(RenderPipelineState *state);
+    
+    void setDepthStencilState(id <MTLDepthStencilState> depthStencilState);
+    
+    void setDepthBias(float depthBias, float slopeScale, float clamp);
+    
+    void setStencilReferenceValue(uint32_t referenceValue);
+    
+    void setBlendColor(float red, float green, float blue, float alpha);
+    
+    void setCullMode(MTLCullMode cullMode);
+    
+    void bindTexture(id <MTLTexture> texture, int location);
+    
+    void drawPrimitive(SubMesh *subPrimitive);
+    
 private:
     CAMetalLayer *layer;
-    id<CAMetalDrawable> drawable;
+    id <CAMetalDrawable> drawable;
 };
 
 }

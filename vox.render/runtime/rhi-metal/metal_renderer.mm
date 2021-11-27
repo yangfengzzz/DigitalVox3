@@ -8,6 +8,8 @@
 #include "metal_renderer.h"
 #include "engine.h"
 #include "camera.h"
+#include "render_pipeline_state.h"
+#include "../graphics/submesh.h"
 
 namespace vox {
 void MetalRenderer::reinit(Canvas canvas) {
@@ -29,8 +31,8 @@ void MetalRenderer::reinit(Canvas canvas) {
     nswin.contentView.wantsLayer = YES;
 }
 
-id<MTLSamplerState> MetalRenderer::buildSamplerState() {
-    auto *descriptor = [[MTLSamplerDescriptor alloc]init];
+id <MTLSamplerState> MetalRenderer::buildSamplerState() {
+    auto *descriptor = [[MTLSamplerDescriptor alloc] init];
     descriptor.sAddressMode = MTLSamplerAddressModeRepeat;
     descriptor.tAddressMode = MTLSamplerAddressModeRepeat;
     descriptor.mipFilter = MTLSamplerMipFilterLinear;
@@ -48,7 +50,7 @@ void MetalRenderer::end() {
     [commandBuffer commit];
 }
 
-void MetalRenderer::activeRenderTarget(MTLRenderPassDescriptor* renderTarget) {
+void MetalRenderer::activeRenderTarget(MTLRenderPassDescriptor *renderTarget) {
     if (renderTarget != nullptr) {
         renderPassDescriptor = renderTarget;
     } else {
@@ -70,27 +72,27 @@ void MetalRenderer::clearRenderTarget(int clearFlags,
     renderPassDescriptor.stencilAttachment.storeAction = MTLStoreActionStore;
 }
 
-void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor* renderTarget, Camera* camera, int mipLevel) {
+void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camera *camera, int mipLevel) {
     renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
     
     if (renderTarget != nullptr) {
         
         [renderEncoder setViewport:MTLViewport{
-         0, 0,
-         static_cast<double>(renderTarget.colorAttachments[0].texture.width >> mipLevel),
-         static_cast<double>(renderTarget.colorAttachments[0].texture.height >> mipLevel),
-         0, 1}];
+            0, 0,
+            static_cast<double>(renderTarget.colorAttachments[0].texture.width >> mipLevel),
+            static_cast<double>(renderTarget.colorAttachments[0].texture.height >> mipLevel),
+            0, 1}];
     } else {
-        const auto& viewport = camera->viewport();
+        const auto &viewport = camera->viewport();
         double width = canvas.width();
         double height = canvas.height();
         
         [renderEncoder setViewport:MTLViewport{
-         viewport.x * width,
-         viewport.y * height,
-         viewport.z * width,
-         viewport.w * height,
-         0, 1}];
+            viewport.x * width,
+            viewport.y * height,
+            viewport.z * width,
+            viewport.w * height,
+            0, 1}];
     }
     
     [renderEncoder setFragmentSamplerState:samplerState atIndex:0];
@@ -98,6 +100,42 @@ void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor* renderTarget, Camer
 
 void MetalRenderer::endRenderPass() {
     [renderEncoder endEncoding];
+}
+
+void MetalRenderer::setRenderPipelineState(RenderPipelineState *state) {
+    [renderEncoder setRenderPipelineState:state->handle()];
+}
+
+void MetalRenderer::setDepthStencilState(id <MTLDepthStencilState> depthStencilState) {
+    [renderEncoder setDepthStencilState:depthStencilState];
+}
+
+void MetalRenderer::setDepthBias(float depthBias, float slopeScale, float clamp) {
+    [renderEncoder setDepthBias:depthBias slopeScale:slopeScale clamp:clamp];
+}
+
+void MetalRenderer::setStencilReferenceValue(uint32_t referenceValue) {
+    [renderEncoder setStencilReferenceValue:referenceValue];
+}
+
+void MetalRenderer::setBlendColor(float red, float green, float blue, float alpha) {
+    [renderEncoder setBlendColorRed:red green:green blue:blue alpha:alpha];
+}
+
+void MetalRenderer::setCullMode(MTLCullMode cullMode) {
+    [renderEncoder setCullMode:cullMode];
+}
+
+void MetalRenderer::bindTexture(id <MTLTexture> texture, int location) {
+    [renderEncoder setFragmentTexture:texture atIndex:location];
+}
+
+void MetalRenderer::drawPrimitive(SubMesh *subPrimitive) {
+    [renderEncoder drawIndexedPrimitives:subPrimitive->topology
+                              indexCount:subPrimitive->indexCount
+                               indexType:subPrimitive->indexType
+                             indexBuffer:subPrimitive->indexBuffer.buffer()
+                       indexBufferOffset:subPrimitive->indexBuffer.offset()];
 }
 
 }

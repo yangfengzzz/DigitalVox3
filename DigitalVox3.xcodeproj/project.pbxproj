@@ -174,6 +174,12 @@
 		04CE38FB2751992C00204B8E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38F92751992C00204B8E /* timer.h */; };
 		04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE38FD27519FB500204B8E /* metal_renderer.mm */; };
 		04CE390027519FB500204B8E /* metal_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE38FE27519FB500204B8E /* metal_renderer.h */; };
+		04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39012751A84000204B8E /* render_pipeline_state.mm */; };
+		04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39022751A84000204B8E /* render_pipeline_state.h */; };
+		04CE39082751AAD000204B8E /* submesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39062751AAD000204B8E /* submesh.mm */; };
+		04CE39092751AAD000204B8E /* submesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39072751AAD000204B8E /* submesh.h */; };
+		04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE390A2751AB6B00204B8E /* mesh_buffer.mm */; };
+		04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE390B2751AB6B00204B8E /* mesh_buffer.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -498,6 +504,12 @@
 		04CE38F92751992C00204B8E /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		04CE38FD27519FB500204B8E /* metal_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = metal_renderer.mm; sourceTree = "<group>"; };
 		04CE38FE27519FB500204B8E /* metal_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = metal_renderer.h; sourceTree = "<group>"; };
+		04CE39012751A84000204B8E /* render_pipeline_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = render_pipeline_state.mm; sourceTree = "<group>"; };
+		04CE39022751A84000204B8E /* render_pipeline_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_pipeline_state.h; sourceTree = "<group>"; };
+		04CE39062751AAD000204B8E /* submesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = submesh.mm; sourceTree = "<group>"; };
+		04CE39072751AAD000204B8E /* submesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = submesh.h; sourceTree = "<group>"; };
+		04CE390A2751AB6B00204B8E /* mesh_buffer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = mesh_buffer.mm; sourceTree = "<group>"; };
+		04CE390B2751AB6B00204B8E /* mesh_buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh_buffer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -772,6 +784,7 @@
 				04CE38EE27510AC600204B8E /* enums */,
 				04CE38FC27519FA200204B8E /* rhi-metal */,
 				04CE3702274D0DEC00204B8E /* animation */,
+				04CE39052751AAC200204B8E /* graphics */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
 				04160FEC27509277006CD384 /* engine_object.h */,
@@ -1091,8 +1104,21 @@
 			children = (
 				04CE38FE27519FB500204B8E /* metal_renderer.h */,
 				04CE38FD27519FB500204B8E /* metal_renderer.mm */,
+				04CE39022751A84000204B8E /* render_pipeline_state.h */,
+				04CE39012751A84000204B8E /* render_pipeline_state.mm */,
 			);
 			path = "rhi-metal";
+			sourceTree = "<group>";
+		};
+		04CE39052751AAC200204B8E /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				04CE390B2751AB6B00204B8E /* mesh_buffer.h */,
+				04CE390A2751AB6B00204B8E /* mesh_buffer.mm */,
+				04CE39072751AAD000204B8E /* submesh.h */,
+				04CE39062751AAD000204B8E /* submesh.mm */,
+			);
+			path = graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1106,6 +1132,7 @@
 				04160FEE27509277006CD384 /* engine_object.h in Headers */,
 				04CE38FB2751992C00204B8E /* timer.h in Headers */,
 				04160FF72750955C006CD384 /* component.h in Headers */,
+				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
 				041610072750A577006CD384 /* script.h in Headers */,
@@ -1114,12 +1141,14 @@
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				0416100B2750A720006CD384 /* scene.h in Headers */,
+				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
+				04CE39092751AAD000204B8E /* submesh.h in Headers */,
 				04CE390027519FB500204B8E /* metal_renderer.h in Headers */,
 				04CE38F72751131C00204B8E /* canvas.h in Headers */,
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
@@ -1249,6 +1278,7 @@
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.cpp in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
+				04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
 				04CE37B8274D167E00204B8E /* simd_math.cc in Sources */,
 				04CE37BA274D167E00204B8E /* simd_math_archive.cc in Sources */,
@@ -1297,7 +1327,9 @@
 				0416100A2750A720006CD384 /* scene.cpp in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
+				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
 				04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */,
+				04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */,
 				04CE3817274D167F00204B8E /* imgui_tables.cpp in Sources */,
 				04CE3818274D167F00204B8E /* imgui_widgets.cpp in Sources */,
 				04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */,
