@@ -180,6 +180,10 @@
 		04CE39092751AAD000204B8E /* submesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39072751AAD000204B8E /* submesh.h */; };
 		04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE390A2751AB6B00204B8E /* mesh_buffer.mm */; };
 		04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE390B2751AB6B00204B8E /* mesh_buffer.h */; };
+		04CE39112751AE5B00204B8E /* shader_program.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE390F2751AE5B00204B8E /* shader_program.mm */; };
+		04CE39122751AE5B00204B8E /* shader_program.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39102751AE5B00204B8E /* shader_program.h */; };
+		04CE39162751AF3800204B8E /* mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39142751AF3800204B8E /* mesh.mm */; };
+		04CE39172751AF3800204B8E /* mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39152751AF3800204B8E /* mesh.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -510,6 +514,10 @@
 		04CE39072751AAD000204B8E /* submesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = submesh.h; sourceTree = "<group>"; };
 		04CE390A2751AB6B00204B8E /* mesh_buffer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = mesh_buffer.mm; sourceTree = "<group>"; };
 		04CE390B2751AB6B00204B8E /* mesh_buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh_buffer.h; sourceTree = "<group>"; };
+		04CE390F2751AE5B00204B8E /* shader_program.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_program.mm; sourceTree = "<group>"; };
+		04CE39102751AE5B00204B8E /* shader_program.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_program.h; sourceTree = "<group>"; };
+		04CE39142751AF3800204B8E /* mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = mesh.mm; sourceTree = "<group>"; };
+		04CE39152751AF3800204B8E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -785,6 +793,8 @@
 				04CE38FC27519FA200204B8E /* rhi-metal */,
 				04CE3702274D0DEC00204B8E /* animation */,
 				04CE39052751AAC200204B8E /* graphics */,
+				04CE390E2751AE4A00204B8E /* shader */,
+				04CE39132751AF0800204B8E /* mesh */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
 				04160FEC27509277006CD384 /* engine_object.h */,
@@ -1117,8 +1127,26 @@
 				04CE390A2751AB6B00204B8E /* mesh_buffer.mm */,
 				04CE39072751AAD000204B8E /* submesh.h */,
 				04CE39062751AAD000204B8E /* submesh.mm */,
+				04CE39152751AF3800204B8E /* mesh.h */,
+				04CE39142751AF3800204B8E /* mesh.mm */,
 			);
 			path = graphics;
+			sourceTree = "<group>";
+		};
+		04CE390E2751AE4A00204B8E /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				04CE39102751AE5B00204B8E /* shader_program.h */,
+				04CE390F2751AE5B00204B8E /* shader_program.mm */,
+			);
+			path = shader;
+			sourceTree = "<group>";
+		};
+		04CE39132751AF0800204B8E /* mesh */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mesh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1132,6 +1160,7 @@
 				04160FEE27509277006CD384 /* engine_object.h in Headers */,
 				04CE38FB2751992C00204B8E /* timer.h in Headers */,
 				04160FF72750955C006CD384 /* component.h in Headers */,
+				04CE39122751AE5B00204B8E /* shader_program.h in Headers */,
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
@@ -1142,6 +1171,7 @@
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				0416100B2750A720006CD384 /* scene.h in Headers */,
 				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
+				04CE39172751AF3800204B8E /* mesh.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
@@ -1305,6 +1335,7 @@
 				04CE37E7274D167F00204B8E /* raw_animation_utils.cc in Sources */,
 				04CE38CC274E678400204B8E /* quaternion.cpp in Sources */,
 				04160FD1274F7079006CD384 /* ray.cpp in Sources */,
+				04CE39162751AF3800204B8E /* mesh.mm in Sources */,
 				04CE38EC27510A8000204B8E /* camera.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
 				041610062750A577006CD384 /* script.cpp in Sources */,
@@ -1315,6 +1346,7 @@
 				04160FED27509277006CD384 /* engine_object.cpp in Sources */,
 				04CE37EF274D167F00204B8E /* animation_optimizer.cc in Sources */,
 				0416100E2750E1A9006CD384 /* components_manager.cpp in Sources */,
+				04CE39112751AE5B00204B8E /* shader_program.mm in Sources */,
 				04CE38FA2751992C00204B8E /* timer.cpp in Sources */,
 				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,

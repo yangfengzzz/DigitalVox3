@@ -9,7 +9,7 @@
 
 namespace vox {
 SubMesh::SubMesh(MeshBuffer indexBuffer, MTLIndexType indexType,
-                 int indexCount, MTLPrimitiveType topology) :
+                 size_t indexCount, MTLPrimitiveType topology) :
 indexBuffer(indexBuffer),
 indexType(indexType),
 indexCount(indexCount),

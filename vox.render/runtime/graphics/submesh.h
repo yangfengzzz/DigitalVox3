@@ -30,7 +30,7 @@ struct SubMesh {
     ///   - indexCount: Drawing count
     ///   - topology: Drawing topology
     SubMesh(MeshBuffer indexBuffer, MTLIndexType indexType,
-            int indexCount = 0, MTLPrimitiveType topology = MTLPrimitiveTypeTriangle);
+            size_t indexCount = 0, MTLPrimitiveType topology = MTLPrimitiveTypeTriangle);
 };
 
 }
