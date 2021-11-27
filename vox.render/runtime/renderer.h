@@ -48,7 +48,7 @@ public:
     
     void _onDestroy() override;
     
-    virtual void _render(const Camera& camera) = 0;
+    virtual void _render(Camera* camera) = 0;
     
     virtual void _updateBounds(const BoundingBox& worldBounds) = 0;
     
