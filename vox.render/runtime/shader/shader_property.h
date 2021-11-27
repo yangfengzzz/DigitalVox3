@@ -18,6 +18,8 @@ struct ShaderProperty {
     std::string name;
     
 private:
+    friend class ShaderData;
+    
     static int _propertyNameCounter;
     int _uniqueId;
     ShaderDataGroup _group;

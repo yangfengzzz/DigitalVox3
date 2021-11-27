@@ -201,6 +201,12 @@
 		04CE393A2751CF3B00204B8E /* stencil_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39382751CF3B00204B8E /* stencil_state.h */; };
 		04CE393E2751D2ED00204B8E /* shader_macro_collection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */; };
 		04CE393F2751D2ED00204B8E /* shader_macro_collection.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE393D2751D2ED00204B8E /* shader_macro_collection.h */; };
+		04CE39422751D7BF00204B8E /* shader_data.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39402751D7BF00204B8E /* shader_data.mm */; };
+		04CE39432751D7BF00204B8E /* shader_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39412751D7BF00204B8E /* shader_data.h */; };
+		04CE39462751D82F00204B8E /* shader_uniform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39442751D82F00204B8E /* shader_uniform.mm */; };
+		04CE39472751D82F00204B8E /* shader_uniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39452751D82F00204B8E /* shader_uniform.h */; };
+		04CE394A2751E3E600204B8E /* shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39482751E3E600204B8E /* shader.mm */; };
+		04CE394B2751E3E600204B8E /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39492751E3E600204B8E /* shader.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -554,6 +560,12 @@
 		04CE393B2751D2C900204B8E /* macro_name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macro_name.h; sourceTree = "<group>"; };
 		04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_macro_collection.mm; sourceTree = "<group>"; };
 		04CE393D2751D2ED00204B8E /* shader_macro_collection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_macro_collection.h; sourceTree = "<group>"; };
+		04CE39402751D7BF00204B8E /* shader_data.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_data.mm; sourceTree = "<group>"; };
+		04CE39412751D7BF00204B8E /* shader_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_data.h; sourceTree = "<group>"; };
+		04CE39442751D82F00204B8E /* shader_uniform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_uniform.mm; sourceTree = "<group>"; };
+		04CE39452751D82F00204B8E /* shader_uniform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_uniform.h; sourceTree = "<group>"; };
+		04CE39482751E3E600204B8E /* shader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader.mm; sourceTree = "<group>"; };
+		04CE39492751E3E600204B8E /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1183,6 +1195,12 @@
 				04CE393B2751D2C900204B8E /* macro_name.h */,
 				04CE393D2751D2ED00204B8E /* shader_macro_collection.h */,
 				04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */,
+				04CE39412751D7BF00204B8E /* shader_data.h */,
+				04CE39402751D7BF00204B8E /* shader_data.mm */,
+				04CE39452751D82F00204B8E /* shader_uniform.h */,
+				04CE39442751D82F00204B8E /* shader_uniform.mm */,
+				04CE39492751E3E600204B8E /* shader.h */,
+				04CE39482751E3E600204B8E /* shader.mm */,
 			);
 			path = shader;
 			sourceTree = "<group>";
@@ -1238,8 +1256,11 @@
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
+				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
 				04CE39212751B2C500204B8E /* shader_property.h in Headers */,
+				04CE39472751D82F00204B8E /* shader_uniform.h in Headers */,
 				041610072750A577006CD384 /* script.h in Headers */,
+				04CE394B2751E3E600204B8E /* shader.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
@@ -1388,6 +1409,7 @@
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
+				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
 				04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
 				04CE37B8274D167E00204B8E /* simd_math.cc in Sources */,
@@ -1426,6 +1448,7 @@
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
 				041610062750A577006CD384 /* script.mm in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
+				04CE39462751D82F00204B8E /* shader_uniform.mm in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
 				04160FF12750944F006CD384 /* entity.mm in Sources */,
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,
@@ -1452,6 +1475,7 @@
 				04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */,
 				04CE3817274D167F00204B8E /* imgui_tables.cpp in Sources */,
 				04CE3818274D167F00204B8E /* imgui_widgets.cpp in Sources */,
+				04CE39422751D7BF00204B8E /* shader_data.mm in Sources */,
 				04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */,
 				04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */,
 				04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */,
