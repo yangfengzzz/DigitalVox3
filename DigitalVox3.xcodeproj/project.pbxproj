@@ -225,6 +225,8 @@
 		04CE397127526DCF00204B8E /* mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE396F27526DCF00204B8E /* mesh_renderer.h */; };
 		04CE397427526F6E00204B8E /* model_mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE397227526F6E00204B8E /* model_mesh.mm */; };
 		04CE397527526F6E00204B8E /* model_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397327526F6E00204B8E /* model_mesh.h */; };
+		04CE397827527B4700204B8E /* primitive_mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE397627527B4700204B8E /* primitive_mesh.mm */; };
+		04CE397927527B4700204B8E /* primitive_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397727527B4700204B8E /* primitive_mesh.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -605,6 +607,8 @@
 		04CE396F27526DCF00204B8E /* mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh_renderer.h; sourceTree = "<group>"; };
 		04CE397227526F6E00204B8E /* model_mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = model_mesh.mm; sourceTree = "<group>"; };
 		04CE397327526F6E00204B8E /* model_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = model_mesh.h; sourceTree = "<group>"; };
+		04CE397627527B4700204B8E /* primitive_mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = primitive_mesh.mm; sourceTree = "<group>"; };
+		04CE397727527B4700204B8E /* primitive_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = primitive_mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1255,6 +1259,8 @@
 				04CE396E27526DCF00204B8E /* mesh_renderer.mm */,
 				04CE397327526F6E00204B8E /* model_mesh.h */,
 				04CE397227526F6E00204B8E /* model_mesh.mm */,
+				04CE397727527B4700204B8E /* primitive_mesh.h */,
+				04CE397627527B4700204B8E /* primitive_mesh.mm */,
 			);
 			path = mesh;
 			sourceTree = "<group>";
@@ -1352,6 +1358,7 @@
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
+				04CE397927527B4700204B8E /* primitive_mesh.h in Headers */,
 				0416100B2750A720006CD384 /* scene.h in Headers */,
 				04CE393A2751CF3B00204B8E /* stencil_state.h in Headers */,
 				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
@@ -1546,6 +1553,7 @@
 				04CE39202751B2C500204B8E /* shader_property.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
 				041610062750A577006CD384 /* script.mm in Sources */,
+				04CE397827527B4700204B8E /* primitive_mesh.mm in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
 				04CE39462751D82F00204B8E /* shader_uniform.mm in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
