@@ -199,6 +199,8 @@
 		04CE39362751CE9D00204B8E /* depth_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39342751CE9D00204B8E /* depth_state.h */; };
 		04CE39392751CF3B00204B8E /* stencil_state.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39372751CF3B00204B8E /* stencil_state.mm */; };
 		04CE393A2751CF3B00204B8E /* stencil_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39382751CF3B00204B8E /* stencil_state.h */; };
+		04CE393E2751D2ED00204B8E /* shader_macro_collection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */; };
+		04CE393F2751D2ED00204B8E /* shader_macro_collection.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE393D2751D2ED00204B8E /* shader_macro_collection.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -549,6 +551,9 @@
 		04CE39342751CE9D00204B8E /* depth_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = depth_state.h; sourceTree = "<group>"; };
 		04CE39372751CF3B00204B8E /* stencil_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = stencil_state.mm; sourceTree = "<group>"; };
 		04CE39382751CF3B00204B8E /* stencil_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stencil_state.h; sourceTree = "<group>"; };
+		04CE393B2751D2C900204B8E /* macro_name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macro_name.h; sourceTree = "<group>"; };
+		04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_macro_collection.mm; sourceTree = "<group>"; };
+		04CE393D2751D2ED00204B8E /* shader_macro_collection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_macro_collection.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1175,6 +1180,9 @@
 				04CE390F2751AE5B00204B8E /* shader_program.mm */,
 				04CE391F2751B2C500204B8E /* shader_property.h */,
 				04CE391E2751B2C500204B8E /* shader_property.cpp */,
+				04CE393B2751D2C900204B8E /* macro_name.h */,
+				04CE393D2751D2ED00204B8E /* shader_macro_collection.h */,
+				04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */,
 			);
 			path = shader;
 			sourceTree = "<group>";
@@ -1220,6 +1228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CE38DC274E8C2D00204B8E /* plane.h in Headers */,
+				04CE393F2751D2ED00204B8E /* shader_macro_collection.h in Headers */,
 				04160FEE27509277006CD384 /* engine_object.h in Headers */,
 				04CE38FB2751992C00204B8E /* timer.h in Headers */,
 				04CE39262751B3A400204B8E /* render_state.h in Headers */,
@@ -1431,6 +1440,7 @@
 				04CE392D2751B42800204B8E /* blend_state.mm in Sources */,
 				04CE37F6274D167F00204B8E /* track_optimizer.cc in Sources */,
 				04160FE9275091FA006CD384 /* engine.mm in Sources */,
+				04CE393E2751D2ED00204B8E /* shader_macro_collection.mm in Sources */,
 				04CE3806274D167F00204B8E /* fbx.cc in Sources */,
 				04CE3808274D167F00204B8E /* fbx_skeleton.cc in Sources */,
 				04CE380A274D167F00204B8E /* fbx_animation.cc in Sources */,
