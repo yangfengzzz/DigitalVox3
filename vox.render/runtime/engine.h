@@ -11,6 +11,7 @@
 #include <memory>
 #include "components_manager.h"
 #include "scene_manager.h"
+#include "rhi-metal/metal_renderer.h"
 #include "canvas.h"
 #include "timer.h"
 
@@ -18,8 +19,9 @@ namespace vox {
 class Engine {
 public:
     ComponentsManager _componentsManager;
-    
-    Engine(Canvas canvas):_canvas(canvas) {
+    MetalRenderer _hardwareRenderer;
+
+    Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
     }
     
     /**

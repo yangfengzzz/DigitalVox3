@@ -12,11 +12,10 @@
 #include "../graphics/submesh.h"
 
 namespace vox {
-void MetalRenderer::reinit(Canvas canvas) {
+MetalRenderer::MetalRenderer(Canvas canvas):canvas(canvas) {
     device = MTLCreateSystemDefaultDevice();
     commandQueue = [device newCommandQueue];
     
-    this->canvas = canvas;
     // self.resouceCache = ResourceCache(self);
     library = [device newDefaultLibrary];
     

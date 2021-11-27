@@ -40,7 +40,7 @@ public:
     MTLPixelFormat colorPixelFormat;
     id <MTLSamplerState> samplerState;
     
-    void reinit(Canvas canvas);
+    explicit MetalRenderer(Canvas canvas);
     
     id <MTLSamplerState> buildSamplerState();
     
