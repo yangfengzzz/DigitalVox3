@@ -17,6 +17,8 @@
 #include <optional>
 #include "transform.h"
 #include "updateFlag.h"
+#include "shader/shader.h"
+#include "shader/shader_data.h"
 
 namespace vox {
 using namespace math;
@@ -26,6 +28,9 @@ using namespace math;
  */
 class Camera : public Component {
 public:
+    /// Shader data.
+    ShaderData shaderData = ShaderData(ShaderDataGroup::Camera);
+    
     /** Rendering priority - A Camera with higher priority will be rendered on top of a camera with lower priority. */
     int priority = 0;
     
@@ -224,6 +229,14 @@ private:
      */
     Matrix inverseProjectionMatrix();
     
+    static ShaderProperty _viewMatrixProperty;
+    static ShaderProperty _projectionMatrixProperty;
+    static ShaderProperty _vpMatrixProperty;
+    static ShaderProperty _inverseViewMatrixProperty;
+    static ShaderProperty _inverseProjectionMatrixProperty;
+    static ShaderProperty _cameraPositionProperty;
+    
+    ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
     BoundingFrustum _frustum = BoundingFrustum();
     
     bool _isOrthographic = false;
@@ -236,7 +249,8 @@ private:
     bool _isInvProjMatDirty = true;
     bool _isFrustumProjectDirty = true;
     std::optional<float> _customAspectRatio = std::nullopt;
-    
+    std::optional<MTLRenderPassDescriptor*> _renderTarget = std::nullopt;
+
     std::unique_ptr<UpdateFlag> _frustumViewChangeFlag;
     Transform* _transform;
     std::unique_ptr<UpdateFlag> _isViewMatrixDirty;

@@ -207,6 +207,8 @@
 		04CE39472751D82F00204B8E /* shader_uniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39452751D82F00204B8E /* shader_uniform.h */; };
 		04CE394A2751E3E600204B8E /* shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39482751E3E600204B8E /* shader.mm */; };
 		04CE394B2751E3E600204B8E /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39492751E3E600204B8E /* shader.h */; };
+		04CE39532752589700204B8E /* material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39512752589700204B8E /* material.mm */; };
+		04CE39542752589700204B8E /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39522752589700204B8E /* material.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -566,6 +568,11 @@
 		04CE39452751D82F00204B8E /* shader_uniform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_uniform.h; sourceTree = "<group>"; };
 		04CE39482751E3E600204B8E /* shader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader.mm; sourceTree = "<group>"; };
 		04CE39492751E3E600204B8E /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
+		04CE394E2752583100204B8E /* blend_mode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blend_mode.h; sourceTree = "<group>"; };
+		04CE394F2752584D00204B8E /* render_face.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_face.h; sourceTree = "<group>"; };
+		04CE39502752587300204B8E /* render_queue_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = render_queue_type.h; sourceTree = "<group>"; };
+		04CE39512752589700204B8E /* material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = material.mm; sourceTree = "<group>"; };
+		04CE39522752589700204B8E /* material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,6 +850,7 @@
 				04CE39052751AAC200204B8E /* graphics */,
 				04CE390E2751AE4A00204B8E /* shader */,
 				04CE39132751AF0800204B8E /* mesh */,
+				04CE394C2752581000204B8E /* material */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
 				04160FEC27509277006CD384 /* engine_object.h */,
@@ -1238,6 +1246,26 @@
 			path = state;
 			sourceTree = "<group>";
 		};
+		04CE394C2752581000204B8E /* material */ = {
+			isa = PBXGroup;
+			children = (
+				04CE394D2752582000204B8E /* enums */,
+				04CE39522752589700204B8E /* material.h */,
+				04CE39512752589700204B8E /* material.mm */,
+			);
+			path = material;
+			sourceTree = "<group>";
+		};
+		04CE394D2752582000204B8E /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				04CE394E2752583100204B8E /* blend_mode.h */,
+				04CE394F2752584D00204B8E /* render_face.h */,
+				04CE39502752587300204B8E /* render_queue_type.h */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1272,6 +1300,7 @@
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
+				04CE39542752589700204B8E /* material.h in Headers */,
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
@@ -1470,6 +1499,7 @@
 				0416100A2750A720006CD384 /* scene.mm in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
+				04CE39532752589700204B8E /* material.mm in Sources */,
 				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
 				04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */,
 				04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */,

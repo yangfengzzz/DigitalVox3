@@ -10,6 +10,13 @@
 #include "engine.h"
 
 namespace vox {
+ShaderProperty Camera::_viewMatrixProperty = Shader::getPropertyByName("u_viewMat");
+ShaderProperty Camera::_projectionMatrixProperty = Shader::getPropertyByName("u_projMat");
+ShaderProperty Camera::_vpMatrixProperty = Shader::getPropertyByName("u_VPMat");
+ShaderProperty Camera::_inverseViewMatrixProperty = Shader::getPropertyByName("u_viewInvMat");
+ShaderProperty Camera::_inverseProjectionMatrixProperty = Shader::getPropertyByName("u_projInvMat");
+ShaderProperty Camera::_cameraPositionProperty = Shader::getPropertyByName("u_cameraPos");
+
 Camera::Camera(Entity* entity):Component(entity) {
     auto transform = entity->transform;
     _transform = transform;

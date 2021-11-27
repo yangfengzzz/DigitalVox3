@@ -43,6 +43,9 @@ public:
     void disableMacro(MacroName macroName);
     
 private:
+    friend class Camera;
+    friend class Material;
+
     ShaderData(ShaderDataGroup group);
     
     ShaderDataGroup _group;
