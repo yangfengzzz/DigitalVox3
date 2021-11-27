@@ -13,23 +13,37 @@ ShaderData::ShaderData(ShaderDataGroup group) {
     _group = group;
 }
 
-std::any ShaderData::_getData(const std::string& property_name) {
+std::any ShaderData::getData(const std::string& property_name) {
     auto property = Shader::getPropertyByName(property_name);
-    return _getData(property);
+    return getData(property);
 }
 
-std::any ShaderData::_getData(const ShaderProperty& property) {
+std::any ShaderData::getData(const ShaderProperty& property) {
     return _properties[property._uniqueId];
 }
 
-void ShaderData::_setData(const std::string& property_name, std::any value) {
+void ShaderData::setData(const std::string& property_name, std::any value) {
     auto property = Shader::getPropertyByName(property_name);
-    _setData(property, value);
+    setData(property, value);
 }
 
-void ShaderData::_setData(ShaderProperty property, std::any value) {
+void ShaderData::setData(ShaderProperty property, std::any value) {
     _properties.insert(std::make_pair(property._uniqueId, value));
 }
 
+void ShaderData::enableMacro(MacroName macroName) {
+    _macroCollection._value.insert(std::make_pair(macroName, std::make_pair(1, MTLDataTypeBool)));
+}
+
+void ShaderData::enableMacro(MacroName macroName, std::pair<int, MTLDataType> value) {
+    _macroCollection._value.insert(std::make_pair(macroName, value));
+}
+
+void ShaderData::disableMacro(MacroName macroName) {
+    auto iter = _macroCollection._value.find(macroName);
+    if (iter != _macroCollection._value.end()) {
+        _macroCollection._value.erase(iter);
+    }
+}
 
 }

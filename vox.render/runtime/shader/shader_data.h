@@ -20,18 +20,30 @@ class MetalRenderer;
 ///  Shader data collection,Correspondence includes shader properties data and macros data.
 class ShaderData {
 public:
+    std::any getData(const std::string& property_name);
+
+    std::any getData(const ShaderProperty& property);
+
+    void setData(const std::string& property, std::any value);
     
+    void setData(ShaderProperty property, std::any value);
+    
+    /// Enable macro.
+    /// - Parameter macroName: Macro name
+    void enableMacro(MacroName macroName);
+
+    /// Enable macro.
+    /// - Parameters:
+    ///   - name: Macro name
+    ///   - value: Macro value
+    void enableMacro(MacroName macroName, std::pair<int, MTLDataType> value);
+
+    /// Disable macro
+    /// - Parameter macroName: Macro name
+    void disableMacro(MacroName macroName);
     
 private:
     ShaderData(ShaderDataGroup group);
-
-    std::any _getData(const std::string& property_name);
-
-    std::any _getData(const ShaderProperty& property);
-
-    void _setData(const std::string& property, std::any value);
-    
-    void _setData(ShaderProperty property, std::any value);
     
     ShaderDataGroup _group;
     std::unordered_map<int, std::any> _properties;
