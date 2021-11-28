@@ -21,6 +21,12 @@ using namespace math;
 
 class Mesh : public EngineObject {
 public:
+    /// Name.
+    std::string name;
+    
+    /// The bounding volume of the mesh.
+    BoundingBox bounds = BoundingBox();
+    
     /// Create mesh.
     /// - Parameters:
     ///   - engine: Engine
@@ -52,12 +58,8 @@ public:
     
 protected:
     friend class PrimitiveMesh;
+    friend class MeshRenderer;
     
-    /// Name.
-    std::string name;
-    /// The bounding volume of the mesh.
-    BoundingBox bounds = BoundingBox();
-
     std::vector<MeshBuffer> _vertexBuffer;
     size_t _vertexCount = 0;
     MDLVertexDescriptor* _vertexDescriptor = nullptr;

@@ -8,6 +8,7 @@
 #ifndef render_pass_hpp
 #define render_pass_hpp
 
+#include "../vox_type.h"
 #include "../layer.h"
 #include "../enums/camera_clear_flags.h"
 #include "maths/color.h"
@@ -17,11 +18,6 @@
 
 namespace vox {
 using namespace math;
-class Material;
-using MaterialPtr = std::shared_ptr<Material>;
-class Camera;
-class RenderQueue;
-
 class RenderPass {
 public:
     std::string name;

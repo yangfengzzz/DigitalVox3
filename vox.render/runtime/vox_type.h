@@ -12,6 +12,11 @@
 
 namespace vox {
 class Engine;
+class Scene;
+using ScenePtr = std::shared_ptr<Scene>;
+class Entity;
+using EntityPtr = std::shared_ptr<Entity>;
+class SubMesh;
 class Mesh;
 using MeshPtr = std::shared_ptr<Mesh>;
 class ModelMesh;
@@ -21,6 +26,8 @@ using MaterialPtr = std::shared_ptr<Material>;
 class Camera;
 class Renderer;
 class Script;
+
+class RenderQueue;
 
 }
 

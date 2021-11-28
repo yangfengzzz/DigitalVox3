@@ -11,10 +11,7 @@
 #include "../renderer.h"
 
 namespace vox {
-class Mesh;
-using MeshPtr = std::shared_ptr<Mesh>;
-
-class MeshRenderer: Renderer {
+class MeshRenderer: public Renderer {
 public:
     void setMesh(const MeshPtr& mesh);
     MeshPtr mesh();
@@ -24,7 +21,7 @@ private:
     
     void _onDestroy() override;
 
-    void _updateBounds(const BoundingBox& worldBounds) override;
+    void _updateBounds(BoundingBox& worldBounds) override;
     
 private:
     MeshPtr _mesh;

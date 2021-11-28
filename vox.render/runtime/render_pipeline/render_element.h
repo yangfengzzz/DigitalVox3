@@ -8,16 +8,9 @@
 #ifndef render_element_hpp
 #define render_element_hpp
 
-#include <memory>
+#include "../vox_type.h"
 
 namespace vox {
-class Renderer;
-class Mesh;
-using MeshPtr = std::shared_ptr<Mesh>;
-class SubMesh;
-class Material;
-using MaterialPtr = std::shared_ptr<Material>;
-
 /// Render element.
 struct RenderElement {
     /// Render component.
@@ -29,7 +22,7 @@ struct RenderElement {
     /// Material.
     MaterialPtr material;
 
-    void setValue(Renderer* component, MeshPtr mesh, SubMesh* subMesh, MaterialPtr material);
+    RenderElement(Renderer* component, MeshPtr mesh, SubMesh* subMesh, MaterialPtr material);
 };
 
 }

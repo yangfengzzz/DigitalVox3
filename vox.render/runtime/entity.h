@@ -17,11 +17,6 @@
 #include "script.h"
 
 namespace vox {
-class Scene;
-using ScenePtr = std::shared_ptr<Scene>;
-class Entity;
-using EntityPtr = std::shared_ptr<Entity>;
-
 /**
  * Entity, be used as components container.
  */

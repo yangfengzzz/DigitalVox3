@@ -11,12 +11,6 @@
 #include "engine_object.h"
 
 namespace vox {
-class Entity;
-
-class Scene;
-
-using ScenePtr = std::shared_ptr<Scene>;
-
 /**
  * The base class of the components.
  */

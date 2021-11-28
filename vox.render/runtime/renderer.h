@@ -19,11 +19,6 @@
 
 namespace vox {
 using namespace math;
-class Material;
-using MaterialPtr = std::shared_ptr<Material>;
-class Camera;
-class Entity;
-using EntityPtr = std::shared_ptr<Entity>;
 
 /// Renderable component.
 class Renderer: public Component {
@@ -50,7 +45,7 @@ public:
     
     virtual void _render(Camera* camera) = 0;
     
-    virtual void _updateBounds(const BoundingBox& worldBounds) = 0;
+    virtual void _updateBounds(BoundingBox& worldBounds) = 0;
     
     virtual void update(float deltaTime) = 0;
     
@@ -93,7 +88,7 @@ public:
     void setMaterials(const std::vector<MaterialPtr>& materials);
     
     
-private:
+protected:
     friend class RenderQueue;
     friend class ComponentsManager;
     
