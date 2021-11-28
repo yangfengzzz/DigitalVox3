@@ -51,6 +51,8 @@ public:
     void _setVertexBuffer(int index, MeshBuffer buffer);
     
 protected:
+    friend class PrimitiveMesh;
+    
     /// Name.
     std::string name;
     /// The bounding volume of the mesh.
