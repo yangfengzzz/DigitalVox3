@@ -215,6 +215,8 @@ public:
     void _onDestroy() override;
     
 private:
+    friend class ComponentsManager;
+    
     void _projMatChange();
     
     Float3 _innerViewportToWorldPoint(const Float3& point, const Matrix& invViewProjMat);

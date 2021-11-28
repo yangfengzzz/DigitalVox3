@@ -108,7 +108,44 @@ void ComponentsManager::callRendererOnUpdate(float deltaTime) {
 }
 
 void ComponentsManager::callRender(const RenderContext& context) {
-    
+    const auto& camera = context._camera;
+    const auto& elements = _renderers;
+    for (size_t i = _renderers.size() - 1; i >= 0; --i) {
+        const auto& element = elements[i];
+        
+        // filter by camera culling mask.
+        if (!(camera->cullingMask & element->_entity->layer)) {
+            continue;
+        }
+        
+        // filter by camera frustum.
+        if (camera->enableFrustumCulling) {
+            element->isCulled = !camera->_frustum.intersectsBox(element->bounds());
+            if (element->isCulled) {
+                continue;
+            }
+        }
+        
+        const auto& transform = camera->entity()->transform;
+        const auto position = transform->worldPosition();
+        auto center = element->bounds().getCenter();
+        if (camera->isOrthographic()) {
+            const auto forward = transform->worldForward();
+            center = center - position;
+            element->_distanceForSort = Dot(center, forward);
+        } else {
+            element->_distanceForSort = LengthSqr(center - position);
+        }
+        
+        element->_updateShaderData(context);
+        
+        element->_render(camera);
+        
+        // union camera global macro and renderer macro.
+        ShaderMacroCollection::unionCollection(camera->_globalShaderMacro,
+                                               element->shaderData._macroCollection,
+                                               element->_globalShaderMacro);
+    }
 }
 
 void ComponentsManager::callComponentDestroy() {
