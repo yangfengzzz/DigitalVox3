@@ -245,6 +245,8 @@
 		04CE399F2753A83C00204B8E /* particle.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39932753A83C00204B8E /* particle.metal */; };
 		04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
 		04CE39A12753A83C00204B8E /* ShaderSimple.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39952753A83C00204B8E /* ShaderSimple.metal */; };
+		04CE39A42753AC6D00204B8E /* compute_pipeline_state.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39A22753AC6D00204B8E /* compute_pipeline_state.mm */; };
+		04CE39A52753AC6D00204B8E /* compute_pipeline_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39A32753AC6D00204B8E /* compute_pipeline_state.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -647,6 +649,8 @@
 		04CE39932753A83C00204B8E /* particle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = particle.metal; sourceTree = "<group>"; };
 		04CE39942753A83C00204B8E /* shadow-map.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "shadow-map.metal"; sourceTree = "<group>"; };
 		04CE39952753A83C00204B8E /* ShaderSimple.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ShaderSimple.metal; sourceTree = "<group>"; };
+		04CE39A22753AC6D00204B8E /* compute_pipeline_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = compute_pipeline_state.mm; sourceTree = "<group>"; };
+		04CE39A32753AC6D00204B8E /* compute_pipeline_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = compute_pipeline_state.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1253,6 +1257,8 @@
 				04CE38FD27519FB500204B8E /* metal_renderer.mm */,
 				04CE39022751A84000204B8E /* render_pipeline_state.h */,
 				04CE39012751A84000204B8E /* render_pipeline_state.mm */,
+				04CE39A32753AC6D00204B8E /* compute_pipeline_state.h */,
+				04CE39A22753AC6D00204B8E /* compute_pipeline_state.mm */,
 				04CE39852753710E00204B8E /* resource_cache_state.h */,
 				04CE39842753710E00204B8E /* resource_cache_state.mm */,
 			);
@@ -1413,6 +1419,7 @@
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
+				04CE39A52753AC6D00204B8E /* compute_pipeline_state.h in Headers */,
 				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
 				04CE39872753710E00204B8E /* resource_cache_state.h in Headers */,
 				04CE39212751B2C500204B8E /* shader_property.h in Headers */,
@@ -1602,6 +1609,7 @@
 				04CE37D2274D167F00204B8E /* sampling_job.cc in Sources */,
 				04CE395C27525E2500204B8E /* render_context.mm in Sources */,
 				04CE37D4274D167F00204B8E /* blending_job.cc in Sources */,
+				04CE39A42753AC6D00204B8E /* compute_pipeline_state.mm in Sources */,
 				04CE37D6274D167F00204B8E /* ik_aim_job.cc in Sources */,
 				04CE39A12753A83C00204B8E /* ShaderSimple.metal in Sources */,
 				04CE39972753A83C00204B8E /* function-common.metal in Sources */,

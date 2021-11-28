@@ -11,6 +11,7 @@
 #include "../vox_type.h"
 #include "../shader/shader_macro_collection.h"
 #include "render_pipeline_state.h"
+#include "compute_pipeline_state.h"
 
 #include <unordered_map>
 #include <string>
@@ -24,6 +25,8 @@ struct ResourceCacheState {
 
     std::unordered_map<size_t, std::unique_ptr<RenderPipelineState>> graphics_pipelines;
     
+    std::unordered_map<size_t, std::unique_ptr<ComputePipelineState>> compute_pipelines;
+
     std::unordered_map<size_t, std::unique_ptr<RenderPass>> render_passes;
 };
 
@@ -48,6 +51,8 @@ public:
                                          ShaderMacroCollection& macroInfo);
     
     RenderPipelineState* request_graphics_pipeline(MTLRenderPipelineDescriptor* pipelineDescriptor);
+    
+    ComputePipelineState* request_compute_pipeline(MTLComputePipelineDescriptor* pipelineDescriptor);
     
     void clear_pipelines();
 

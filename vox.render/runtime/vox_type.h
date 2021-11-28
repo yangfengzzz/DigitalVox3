@@ -29,6 +29,7 @@ class Script;
 
 class ShaderProgram;
 class RenderPipelineState;
+class ComputePipelineState;
 class RenderPass;
 class RenderQueue;
 class MetalRenderer;

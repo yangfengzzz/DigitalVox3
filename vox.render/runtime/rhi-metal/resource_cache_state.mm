@@ -45,6 +45,18 @@ RenderPipelineState* ResourceCache::request_graphics_pipeline(MTLRenderPipelineD
     }
 }
 
+ComputePipelineState* ResourceCache::request_compute_pipeline(MTLComputePipelineDescriptor* pipelineDescriptor) {
+    const auto hash = pipelineDescriptor.hash;
+    auto iter = state.compute_pipelines.find(hash);
+    if (iter == state.compute_pipelines.end()) {
+        auto pipelineState = std::make_unique<ComputePipelineState>(render->device, pipelineDescriptor);
+        state.compute_pipelines[hash] = std::move(pipelineState);
+        return state.compute_pipelines[hash].get();
+    } else {
+        return iter->second.get();
+    }
+}
+
 void ResourceCache::clear_pipelines() {
     state.graphics_pipelines.clear();
 }
