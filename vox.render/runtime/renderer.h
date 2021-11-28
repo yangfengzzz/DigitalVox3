@@ -95,6 +95,7 @@ public:
     
 private:
     friend class RenderQueue;
+    friend class ComponentsManager;
     
     static ShaderProperty _localMatrixProperty;
     static ShaderProperty _worldMatrixProperty;
@@ -108,8 +109,8 @@ private:
     MaterialPtr _createInstanceMaterial(const MaterialPtr& material, size_t index);
     
     float _distanceForSort = 0;
-    int _onUpdateIndex = -1;
-    int _rendererIndex = -1;
+    ssize_t _onUpdateIndex = -1;
+    ssize_t _rendererIndex = -1;
     ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
     int _renderSortId = 0;
     

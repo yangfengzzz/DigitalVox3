@@ -7,6 +7,9 @@
 
 #include "components_manager.h"
 #include "script.h"
+#include "renderer.h"
+#include "entity.h"
+#include "camera.h"
 
 namespace vox {
 void ComponentsManager::addOnStartScript(Script* script) {
@@ -17,15 +20,6 @@ void ComponentsManager::addOnStartScript(Script* script) {
 void ComponentsManager::removeOnStartScript(Script* script) {
     _onStartScripts.erase(_onStartScripts.begin() + script->_onStartIndex);
     script->_onStartIndex = -1;
-}
-
-std::vector<Component *> ComponentsManager::getActiveChangedTempList() {
-    return _componentsContainerPool.size() ? *(_componentsContainerPool.end() - 1) : std::vector<Component *>{};
-}
-
-void ComponentsManager::putActiveChangedTempList(std::vector<Component *> &componentContainer) {
-    componentContainer.clear();
-    _componentsContainerPool.push_back(componentContainer);
 }
 
 void ComponentsManager::addOnUpdateScript(Script* script) {
@@ -46,6 +40,30 @@ void ComponentsManager::addOnLateUpdateScript(Script* script) {
 void ComponentsManager::removeOnLateUpdateScript(Script* script) {
     _onLateUpdateScripts.erase(_onLateUpdateScripts.begin() + script->_onLateUpdateIndex);
     script->_onLateUpdateIndex = -1;
+}
+
+void ComponentsManager::addDestroyComponent(Script* component) {
+    _destroyComponents.push_back(component);
+}
+
+void ComponentsManager::addRenderer(Renderer* renderer) {
+    renderer->_rendererIndex = _renderers.size();
+    _renderers.push_back(renderer);
+}
+
+void ComponentsManager::removeRenderer(Renderer* renderer) {
+    _renderers.erase(_renderers.begin() + renderer->_rendererIndex);
+    renderer->_rendererIndex = -1;
+}
+
+void ComponentsManager::addOnUpdateRenderers(Renderer* renderer) {
+    renderer->_onUpdateIndex = _onUpdateRenderers.size();
+    _onUpdateRenderers.push_back(renderer);
+}
+
+void ComponentsManager::removeOnUpdateRenderers(Renderer* renderer) {
+    _onUpdateRenderers.erase(_onUpdateRenderers.begin() + renderer->_onUpdateIndex);
+    renderer->_onUpdateIndex = -1;
 }
 
 void ComponentsManager::callScriptOnStart() {
@@ -80,6 +98,57 @@ void ComponentsManager::callScriptOnLateUpdate(float deltaTime) {
             element->onLateUpdate(deltaTime);
         }
     }
+}
+
+void ComponentsManager::callRendererOnUpdate(float deltaTime) {
+    const auto& elements = _onUpdateRenderers;
+    for (size_t i = _onUpdateRenderers.size() - 1; i >= 0; --i) {
+        elements[i]->update(deltaTime);
+    }
+}
+
+void ComponentsManager::callRender(const RenderContext& context) {
+    
+}
+
+void ComponentsManager::callComponentDestroy() {
+    if (_destroyComponents.size() > 0) {
+        for (size_t i = _destroyComponents.size() - 1; i >= 0; --i) {
+            _destroyComponents[i]->onDestroy();
+        }
+        _destroyComponents.clear();
+    }
+}
+
+void ComponentsManager::callCameraOnBeginRender(Camera* camera) {
+    const auto& camComps = camera->entity()->_components;
+    for (size_t i = camComps.size() - 1; i >= 0; --i) {
+        const auto& camComp = camComps[i].get();
+        auto pointer = dynamic_cast<Script*>(camComp);
+        if (pointer != nullptr) {
+            pointer->onBeginRender(camera);
+        }
+    }
+}
+
+void ComponentsManager::callCameraOnEndRender(Camera* camera) {
+    const auto& camComps = camera->entity()->_components;
+    for (size_t i = camComps.size() - 1; i >= 0; --i) {
+        const auto& camComp = camComps[i].get();
+        auto pointer = dynamic_cast<Script*>(camComp);
+        if (pointer != nullptr) {
+            pointer->onEndRender(camera);
+        }
+    }
+}
+
+std::vector<Component *> ComponentsManager::getActiveChangedTempList() {
+    return _componentsContainerPool.size() ? *(_componentsContainerPool.end() - 1) : std::vector<Component *>{};
+}
+
+void ComponentsManager::putActiveChangedTempList(std::vector<Component *> &componentContainer) {
+    componentContainer.clear();
+    _componentsContainerPool.push_back(componentContainer);
 }
 
 }

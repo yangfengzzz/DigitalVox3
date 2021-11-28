@@ -190,9 +190,11 @@ public:
     void destroy();
     
 private:
-    friend class Transform;
-    friend class Component;
     friend class Scene;
+    friend class Component;
+    friend class ComponentsManager;
+    friend class Transform;
+    friend class Script;
     
     void _removeComponent(Component* component);
     

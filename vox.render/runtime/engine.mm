@@ -24,7 +24,7 @@ Engine::Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
     [_whiteTexture2D replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
                        mipmapLevel:0 withBytes:&whitePixel
                        bytesPerRow: 4 * sizeof(uint8_t)];
-
+    
     MTLTextureDescriptor* whiteTextureCubeDescriptor =[[MTLTextureDescriptor alloc]init];
     whiteTextureCubeDescriptor.width = 1;
     whiteTextureCubeDescriptor.height = 1;
@@ -61,13 +61,17 @@ Engine::Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
                            withBytes:&whitePixel
                          bytesPerRow:4 * sizeof(uint8_t)
                        bytesPerImage:4 * sizeof(uint8_t)];
-
+    
     _backgroundTextureMaterial = std::make_shared<Material>(this, Shader::find("background-texture"));
     _backgroundTextureMaterial->renderState.depthState.compareFunction = MTLCompareFunctionLessEqual;
 }
 
 void Engine::run() {
     resume();
+}
+
+void Engine::pause() {
+    _isPaused = true;
 }
 
 void Engine::resume() {
@@ -81,29 +85,40 @@ void Engine::resume() {
 }
 
 void Engine::update() {
-    const auto deltaTime = _timer.tick();
+    const float deltaTime = _timer.tick();
     
     const auto& scene = _sceneManager._activeScene;
     if (scene) {
+        std::sort(scene->_activeCameras.begin(), scene->_activeCameras.end(),
+                  [](const Camera* camera1, const Camera* camera2){
+            return camera1->priority - camera2->priority;
+        });
+        
         _componentsManager.callScriptOnStart();
         
         _componentsManager.callScriptOnUpdate(deltaTime);
         // _componentsManager.callAnimationUpdate(deltaTime);
         _componentsManager.callScriptOnLateUpdate(deltaTime);
         
-        _render(scene);
+        _render(scene, deltaTime);
     }
+    _componentsManager.callComponentDestroy();
 }
 
-void Engine::_render(ScenePtr scene) {
+void Engine::_render(ScenePtr scene, float deltaTime) {
     const auto& cameras = scene->_activeCameras;
+    _componentsManager.callRendererOnUpdate(deltaTime);
     
+    scene->_updateShaderData();
+
     if (cameras.size() > 0) {
         for (size_t i = 0, l = cameras.size(); i < l; i++) {
             const auto& camera = cameras[i];
             const auto& cameraEntity = camera->entity();
             if (camera->enabled() && cameraEntity->isActiveInHierarchy()) {
+                _componentsManager.callCameraOnBeginRender(camera);
                 camera->render();
+                _componentsManager.callCameraOnEndRender(camera);
             }
         }
     } else {

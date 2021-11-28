@@ -11,6 +11,7 @@
 #include <string>
 #include "engine_object.h"
 #include "entity.h"
+#include "shader/shader_data.h"
 
 namespace vox {
 class Camera;
@@ -22,6 +23,9 @@ class Scene : public EngineObject {
 public:
     /** Scene name. */
     std::string name;
+    
+    /** Scene-related shader data. */
+    ShaderData shaderData = ShaderData(ShaderDataGroup::Scene);
     
     /**
      * Create scene.
@@ -38,7 +42,7 @@ public:
     /**
      * Root entity collection.
      */
-    const std::vector<EntityPtr> rootEntities();
+    const std::vector<EntityPtr>& rootEntities();
     
     /**
      * Whether it's destroyed.
@@ -94,10 +98,14 @@ private:
     
     void _processActive(bool active);
     
+    void _updateShaderData();
+    
     void _removeEntity(EntityPtr entity);
 
     std::vector<Camera*> _activeCameras;
     bool _isActiveInEngine = false;
+    ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
+    
     bool _destroyed = false;
     std::vector<EntityPtr> _rootEntities;
 };

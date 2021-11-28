@@ -18,7 +18,7 @@ size_t Scene::rootEntitiesCount() {
     return _rootEntities.size();
 }
 
-const std::vector<EntityPtr> Scene::rootEntities() {
+const std::vector<EntityPtr>& Scene::rootEntities() {
     return _rootEntities;
 }
 
@@ -137,6 +137,13 @@ void Scene::_processActive(bool active) {
             active ? entity->_processActive() : entity->_processInActive();
         }
     }
+}
+
+void Scene::_updateShaderData() {
+    // union scene and camera macro.
+    ShaderMacroCollection::unionCollection(engine()->_macroCollection,
+                                           shaderData._macroCollection,
+                                           _globalShaderMacro);
 }
 
 void Scene::_removeEntity(EntityPtr entity) {

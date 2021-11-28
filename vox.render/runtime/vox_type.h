@@ -19,6 +19,8 @@ using ModelMeshPtr = std::shared_ptr<ModelMesh>;
 class Material;
 using MaterialPtr = std::shared_ptr<Material>;
 class Camera;
+class Renderer;
+class Script;
 
 }
 

@@ -42,9 +42,71 @@ class Script : public Component {
      */
     virtual void onLateUpdate(float deltaTime) {}
     
+    /**
+     * Called before camera rendering, called per camera.
+     * @param camera - Current camera.
+     */
+    virtual void onBeginRender(Camera* camera) {}
+    
+    /**
+     * Called after camera rendering, called per camera.
+     * @param camera - Current camera.
+     */
+    virtual void onEndRender(Camera* camera) {}
+    
+    /**
+     * Called when the pointer is down while over the ColliderShape.
+     */
+    virtual void onPointerDown() {}
+    
+    /**
+     * Called when the pointer is up while over the ColliderShape.
+     */
+    virtual void onPointerUp() {}
+    
+    /**
+     * Called when the pointer is down and up with the same collider.
+     */
+    virtual void onPointerClick() {}
+    
+    /**
+     * Called when the pointer is enters the ColliderShape.
+     */
+    virtual void onPointerEnter() {}
+    
+    /**
+     * Called when the pointer is no longer over the ColliderShape.
+     */
+    virtual void onPointerExit() {}
+    
+    /**
+     * Called when the pointer is down while over the ColliderShape and is still holding down.
+     * @remarks onPointerDrag is called every frame while the pointer is down.
+     */
+    virtual void onPointerDrag() {}
+    
+    /**
+     * Called when be disabled.
+     */
+    virtual void onDisable() {}
+    
+    /**
+     * Called at the end of the destroyed frame.
+     */
+    virtual void onDestroy() {}
+    
+    
 private:
     friend class Entity;
     friend class ComponentsManager;
+    
+    void _onAwake() override;
+    
+    void _onEnable() override;
+    
+    void _onDisable() override;
+    
+    void _onDestroy() override;
     
     bool _started = false;
     ssize_t _onStartIndex = -1;

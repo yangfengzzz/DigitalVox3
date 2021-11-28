@@ -82,6 +82,11 @@ public:
     void run();
     
     /**
+     * Pause the engine.
+     */
+    void pause();
+    
+    /**
      * Resume the engine.
      */
     void resume();
@@ -92,11 +97,13 @@ public:
     void update();
     
 protected:
-    void _render(ScenePtr scene);
+    void _render(ScenePtr scene, float deltaTime);
     
     Canvas _canvas;
     
 private:
+    friend class Scene;
+    
     id<MTLTexture> _whiteTexture2D;
     id<MTLTexture> _whiteTextureCube;
     MaterialPtr _backgroundTextureMaterial;

@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "component.h"
+#include "render_pipeline/render_context.h"
 
 namespace vox {
 class Script;
@@ -31,12 +32,33 @@ public:
 
     void removeOnLateUpdateScript(Script* script);
     
+    void addDestroyComponent(Script* component);
+    
+public:
+    void addRenderer(Renderer* renderer);
+    
+    void removeRenderer(Renderer* renderer);
+    
+    void addOnUpdateRenderers(Renderer* renderer);
+    
+    void removeOnUpdateRenderers(Renderer* renderer);
+    
 public:
     void callScriptOnStart();
     
     void callScriptOnUpdate(float deltaTime);
     
     void callScriptOnLateUpdate(float deltaTime);
+    
+    void callRendererOnUpdate(float deltaTime);
+    
+    void callRender(const RenderContext& context);
+    
+    void callComponentDestroy();
+
+    void callCameraOnBeginRender(Camera* camera);
+    
+    void callCameraOnEndRender(Camera* camera);
     
 public:
     std::vector<Component *> getActiveChangedTempList();
@@ -49,6 +71,10 @@ private:
     std::vector<Script *> _onUpdateScripts;
     std::vector<Script *> _onLateUpdateScripts;
     std::vector<Script *> _destroyComponents;
+    
+    // Render
+    std::vector<Renderer*> _renderers;
+    std::vector<Renderer*> _onUpdateRenderers;
     
     // Delay dispose active/inActive Pool
     std::vector<std::vector<Component *>> _componentsContainerPool;
