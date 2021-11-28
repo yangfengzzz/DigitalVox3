@@ -52,7 +52,7 @@ public:
     void activeRenderTarget(MTLRenderPassDescriptor *renderTarget);
     
     void clearRenderTarget(int clearFlags = CameraClearFlags::Depth | CameraClearFlags::DepthColor,
-                           Color clearColor = Color(0.45f, 0.55f, 0.60f, 1.00f));
+                           math::Color clearColor = math::Color(0.45f, 0.55f, 0.60f, 1.00f));
     
     void beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camera *camera, int mipLevel = 0);
     

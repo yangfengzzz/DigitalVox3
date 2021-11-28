@@ -146,7 +146,8 @@ private:
                                   std::vector<uint32_t>& indices,
                                   size_t indicesOffset);
     
-    static void _initialize(const ModelMeshPtr& mesh,
+    static void _initialize(const EnginePtr& engine,
+                            const ModelMeshPtr& mesh,
                             const std::vector<Float3>& positions,
                             const std::vector<Float3>& normals,
                             std::vector<Float2>& uvs,

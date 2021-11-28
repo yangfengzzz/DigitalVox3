@@ -40,7 +40,7 @@ const MDLVertexAttribute* POSITION_VERTEX_DESCRIPTOR =
                                  format:MDLVertexFormatFloat3
                                  offset:0 bufferIndex:0];
 
-class ModelMesh: Mesh {
+class ModelMesh: public Mesh {
 public:
     /// Whether to access data of the mesh.
     bool accessible();

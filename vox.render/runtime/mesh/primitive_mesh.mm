@@ -6,6 +6,7 @@
 //
 
 #include "primitive_mesh.h"
+#include "../engine.h"
 
 namespace vox {
 ModelMeshPtr PrimitiveMesh::createSphere(const EnginePtr& engine,
@@ -85,13 +86,24 @@ void PrimitiveMesh::_createCapsuleCap(float radius,
     
 }
 
-void PrimitiveMesh::_initialize(const ModelMeshPtr& mesh,
+void PrimitiveMesh::_initialize(const EnginePtr& engine,
+                                const ModelMeshPtr& mesh,
                                 const std::vector<Float3>& positions,
                                 const std::vector<Float3>& normals,
                                 std::vector<Float2>& uvs,
                                 const std::vector<uint32_t>& indices,
                                 bool noLongerAccessible) {
+    mesh->setPositions(positions);
+    mesh->setNormals(normals);
+    mesh->setUVs(uvs);
     
+    mesh->uploadData(noLongerAccessible);
+    const auto indexBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:indices.data()
+                                                                           length:indices.size() * sizeof(uint32_t)
+                                                                          options:MTLResourceStorageModeShared];
+    
+    mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size() * sizeof(uint32_t), MDLMeshBufferTypeIndex),
+                     MTLIndexTypeUInt32, indices.size(), MTLPrimitiveTypeTriangle);
 }
 
 }
