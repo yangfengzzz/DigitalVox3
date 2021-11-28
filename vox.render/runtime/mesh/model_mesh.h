@@ -35,7 +35,7 @@ enum ValueChanged {
     All = 0xffff
 };
 
-const MDLVertexAttribute* POSITION_VERTEX_DESCRIPTOR =
+MDLVertexAttribute* POSITION_VERTEX_DESCRIPTOR =
 [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
                                  format:MDLVertexFormatFloat3
                                  offset:0 bufferIndex:0];
