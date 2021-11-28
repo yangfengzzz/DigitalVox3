@@ -46,6 +46,7 @@ public:
     static ShaderProperty getPropertyByName(const std::string& name);
     
 private:
+    friend class RenderPipelineState;
     static std::unordered_map<std::string, std::unique_ptr<Shader>> _shaderMap;
     static std::unordered_map<std::string, ShaderProperty> _propertyNameMap;
     

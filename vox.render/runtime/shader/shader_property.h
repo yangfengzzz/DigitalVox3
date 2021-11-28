@@ -20,6 +20,7 @@ struct ShaderProperty {
 private:
     friend class ShaderData;
     friend class Shader;
+    friend class RenderPipelineState;
 
     static int _propertyNameCounter;
     int _uniqueId;

@@ -18,11 +18,12 @@ class ShaderUniform {
 public:
     std::string name;
     int propertyId;
-    int location;
+    size_t location;
 };
 
 /// Shader uniform block.
 class ShaderUniformBlock {
+public:
     std::vector<ShaderUniform> constUniforms;
     std::vector<ShaderUniform> textureUniforms;
 };

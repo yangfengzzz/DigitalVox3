@@ -231,6 +231,8 @@
 		04CE397D2753491200204B8E /* buffer_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397B2753491200204B8E /* buffer_mesh.h */; };
 		04CE39822753678E00204B8E /* background.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39802753678E00204B8E /* background.mm */; };
 		04CE39832753678E00204B8E /* background.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39812753678E00204B8E /* background.h */; };
+		04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39842753710E00204B8E /* resource_cache_state.mm */; };
+		04CE39872753710E00204B8E /* resource_cache_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39852753710E00204B8E /* resource_cache_state.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -618,6 +620,8 @@
 		04CE397F27534C1100204B8E /* vox_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vox_type.h; sourceTree = "<group>"; };
 		04CE39802753678E00204B8E /* background.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = background.mm; sourceTree = "<group>"; };
 		04CE39812753678E00204B8E /* background.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = background.h; sourceTree = "<group>"; };
+		04CE39842753710E00204B8E /* resource_cache_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = resource_cache_state.mm; sourceTree = "<group>"; };
+		04CE39852753710E00204B8E /* resource_cache_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resource_cache_state.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1223,6 +1227,8 @@
 				04CE38FD27519FB500204B8E /* metal_renderer.mm */,
 				04CE39022751A84000204B8E /* render_pipeline_state.h */,
 				04CE39012751A84000204B8E /* render_pipeline_state.mm */,
+				04CE39852753710E00204B8E /* resource_cache_state.h */,
+				04CE39842753710E00204B8E /* resource_cache_state.mm */,
 			);
 			path = "rhi-metal";
 			sourceTree = "<group>";
@@ -1362,6 +1368,7 @@
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
 				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
+				04CE39872753710E00204B8E /* resource_cache_state.h in Headers */,
 				04CE39212751B2C500204B8E /* shader_property.h in Headers */,
 				04CE396127525EC700204B8E /* render_element.h in Headers */,
 				04CE39472751D82F00204B8E /* shader_uniform.h in Headers */,
@@ -1518,6 +1525,7 @@
 				04160FF62750955C006CD384 /* component.mm in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
 				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
+				04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
 				04CE39822753678E00204B8E /* background.mm in Sources */,
