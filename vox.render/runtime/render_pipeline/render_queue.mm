@@ -10,7 +10,7 @@
 #include "../renderer.h"
 
 namespace vox {
-RenderQueue::RenderQueue(EnginePtr engine) {
+RenderQueue::RenderQueue(Engine* engine) {
     
 }
 

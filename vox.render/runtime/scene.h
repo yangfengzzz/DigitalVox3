@@ -28,7 +28,7 @@ public:
      * @param engine - Engine
      * @param name - Name
      */
-    Scene(EnginePtr engine, std::string name = "");
+    Scene(Engine* engine, std::string name = "");
     
     /**
      * Count of root entities.

@@ -60,7 +60,7 @@ std::optional<ShaderDataGroup> Shader::_getShaderPropertyGroup(const std::string
     }
 }
 
-//ShaderProgram Shader::_getShaderProgram(EnginePtr engine, ShaderMacroCollection macroCollection) {
+//ShaderProgram Shader::_getShaderProgram(Engine* engine, ShaderMacroCollection macroCollection) {
 //
 //}
 

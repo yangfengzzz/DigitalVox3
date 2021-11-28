@@ -29,7 +29,7 @@ void Entity::_traverseSetOwnerScene(EntityPtr entity, std::optional<std::weak_pt
     }
 }
 
-Entity::Entity(EnginePtr engine, std::string name) : EngineObject(engine), name(name) {
+Entity::Entity(Engine* engine, std::string name) : EngineObject(engine), name(name) {
     transform = addComponent<Transform>();
     _inverseWorldMatFlag = transform->registerWorldChangeFlag();
 }

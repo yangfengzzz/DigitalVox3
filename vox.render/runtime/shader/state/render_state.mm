@@ -9,7 +9,7 @@
 #include "engine.h"
 
 namespace vox {
-void RenderState::_apply(EnginePtr engine,
+void RenderState::_apply(Engine* engine,
             MTLRenderPipelineDescriptor* pipelineDescriptor,
             MTLDepthStencilDescriptor* depthStencilDescriptor) {
     auto* hardwareRenderer = &engine->_hardwareRenderer;

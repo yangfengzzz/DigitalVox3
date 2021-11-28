@@ -10,7 +10,7 @@
 namespace vox {
 int EngineObject::_instanceIdCounter = 0;
 
-EngineObject::EngineObject(EnginePtr engine) : _engine(engine) {
+EngineObject::EngineObject(Engine* engine) : _engine(engine) {
 }
 
 int EngineObject::instanceId() {
@@ -18,7 +18,7 @@ int EngineObject::instanceId() {
     return EngineObject::_instanceIdCounter;
 }
 
-EnginePtr EngineObject::engine() {
+Engine* EngineObject::engine() {
     return _engine;
 }
 

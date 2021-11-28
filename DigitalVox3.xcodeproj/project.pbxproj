@@ -613,6 +613,7 @@
 		04CE397727527B4700204B8E /* primitive_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = primitive_mesh.h; sourceTree = "<group>"; };
 		04CE397A2753491200204B8E /* buffer_mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = buffer_mesh.mm; sourceTree = "<group>"; };
 		04CE397B2753491200204B8E /* buffer_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffer_mesh.h; sourceTree = "<group>"; };
+		04CE397F27534C1100204B8E /* vox_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vox_type.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -894,6 +895,7 @@
 				04CE395927525E0700204B8E /* render_pipeline */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
+				04CE397F27534C1100204B8E /* vox_type.h */,
 				04160FEC27509277006CD384 /* engine_object.h */,
 				04160FEB27509277006CD384 /* engine_object.cpp */,
 				04160FE8275091FA006CD384 /* engine.h */,

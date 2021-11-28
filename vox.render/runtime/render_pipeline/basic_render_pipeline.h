@@ -41,7 +41,7 @@ public:
     /// - Parameter element: Render element
     void pushPrimitive(const RenderElement& element);
     
-    // void _drawSky(EnginePtr engine, Camera* camera, Sky sky);
+    // void _drawSky(Engine* engine, Camera* camera, Sky sky);
     
 public:
     /// Default render pass.

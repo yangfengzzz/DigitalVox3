@@ -11,7 +11,7 @@
 #include "log.h"
 
 namespace vox {
-Scene::Scene(EnginePtr engine, std::string name):EngineObject(engine), name(name) {
+Scene::Scene(Engine* engine, std::string name):EngineObject(engine), name(name) {
 }
 
 size_t Scene::rootEntitiesCount() {

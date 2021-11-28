@@ -33,7 +33,7 @@ public:
     /// - Parameters:
     ///   - engine: Engine to which the material belongs
     ///   - shader: Shader used by the material
-    Material(EnginePtr engine, Shader* shader);
+    Material(Engine* engine, Shader* shader);
 };
 
 }

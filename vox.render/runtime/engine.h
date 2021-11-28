@@ -14,15 +14,17 @@
 #include "rhi-metal/metal_renderer.h"
 #include "canvas.h"
 #include "timer.h"
+#include "render_pipeline/render_context.h"
+#include "shader/shader_macro_collection.h"
 
 namespace vox {
 class Engine {
 public:
     ComponentsManager _componentsManager;
     MetalRenderer _hardwareRenderer;
-
-    Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
-    }
+    RenderContext _renderContext = RenderContext();
+    
+    Engine(Canvas canvas);
     
     /**
      * The canvas to use for rendering.
@@ -43,6 +45,34 @@ public:
      */
     Timer timer() {
         return _timer;
+    }
+    
+    /// Whether the engine is paused.
+    bool isPaused() {
+        return _isPaused;
+    }
+    
+    /// The number of vertical synchronization means the number of vertical blanking for one frame.
+    /// - Remark: 0 means that the vertical synchronization is turned off.
+    int vSyncCount() {
+        return _vSyncCount;
+    }
+    
+    void setVSyncCount(int newValue) {
+        _vSyncCount = std::max(0, newValue);
+    }
+    
+    /// Set the target frame rate you want to achieve.
+    /// - Remark: It only takes effect when vSyncCount = 0 (ie, vertical synchronization is turned off).
+    /// The larger the value, the higher the target frame rate, Number.POSITIVE_INFINITY represents the infinite target frame rate.
+    float targetFrameRate() {
+        return _targetFrameRate;
+    }
+    
+    void setTargetFrameRate(float newValue) {
+        newValue = std::max(0.000001f, newValue);
+        _targetFrameRate = newValue;
+        _targetFrameInterval = 1000 / newValue;
     }
     
 public:
@@ -67,18 +97,21 @@ protected:
     Canvas _canvas;
     
 private:
+    id<MTLTexture> _whiteTexture2D;
+    id<MTLTexture> _whiteTextureCube;
+    MaterialPtr _backgroundTextureMaterial;
+    ShaderMacroCollection _macroCollection = ShaderMacroCollection();
+    
     SceneManager _sceneManager = SceneManager(this);
     int _vSyncCount = 1;
     float _targetFrameRate = 60;
     Timer _timer = Timer();
     bool _isPaused = true;
-    int _requestId;
-    int _timeoutId;
+    int _requestId = 0;
+    int _timeoutId = 0;
     int _vSyncCounter = 1;
     float _targetFrameInterval = 1000 / 60;
 };
-
-using EnginePtr = std::shared_ptr<Engine>;
 
 }
 

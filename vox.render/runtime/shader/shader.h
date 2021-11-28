@@ -11,14 +11,12 @@
 #include <unordered_map>
 #include <string>
 #include <optional>
+#include "../vox_type.h"
 #include "shader_property.h"
 #include "shader_program.h"
 #include "shader_macro_collection.h"
 
 namespace vox {
-class Engine;
-using EnginePtr = std::shared_ptr<Engine>;
-
 /// Shader containing vertex and fragment source.
 class Shader {
 public:
@@ -53,7 +51,7 @@ private:
     
     static std::optional<ShaderDataGroup> _getShaderPropertyGroup(const std::string& propertyName);
     
-    ShaderProgram _getShaderProgram(EnginePtr engine, ShaderMacroCollection macroCollection);
+    ShaderProgram _getShaderProgram(Engine* engine, ShaderMacroCollection macroCollection);
 
     int _shaderId = 0;
     std::string _vertexSource;

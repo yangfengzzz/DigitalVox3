@@ -8,19 +8,16 @@
 #ifndef render_queue_hpp
 #define render_queue_hpp
 
+#include "../vox_type.h"
 #include "../layer.h"
 #include "render_element.h"
 #include <vector>
 
 namespace vox {
-class Engine;
-using EnginePtr = std::shared_ptr<Engine>;
-class Camera;
-
 /// Render queue.
 class RenderQueue {
 public:
-    RenderQueue(EnginePtr engine);
+    RenderQueue(Engine* engine);
     
     /// Push a render element.
     void pushPrimitive(RenderElement element);

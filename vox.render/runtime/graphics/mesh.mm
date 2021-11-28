@@ -8,7 +8,7 @@
 #include "mesh.h"
 
 namespace vox {
-Mesh::Mesh(EnginePtr engine, std::string name):EngineObject(engine), name(name) {
+Mesh::Mesh(Engine* engine, std::string name):EngineObject(engine), name(name) {
 }
 
 void Mesh::addSubMesh(SubMesh subMesh) {

@@ -23,7 +23,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Sphere model mesh
      */
-    static ModelMeshPtr createSphere(const EnginePtr &engine,
+    static ModelMeshPtr createSphere(Engine* engine,
                                      float radius = 0.5,
                                      size_t segments = 18,
                                      bool noLongerAccessible = true);
@@ -37,7 +37,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Cuboid model mesh
      */
-    static ModelMeshPtr createCuboid(const EnginePtr &engine,
+    static ModelMeshPtr createCuboid(Engine* engine,
                                      float width = 1,
                                      float height = 1,
                                      float depth = 1,
@@ -54,7 +54,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Plane model mesh
      */
-    static ModelMeshPtr createPlane(const EnginePtr &engine,
+    static ModelMeshPtr createPlane(Engine* engine,
                                     float width = 1,
                                     float height = 1,
                                     size_t horizontalSegments = 1,
@@ -72,7 +72,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Cylinder model mesh
      */
-    static ModelMeshPtr createCylinder(const EnginePtr &engine,
+    static ModelMeshPtr createCylinder(Engine* engine,
                                        float radiusTop = 0.5,
                                        float radiusBottom = 0.5,
                                        float height = 2,
@@ -91,7 +91,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Torus model mesh
      */
-    static ModelMeshPtr createTorus(const EnginePtr &engine,
+    static ModelMeshPtr createTorus(Engine* engine,
                                     float radius = 0.5,
                                     float tubeRadius = 0.1,
                                     size_t radialSegments = 30,
@@ -109,7 +109,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Cone model mesh
      */
-    static ModelMeshPtr createCone(const EnginePtr &engine,
+    static ModelMeshPtr createCone(Engine* engine,
                                    float radius = 0.5,
                                    float height = 2,
                                    size_t radialSegments = 20,
@@ -126,7 +126,7 @@ class PrimitiveMesh {
      * @param noLongerAccessible - No longer access the vertices of the mesh after creation
      * @returns Capsule model mesh
      */
-    static ModelMeshPtr createCapsule(const EnginePtr &engine,
+    static ModelMeshPtr createCapsule(Engine* engine,
                                       float radius = 0.5,
                                       float height = 2,
                                       size_t radialSegments = 6,
@@ -146,7 +146,7 @@ private:
                                   std::vector<uint32_t> &indices,
                                   size_t indicesOffset);
     
-    static void _initialize(const EnginePtr &engine,
+    static void _initialize(Engine* engine,
                             const ModelMeshPtr &mesh,
                             const std::vector<Float3> &positions,
                             const std::vector<Float3> &normals,

@@ -8,15 +8,13 @@
 #ifndef render_state_hpp
 #define render_state_hpp
 
+#include "../../vox_type.h"
 #include "blend_state.h"
 #include "raster_state.h"
 #include "depth_state.h"
 #include "stencil_state.h"
 
 namespace vox {
-class Engine;
-using EnginePtr = std::shared_ptr<Engine>;
-
 /// Render state.
 struct RenderState {
     /// Blend state.
@@ -29,7 +27,7 @@ struct RenderState {
     RasterState rasterState = RasterState();
 
 private:
-    void _apply(EnginePtr engine,
+    void _apply(Engine* engine,
                 MTLRenderPipelineDescriptor* pipelineDescriptor,
                 MTLDepthStencilDescriptor* depthStencilDescriptor);
 };

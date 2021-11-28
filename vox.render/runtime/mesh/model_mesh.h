@@ -52,7 +52,7 @@ public:
     /// - Parameters:
     ///   - engine: Engine to which the mesh belongs
     ///   - name: Mesh name
-    ModelMesh(const EnginePtr& engine, const std::string& name = "");
+    ModelMesh(Engine* engine, const std::string& name = "");
     
 public:
     /// Set positions for the mesh.

@@ -38,7 +38,7 @@ public:
      * Create a entity.
      * @param engine - The engine the entity belongs to.
      */
-    Entity(EnginePtr engine, std::string name = "");
+    Entity(Engine* engine, std::string name = "");
     
     /**
      * Whether to activate locally.

@@ -16,7 +16,7 @@ size_t ModelMesh::vertexCount() {
     return _vertexCount;
 }
 
-ModelMesh::ModelMesh(const EnginePtr& engine, const std::string& name):
+ModelMesh::ModelMesh(Engine* engine, const std::string& name):
 Mesh(engine, name){
     
 }

@@ -25,7 +25,7 @@ public:
     /// - Parameters:
     ///   - engine: Engine
     ///   - name: Mesh name
-    Mesh(EnginePtr engine, std::string name = "");
+    Mesh(Engine* engine, std::string name = "");
     
     /// Add sub-mesh, each sub-mesh can correspond to an independent material.
     /// - Parameter subMesh: Start drawing offset, if the index buffer is set, it means the offset in the index buffer, if not set, it means the offset in the vertex buffer
