@@ -233,6 +233,18 @@
 		04CE39832753678E00204B8E /* background.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39812753678E00204B8E /* background.h */; };
 		04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39842753710E00204B8E /* resource_cache_state.mm */; };
 		04CE39872753710E00204B8E /* resource_cache_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39852753710E00204B8E /* resource_cache_state.h */; };
+		04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398A2753A83B00204B8E /* blinn-phong.metal */; };
+		04CE39972753A83C00204B8E /* function-common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398B2753A83B00204B8E /* function-common.metal */; };
+		04CE39982753A83C00204B8E /* background-texture.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398C2753A83B00204B8E /* background-texture.metal */; };
+		04CE39992753A83C00204B8E /* BRDF.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* BRDF.metal */; };
+		04CE399A2753A83C00204B8E /* pbr.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398E2753A83B00204B8E /* pbr.metal */; };
+		04CE399B2753A83C00204B8E /* skybox.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398F2753A83B00204B8E /* skybox.metal */; };
+		04CE399C2753A83C00204B8E /* function-constant.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39902753A83B00204B8E /* function-constant.metal */; };
+		04CE399D2753A83C00204B8E /* SkinningShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39912753A83C00204B8E /* SkinningShader.metal */; };
+		04CE399E2753A83C00204B8E /* unlit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39922753A83C00204B8E /* unlit.metal */; };
+		04CE399F2753A83C00204B8E /* particle.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39932753A83C00204B8E /* particle.metal */; };
+		04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
+		04CE39A12753A83C00204B8E /* ShaderSimple.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39952753A83C00204B8E /* ShaderSimple.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -623,6 +635,18 @@
 		04CE39842753710E00204B8E /* resource_cache_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = resource_cache_state.mm; sourceTree = "<group>"; };
 		04CE39852753710E00204B8E /* resource_cache_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resource_cache_state.h; sourceTree = "<group>"; };
 		04CE39892753A43800204B8E /* shader_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_common.h; sourceTree = "<group>"; };
+		04CE398A2753A83B00204B8E /* blinn-phong.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "blinn-phong.metal"; sourceTree = "<group>"; };
+		04CE398B2753A83B00204B8E /* function-common.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "function-common.metal"; sourceTree = "<group>"; };
+		04CE398C2753A83B00204B8E /* background-texture.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "background-texture.metal"; sourceTree = "<group>"; };
+		04CE398D2753A83B00204B8E /* BRDF.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BRDF.metal; sourceTree = "<group>"; };
+		04CE398E2753A83B00204B8E /* pbr.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = pbr.metal; sourceTree = "<group>"; };
+		04CE398F2753A83B00204B8E /* skybox.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = skybox.metal; sourceTree = "<group>"; };
+		04CE39902753A83B00204B8E /* function-constant.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "function-constant.metal"; sourceTree = "<group>"; };
+		04CE39912753A83C00204B8E /* SkinningShader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = SkinningShader.metal; sourceTree = "<group>"; };
+		04CE39922753A83C00204B8E /* unlit.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = unlit.metal; sourceTree = "<group>"; };
+		04CE39932753A83C00204B8E /* particle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = particle.metal; sourceTree = "<group>"; };
+		04CE39942753A83C00204B8E /* shadow-map.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "shadow-map.metal"; sourceTree = "<group>"; };
+		04CE39952753A83C00204B8E /* ShaderSimple.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ShaderSimple.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1261,7 +1285,6 @@
 				04CE390F2751AE5B00204B8E /* shader_program.mm */,
 				04CE391F2751B2C500204B8E /* shader_property.h */,
 				04CE391E2751B2C500204B8E /* shader_property.cpp */,
-				04CE393B2751D2C900204B8E /* macro_name.h */,
 				04CE393D2751D2ED00204B8E /* shader_macro_collection.h */,
 				04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */,
 				04CE39412751D7BF00204B8E /* shader_data.h */,
@@ -1353,7 +1376,20 @@
 		04CE39882753A41E00204B8E /* shaderlib */ = {
 			isa = PBXGroup;
 			children = (
+				04CE393B2751D2C900204B8E /* macro_name.h */,
 				04CE39892753A43800204B8E /* shader_common.h */,
+				04CE398B2753A83B00204B8E /* function-common.metal */,
+				04CE39902753A83B00204B8E /* function-constant.metal */,
+				04CE398C2753A83B00204B8E /* background-texture.metal */,
+				04CE398A2753A83B00204B8E /* blinn-phong.metal */,
+				04CE398D2753A83B00204B8E /* BRDF.metal */,
+				04CE39932753A83C00204B8E /* particle.metal */,
+				04CE398E2753A83B00204B8E /* pbr.metal */,
+				04CE39942753A83C00204B8E /* shadow-map.metal */,
+				04CE398F2753A83B00204B8E /* skybox.metal */,
+				04CE39922753A83C00204B8E /* unlit.metal */,
+				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
+				04CE39912753A83C00204B8E /* SkinningShader.metal */,
 			);
 			path = shaderlib;
 			sourceTree = "<group>";
@@ -1540,11 +1576,13 @@
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
 				04CE39822753678E00204B8E /* background.mm in Sources */,
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
+				04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
+				04CE399F2753A83C00204B8E /* particle.metal in Sources */,
 				04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
 				04CE37B8274D167E00204B8E /* simd_math.cc in Sources */,
@@ -1555,6 +1593,7 @@
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
+				04CE39992753A83C00204B8E /* BRDF.metal in Sources */,
 				04CE3957275259FA00204B8E /* renderer.mm in Sources */,
 				04CE3968275268BB00204B8E /* render_pass.mm in Sources */,
 				04CE37CE274D167E00204B8E /* animation_utils.cc in Sources */,
@@ -1564,10 +1603,15 @@
 				04CE395C27525E2500204B8E /* render_context.mm in Sources */,
 				04CE37D4274D167F00204B8E /* blending_job.cc in Sources */,
 				04CE37D6274D167F00204B8E /* ik_aim_job.cc in Sources */,
+				04CE39A12753A83C00204B8E /* ShaderSimple.metal in Sources */,
+				04CE39972753A83C00204B8E /* function-common.metal in Sources */,
 				04CE37D8274D167F00204B8E /* ik_two_bone_job.cc in Sources */,
+				04CE399D2753A83C00204B8E /* SkinningShader.metal in Sources */,
 				04CE397427526F6E00204B8E /* model_mesh.mm in Sources */,
 				04CE396C27526AEE00204B8E /* basic_render_pipeline.mm in Sources */,
 				04CE39392751CF3B00204B8E /* stencil_state.mm in Sources */,
+				04CE399C2753A83C00204B8E /* function-constant.metal in Sources */,
+				04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */,
 				04CE37DA274D167F00204B8E /* track.cc in Sources */,
 				04CE37DC274D167F00204B8E /* track_sampling_job.cc in Sources */,
 				04CE37DE274D167F00204B8E /* track_triggering_job.cc in Sources */,
@@ -1575,11 +1619,13 @@
 				04CE38DB274E8C2D00204B8E /* plane.cpp in Sources */,
 				04CE39642752661F00204B8E /* render_queue.mm in Sources */,
 				04CE37E1274D167F00204B8E /* raw_skeleton.cc in Sources */,
+				04CE399B2753A83C00204B8E /* skybox.metal in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
 				04160FFE275096FD006CD384 /* updateFlag.cpp in Sources */,
 				04CE37E6274D167F00204B8E /* raw_animation.cc in Sources */,
 				04CE397C2753491200204B8E /* buffer_mesh.mm in Sources */,
+				04CE399A2753A83C00204B8E /* pbr.metal in Sources */,
 				04CE37E7274D167F00204B8E /* raw_animation_utils.cc in Sources */,
 				04CE391A2751B23400204B8E /* shader_pool.cpp in Sources */,
 				04CE38CC274E678400204B8E /* quaternion.cpp in Sources */,
@@ -1588,6 +1634,7 @@
 				04CE38EC27510A8000204B8E /* camera.mm in Sources */,
 				04CE39202751B2C500204B8E /* shader_property.cpp in Sources */,
 				04CE37E9274D167F00204B8E /* raw_animation_archive.cc in Sources */,
+				04CE39982753A83C00204B8E /* background-texture.metal in Sources */,
 				041610062750A577006CD384 /* script.mm in Sources */,
 				04CE397827527B4700204B8E /* primitive_mesh.mm in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
@@ -1614,6 +1661,7 @@
 				0416100A2750A720006CD384 /* scene.mm in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
+				04CE399E2753A83C00204B8E /* unlit.metal in Sources */,
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
 				04CE396027525EC700204B8E /* render_element.mm in Sources */,
