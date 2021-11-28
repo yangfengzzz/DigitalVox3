@@ -92,7 +92,7 @@ void RenderQueue::render(Camera* camera, MaterialPtr replaceMaterial, Layer mask
 
         auto& buffers = element.mesh->_vertexBuffer;
         for (size_t index = 0; index < buffers.size(); index++) {
-            [rhi.renderEncoder setVertexBuffer:buffers[index].buffer() offset:0 atIndex:index];
+            [rhi.renderEncoder setVertexBuffer:buffers[index]->buffer() offset:0 atIndex:index];
         }
         rhi.drawPrimitive(element.subMesh);
     }

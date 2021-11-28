@@ -192,7 +192,7 @@ void ModelMesh::uploadData(bool noLongerAccessible) {
     }
     
     // Vertex value change.
-    const auto& vertexBuffer = _vertexBuffer[0].buffer();
+    const auto& vertexBuffer = _vertexBuffer[0]->buffer();
     auto vertexFloatCount = _elementCount * _vertexCount;
     if (vertexBuffer == nil || _verticesFloat32.size() != vertexFloatCount) {
         auto vertices = std::vector<float>(vertexFloatCount);

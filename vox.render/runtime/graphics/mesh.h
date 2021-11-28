@@ -11,6 +11,7 @@
 #import <Metal/Metal.h>
 #include <string>
 #include <vector>
+#include <optional>
 #include "submesh.h"
 #include "maths/bounding_box.h"
 #include "../updateFlag_manager.h"
@@ -54,14 +55,14 @@ public:
     /// - Returns: Update flag
     std::unique_ptr<UpdateFlag> registerUpdateFlag();
     
-    void _setVertexBuffer(int index, MeshBuffer buffer);
+    void _setVertexBuffer(size_t index, MeshBuffer buffer);
     
 protected:
     friend class PrimitiveMesh;
     friend class MeshRenderer;
     friend class RenderQueue;
     
-    std::vector<MeshBuffer> _vertexBuffer;
+    std::vector<std::optional<MeshBuffer>> _vertexBuffer;
     size_t _vertexCount = 0;
     MDLVertexDescriptor* _vertexDescriptor = nullptr;
     std::vector<SubMesh> _subMeshes;

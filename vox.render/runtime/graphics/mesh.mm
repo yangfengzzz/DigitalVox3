@@ -29,7 +29,7 @@ std::unique_ptr<UpdateFlag> Mesh::registerUpdateFlag() {
     return _updateFlagManager.registration();
 }
 
-void Mesh::_setVertexBuffer(int index, MeshBuffer buffer) {
+void Mesh::_setVertexBuffer(size_t index, MeshBuffer buffer) {
     _vertexBuffer.insert(_vertexBuffer.begin() + index, buffer);
 }
 

@@ -18,7 +18,7 @@ class BufferMesh: public Mesh {
     void setInstanceCount(size_t newValue);
 
     /// Vertex buffer collection.
-    const std::vector<MeshBuffer>& vertexBuffer();
+    const std::vector<std::optional<MeshBuffer>>& vertexBuffer();
     
     MDLVertexDescriptor* vertexDescriptor();
     /// Set vertex descriptor.
