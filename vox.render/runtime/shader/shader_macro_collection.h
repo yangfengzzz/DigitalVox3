@@ -26,6 +26,8 @@ struct ShaderMacroCollection {
     ///   - out: union output macro collection
     static void unionCollection(const ShaderMacroCollection& left, const ShaderMacroCollection& right,
                                 ShaderMacroCollection& result);
+    
+    size_t hash();
 
 private:
     friend class ShaderProgram;

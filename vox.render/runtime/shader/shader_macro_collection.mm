@@ -6,6 +6,7 @@
 //
 
 #include "shader_macro_collection.h"
+#include "maths/math_ex.h"
 
 namespace vox {
 std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection::defaultValue = {
@@ -94,5 +95,14 @@ void ShaderMacroCollection::unionCollection(const ShaderMacroCollection& left, c
     result._value.insert(left._value.begin(), left._value.end());
     result._value.insert(right._value.begin(), right._value.end());
 }
+
+size_t ShaderMacroCollection::hash() {
+    std::size_t hash{0U};
+    for (int i = 0; i < MacroName::TOTAL_COUNT; i++) {
+        math::hash_combine(hash, std::hash<int>{}(_value[MacroName(i)].first));
+    }
+    return hash;
+}
+
 
 }

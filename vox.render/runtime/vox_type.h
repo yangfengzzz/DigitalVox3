@@ -27,7 +27,11 @@ class Camera;
 class Renderer;
 class Script;
 
+class ShaderProgram;
+class RenderPipelineState;
+class RenderPass;
 class RenderQueue;
+class MetalRenderer;
 
 }
 

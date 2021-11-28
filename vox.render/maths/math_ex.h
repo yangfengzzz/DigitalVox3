@@ -144,6 +144,11 @@ VOX_INLINE int sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
 
+VOX_INLINE void hash_combine(size_t &seed, size_t hash) {
+    hash += 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    seed ^= hash;
+}
+
 }  // namespace math
 }  // namespace vox
 #endif  // VOX_VOX_BASE_MATHS_MATH_EX_H_
