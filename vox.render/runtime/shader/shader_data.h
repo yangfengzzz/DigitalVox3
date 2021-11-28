@@ -49,6 +49,7 @@ private:
     friend class Scene;
     friend class ComponentsManager;
     friend class RenderPipelineState;
+    friend class RenderQueue;
     
     ShaderData(ShaderDataGroup group);
     

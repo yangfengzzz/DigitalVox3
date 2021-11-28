@@ -47,12 +47,14 @@ public:
     
 private:
     friend class RenderPipelineState;
+    friend class RenderQueue;
+    
     static std::unordered_map<std::string, std::unique_ptr<Shader>> _shaderMap;
     static std::unordered_map<std::string, ShaderProperty> _propertyNameMap;
     
     static std::optional<ShaderDataGroup> _getShaderPropertyGroup(const std::string& propertyName);
     
-    ShaderProgram _getShaderProgram(Engine* engine, ShaderMacroCollection macroCollection);
+    ShaderProgram* _getShaderProgram(Engine* engine, ShaderMacroCollection macroCollection);
 
     int _shaderId = 0;
     std::string _vertexSource;

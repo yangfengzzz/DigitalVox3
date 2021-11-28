@@ -27,6 +27,8 @@ struct RenderState {
     RasterState rasterState = RasterState();
 
 private:
+    friend class RenderQueue;
+    
     void _apply(Engine* engine,
                 MTLRenderPipelineDescriptor* pipelineDescriptor,
                 MTLDepthStencilDescriptor* depthStencilDescriptor);

@@ -59,6 +59,7 @@ public:
 protected:
     friend class PrimitiveMesh;
     friend class MeshRenderer;
+    friend class RenderQueue;
     
     std::vector<MeshBuffer> _vertexBuffer;
     size_t _vertexCount = 0;
