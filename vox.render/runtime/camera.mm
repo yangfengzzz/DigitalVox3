@@ -17,7 +17,10 @@ ShaderProperty Camera::_inverseViewMatrixProperty = Shader::getPropertyByName("u
 ShaderProperty Camera::_inverseProjectionMatrixProperty = Shader::getPropertyByName("u_projInvMat");
 ShaderProperty Camera::_cameraPositionProperty = Shader::getPropertyByName("u_cameraPos");
 
-Camera::Camera(Entity* entity):Component(entity) {
+Camera::Camera(Entity* entity):
+Component(entity),
+_renderPipeline(BasicRenderPipeline(this))
+{
     auto transform = entity->transform;
     _transform = transform;
     _isViewMatrixDirty = transform->registerWorldChangeFlag();
@@ -139,6 +142,14 @@ void Camera::setEnableHDR(bool value) {
     assert(false && "not implementation");
 }
 
+MTLRenderPassDescriptor* Camera::renderTarget() {
+    return _renderTarget;
+}
+
+void Camera::setRenderTarget(MTLRenderPassDescriptor* value) {
+    _renderTarget = value;
+}
+
 void Camera::resetProjectionMatrix() {
     _isProjMatSetting = false;
     _projMatChange();
@@ -232,7 +243,25 @@ Ray Camera::screenPointToRay(const Float2& point) {
 }
 
 void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+    // compute cull frustum.
+    auto& context = engine()->_renderContext;
+    context._setContext(this);
+    if (enableFrustumCulling && (_frustumViewChangeFlag->flag || _isFrustumProjectDirty)) {
+        _frustum.calculateFromMatrix(context._viewProjectMatrix);
+        _frustumViewChangeFlag->flag = false;
+        _isFrustumProjectDirty = false;
+    }
     
+    _updateShaderData(context);
+    
+    // union scene and camera macro.
+    ShaderMacroCollection::unionCollection(
+                                           scene()->_globalShaderMacro,
+                                           shaderData._macroCollection,
+                                           _globalShaderMacro
+                                           );
+    
+    _renderPipeline.render(context, cubeFace, mipLevel);
 }
 
 void Camera::_onActive() {
@@ -265,6 +294,15 @@ Float3 Camera::_innerViewportToWorldPoint(const Float3& point, const Matrix& inv
     return Float3(clipPoint.x * invW,
                   clipPoint.y * invW,
                   clipPoint.z * invW);
+}
+
+void Camera::_updateShaderData(const RenderContext& context) {
+    shaderData.setData(Camera::_viewMatrixProperty, viewMatrix());
+    shaderData.setData(Camera::_projectionMatrixProperty, projectionMatrix());
+    shaderData.setData(Camera::_vpMatrixProperty, context._viewProjectMatrix);
+    shaderData.setData(Camera::_inverseViewMatrixProperty, _transform->worldMatrix());
+    shaderData.setData(Camera::_inverseProjectionMatrixProperty, inverseProjectionMatrix());
+    shaderData.setData(Camera::_cameraPositionProperty, _transform->worldPosition());
 }
 
 Matrix Camera::invViewProjMat() {

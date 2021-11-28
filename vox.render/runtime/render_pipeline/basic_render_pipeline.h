@@ -13,6 +13,7 @@
 #include "render_queue.h"
 #include "render_pass.h"
 #include "render_context.h"
+#include <optional>
 
 namespace vox {
 using namespace math;
@@ -32,7 +33,7 @@ public:
     /// - Parameters:
     ///   - context: Render context
     ///   - cubeFace: Render surface of cube texture
-    void render(const RenderContext& context, TextureCubeFace cubeFace, int mipLevel = 0);
+    void render(const RenderContext& context, std::optional<TextureCubeFace> cubeFace, int mipLevel = 0);
     
     void _drawRenderPass(const RenderPass& pass, Camera* camera,
                          TextureCubeFace cubeFace, int mipLevel = 0);

@@ -19,6 +19,8 @@
 #include "updateFlag.h"
 #include "shader/shader.h"
 #include "shader/shader_data.h"
+#include "render_pipeline/basic_render_pipeline.h"
+#include "render_pipeline/render_context.h"
 
 namespace vox {
 using namespace math;
@@ -127,6 +129,13 @@ public:
     
     void setEnableHDR(bool value);
     
+    /**
+     * RenderTarget. After setting, it will be rendered to the renderTarget. If it is empty, it will be rendered to the main canvas.
+     */
+    MTLRenderPassDescriptor* renderTarget();
+    
+    void setRenderTarget(MTLRenderPassDescriptor* value);
+    
 public:
     /**
      * Restore the automatic calculation of projection matrix through fieldOfView, nearClipPlane and farClipPlane.
@@ -221,6 +230,8 @@ private:
     
     Float3 _innerViewportToWorldPoint(const Float3& point, const Matrix& invViewProjMat);
     
+    void _updateShaderData(const RenderContext& context);
+    
     /**
      * The inverse matrix of view projection matrix.
      */
@@ -240,6 +251,7 @@ private:
     
     ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
     BoundingFrustum _frustum = BoundingFrustum();
+    BasicRenderPipeline _renderPipeline;
     
     bool _isOrthographic = false;
     bool _isProjMatSetting = false;
@@ -251,8 +263,8 @@ private:
     bool _isInvProjMatDirty = true;
     bool _isFrustumProjectDirty = true;
     std::optional<float> _customAspectRatio = std::nullopt;
-    std::optional<MTLRenderPassDescriptor*> _renderTarget = std::nullopt;
-
+    MTLRenderPassDescriptor* _renderTarget = nullptr;
+    
     std::unique_ptr<UpdateFlag> _frustumViewChangeFlag;
     Transform* _transform;
     std::unique_ptr<UpdateFlag> _isViewMatrixDirty;
