@@ -8,6 +8,13 @@
 #include "render_pipeline_state.h"
 #include "metal_renderer.h"
 #include "../shader/shader.h"
+#include "maths/matrix.h"
+#include "log.h"
+#include <iomanip>
+#include <type_traits>
+#include <typeindex>
+#include <typeinfo>
+#include <unordered_map>
 
 namespace vox {
 RenderPipelineState::RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor):
@@ -28,13 +35,79 @@ void RenderPipelineState::groupingOtherUniformBlock() {
     }
 }
 
+namespace {
+template<class T, class F>
+inline std::pair<const std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
+to_any_visitor(F const &f) {
+    return {
+        std::type_index(typeid(T)),
+        [g = f](std::any const &a, size_t location, id <MTLRenderCommandEncoder> encoder)
+        {
+            if constexpr (std::is_void_v<T>)
+                g();
+            else
+                g(std::any_cast<T const&>(a), location, encoder);
+        }
+    };
+}
+
+static std::unordered_map<
+std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
+any_visitor {
+    to_any_visitor<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(int) atIndex:location];
+    }),
+    to_any_visitor<float>([](const float& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(float) atIndex:location];
+    }),
+    to_any_visitor<Float2>([](const Float2& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(Float2) atIndex:location];
+    }),
+    to_any_visitor<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(Float3) atIndex:location];
+    }),
+    to_any_visitor<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(Float4) atIndex:location];
+    }),
+    to_any_visitor<Color>([](const Color& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(Color) atIndex:location];
+    }),
+    to_any_visitor<Matrix>([](const Matrix& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(Matrix) atIndex:location];
+    }),
+    to_any_visitor<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBuffer:x offset:0 atIndex:location];
+    }),
+};
+
+inline void process(const std::any& a, size_t location, id <MTLRenderCommandEncoder> encoder)
+{
+    if (const auto it = any_visitor.find(std::type_index(a.type()));
+        it != any_visitor.cend()) {
+        it->second(a, location, encoder);
+    } else {
+        log::Log() << "Unregistered type "<< std::quoted(a.type().name());
+    }
+}
+
+}
+
 void RenderPipelineState::uploadAll(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
     uploadUniforms(uniformBlock, shaderData);
     uploadTextures(uniformBlock, shaderData);
 }
 
 void RenderPipelineState::uploadUniforms(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
+    const auto& properties = shaderData._properties;
+    const auto& constUniforms = uniformBlock.constUniforms;
     
+    for (size_t i = 0; i < constUniforms.size(); i++) {
+        const auto& uniform = constUniforms[i];
+        auto iter = properties.find(uniform.propertyId);
+        if (iter != properties.end()) {
+            process(*iter, uniform.location, _render->renderEncoder);
+        }
+    }
 }
 
 void RenderPipelineState::uploadTextures(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {

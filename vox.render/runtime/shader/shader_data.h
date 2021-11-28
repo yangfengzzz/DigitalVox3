@@ -48,6 +48,7 @@ private:
     friend class Renderer;
     friend class Scene;
     friend class ComponentsManager;
+    friend class RenderPipelineState;
     
     ShaderData(ShaderDataGroup group);
     
