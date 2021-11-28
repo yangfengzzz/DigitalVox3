@@ -227,6 +227,8 @@
 		04CE397527526F6E00204B8E /* model_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397327526F6E00204B8E /* model_mesh.h */; };
 		04CE397827527B4700204B8E /* primitive_mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE397627527B4700204B8E /* primitive_mesh.mm */; };
 		04CE397927527B4700204B8E /* primitive_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397727527B4700204B8E /* primitive_mesh.h */; };
+		04CE397C2753491200204B8E /* buffer_mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE397A2753491200204B8E /* buffer_mesh.mm */; };
+		04CE397D2753491200204B8E /* buffer_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397B2753491200204B8E /* buffer_mesh.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -609,6 +611,8 @@
 		04CE397327526F6E00204B8E /* model_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = model_mesh.h; sourceTree = "<group>"; };
 		04CE397627527B4700204B8E /* primitive_mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = primitive_mesh.mm; sourceTree = "<group>"; };
 		04CE397727527B4700204B8E /* primitive_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = primitive_mesh.h; sourceTree = "<group>"; };
+		04CE397A2753491200204B8E /* buffer_mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = buffer_mesh.mm; sourceTree = "<group>"; };
+		04CE397B2753491200204B8E /* buffer_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffer_mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1261,6 +1265,8 @@
 				04CE397227526F6E00204B8E /* model_mesh.mm */,
 				04CE397727527B4700204B8E /* primitive_mesh.h */,
 				04CE397627527B4700204B8E /* primitive_mesh.mm */,
+				04CE397B2753491200204B8E /* buffer_mesh.h */,
+				04CE397A2753491200204B8E /* buffer_mesh.mm */,
 			);
 			path = mesh;
 			sourceTree = "<group>";
@@ -1352,6 +1358,7 @@
 				04CE39472751D82F00204B8E /* shader_uniform.h in Headers */,
 				04CE3969275268BB00204B8E /* render_pass.h in Headers */,
 				041610072750A577006CD384 /* script.h in Headers */,
+				04CE397D2753491200204B8E /* buffer_mesh.h in Headers */,
 				04CE394B2751E3E600204B8E /* shader.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				04CE3958275259FA00204B8E /* renderer.h in Headers */,
@@ -1544,6 +1551,7 @@
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
 				04160FFE275096FD006CD384 /* updateFlag.cpp in Sources */,
 				04CE37E6274D167F00204B8E /* raw_animation.cc in Sources */,
+				04CE397C2753491200204B8E /* buffer_mesh.mm in Sources */,
 				04CE37E7274D167F00204B8E /* raw_animation_utils.cc in Sources */,
 				04CE391A2751B23400204B8E /* shader_pool.cpp in Sources */,
 				04CE38CC274E678400204B8E /* quaternion.cpp in Sources */,
