@@ -10,6 +10,8 @@
 
 #include "../vox_type.h"
 #include "../shader/shader_macro_collection.h"
+#include "render_pipeline_state.h"
+
 #include <unordered_map>
 #include <string>
 #include <Metal/Metal.h>

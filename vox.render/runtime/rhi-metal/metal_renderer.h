@@ -11,24 +11,19 @@
 #include "maths/color.h"
 #include "../enums/camera_clear_flags.h"
 #include "../canvas.h"
+#include "resource_cache_state.h"
 #import <Metal/Metal.h>
 #import <QuartzCore/QuartzCore.h>
 
 namespace vox {
-class Camera;
-
-class RenderPipelineState;
-
-struct SubMesh;
-
 /// Metal renderer.
 class MetalRenderer {
 public:
     const int maxAnisotropy = 8;
     
     Canvas canvas;
+    ResourceCache resouceCache;
     id <MTLDevice> device;
-    // var resouceCache: ResourceCache!
     id <MTLCommandQueue> commandQueue;
     id <MTLLibrary> library;
     
