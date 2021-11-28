@@ -53,7 +53,7 @@ to_any_visitor(F const &f) {
 
 static std::unordered_map<
 std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
-any_visitor {
+vertex_any_visitor {
     to_any_visitor<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(int) atIndex:location];
     }),
@@ -78,13 +78,49 @@ any_visitor {
     to_any_visitor<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBuffer:x offset:0 atIndex:location];
     }),
+    to_any_visitor<id<MTLTexture>>([](const id<MTLTexture>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexTexture:x atIndex:location];
+    }),
 };
 
-inline void process(const std::any& a, size_t location, id <MTLRenderCommandEncoder> encoder)
+static std::unordered_map<
+std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
+fragment_any_visitor {
+    to_any_visitor<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(int) atIndex:location];
+    }),
+    to_any_visitor<float>([](const float& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(float) atIndex:location];
+    }),
+    to_any_visitor<Float2>([](const Float2& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(Float2) atIndex:location];
+    }),
+    to_any_visitor<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(Float3) atIndex:location];
+    }),
+    to_any_visitor<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(Float4) atIndex:location];
+    }),
+    to_any_visitor<Color>([](const Color& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(Color) atIndex:location];
+    }),
+    to_any_visitor<Matrix>([](const Matrix& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(Matrix) atIndex:location];
+    }),
+    to_any_visitor<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBuffer:x offset:0 atIndex:location];
+    }),
+    to_any_visitor<id<MTLTexture>>([](const id<MTLTexture>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentTexture:x atIndex:location];
+    }),
+};
+
+inline void process(const ShaderUniform& uniform, const std::any& a, id <MTLRenderCommandEncoder> encoder)
 {
+    const auto& any_visitor = uniform.type == MTLFunctionTypeVertex? vertex_any_visitor: fragment_any_visitor;
     if (const auto it = any_visitor.find(std::type_index(a.type()));
         it != any_visitor.cend()) {
-        it->second(a, location, encoder);
+        it->second(a, uniform.location, encoder);
     } else {
         log::Log() << "Unregistered type "<< std::quoted(a.type().name());
     }
@@ -105,13 +141,24 @@ void RenderPipelineState::uploadUniforms(const ShaderUniformBlock& uniformBlock,
         const auto& uniform = constUniforms[i];
         auto iter = properties.find(uniform.propertyId);
         if (iter != properties.end()) {
-            process(*iter, uniform.location, _render->renderEncoder);
+            process(uniform, *iter, _render->renderEncoder);
         }
     }
 }
 
 void RenderPipelineState::uploadTextures(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
-    
+    const auto& properties = shaderData._properties;
+    const auto& textureUniforms = uniformBlock.textureUniforms;
+
+    if (!textureUniforms.empty()) {
+        for (size_t i = 0; i < textureUniforms.size(); i++) {
+            const auto& uniform = textureUniforms[i];
+            auto iter = properties.find(uniform.propertyId);
+            if (iter != properties.end()) {
+                process(uniform, *iter, _render->renderEncoder);
+            }
+        }
+    }
 }
 
 void RenderPipelineState::_recordVertexLocation() {
@@ -132,6 +179,7 @@ void RenderPipelineState::_recordVertexLocation() {
             shaderUniform.name = name;
             shaderUniform.propertyId = Shader::getPropertyByName(name)._uniqueId;
             shaderUniform.location = location;
+            shaderUniform.type = MTLFunctionTypeVertex;
             
             switch (type) {
                 case MTLDataTypeFloat:
@@ -164,7 +212,8 @@ void RenderPipelineState::_recordVertexLocation() {
             shaderUniform.name = name;
             shaderUniform.propertyId = Shader::getPropertyByName(name)._uniqueId;
             shaderUniform.location = location;
-            
+            shaderUniform.type = MTLFunctionTypeFragment;
+
             if (type == MTLArgumentTypeBuffer) {
                 switch (aug.bufferDataType) {
                     case MTLDataTypeFloat:

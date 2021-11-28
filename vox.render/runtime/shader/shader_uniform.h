@@ -19,6 +19,7 @@ public:
     std::string name;
     int propertyId;
     size_t location;
+    MTLFunctionType type;
 };
 
 /// Shader uniform block.
