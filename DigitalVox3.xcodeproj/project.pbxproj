@@ -229,6 +229,8 @@
 		04CE397927527B4700204B8E /* primitive_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397727527B4700204B8E /* primitive_mesh.h */; };
 		04CE397C2753491200204B8E /* buffer_mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE397A2753491200204B8E /* buffer_mesh.mm */; };
 		04CE397D2753491200204B8E /* buffer_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE397B2753491200204B8E /* buffer_mesh.h */; };
+		04CE39822753678E00204B8E /* background.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39802753678E00204B8E /* background.mm */; };
+		04CE39832753678E00204B8E /* background.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39812753678E00204B8E /* background.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -614,6 +616,8 @@
 		04CE397A2753491200204B8E /* buffer_mesh.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = buffer_mesh.mm; sourceTree = "<group>"; };
 		04CE397B2753491200204B8E /* buffer_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffer_mesh.h; sourceTree = "<group>"; };
 		04CE397F27534C1100204B8E /* vox_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vox_type.h; sourceTree = "<group>"; };
+		04CE39802753678E00204B8E /* background.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = background.mm; sourceTree = "<group>"; };
+		04CE39812753678E00204B8E /* background.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = background.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -915,6 +919,8 @@
 				04160FF82750963B006CD384 /* transform.mm */,
 				041610052750A577006CD384 /* script.h */,
 				041610042750A577006CD384 /* script.mm */,
+				04CE39812753678E00204B8E /* background.h */,
+				04CE39802753678E00204B8E /* background.mm */,
 				041610092750A720006CD384 /* scene.h */,
 				041610082750A720006CD384 /* scene.mm */,
 				04CE38E7275103BC00204B8E /* scene_manager.h */,
@@ -1351,6 +1357,7 @@
 				04160FF72750955C006CD384 /* component.h in Headers */,
 				04CE392E2751B42800204B8E /* blend_state.h in Headers */,
 				04CE39122751AE5B00204B8E /* shader_program.h in Headers */,
+				04CE39832753678E00204B8E /* background.h in Headers */,
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
@@ -1513,6 +1520,7 @@
 				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
+				04CE39822753678E00204B8E /* background.mm in Sources */,
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,

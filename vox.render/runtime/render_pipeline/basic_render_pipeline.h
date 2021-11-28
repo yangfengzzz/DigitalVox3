@@ -33,10 +33,12 @@ public:
     /// - Parameters:
     ///   - context: Render context
     ///   - cubeFace: Render surface of cube texture
-    void render(const RenderContext& context, std::optional<TextureCubeFace> cubeFace, int mipLevel = 0);
+    void render(const RenderContext& context, std::optional<TextureCubeFace> cubeFace = std::nullopt,
+                int mipLevel = 0);
     
-    void _drawRenderPass(const RenderPass& pass, Camera* camera,
-                         TextureCubeFace cubeFace, int mipLevel = 0);
+    void _drawRenderPass(RenderPass& pass, Camera* camera,
+                         std::optional<TextureCubeFace> cubeFace = std::nullopt,
+                         int mipLevel = 0);
     
     /// Push a render element to the render queue.
     /// - Parameter element: Render element
@@ -76,7 +78,7 @@ public:
     
     /// Get render pass by name.
     /// - Parameter name: Render pass name
-    RenderPass getRenderPass(const std::string& name);
+    std::optional<RenderPass> getRenderPass(const std::string& name);
     
 private:
     RenderQueue _opaqueQueue;

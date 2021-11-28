@@ -12,6 +12,7 @@
 #include "engine_object.h"
 #include "entity.h"
 #include "shader/shader_data.h"
+#include "background.h"
 
 namespace vox {
 class Camera;
@@ -23,6 +24,9 @@ class Scene : public EngineObject {
 public:
     /** Scene name. */
     std::string name;
+    
+    /** The background of the scene. */
+    Background background = Background(_engine);
     
     /** Scene-related shader data. */
     ShaderData shaderData = ShaderData(ShaderDataGroup::Scene);

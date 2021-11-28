@@ -13,6 +13,7 @@
 #include "maths/color.h"
 #include <Metal/Metal.h>
 #include <string>
+#include <optional>
 
 namespace vox {
 using namespace math;
@@ -30,8 +31,8 @@ public:
     MaterialPtr replaceMaterial;
     Layer mask;
     bool renderOverride;
-    CameraClearFlags clearFlags;
-    Color clearColor;
+    std::optional<CameraClearFlags> clearFlags;
+    std::optional<Color> clearColor;
     
     /// Create a RenderPass.
     /// - Parameters:

@@ -34,6 +34,8 @@ public:
     void sort(std::function<bool(const RenderElement&, const RenderElement&)> compareFunc);
     
 private:
+    friend class BasicRenderPipeline;
+    
     std::vector<RenderElement> items;
 
     static bool _compareFromNearToFar(const RenderElement& a, const RenderElement& b);
