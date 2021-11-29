@@ -54,7 +54,7 @@ private:
     
     static std::optional<ShaderDataGroup> _getShaderPropertyGroup(const std::string& propertyName);
     
-    ShaderProgram* _getShaderProgram(Engine* engine, ShaderMacroCollection macroCollection);
+    ShaderProgram* _getShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection);
 
     int _shaderId = 0;
     std::string _vertexSource;

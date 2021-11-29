@@ -96,10 +96,13 @@ void ShaderMacroCollection::unionCollection(const ShaderMacroCollection& left, c
     result._value.insert(right._value.begin(), right._value.end());
 }
 
-size_t ShaderMacroCollection::hash() {
+size_t ShaderMacroCollection::hash() const {
     std::size_t hash{0U};
     for (int i = 0; i < MacroName::TOTAL_COUNT; i++) {
-        math::hash_combine(hash, std::hash<int>{}(_value[MacroName(i)].first));
+        auto iter = _value.find(MacroName(i));
+        if (iter != _value.end()) {
+            math::hash_combine(hash, std::hash<int>{}(iter->first));
+        }
     }
     return hash;
 }

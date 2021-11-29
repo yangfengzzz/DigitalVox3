@@ -49,7 +49,7 @@ public:
     ResourceCache(MetalRenderer* render);
     
     ShaderProgram* request_shader_module(const std::string& vertexSource, const std::string& fragmentSource,
-                                         ShaderMacroCollection& macroInfo);
+                                         const ShaderMacroCollection& macroInfo);
     
     RenderPipelineState* request_graphics_pipeline(MTLRenderPipelineDescriptor* pipelineDescriptor);
     

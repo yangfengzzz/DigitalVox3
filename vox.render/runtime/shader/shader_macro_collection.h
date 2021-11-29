@@ -27,7 +27,7 @@ struct ShaderMacroCollection {
     static void unionCollection(const ShaderMacroCollection& left, const ShaderMacroCollection& right,
                                 ShaderMacroCollection& result);
     
-    size_t hash();
+    size_t hash() const;
 
 private:
     friend class ShaderProgram;

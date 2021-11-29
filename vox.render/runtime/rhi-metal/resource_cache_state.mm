@@ -16,7 +16,7 @@ render(render){
 }
 
 ShaderProgram* ResourceCache::request_shader_module(const std::string& vertexSource, const std::string& fragmentSource,
-                                                    ShaderMacroCollection& macroInfo) {
+                                                    const ShaderMacroCollection& macroInfo) {
     std::size_t hash{0U};
     math::hash_combine(hash, std::hash<std::string>{}(vertexSource));
     math::hash_combine(hash, std::hash<std::string>{}(fragmentSource));

@@ -9,9 +9,12 @@
 #include "camera.h"
 #include "log.h"
 #include "material/material.h"
+#include "shader/shader_pool.h"
 
 namespace vox {
 Engine::Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
+    ShaderPool::initialization();
+
     _sceneManager.setActiveScene(std::make_shared<Scene>(this, "DefaultScene"));
     const uint8_t whitePixel[] = {255, 255, 255, 255};
     

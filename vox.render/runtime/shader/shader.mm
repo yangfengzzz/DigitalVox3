@@ -64,7 +64,7 @@ std::optional<ShaderDataGroup> Shader::_getShaderPropertyGroup(const std::string
     }
 }
 
-ShaderProgram* Shader::_getShaderProgram(Engine* engine, ShaderMacroCollection macroCollection) {
+ShaderProgram* Shader::_getShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection) {
     return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _fragmentSource, macroCollection);
 }
 

@@ -13,6 +13,7 @@
 namespace vox {
 /// Internal shader pool.
 class ShaderPool {
+public:
     static void initialization();
 };
 
