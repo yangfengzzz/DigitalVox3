@@ -13,7 +13,7 @@ std::unique_ptr<UpdateFlag> UpdateFlagManager::registration() {
 }
 
 void UpdateFlagManager::distribute() {
-    for (size_t i = _updateFlags.size() - 1; i >= 0; i--) {
+    for (size_t i = 0; i < _updateFlags.size(); i++) {
         _updateFlags[i]->flag = true;
     }
 }

@@ -92,6 +92,7 @@ public:
     void destroy();
     
 private:
+    friend class SceneManager;
     friend class Engine;
     friend class Entity;
     friend class Camera;

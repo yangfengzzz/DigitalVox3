@@ -12,8 +12,17 @@ ScenePtr SceneManager::activeScene() {
   return _activeScene;
 }
 
-void SceneManager::setActiveScene(ScenePtr scene) {
-    
+void SceneManager::setActiveScene(ScenePtr newValue) {
+    auto oldScene = _activeScene;
+    if (oldScene != newValue) {
+        if (oldScene) {
+            oldScene->_processActive(false);
+        }
+        if (newValue) {
+            newValue->_processActive(true);
+        }
+        _activeScene = newValue;
+    }
 }
 
 }

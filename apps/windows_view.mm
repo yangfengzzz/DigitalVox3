@@ -11,6 +11,10 @@
 using namespace vox;
 
 int main(int, char**) {
-    const auto canvas = Canvas(720, 1080, "vox.render");
-    const auto engine = Engine(canvas);
+    auto canvas = Canvas(720, 1080, "vox.render");
+    auto engine = Engine(canvas);
+    auto scene = engine.sceneManager().activeScene();
+    auto rootEntity = scene->createRootEntity();
+
+    engine.run();
 }

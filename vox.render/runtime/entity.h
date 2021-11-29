@@ -50,9 +50,9 @@ public:
     /**
      * The parent entity.
      */
-    EntityPtr parent();
+    Entity* parent();
     
-    void setParent(EntityPtr entity);
+    void setParent(Entity* entity);
     
     
     /**
@@ -63,7 +63,7 @@ public:
     /**
      * The scene the entity belongs to.
      */
-    ScenePtr scene();
+    Scene* scene();
     
     /**
      * The children entities
@@ -92,7 +92,7 @@ public:
      */
     template<typename T>
     T* getComponent() {
-        for (size_t i = _components.size() - 1; i >= 0; i--) {
+        for (size_t i = 0; i < _components.size(); i++) {
             T* component = dynamic_cast<T*>(_components[i].get());
             if (component) {
                 return component;
@@ -108,7 +108,7 @@ public:
     template<typename T>
     std::vector<T*> getComponents() {
         std::vector<T*> results;
-        for (size_t i = _components.size() - 1; i >= 0; i--) {
+        for (size_t i = 0; i < _components.size(); i++) {
             T* component = dynamic_cast<T*>(_components[i].get());
             if (component) {
                 results.push_back(component);
@@ -197,7 +197,7 @@ private:
     
     void _removeScript(Script* script);
     
-    EntityPtr _removeFromParent();
+    Entity* _removeFromParent();
     
     void _processActive();
     
@@ -205,13 +205,13 @@ private:
     
     template<typename T>
     void _getComponentsInChildren(std::vector<T*>& results) {
-        for (size_t i = _components.size() - 1; i >= 0; i--) {
+        for (size_t i = 0; i < _components.size(); i++) {
             T* component = dynamic_cast<T*>(_components[i].get());
             if (component) {
                 results.push_back(component);
             }
         }
-        for (size_t i = _children.size() - 1; i >= 0; i--) {
+        for (size_t i = 0; i < _children.size(); i++) {
             _children[i]->_getComponentsInChildren(results);
         }
     }
@@ -226,17 +226,17 @@ private:
     
     static EntityPtr _findChildByName(EntityPtr root, const std::string& name);
     
-    static void _traverseSetOwnerScene(EntityPtr entity, std::optional<std::weak_ptr<Scene>> scene);
+    static void _traverseSetOwnerScene(EntityPtr entity, Scene* scene);
     
     bool _isActiveInHierarchy = false;
     std::vector<std::unique_ptr<Component>> _components;
     std::vector<Script*> _scripts;
     std::vector<EntityPtr> _children;
-    std::optional<std::weak_ptr<Scene>> _scene;
+    Scene* _scene;
     bool _isRoot = false;
     bool _isActive = true;
     
-    std::optional<std::weak_ptr<Entity>> _parent;
+    Entity* _parent;
     std::vector<Component*> _activeChangedComponents;
     
     std::unique_ptr<UpdateFlag> _inverseWorldMatFlag;

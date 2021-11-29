@@ -43,12 +43,12 @@ void Scene::addRootEntity(EntityPtr entity) {
     
     // add or remove from scene's rootEntities
     const auto oldScene = entity->_scene;
-    if (oldScene->lock().get() != this) {
+    if (oldScene != this) {
         if (oldScene && isRoot) {
-            oldScene->lock()->_removeEntity(entity);
+            oldScene->_removeEntity(entity);
         }
         _rootEntities.push_back(entity);
-        Entity::_traverseSetOwnerScene(entity, ScenePtr(this));
+        Entity::_traverseSetOwnerScene(entity, this);
     } else if (!isRoot) {
         _rootEntities.push_back(entity);
     }
@@ -66,12 +66,12 @@ void Scene::addRootEntity(EntityPtr entity) {
 }
 
 void Scene::removeRootEntity(EntityPtr entity) {
-    if (entity->_isRoot && entity->_scene->lock().get() == this) {
+    if (entity->_isRoot && entity->_scene == this) {
         _removeEntity(entity);
         if (_isActiveInEngine) {
             entity->_processInActive();
         }
-        Entity::_traverseSetOwnerScene(entity, std::nullopt);
+        Entity::_traverseSetOwnerScene(entity, nullptr);
     }
 }
 
@@ -81,14 +81,14 @@ EntityPtr Scene::getRootEntity(size_t index) {
 
 EntityPtr Scene::findEntityByName(const std::string& name) {
     const auto& children = _rootEntities;
-    for (size_t i = children.size() - 1; i >= 0; i--) {
+    for (size_t i = 0; i < children.size(); i++) {
         const auto& child = children[i];
         if (child->name == name) {
             return child;
         }
     }
     
-    for (size_t i = children.size() - 1; i >= 0; i--) {
+    for (size_t i = 0; i < children.size(); i++) {
         const auto& child = children[i];
         const auto entity = child->findByName(name);
         if (entity) {
@@ -131,7 +131,7 @@ void Scene::_detachRenderCamera(Camera* camera) {
 void Scene::_processActive(bool active) {
     _isActiveInEngine = active;
     const auto& rootEntities = _rootEntities;
-    for (size_t i = rootEntities.size() - 1; i >= 0; i--) {
+    for (size_t i = 0; i < rootEntities.size(); i++) {
         const auto& entity = rootEntities[i];
         if (entity->_isActive) {
             active ? entity->_processActive() : entity->_processInActive();

@@ -82,7 +82,7 @@ void ComponentsManager::callScriptOnStart() {
 
 void ComponentsManager::callScriptOnUpdate(float deltaTime) {
     const auto& onUpdateScripts = _onUpdateScripts;
-    for (size_t i = _onUpdateScripts.size() - 1; i >= 0; --i) {
+    for (size_t i = 0; i < _onUpdateScripts.size(); i++) {
         const auto& element = onUpdateScripts[i];
         if (element->_started) {
             element->onUpdate(deltaTime);
@@ -92,7 +92,7 @@ void ComponentsManager::callScriptOnUpdate(float deltaTime) {
 
 void ComponentsManager::callScriptOnLateUpdate(float deltaTime) {
     const auto& onLateUpdateScripts = _onLateUpdateScripts;
-    for (size_t i = _onLateUpdateScripts.size() - 1; i >= 0; --i) {
+    for (size_t i = 0; i < _onLateUpdateScripts.size(); i++) {
         const auto& element = onLateUpdateScripts[i];
         if (element->_started) {
             element->onLateUpdate(deltaTime);
@@ -102,7 +102,7 @@ void ComponentsManager::callScriptOnLateUpdate(float deltaTime) {
 
 void ComponentsManager::callRendererOnUpdate(float deltaTime) {
     const auto& elements = _onUpdateRenderers;
-    for (size_t i = _onUpdateRenderers.size() - 1; i >= 0; --i) {
+    for (size_t i = 0; i < _onUpdateRenderers.size(); i++) {
         elements[i]->update(deltaTime);
     }
 }
@@ -110,7 +110,7 @@ void ComponentsManager::callRendererOnUpdate(float deltaTime) {
 void ComponentsManager::callRender(const RenderContext& context) {
     const auto& camera = context._camera;
     const auto& elements = _renderers;
-    for (size_t i = _renderers.size() - 1; i >= 0; --i) {
+    for (size_t i = 0; i < _renderers.size(); i++) {
         const auto& element = elements[i];
         
         // filter by camera culling mask.
@@ -150,7 +150,7 @@ void ComponentsManager::callRender(const RenderContext& context) {
 
 void ComponentsManager::callComponentDestroy() {
     if (_destroyComponents.size() > 0) {
-        for (size_t i = _destroyComponents.size() - 1; i >= 0; --i) {
+        for (size_t i = 0; i < _destroyComponents.size(); i++) {
             _destroyComponents[i]->onDestroy();
         }
         _destroyComponents.clear();
@@ -159,7 +159,7 @@ void ComponentsManager::callComponentDestroy() {
 
 void ComponentsManager::callCameraOnBeginRender(Camera* camera) {
     const auto& camComps = camera->entity()->_components;
-    for (size_t i = camComps.size() - 1; i >= 0; --i) {
+    for (size_t i = 0; i < camComps.size(); i++) {
         const auto& camComp = camComps[i].get();
         auto pointer = dynamic_cast<Script*>(camComp);
         if (pointer != nullptr) {
@@ -170,7 +170,7 @@ void ComponentsManager::callCameraOnBeginRender(Camera* camera) {
 
 void ComponentsManager::callCameraOnEndRender(Camera* camera) {
     const auto& camComps = camera->entity()->_components;
-    for (size_t i = camComps.size() - 1; i >= 0; --i) {
+    for (size_t i = 0; i < camComps.size(); i++) {
         const auto& camComp = camComps[i].get();
         auto pointer = dynamic_cast<Script*>(camComp);
         if (pointer != nullptr) {
