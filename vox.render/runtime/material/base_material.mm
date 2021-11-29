@@ -15,7 +15,23 @@ bool BaseMaterial::isTransparent() {
 }
 
 void BaseMaterial::setIsTransparent(bool newValue) {
+    if (newValue == _isTransparent) {
+        return;
+    }
+    _isTransparent = newValue;
     
+    auto& depthState = renderState.depthState;
+    auto& targetBlendState = renderState.blendState.targetBlendState;
+    
+    if (newValue) {
+        targetBlendState.enabled = true;
+        depthState.writeEnabled = false;
+        renderQueueType = RenderQueueType::Transparent;
+    } else {
+        targetBlendState.enabled = false;
+        depthState.writeEnabled = true;
+        renderQueueType = (shaderData.getData(BaseMaterial::_alphaCutoffProp).has_value()) ? RenderQueueType::AlphaTest : RenderQueueType::Opaque;
+    }
 }
 
 float BaseMaterial::alphaCutoff() {
@@ -23,7 +39,15 @@ float BaseMaterial::alphaCutoff() {
 }
 
 void BaseMaterial::setAlphaCutoff(float newValue) {
+    shaderData.setData(BaseMaterial::_alphaCutoffProp, newValue);
     
+    if (newValue > 0) {
+        shaderData.enableMacro(NEED_ALPHA_CUTOFF);
+        renderQueueType = _isTransparent ? RenderQueueType::Transparent : RenderQueueType::AlphaTest;
+    } else {
+        shaderData.disableMacro(NEED_ALPHA_CUTOFF);
+        renderQueueType = _isTransparent ? RenderQueueType::Transparent : RenderQueueType::Opaque;
+    }
 }
 
 const RenderFace& BaseMaterial::renderFace() {
@@ -31,7 +55,19 @@ const RenderFace& BaseMaterial::renderFace() {
 }
 
 void BaseMaterial::setRenderFace(const RenderFace& newValue) {
+    _renderFace = newValue;
     
+    switch (newValue) {
+        case RenderFace::Front:
+            renderState.rasterState.cullMode = MTLCullModeBack;
+            break;
+        case RenderFace::Back:
+            renderState.rasterState.cullMode = MTLCullModeFront;
+            break;
+        case RenderFace::Double:
+            renderState.rasterState.cullMode = MTLCullModeNone;
+            break;
+    }
 }
 
 const BlendMode& BaseMaterial::blendMode() {
@@ -39,7 +75,28 @@ const BlendMode& BaseMaterial::blendMode() {
 }
 
 void BaseMaterial::setBlendMode(const BlendMode& newValue) {
+    _blendMode = newValue;
     
+    auto& target = renderState.blendState.targetBlendState;
+    
+    switch (newValue) {
+        case BlendMode::Normal:
+            target.sourceColorBlendFactor = MTLBlendFactorSourceAlpha;
+            target.destinationColorBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+            target.sourceAlphaBlendFactor = MTLBlendFactorOne;
+            target.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+            target.alphaBlendOperation = MTLBlendOperationAdd;
+            target.colorBlendOperation = MTLBlendOperationAdd;
+            break;
+        case BlendMode::Additive:
+            target.sourceColorBlendFactor = MTLBlendFactorSourceAlpha;
+            target.destinationColorBlendFactor = MTLBlendFactorOne;
+            target.sourceAlphaBlendFactor = MTLBlendFactorOne;
+            target.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+            target.alphaBlendOperation = MTLBlendOperationAdd;
+            target.colorBlendOperation = MTLBlendOperationAdd;
+            break;
+    }
 }
 
 BaseMaterial::BaseMaterial(Engine* engine, Shader* shader):
