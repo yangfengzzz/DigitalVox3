@@ -14,6 +14,7 @@
 
 namespace vox {
 class BaseMaterial: public Material {
+public:
     /// Is this material transparent.
     /// - Remark:
     /// If material is transparent, transparent blend mode will be affected by `blendMode`, default is `BlendMode.Normal`.
