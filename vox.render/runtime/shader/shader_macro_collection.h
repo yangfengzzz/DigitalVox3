@@ -33,7 +33,7 @@ private:
     friend class ShaderProgram;
     friend class ShaderData;
     
-    std::unordered_map<MacroName, std::pair<int, MTLDataType>> _value;
+    std::unordered_map<MacroName, std::pair<int, MTLDataType>> _value{};
 };
     
 }

@@ -48,7 +48,7 @@ void Scene::addRootEntity(EntityPtr entity) {
             oldScene->_removeEntity(entity);
         }
         _rootEntities.push_back(entity);
-        Entity::_traverseSetOwnerScene(entity, this);
+        Entity::_traverseSetOwnerScene(entity.get(), this);
     } else if (!isRoot) {
         _rootEntities.push_back(entity);
     }
@@ -71,7 +71,7 @@ void Scene::removeRootEntity(EntityPtr entity) {
         if (_isActiveInEngine) {
             entity->_processInActive();
         }
-        Entity::_traverseSetOwnerScene(entity, nullptr);
+        Entity::_traverseSetOwnerScene(entity.get(), nullptr);
     }
 }
 

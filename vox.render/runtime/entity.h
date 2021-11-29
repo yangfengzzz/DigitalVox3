@@ -224,9 +224,9 @@ private:
     
     void _setTransformDirty();
     
-    static EntityPtr _findChildByName(EntityPtr root, const std::string& name);
+    static EntityPtr _findChildByName(Entity* root, const std::string& name);
     
-    static void _traverseSetOwnerScene(EntityPtr entity, Scene* scene);
+    static void _traverseSetOwnerScene(Entity* entity, Scene* scene);
     
     bool _isActiveInHierarchy = false;
     std::vector<std::unique_ptr<Component>> _components{};
