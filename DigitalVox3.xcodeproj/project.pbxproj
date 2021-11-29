@@ -43,6 +43,7 @@
 		0416100E2750E1A9006CD384 /* components_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416100C2750E1A9006CD384 /* components_manager.mm */; };
 		0416100F2750E1A9006CD384 /* components_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416100D2750E1A9006CD384 /* components_manager.h */; };
 		0416101327546E8F006CD384 /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
+		04161015275474AE006CD384 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04161014275474AE006CD384 /* ModelIO.framework */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -326,6 +327,7 @@
 		0416100C2750E1A9006CD384 /* components_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = components_manager.mm; sourceTree = "<group>"; };
 		0416100D2750E1A9006CD384 /* components_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = components_manager.h; sourceTree = "<group>"; };
 		0416101027545535006CD384 /* windows_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = windows_view.mm; sourceTree = "<group>"; };
+		04161014275474AE006CD384 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */,
 				04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */,
 				04CE36A0274D096600204B8E /* Metal.framework in Frameworks */,
+				04161015275474AE006CD384 /* ModelIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +767,7 @@
 		04CE369E274D096600204B8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04161014275474AE006CD384 /* ModelIO.framework */,
 				04CE38C1274D21AE00204B8E /* CoreFoundation.framework */,
 				04CE36B7274D0AAB00204B8E /* QuartzCore.framework */,
 				04CE36A1274D096A00204B8E /* MetalKit.framework */,

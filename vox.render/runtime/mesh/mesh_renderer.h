@@ -13,6 +13,8 @@
 namespace vox {
 class MeshRenderer: public Renderer {
 public:
+    explicit MeshRenderer(Entity* entity);
+    
     void setMesh(const MeshPtr& mesh);
     MeshPtr mesh();
     

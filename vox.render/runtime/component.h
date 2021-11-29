@@ -16,7 +16,7 @@ namespace vox {
  */
 class Component : public EngineObject {
 public:
-    Component(Entity *entity);
+    explicit Component(Entity *entity);
     
     /**
      * Indicates whether the component is enabled.

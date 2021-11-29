@@ -35,7 +35,7 @@ public:
     /// The bounding volume of the renderer.
     BoundingBox bounds();
     
-    Renderer(Entity* entity);
+    explicit Renderer(Entity* entity);
     
     void _onEnable() override;
     
@@ -45,9 +45,9 @@ public:
     
     virtual void _render(Camera* camera) = 0;
     
-    virtual void _updateBounds(BoundingBox& worldBounds) = 0;
+    virtual void _updateBounds(BoundingBox& worldBounds) {}
     
-    virtual void update(float deltaTime) = 0;
+    virtual void update(float deltaTime) {}
     
 public:
     //MARK:- Material Methods

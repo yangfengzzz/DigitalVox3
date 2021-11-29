@@ -11,6 +11,11 @@
 #include "../camera.h"
 
 namespace vox {
+MeshRenderer::MeshRenderer(Entity* entity):
+Renderer(entity) {
+    
+}
+
 void MeshRenderer::setMesh(const MeshPtr& newValue) {
     auto& lastMesh = _mesh;
     if (lastMesh != newValue) {
