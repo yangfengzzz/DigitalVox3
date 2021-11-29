@@ -10,6 +10,9 @@
 #include "../engine.h"
 
 namespace vox {
+std::unordered_map<std::string, std::unique_ptr<Shader>> Shader::_shaderMap = {};
+std::unordered_map<std::string, ShaderProperty> Shader::_propertyNameMap = {};
+
 Shader::Shader(const std::string& name,
                const std::string& vertexSource,
                const std::string& fragmentSource):

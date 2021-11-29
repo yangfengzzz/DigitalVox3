@@ -7,8 +7,6 @@
 
 #include "resource_cache_state.h"
 #include "metal_renderer.h"
-#include "../render_pipeline/render_pass.h"
-#include "../shader/shader_program.h"
 #include "maths/math_ex.h"
 
 namespace vox {

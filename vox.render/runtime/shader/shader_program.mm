@@ -9,6 +9,8 @@
 #include <string>
 
 namespace vox {
+int ShaderProgram::_counter = 0;
+
 id<MTLFunction> ShaderProgram::vertexShader() {
     return _vertexShader;
 }

@@ -28,7 +28,7 @@ public:
     Layer mask;
     bool renderOverride;
     std::optional<CameraClearFlags> clearFlags;
-    std::optional<Color> clearColor;
+    std::optional<math::Color> clearColor;
     
     /// Create a RenderPass.
     /// - Parameters:

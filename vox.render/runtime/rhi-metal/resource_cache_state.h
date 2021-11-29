@@ -9,10 +9,11 @@
 #define resource_cache_state_hpp
 
 #include "../vox_type.h"
-#include "../shader/shader_macro_collection.h"
 #include "render_pipeline_state.h"
 #include "compute_pipeline_state.h"
-
+#include "../render_pipeline/render_pass.h"
+#include "../shader/shader_program.h"
+#include "../shader/shader_macro_collection.h"
 #include <unordered_map>
 #include <string>
 #include <Metal/Metal.h>

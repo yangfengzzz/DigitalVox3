@@ -42,6 +42,7 @@
 		0416100B2750A720006CD384 /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610092750A720006CD384 /* scene.h */; };
 		0416100E2750E1A9006CD384 /* components_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416100C2750E1A9006CD384 /* components_manager.mm */; };
 		0416100F2750E1A9006CD384 /* components_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416100D2750E1A9006CD384 /* components_manager.h */; };
+		0416101127545535006CD384 /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -92,9 +93,7 @@
 		04CE3818274D167F00204B8E /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE368D274D089700204B8E /* imgui_widgets.cpp */; };
 		04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3695274D08BC00204B8E /* imgui_impl_glfw.cpp */; };
 		04CE3821274D168000204B8E /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3696274D08BC00204B8E /* imgui_impl_metal.mm */; };
-		04CE3824274D174300204B8E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3686274D086900204B8E /* main.mm */; };
 		04CE3825274D174700204B8E /* libvox.render.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE3781274D156200204B8E /* libvox.render.dylib */; };
-		04CE3827274D179500204B8E /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE368B274D089700204B8E /* imgui_demo.cpp */; };
 		04CE3836274D17EA00204B8E /* gtest-all.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3833274D17EA00204B8E /* gtest-all.cc */; };
 		04CE3837274D17EA00204B8E /* gtest_main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04CE3835274D17EA00204B8E /* gtest_main.cc */; };
 		04CE383A274D181D00204B8E /* libvox.render.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE3781274D156200204B8E /* libvox.render.dylib */; };
@@ -326,6 +325,7 @@
 		041610092750A720006CD384 /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		0416100C2750E1A9006CD384 /* components_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = components_manager.mm; sourceTree = "<group>"; };
 		0416100D2750E1A9006CD384 /* components_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = components_manager.h; sourceTree = "<group>"; };
+		0416101027545535006CD384 /* windows_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = windows_view.mm; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -756,6 +756,7 @@
 				04CE36B9274D0AC600204B8E /* apps.entitlements */,
 				04CE368B274D089700204B8E /* imgui_demo.cpp */,
 				04CE3686274D086900204B8E /* main.mm */,
+				0416101027545535006CD384 /* windows_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";
@@ -1565,8 +1566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CE3827274D179500204B8E /* imgui_demo.cpp in Sources */,
-				04CE3824274D174300204B8E /* main.mm in Sources */,
+				0416101127545535006CD384 /* windows_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1894,6 +1894,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = ./vox.render;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					/Users/yangfeng/Desktop/PhysX/physx/bin/mac.x86_64/debug,
@@ -1945,6 +1946,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = ./vox.render;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					/Users/yangfeng/Desktop/PhysX/physx/bin/mac.x86_64/debug,
