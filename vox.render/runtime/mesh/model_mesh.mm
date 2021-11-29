@@ -184,28 +184,18 @@ void ModelMesh::uploadData(bool noLongerAccessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
     
-    // Vertex element change.
-    if (_vertexSlotChanged) {
-        _vertexDescriptor = _updateVertexDescriptor();
-        _vertexChangeFlag = ValueChanged::All;
-        _vertexSlotChanged = false;
-    }
+    _vertexDescriptor = _updateVertexDescriptor();
+    _vertexChangeFlag = ValueChanged::All;
+    _vertexSlotChanged = false;
     
-    // Vertex value change.
-    const auto& vertexBuffer = _vertexBuffer[0]->buffer();
     auto vertexFloatCount = _elementCount * _vertexCount;
-    if (vertexBuffer == nil || _verticesFloat32.size() != vertexFloatCount) {
-        auto vertices = std::vector<float>(vertexFloatCount);
-        _verticesFloat32 = vertices;
-        
-        _vertexChangeFlag = ValueChanged::All;
-        _updateVertices(vertices);
-        
-        auto newVertexBuffer = [engine()->_hardwareRenderer.device newBufferWithBytes:vertices.data()
-                                                                               length:vertexFloatCount * sizeof(float)
-                                                                              options:NULL];
-        _setVertexBuffer(0, MeshBuffer(newVertexBuffer, vertexFloatCount * sizeof(float), MDLMeshBufferTypeVertex));
-    }
+    auto vertices = std::vector<float>(vertexFloatCount);
+    _updateVertices(vertices);
+    
+    auto newVertexBuffer = [engine()->_hardwareRenderer.device newBufferWithBytes:vertices.data()
+                                                                           length:vertexFloatCount * sizeof(float)
+                                                                          options:NULL];
+    _setVertexBuffer(0, MeshBuffer(newVertexBuffer, vertexFloatCount * sizeof(float), MDLMeshBufferTypeVertex));
 }
 
 MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
