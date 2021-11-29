@@ -210,7 +210,10 @@ void ModelMesh::uploadData(bool noLongerAccessible) {
 
 MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
     auto descriptr = [[MDLVertexDescriptor alloc]init];
-    descriptr.attributes[Position] = POSITION_VERTEX_DESCRIPTOR;
+    descriptr.attributes[Position] =
+    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
+                                     format:MDLVertexFormatFloat3
+                                     offset:0 bufferIndex:0];
     
     size_t offset = 12;
     size_t elementCount = 3;

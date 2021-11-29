@@ -35,11 +35,6 @@ enum ValueChanged {
     All = 0xffff
 };
 
-MDLVertexAttribute* POSITION_VERTEX_DESCRIPTOR =
-[[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
-                                 format:MDLVertexFormatFloat3
-                                 offset:0 bufferIndex:0];
-
 class ModelMesh: public Mesh {
 public:
     /// Whether to access data of the mesh.

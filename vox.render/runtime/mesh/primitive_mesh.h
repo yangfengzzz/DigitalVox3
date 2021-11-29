@@ -15,6 +15,7 @@ namespace vox {
  * Used to generate common primitive meshes.
  */
 class PrimitiveMesh {
+public:
     /**
      * Create a sphere mesh.
      * @param engine - Engine

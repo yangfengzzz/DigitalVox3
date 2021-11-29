@@ -9,6 +9,7 @@
 #include "../vox.render/runtime/engine.h"
 #include "../vox.render/runtime/camera.h"
 #include "../vox.render/runtime/mesh/mesh_renderer.h"
+#include "../vox.render/runtime/mesh/primitive_mesh.h"
 
 using namespace vox;
 
@@ -22,7 +23,7 @@ int main(int, char**) {
     
     auto boxEntity = rootEntity->createChild("BoxEntity");
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
-
+    boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, 2, 2, 2));
 
     engine.run();
 }
