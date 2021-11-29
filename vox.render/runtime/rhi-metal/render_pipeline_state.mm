@@ -19,9 +19,15 @@
 namespace vox {
 RenderPipelineState::RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor):
 _render(_render) {
+    NSError *error = nil;
     _handle = [_render->device newRenderPipelineStateWithDescriptor:descriptor
                                                             options:MTLPipelineOptionArgumentInfo
-                                                         reflection:_reflection error:NULL];
+                                                         reflection:_reflection error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create Metal pipeline state: %@", error);
+    }
+    
     _recordVertexLocation();
 }
 
@@ -149,7 +155,7 @@ void RenderPipelineState::uploadUniforms(const ShaderUniformBlock& uniformBlock,
 void RenderPipelineState::uploadTextures(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
     const auto& properties = shaderData._properties;
     const auto& textureUniforms = uniformBlock.textureUniforms;
-
+    
     if (!textureUniforms.empty()) {
         for (size_t i = 0; i < textureUniforms.size(); i++) {
             const auto& uniform = textureUniforms[i];
@@ -213,7 +219,7 @@ void RenderPipelineState::_recordVertexLocation() {
             shaderUniform.propertyId = Shader::getPropertyByName(name)._uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeFragment;
-
+            
             if (type == MTLArgumentTypeBuffer) {
                 switch (aug.bufferDataType) {
                     case MTLDataTypeFloat:
