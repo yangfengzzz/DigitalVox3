@@ -71,6 +71,7 @@ void MetalRenderer::clearRenderTarget(int clearFlags,
     if (clearFlags == CameraClearFlags::DepthColor) {
         renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
         renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+        renderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
     }
     renderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
     renderPassDescriptor.stencilAttachment.storeAction = MTLStoreActionStore;
