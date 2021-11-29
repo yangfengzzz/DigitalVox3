@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "render_pipeline_state.h"
 #include "../graphics/submesh.h"
+#include "../../gui/imgui_impl_metal.h"
 
 namespace vox {
 MetalRenderer::MetalRenderer(Canvas canvas):
@@ -23,6 +24,8 @@ resouceCache(this) {
     
     colorPixelFormat = MTLPixelFormatBGRA8Unorm;
     samplerState = buildSamplerState();
+    
+    ImGui_ImplMetal_Init(device);
     
     NSWindow *nswin = glfwGetCocoaWindow(canvas.window);
     layer = [CAMetalLayer layer];

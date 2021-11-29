@@ -12,7 +12,7 @@
 using namespace vox;
 
 int main(int, char**) {
-    auto canvas = Canvas(720, 1080, "vox.render");
+    auto canvas = Canvas(1280, 720, "vox.render");
     auto engine = Engine(canvas);
     auto scene = engine.sceneManager().activeScene();
     auto rootEntity = scene->createRootEntity();

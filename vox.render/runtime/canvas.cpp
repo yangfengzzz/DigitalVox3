@@ -6,6 +6,7 @@
 //
 
 #include "canvas.h"
+#include "../gui/imgui_impl_glfw.h"
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -25,6 +26,15 @@ Canvas::Canvas(int width, int height, const char* title) {
     if (window == NULL)
         return;
     
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    // Setup style
+    ImGui::StyleColorsDark();
+    
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+
     _width = width;
     _height = height;
 }

@@ -42,7 +42,7 @@
 		0416100B2750A720006CD384 /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610092750A720006CD384 /* scene.h */; };
 		0416100E2750E1A9006CD384 /* components_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416100C2750E1A9006CD384 /* components_manager.mm */; };
 		0416100F2750E1A9006CD384 /* components_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416100D2750E1A9006CD384 /* components_manager.h */; };
-		0416101127545535006CD384 /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
+		0416101327546E8F006CD384 /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -1566,7 +1566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0416101127545535006CD384 /* windows_view.mm in Sources */,
+				0416101327546E8F006CD384 /* windows_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -96,11 +96,14 @@ void Engine::update() {
         
         _componentsManager.callScriptOnStart();
         
+        glfwPollEvents();
         _componentsManager.callScriptOnUpdate(deltaTime);
         // _componentsManager.callAnimationUpdate(deltaTime);
         _componentsManager.callScriptOnLateUpdate(deltaTime);
         
+        _hardwareRenderer.begin();
         _render(scene, deltaTime);
+        _hardwareRenderer.end();
     }
     _componentsManager.callComponentDestroy();
 }
