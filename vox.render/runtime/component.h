@@ -38,7 +38,7 @@ public:
     /**
      * The scene which the component's entity belongs to.
      */
-    ScenePtr scene();
+    Scene* scene();
     
     /**
      * Destroy this instance.

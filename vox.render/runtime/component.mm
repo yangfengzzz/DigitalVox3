@@ -40,7 +40,7 @@ Entity *Component::entity() {
     return _entity;
 }
 
-ScenePtr Component::scene() {
+Scene* Component::scene() {
     return _entity->scene();
 }
 
