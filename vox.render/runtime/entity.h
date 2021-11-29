@@ -229,17 +229,17 @@ private:
     static void _traverseSetOwnerScene(EntityPtr entity, Scene* scene);
     
     bool _isActiveInHierarchy = false;
-    std::vector<std::unique_ptr<Component>> _components;
-    std::vector<Script*> _scripts;
-    std::vector<EntityPtr> _children;
-    Scene* _scene;
+    std::vector<std::unique_ptr<Component>> _components{};
+    std::vector<Script*> _scripts{};
+    std::vector<EntityPtr> _children{};
+    Scene* _scene = nullptr;
     bool _isRoot = false;
     bool _isActive = true;
     
-    Entity* _parent;
-    std::vector<Component*> _activeChangedComponents;
+    Entity* _parent = nullptr;
+    std::vector<Component*> _activeChangedComponents{};
     
-    std::unique_ptr<UpdateFlag> _inverseWorldMatFlag;
+    std::unique_ptr<UpdateFlag> _inverseWorldMatFlag = nullptr;
 };
 
 }

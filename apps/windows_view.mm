@@ -7,6 +7,7 @@
 
 #include "../vox.render/runtime/canvas.h"
 #include "../vox.render/runtime/engine.h"
+#include "../vox.render/runtime/camera.h"
 
 using namespace vox;
 
@@ -15,6 +16,8 @@ int main(int, char**) {
     auto engine = Engine(canvas);
     auto scene = engine.sceneManager().activeScene();
     auto rootEntity = scene->createRootEntity();
+    auto cameraEntity = rootEntity->createChild("camera");
+    auto camera = cameraEntity->addComponent<vox::Camera>();
 
     engine.run();
 }
