@@ -8,6 +8,7 @@
 #include "renderer.h"
 #include "entity.h"
 #include "camera.h"
+#include "engine.h"
 
 namespace vox {
 ShaderProperty Renderer::_localMatrixProperty = Shader::getPropertyByName("u_localMat");
@@ -37,9 +38,19 @@ _transformChangeFlag(entity->transform->registerWorldChangeFlag()) {
 }
 
 void Renderer::_onEnable()  {
+    auto& componentsManager = engine()->_componentsManager;
+    if (_overrideUpdate) {
+        componentsManager.addOnUpdateRenderers(this);
+    }
+    componentsManager.addRenderer(this);
 }
 
 void Renderer::_onDisable()  {
+    auto& componentsManager = engine()->_componentsManager;
+    if (_overrideUpdate) {
+        componentsManager.removeOnUpdateRenderers(this);
+    }
+    componentsManager.removeRenderer(this);
 }
 
 void Renderer::_onDestroy()  {
@@ -74,7 +85,7 @@ void Renderer::setMaterial(MaterialPtr material) {
 
     if (index >= _materials.size()) {
         _materials.reserve(index + 1);
-        for (size_t i = _materials.size(); i < index; i++) {
+        for (size_t i = _materials.size(); i <= index; i++) {
             _materials.push_back(nullptr);
         }
     }
@@ -91,7 +102,7 @@ void Renderer::setMaterial(MaterialPtr material) {
 void Renderer::setMaterial(size_t index, MaterialPtr material) {
     if (index >= _materials.size()) {
         _materials.reserve(index + 1);
-        for (size_t i = _materials.size(); i < index; i++) {
+        for (size_t i = _materials.size(); i <= index; i++) {
             _materials.push_back(nullptr);
         }
     }

@@ -23,6 +23,7 @@ int main(int, char**) {
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
+    cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     
     auto boxEntity = rootEntity->createChild("BoxEntity");
