@@ -257,6 +257,8 @@
 		04CE39B5275508D900204B8E /* pbr_base_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39B3275508D900204B8E /* pbr_base_material.h */; };
 		04CE39B827550EBE00204B8E /* pbr_specular_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39B627550EBE00204B8E /* pbr_specular_material.mm */; };
 		04CE39B927550EBE00204B8E /* pbr_specular_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39B727550EBE00204B8E /* pbr_specular_material.h */; };
+		04CE39BC275511CE00204B8E /* pbr_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39BA275511CE00204B8E /* pbr_material.mm */; };
+		04CE39BD275511CE00204B8E /* pbr_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39BB275511CE00204B8E /* pbr_material.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -673,6 +675,8 @@
 		04CE39B3275508D900204B8E /* pbr_base_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pbr_base_material.h; sourceTree = "<group>"; };
 		04CE39B627550EBE00204B8E /* pbr_specular_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pbr_specular_material.mm; sourceTree = "<group>"; };
 		04CE39B727550EBE00204B8E /* pbr_specular_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pbr_specular_material.h; sourceTree = "<group>"; };
+		04CE39BA275511CE00204B8E /* pbr_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pbr_material.mm; sourceTree = "<group>"; };
+		04CE39BB275511CE00204B8E /* pbr_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pbr_material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1383,6 +1387,8 @@
 				04CE39B2275508D900204B8E /* pbr_base_material.mm */,
 				04CE39B727550EBE00204B8E /* pbr_specular_material.h */,
 				04CE39B627550EBE00204B8E /* pbr_specular_material.mm */,
+				04CE39BB275511CE00204B8E /* pbr_material.h */,
+				04CE39BA275511CE00204B8E /* pbr_material.mm */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -1474,6 +1480,7 @@
 				0416100B2750A720006CD384 /* scene.h in Headers */,
 				04CE393A2751CF3B00204B8E /* stencil_state.h in Headers */,
 				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
+				04CE39BD275511CE00204B8E /* pbr_material.h in Headers */,
 				04CE397127526DCF00204B8E /* mesh_renderer.h in Headers */,
 				04CE39172751AF3800204B8E /* mesh.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
@@ -1725,6 +1732,7 @@
 				04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */,
 				04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */,
 				04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */,
+				04CE39BC275511CE00204B8E /* pbr_material.mm in Sources */,
 				04CE3821274D168000204B8E /* imgui_impl_metal.mm in Sources */,
 				04160FFA2750963B006CD384 /* transform.mm in Sources */,
 			);
