@@ -12,11 +12,11 @@ ShaderProperty UnlitMaterial::_baseColorProp = Shader::getPropertyByName("u_base
 ShaderProperty UnlitMaterial::_baseTextureProp = Shader::getPropertyByName("u_baseTexture");
 ShaderProperty UnlitMaterial::_tilingOffsetProp = Shader::getPropertyByName("u_tilingOffset");
 
-Color UnlitMaterial::baseColor() {
-    return std::any_cast<Color>(shaderData.getData(UnlitMaterial::_baseColorProp));
+math::Color UnlitMaterial::baseColor() {
+    return std::any_cast<math::Color>(shaderData.getData(UnlitMaterial::_baseColorProp));
 }
 
-void UnlitMaterial::setBaseColor(const Color& newValue) {
+void UnlitMaterial::setBaseColor(const math::Color& newValue) {
     shaderData.setData(UnlitMaterial::_baseColorProp, newValue);
 }
 
@@ -28,11 +28,11 @@ void UnlitMaterial::setBaseTexture(id<MTLTexture> newValue) {
     shaderData.setData(UnlitMaterial::_baseTextureProp, newValue);
 }
 
-Float4 UnlitMaterial::tilingOffset() {
-    return std::any_cast<Float4>(shaderData.getData(UnlitMaterial::_tilingOffsetProp));
+math::Float4 UnlitMaterial::tilingOffset() {
+    return std::any_cast<math::Float4>(shaderData.getData(UnlitMaterial::_tilingOffsetProp));
 }
 
-void UnlitMaterial::setTilingOffset(const Float4& newValue) {
+void UnlitMaterial::setTilingOffset(const math::Float4& newValue) {
     shaderData.setData(UnlitMaterial::_tilingOffsetProp, newValue);
 }
 
@@ -41,8 +41,8 @@ BaseMaterial(engine, Shader::find("unlit")){
     shaderData.enableMacro(OMIT_NORMAL);
     shaderData.enableMacro(NEED_TILINGOFFSET);
 
-    shaderData.setData(UnlitMaterial::_baseColorProp, Color(1, 1, 1, 1));
-    shaderData.setData(UnlitMaterial::_tilingOffsetProp, Float4(1, 1, 0, 0));
+    shaderData.setData(UnlitMaterial::_baseColorProp, math::Color(1, 1, 1, 1));
+    shaderData.setData(UnlitMaterial::_tilingOffsetProp, math::Float4(1, 1, 0, 0));
 }
 
 }

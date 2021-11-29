@@ -15,8 +15,8 @@ namespace vox {
 class PBRSpecularMaterial: public PBRBaseMaterial {
 public:
     /// Specular color.
-    Color specularColor();
-    void setSpecularColor(const Color& newValue);
+    math::Color specularColor();
+    void setSpecularColor(const math::Color& newValue);
     
     /// Glossiness.
     float glossiness();

@@ -12,7 +12,6 @@
 #include "maths/color.h"
 
 namespace vox {
-using namespace math;
 class MetalRenderer;
 
 /// Blend state.
@@ -20,7 +19,7 @@ struct BlendState {
     /// The blend state of the render target.
     RenderTargetBlendState targetBlendState = RenderTargetBlendState();
     /// Constant blend color.
-    Color blendColor = Color(0, 0, 0, 0);
+    math::Color blendColor = math::Color(0, 0, 0, 0);
     /// Whether to use (Alpha-to-Coverage) technology.
     bool alphaToCoverage = false;
     

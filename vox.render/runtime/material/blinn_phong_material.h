@@ -16,24 +16,24 @@ namespace vox {
 class BlinnPhongMaterial: public BaseMaterial {
 public:
     /// Base color.
-    Color baseColor();
-    void setBaseColor(const Color& newValue);
+    math::Color baseColor();
+    void setBaseColor(const math::Color& newValue);
     
     /// Base texture.
     id<MTLTexture> baseTexture();
     void setBaseTexture(id<MTLTexture> newValue);
     
     /// Specular color.
-    Color specularColor();
-    void setSpecularColor(const Color& newValue);
+    math::Color specularColor();
+    void setSpecularColor(const math::Color& newValue);
     
     /// Specular texture.
     id<MTLTexture> specularTexture();
     void setSpecularTexture(id<MTLTexture> newValue);
     
     /// Emissive color.
-    Color emissiveColor();
-    void setEmissiveColor(const Color& newValue);
+    math::Color emissiveColor();
+    void setEmissiveColor(const math::Color& newValue);
     
     /// Emissive texture.
     id<MTLTexture> emissiveTexture();

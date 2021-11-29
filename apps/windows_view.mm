@@ -10,6 +10,7 @@
 #include "../vox.render/runtime/camera.h"
 #include "../vox.render/runtime/mesh/mesh_renderer.h"
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
+#include "../vox.render/runtime/material/unlit_material.h"
 
 using namespace vox;
 
@@ -26,6 +27,8 @@ int main(int, char**) {
     auto boxEntity = rootEntity->createChild("BoxEntity");
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, 2, 2, 2));
+    auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
+    boxRenderer->setMaterial(boxMtl);
 
     engine.run();
 }

@@ -20,11 +20,11 @@ ShaderProperty PBRBaseMaterial::_normalTextureProp = Shader::getPropertyByName("
 ShaderProperty PBRBaseMaterial::_emissiveTextureProp = Shader::getPropertyByName("u_emissiveTexture");
 ShaderProperty PBRBaseMaterial::_occlusionTextureProp = Shader::getPropertyByName("u_occlusionTexture");
 
-Color PBRBaseMaterial::baseColor() {
-    return std::any_cast<Color>(shaderData.getData(PBRBaseMaterial::_baseColorProp));
+math::Color PBRBaseMaterial::baseColor() {
+    return std::any_cast<math::Color>(shaderData.getData(PBRBaseMaterial::_baseColorProp));
 }
 
-void PBRBaseMaterial::setBaseColor(const Color& newValue) {
+void PBRBaseMaterial::setBaseColor(const math::Color& newValue) {
     shaderData.setData(PBRBaseMaterial::_baseColorProp, newValue);
 }
 
@@ -52,11 +52,11 @@ void PBRBaseMaterial::setNormalTextureIntensity(float newValue) {
     shaderData.setData(PBRBaseMaterial::_normalTextureIntensityProp, newValue);
 }
 
-Color PBRBaseMaterial::emissiveColor() {
-    return std::any_cast<Color>(shaderData.getData(PBRBaseMaterial::_emissiveColorProp));
+math::Color PBRBaseMaterial::emissiveColor() {
+    return std::any_cast<math::Color>(shaderData.getData(PBRBaseMaterial::_emissiveColorProp));
 }
 
-void PBRBaseMaterial::setEmissiveColor(const Color& newValue) {
+void PBRBaseMaterial::setEmissiveColor(const math::Color& newValue) {
     shaderData.setData(PBRBaseMaterial::_emissiveColorProp, newValue);
 }
 
@@ -84,11 +84,11 @@ void PBRBaseMaterial::setOcclusionTextureIntensity(float newValue) {
     shaderData.setData(PBRBaseMaterial::_occlusionTextureIntensityProp, newValue);
 }
 
-Float4 PBRBaseMaterial::tilingOffset() {
-    return std::any_cast<Float4>(shaderData.getData(PBRBaseMaterial::_tilingOffsetProp));
+math::Float4 PBRBaseMaterial::tilingOffset() {
+    return std::any_cast<math::Float4>(shaderData.getData(PBRBaseMaterial::_tilingOffsetProp));
 }
 
-void PBRBaseMaterial::setTilingOffset(const Float4& newValue) {
+void PBRBaseMaterial::setTilingOffset(const math::Float4& newValue) {
     shaderData.setData(PBRBaseMaterial::_tilingOffsetProp, newValue);
 }
 
@@ -97,9 +97,9 @@ BaseMaterial(engine, Shader::find("skin")){
     shaderData.enableMacro(NEED_WORLDPOS);
     shaderData.enableMacro(NEED_TILINGOFFSET);
 
-    shaderData.setData(PBRBaseMaterial::_baseColorProp, Color(1, 1, 1, 1));
-    shaderData.setData(PBRBaseMaterial::_emissiveColorProp, Color(0, 0, 0, 1));
-    shaderData.setData(PBRBaseMaterial::_tilingOffsetProp, Float4(1, 1, 0, 0));
+    shaderData.setData(PBRBaseMaterial::_baseColorProp, math::Color(1, 1, 1, 1));
+    shaderData.setData(PBRBaseMaterial::_emissiveColorProp, math::Color(0, 0, 0, 1));
+    shaderData.setData(PBRBaseMaterial::_tilingOffsetProp, math::Float4(1, 1, 0, 0));
 
     shaderData.setData(PBRBaseMaterial::_normalTextureIntensityProp, 1.f);
     shaderData.setData(PBRBaseMaterial::_occlusionTextureIntensityProp, 1.f);

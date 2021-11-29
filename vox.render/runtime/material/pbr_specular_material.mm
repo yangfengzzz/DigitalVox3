@@ -13,11 +13,11 @@ ShaderProperty PBRSpecularMaterial::_specularColorProp = Shader::getPropertyByNa
 ShaderProperty PBRSpecularMaterial::_glossinessTextureProp = Shader::getPropertyByName("u_glossinessTexture");
 ShaderProperty PBRSpecularMaterial::_specularTextureProp = Shader::getPropertyByName("u_specularTexture");
 
-Color PBRSpecularMaterial::specularColor() {
-    return std::any_cast<Color>(shaderData.getData(PBRSpecularMaterial::_specularColorProp));
+math::Color PBRSpecularMaterial::specularColor() {
+    return std::any_cast<math::Color>(shaderData.getData(PBRSpecularMaterial::_specularColorProp));
 }
 
-void PBRSpecularMaterial::setSpecularColor(const Color& newValue) {
+void PBRSpecularMaterial::setSpecularColor(const math::Color& newValue) {
     shaderData.setData(PBRSpecularMaterial::_specularColorProp, newValue);
 }
 
@@ -47,7 +47,7 @@ void PBRSpecularMaterial::setSpecularTexture(id<MTLTexture> newValue) {
 
 PBRSpecularMaterial::PBRSpecularMaterial(Engine* engine):
 PBRBaseMaterial(engine){
-    shaderData.setData(PBRSpecularMaterial::_specularColorProp, Color(1, 1, 1, 1));
+    shaderData.setData(PBRSpecularMaterial::_specularColorProp, math::Color(1, 1, 1, 1));
     shaderData.setData(PBRSpecularMaterial::_glossinessProp, 1.f);
 }
 

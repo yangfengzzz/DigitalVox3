@@ -16,8 +16,8 @@ namespace vox {
 class PBRBaseMaterial: public BaseMaterial {
 public:
     /// Base color.
-    Color baseColor();
-    void setBaseColor(const Color& newValue);
+    math::Color baseColor();
+    void setBaseColor(const math::Color& newValue);
     
     /// Base texture.
     id<MTLTexture> baseTexture();
@@ -32,8 +32,8 @@ public:
     void setNormalTextureIntensity(float newValue);
     
     /// Emissive color.
-    Color emissiveColor();
-    void setEmissiveColor(const Color& newValue);
+    math::Color emissiveColor();
+    void setEmissiveColor(const math::Color& newValue);
     
     /// Emissive texture.
     id<MTLTexture> emissiveTexture();
@@ -48,8 +48,8 @@ public:
     void setOcclusionTextureIntensity(float newValue);
     
     /// Tiling and offset of main textures.
-    Float4 tilingOffset();
-    void setTilingOffset(const Float4& newValue);
+    math::Float4 tilingOffset();
+    void setTilingOffset(const math::Float4& newValue);
     
     /// Create a pbr base material instance.
     /// - Parameter engine: Engine to which the material belongs
