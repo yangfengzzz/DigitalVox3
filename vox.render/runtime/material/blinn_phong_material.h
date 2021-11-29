@@ -13,7 +13,7 @@
 
 namespace vox {
 /// Blinn-phong Material.
-class BlinnPhongMaterial: BaseMaterial {
+class BlinnPhongMaterial: public BaseMaterial {
 public:
     /// Base color.
     Color baseColor();

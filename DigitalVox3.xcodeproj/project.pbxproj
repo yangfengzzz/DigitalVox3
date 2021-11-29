@@ -251,6 +251,8 @@
 		04CE39A92754F5DA00204B8E /* base_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39A72754F5DA00204B8E /* base_material.h */; };
 		04CE39AC2755003B00204B8E /* blinn_phong_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39AA2755003B00204B8E /* blinn_phong_material.mm */; };
 		04CE39AD2755003B00204B8E /* blinn_phong_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39AB2755003B00204B8E /* blinn_phong_material.h */; };
+		04CE39B02755052E00204B8E /* unlit_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39AE2755052E00204B8E /* unlit_material.mm */; };
+		04CE39B12755052E00204B8E /* unlit_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39AF2755052E00204B8E /* unlit_material.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -661,6 +663,8 @@
 		04CE39A72754F5DA00204B8E /* base_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base_material.h; sourceTree = "<group>"; };
 		04CE39AA2755003B00204B8E /* blinn_phong_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = blinn_phong_material.mm; sourceTree = "<group>"; };
 		04CE39AB2755003B00204B8E /* blinn_phong_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blinn_phong_material.h; sourceTree = "<group>"; };
+		04CE39AE2755052E00204B8E /* unlit_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = unlit_material.mm; sourceTree = "<group>"; };
+		04CE39AF2755052E00204B8E /* unlit_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unlit_material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1365,6 +1369,8 @@
 				04CE39A62754F5DA00204B8E /* base_material.mm */,
 				04CE39AB2755003B00204B8E /* blinn_phong_material.h */,
 				04CE39AA2755003B00204B8E /* blinn_phong_material.mm */,
+				04CE39AF2755052E00204B8E /* unlit_material.h */,
+				04CE39AE2755052E00204B8E /* unlit_material.mm */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -1459,6 +1465,7 @@
 				04CE397127526DCF00204B8E /* mesh_renderer.h in Headers */,
 				04CE39172751AF3800204B8E /* mesh.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
+				04CE39B12755052E00204B8E /* unlit_material.h in Headers */,
 				04CE395D27525E2500204B8E /* render_context.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
@@ -1685,6 +1692,7 @@
 				04CE3806274D167F00204B8E /* fbx.cc in Sources */,
 				04CE3808274D167F00204B8E /* fbx_skeleton.cc in Sources */,
 				04CE397027526DCF00204B8E /* mesh_renderer.mm in Sources */,
+				04CE39B02755052E00204B8E /* unlit_material.mm in Sources */,
 				04CE380A274D167F00204B8E /* fbx_animation.cc in Sources */,
 				0416100A2750A720006CD384 /* scene.mm in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
