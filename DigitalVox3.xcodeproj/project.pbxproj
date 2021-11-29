@@ -247,6 +247,8 @@
 		04CE39A12753A83C00204B8E /* ShaderSimple.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39952753A83C00204B8E /* ShaderSimple.metal */; };
 		04CE39A42753AC6D00204B8E /* compute_pipeline_state.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39A22753AC6D00204B8E /* compute_pipeline_state.mm */; };
 		04CE39A52753AC6D00204B8E /* compute_pipeline_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39A32753AC6D00204B8E /* compute_pipeline_state.h */; };
+		04CE39A82754F5DA00204B8E /* base_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39A62754F5DA00204B8E /* base_material.mm */; };
+		04CE39A92754F5DA00204B8E /* base_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39A72754F5DA00204B8E /* base_material.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -653,6 +655,8 @@
 		04CE39952753A83C00204B8E /* ShaderSimple.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ShaderSimple.metal; sourceTree = "<group>"; };
 		04CE39A22753AC6D00204B8E /* compute_pipeline_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = compute_pipeline_state.mm; sourceTree = "<group>"; };
 		04CE39A32753AC6D00204B8E /* compute_pipeline_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = compute_pipeline_state.h; sourceTree = "<group>"; };
+		04CE39A62754F5DA00204B8E /* base_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = base_material.mm; sourceTree = "<group>"; };
+		04CE39A72754F5DA00204B8E /* base_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base_material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1353,6 +1357,8 @@
 				04CE394D2752582000204B8E /* enums */,
 				04CE39522752589700204B8E /* material.h */,
 				04CE39512752589700204B8E /* material.mm */,
+				04CE39A72754F5DA00204B8E /* base_material.h */,
+				04CE39A62754F5DA00204B8E /* base_material.mm */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -1420,6 +1426,7 @@
 				04160FF72750955C006CD384 /* component.h in Headers */,
 				04CE392E2751B42800204B8E /* blend_state.h in Headers */,
 				04CE39122751AE5B00204B8E /* shader_program.h in Headers */,
+				04CE39A92754F5DA00204B8E /* base_material.h in Headers */,
 				04CE39832753678E00204B8E /* background.h in Headers */,
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
@@ -1661,6 +1668,7 @@
 				04CE38FA2751992C00204B8E /* timer.cpp in Sources */,
 				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,
+				04CE39A82754F5DA00204B8E /* base_material.mm in Sources */,
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,
 				04CE392D2751B42800204B8E /* blend_state.mm in Sources */,
 				04CE37F6274D167F00204B8E /* track_optimizer.cc in Sources */,
