@@ -22,7 +22,8 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    auto camera = cameraEntity->addComponent<vox::Camera>();
+    cameraEntity->transform->setPosition(10, 10, 10);
+    cameraEntity->addComponent<vox::Camera>();
     
     auto boxEntity = rootEntity->createChild("BoxEntity");
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
