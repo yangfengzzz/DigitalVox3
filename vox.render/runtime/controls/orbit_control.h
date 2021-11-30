@@ -22,6 +22,172 @@ class OrbitControl : public Script {
 public:
     explicit OrbitControl(Entity* entity);
     
+    void onDisable() override;
+    
+    void onDestroy() override;
+    
+    void onUpdate(float dtime) override;
+    
+public:
+    /**
+     * Get the radian of automatic rotation.
+     */
+    void autoRotationAngle(float dtime);
+    
+    void zoomScale();
+    
+    /**
+     * Rotate to the left by a certain radian.
+     * @param radian - Radian value of rotation
+     */
+    void rotateLeft(float radian);
+    
+    /**
+     * Rotate to the right by a certain radian.
+     * @param radian - Radian value of rotation
+     */
+    void rotateUp(float radian);
+    
+    /**
+     * Pan left.
+     */
+    void panLeft(float distance, const math::Matrix& worldMatrix);
+    
+    /**
+     * Pan right.
+     */
+    void panUp(float distance, const math::Matrix& worldMatrix);
+    
+    /**
+     * Pan.
+     * @param deltaX - The amount of translation from the screen distance in the x direction
+     * @param deltaY - The amount of translation from the screen distance in the y direction
+     */
+    void pan(float deltaX, float deltaY);
+    
+    /**
+     * Zoom in.
+     */
+    void zoomIn(float zoomScale);
+    
+    /**
+     * Zoom out.
+     */
+    void zoomOut(float zoomScale);
+    
+public:
+    /**
+     * Rotation parameter update on mouse click.
+     */
+    void handleMouseDownRotate();
+    
+    /**
+     * Zoom parameter update on mouse click.
+     */
+    void handleMouseDownZoom();
+    
+    /**
+     * Pan parameter update on mouse click.
+     */
+    void handleMouseDownPan();
+    
+    /**
+     * Rotation parameter update when the mouse moves.
+     */
+    void handleMouseMoveRotate();
+    
+    /**
+     * Zoom parameters update when the mouse moves.
+     */
+    void handleMouseMoveZoom();
+    
+    /**
+     * Pan parameters update when the mouse moves.
+     */
+    void handleMouseMovePan();
+    
+    /**
+     * Zoom parameter update when the mouse wheel is scrolled.
+     */
+    void handleMouseWheel();
+    
+    /**
+     * Total handling of mouse down events.
+     */
+    void onMouseDown();
+    
+    /**
+     * Total handling of mouse movement events.
+     */
+    void onMouseMove();
+    
+    /**
+     * Total handling of mouse up events.
+     */
+    void onMouseUp();
+    
+    /**
+     * Total handling of mouse wheel events.
+     */
+    void onMouseWheel();
+    
+public:
+    /**
+     * Pan parameter update when keyboard is pressed.
+     */
+    void handleKeyDown();
+    
+    /**
+     * Total handling of keyboard down events.
+     */
+    void onKeyDown();
+    
+public:
+    /**
+     * Rotation parameter update when touch is dropped.
+     */
+    void handleTouchStartRotate();
+    
+    /**
+     * Zoom parameter update when touch down.
+     */
+    void handleTouchStartZoom();
+    
+    /**
+     * Update the translation parameter when touch down.
+     */
+    void handleTouchStartPan();
+    
+    /**
+     * Rotation parameter update when touch to move.
+     */
+    void handleTouchMoveRotate();
+    
+    /**
+     * Zoom parameter update when touch to move.
+     */
+    void handleTouchMoveZoom();
+    
+    /**
+     * Pan parameter update when touch moves.
+     */
+    void handleTouchMovePan();
+    
+    /**
+     * Total handling of touch start events.
+     */
+    void onTouchStart();
+    
+    /**
+     * Total handling of touch movement events.
+     */
+    void onTouchMove();
+    
+    /**
+     * Total handling of touch end events.
+     */
+    void onTouchEnd();
+    
 private:
     enum STATE {
         NONE = -1,
