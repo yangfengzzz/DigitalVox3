@@ -15,6 +15,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <unordered_map>
+#include <iostream>
 
 namespace vox {
 RenderPipelineState::RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor):
@@ -148,7 +149,7 @@ void RenderPipelineState::uploadUniforms(const ShaderUniformBlock& uniformBlock,
         const auto& uniform = constUniforms[i];
         auto iter = properties.find(uniform.propertyId);
         if (iter != properties.end()) {
-            process(uniform, *iter, _render->renderEncoder);
+            process(uniform, iter->second, _render->renderEncoder);
         }
     }
 }
@@ -162,7 +163,7 @@ void RenderPipelineState::uploadTextures(const ShaderUniformBlock& uniformBlock,
             const auto& uniform = textureUniforms[i];
             auto iter = properties.find(uniform.propertyId);
             if (iter != properties.end()) {
-                process(uniform, *iter, _render->renderEncoder);
+                process(uniform, iter->second, _render->renderEncoder);
             }
         }
     }
