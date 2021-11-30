@@ -37,7 +37,7 @@ typedef struct {
 } VertexOut;
 
 vertex VertexOut vertex_unlit(const VertexIn in [[stage_in]],
-                              constant matrix_float4x4 &u_MVPMat [[buffer(0)]],
+                              constant matrix_float4x4 &u_MVPMat [[buffer(7)]],
                               constant float4 &u_tilingOffset [[buffer(8)]],
                               sampler u_jointSampler [[sampler(0), function_constant(hasSkinAndHasJointTexture)]],
                               texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],

@@ -32,7 +32,7 @@ void ShaderData::setData(const std::string& property_name, std::any value) {
 }
 
 void ShaderData::setData(ShaderProperty property, std::any value) {
-    _properties.insert(std::make_pair(property._uniqueId, value));
+    _properties[property._uniqueId] = value;
 }
 
 void ShaderData::enableMacro(MacroName macroName) {

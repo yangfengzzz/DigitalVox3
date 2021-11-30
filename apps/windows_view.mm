@@ -30,7 +30,8 @@ int main(int, char**) {
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, 2, 2, 2));
     auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
+    boxMtl->setBaseColor(math::Color(0.6, 0.3, 0.4, 1));
     boxRenderer->setMaterial(boxMtl);
-
+    
     engine.run();
 }
