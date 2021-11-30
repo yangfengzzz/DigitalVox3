@@ -46,6 +46,8 @@ public:
      */
     void resizeByClientSize(float pixelRatio);
     
+    GLFWwindow* handle();
+    
 public:
     bool shouldClose();
 
@@ -58,7 +60,6 @@ public:
     float getContentScaleFactor() const;
     
 private:
-    friend class MetalRenderer;
     GLFWwindow* window;
     
     int _width;

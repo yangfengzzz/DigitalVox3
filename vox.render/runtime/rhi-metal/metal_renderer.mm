@@ -28,7 +28,7 @@ resouceCache(this) {
     
     ImGui_ImplMetal_Init(device);
     
-    NSWindow *nswin = glfwGetCocoaWindow(canvas.window);
+    NSWindow *nswin = glfwGetCocoaWindow(canvas.handle());
     layer = [CAMetalLayer layer];
     layer.device = device;
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;

@@ -68,6 +68,10 @@ void Canvas::setScale(const Float2& value) {
 void Canvas::resizeByClientSize(float pixelRatio) {
 }
 
+GLFWwindow* Canvas::handle() {
+    return window;
+}
+
 bool Canvas::shouldClose() {
     return glfwWindowShouldClose(window);
 }

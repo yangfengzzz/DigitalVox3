@@ -6,12 +6,14 @@
 //
 
 #include "orbit_control.h"
+#include "../engine.h"
 
 namespace vox {
 namespace control {
 OrbitControl::OrbitControl(Entity* entity):
-Script(entity) {
-    
+Script(entity),
+camera(entity) {
+    windows = engine()->canvas().handle();
 }
 
 
