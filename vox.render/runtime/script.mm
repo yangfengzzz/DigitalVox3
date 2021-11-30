@@ -9,6 +9,11 @@
 #include "engine.h"
 
 namespace vox {
+Script::Script(Entity* entity):
+Component(entity) {
+    
+}
+
 void Script::_onAwake() {
     onAwake();
 }

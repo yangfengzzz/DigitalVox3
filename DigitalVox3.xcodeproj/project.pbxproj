@@ -46,6 +46,8 @@
 		04161015275474AE006CD384 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04161014275474AE006CD384 /* ModelIO.framework */; };
 		041610192755DB7C006CD384 /* spherical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610172755DB7C006CD384 /* spherical.cpp */; };
 		0416101A2755DB7C006CD384 /* spherical.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610182755DB7C006CD384 /* spherical.h */; };
+		0416101D2755DD48006CD384 /* orbit_control.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101B2755DD48006CD384 /* orbit_control.mm */; };
+		0416101E2755DD48006CD384 /* orbit_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416101C2755DD48006CD384 /* orbit_control.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -344,6 +346,8 @@
 		04161014275474AE006CD384 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		041610172755DB7C006CD384 /* spherical.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = spherical.cpp; sourceTree = "<group>"; };
 		041610182755DB7C006CD384 /* spherical.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spherical.h; sourceTree = "<group>"; };
+		0416101B2755DD48006CD384 /* orbit_control.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = orbit_control.mm; sourceTree = "<group>"; };
+		0416101C2755DD48006CD384 /* orbit_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = orbit_control.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -765,6 +769,8 @@
 			children = (
 				041610182755DB7C006CD384 /* spherical.h */,
 				041610172755DB7C006CD384 /* spherical.cpp */,
+				0416101C2755DD48006CD384 /* orbit_control.h */,
+				0416101B2755DD48006CD384 /* orbit_control.mm */,
 			);
 			path = controls;
 			sourceTree = "<group>";
@@ -1475,6 +1481,7 @@
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
+				0416101E2755DD48006CD384 /* orbit_control.h in Headers */,
 				04CE39A52753AC6D00204B8E /* compute_pipeline_state.h in Headers */,
 				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
 				04CE39872753710E00204B8E /* resource_cache_state.h in Headers */,
@@ -1648,6 +1655,7 @@
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
+				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
 				04CE399F2753A83C00204B8E /* particle.metal in Sources */,

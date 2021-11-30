@@ -15,6 +15,9 @@ namespace vox {
  * Script class, used for logic writing.
  */
 class Script : public Component {
+public:
+    explicit Script(Entity* entity);
+    
     /**
      * Called when be enabled first time, only once.
      */
