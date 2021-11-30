@@ -26,6 +26,7 @@ public:
     void setToVec3(math::Float3& v3);
 
 private:
+    friend class OrbitControl;
     float radius;
     float phi;
     float theta;

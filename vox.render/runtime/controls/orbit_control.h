@@ -32,9 +32,9 @@ public:
     /**
      * Get the radian of automatic rotation.
      */
-    void autoRotationAngle(float dtime);
+    float autoRotationAngle(float dtime);
     
-    void zoomScale();
+    float zoomScale();
     
     /**
      * Rotate to the left by a certain radian.
