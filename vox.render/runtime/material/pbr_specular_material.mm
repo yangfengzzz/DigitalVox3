@@ -8,10 +8,10 @@
 #include "pbr_specular_material.h"
 
 namespace vox {
-ShaderProperty PBRSpecularMaterial::_glossinessProp = Shader::getPropertyByName("u_glossinessFactor");
-ShaderProperty PBRSpecularMaterial::_specularColorProp = Shader::getPropertyByName("u_specularColor");
-ShaderProperty PBRSpecularMaterial::_glossinessTextureProp = Shader::getPropertyByName("u_glossinessTexture");
-ShaderProperty PBRSpecularMaterial::_specularTextureProp = Shader::getPropertyByName("u_specularTexture");
+ShaderProperty PBRSpecularMaterial::_glossinessProp = Shader::createProperty("u_glossinessFactor", ShaderDataGroup::Material);
+ShaderProperty PBRSpecularMaterial::_specularColorProp = Shader::createProperty("u_specularColor", ShaderDataGroup::Material);
+ShaderProperty PBRSpecularMaterial::_glossinessTextureProp = Shader::createProperty("u_glossinessTexture", ShaderDataGroup::Material);
+ShaderProperty PBRSpecularMaterial::_specularTextureProp = Shader::createProperty("u_specularTexture", ShaderDataGroup::Material);
 
 math::Color PBRSpecularMaterial::specularColor() {
     return std::any_cast<math::Color>(shaderData.getData(PBRSpecularMaterial::_specularColorProp));

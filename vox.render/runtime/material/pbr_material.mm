@@ -8,10 +8,10 @@
 #include "pbr_material.h"
 
 namespace vox {
-ShaderProperty PBRMaterial::_metallicProp = Shader::getPropertyByName("u_metal");
-ShaderProperty PBRMaterial::_roughnessProp = Shader::getPropertyByName("u_roughness");
-ShaderProperty PBRMaterial::_metallicTextureProp = Shader::getPropertyByName("u_metallicTexture");
-ShaderProperty PBRMaterial::_roughnessTextureProp = Shader::getPropertyByName("u_roughnessTexture");
+ShaderProperty PBRMaterial::_metallicProp = Shader::createProperty("u_metal", ShaderDataGroup::Material);
+ShaderProperty PBRMaterial::_roughnessProp = Shader::createProperty("u_roughness", ShaderDataGroup::Material);
+ShaderProperty PBRMaterial::_metallicTextureProp = Shader::createProperty("u_metallicTexture", ShaderDataGroup::Material);
+ShaderProperty PBRMaterial::_roughnessTextureProp = Shader::createProperty("u_roughnessTexture", ShaderDataGroup::Material);
 
 float PBRMaterial::metallic(){
     return std::any_cast<float>(shaderData.getData(PBRMaterial::_metallicProp));

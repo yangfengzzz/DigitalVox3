@@ -26,7 +26,7 @@ private:
     int _uniqueId;
     ShaderDataGroup _group;
 
-    ShaderProperty(const std::string& name);
+    ShaderProperty(const std::string& name, ShaderDataGroup group);
 };
 
 }

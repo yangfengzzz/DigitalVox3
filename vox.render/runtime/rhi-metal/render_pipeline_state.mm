@@ -184,7 +184,7 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
             
             ShaderUniform shaderUniform;
             shaderUniform.name = name;
-            shaderUniform.propertyId = Shader::getPropertyByName(name)._uniqueId;
+            shaderUniform.propertyId = Shader::getPropertyByName(name)->_uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeVertex;
             
@@ -217,7 +217,7 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
             
             ShaderUniform shaderUniform;
             shaderUniform.name = name;
-            shaderUniform.propertyId = Shader::getPropertyByName(name)._uniqueId;
+            shaderUniform.propertyId = Shader::getPropertyByName(name)->_uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeFragment;
             

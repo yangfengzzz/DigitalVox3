@@ -8,17 +8,17 @@
 #include "pbr_base_material.h"
 
 namespace vox {
-ShaderProperty PBRBaseMaterial::_tilingOffsetProp = Shader::getPropertyByName("u_tilingOffset");
-ShaderProperty PBRBaseMaterial::_normalTextureIntensityProp = Shader::getPropertyByName("u_normalIntensity");
-ShaderProperty PBRBaseMaterial::_occlusionTextureIntensityProp = Shader::getPropertyByName("u_occlusionStrength");
+ShaderProperty PBRBaseMaterial::_tilingOffsetProp = Shader::createProperty("u_tilingOffset", ShaderDataGroup::Material);
+ShaderProperty PBRBaseMaterial::_normalTextureIntensityProp = Shader::createProperty("u_normalIntensity", ShaderDataGroup::Material);
+ShaderProperty PBRBaseMaterial::_occlusionTextureIntensityProp = Shader::createProperty("u_occlusionStrength", ShaderDataGroup::Material);
 
-ShaderProperty PBRBaseMaterial::_baseColorProp = Shader::getPropertyByName("u_baseColor");
-ShaderProperty PBRBaseMaterial::_emissiveColorProp = Shader::getPropertyByName("u_emissiveColor");
+ShaderProperty PBRBaseMaterial::_baseColorProp = Shader::createProperty("u_baseColor", ShaderDataGroup::Material);
+ShaderProperty PBRBaseMaterial::_emissiveColorProp = Shader::createProperty("u_emissiveColor", ShaderDataGroup::Material);
 
-ShaderProperty PBRBaseMaterial::_baseTextureProp = Shader::getPropertyByName("u_baseColorTexture");
-ShaderProperty PBRBaseMaterial::_normalTextureProp = Shader::getPropertyByName("u_normalTexture");
-ShaderProperty PBRBaseMaterial::_emissiveTextureProp = Shader::getPropertyByName("u_emissiveTexture");
-ShaderProperty PBRBaseMaterial::_occlusionTextureProp = Shader::getPropertyByName("u_occlusionTexture");
+ShaderProperty PBRBaseMaterial::_baseTextureProp = Shader::createProperty("u_baseColorTexture", ShaderDataGroup::Material);
+ShaderProperty PBRBaseMaterial::_normalTextureProp = Shader::createProperty("u_normalTexture", ShaderDataGroup::Material);
+ShaderProperty PBRBaseMaterial::_emissiveTextureProp = Shader::createProperty("u_emissiveTexture", ShaderDataGroup::Material);
+ShaderProperty PBRBaseMaterial::_occlusionTextureProp = Shader::createProperty("u_occlusionTexture", ShaderDataGroup::Material);
 
 math::Color PBRBaseMaterial::baseColor() {
     return std::any_cast<math::Color>(shaderData.getData(PBRBaseMaterial::_baseColorProp));

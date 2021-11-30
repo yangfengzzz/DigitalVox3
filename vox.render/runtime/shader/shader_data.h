@@ -51,9 +51,6 @@ private:
     friend class RenderPipelineState;
     friend class RenderQueue;
     
-    ShaderData(ShaderDataGroup group);
-    
-    ShaderDataGroup _group;
     std::unordered_map<int, std::any> _properties;
     ShaderMacroCollection _macroCollection;
     int _refCount;

@@ -43,7 +43,12 @@ public:
     /// Get shader property by name.
     /// - Parameter name: Name of the shader property
     /// - Returns: Shader property
-    static ShaderProperty getPropertyByName(const std::string& name);
+    static std::optional<ShaderProperty> getPropertyByName(const std::string& name);
+    
+    /// Get shader property by name.
+    /// - Parameter name: Name of the shader property
+    /// - Returns: Shader property
+    static ShaderProperty createProperty(const std::string& name, ShaderDataGroup group);
     
 private:
     friend class RenderPipelineState;

@@ -10,12 +10,12 @@
 #include "engine.h"
 
 namespace vox {
-ShaderProperty Camera::_viewMatrixProperty = Shader::getPropertyByName("u_viewMat");
-ShaderProperty Camera::_projectionMatrixProperty = Shader::getPropertyByName("u_projMat");
-ShaderProperty Camera::_vpMatrixProperty = Shader::getPropertyByName("u_VPMat");
-ShaderProperty Camera::_inverseViewMatrixProperty = Shader::getPropertyByName("u_viewInvMat");
-ShaderProperty Camera::_inverseProjectionMatrixProperty = Shader::getPropertyByName("u_projInvMat");
-ShaderProperty Camera::_cameraPositionProperty = Shader::getPropertyByName("u_cameraPos");
+ShaderProperty Camera::_viewMatrixProperty = Shader::createProperty("u_viewMat", ShaderDataGroup::Camera);
+ShaderProperty Camera::_projectionMatrixProperty = Shader::createProperty("u_projMat", ShaderDataGroup::Camera);
+ShaderProperty Camera::_vpMatrixProperty = Shader::createProperty("u_VPMat", ShaderDataGroup::Camera);
+ShaderProperty Camera::_inverseViewMatrixProperty = Shader::createProperty("u_viewInvMat", ShaderDataGroup::Camera);
+ShaderProperty Camera::_inverseProjectionMatrixProperty = Shader::createProperty("u_projInvMat", ShaderDataGroup::Camera);
+ShaderProperty Camera::_cameraPositionProperty = Shader::createProperty("u_cameraPos", ShaderDataGroup::Camera);
 
 Camera::Camera(Entity* entity):
 Component(entity),

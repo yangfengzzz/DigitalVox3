@@ -8,7 +8,7 @@
 #include "base_material.h"
 
 namespace vox {
-ShaderProperty BaseMaterial::_alphaCutoffProp = Shader::getPropertyByName("u_alphaCutoff");
+ShaderProperty BaseMaterial::_alphaCutoffProp = Shader::createProperty("u_alphaCutoff", ShaderDataGroup::Material);
 
 bool BaseMaterial::isTransparent() {
     return _isTransparent;

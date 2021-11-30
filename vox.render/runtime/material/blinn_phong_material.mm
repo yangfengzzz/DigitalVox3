@@ -8,17 +8,17 @@
 #include "blinn_phong_material.h"
 
 namespace vox {
-ShaderProperty BlinnPhongMaterial::_diffuseColorProp = Shader::getPropertyByName("u_diffuseColor");
-ShaderProperty BlinnPhongMaterial::_specularColorProp = Shader::getPropertyByName("u_specularColor");
-ShaderProperty BlinnPhongMaterial::_emissiveColorProp = Shader::getPropertyByName("u_emissiveColor");
-ShaderProperty BlinnPhongMaterial::_tilingOffsetProp = Shader::getPropertyByName("u_tilingOffset");
-ShaderProperty BlinnPhongMaterial::_shininessProp = Shader::getPropertyByName("u_shininess");
-ShaderProperty BlinnPhongMaterial::_normalIntensityProp = Shader::getPropertyByName("u_normalIntensity");
+ShaderProperty BlinnPhongMaterial::_diffuseColorProp = Shader::createProperty("u_diffuseColor", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_specularColorProp = Shader::createProperty("u_specularColor", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_emissiveColorProp = Shader::createProperty("u_emissiveColor", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_tilingOffsetProp = Shader::createProperty("u_tilingOffset", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_shininessProp = Shader::createProperty("u_shininess", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_normalIntensityProp = Shader::createProperty("u_normalIntensity", ShaderDataGroup::Material);
 
-ShaderProperty BlinnPhongMaterial::_baseTextureProp = Shader::getPropertyByName("u_diffuseTexture");
-ShaderProperty BlinnPhongMaterial::_specularTextureProp = Shader::getPropertyByName("u_specularTexture");
-ShaderProperty BlinnPhongMaterial::_emissiveTextureProp = Shader::getPropertyByName("u_emissiveTexture");
-ShaderProperty BlinnPhongMaterial::_normalTextureProp = Shader::getPropertyByName("u_normalTexture");
+ShaderProperty BlinnPhongMaterial::_baseTextureProp = Shader::createProperty("u_diffuseTexture", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_specularTextureProp = Shader::createProperty("u_specularTexture", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_emissiveTextureProp = Shader::createProperty("u_emissiveTexture", ShaderDataGroup::Material);
+ShaderProperty BlinnPhongMaterial::_normalTextureProp = Shader::createProperty("u_normalTexture", ShaderDataGroup::Material);
 
 math::Color BlinnPhongMaterial::baseColor() {
     return std::any_cast<math::Color>(shaderData.getData(BlinnPhongMaterial::_diffuseColorProp));

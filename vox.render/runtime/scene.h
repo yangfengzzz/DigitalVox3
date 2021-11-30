@@ -29,7 +29,7 @@ public:
     Background background = Background(_engine);
     
     /** Scene-related shader data. */
-    ShaderData shaderData = ShaderData(ShaderDataGroup::Scene);
+    ShaderData shaderData = ShaderData();
     
     /**
      * Create scene.

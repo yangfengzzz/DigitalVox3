@@ -25,7 +25,7 @@ public:
     /// Render queue type.
     RenderQueueType renderQueueType = RenderQueueType::Opaque;
     /// Shader data.
-    ShaderData shaderData = ShaderData(ShaderDataGroup::Material);
+    ShaderData shaderData = ShaderData();
     /// Render state.
     RenderState renderState = RenderState();
     

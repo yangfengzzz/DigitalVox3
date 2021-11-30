@@ -8,9 +8,9 @@
 #include "unlit_material.h"
 
 namespace vox {
-ShaderProperty UnlitMaterial::_baseColorProp = Shader::getPropertyByName("u_baseColor");
-ShaderProperty UnlitMaterial::_baseTextureProp = Shader::getPropertyByName("u_baseTexture");
-ShaderProperty UnlitMaterial::_tilingOffsetProp = Shader::getPropertyByName("u_tilingOffset");
+ShaderProperty UnlitMaterial::_baseColorProp = Shader::createProperty("u_baseColor", ShaderDataGroup::Material);
+ShaderProperty UnlitMaterial::_baseTextureProp = Shader::createProperty("u_baseTexture", ShaderDataGroup::Material);
+ShaderProperty UnlitMaterial::_tilingOffsetProp = Shader::createProperty("u_tilingOffset", ShaderDataGroup::Material);
 
 math::Color UnlitMaterial::baseColor() {
     return std::any_cast<math::Color>(shaderData.getData(UnlitMaterial::_baseColorProp));

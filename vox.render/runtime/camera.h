@@ -31,7 +31,7 @@ using namespace math;
 class Camera : public Component {
 public:
     /// Shader data.
-    ShaderData shaderData = ShaderData(ShaderDataGroup::Camera);
+    ShaderData shaderData = ShaderData();
     
     /** Rendering priority - A Camera with higher priority will be rendered on top of a camera with lower priority. */
     int priority = 0;

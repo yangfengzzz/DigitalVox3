@@ -11,12 +11,12 @@
 #include "engine.h"
 
 namespace vox {
-ShaderProperty Renderer::_localMatrixProperty = Shader::getPropertyByName("u_localMat");
-ShaderProperty Renderer::_worldMatrixProperty = Shader::getPropertyByName("u_modelMat");
-ShaderProperty Renderer::_mvMatrixProperty = Shader::getPropertyByName("u_MVMat");
-ShaderProperty Renderer::_mvpMatrixProperty = Shader::getPropertyByName("u_MVPMat");
-ShaderProperty Renderer::_mvInvMatrixProperty = Shader::getPropertyByName("u_MVInvMat");
-ShaderProperty Renderer::_normalMatrixProperty = Shader::getPropertyByName("u_normalMat");
+ShaderProperty Renderer::_localMatrixProperty = Shader::createProperty("u_localMat", ShaderDataGroup::Renderer);
+ShaderProperty Renderer::_worldMatrixProperty = Shader::createProperty("u_modelMat", ShaderDataGroup::Renderer);
+ShaderProperty Renderer::_mvMatrixProperty = Shader::createProperty("u_MVMat", ShaderDataGroup::Renderer);
+ShaderProperty Renderer::_mvpMatrixProperty = Shader::createProperty("u_MVPMat", ShaderDataGroup::Renderer);
+ShaderProperty Renderer::_mvInvMatrixProperty = Shader::createProperty("u_MVInvMat", ShaderDataGroup::Renderer);
+ShaderProperty Renderer::_normalMatrixProperty = Shader::createProperty("u_normalMat", ShaderDataGroup::Renderer);
 
 size_t Renderer::materialCount() {
     return _materials.size();
