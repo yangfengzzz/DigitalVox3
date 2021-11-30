@@ -126,6 +126,52 @@ void OrbitControl::zoomOut(float zoomScale) {
     _scale /= zoomScale;
 }
 
+//MARK: - Mouse
+void OrbitControl::handleMouseDownRotate() {}
+
+void OrbitControl::handleMouseDownZoom() {}
+
+void OrbitControl::handleMouseDownPan(){}
+
+void OrbitControl::handleMouseMoveRotate(){}
+
+void OrbitControl::handleMouseMoveZoom(){}
+
+void OrbitControl::handleMouseMovePan(){}
+
+void OrbitControl::handleMouseWheel(){}
+
+void OrbitControl::onMouseDown(){}
+
+void OrbitControl::onMouseMove(){}
+
+void OrbitControl::onMouseUp(){}
+
+void OrbitControl::onMouseWheel(){}
+
+//MARK: - KeyBoard
+void OrbitControl::handleKeyDown(){}
+
+void OrbitControl::onKeyDown(){}
+
+//MARK: - Touch
+void OrbitControl::handleTouchStartRotate(){}
+
+void OrbitControl::handleTouchStartZoom(){}
+
+void OrbitControl::handleTouchStartPan(){}
+
+void OrbitControl::handleTouchMoveRotate(){}
+
+void OrbitControl::handleTouchMoveZoom(){}
+
+void OrbitControl::handleTouchMovePan(){}
+
+void OrbitControl::onTouchStart(){}
+
+void OrbitControl::onTouchMove(){}
+
+void OrbitControl::onTouchEnd(){}
 
 }
 }
