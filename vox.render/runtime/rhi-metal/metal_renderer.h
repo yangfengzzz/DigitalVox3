@@ -70,9 +70,13 @@ public:
     
     void drawPrimitive(SubMesh *subPrimitive);
     
+    id<MTLTexture> buildTexture(MTLPixelFormat pixelFormat, int width, int height);
+    
 private:
     CAMetalLayer *layer;
     id <CAMetalDrawable> drawable;
+    
+    id<MTLTexture> depthTexture;
 };
 
 }

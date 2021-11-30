@@ -22,6 +22,7 @@ resouceCache(this) {
     // self.resouceCache = ResourceCache(self);
     library = [device newDefaultLibrary];
     
+    depthTexture = buildTexture(MTLPixelFormatDepth32Float, canvas.width(), canvas.height());
     colorPixelFormat = MTLPixelFormatBGRA8Unorm;
     samplerState = buildSamplerState();
     
@@ -60,6 +61,7 @@ void MetalRenderer::activeRenderTarget(MTLRenderPassDescriptor *renderTarget) {
     } else {
         renderPassDescriptor = [MTLRenderPassDescriptor new];
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture;
+        renderPassDescriptor.depthAttachment.texture = depthTexture;
     }
 }
 
@@ -141,6 +143,15 @@ void MetalRenderer::drawPrimitive(SubMesh *subPrimitive) {
                                indexType:subPrimitive->indexType
                              indexBuffer:subPrimitive->indexBuffer.buffer()
                        indexBufferOffset:subPrimitive->indexBuffer.offset()];
+}
+
+id<MTLTexture> MetalRenderer::buildTexture(MTLPixelFormat pixelFormat, int width, int height) {
+    MTLTextureDescriptor* descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pixelFormat
+                                                                                          width:width height:height
+                                                                                      mipmapped:false];
+    descriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
+    descriptor.storageMode = MTLStorageModePrivate;
+    return [device newTextureWithDescriptor:descriptor];
 }
 
 }
