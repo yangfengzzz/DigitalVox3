@@ -109,12 +109,12 @@ public:
     /**
      * Zoom parameter update when the mouse wheel is scrolled.
      */
-    void handleMouseWheel();
+    void handleMouseWheel(double xoffset, double yoffset);
     
     /**
      * Total handling of mouse down events.
      */
-    void onMouseDown();
+    void onMouseDown(GLFWwindow* window, int button, int action, int mods);
     
     /**
      * Total handling of mouse movement events.
@@ -129,7 +129,7 @@ public:
     /**
      * Total handling of mouse wheel events.
      */
-    void onMouseWheel();
+    void onMouseWheel(GLFWwindow* window, double xoffset, double yoffset);
     
 public:
     /**

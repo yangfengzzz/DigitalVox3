@@ -11,6 +11,7 @@
 #include "../vox.render/runtime/mesh/mesh_renderer.h"
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
 #include "../vox.render/runtime/material/unlit_material.h"
+#include "../vox.render/runtime/controls/orbit_control.h"
 
 using namespace vox;
 
@@ -25,6 +26,7 @@ int main(int, char**) {
     cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
+    cameraEntity->addComponent<control::OrbitControl>();
     
     auto boxEntity = rootEntity->createChild("BoxEntity");
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();

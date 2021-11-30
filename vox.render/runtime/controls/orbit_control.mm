@@ -10,10 +10,22 @@
 
 namespace vox {
 namespace control {
+void onMouseDownCallback(GLFWwindow* window, int button, int action, int mods) {
+    static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onMouseDown(window, button, action, mods);
+}
+
+void onMouseWheelCallback(GLFWwindow* window, double xoffset, double yoffset) {
+    static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onMouseWheel(window, xoffset, yoffset);
+}
+
 OrbitControl::OrbitControl(Entity* entity):
 Script(entity),
 camera(entity) {
     windows = engine()->canvas().handle();
+    
+    glfwSetWindowUserPointer(windows, this);
+    glfwSetMouseButtonCallback(windows, onMouseDownCallback);
+    glfwSetScrollCallback(windows, onMouseWheelCallback);
 }
 
 void OrbitControl::onDisable() {
@@ -115,7 +127,18 @@ void OrbitControl::panUp(float distance, const math::Matrix& worldMatrix) {
 }
 
 void OrbitControl::pan(float deltaX, float deltaY) {
-    
+    // perspective only
+    Float3 position = camera->transform->position();
+    _vPan = position;
+    _vPan = _vPan - target;
+    auto targetDistance = Length(_vPan);
+
+    targetDistance *= (fov / 2) * (M_PI / 180);
+
+    int width, height;
+    glfwGetWindowSize(windows, &width, &height);
+    panLeft(-2 * deltaX * (targetDistance / float(width)), camera->transform->worldMatrix());
+    panUp(2 * deltaY * (targetDistance / float(height)), camera->transform->worldMatrix());
 }
 
 void OrbitControl::zoomIn(float zoomScale) {
@@ -127,27 +150,149 @@ void OrbitControl::zoomOut(float zoomScale) {
 }
 
 //MARK: - Mouse
-void OrbitControl::handleMouseDownRotate() {}
+void OrbitControl::handleMouseDownRotate() {
+    double x, y;
+    glfwGetCursorPos(windows, &x, &y);
+    _rotateStart = Float2(x, y);
+}
 
-void OrbitControl::handleMouseDownZoom() {}
+void OrbitControl::handleMouseDownZoom() {
+    double x, y;
+    glfwGetCursorPos(windows, &x, &y);
+    _zoomStart = Float2(x, y);
+}
 
-void OrbitControl::handleMouseDownPan(){}
+void OrbitControl::handleMouseDownPan(){
+    double x, y;
+    glfwGetCursorPos(windows, &x, &y);
+    _panStart = Float2(x, y);
+}
 
-void OrbitControl::handleMouseMoveRotate(){}
+void OrbitControl::handleMouseMoveRotate(){
+    double x, y;
+    glfwGetCursorPos(windows, &x, &y);
+    
+    _rotateEnd = Float2(x, y);
+    _rotateDelta = _rotateEnd - _rotateStart;
+    
+    int width, height;
+    glfwGetWindowSize(windows, &width, &height);
+    rotateLeft(2 * M_PI * (_rotateDelta.x / float(width)) * rotateSpeed);
+    rotateUp(2 * M_PI * (_rotateDelta.y / float(height)) * rotateSpeed);
+    
+    _rotateStart = _rotateEnd;
+}
 
-void OrbitControl::handleMouseMoveZoom(){}
+void OrbitControl::handleMouseMoveZoom(){
+    double x, y;
+    glfwGetCursorPos(windows, &x, &y);
+    
+    _zoomEnd = Float2(x, y);
+    _zoomDelta = _zoomEnd - _zoomStart;
+    
+    if (_zoomDelta.y > 0) {
+        zoomOut(zoomScale());
+    } else if (_zoomDelta.y < 0) {
+        zoomIn(zoomScale());
+    }
+    
+    _zoomStart = _zoomEnd;
+}
 
-void OrbitControl::handleMouseMovePan(){}
+void OrbitControl::handleMouseMovePan(){
+    double x, y;
+    glfwGetCursorPos(windows, &x, &y);
+    
+    _panEnd = Float2(x, y);
+    _panDelta = _panEnd - _panStart;
+    
+    pan(_panDelta.x, _panDelta.y);
+    
+    _panStart = _panEnd;
+}
 
-void OrbitControl::handleMouseWheel(){}
+void OrbitControl::handleMouseWheel(double xoffset, double yoffset){
+    if (yoffset < 0) {
+        zoomIn(zoomScale());
+    } else if (yoffset > 0) {
+        zoomOut(zoomScale());
+    }
+}
 
-void OrbitControl::onMouseDown(){}
+void OrbitControl::onMouseDown(GLFWwindow* window, int button, int action, int mods){
+    if (enabled() == false) return;
+    
+    _isMouseUp = false;
+    
+    switch (button) {
+        case GLFW_MOUSE_BUTTON_LEFT:
+            if (enableRotate == false) return;
+            
+            handleMouseDownRotate();
+            _state = STATE::ROTATE;
+            break;
+        case GLFW_MOUSE_BUTTON_MIDDLE:
+            if (enableZoom == false) return;
+            
+            handleMouseDownZoom();
+            _state = STATE::ZOOM;
+            break;
+        case GLFW_MOUSE_BUTTON_RIGHT:
+            if (enablePan == false) return;
+            
+            handleMouseDownPan();
+            _state = STATE::PAN;
+            break;
+        default:
+            break;
+    }
+    
+    if (_state != STATE::NONE) {
+        onMouseMove();
+        onMouseUp();
+    }
+}
 
-void OrbitControl::onMouseMove(){}
+void OrbitControl::onMouseMove(){
+    if (enabled() == false) return;
+    
+    switch (_state) {
+        case STATE::ROTATE:
+            if (enableRotate == false) return;
+            
+            handleMouseMoveRotate();
+            break;
+            
+        case STATE::ZOOM:
+            if (enableZoom == false) return;
+            
+            handleMouseMoveZoom();
+            break;
+            
+        case STATE::PAN:
+            if (enablePan == false) return;
+            
+            handleMouseMovePan();
+            break;
+        default:
+            break;;
+    }
+}
 
-void OrbitControl::onMouseUp(){}
+void OrbitControl::onMouseUp(){
+    if (enabled() == false) return;
+    
+    _isMouseUp = true;
+    _state = STATE::NONE;
+}
 
-void OrbitControl::onMouseWheel(){}
+void OrbitControl::onMouseWheel(GLFWwindow* window, double xoffset, double yoffset){
+    if (enabled() == false || enableZoom == false ||
+        (_state != STATE::NONE && _state != STATE::ROTATE))
+        return;
+    
+    handleMouseWheel(xoffset, yoffset);
+}
 
 //MARK: - KeyBoard
 void OrbitControl::handleKeyDown(){}
