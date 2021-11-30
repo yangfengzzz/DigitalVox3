@@ -29,10 +29,6 @@ public:
         return _handle;
     }
     
-    MTLAutoreleasedRenderPipelineReflection *reflection() {
-        return _reflection;
-    }
-    
 public:
     /// Grouping other data.
     void groupingOtherUniformBlock();
@@ -57,7 +53,7 @@ public:
     
 private:
     /// record the location of uniform/attribute.
-    void _recordVertexLocation();
+    void _recordVertexLocation(MTLRenderPipelineReflection* reflection);
     
     void _groupingUniform(const ShaderUniform& uniform,
                           const std::optional<ShaderDataGroup>& group, bool isTexture);
@@ -65,7 +61,6 @@ private:
     void _groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms, bool isTexture);
 
     MetalRenderer *_render;
-    MTLAutoreleasedRenderPipelineReflection *_reflection;
     id <MTLRenderPipelineState> _handle;
 };
 

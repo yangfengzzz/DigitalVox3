@@ -19,16 +19,17 @@
 namespace vox {
 RenderPipelineState::RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor):
 _render(_render) {
+    MTLRenderPipelineReflection *_reflection;
     NSError *error = nil;
     _handle = [_render->device newRenderPipelineStateWithDescriptor:descriptor
                                                             options:MTLPipelineOptionArgumentInfo
-                                                         reflection:_reflection error:&error];
+                                                         reflection:&_reflection error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create Metal pipeline state: %@", error);
     }
     
-    _recordVertexLocation();
+    _recordVertexLocation(_reflection);
 }
 
 void RenderPipelineState::groupingOtherUniformBlock() {
@@ -167,11 +168,11 @@ void RenderPipelineState::uploadTextures(const ShaderUniformBlock& uniformBlock,
     }
 }
 
-void RenderPipelineState::_recordVertexLocation() {
-    auto count = [[*_reflection vertexArguments] count];
+void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* reflection) {
+    auto count = [[reflection vertexArguments] count];
     if (count != 0) {
         for (size_t i = 0; i < count; i++) {
-            const auto& aug = [*_reflection vertexArguments][i];
+            const auto& aug = [reflection vertexArguments][i];
             const auto type = aug.bufferDataType;
             if (type == MTLDataTypeStruct) {
                 continue;
@@ -204,10 +205,10 @@ void RenderPipelineState::_recordVertexLocation() {
         }
     }
     
-    count = [[*_reflection fragmentArguments] count];
+    count = [[reflection fragmentArguments] count];
     if (count != 0) {
         for (size_t i = 0; i < count; i++) {
-            const auto& aug = [*_reflection fragmentArguments][i];
+            const auto& aug = [reflection fragmentArguments][i];
             const auto type = aug.type;
             
             const auto name = [aug.name cStringUsingEncoding:NSUTF8StringEncoding];
