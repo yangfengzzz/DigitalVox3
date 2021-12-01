@@ -32,9 +32,8 @@
 #include "memory/allocator.h"
 
 namespace vox {
-namespace animation {
 namespace offline {
-namespace fbx {
+namespace loader {
 
 FbxManagerInstance::FbxManagerInstance() : fbx_manager_(nullptr) {
     // Instantiate Fbx manager, mostly a memory manager.
@@ -313,7 +312,7 @@ bool FbxSystemConverter::ConvertTransform(const FbxAMatrix &_m,
     *_transform = vox::math::Transform::identity();
     return false;
 }
-}  // namespace fbx
+
+}  // namespace loader
 }  // namespace offline
-}  // namespace animation
 }  // namespace vox

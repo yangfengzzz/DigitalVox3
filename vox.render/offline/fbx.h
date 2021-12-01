@@ -37,9 +37,8 @@ namespace vox {
 namespace math {
 struct Transform;
 }  // namespace math
-namespace animation {
 namespace offline {
-namespace fbx {
+namespace loader {
 
 // Manages FbxManager instance.
 class FbxManagerInstance {
@@ -173,8 +172,7 @@ private:
     // Axis and unit conversion helper.
     FbxSystemConverter *converter_;
 };
-}  // namespace fbx
+}  // namespace loader
 }  // namespace offline
-}  // namespace animation
 }  // namespace vox
 #endif  // VOX_VOX_ANIMATION_OFFLINE_FBX_FBX_H_
