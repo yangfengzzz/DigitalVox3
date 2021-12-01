@@ -16,6 +16,7 @@
 #include "../containers/vector.h"
 #include "../memory/unique_ptr.h"
 #include "maths/soa_transform.h"
+#include <string>
 
 namespace vox {
 class Animator: public Component {
@@ -45,11 +46,21 @@ public:
     
     Animator(Entity* entity);
     
+    bool addAnimationClip(const std::string& filename, int num_joints, int num_soa_joints);
+    
     void update(float deltaTime);
     
     span<vox::animation::BlendingJob::Layer> layers();
+    
+private:
+    void _onEnable() override;
+
+    void _onDisable() override;
 
 private:
+    friend class ComponentsManager;
+    
+    ssize_t _onUpdateIndex = -1;
     vox::vector<vox::unique_ptr<AnimationClip>> clips_;
     vox::vector<vox::animation::BlendingJob::Layer> layers_;
 };

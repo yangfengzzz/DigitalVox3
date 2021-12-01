@@ -6,10 +6,31 @@
 //
 
 #include "animator.h"
+#include "engine.h"
+#include "../offline/anim_loader.h"
+#include <string>
 
 namespace vox {
 Animator::Animator(Entity* entity):
 Component(entity) {
+}
+
+bool Animator::addAnimationClip(const std::string& filename, int num_joints, int num_soa_joints) {
+    vox::unique_ptr<AnimationClip> clip = vox::make_unique<AnimationClip>();
+
+    if (!vox::offline::loader::LoadAnimation(filename.c_str(), &clip->animation)) {
+        return false;
+    }
+    
+    // Allocates sampler runtime buffers.
+    clip->locals.resize(num_soa_joints);
+
+    // Allocates a cache that matches animation requirements.
+    clip->cache.Resize(num_joints);
+    
+    clips_.emplace_back(std::move(clip));
+
+    return true;
 }
 
 void Animator::update(float deltaTime) {
@@ -49,6 +70,14 @@ void Animator::update(float deltaTime) {
 
 span<vox::animation::BlendingJob::Layer> Animator::layers() {
     return make_span(layers_);
+}
+
+void Animator::_onEnable() {
+    engine()->_componentsManager.addOnUpdateAnimators(this);
+}
+
+void Animator::_onDisable() {
+    engine()->_componentsManager.removeOnUpdateAnimators(this);
 }
 
 }

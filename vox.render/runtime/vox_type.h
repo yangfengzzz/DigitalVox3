@@ -26,6 +26,7 @@ using MaterialPtr = std::shared_ptr<Material>;
 class Camera;
 class Renderer;
 class Script;
+class Animator;
 
 class ShaderProgram;
 class RenderPipelineState;

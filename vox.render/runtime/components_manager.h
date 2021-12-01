@@ -13,8 +13,6 @@
 #include "render_pipeline/render_context.h"
 
 namespace vox {
-class Script;
-
 /**
  * The manager of the components.
  */
@@ -44,6 +42,11 @@ public:
     void removeOnUpdateRenderers(Renderer* renderer);
     
 public:
+    void addOnUpdateAnimators(Animator* animator);
+
+    void removeOnUpdateAnimators(Animator* animator);
+    
+public:
     void callScriptOnStart();
     
     void callScriptOnUpdate(float deltaTime);
@@ -53,6 +56,8 @@ public:
     void callRendererOnUpdate(float deltaTime);
     
     void callRender(const RenderContext& context);
+    
+    void callAnimatorUpdate(float deltaTime);
     
     void callComponentDestroy();
 
@@ -71,6 +76,9 @@ private:
     std::vector<Script *> _onUpdateScripts;
     std::vector<Script *> _onLateUpdateScripts;
     std::vector<Script *> _destroyComponents;
+    
+    // Animatior
+    std::vector<Animator*> _onUpdateAnimators;
     
     // Render
     std::vector<Renderer*> _renderers;

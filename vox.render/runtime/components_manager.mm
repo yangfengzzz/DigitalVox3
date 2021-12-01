@@ -10,6 +10,7 @@
 #include "renderer.h"
 #include "entity.h"
 #include "camera.h"
+#include "animator.h"
 
 namespace vox {
 void ComponentsManager::addOnStartScript(Script* script) {
@@ -64,6 +65,16 @@ void ComponentsManager::addOnUpdateRenderers(Renderer* renderer) {
 void ComponentsManager::removeOnUpdateRenderers(Renderer* renderer) {
     _onUpdateRenderers.erase(_onUpdateRenderers.begin() + renderer->_onUpdateIndex);
     renderer->_onUpdateIndex = -1;
+}
+
+void ComponentsManager::addOnUpdateAnimators(Animator* animator) {
+    animator->_onUpdateIndex = _onUpdateAnimators.size();
+    _onUpdateAnimators.push_back(animator);
+}
+
+void ComponentsManager::removeOnUpdateAnimators(Animator* animator) {
+    _onUpdateAnimators.erase(_onUpdateAnimators.begin() + animator->_onUpdateIndex);
+    animator->_onUpdateIndex = -1;
 }
 
 void ComponentsManager::callScriptOnStart() {
@@ -145,6 +156,13 @@ void ComponentsManager::callRender(const RenderContext& context) {
         ShaderMacroCollection::unionCollection(camera->_globalShaderMacro,
                                                element->shaderData._macroCollection,
                                                element->_globalShaderMacro);
+    }
+}
+
+void ComponentsManager::callAnimatorUpdate(float deltaTime) {
+    const auto& elements = _onUpdateAnimators;
+    for (size_t i = 0; i < _onUpdateAnimators.size(); i++) {
+        elements[i]->update(deltaTime);
     }
 }
 

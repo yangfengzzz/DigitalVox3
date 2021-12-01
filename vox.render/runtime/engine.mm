@@ -14,7 +14,7 @@
 namespace vox {
 Engine::Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
     ShaderPool::initialization();
-
+    
     _sceneManager.setActiveScene(std::make_shared<Scene>(this, "DefaultScene"));
     const uint8_t whitePixel[] = {255, 255, 255, 255};
     
@@ -101,7 +101,7 @@ void Engine::update() {
         
         glfwPollEvents();
         _componentsManager.callScriptOnUpdate(deltaTime);
-        // _componentsManager.callAnimationUpdate(deltaTime);
+        _componentsManager.callAnimatorUpdate(deltaTime);
         _componentsManager.callScriptOnLateUpdate(deltaTime);
         
         _hardwareRenderer.begin();
@@ -116,7 +116,7 @@ void Engine::_render(ScenePtr scene, float deltaTime) {
     _componentsManager.callRendererOnUpdate(deltaTime);
     
     scene->_updateShaderData();
-
+    
     if (cameras.size() > 0) {
         for (size_t i = 0, l = cameras.size(); i < l; i++) {
             const auto& camera = cameras[i];
