@@ -263,6 +263,10 @@
 		04CE39B927550EBE00204B8E /* pbr_specular_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39B727550EBE00204B8E /* pbr_specular_material.h */; };
 		04CE39BC275511CE00204B8E /* pbr_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39BA275511CE00204B8E /* pbr_material.mm */; };
 		04CE39BD275511CE00204B8E /* pbr_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39BB275511CE00204B8E /* pbr_material.h */; };
+		04CE39C02757A0D200204B8E /* fbx_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39BE2757A0D200204B8E /* fbx_loader.cpp */; };
+		04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39BF2757A0D200204B8E /* fbx_loader.h */; };
+		04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39C22757A18C00204B8E /* fbx_mesh.cpp */; };
+		04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39C32757A18C00204B8E /* fbx_mesh.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -662,6 +666,10 @@
 		04CE39B727550EBE00204B8E /* pbr_specular_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pbr_specular_material.h; sourceTree = "<group>"; };
 		04CE39BA275511CE00204B8E /* pbr_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pbr_material.mm; sourceTree = "<group>"; };
 		04CE39BB275511CE00204B8E /* pbr_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pbr_material.h; sourceTree = "<group>"; };
+		04CE39BE2757A0D200204B8E /* fbx_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fbx_loader.cpp; sourceTree = "<group>"; };
+		04CE39BF2757A0D200204B8E /* fbx_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fbx_loader.h; sourceTree = "<group>"; };
+		04CE39C22757A18C00204B8E /* fbx_mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fbx_mesh.cpp; sourceTree = "<group>"; };
+		04CE39C32757A18C00204B8E /* fbx_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fbx_mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -938,6 +946,10 @@
 			children = (
 				04CE3765274D0F5000204B8E /* fbx.h */,
 				04CE376C274D0F5100204B8E /* fbx.cc */,
+				04CE39C32757A18C00204B8E /* fbx_mesh.h */,
+				04CE39C22757A18C00204B8E /* fbx_mesh.cpp */,
+				04CE39BF2757A0D200204B8E /* fbx_loader.h */,
+				04CE39BE2757A0D200204B8E /* fbx_loader.cpp */,
 				0416102027578322006CD384 /* ozz_loader.h */,
 				0416101F27578322006CD384 /* ozz_loader.cpp */,
 				04160FE627509026006CD384 /* animation */,
@@ -1416,6 +1428,7 @@
 				04CE394B2751E3E600204B8E /* shader.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				04CE3958275259FA00204B8E /* renderer.h in Headers */,
+				04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
@@ -1426,6 +1439,7 @@
 				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
 				04CE39BD275511CE00204B8E /* pbr_material.h in Headers */,
 				04CE397127526DCF00204B8E /* mesh_renderer.h in Headers */,
+				04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */,
 				04CE39172751AF3800204B8E /* mesh.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE39B5275508D900204B8E /* pbr_base_material.h in Headers */,
@@ -1582,6 +1596,7 @@
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
+				04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */,
 				04CE399F2753A83C00204B8E /* particle.metal in Sources */,
 				04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
@@ -1610,6 +1625,7 @@
 				04CE39972753A83C00204B8E /* function-common.metal in Sources */,
 				04CE37D8274D167F00204B8E /* ik_two_bone_job.cc in Sources */,
 				04CE39B827550EBE00204B8E /* pbr_specular_material.mm in Sources */,
+				04CE39C02757A0D200204B8E /* fbx_loader.cpp in Sources */,
 				04CE399D2753A83C00204B8E /* SkinningShader.metal in Sources */,
 				04CE397427526F6E00204B8E /* model_mesh.mm in Sources */,
 				04CE396C27526AEE00204B8E /* basic_render_pipeline.mm in Sources */,
