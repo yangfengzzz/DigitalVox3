@@ -41,7 +41,7 @@ struct Quaternion;
 
 // Declares a 2d float vector.
 struct Float2 {
-    float x, y;
+    float x = 0, y = 0;
     
     // Constructs an uninitialized vector.
     VOX_INLINE Float2() {
@@ -78,7 +78,7 @@ struct Float2 {
 
 // Declares a 3d float vector.
 struct Float3 {
-    float x, y, z;
+    float x = 0, y = 0, z = 0;
     
     // Constructs an uninitialized vector.
     VOX_INLINE Float3() {
@@ -124,7 +124,7 @@ struct Float3 {
 
 // Declares a 4d float vector.
 struct Float4 {
-    float x, y, z, w;
+    float x = 0, y = 0, z = 0, w = 0;
     
     // Constructs an uninitialized vector.
     VOX_INLINE Float4() {
