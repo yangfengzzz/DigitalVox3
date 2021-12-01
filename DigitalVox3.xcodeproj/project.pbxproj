@@ -48,8 +48,8 @@
 		0416101A2755DB7C006CD384 /* spherical.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610182755DB7C006CD384 /* spherical.h */; };
 		0416101D2755DD48006CD384 /* orbit_control.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101B2755DD48006CD384 /* orbit_control.mm */; };
 		0416101E2755DD48006CD384 /* orbit_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416101C2755DD48006CD384 /* orbit_control.h */; };
-		0416102127578322006CD384 /* ozz_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416101F27578322006CD384 /* ozz_loader.cpp */; };
-		0416102227578322006CD384 /* ozz_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416102027578322006CD384 /* ozz_loader.h */; };
+		0416102127578322006CD384 /* anim_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416101F27578322006CD384 /* anim_loader.cpp */; };
+		0416102227578322006CD384 /* anim_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416102027578322006CD384 /* anim_loader.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -352,8 +352,8 @@
 		041610182755DB7C006CD384 /* spherical.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spherical.h; sourceTree = "<group>"; };
 		0416101B2755DD48006CD384 /* orbit_control.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = orbit_control.mm; sourceTree = "<group>"; };
 		0416101C2755DD48006CD384 /* orbit_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = orbit_control.h; sourceTree = "<group>"; };
-		0416101F27578322006CD384 /* ozz_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ozz_loader.cpp; sourceTree = "<group>"; };
-		0416102027578322006CD384 /* ozz_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ozz_loader.h; sourceTree = "<group>"; };
+		0416101F27578322006CD384 /* anim_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = anim_loader.cpp; sourceTree = "<group>"; };
+		0416102027578322006CD384 /* anim_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = anim_loader.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -950,8 +950,8 @@
 				04CE39C22757A18C00204B8E /* fbx_mesh.cpp */,
 				04CE39BF2757A0D200204B8E /* fbx_loader.h */,
 				04CE39BE2757A0D200204B8E /* fbx_loader.cpp */,
-				0416102027578322006CD384 /* ozz_loader.h */,
-				0416101F27578322006CD384 /* ozz_loader.cpp */,
+				0416102027578322006CD384 /* anim_loader.h */,
+				0416101F27578322006CD384 /* anim_loader.cpp */,
 				04160FE627509026006CD384 /* animation */,
 			);
 			path = offline;
@@ -1434,7 +1434,7 @@
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				04CE397927527B4700204B8E /* primitive_mesh.h in Headers */,
 				0416100B2750A720006CD384 /* scene.h in Headers */,
-				0416102227578322006CD384 /* ozz_loader.h in Headers */,
+				0416102227578322006CD384 /* anim_loader.h in Headers */,
 				04CE393A2751CF3B00204B8E /* stencil_state.h in Headers */,
 				04CE390D2751AB6B00204B8E /* mesh_buffer.h in Headers */,
 				04CE39BD275511CE00204B8E /* pbr_material.h in Headers */,
@@ -1583,7 +1583,7 @@
 				04160FF62750955C006CD384 /* component.mm in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
 				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
-				0416102127578322006CD384 /* ozz_loader.cpp in Sources */,
+				0416102127578322006CD384 /* anim_loader.cpp in Sources */,
 				04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,

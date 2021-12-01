@@ -1,12 +1,12 @@
 //
-//  ozz_loader.hpp
+//  anim_loader.hpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/12/1.
 //
 
-#ifndef ozz_loader_hpp
-#define ozz_loader_hpp
+#ifndef anim_loader_hpp
+#define anim_loader_hpp
 
 #include "../runtime/animation/skeleton.h"
 #include "../runtime/animation/animation.h"
@@ -44,4 +44,4 @@ bool LoadTrack(const char* _filename, animation::QuaternionTrack* _track);
 } // offline
 } // vox
 
-#endif /* ozz_loader_hpp */
+#endif /* anim_loader_hpp */

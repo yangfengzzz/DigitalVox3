@@ -1,11 +1,11 @@
 //
-//  ozz_loader.cpp
+//  anim_loader.cpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/12/1.
 //
 
-#include "ozz_loader.h"
+#include "anim_loader.h"
 #include "../log.h"
 #include "../io/archive.h"
 

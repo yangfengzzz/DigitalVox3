@@ -967,6 +967,47 @@ bool loadScene(const char* mesh_filename, const char* skeleton_filename,
     return EXIT_SUCCESS;
 }
 
+bool loadMesh(const char* _filename, Mesh* _mesh) {
+    assert(_filename && _mesh);
+    vox::log::Out() << "Loading mesh archive: " << _filename << "." << std::endl;
+    vox::io::File file(_filename, "rb");
+    if (!file.opened()) {
+        vox::log::Err() << "Failed to open mesh file " << _filename << "."
+        << std::endl;
+        return false;
+    }
+    vox::io::IArchive archive(&file);
+    if (!archive.TestTag<vox::offline::loader::Mesh>()) {
+        vox::log::Err() << "Failed to load mesh instance from file " << _filename
+        << "." << std::endl;
+        return false;
+    }
+    
+    // Once the tag is validated, reading cannot fail.
+    archive >> *_mesh;
+    
+    return true;
+}
+
+bool loadMeshes(const char* _filename, vox::vector<Mesh>* _meshes) {
+    assert(_filename && _meshes);
+    vox::log::Out() << "Loading meshes archive: " << _filename << "." << std::endl;
+    vox::io::File file(_filename, "rb");
+    if (!file.opened()) {
+        vox::log::Err() << "Failed to open mesh file " << _filename << "."
+        << std::endl;
+        return false;
+    }
+    vox::io::IArchive archive(&file);
+    
+    while (archive.TestTag<vox::offline::loader::Mesh>()) {
+        _meshes->resize(_meshes->size() + 1);
+        archive >> _meshes->back();
+    }
+    
+    return true;
+}
+
 } // loader
 } // offline
 } // vox
