@@ -39,8 +39,9 @@ bool LoadTrack(const char* _filename, animation::Float2Track* _track);
 bool LoadTrack(const char* _filename, animation::Float3Track* _track);
 bool LoadTrack(const char* _filename, animation::Float4Track* _track);
 bool LoadTrack(const char* _filename, animation::QuaternionTrack* _track);
-}
-}
-}
+
+} // loader
+} // offline
+} // vox
 
 #endif /* ozz_loader_hpp */
