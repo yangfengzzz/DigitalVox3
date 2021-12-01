@@ -842,6 +842,7 @@ bool StripWeights(vox::offline::loader::Mesh* _mesh) {
     return true;
 }
 
+//MARK: - Loader
 bool loadScene(const char* mesh_filename, const char* skeleton_filename,
                std::vector<Mesh>& meshes) {
     // Opens skeleton file.
@@ -866,7 +867,104 @@ bool loadScene(const char* mesh_filename, const char* skeleton_filename,
         archive >> skeleton;
     }
     
-    return true;
+    // Import Fbx content.
+    vox::offline::loader::FbxManagerInstance fbx_manager;
+    vox::offline::loader::FbxDefaultIOSettings settings(fbx_manager);
+    vox::offline::loader::FbxSceneLoader scene_loader(mesh_filename, "", fbx_manager, settings);
+    if (!scene_loader.scene()) {
+        vox::log::Err() << "Failed to import file " << mesh_filename << "."
+        << std::endl;
+        return EXIT_FAILURE;
+    }
+    
+    const int num_meshes = scene_loader.scene()->GetSrcObjectCount<FbxMesh>();
+    if (num_meshes == 0) {
+        vox::log::Err() << "No mesh to process in this file: "
+        << mesh_filename << "." << std::endl;
+        return EXIT_FAILURE;
+    } else if (num_meshes > 1) {
+        vox::log::Err() << "There's more than one mesh in the file: "
+        << mesh_filename << ". All (" << num_meshes
+        << ") meshes will be concatenated to the output file."
+        << std::endl;
+    }
+    
+    {  // Clean and triangulates the scene.
+        vox::log::LogV() << "Triangulating scene." << std::endl;
+        FbxGeometryConverter converter(fbx_manager);
+        converter.RemoveBadPolygonsFromMeshes(scene_loader.scene());
+        if (!converter.Triangulate(scene_loader.scene(), true)) {
+            vox::log::Err() << "Failed to triangulating meshes." << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
+    
+    const size_t max_influences = 0;
+    const bool split = true;
+    // Take all meshes
+    meshes.resize(num_meshes);
+    
+    for (int m = 0; m < num_meshes; ++m) {
+        FbxMesh* mesh = scene_loader.scene()->GetSrcObject<FbxMesh>(m);
+        
+        // Allocates output mesh.
+        vox::offline::loader::Mesh& output_mesh = meshes[m];
+        output_mesh.parts.resize(1);
+        
+        ControlPointsRemap remap;
+        if (!BuildVertices(mesh, scene_loader.converter(), &remap, &output_mesh)) {
+            vox::log::Err() << "Failed to read vertices." << std::endl;
+            return EXIT_FAILURE;
+        }
+        
+        // Finds skinning informations
+        if (mesh->GetDeformerCount(FbxDeformer::eSkin) > 0) {
+            if (!BuildSkin(mesh, scene_loader.converter(), remap, skeleton,
+                           &output_mesh)) {
+                vox::log::Err() << "Failed to read skinning data." << std::endl;
+                return EXIT_FAILURE;
+            }
+            
+            // Limiting number of joint influences per vertex.
+            if (max_influences > 0) {
+                vox::offline::loader::Mesh partitioned_meshes;
+                if (!LimitInfluences(output_mesh, max_influences)) {
+                    vox::log::Err() << "Failed to limit number of joint influences."
+                    << std::endl;
+                    return EXIT_FAILURE;
+                }
+            }
+            
+            // Remap joint indices. The mesh might not use all skeleton joints, so
+            // this function remaps joint indices to the subset of used joints. It
+            // also reoders inverse bin pose matrices.
+            if (!RemapIndices(&output_mesh)) {
+                vox::log::Err() << "Failed to remap joint indices." << std::endl;
+                return EXIT_FAILURE;
+            }
+            
+            // Split the mesh if option is true (default)
+            if (split) {
+                vox::offline::loader::Mesh partitioned_meshes;
+                if (!SplitParts(output_mesh, &partitioned_meshes)) {
+                    vox::log::Err() << "Failed to partitioned meshes." << std::endl;
+                    return EXIT_FAILURE;
+                }
+                
+                // Copy partitioned mesh back to the output.
+                output_mesh = partitioned_meshes;
+            }
+            
+            if (!StripWeights(&output_mesh)) {
+                vox::log::Err() << "Failed to strip weights." << std::endl;
+                return EXIT_FAILURE;
+            }
+            
+            assert(max_influences <= 0 || output_mesh.max_influences_count() <= max_influences);
+        }
+    }
+    
+    return EXIT_SUCCESS;
 }
 
 } // loader
