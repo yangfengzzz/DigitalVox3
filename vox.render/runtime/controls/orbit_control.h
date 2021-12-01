@@ -94,17 +94,17 @@ public:
     /**
      * Rotation parameter update when the mouse moves.
      */
-    void handleMouseMoveRotate();
+    void handleMouseMoveRotate(double xpos, double ypos);
     
     /**
      * Zoom parameters update when the mouse moves.
      */
-    void handleMouseMoveZoom();
+    void handleMouseMoveZoom(double xpos, double ypos);
     
     /**
      * Pan parameters update when the mouse moves.
      */
-    void handleMouseMovePan();
+    void handleMouseMovePan(double xpos, double ypos);
     
     /**
      * Zoom parameter update when the mouse wheel is scrolled.
@@ -114,12 +114,12 @@ public:
     /**
      * Total handling of mouse down events.
      */
-    void onMouseDown(GLFWwindow* window, int button, int action, int mods);
+    void onMouseDown(int button);
     
     /**
      * Total handling of mouse movement events.
      */
-    void onMouseMove();
+    void onMouseMove(double xpos, double ypos);
     
     /**
      * Total handling of mouse up events.
@@ -129,7 +129,7 @@ public:
     /**
      * Total handling of mouse wheel events.
      */
-    void onMouseWheel(GLFWwindow* window, double xoffset, double yoffset);
+    void onMouseWheel(double xoffset, double yoffset);
     
 public:
     /**
