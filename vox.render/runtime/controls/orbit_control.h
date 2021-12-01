@@ -135,12 +135,12 @@ public:
     /**
      * Pan parameter update when keyboard is pressed.
      */
-    void handleKeyDown();
+    void handleKeyDown(int key);
     
     /**
      * Total handling of keyboard down events.
      */
-    void onKeyDown();
+    void onKeyDown(int key);
     
 public:
     /**
@@ -220,7 +220,7 @@ private:
     };
     
     EntityPtr camera;
-    GLFWwindow* windows;
+    GLFWwindow* window;
     
     float fov = 45;
     // Target position.
@@ -283,7 +283,7 @@ private:
     /**
      * Whether to enable keyboard.
      */
-    bool enableKeys = false;
+    bool enableKeys = true;
     /**
      * The minimum radian in the vertical direction, the default is 0 radian, the value range is 0 - Math.PI.
      */
