@@ -8,13 +8,13 @@
 #ifndef fbx_loader_hpp
 #define fbx_loader_hpp
 
-#include "fbx.h"
+#include "fbx_mesh.h"
 
 namespace vox {
 namespace offline {
 namespace loader {
-
-
+bool loadScene(const char* mesh_filename, const char* skeleton_filename,
+               std::vector<Mesh>& meshes);
 } // loader
 } // offline
 } // vox
