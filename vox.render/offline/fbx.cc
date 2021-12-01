@@ -25,7 +25,7 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "offline/animation/fbx/fbx.h"
+#include "fbx.h"
 
 #include "log.h"
 #include "maths/transform.h"
