@@ -16,6 +16,9 @@ namespace vox {
 namespace physics {
 class ColliderShape {
 public:
+    Collider* collider();
+    
+public:
     void setLocalPose(const math::Transform &pose);
     
     math::Transform localPose() const;
@@ -46,9 +49,12 @@ public:
     void setSceneQuery(bool isQuery);
     
 protected:
+    friend class Collider;
+    
     math::Transform _pose;
     PxShape* _pxShape;
     PxGeometry* _pxGeometry;
+    Collider* _collider;
 };
 
 }

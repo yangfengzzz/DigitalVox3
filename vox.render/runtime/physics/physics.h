@@ -10,10 +10,14 @@
 
 #include "maths/vec_float.h"
 #include <PxPhysicsAPI.h>
+#include <memory>
 
 namespace vox {
 namespace physics {
 class PhysicsMaterial;
+class ColliderShape;
+using ColliderShapePtr = std::shared_ptr<ColliderShape>;
+class Collider;
 
 using namespace physx;
 

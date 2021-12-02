@@ -10,6 +10,10 @@
 
 namespace vox {
 namespace physics {
+Collider* ColliderShape::collider() {
+    return _collider;
+}
+
 void ColliderShape::setLocalPose(const math::Transform &pose) {
     _pose = pose;
     
