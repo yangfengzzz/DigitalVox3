@@ -13,11 +13,15 @@
 
 namespace vox {
 namespace physics {
+class PhysicsMaterial;
+
 using namespace physx;
 
 class Physics {
 public:
     Physics();
+    
+    PhysicsMaterial createMaterial(PxReal staticFriction, PxReal dynamicFriction, PxReal restitution);
     
 private:
     PxPhysics* _physics;
