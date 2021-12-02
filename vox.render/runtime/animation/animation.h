@@ -131,7 +131,7 @@ class Animation {
 
 namespace io {
 VOX_IO_TYPE_VERSION(6, animation::Animation)
-VOX_IO_TYPE_TAG("vox-animation", animation::Animation)
+VOX_IO_TYPE_TAG("ozz-animation", animation::Animation)
 }  // namespace io
 }  // namespace vox
 #endif  // VOX_VOX_ANIMATION_RUNTIME_ANIMATION_H_

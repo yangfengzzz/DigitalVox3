@@ -155,15 +155,15 @@ class QuaternionTrack : public internal::Track<math::Quaternion> {};
 }  // namespace animation
 namespace io {
 VOX_IO_TYPE_VERSION(1, animation::FloatTrack)
-VOX_IO_TYPE_TAG("vox-float_track", animation::FloatTrack)
+VOX_IO_TYPE_TAG("ozz-float_track", animation::FloatTrack)
 VOX_IO_TYPE_VERSION(1, animation::Float2Track)
-VOX_IO_TYPE_TAG("vox-float2_track", animation::Float2Track)
+VOX_IO_TYPE_TAG("ozz-float2_track", animation::Float2Track)
 VOX_IO_TYPE_VERSION(1, animation::Float3Track)
-VOX_IO_TYPE_TAG("vox-float3_track", animation::Float3Track)
+VOX_IO_TYPE_TAG("ozz-float3_track", animation::Float3Track)
 VOX_IO_TYPE_VERSION(1, animation::Float4Track)
-VOX_IO_TYPE_TAG("vox-float4_track", animation::Float4Track)
+VOX_IO_TYPE_TAG("ozz-float4_track", animation::Float4Track)
 VOX_IO_TYPE_VERSION(1, animation::QuaternionTrack)
-VOX_IO_TYPE_TAG("vox-quat_track", animation::QuaternionTrack)
+VOX_IO_TYPE_TAG("ozz-quat_track", animation::QuaternionTrack)
 }  // namespace io
 }  // namespace vox
 #endif  // VOX_VOX_ANIMATION_RUNTIME_TRACK_H_

@@ -135,7 +135,7 @@ inline _Fct IterateJointsBF(const RawSkeleton& _skeleton, _Fct _fct) {
 }  // namespace animation
 namespace io {
 VOX_IO_TYPE_VERSION(1, animation::offline::RawSkeleton)
-VOX_IO_TYPE_TAG("vox-raw_skeleton", animation::offline::RawSkeleton)
+VOX_IO_TYPE_TAG("ozz-raw_skeleton", animation::offline::RawSkeleton)
 
 // Should not be called directly but through io::Archive << and >> operators.
 template <>

@@ -142,7 +142,7 @@ struct RawAnimation {
 }  // namespace animation
 namespace io {
 VOX_IO_TYPE_VERSION(3, animation::offline::RawAnimation)
-VOX_IO_TYPE_TAG("vox-raw_animation", animation::offline::RawAnimation)
+VOX_IO_TYPE_TAG("ozz-raw_animation", animation::offline::RawAnimation)
 
 // Should not be called directly but through io::Archive << and >> operators.
 template <>

@@ -138,7 +138,7 @@ class Skeleton {
 
 namespace io {
 VOX_IO_TYPE_VERSION(2, animation::Skeleton)
-VOX_IO_TYPE_TAG("vox-skeleton", animation::Skeleton)
+VOX_IO_TYPE_TAG("ozz-skeleton", animation::Skeleton)
 }  // namespace io
 }  // namespace vox
 #endif  // VOX_VOX_ANIMATION_RUNTIME_SKELETON_H_
