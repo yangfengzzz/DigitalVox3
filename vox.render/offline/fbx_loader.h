@@ -9,12 +9,13 @@
 #define fbx_loader_hpp
 
 #include "fbx_mesh.h"
+#include "../runtime/animation/skeleton.h"
 
 namespace vox {
 namespace offline {
 namespace loader {
-bool loadScene(const char* mesh_filename, const char* skeleton_filename,
-               std::vector<Mesh>& meshes);
+bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
+               vox::vector<Mesh>& _meshes);
 
 // Loads a sample::Mesh from an ozz archive file named _filename.
 // This function will fail and return false if the file cannot be opened or if

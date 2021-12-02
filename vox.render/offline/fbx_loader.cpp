@@ -8,7 +8,6 @@
 #include "fbx.h"
 #include "fbx_loader.h"
 #include "../log.h"
-#include "../runtime/animation/skeleton.h"
 #include "../containers/map.h"
 
 namespace vox {
@@ -843,36 +842,14 @@ bool StripWeights(vox::offline::loader::Mesh* _mesh) {
 }
 
 //MARK: - Loader
-bool loadScene(const char* mesh_filename, const char* skeleton_filename,
-               std::vector<Mesh>& meshes) {
-    // Opens skeleton file.
-    animation::Skeleton skeleton;
-    {
-        log::Out() << "Loading skeleton archive " << skeleton_filename
-        << "." << std::endl;
-        io::File file(skeleton_filename, "rb");
-        if (!file.opened()) {
-            log::Err() << "Failed to open skeleton file "
-            << skeleton_filename << "." << std::endl;
-            return EXIT_FAILURE;
-        }
-        io::IArchive archive(&file);
-        if (!archive.TestTag<animation::Skeleton>()) {
-            log::Err() << "Failed to load skeleton instance from file "
-            << skeleton_filename << "." << std::endl;
-            return EXIT_FAILURE;
-        }
-        
-        // Once the tag is validated, reading cannot fail.
-        archive >> skeleton;
-    }
-    
+bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
+               vox::vector<Mesh>& meshes) {
     // Import Fbx content.
     vox::offline::loader::FbxManagerInstance fbx_manager;
     vox::offline::loader::FbxDefaultIOSettings settings(fbx_manager);
-    vox::offline::loader::FbxSceneLoader scene_loader(mesh_filename, "", fbx_manager, settings);
+    vox::offline::loader::FbxSceneLoader scene_loader(_filename, "", fbx_manager, settings);
     if (!scene_loader.scene()) {
-        vox::log::Err() << "Failed to import file " << mesh_filename << "."
+        vox::log::Err() << "Failed to import file " << _filename << "."
         << std::endl;
         return EXIT_FAILURE;
     }
@@ -880,11 +857,11 @@ bool loadScene(const char* mesh_filename, const char* skeleton_filename,
     const int num_meshes = scene_loader.scene()->GetSrcObjectCount<FbxMesh>();
     if (num_meshes == 0) {
         vox::log::Err() << "No mesh to process in this file: "
-        << mesh_filename << "." << std::endl;
+        << _filename << "." << std::endl;
         return EXIT_FAILURE;
     } else if (num_meshes > 1) {
         vox::log::Err() << "There's more than one mesh in the file: "
-        << mesh_filename << ". All (" << num_meshes
+        << _filename << ". All (" << num_meshes
         << ") meshes will be concatenated to the output file."
         << std::endl;
     }
