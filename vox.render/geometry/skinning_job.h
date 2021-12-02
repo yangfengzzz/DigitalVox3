@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#ifndef OZZ_OZZ_GEOMETRY_RUNTIME_SKINNING_JOB_H_
-#define OZZ_OZZ_GEOMETRY_RUNTIME_SKINNING_JOB_H_
+#ifndef VOX_VOX_GEOMETRY_RUNTIME_SKINNING_JOB_H_
+#define VOX_VOX_GEOMETRY_RUNTIME_SKINNING_JOB_H_
 
-#include "ozz/base/platform.h"
-#include "ozz/base/span.h"
+#include "../platform.h"
+#include "../span.h"
 
-namespace ozz {
+namespace vox {
 namespace math {
 struct Float4x4;
 }
@@ -74,111 +74,111 @@ namespace geometry {
 // The job does not owned the buffers (in/output) and will thus not delete them
 // during job's destruction.
 struct SkinningJob {
-  // Default constructor, initializes default values.
-  SkinningJob();
-
-  // Validates job parameters.
-  // Returns true for a valid job, false otherwise:
-  // - if any range is invalid. See each range description.
-  // - if normals are provided but positions aren't.
-  // - if tangents are provided but normals aren't.
-  // - if no output is provided while an input is. For example, if input normals
-  // are provided, then output normals must also.
-  bool Validate() const;
-
-  // Runs job's skinning task.
-  // The job is validated before any operation is performed, see Validate() for
-  // more details.
-  // Returns false if *this job is not valid.
-  bool Run() const;
-
-  // Number of vertices to transform. All input and output arrays must store at
-  // least this number of vertices.
-  int vertex_count;
-
-  // Maximum number of joints influencing each vertex. Must be greater than 0.
-  // The number of influences drives how joint_indices and joint_weights are
-  // sampled:
-  // - influences_count joint indices are red from joint_indices for each
-  // vertex.
-  // - influences_count - 1 joint weights are red from joint_weightrs for each
-  // vertex. The weight of the last joint is restored (weights are normalized).
-  int influences_count;
-
-  // Array of matrices for each joint. Joint are indexed through indices array.
-  span<const math::Float4x4> joint_matrices;
-
-  // Optional array of inverse transposed matrices for each joint. If provided,
-  // this array is used to transform vectors (normals and tangents), otherwise
-  // joint_matrices array is used.
-  // As explained here (http://www.glprogramming.com/red/appendixf.html) in the,
-  // red book, transforming normals requires a special attention when the
-  // transformation matrix has scaling or shearing. In this case the right
-  // transformation is done by the inverse transpose of the transformation that
-  // transforms points. Any rotation matrix is good though.
-  // These matrices are optional as they might by costly to compute, and also
-  // fall into a more costly code path in the skinning algorithm.
-  span<const math::Float4x4> joint_inverse_transpose_matrices;
-
-  // Array of joints indices. This array is used to indexes matrices in joints
-  // array.
-  // Each vertex has influences_max number of indices, meaning that the size of
-  // this array must be at least influences_max * vertex_count.
-  span<const uint16_t> joint_indices;
-  size_t joint_indices_stride;
-
-  // Array of joints weights. This array is used to associate a weight to every
-  // joint that influences a vertex. The number of weights required per vertex
-  // is "influences_max - 1". The weight for the last joint (for each vertex) is
-  // restored at runtime thanks to the fact that the sum of the weights for each
-  // vertex is 1.
-  // Each vertex has (influences_max - 1) number of weights, meaning that the
-  // size of this array must be at least (influences_max - 1)* vertex_count.
-  span<const float> joint_weights;
-  size_t joint_weights_stride;
-
-  // Input vertex positions array (3 float values per vertex) and stride (number
-  // of bytes between each position).
-  // Array length must be at least vertex_count * in_positions_stride.
-  span<const float> in_positions;
-  size_t in_positions_stride;
-
-  // Input vertex normals (3 float values per vertex) array and stride (number
-  // of bytes between each normal).
-  // Array length must be at least vertex_count * in_normals_stride.
-  span<const float> in_normals;
-  size_t in_normals_stride;
-
-  // Input vertex tangents (3 float values per vertex) array and stride (number
-  // of bytes between each tangent).
-  // Array length must be at least vertex_count * in_tangents_stride.
-  span<const float> in_tangents;
-  size_t in_tangents_stride;
-
-  // Output vertex positions (3 float values per vertex) array and stride
-  // (number of bytes between each position).
-  // Array length must be at least vertex_count * out_positions_stride.
-  span<float> out_positions;
-  size_t out_positions_stride;
-
-  // Output vertex normals (3 float values per vertex) array and stride (number
-  // of bytes between each normal).
-  // Note that output normals are not normalized by the skinning job. This task
-  // should be handled by the application, who knows if transform matrices have
-  // uniform scale, and if normals are re-normalized later in the rendering
-  // pipeline (shader vertex transformation stage).
-  // Array length must be at least vertex_count * out_normals_stride.
-  span<float> out_normals;
-  size_t out_normals_stride;
-
-  // Output vertex positions (3 float values per vertex) array and stride
-  // (number of bytes between each tangent).
-  // Like normals, Note that output tangents are not normalized by the skinning
-  // job.
-  // Array length must be at least vertex_count * out_tangents_stride.
-  span<float> out_tangents;
-  size_t out_tangents_stride;
+    // Default constructor, initializes default values.
+    SkinningJob();
+    
+    // Validates job parameters.
+    // Returns true for a valid job, false otherwise:
+    // - if any range is invalid. See each range description.
+    // - if normals are provided but positions aren't.
+    // - if tangents are provided but normals aren't.
+    // - if no output is provided while an input is. For example, if input normals
+    // are provided, then output normals must also.
+    bool Validate() const;
+    
+    // Runs job's skinning task.
+    // The job is validated before any operation is performed, see Validate() for
+    // more details.
+    // Returns false if *this job is not valid.
+    bool Run() const;
+    
+    // Number of vertices to transform. All input and output arrays must store at
+    // least this number of vertices.
+    int vertex_count;
+    
+    // Maximum number of joints influencing each vertex. Must be greater than 0.
+    // The number of influences drives how joint_indices and joint_weights are
+    // sampled:
+    // - influences_count joint indices are red from joint_indices for each
+    // vertex.
+    // - influences_count - 1 joint weights are red from joint_weightrs for each
+    // vertex. The weight of the last joint is restored (weights are normalized).
+    int influences_count;
+    
+    // Array of matrices for each joint. Joint are indexed through indices array.
+    span<const math::Float4x4> joint_matrices;
+    
+    // Optional array of inverse transposed matrices for each joint. If provided,
+    // this array is used to transform vectors (normals and tangents), otherwise
+    // joint_matrices array is used.
+    // As explained here (http://www.glprogramming.com/red/appendixf.html) in the,
+    // red book, transforming normals requires a special attention when the
+    // transformation matrix has scaling or shearing. In this case the right
+    // transformation is done by the inverse transpose of the transformation that
+    // transforms points. Any rotation matrix is good though.
+    // These matrices are optional as they might by costly to compute, and also
+    // fall into a more costly code path in the skinning algorithm.
+    span<const math::Float4x4> joint_inverse_transpose_matrices;
+    
+    // Array of joints indices. This array is used to indexes matrices in joints
+    // array.
+    // Each vertex has influences_max number of indices, meaning that the size of
+    // this array must be at least influences_max * vertex_count.
+    span<const uint16_t> joint_indices;
+    size_t joint_indices_stride;
+    
+    // Array of joints weights. This array is used to associate a weight to every
+    // joint that influences a vertex. The number of weights required per vertex
+    // is "influences_max - 1". The weight for the last joint (for each vertex) is
+    // restored at runtime thanks to the fact that the sum of the weights for each
+    // vertex is 1.
+    // Each vertex has (influences_max - 1) number of weights, meaning that the
+    // size of this array must be at least (influences_max - 1)* vertex_count.
+    span<const float> joint_weights;
+    size_t joint_weights_stride;
+    
+    // Input vertex positions array (3 float values per vertex) and stride (number
+    // of bytes between each position).
+    // Array length must be at least vertex_count * in_positions_stride.
+    span<const float> in_positions;
+    size_t in_positions_stride;
+    
+    // Input vertex normals (3 float values per vertex) array and stride (number
+    // of bytes between each normal).
+    // Array length must be at least vertex_count * in_normals_stride.
+    span<const float> in_normals;
+    size_t in_normals_stride;
+    
+    // Input vertex tangents (3 float values per vertex) array and stride (number
+    // of bytes between each tangent).
+    // Array length must be at least vertex_count * in_tangents_stride.
+    span<const float> in_tangents;
+    size_t in_tangents_stride;
+    
+    // Output vertex positions (3 float values per vertex) array and stride
+    // (number of bytes between each position).
+    // Array length must be at least vertex_count * out_positions_stride.
+    span<float> out_positions;
+    size_t out_positions_stride;
+    
+    // Output vertex normals (3 float values per vertex) array and stride (number
+    // of bytes between each normal).
+    // Note that output normals are not normalized by the skinning job. This task
+    // should be handled by the application, who knows if transform matrices have
+    // uniform scale, and if normals are re-normalized later in the rendering
+    // pipeline (shader vertex transformation stage).
+    // Array length must be at least vertex_count * out_normals_stride.
+    span<float> out_normals;
+    size_t out_normals_stride;
+    
+    // Output vertex positions (3 float values per vertex) array and stride
+    // (number of bytes between each tangent).
+    // Like normals, Note that output tangents are not normalized by the skinning
+    // job.
+    // Array length must be at least vertex_count * out_tangents_stride.
+    span<float> out_tangents;
+    size_t out_tangents_stride;
 };
 }  // namespace geometry
-}  // namespace ozz
-#endif  // OZZ_OZZ_GEOMETRY_RUNTIME_SKINNING_JOB_H_
+}  // namespace vox
+#endif  // VOX_VOX_GEOMETRY_RUNTIME_SKINNING_JOB_H_

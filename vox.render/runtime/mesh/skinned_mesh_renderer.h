@@ -8,13 +8,13 @@
 #ifndef skinned_mesh_renderer_hpp
 #define skinned_mesh_renderer_hpp
 
-#include "mesh_renderer.h"
+#include "../renderer.h"
 #include "../animation/skeleton.h"
 #include "../../containers/vector.h"
 #include "../../offline/fbx_mesh.h"
 
 namespace vox {
-class SkinnedMeshRenderer : public MeshRenderer {
+class SkinnedMeshRenderer : public Renderer {
 public:
     SkinnedMeshRenderer(Entity* entity);
     
@@ -41,7 +41,14 @@ private:
     static void computePostureBounds(vox::span<const vox::math::Float4x4> _matrices,
                                      math::BoundingBox* _bound);
     
+    // Renders a skinned mesh at a specified location.
+    bool drawSkinnedMesh(const vox::offline::loader::Mesh& _mesh,
+                         const span<math::Float4x4> _skinning_matrices,
+                         const vox::math::Float4x4& _transform);
+    
 private:
+    vox::vector<MeshPtr> render_meshes_;
+    
     Animator* animator;
     
     // Runtime skeleton.

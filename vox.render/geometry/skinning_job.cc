@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------//
 //                                                                            //
-// ozz-animation is hosted at http://github.com/guillaumeblanc/ozz-animation  //
+// vox-animation is hosted at http://github.com/guillaumeblanc/vox-animation  //
 // and distributed under the MIT License (MIT).                               //
 //                                                                            //
 // Copyright (c) Guillaume Blanc                                              //
@@ -25,13 +25,13 @@
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-#include "ozz/geometry/runtime/skinning_job.h"
+#include "skinning_job.h"
 
 #include <cassert>
 
-#include "ozz/base/maths/simd_math.h"
+#include "maths/simd_math.h"
 
-namespace ozz {
+namespace vox {
 namespace geometry {
 
 SkinningJob::SkinningJob()
@@ -482,14 +482,14 @@ bool SkinningJob::Run() const {
 
   // Find skinning function index.
   const size_t it = !joint_inverse_transpose_matrices.empty();
-  assert(it < OZZ_ARRAY_SIZE(kSkinningFct));
+  assert(it < VOX_ARRAY_SIZE(kSkinningFct));
   const size_t inf =
-      static_cast<size_t>(influences_count) > OZZ_ARRAY_SIZE(kSkinningFct[0])
-          ? OZZ_ARRAY_SIZE(kSkinningFct[0]) - 1
+      static_cast<size_t>(influences_count) > VOX_ARRAY_SIZE(kSkinningFct[0])
+          ? VOX_ARRAY_SIZE(kSkinningFct[0]) - 1
           : influences_count - 1;
-  assert(inf < OZZ_ARRAY_SIZE(kSkinningFct[0]));
+  assert(inf < VOX_ARRAY_SIZE(kSkinningFct[0]));
   const size_t fct = !in_normals.empty() + !in_tangents.empty();
-  assert(fct < OZZ_ARRAY_SIZE(kSkinningFct[0][0]));
+  assert(fct < VOX_ARRAY_SIZE(kSkinningFct[0][0]));
 
   // Calls skinning function. Cannot fail because job is valid.
   kSkinningFct[it][inf][fct](*this);
@@ -497,4 +497,4 @@ bool SkinningJob::Run() const {
   return true;
 }
 }  // namespace geometry
-}  // namespace ozz
+}  // namespace vox
