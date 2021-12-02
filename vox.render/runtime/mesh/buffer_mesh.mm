@@ -8,6 +8,10 @@
 #include "buffer_mesh.h"
 
 namespace vox {
+BufferMesh::BufferMesh(Engine* engine, const std::string& name):
+Mesh(engine, name) {
+}
+
 size_t BufferMesh::instanceCount() {
     return _instanceCount;
 }

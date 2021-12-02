@@ -13,6 +13,9 @@
 namespace vox {
 /// BufferMesh.
 class BufferMesh: public Mesh {
+public:
+    BufferMesh(Engine* engine, const std::string&  name = "");
+    
     /// Instanced count, disable instanced drawing when set zero.
     size_t instanceCount();
     void setInstanceCount(size_t newValue);

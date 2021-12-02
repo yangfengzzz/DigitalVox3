@@ -6,6 +6,7 @@
 //
 
 #include "skinned_mesh_renderer.h"
+#include "buffer_mesh.h"
 #include "../animation/blending_job.h"
 #include "../animation/local_to_model_job.h"
 #include "../entity.h"
@@ -14,6 +15,7 @@
 #include "../../offline/anim_loader.h"
 #include "../../offline/fbx_loader.h"
 #include "../../log.h"
+#include "../engine.h"
 #include <MetalKit/MetalKit.h>
 
 namespace vox {
@@ -66,7 +68,6 @@ bool SkinnedMeshRenderer::addSkinnedMesh(const std::string& skin_filename,
     }
     
     meshes_.insert(meshes_.end(), meshes.begin(), meshes.end());
-    render_meshes_.resize(meshes_.size());
     // Computes the number of skinning matrices required to skin all meshes.
     // A mesh is skinned by only a subset of joints, so the number of skinning
     // matrices might be less that the number of skeleton joints.
@@ -116,13 +117,14 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
     // The mesh might not use (aka be skinned by) all skeleton joints. We use
     // the joint remapping table (available from the mesh object) to reorder
     // model-space matrices and build skinning ones.
-    for (const vox::offline::loader::Mesh& mesh : meshes_) {
+    for (size_t index = 0; index < meshes_.size(); index++) {
+        const auto &mesh = meshes_[index];
         for (size_t i = 0; i < mesh.joint_remaps.size(); ++i) {
             skinning_matrices_[i] = models_[mesh.joint_remaps[i]] * mesh.inverse_bind_poses[i];
         }
         
         // Renders skin.
-        drawSkinnedMesh(mesh, make_span(skinning_matrices_), vox::math::Float4x4::identity());
+        drawSkinnedMesh(index, mesh, make_span(skinning_matrices_), vox::math::Float4x4::identity());
     }
 }
 
@@ -133,11 +135,11 @@ class ScratchBuffer {
 public:
     ScratchBuffer() : buffer_(nullptr), size_(0) {
     }
-
+    
     ~ScratchBuffer() {
         vox::memory::default_allocator()->Deallocate(buffer_);
     }
-
+    
     // Resizes the buffer to the new size and return the memory address.
     void *Resize(size_t _size) {
         if (_size > size_) {
@@ -147,35 +149,36 @@ public:
         }
         return buffer_;
     }
-
+    
 private:
     void *buffer_;
     size_t size_;
 };
 
 const float kDefaultUVsArray[][2] = {
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
-        {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}};
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f},
+    {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}, {0.f, 0.f}};
 } // namespace
 
-bool SkinnedMeshRenderer::drawSkinnedMesh(const vox::offline::loader::Mesh& _mesh,
-                                          const span<math::Float4x4> _skinning_matrices,
-                                          const vox::math::Float4x4& _transform) {
+std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
+                                                           const vox::offline::loader::Mesh& _mesh,
+                                                           const span<math::Float4x4> _skinning_matrices,
+                                                           const vox::math::Float4x4& _transform) {
     ScratchBuffer vbo_buffer_;
     ScratchBuffer uv_buffer_;
     const int vertex_count = _mesh.vertex_count();
-
+    
     MDLVertexDescriptor *vertexDescriptor = [[MDLVertexDescriptor alloc] init];
-
+    
     // Positions and normals are interleaved to improve caching while executing
     // skinning job.
     const int32_t positions_offset = 0;
@@ -192,7 +195,7 @@ bool SkinnedMeshRenderer::drawSkinnedMesh(const vox::offline::loader::Mesh& _mes
                                                                        format:MDLVertexFormatFloat3 offset:normals_offset bufferIndex:0];
     vertexDescriptor.attributes[2] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTangent
                                                                        format:MDLVertexFormatFloat3 offset:tangents_offset bufferIndex:0];
-
+    
     // Colors and uvs are contiguous. They aren't transformed, so they can be
     // directly copied from source mesh which is non-interleaved as-well.
     // Colors will be filled with white if _options.colors is false.
@@ -205,72 +208,71 @@ bool SkinnedMeshRenderer::drawSkinnedMesh(const vox::offline::loader::Mesh& _mes
                                                                        format:MDLVertexFormatFloat2 offset:uvs_offset bufferIndex:1];
     vertexDescriptor.layouts[0] = [[MDLVertexBufferLayout alloc] initWithStride:positions_stride];
     vertexDescriptor.layouts[1] = [[MDLVertexBufferLayout alloc] initWithStride:uvs_stride];
-
-
+    
+    
     // Iterate mesh parts and fills vbo.
     // Runs a skinning job per mesh part. Triangle indices are shared
     // across parts.
     size_t processed_vertex_count = 0;
     for (size_t i = 0; i < _mesh.parts.size(); ++i) {
         const vox::offline::loader::Mesh::Part &part = _mesh.parts[i];
-
+        
         // Skip this iteration if no vertex.
         const size_t part_vertex_count = part.positions.size() / 3;
         if (part_vertex_count == 0) {
             continue;
         }
-
+        
         // Fills the job.
         vox::geometry::SkinningJob skinning_job;
         skinning_job.vertex_count = static_cast<int>(part_vertex_count);
         const int part_influences_count = part.influences_count();
-
+        
         // Clamps joints influence count according to the option.
         skinning_job.influences_count = part_influences_count;
-
+        
         // Setup skinning matrices, that came from the animation stage before being
         // multiplied by inverse model-space bind-pose.
         skinning_job.joint_matrices = _skinning_matrices;
-
+        
         // Setup joint's indices.
         skinning_job.joint_indices = make_span(part.joint_indices);
         skinning_job.joint_indices_stride =
-                sizeof(uint16_t) * part_influences_count;
-
+        sizeof(uint16_t) * part_influences_count;
+        
         // Setup joint's weights.
         if (part_influences_count > 1) {
             skinning_job.joint_weights = make_span(part.joint_weights);
             skinning_job.joint_weights_stride =
-                    sizeof(float) * (part_influences_count - 1);
+            sizeof(float) * (part_influences_count - 1);
         }
-
+        
         // Setup input positions, coming from the loaded mesh.
         skinning_job.in_positions = make_span(part.positions);
         skinning_job.in_positions_stride =
-                sizeof(float) * vox::offline::loader::Mesh::Part::kPositionsCpnts;
-
+        sizeof(float) * vox::offline::loader::Mesh::Part::kPositionsCpnts;
+        
         // Setup output positions, coming from the rendering output mesh buffers.
         // We need to offset the buffer every loop.
-        float *out_positions_begin = reinterpret_cast<float *>(vox::PointerStride(
-                vbo_map, positions_offset + processed_vertex_count * positions_stride));
+        float *out_positions_begin = reinterpret_cast<float *>(vox::PointerStride(vbo_map,
+                                                                                  positions_offset + processed_vertex_count * positions_stride));
         float *out_positions_end = vox::PointerStride(
-                out_positions_begin, part_vertex_count * positions_stride);
+                                                      out_positions_begin, part_vertex_count * positions_stride);
         skinning_job.out_positions = {out_positions_begin, out_positions_end};
         skinning_job.out_positions_stride = positions_stride;
-
+        
         // Setup normals if input are provided.
-        float *out_normal_begin = reinterpret_cast<float *>(vox::PointerStride(
-                vbo_map, normals_offset + processed_vertex_count * normals_stride));
-        float *out_normal_end = vox::PointerStride(
-                out_normal_begin, part_vertex_count * normals_stride);
-
+        float *out_normal_begin = reinterpret_cast<float *>(vox::PointerStride(vbo_map,
+                                                                               normals_offset + processed_vertex_count * normals_stride));
+        float *out_normal_end = vox::PointerStride(out_normal_begin, part_vertex_count * normals_stride);
+        
         if (part.normals.size() / vox::offline::loader::Mesh::Part::kNormalsCpnts ==
-                part_vertex_count) {
+            part_vertex_count) {
             // Setup input normals, coming from the loaded mesh.
             skinning_job.in_normals = make_span(part.normals);
             skinning_job.in_normals_stride =
-                    sizeof(float) * vox::offline::loader::Mesh::Part::kNormalsCpnts;
-
+            sizeof(float) * vox::offline::loader::Mesh::Part::kNormalsCpnts;
+            
             // Setup output normals, coming from the rendering output mesh buffers.
             // We need to offset the buffer every loop.
             skinning_job.out_normals = {out_normal_begin, out_normal_end};
@@ -284,20 +286,19 @@ bool SkinnedMeshRenderer::drawSkinnedMesh(const vox::offline::loader::Mesh& _mes
                 normal[2] = 0.f;
             }
         }
-
+        
         // Setup tangents if input are provided.
-        float *out_tangent_begin = reinterpret_cast<float *>(vox::PointerStride(
-                vbo_map, tangents_offset + processed_vertex_count * tangents_stride));
-        float *out_tangent_end = vox::PointerStride(
-                out_tangent_begin, part_vertex_count * tangents_stride);
-
+        float *out_tangent_begin = reinterpret_cast<float *>(vox::PointerStride(vbo_map,
+                                                                                tangents_offset + processed_vertex_count * tangents_stride));
+        float *out_tangent_end = vox::PointerStride(out_tangent_begin, part_vertex_count * tangents_stride);
+        
         if (part.tangents.size() / vox::offline::loader::Mesh::Part::kTangentsCpnts ==
-                part_vertex_count) {
+            part_vertex_count) {
             // Setup input tangents, coming from the loaded mesh.
             skinning_job.in_tangents = make_span(part.tangents);
             skinning_job.in_tangents_stride =
-                    sizeof(float) * vox::offline::loader::Mesh::Part::kTangentsCpnts;
-
+            sizeof(float) * vox::offline::loader::Mesh::Part::kTangentsCpnts;
+            
             // Setup output tangents, coming from the rendering output mesh buffers.
             // We need to offset the buffer every loop.
             skinning_job.out_tangents = {out_tangent_begin, out_tangent_end};
@@ -311,18 +312,18 @@ bool SkinnedMeshRenderer::drawSkinnedMesh(const vox::offline::loader::Mesh& _mes
                 tangent[2] = 0.f;
             }
         }
-
+        
         // Execute the job, which should succeed unless a parameter is invalid.
         if (!skinning_job.Run()) {
-            return false;
+            return nullptr;
         }
-
+        
         // Copies uvs which aren't affected by skinning.
         if (true) {
             if (part_vertex_count == part.uvs.size() / vox::offline::loader::Mesh::Part::kUVsCpnts) {
                 // Optimal path used when the right number of uvs is provided.
                 memcpy(vox::PointerStride(uv_map, uvs_offset + processed_vertex_count * uvs_stride),
-                        array_begin(part.uvs), part_vertex_count * uvs_stride);
+                       array_begin(part.uvs), part_vertex_count * uvs_stride);
             } else {
                 // Un-optimal path used when the right number of uvs is not provided.
                 assert(sizeof(kDefaultUVsArray[0]) == uvs_stride);
@@ -330,16 +331,45 @@ bool SkinnedMeshRenderer::drawSkinnedMesh(const vox::offline::loader::Mesh& _mes
                      j += VOX_ARRAY_SIZE(kDefaultUVsArray)) {
                     const size_t this_loop_count = vox::math::Min(VOX_ARRAY_SIZE(kDefaultUVsArray), part_vertex_count - j);
                     memcpy(vox::PointerStride(uv_map, uvs_offset + (processed_vertex_count + j) * uvs_stride),
-                            kDefaultUVsArray, uvs_stride * this_loop_count);
+                           kDefaultUVsArray, uvs_stride * this_loop_count);
                 }
             }
         }
-
+        
         // Some more vertices were processed.
         processed_vertex_count += part_vertex_count;
     }
-
-    return true;
+    
+    const auto& device = engine()->_hardwareRenderer.device;
+    if (vertexBuffers[index] == nullptr) {
+        vertexBuffers[index] = [device newBufferWithBytes:vbo_map length:skinned_data_size options:NULL];
+    } else {
+        memcpy([vertexBuffers[index] contents], vbo_map, skinned_data_size);
+    }
+    
+    if (uvBuffers[index] == nullptr) {
+        uvBuffers[index] = [device newBufferWithBytes:uv_map length:uvs_size options:NULL];
+    } else {
+        memcpy([uvBuffers[index] contents], uv_map, uvs_size);
+    }
+    
+    size_t indexCount = _mesh.triangle_indices.size();
+    if (indexBuffers[index] == nullptr) {
+        indexBuffers[index] = [device newBufferWithBytes: _mesh.triangle_indices.data()
+                                                  length: indexCount * sizeof(vox::offline::loader::Mesh::TriangleIndices::value_type)
+                                                 options: NULL];
+    }
+    
+    auto mesh = std::make_shared<BufferMesh>(_engine);
+    mesh->setVertexDescriptor(vertexDescriptor);
+    mesh->setVertexBufferBinding(vertexBuffers[index], 0, 0);
+    mesh->setVertexBufferBinding(uvBuffers[index], 0, 1);
+    mesh->addSubMesh(MeshBuffer(indexBuffers[index],
+                                indexCount * sizeof(vox::offline::loader::Mesh::TriangleIndices::value_type),
+                                MDLMeshBufferTypeIndex),
+                     MTLIndexTypeUInt16, indexCount, MTLPrimitiveTypeTriangle);
+    
+    return mesh;
 }
 
 void SkinnedMeshRenderer::_updateBounds(BoundingBox& worldBounds) {
