@@ -16,6 +16,7 @@
 #include "../../offline/fbx_loader.h"
 #include "../../log.h"
 #include "../engine.h"
+#include "../camera.h"
 #include <MetalKit/MetalKit.h>
 
 namespace vox {
@@ -124,7 +125,21 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
         }
         
         // Renders skin.
-        drawSkinnedMesh(index, mesh, make_span(skinning_matrices_), vox::math::Float4x4::identity());
+        auto render_mesh = drawSkinnedMesh(index, mesh, make_span(skinning_matrices_), vox::math::Float4x4::identity());
+        auto& subMeshes = render_mesh->_subMeshes;
+        auto& renderPipeline = camera->_renderPipeline;
+        for (size_t i = 0; i < subMeshes.size(); i++) {
+            MaterialPtr material;
+            if (i < _materials.size()) {
+                material = _materials[i];
+            } else {
+                material = nullptr;
+            }
+            if (material != nullptr) {
+                RenderElement element(this, render_mesh, &subMeshes[i], material);
+                renderPipeline.pushPrimitive(element);
+            }
+        }
     }
 }
 

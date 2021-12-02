@@ -226,6 +226,7 @@ public:
 private:
     friend class ComponentsManager;
     friend class MeshRenderer;
+    friend class SkinnedMeshRenderer;
     
     void _projMatChange();
     
