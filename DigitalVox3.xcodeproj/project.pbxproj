@@ -64,6 +64,8 @@
 		0434A2932757B385009AD4EA /* animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2912757B385009AD4EA /* animator.h */; };
 		0434A2962757B45B009AD4EA /* animator_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2942757B45B009AD4EA /* animator_controller.cpp */; };
 		0434A2972757B45B009AD4EA /* animator_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2952757B45B009AD4EA /* animator_controller.h */; };
+		0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A29827590B86009AD4EA /* box_collider_shape.cpp */; };
+		0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A29927590B86009AD4EA /* box_collider_shape.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -382,6 +384,8 @@
 		0434A2912757B385009AD4EA /* animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animator.h; sourceTree = "<group>"; };
 		0434A2942757B45B009AD4EA /* animator_controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animator_controller.cpp; sourceTree = "<group>"; };
 		0434A2952757B45B009AD4EA /* animator_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animator_controller.h; sourceTree = "<group>"; };
+		0434A29827590B86009AD4EA /* box_collider_shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = box_collider_shape.cpp; sourceTree = "<group>"; };
+		0434A29927590B86009AD4EA /* box_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider_shape.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -802,6 +806,8 @@
 			children = (
 				041610312758ED2C006CD384 /* collider_shape.h */,
 				041610302758ED2C006CD384 /* collider_shape.cpp */,
+				0434A29927590B86009AD4EA /* box_collider_shape.h */,
+				0434A29827590B86009AD4EA /* box_collider_shape.cpp */,
 			);
 			path = shape;
 			sourceTree = "<group>";
@@ -1516,6 +1522,7 @@
 				04CE397527526F6E00204B8E /* model_mesh.h in Headers */,
 				0416101A2755DB7C006CD384 /* spherical.h in Headers */,
 				04CE39AD2755003B00204B8E /* blinn_phong_material.h in Headers */,
+				0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
 				04CE39092751AAD000204B8E /* submesh.h in Headers */,
 				04CE391B2751B23400204B8E /* shader_pool.h in Headers */,
@@ -1657,6 +1664,7 @@
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
+				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
