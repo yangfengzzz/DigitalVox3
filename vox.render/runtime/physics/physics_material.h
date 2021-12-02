@@ -42,6 +42,8 @@ public:
     
     PxCombineMode::Enum restitutionCombineMode() const;
     
+    PxMaterial * handle() const;
+    
 private:
     PxMaterial* material;
 };

@@ -65,5 +65,10 @@ PxCombineMode::Enum PhysicsMaterial::restitutionCombineMode() const {
     return material->getRestitutionCombineMode();
 }
 
+PxMaterial * PhysicsMaterial::handle() const {
+    return material;
+}
+
+
 }
 }
