@@ -30,12 +30,8 @@ int main(int, char**) {
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
     
-    auto boxEntity = rootEntity->createChild("BoxEntity");
-    auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
-    boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, 2, 2, 2));
     auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
     boxMtl->setBaseColor(math::Color(0.6, 0.3, 0.4, 1));
-    boxRenderer->setMaterial(boxMtl);
     
     auto characterEntity = rootEntity->createChild("characterEntity");
     auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();

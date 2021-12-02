@@ -35,7 +35,7 @@ void BufferMesh::setVertexDescriptor(MDLVertexDescriptor* descriptor) {
 void BufferMesh::setVertexBuffer(const MeshBuffer& vertexBuffer, size_t index) {
     if (_vertexBuffer.size() <= index) {
         _vertexBuffer.reserve(index + 1);
-        for (size_t i = _vertexBuffer.size(); i <= index; i++) {
+        for (size_t i = _vertexBuffer.size(); i < index; i++) {
             _vertexBuffer.push_back(std::nullopt);
         }
     }
@@ -46,7 +46,7 @@ void BufferMesh::setVertexBufferBinding(id<MTLBuffer> vertexBuffer, int offset, 
     auto binding = MeshBuffer(vertexBuffer, offset, MDLMeshBufferTypeVertex);
     if (_vertexBuffer.size() <= index) {
         _vertexBuffer.reserve(index + 1);
-        for (size_t i = _vertexBuffer.size(); i <= index; i++) {
+        for (size_t i = _vertexBuffer.size(); i < index; i++) {
             _vertexBuffer.push_back(std::nullopt);
         }
     }
