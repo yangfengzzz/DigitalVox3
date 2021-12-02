@@ -11,6 +11,7 @@
 #include "../vox.render/runtime/mesh/mesh_renderer.h"
 #include "../vox.render/runtime/mesh/skinned_mesh_renderer.h"
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
+#include "../vox.render/runtime/animator.h"
 #include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 
@@ -41,6 +42,9 @@ int main(int, char**) {
     characterRenderer->addSkinnedMesh("models/Doggy/Doggy.fbx",
                                       "models/Doggy/doggy_skeleton.ozz");
     characterRenderer->setMaterial(boxMtl);
+    auto characterAnim = characterEntity->addComponent<Animator>();
+    characterAnim->addAnimationClip("models/Doggy/Run.ozz",
+                                    characterRenderer->numJoints(), characterRenderer->numSoaJoints());
     
     engine.run();
 }

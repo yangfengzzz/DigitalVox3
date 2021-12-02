@@ -29,6 +29,11 @@ public:
     
     bool addSkinnedMesh(const std::string& skin_filename,
                         const std::string& skel_filename);
+
+public:
+    int numJoints();
+    
+    int numSoaJoints();
     
 private:
     // Computes the bounding box of _skeleton. This is the box that encloses all

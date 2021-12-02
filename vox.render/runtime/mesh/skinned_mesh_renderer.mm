@@ -452,4 +452,12 @@ void SkinnedMeshRenderer::computePostureBounds(vox::span<const vox::math::Float4
     return;
 }
 
+int SkinnedMeshRenderer::numJoints() {
+    return skeleton_.num_joints();
+}
+
+int SkinnedMeshRenderer::numSoaJoints() {
+    return skeleton_.num_soa_joints();
+}
+
 }

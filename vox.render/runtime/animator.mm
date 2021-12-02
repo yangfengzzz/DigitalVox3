@@ -29,6 +29,7 @@ bool Animator::addAnimationClip(const std::string& filename, int num_joints, int
     clip->cache.Resize(num_joints);
     
     clips_.emplace_back(std::move(clip));
+    layers_.resize(clips_.size());
 
     return true;
 }
