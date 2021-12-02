@@ -23,7 +23,6 @@ namespace vox {
 SkinnedMeshRenderer::SkinnedMeshRenderer(Entity* entity):
 Renderer(entity){
     threshold_ = vox::animation::BlendingJob().threshold;
-    animator = entity->getComponent<Animator>();
 }
 
 bool SkinnedMeshRenderer::loadSkeleton(const std::string& filename) {
@@ -97,6 +96,9 @@ void SkinnedMeshRenderer::update(float deltaTime) {
     blend_job.threshold = threshold_;
     blend_job.bind_pose = skeleton_.joint_bind_poses();
     blend_job.output = make_span(blended_locals_);
+    if (animator == nullptr) {
+        animator = entity()->getComponent<Animator>();
+    }
     if (animator != nullptr) {
         blend_job.layers = animator->layers();
     }
