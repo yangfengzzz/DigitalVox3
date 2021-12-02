@@ -52,6 +52,8 @@
 		0416102227578322006CD384 /* anim_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416102027578322006CD384 /* anim_loader.h */; };
 		0416102527584D8F006CD384 /* skinning_job.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0416102327584D8F006CD384 /* skinning_job.cc */; };
 		0416102627584D8F006CD384 /* skinning_job.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416102427584D8F006CD384 /* skinning_job.h */; };
+		0416102A2758690C006CD384 /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610282758690C006CD384 /* physics.cpp */; };
+		0416102B2758690C006CD384 /* physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610292758690C006CD384 /* physics.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -364,6 +366,8 @@
 		0416102027578322006CD384 /* anim_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = anim_loader.h; sourceTree = "<group>"; };
 		0416102327584D8F006CD384 /* skinning_job.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = skinning_job.cc; sourceTree = "<group>"; };
 		0416102427584D8F006CD384 /* skinning_job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skinning_job.h; sourceTree = "<group>"; };
+		041610282758690C006CD384 /* physics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = physics.cpp; sourceTree = "<group>"; };
+		041610292758690C006CD384 /* physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physics.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -773,6 +777,15 @@
 			path = controls;
 			sourceTree = "<group>";
 		};
+		04161027275868E2006CD384 /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				041610292758690C006CD384 /* physics.h */,
+				041610282758690C006CD384 /* physics.cpp */,
+			);
+			path = physics;
+			sourceTree = "<group>";
+		};
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
@@ -992,6 +1005,7 @@
 				04CE394C2752581000204B8E /* material */,
 				04CE395927525E0700204B8E /* render_pipeline */,
 				041610162755DB5E006CD384 /* controls */,
+				04161027275868E2006CD384 /* physics */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
 				04CE397F27534C1100204B8E /* vox_type.h */,
@@ -1438,6 +1452,7 @@
 				04CE39A92754F5DA00204B8E /* base_material.h in Headers */,
 				04CE39832753678E00204B8E /* background.h in Headers */,
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
+				0416102B2758690C006CD384 /* physics.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
 				0416101E2755DD48006CD384 /* orbit_control.h in Headers */,
@@ -1704,6 +1719,7 @@
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,
 				04CE392D2751B42800204B8E /* blend_state.mm in Sources */,
 				0416102527584D8F006CD384 /* skinning_job.cc in Sources */,
+				0416102A2758690C006CD384 /* physics.cpp in Sources */,
 				0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */,
 				04CE37F6274D167F00204B8E /* track_optimizer.cc in Sources */,
 				04160FE9275091FA006CD384 /* engine.mm in Sources */,
@@ -2046,6 +2062,16 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					DISABLE_CUDA_PHYSX,
+					PX_PHYSX_CORE_EXPORTS,
+					_DEBUG,
+					"'PX_DEBUG=1'",
+					"'PX_CHECKED=1'",
+					"'PX_NVTX=0'",
+					"'PX_SUPPORT_PVD=1'",
+					"$(inherited)",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = ./vox.render;
 				LIBRARY_SEARCH_PATHS = (
@@ -2103,6 +2129,13 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					DISABLE_CUDA_PHYSX,
+					PX_PHYSX_CORE_EXPORTS,
+					NDEBUG,
+					"'PX_SUPPORT_PVD=0'",
+					"$(inherited)",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = ./vox.render;
 				LIBRARY_SEARCH_PATHS = (
