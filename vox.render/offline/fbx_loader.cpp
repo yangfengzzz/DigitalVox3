@@ -851,14 +851,14 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
     if (!scene_loader.scene()) {
         vox::log::Err() << "Failed to import file " << _filename << "."
         << std::endl;
-        return EXIT_FAILURE;
+        return false;
     }
     
     const int num_meshes = scene_loader.scene()->GetSrcObjectCount<FbxMesh>();
     if (num_meshes == 0) {
         vox::log::Err() << "No mesh to process in this file: "
         << _filename << "." << std::endl;
-        return EXIT_FAILURE;
+        return false;
     } else if (num_meshes > 1) {
         vox::log::Err() << "There's more than one mesh in the file: "
         << _filename << ". All (" << num_meshes
@@ -872,7 +872,7 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
         converter.RemoveBadPolygonsFromMeshes(scene_loader.scene());
         if (!converter.Triangulate(scene_loader.scene(), true)) {
             vox::log::Err() << "Failed to triangulating meshes." << std::endl;
-            return EXIT_FAILURE;
+            return false;
         }
     }
     
@@ -891,7 +891,7 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
         ControlPointsRemap remap;
         if (!BuildVertices(mesh, scene_loader.converter(), &remap, &output_mesh)) {
             vox::log::Err() << "Failed to read vertices." << std::endl;
-            return EXIT_FAILURE;
+            return false;
         }
         
         // Finds skinning informations
@@ -899,7 +899,7 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
             if (!BuildSkin(mesh, scene_loader.converter(), remap, skeleton,
                            &output_mesh)) {
                 vox::log::Err() << "Failed to read skinning data." << std::endl;
-                return EXIT_FAILURE;
+                return false;
             }
             
             // Limiting number of joint influences per vertex.
@@ -908,7 +908,7 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
                 if (!LimitInfluences(output_mesh, max_influences)) {
                     vox::log::Err() << "Failed to limit number of joint influences."
                     << std::endl;
-                    return EXIT_FAILURE;
+                    return false;
                 }
             }
             
@@ -917,7 +917,7 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
             // also reoders inverse bin pose matrices.
             if (!RemapIndices(&output_mesh)) {
                 vox::log::Err() << "Failed to remap joint indices." << std::endl;
-                return EXIT_FAILURE;
+                return false;
             }
             
             // Split the mesh if option is true (default)
@@ -925,7 +925,7 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
                 vox::offline::loader::Mesh partitioned_meshes;
                 if (!SplitParts(output_mesh, &partitioned_meshes)) {
                     vox::log::Err() << "Failed to partitioned meshes." << std::endl;
-                    return EXIT_FAILURE;
+                    return false;
                 }
                 
                 // Copy partitioned mesh back to the output.
@@ -934,14 +934,14 @@ bool loadScene(const char* _filename, const animation::Skeleton& skeleton,
             
             if (!StripWeights(&output_mesh)) {
                 vox::log::Err() << "Failed to strip weights." << std::endl;
-                return EXIT_FAILURE;
+                return false;
             }
             
             assert(max_influences <= 0 || output_mesh.max_influences_count() <= max_influences);
         }
     }
     
-    return EXIT_SUCCESS;
+    return true;
 }
 
 bool loadMesh(const char* _filename, Mesh* _mesh) {

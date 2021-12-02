@@ -22,6 +22,7 @@
 namespace vox {
 SkinnedMeshRenderer::SkinnedMeshRenderer(Entity* entity):
 Renderer(entity){
+    threshold_ = vox::animation::BlendingJob().threshold;
     animator = entity->getComponent<Animator>();
 }
 
@@ -81,6 +82,11 @@ bool SkinnedMeshRenderer::addSkinnedMesh(const std::string& skin_filename,
     
     // Allocates skinning matrices.
     skinning_matrices_.resize(num_skinning_matrices);
+    
+    const size_t bufferLength = meshes_.size();
+    vertexBuffers.resize(bufferLength, nullptr);
+    uvBuffers.resize(bufferLength, nullptr);
+    indexBuffers.resize(bufferLength, nullptr);
     
     return true;
 }
