@@ -89,9 +89,11 @@ void SkinnedMeshRenderer::update(float deltaTime) {
     // Setups blending job.
     vox::animation::BlendingJob blend_job;
     blend_job.threshold = threshold_;
-    blend_job.layers = animator->layers();
     blend_job.bind_pose = skeleton_.joint_bind_poses();
     blend_job.output = make_span(blended_locals_);
+    if (animator != nullptr) {
+        blend_job.layers = animator->layers();
+    }
     
     // Blends.
     if (!blend_job.Run()) {

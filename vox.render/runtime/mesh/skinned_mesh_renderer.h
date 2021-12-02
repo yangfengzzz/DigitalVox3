@@ -12,6 +12,7 @@
 #include "../animation/skeleton.h"
 #include "../../containers/vector.h"
 #include "../../offline/fbx_mesh.h"
+#include "maths/soa_transform.h"
 
 namespace vox {
 class SkinnedMeshRenderer : public Renderer {

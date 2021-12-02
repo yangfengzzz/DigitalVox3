@@ -9,6 +9,7 @@
 #include "../vox.render/runtime/engine.h"
 #include "../vox.render/runtime/camera.h"
 #include "../vox.render/runtime/mesh/mesh_renderer.h"
+#include "../vox.render/runtime/mesh/skinned_mesh_renderer.h"
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
 #include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
@@ -34,6 +35,12 @@ int main(int, char**) {
     auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
     boxMtl->setBaseColor(math::Color(0.6, 0.3, 0.4, 1));
     boxRenderer->setMaterial(boxMtl);
+    
+    auto characterEntity = rootEntity->createChild("characterEntity");
+    auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();
+    characterRenderer->addSkinnedMesh("/Users/yangfeng/Downloads/doggy-11-animations-2-skins/source/Doggy/files/Doggy_files/Doggy.fbx",
+                                      "/Users/yangfeng/Desktop/DigitalVox2/vox.oasis/models/Doggy/doggy_skeleton.ozz");
+    characterRenderer->setMaterial(boxMtl);
     
     engine.run();
 }
