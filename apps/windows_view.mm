@@ -38,8 +38,8 @@ int main(int, char**) {
     
     auto characterEntity = rootEntity->createChild("characterEntity");
     auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();
-    characterRenderer->addSkinnedMesh("/Users/yangfeng/Downloads/doggy-11-animations-2-skins/source/Doggy/files/Doggy_files/Doggy.fbx",
-                                      "/Users/yangfeng/Desktop/DigitalVox2/vox.oasis/models/Doggy/doggy_skeleton.ozz");
+    characterRenderer->addSkinnedMesh("models/Doggy/Doggy.fbx",
+                                      "models/Doggy/doggy_skeleton.ozz");
     characterRenderer->setMaterial(boxMtl);
     
     engine.run();
