@@ -18,6 +18,10 @@ class SkinnedMeshRenderer : public MeshRenderer {
 public:
     SkinnedMeshRenderer(Entity* entity);
     
+    void _render(Camera* camera) override;
+    
+    void _updateBounds(BoundingBox& worldBounds) override;
+    
     void update(float deltaTime) override;
     
     bool loadSkeleton(const std::string& filename);
@@ -25,6 +29,18 @@ public:
     bool addSkinnedMesh(const std::string& skin_filename,
                         const std::string& skel_filename);
 
+private:
+    // Computes the bounding box of _skeleton. This is the box that encloses all
+    // skeleton's joints in model space.
+    // _bound must be a valid math::Box instance.
+    static void computeSkeletonBounds(const animation::Skeleton& _skeleton,
+                                      math::BoundingBox* _bound);
+
+    // Computes the bounding box of posture defines be _matrices range.
+    // _bound must be a valid math::Box instance.
+    static void computePostureBounds(vox::span<const vox::math::Float4x4> _matrices,
+                                     math::BoundingBox* _bound);
+    
 private:
     Animator* animator;
     
