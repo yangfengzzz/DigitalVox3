@@ -26,25 +26,27 @@ public:
     struct AnimationClip {
         // Constructor, default initialization.
         AnimationClip() : weight(1.f) {}
-
+        
         // Playback animation controller. This is a utility class that helps with
         // controlling animation playback time.
         vox::AnimatorController controller;
-
+        
         // Blending weight for the layer.
         float weight;
-
+        
         // Runtime animation.
         vox::animation::Animation animation;
-
+        
         // Sampling cache.
         vox::animation::SamplingCache cache;
-
+        
         // Buffer of local transforms as sampled from animation_.
         vox::vector<vox::math::SoaTransform> locals;
     };
     
     Animator(Entity* entity);
+    
+    bool addAnimationClip(const std::string& filename);
     
     bool addAnimationClip(const std::string& filename, int num_joints, int num_soa_joints);
     
@@ -54,9 +56,9 @@ public:
     
 private:
     void _onEnable() override;
-
+    
     void _onDisable() override;
-
+    
 private:
     friend class ComponentsManager;
     

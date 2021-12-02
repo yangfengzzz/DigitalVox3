@@ -39,8 +39,7 @@ int main(int, char**) {
                                       "models/Doggy/doggy_skeleton.ozz");
     characterRenderer->setMaterial(boxMtl);
     auto characterAnim = characterEntity->addComponent<Animator>();
-    characterAnim->addAnimationClip("models/Doggy/Run.ozz",
-                                    characterRenderer->numJoints(), characterRenderer->numSoaJoints());
+    characterAnim->addAnimationClip("models/Doggy/Run.ozz");
     
     engine.run();
 }

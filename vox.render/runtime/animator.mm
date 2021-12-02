@@ -7,6 +7,7 @@
 
 #include "animator.h"
 #include "engine.h"
+#include "mesh/skinned_mesh_renderer.h"
 #include "../offline/anim_loader.h"
 #include <string>
 
@@ -15,22 +16,31 @@ Animator::Animator(Entity* entity):
 Component(entity) {
 }
 
+bool Animator::addAnimationClip(const std::string& filename) {
+    const auto skinnedMesh = entity()->getComponent<SkinnedMeshRenderer>();
+    if (skinnedMesh) {
+        return addAnimationClip(filename, skinnedMesh->numJoints(), skinnedMesh->numSoaJoints());
+    } else {
+        assert(false && "found no skeleton");
+    }
+}
+
 bool Animator::addAnimationClip(const std::string& filename, int num_joints, int num_soa_joints) {
     vox::unique_ptr<AnimationClip> clip = vox::make_unique<AnimationClip>();
-
+    
     if (!vox::offline::loader::LoadAnimation(filename.c_str(), &clip->animation)) {
         return false;
     }
     
     // Allocates sampler runtime buffers.
     clip->locals.resize(num_soa_joints);
-
+    
     // Allocates a cache that matches animation requirements.
     clip->cache.Resize(num_joints);
     
     clips_.emplace_back(std::move(clip));
     layers_.resize(clips_.size());
-
+    
     return true;
 }
 
