@@ -15,6 +15,14 @@ namespace physics {
 class DynamicCollider: public Collider {
 public:
     DynamicCollider(Entity* entity);
+    
+    /**
+     * The linear damping of the dynamic collider.
+     */
+    float linearDamping();
+
+    void setLinearDamping(float newValue);
+    
 };
 
 }

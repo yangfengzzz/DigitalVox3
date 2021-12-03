@@ -20,5 +20,13 @@ Collider(entity) {
                                                                                     PxQuat(q.x, q.y, q.z, q.w)));
 }
 
+float DynamicCollider::linearDamping() {
+    return static_cast<PxRigidDynamic *>(_nativeActor)->getLinearDamping();
+}
+
+void DynamicCollider::setLinearDamping(float newValue) {
+    static_cast<PxRigidDynamic *>(_nativeActor)->setLinearDamping(newValue);
+}
+
 }
 }

@@ -129,7 +129,7 @@ PhysicsManager::PhysicsManager(){
 
 void PhysicsManager::update(float deltaTime) {
     _nativePhysicsManager->simulate(deltaTime);
-    _nativePhysicsManager->fetchResults();
+    _nativePhysicsManager->fetchResults(true);
 }
 
 void PhysicsManager::callColliderOnUpdate() {
