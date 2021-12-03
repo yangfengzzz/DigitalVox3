@@ -99,6 +99,10 @@ void Engine::update() {
         
         _componentsManager.callScriptOnStart();
         
+        _physicsManager.callColliderOnUpdate();
+        _physicsManager.update(deltaTime);
+        _physicsManager.callColliderOnLateUpdate();
+        
         glfwPollEvents();
         _componentsManager.callScriptOnUpdate(deltaTime);
         _componentsManager.callAnimatorUpdate(deltaTime);

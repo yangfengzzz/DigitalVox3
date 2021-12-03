@@ -10,6 +10,7 @@
 
 #include "physics.h"
 #include <unordered_map>
+#include <vector>
 #include "maths/ray.h"
 #include "hit_result.h"
 #include "../layer.h"
@@ -78,15 +79,20 @@ public:
      */
     bool raycast(const math::Ray& ray, float distance, Layer layerMask, HitResult&  outHitResult);
     
-private:
-    friend class Collider;
-
+public:
     /**
      * Call on every frame to update pose of objects.
-     * @internal
      */
-    void _update(float deltaTime);
+    void update(float deltaTime);
     
+    void callColliderOnUpdate();
+
+    void callColliderOnLateUpdate();
+
+    void callCharacterControllerOnLateUpdate();
+    
+private:
+    friend class Collider;
     /**
      * Add ColliderShape into the manager.
      * @param colliderShape - The Collider Shape.
@@ -116,6 +122,7 @@ private:
     PxScene* _nativePhysicsManager;
     
     std::unordered_map<uint32_t, ColliderShapePtr> _physicalObjectsMap;
+    std::vector<Collider*> _colliders;
     
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactEnter;
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactExit;

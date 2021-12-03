@@ -127,9 +127,25 @@ PhysicsManager::PhysicsManager(){
     _nativeCharacterControllerManager = PxCreateControllerManager(*_nativePhysicsManager);
 }
 
-void PhysicsManager::_update(float deltaTime) {
+void PhysicsManager::update(float deltaTime) {
     _nativePhysicsManager->simulate(deltaTime);
     _nativePhysicsManager->fetchResults();
+}
+
+void PhysicsManager::callColliderOnUpdate() {
+    for (auto& collider : _colliders) {
+        collider->_onUpdate();
+    }
+}
+
+void PhysicsManager::callColliderOnLateUpdate() {
+    for (auto& collider : _colliders) {
+        collider->_onLateUpdate();
+    }
+}
+
+void PhysicsManager::callCharacterControllerOnLateUpdate() {
+    
 }
 
 void PhysicsManager::_addColliderShape(const ColliderShapePtr& colliderShape) {
