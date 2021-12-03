@@ -87,6 +87,8 @@
 		04161072275A2069006CD384 /* character_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161070275A2069006CD384 /* character_controller.h */; };
 		04161075275A5AC4006CD384 /* box_character_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04161073275A5AC4006CD384 /* box_character_controller.mm */; };
 		04161076275A5AC4006CD384 /* box_character_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161074275A5AC4006CD384 /* box_character_controller.h */; };
+		04161079275A5DB1006CD384 /* capsule_character_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04161077275A5DB1006CD384 /* capsule_character_controller.mm */; };
+		0416107A275A5DB1006CD384 /* capsule_character_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161078275A5DB1006CD384 /* capsule_character_controller.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -438,6 +440,8 @@
 		04161070275A2069006CD384 /* character_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_controller.h; sourceTree = "<group>"; };
 		04161073275A5AC4006CD384 /* box_character_controller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = box_character_controller.mm; sourceTree = "<group>"; };
 		04161074275A5AC4006CD384 /* box_character_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_character_controller.h; sourceTree = "<group>"; };
+		04161077275A5DB1006CD384 /* capsule_character_controller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = capsule_character_controller.mm; sourceTree = "<group>"; };
+		04161078275A5DB1006CD384 /* capsule_character_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = capsule_character_controller.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -917,6 +921,8 @@
 				0416106F275A2069006CD384 /* character_controller.cpp */,
 				04161074275A5AC4006CD384 /* box_character_controller.h */,
 				04161073275A5AC4006CD384 /* box_character_controller.mm */,
+				04161078275A5DB1006CD384 /* capsule_character_controller.h */,
+				04161077275A5DB1006CD384 /* capsule_character_controller.mm */,
 			);
 			path = character_controller;
 			sourceTree = "<group>";
@@ -1611,6 +1617,7 @@
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				04CE3958275259FA00204B8E /* renderer.h in Headers */,
 				041610442759CC06006CD384 /* dynamic_collider.h in Headers */,
+				0416107A275A5DB1006CD384 /* capsule_character_controller.h in Headers */,
 				041610402759B4B2006CD384 /* hit_result.h in Headers */,
 				041610332758ED2C006CD384 /* collider_shape.h in Headers */,
 				04161072275A2069006CD384 /* character_controller.h in Headers */,
@@ -1784,6 +1791,7 @@
 				041610432759CC06006CD384 /* dynamic_collider.cpp in Sources */,
 				0416102127578322006CD384 /* anim_loader.cpp in Sources */,
 				04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */,
+				04161079275A5DB1006CD384 /* capsule_character_controller.mm in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
 				04160FCA274F6374006CD384 /* collision_util.cpp in Sources */,
 				04CE39822753678E00204B8E /* background.mm in Sources */,
