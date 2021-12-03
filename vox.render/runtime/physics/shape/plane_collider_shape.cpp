@@ -14,6 +14,7 @@ PlaneColliderShape::PlaneColliderShape() {
     _nativeGeometry = std::make_shared<PxPlaneGeometry>();
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
+    setLocalPose(_pose);
 }
 
 math::Float3 PlaneColliderShape::rotation() {
@@ -23,8 +24,9 @@ math::Float3 PlaneColliderShape::rotation() {
 
 void PlaneColliderShape::setRotation(const math::Float3& value) {
     _pose.rotation = math::Quaternion::FromEuler(value.x, value.y, value.z);
-    auto rot = math::Quaternion::rotateZ(_pose.rotation, M_PI * 0.5);
-    rot = math::Normalize(rot);
+    _pose.rotation = math::Quaternion::rotateZ(_pose.rotation, M_PI * 0.5);
+    _pose.rotation = math::Normalize(_pose.rotation);
+    setLocalPose(_pose);
 }
 
 }

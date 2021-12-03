@@ -14,6 +14,7 @@ BoxColliderShape::BoxColliderShape():ColliderShape() {
     _nativeGeometry = std::make_shared<PxBoxGeometry>();
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
+    setLocalPose(_pose);
 }
 
 math::Float3 BoxColliderShape::size() {

@@ -14,6 +14,7 @@ CapsuleColliderShape::CapsuleColliderShape() {
     _nativeGeometry = std::make_shared<PxCapsuleGeometry>();
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
+    setLocalPose(_pose);
 }
 
 float CapsuleColliderShape::radius() {
@@ -73,6 +74,7 @@ void CapsuleColliderShape::setUpAxis(ColliderShapeUpAxis::Enum value) {
             _pose.rotation = math::Quaternion(0, ColliderShape::halfSqrt, 0, ColliderShape::halfSqrt);
             break;
     }
+    setLocalPose(_pose);
 }
 
 void CapsuleColliderShape::setWorldScale(const math::Float3& scale) {
