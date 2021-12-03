@@ -121,6 +121,19 @@ void DynamicCollider::setSolverIterations(uint32_t newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setSolverIterationCounts(newValue);
 }
 
+//MARK: - PxRigidBodyFlag
+PxRigidBodyFlags DynamicCollider::rigidBodyFlags() const {
+    return static_cast<PxRigidDynamic *>(_nativeActor)->getRigidBodyFlags();
+}
+
+void DynamicCollider::setRigidBodyFlag(PxRigidBodyFlag::Enum flag, bool value) {
+    static_cast<PxRigidDynamic *>(_nativeActor)->setRigidBodyFlag(flag, value);
+}
+
+void DynamicCollider::setRigidBodyFlags(PxRigidBodyFlags inFlags) {
+    static_cast<PxRigidDynamic *>(_nativeActor)->setRigidBodyFlags(inFlags);
+}
+
 bool DynamicCollider::isKinematic() {
     return static_cast<PxRigidDynamic *>(_nativeActor)->getRigidBodyFlags().isSet(PxRigidBodyFlag::eKINEMATIC);
 }
@@ -129,6 +142,7 @@ void DynamicCollider::setIsKinematic(bool newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, newValue);
 }
 
+//MARK: - RigidDynamicLockFlag
 void DynamicCollider::setRigidDynamicLockFlag(PxRigidDynamicLockFlag::Enum flag, bool value) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setRigidDynamicLockFlag(flag, value);
 }
@@ -141,7 +155,6 @@ PxRigidDynamicLockFlags DynamicCollider::rigidDynamicLockFlags() const {
     return static_cast<PxRigidDynamic *>(_nativeActor)->getRigidDynamicLockFlags();
 }
 
-
 bool DynamicCollider::freezeRotation() {
     const auto x_lock = static_cast<PxRigidDynamic *>(_nativeActor)->getRigidDynamicLockFlags().isSet(PxRigidDynamicLockFlag::Enum::eLOCK_ANGULAR_X);
     const auto y_lock = static_cast<PxRigidDynamic *>(_nativeActor)->getRigidDynamicLockFlags().isSet(PxRigidDynamicLockFlag::Enum::eLOCK_ANGULAR_Y);
@@ -153,6 +166,37 @@ void DynamicCollider::setFreezeRotation(bool newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::Enum::eLOCK_ANGULAR_X, true);
     static_cast<PxRigidDynamic *>(_nativeActor)->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::Enum::eLOCK_ANGULAR_Y, true);
     static_cast<PxRigidDynamic *>(_nativeActor)->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::Enum::eLOCK_ANGULAR_Z, true);
+}
+
+void DynamicCollider::applyForce(const math::Float3& force) {
+    static_cast<PxRigidDynamic *>(_nativeActor)->addForce(PxVec3(force.x, force.y, force.z));
+}
+
+void DynamicCollider::applyTorque(const math::Float3& torque) {
+    static_cast<PxRigidDynamic *>(_nativeActor)->addTorque(PxVec3(torque.x, torque.y, torque.z));
+}
+
+void DynamicCollider::setKinematicTarget(const math::Transform& pose) {
+    const auto& p = pose.translation;
+    const auto& q = pose.rotation;
+    static_cast<PxRigidDynamic *>(_nativeActor)->setKinematicTarget(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
+}
+
+void DynamicCollider::putToSleep() {
+    static_cast<PxRigidDynamic *>(_nativeActor)->putToSleep();
+}
+
+void DynamicCollider::wakeUp() {
+    static_cast<PxRigidDynamic *>(_nativeActor)->wakeUp();
+}
+
+void DynamicCollider::_onLateUpdate() {
+    const auto& transform = entity()->transform;
+    
+    PxTransform pose = _nativeActor->getGlobalPose();
+    transform->setWorldPosition(Float3(pose.p.x, pose.p.y, pose.p.z));
+    transform->setWorldRotationQuaternion(Quaternion(pose.q.x, pose.q.y, pose.q.z, pose.q.w));
+    _updateFlag->flag = false;
 }
 
 }

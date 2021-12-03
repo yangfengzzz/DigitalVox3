@@ -94,12 +94,18 @@ public:
 
     void setSolverIterations(uint32_t newValue);
 
+public:
     /**
      * Controls whether physics affects the dynamic collider.
      */
     bool isKinematic();
 
     void setIsKinematic(bool newValue);
+    
+    PxRigidBodyFlags rigidBodyFlags() const;
+    
+    void setRigidBodyFlag(PxRigidBodyFlag::Enum flag, bool value);
+    void setRigidBodyFlags(PxRigidBodyFlags inFlags);
 
 public:
     /**
@@ -119,7 +125,36 @@ public:
     void setRigidDynamicLockFlags(PxRigidDynamicLockFlags flags);
     
 public:
+    /**
+     * Apply a force to the DynamicCollider.
+     * @param force - The force make the collider move
+     */
+    void applyForce(const math::Float3& force);
+
+    /**
+     * Apply a torque to the DynamicCollider.
+     * @param torque - The force make the collider rotate
+     */
+    void applyTorque(const math::Float3& torque);
+
+    /**
+     * Moves kinematically controlled dynamic actors through the game world.
+     * @param pose The desired pose for the kinematic actor
+     */
+    void setKinematicTarget(const math::Transform& pose);
+
+    /**
+     * Forces a collider to sleep at least one frame.
+     */
+    void putToSleep();
+
+    /**
+     * Forces a collider to wake up.
+     */
+    void wakeUp();
     
+private:
+    void _onLateUpdate() override;
 };
 
 }
