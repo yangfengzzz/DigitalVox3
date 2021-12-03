@@ -55,7 +55,7 @@ public:
 
     void resize(float height);
     
-private:
+protected:
     PxController* _nativeController;
 };
 

@@ -19,6 +19,8 @@ class PhysicsMaterial;
 class ColliderShape;
 using ColliderShapePtr = std::shared_ptr<ColliderShape>;
 class Collider;
+class BoxCharacterController;
+class CapsuleCharacterController;
 
 using namespace physx;
 

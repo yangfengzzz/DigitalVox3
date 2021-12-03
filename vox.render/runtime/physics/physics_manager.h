@@ -93,6 +93,9 @@ public:
     
 private:
     friend class Collider;
+    friend class BoxCharacterController;
+    friend class CapsuleCharacterController;
+    
     /**
      * Add ColliderShape into the manager.
      * @param colliderShape - The Collider Shape.
