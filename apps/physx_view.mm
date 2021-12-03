@@ -46,7 +46,7 @@ int main(int, char**) {
 
     auto boxCollider = boxEntity->addComponent<physics::StaticCollider>();
     auto boxColliderShape = std::make_shared<physics::BoxColliderShape>();
-    boxColliderShape->setSize(math::Float3(cubeSize/2, cubeSize/2, cubeSize/2));
+    boxColliderShape->setSize(math::Float3(cubeSize, cubeSize, cubeSize));
     boxCollider->addShape(boxColliderShape);
     
     // create sphere test entity

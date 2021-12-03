@@ -22,8 +22,8 @@ math::Float3 BoxColliderShape::size() {
     return _half;
 }
 
-void BoxColliderShape::setSize(const math::Float3& half) {
-    _half = half;
+void BoxColliderShape::setSize(const math::Float3& size) {
+    _half = size * 0.5;
     auto halfExtent = _half * _pose.scale;
     static_cast<PxBoxGeometry*>(_nativeGeometry.get())->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
     _nativeShape->setGeometry(*_nativeGeometry);

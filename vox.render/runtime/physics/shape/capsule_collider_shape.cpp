@@ -42,7 +42,7 @@ float CapsuleColliderShape::height() {
 }
 
 void CapsuleColliderShape::setHeight(float value) {
-    _height = value;
+    _height = value * 0.5;
     switch (_upAxis) {
         case ColliderShapeUpAxis::Enum::X:
             static_cast<PxCapsuleGeometry*>(_nativeGeometry.get())->halfHeight = _height * _pose.scale.x;
