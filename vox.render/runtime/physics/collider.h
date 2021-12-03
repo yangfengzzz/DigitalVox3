@@ -39,6 +39,7 @@ public:
     
 protected:
     friend class PhysicsManager;
+    friend class Joint;
     
     ssize_t _index = -1;
     std::unique_ptr<UpdateFlag> _updateFlag;
