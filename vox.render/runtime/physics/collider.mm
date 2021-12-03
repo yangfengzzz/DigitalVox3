@@ -17,6 +17,10 @@ Component(entity) {
     _updateFlag = entity->transform->registerWorldChangeFlag();
 }
 
+PxRigidActor * Collider::handle() {
+    return _nativeActor;
+}
+
 void Collider::addShape(const ColliderShapePtr& shape) {
     const auto& oldCollider = shape->_collider;
     if (oldCollider != this) {

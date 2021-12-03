@@ -56,7 +56,7 @@ public:
 
     float invInertiaScale1() const;
     
-private:
+protected:
     PxJoint* _nativeJoint;
 };
 

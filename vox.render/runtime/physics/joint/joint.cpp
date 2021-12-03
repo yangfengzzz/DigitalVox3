@@ -11,7 +11,7 @@
 namespace vox {
 namespace physics {
 void Joint::setActors(Collider *actor0, Collider *actor1) {
-    _nativeJoint->setActors(actor0->_nativeActor, actor1->_nativeActor);
+    _nativeJoint->setActors(actor0->handle(), actor1->handle());
 }
 
 void Joint::setLocalPose(PxJointActorIndex::Enum actor, const math::Transform &localPose) {
