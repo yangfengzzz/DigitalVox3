@@ -34,7 +34,7 @@ public:
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
     bool raycast(const math::Ray& ray);
-
+    
     /**
      * Casts a ray through the Scene and returns the first hit.
      * @param ray - The ray
@@ -42,7 +42,7 @@ public:
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
     bool raycast(const math::Ray& ray, HitResult& outHitResult);
-
+    
     /**
      * Casts a ray through the Scene and returns the first hit.
      * @param ray - The ray
@@ -50,7 +50,7 @@ public:
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
     bool raycast(const math::Ray& ray, float distance);
-
+    
     /**
      * Casts a ray through the Scene and returns the first hit.
      * @param ray - The ray
@@ -59,7 +59,7 @@ public:
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
     bool raycast(const math::Ray& ray, float distance, HitResult&  outHitResult);
-
+    
     /**
      * Casts a ray through the Scene and returns the first hit.
      * @param ray - The ray
@@ -68,7 +68,7 @@ public:
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
     bool raycast(const math::Ray& ray, float distance, Layer layerMask);
-
+    
     /**
      * Casts a ray through the Scene and returns the first hit.
      * @param ray - The ray
@@ -86,9 +86,9 @@ public:
     void update(float deltaTime);
     
     void callColliderOnUpdate();
-
+    
     void callColliderOnLateUpdate();
-
+    
     void callCharacterControllerOnLateUpdate();
     
 private:
@@ -118,7 +118,9 @@ private:
     void _removeCollider(Collider* collider);
     
     bool _raycast(const math::Ray& ray, float distance,
-                  std::function<void(uint32_t, float, math::Float3, math::Float3)> outHitResult);
+                  std::function<void(uint32_t, float,
+                                     const math::Float3&,
+                                     const math::Float3&)> outHitResult);
     
 private:
     PxControllerManager* _nativeCharacterControllerManager;

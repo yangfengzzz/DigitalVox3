@@ -164,32 +164,103 @@ void PhysicsManager::_removeCollider(Collider* collider) {
     _nativePhysicsManager->removeActor(*collider->_nativeActor);
 }
 
+//MARK: - Raycast
 bool PhysicsManager::raycast(const math::Ray& ray) {
     return _raycast(ray, std::numeric_limits<float>::infinity(), nullptr);
 }
 
 bool PhysicsManager::raycast(const math::Ray& ray, HitResult& outHitResult) {
-    return false;
+    const auto layerMask = Layer::Everything;
+    
+    bool result = false;
+    _raycast(ray, std::numeric_limits<float>::infinity(),
+             [&](uint32_t idx, float distance, const math::Float3& normal, const math::Float3& point) {
+        if (_physicalObjectsMap[idx]->collider()->entity()->layer & layerMask) {
+            result = true;
+            
+            outHitResult.entity = _physicalObjectsMap[idx]->collider()->entity();
+            outHitResult.distance = distance;
+            outHitResult.normal = normal;
+            outHitResult.point = point;
+        }
+    });
+    
+    if (!result) {
+        outHitResult.entity = nullptr;
+        outHitResult.distance = 0;
+        outHitResult.point = math::Float3(0, 0, 0);
+        outHitResult.normal = math::Float3(0, 0, 0);
+    }
+    
+    return result;
 }
 
 bool PhysicsManager::raycast(const math::Ray& ray, float distance) {
-    return false;
+    return _raycast(ray, distance, nullptr);
 }
 
 bool PhysicsManager::raycast(const math::Ray& ray, float distance, HitResult&  outHitResult) {
-    return false;
+    const auto layerMask = Layer::Everything;
+    
+    bool result = false;
+    _raycast(ray, distance, [&](uint32_t idx, float distance, const math::Float3& normal, const math::Float3& point) {
+        if (_physicalObjectsMap[idx]->collider()->entity()->layer & layerMask) {
+            result = true;
+            
+            outHitResult.entity = _physicalObjectsMap[idx]->collider()->entity();
+            outHitResult.distance = distance;
+            outHitResult.normal = normal;
+            outHitResult.point = point;
+        }
+    });
+    
+    if (!result) {
+        outHitResult.entity = nullptr;
+        outHitResult.distance = 0;
+        outHitResult.point = math::Float3(0, 0, 0);
+        outHitResult.normal = math::Float3(0, 0, 0);
+    }
+    
+    return result;
 }
 
 bool PhysicsManager::raycast(const math::Ray& ray, float distance, Layer layerMask) {
-    return false;
+    bool result = false;
+    _raycast(ray, distance, [&](uint32_t idx, float, const math::Float3&, const math::Float3&) {
+        if (_physicalObjectsMap[idx]->collider()->entity()->layer & layerMask) {
+            result = true;
+        }
+    });
+    return result;
 }
 
 bool PhysicsManager::raycast(const math::Ray& ray, float distance, Layer layerMask, HitResult&  outHitResult) {
-    return false;
+    bool result = false;
+    _raycast(ray, distance, [&](uint32_t idx, float distance, const math::Float3& normal, const math::Float3& point) {
+        if (_physicalObjectsMap[idx]->collider()->entity()->layer & layerMask) {
+            result = true;
+            
+            outHitResult.entity = _physicalObjectsMap[idx]->collider()->entity();
+            outHitResult.distance = distance;
+            outHitResult.normal = normal;
+            outHitResult.point = point;
+        }
+    });
+    
+    if (!result) {
+        outHitResult.entity = nullptr;
+        outHitResult.distance = 0;
+        outHitResult.point = math::Float3(0, 0, 0);
+        outHitResult.normal = math::Float3(0, 0, 0);
+    }
+    
+    return result;
 }
 
 bool PhysicsManager::_raycast(const math::Ray& ray, float distance,
-                              std::function<void(uint32_t, float, math::Float3, math::Float3)> outHitResult) {
+                              std::function<void(uint32_t, float,
+                                                 const math::Float3&,
+                                                 const math::Float3&)> outHitResult) {
     PxRaycastHit hit = PxRaycastHit();
     PxSceneQueryFilterData filterData = PxSceneQueryFilterData();
     filterData.flags = PxQueryFlags(PxQueryFlag::eSTATIC | PxQueryFlag::eDYNAMIC);
@@ -202,7 +273,7 @@ bool PhysicsManager::_raycast(const math::Ray& ray, float distance,
                                                  distance, PxHitFlags(PxHitFlag::eDEFAULT),
                                                  hit, filterData);
     
-    if (outHitResult != nullptr) {
+    if (result && outHitResult != nullptr) {
         outHitResult(hit.shape->getQueryFilterData().word0,
                      hit.distance,
                      math::Float3(hit.position.x, hit.position.y, hit.position.z),
