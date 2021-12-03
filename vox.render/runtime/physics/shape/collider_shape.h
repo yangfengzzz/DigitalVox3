@@ -19,7 +19,7 @@ public:
     ColliderShape();
     
     Collider* collider();
-        
+    
 public:
     void setLocalPose(const math::Transform &pose);
     
@@ -40,10 +40,16 @@ public:
     void setQueryFilterData(const PxFilterData &data);
     
     PxFilterData queryFilterData();
-
+    
     uint32_t uniqueID();
-        
+    
 public:
+    void setFlag(PxShapeFlag::Enum flag, bool value);
+    
+    void setFlags(PxShapeFlags inFlags);
+    
+    PxShapeFlags getFlags() const;
+    
     bool trigger();
     
     void setTrigger(bool isTrigger);
@@ -58,9 +64,9 @@ protected:
     PxShape* _nativeShape;
     std::shared_ptr<PxGeometry> _nativeGeometry;
     PxMaterial* _nativeMaterial;
-
+    
     Collider* _collider;
-
+    
     math::Transform _pose;
     static const float halfSqrt;
 };

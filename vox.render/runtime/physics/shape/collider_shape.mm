@@ -53,6 +53,7 @@ PxMaterial* ColliderShape::material() {
     return _nativeMaterial;
 }
 
+//MARK: - QueryFilterData
 PxFilterData ColliderShape::queryFilterData() {
     return _nativeShape->getQueryFilterData();
 }
@@ -63,6 +64,19 @@ void ColliderShape::setQueryFilterData(const PxFilterData &data) {
 
 uint32_t ColliderShape::uniqueID() {
     return _nativeShape->getQueryFilterData().word0;
+}
+
+//MARK: - ShapeFlag
+void ColliderShape::setFlag(PxShapeFlag::Enum flag, bool value) {
+    _nativeShape->setFlag(flag, value);
+}
+
+void ColliderShape::setFlags(PxShapeFlags inFlags) {
+    _nativeShape->setFlags(inFlags);
+}
+
+PxShapeFlags ColliderShape::getFlags() const {
+    return _nativeShape->getFlags();
 }
 
 bool ColliderShape::trigger() {

@@ -23,7 +23,7 @@ public:
      * The local rotation of this plane.
      */
     math::Float3 rotation();
-
+    
     void setRotation(const math::Float3& value);
     
     void setWorldScale(const math::Float3& scale) {}

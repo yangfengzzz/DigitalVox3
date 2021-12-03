@@ -23,7 +23,7 @@ public:
      * Radius of sphere shape.
      */
     float radius();
-
+    
     void setRadius(float value);
     
     void setWorldScale(const math::Float3& scale) override;

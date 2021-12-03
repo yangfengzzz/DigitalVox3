@@ -37,21 +37,21 @@ public:
      * Radius of capsule.
      */
     float radius();
-
+    
     void setRadius(float value);
     
     /**
      * Height of capsule.
      */
     float height();
-
+    
     void setHeight(float value);
-
+    
     /**
      * Up axis of capsule.
      */
     ColliderShapeUpAxis::Enum upAxis();
-
+    
     void setUpAxis(ColliderShapeUpAxis::Enum value);
     
     void setWorldScale(const math::Float3& scale) override;
