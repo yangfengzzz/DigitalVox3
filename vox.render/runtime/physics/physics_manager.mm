@@ -157,10 +157,16 @@ void PhysicsManager::_removeColliderShape(const ColliderShapePtr& colliderShape)
 }
 
 void PhysicsManager::_addCollider(Collider* collider) {
+    _colliders.push_back(collider);
     _nativePhysicsManager->addActor(*collider->_nativeActor);
 }
 
 void PhysicsManager::_removeCollider(Collider* collider) {
+    auto iter = std::find(_colliders.begin(), _colliders.end(), collider);
+    if (iter != _colliders.end()) {
+        _colliders.erase(iter);
+    }
+    
     _nativePhysicsManager->removeActor(*collider->_nativeActor);
 }
 
