@@ -65,6 +65,8 @@
 		041610442759CC06006CD384 /* dynamic_collider.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610422759CC06006CD384 /* dynamic_collider.h */; };
 		041610472759EC90006CD384 /* sphere_collider_shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610452759EC90006CD384 /* sphere_collider_shape.cpp */; };
 		041610482759EC90006CD384 /* sphere_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610462759EC90006CD384 /* sphere_collider_shape.h */; };
+		0416104B2759EEB2006CD384 /* capsule_collider_shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610492759EEB2006CD384 /* capsule_collider_shape.cpp */; };
+		0416104C2759EEB2006CD384 /* capsule_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416104A2759EEB2006CD384 /* capsule_collider_shape.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -394,6 +396,8 @@
 		041610422759CC06006CD384 /* dynamic_collider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynamic_collider.h; sourceTree = "<group>"; };
 		041610452759EC90006CD384 /* sphere_collider_shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sphere_collider_shape.cpp; sourceTree = "<group>"; };
 		041610462759EC90006CD384 /* sphere_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sphere_collider_shape.h; sourceTree = "<group>"; };
+		041610492759EEB2006CD384 /* capsule_collider_shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = capsule_collider_shape.cpp; sourceTree = "<group>"; };
+		0416104A2759EEB2006CD384 /* capsule_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = capsule_collider_shape.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -835,6 +839,8 @@
 				0434A29827590B86009AD4EA /* box_collider_shape.mm */,
 				041610462759EC90006CD384 /* sphere_collider_shape.h */,
 				041610452759EC90006CD384 /* sphere_collider_shape.cpp */,
+				0416104A2759EEB2006CD384 /* capsule_collider_shape.h */,
+				041610492759EEB2006CD384 /* capsule_collider_shape.cpp */,
 			);
 			path = shape;
 			sourceTree = "<group>";
@@ -1517,6 +1523,7 @@
 				04CE39212751B2C500204B8E /* shader_property.h in Headers */,
 				0434A2972757B45B009AD4EA /* animator_controller.h in Headers */,
 				04CE396127525EC700204B8E /* render_element.h in Headers */,
+				0416104C2759EEB2006CD384 /* capsule_collider_shape.h in Headers */,
 				0416102627584D8F006CD384 /* skinning_job.h in Headers */,
 				04CE39472751D82F00204B8E /* shader_uniform.h in Headers */,
 				04CE3969275268BB00204B8E /* render_pass.h in Headers */,
@@ -1712,6 +1719,7 @@
 				04CE37C1274D167E00204B8E /* soa_math_archive.cc in Sources */,
 				04CE37C4274D167E00204B8E /* bounding_box.cc in Sources */,
 				04CE39252751B3A400204B8E /* render_state.mm in Sources */,
+				0416104B2759EEB2006CD384 /* capsule_collider_shape.cpp in Sources */,
 				04CE39AC2755003B00204B8E /* blinn_phong_material.mm in Sources */,
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
