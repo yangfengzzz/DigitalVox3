@@ -83,7 +83,7 @@
 		04161069275A1506006CD384 /* translational_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161067275A1506006CD384 /* translational_joint.h */; };
 		0416106C275A18E5006CD384 /* configurable_joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416106A275A18E5006CD384 /* configurable_joint.cpp */; };
 		0416106D275A18E5006CD384 /* configurable_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416106B275A18E5006CD384 /* configurable_joint.h */; };
-		04161071275A2069006CD384 /* character_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416106F275A2069006CD384 /* character_controller.cpp */; };
+		04161071275A2069006CD384 /* character_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416106F275A2069006CD384 /* character_controller.mm */; };
 		04161072275A2069006CD384 /* character_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161070275A2069006CD384 /* character_controller.h */; };
 		04161075275A5AC4006CD384 /* box_character_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04161073275A5AC4006CD384 /* box_character_controller.mm */; };
 		04161076275A5AC4006CD384 /* box_character_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161074275A5AC4006CD384 /* box_character_controller.h */; };
@@ -436,7 +436,7 @@
 		04161067275A1506006CD384 /* translational_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = translational_joint.h; sourceTree = "<group>"; };
 		0416106A275A18E5006CD384 /* configurable_joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = configurable_joint.cpp; sourceTree = "<group>"; };
 		0416106B275A18E5006CD384 /* configurable_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configurable_joint.h; sourceTree = "<group>"; };
-		0416106F275A2069006CD384 /* character_controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_controller.cpp; sourceTree = "<group>"; };
+		0416106F275A2069006CD384 /* character_controller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = character_controller.mm; sourceTree = "<group>"; };
 		04161070275A2069006CD384 /* character_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_controller.h; sourceTree = "<group>"; };
 		04161073275A5AC4006CD384 /* box_character_controller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = box_character_controller.mm; sourceTree = "<group>"; };
 		04161074275A5AC4006CD384 /* box_character_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_character_controller.h; sourceTree = "<group>"; };
@@ -918,7 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				04161070275A2069006CD384 /* character_controller.h */,
-				0416106F275A2069006CD384 /* character_controller.cpp */,
+				0416106F275A2069006CD384 /* character_controller.mm */,
 				04161074275A5AC4006CD384 /* box_character_controller.h */,
 				04161073275A5AC4006CD384 /* box_character_controller.mm */,
 				04161078275A5DB1006CD384 /* capsule_character_controller.h */,
@@ -1902,7 +1902,7 @@
 				04CE393E2751D2ED00204B8E /* shader_macro_collection.mm in Sources */,
 				04CE3806274D167F00204B8E /* fbx.cc in Sources */,
 				04CE397027526DCF00204B8E /* mesh_renderer.mm in Sources */,
-				04161071275A2069006CD384 /* character_controller.cpp in Sources */,
+				04161071275A2069006CD384 /* character_controller.mm in Sources */,
 				04CE39B02755052E00204B8E /* unlit_material.mm in Sources */,
 				0416100A2750A720006CD384 /* scene.mm in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,

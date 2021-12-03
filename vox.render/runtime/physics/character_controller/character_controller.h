@@ -55,6 +55,15 @@ public:
 
     void resize(float height);
     
+private:
+    friend class PhysicsManager;
+    
+    void _onLateUpdate();
+
+    void _onEnable() override;
+
+    void _onDisable() override;
+    
 protected:
     PxController* _nativeController;
 };

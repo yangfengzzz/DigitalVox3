@@ -93,6 +93,7 @@ public:
     
 private:
     friend class Collider;
+    friend class CharacterController;
     friend class BoxCharacterController;
     friend class CapsuleCharacterController;
     
@@ -120,6 +121,18 @@ private:
      */
     void _removeCollider(Collider* collider);
     
+    /**
+     * Add CharacterController into the manager.
+     * @param characterController The Character Controller.
+     */
+    void _addCharacterController(CharacterController* characterController);
+
+    /**
+     * Remove CharacterController.
+     * @param characterController The Character Controller.
+     */
+    void _removeCharacterController(CharacterController* characterController);
+    
     bool _raycast(const math::Ray& ray, float distance,
                   std::function<void(uint32_t, float,
                                      const math::Float3&,
@@ -131,6 +144,7 @@ private:
     
     std::unordered_map<uint32_t, ColliderShapePtr> _physicalObjectsMap;
     std::vector<Collider*> _colliders;
+    std::vector<CharacterController* > _controllers;
     
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactEnter;
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactExit;

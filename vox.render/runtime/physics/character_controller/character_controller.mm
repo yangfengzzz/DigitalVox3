@@ -6,6 +6,7 @@
 //
 
 #include "character_controller.h"
+#include "../../engine.h"
 
 namespace vox {
 namespace physics {
@@ -90,6 +91,18 @@ void CharacterController::stats(PxControllerStats &stats) const {
 
 void CharacterController::resize(float height) {
     _nativeController->resize(height);
+}
+
+void CharacterController::_onLateUpdate() {
+    entity()->transform->setWorldPosition(position());
+}
+
+void CharacterController::_onEnable() {
+    engine()->_physicsManager._addCharacterController(this);
+}
+
+void CharacterController::_onDisable() {
+    engine()->_physicsManager._removeCharacterController(this);
 }
 
 }

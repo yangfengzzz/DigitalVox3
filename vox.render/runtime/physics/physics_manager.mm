@@ -7,6 +7,7 @@
 
 #include "physics_manager.h"
 #include "shape/collider_shape.h"
+#include "character_controller/character_controller.h"
 #include "collider.h"
 #include "../entity.h"
 
@@ -145,7 +146,9 @@ void PhysicsManager::callColliderOnLateUpdate() {
 }
 
 void PhysicsManager::callCharacterControllerOnLateUpdate() {
-    
+    for (auto& controller : _controllers) {
+        controller->_onLateUpdate();
+    }
 }
 
 void PhysicsManager::_addColliderShape(const ColliderShapePtr& colliderShape) {
@@ -168,6 +171,17 @@ void PhysicsManager::_removeCollider(Collider* collider) {
     }
     
     _nativePhysicsManager->removeActor(*collider->_nativeActor);
+}
+
+void PhysicsManager::_addCharacterController(CharacterController* characterController) {
+    _controllers.push_back(characterController);
+}
+
+void PhysicsManager::_removeCharacterController(CharacterController* characterController) {
+    auto iter = std::find(_controllers.begin(), _controllers.end(), characterController);
+    if (iter != _controllers.end()) {
+        _controllers.erase(iter);
+    }
 }
 
 //MARK: - Raycast
