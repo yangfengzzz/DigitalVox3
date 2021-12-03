@@ -1,12 +1,12 @@
 //
-//  Joint.hpp
+//  joint.hpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/12/3.
 //
 
-#ifndef Joint_hpp
-#define Joint_hpp
+#ifndef joint_hpp
+#define joint_hpp
 
 #include "../physics.h"
 #include "maths/transform.h"
@@ -63,4 +63,4 @@ private:
 }
 }
 
-#endif /* Joint_hpp */
+#endif /* joint_hpp */

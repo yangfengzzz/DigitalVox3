@@ -69,8 +69,8 @@
 		0416104C2759EEB2006CD384 /* capsule_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416104A2759EEB2006CD384 /* capsule_collider_shape.h */; };
 		0416104F2759F60D006CD384 /* plane_collider_shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416104D2759F60D006CD384 /* plane_collider_shape.cpp */; };
 		041610502759F60D006CD384 /* plane_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416104E2759F60D006CD384 /* plane_collider_shape.h */; };
-		041610542759FCF1006CD384 /* Joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610522759FCF1006CD384 /* Joint.cpp */; };
-		041610552759FCF1006CD384 /* Joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610532759FCF1006CD384 /* Joint.h */; };
+		041610542759FCF1006CD384 /* joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610522759FCF1006CD384 /* joint.cpp */; };
+		041610552759FCF1006CD384 /* joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610532759FCF1006CD384 /* joint.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -404,8 +404,8 @@
 		0416104A2759EEB2006CD384 /* capsule_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = capsule_collider_shape.h; sourceTree = "<group>"; };
 		0416104D2759F60D006CD384 /* plane_collider_shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = plane_collider_shape.cpp; sourceTree = "<group>"; };
 		0416104E2759F60D006CD384 /* plane_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plane_collider_shape.h; sourceTree = "<group>"; };
-		041610522759FCF1006CD384 /* Joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Joint.cpp; sourceTree = "<group>"; };
-		041610532759FCF1006CD384 /* Joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Joint.h; sourceTree = "<group>"; };
+		041610522759FCF1006CD384 /* joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = joint.cpp; sourceTree = "<group>"; };
+		041610532759FCF1006CD384 /* joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = joint.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -859,8 +859,8 @@
 		041610512759FCE3006CD384 /* joint */ = {
 			isa = PBXGroup;
 			children = (
-				041610532759FCF1006CD384 /* Joint.h */,
-				041610522759FCF1006CD384 /* Joint.cpp */,
+				041610532759FCF1006CD384 /* joint.h */,
+				041610522759FCF1006CD384 /* joint.cpp */,
 			);
 			path = joint;
 			sourceTree = "<group>";
@@ -1595,7 +1595,7 @@
 				0416100F2750E1A9006CD384 /* components_manager.h in Headers */,
 				04CE392A2751B3D900204B8E /* renderTarget_blend_state.h in Headers */,
 				041610502759F60D006CD384 /* plane_collider_shape.h in Headers */,
-				041610552759FCF1006CD384 /* Joint.h in Headers */,
+				041610552759FCF1006CD384 /* joint.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
 				04CE396D27526AEE00204B8E /* basic_render_pipeline.h in Headers */,
 				0434A2932757B385009AD4EA /* animator.h in Headers */,
@@ -1730,7 +1730,7 @@
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
-				041610542759FCF1006CD384 /* Joint.cpp in Sources */,
+				041610542759FCF1006CD384 /* joint.cpp in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
 				04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */,

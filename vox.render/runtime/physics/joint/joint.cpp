@@ -1,11 +1,11 @@
 //
-//  Joint.cpp
+//  joint.cpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/12/3.
 //
 
-#include "Joint.h"
+#include "joint.h"
 #include "../collider.h"
 
 namespace vox {
