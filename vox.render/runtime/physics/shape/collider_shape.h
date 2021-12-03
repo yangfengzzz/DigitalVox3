@@ -56,7 +56,7 @@ protected:
     friend class Collider;
     
     PxShape* _nativeShape;
-    PxGeometry* _nativeGeometry;
+    std::shared_ptr<PxGeometry> _nativeGeometry;
     PxMaterial* _nativeMaterial;
 
     Collider* _collider;
