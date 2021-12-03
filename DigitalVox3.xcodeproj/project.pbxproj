@@ -54,11 +54,11 @@
 		0416102627584D8F006CD384 /* skinning_job.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416102427584D8F006CD384 /* skinning_job.h */; };
 		0416102A2758690C006CD384 /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610282758690C006CD384 /* physics.cpp */; };
 		0416102B2758690C006CD384 /* physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610292758690C006CD384 /* physics.h */; };
-		041610322758ED2C006CD384 /* collider_shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610302758ED2C006CD384 /* collider_shape.cpp */; };
+		041610322758ED2C006CD384 /* collider_shape.mm in Sources */ = {isa = PBXBuildFile; fileRef = 041610302758ED2C006CD384 /* collider_shape.mm */; };
 		041610332758ED2C006CD384 /* collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 041610312758ED2C006CD384 /* collider_shape.h */; };
-		0416103727599B05006CD384 /* physics_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416103527599B05006CD384 /* physics_manager.cpp */; };
+		0416103727599B05006CD384 /* physics_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416103527599B05006CD384 /* physics_manager.mm */; };
 		0416103827599B05006CD384 /* physics_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416103627599B05006CD384 /* physics_manager.h */; };
-		0416103B2759A4C7006CD384 /* static_collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 041610392759A4C7006CD384 /* static_collider.cpp */; };
+		0416103B2759A4C7006CD384 /* static_collider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 041610392759A4C7006CD384 /* static_collider.mm */; };
 		0416103C2759A4C7006CD384 /* static_collider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416103A2759A4C7006CD384 /* static_collider.h */; };
 		041610402759B4B2006CD384 /* hit_result.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416103E2759B4B2006CD384 /* hit_result.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
@@ -67,9 +67,9 @@
 		0434A2932757B385009AD4EA /* animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2912757B385009AD4EA /* animator.h */; };
 		0434A2962757B45B009AD4EA /* animator_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2942757B45B009AD4EA /* animator_controller.cpp */; };
 		0434A2972757B45B009AD4EA /* animator_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2952757B45B009AD4EA /* animator_controller.h */; };
-		0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A29827590B86009AD4EA /* box_collider_shape.cpp */; };
+		0434A29A27590B86009AD4EA /* box_collider_shape.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A29827590B86009AD4EA /* box_collider_shape.mm */; };
 		0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A29927590B86009AD4EA /* box_collider_shape.h */; };
-		0434A29E27590D71009AD4EA /* collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A29C27590D71009AD4EA /* collider.cpp */; };
+		0434A29E27590D71009AD4EA /* collider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A29C27590D71009AD4EA /* collider.mm */; };
 		0434A29F27590D71009AD4EA /* collider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A29D27590D71009AD4EA /* collider.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
@@ -379,11 +379,11 @@
 		0416102427584D8F006CD384 /* skinning_job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skinning_job.h; sourceTree = "<group>"; };
 		041610282758690C006CD384 /* physics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = physics.cpp; sourceTree = "<group>"; };
 		041610292758690C006CD384 /* physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physics.h; sourceTree = "<group>"; };
-		041610302758ED2C006CD384 /* collider_shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = collider_shape.cpp; sourceTree = "<group>"; };
+		041610302758ED2C006CD384 /* collider_shape.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = collider_shape.mm; sourceTree = "<group>"; };
 		041610312758ED2C006CD384 /* collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collider_shape.h; sourceTree = "<group>"; };
-		0416103527599B05006CD384 /* physics_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = physics_manager.cpp; sourceTree = "<group>"; };
+		0416103527599B05006CD384 /* physics_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = physics_manager.mm; sourceTree = "<group>"; };
 		0416103627599B05006CD384 /* physics_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physics_manager.h; sourceTree = "<group>"; };
-		041610392759A4C7006CD384 /* static_collider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = static_collider.cpp; sourceTree = "<group>"; };
+		041610392759A4C7006CD384 /* static_collider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = static_collider.mm; sourceTree = "<group>"; };
 		0416103A2759A4C7006CD384 /* static_collider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_collider.h; sourceTree = "<group>"; };
 		0416103E2759B4B2006CD384 /* hit_result.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hit_result.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
@@ -392,9 +392,9 @@
 		0434A2912757B385009AD4EA /* animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animator.h; sourceTree = "<group>"; };
 		0434A2942757B45B009AD4EA /* animator_controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animator_controller.cpp; sourceTree = "<group>"; };
 		0434A2952757B45B009AD4EA /* animator_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animator_controller.h; sourceTree = "<group>"; };
-		0434A29827590B86009AD4EA /* box_collider_shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = box_collider_shape.cpp; sourceTree = "<group>"; };
+		0434A29827590B86009AD4EA /* box_collider_shape.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = box_collider_shape.mm; sourceTree = "<group>"; };
 		0434A29927590B86009AD4EA /* box_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider_shape.h; sourceTree = "<group>"; };
-		0434A29C27590D71009AD4EA /* collider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = collider.cpp; sourceTree = "<group>"; };
+		0434A29C27590D71009AD4EA /* collider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = collider.mm; sourceTree = "<group>"; };
 		0434A29D27590D71009AD4EA /* collider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collider.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -804,13 +804,13 @@
 			children = (
 				0416103427590176006CD384 /* shape */,
 				0434A29D27590D71009AD4EA /* collider.h */,
-				0434A29C27590D71009AD4EA /* collider.cpp */,
+				0434A29C27590D71009AD4EA /* collider.mm */,
 				0416103A2759A4C7006CD384 /* static_collider.h */,
-				041610392759A4C7006CD384 /* static_collider.cpp */,
+				041610392759A4C7006CD384 /* static_collider.mm */,
 				041610292758690C006CD384 /* physics.h */,
 				041610282758690C006CD384 /* physics.cpp */,
 				0416103627599B05006CD384 /* physics_manager.h */,
-				0416103527599B05006CD384 /* physics_manager.cpp */,
+				0416103527599B05006CD384 /* physics_manager.mm */,
 				0416103E2759B4B2006CD384 /* hit_result.h */,
 			);
 			path = physics;
@@ -820,9 +820,9 @@
 			isa = PBXGroup;
 			children = (
 				041610312758ED2C006CD384 /* collider_shape.h */,
-				041610302758ED2C006CD384 /* collider_shape.cpp */,
+				041610302758ED2C006CD384 /* collider_shape.mm */,
 				0434A29927590B86009AD4EA /* box_collider_shape.h */,
-				0434A29827590B86009AD4EA /* box_collider_shape.cpp */,
+				0434A29827590B86009AD4EA /* box_collider_shape.mm */,
 			);
 			path = shape;
 			sourceTree = "<group>";
@@ -1682,7 +1682,7 @@
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
-				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
+				0434A29A27590B86009AD4EA /* box_collider_shape.mm in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
@@ -1726,16 +1726,16 @@
 				04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */,
 				04CE37DA274D167F00204B8E /* track.cc in Sources */,
 				0434A2962757B45B009AD4EA /* animator_controller.cpp in Sources */,
-				0416103B2759A4C7006CD384 /* static_collider.cpp in Sources */,
+				0416103B2759A4C7006CD384 /* static_collider.mm in Sources */,
 				04CE37DC274D167F00204B8E /* track_sampling_job.cc in Sources */,
 				04CE37DE274D167F00204B8E /* track_triggering_job.cc in Sources */,
 				04CE39312751CDAB00204B8E /* raster_state.mm in Sources */,
 				04CE38DB274E8C2D00204B8E /* plane.cpp in Sources */,
 				04CE39642752661F00204B8E /* render_queue.mm in Sources */,
 				04CE37E1274D167F00204B8E /* raw_skeleton.cc in Sources */,
-				041610322758ED2C006CD384 /* collider_shape.cpp in Sources */,
+				041610322758ED2C006CD384 /* collider_shape.mm in Sources */,
 				04CE399B2753A83C00204B8E /* skybox.metal in Sources */,
-				0416103727599B05006CD384 /* physics_manager.cpp in Sources */,
+				0416103727599B05006CD384 /* physics_manager.mm in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
 				04160FFE275096FD006CD384 /* updateFlag.cpp in Sources */,
@@ -1782,7 +1782,7 @@
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
 				04CE399E2753A83C00204B8E /* unlit.metal in Sources */,
-				0434A29E27590D71009AD4EA /* collider.cpp in Sources */,
+				0434A29E27590D71009AD4EA /* collider.mm in Sources */,
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
 				04CE396027525EC700204B8E /* render_element.mm in Sources */,
@@ -2008,6 +2008,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					DISABLE_CUDA_PHYSX,
+					PX_PHYSX_CORE_EXPORTS,
+					_DEBUG,
+					"'PX_DEBUG=1'",
+					"'PX_CHECKED=1'",
+					"'PX_NVTX=0'",
+					"'PX_SUPPORT_PVD=1'",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = ./vox.render;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
@@ -2060,6 +2070,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					DISABLE_CUDA_PHYSX,
+					PX_PHYSX_CORE_EXPORTS,
+					NDEBUG,
+					"'PX_SUPPORT_PVD=0'",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = ./vox.render;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,

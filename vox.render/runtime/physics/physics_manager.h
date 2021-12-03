@@ -26,37 +26,6 @@ public:
     
     PhysicsManager();
     
-private:
-    /**
-     * Call on every frame to update pose of objects.
-     * @internal
-     */
-    void _update(float deltaTime);
-    
-    /**
-     * Add ColliderShape into the manager.
-     * @param colliderShape - The Collider Shape.
-     */
-    void _addColliderShape(const ColliderShapePtr& colliderShape);
-    
-    /**
-     * Remove ColliderShape.
-     * @param colliderShape - The Collider Shape.
-     */
-    void _removeColliderShape(const ColliderShapePtr& colliderShape);
-    
-    /**
-     * Add collider into the manager.
-     * @param collider - StaticCollider or DynamicCollider.
-     */
-    void _addCollider(Collider* collider);
-    
-    /**
-     * Remove collider.
-     * @param collider - StaticCollider or DynamicCollider.
-     */
-    void _removeCollider(Collider* collider);
-    
 public:
     /**
      * Casts a ray through the Scene and returns the first hit.
@@ -108,6 +77,39 @@ public:
      * @returns Returns True if the ray intersects with a collider, otherwise false.
      */
     bool raycast(const math::Ray& ray, float distance, Layer layerMask, HitResult&  outHitResult);
+    
+private:
+    friend class Collider;
+
+    /**
+     * Call on every frame to update pose of objects.
+     * @internal
+     */
+    void _update(float deltaTime);
+    
+    /**
+     * Add ColliderShape into the manager.
+     * @param colliderShape - The Collider Shape.
+     */
+    void _addColliderShape(const ColliderShapePtr& colliderShape);
+    
+    /**
+     * Remove ColliderShape.
+     * @param colliderShape - The Collider Shape.
+     */
+    void _removeColliderShape(const ColliderShapePtr& colliderShape);
+    
+    /**
+     * Add collider into the manager.
+     * @param collider - StaticCollider or DynamicCollider.
+     */
+    void _addCollider(Collider* collider);
+    
+    /**
+     * Remove collider.
+     * @param collider - StaticCollider or DynamicCollider.
+     */
+    void _removeCollider(Collider* collider);
     
 private:
     PxControllerManager* _nativeCharacterControllerManager;

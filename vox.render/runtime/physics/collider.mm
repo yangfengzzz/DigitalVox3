@@ -8,6 +8,7 @@
 #include "collider.h"
 #include "../entity.h"
 #include "shape/collider_shape.h"
+#include "../engine.h"
 
 namespace vox {
 namespace physics {
@@ -23,7 +24,7 @@ void Collider::addShape(const ColliderShapePtr& shape) {
             oldCollider->removeShape(shape);
         }
         _shapes.push_back(shape);
-        // engine.physicsManager!._addColliderShape(shape);
+        engine()->_physicsManager._addColliderShape(shape);
         _nativeActor->attachShape(*shape->_nativeShape);
         shape->_collider = this;
     }

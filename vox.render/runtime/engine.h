@@ -9,6 +9,7 @@
 #define engine_hpp
 
 #include <memory>
+#include "physics/physics_manager.h"
 #include "components_manager.h"
 #include "scene_manager.h"
 #include "rhi-metal/metal_renderer.h"
@@ -20,6 +21,7 @@
 namespace vox {
 class Engine {
 public:
+    physics::PhysicsManager _physicsManager;
     ComponentsManager _componentsManager;
     MetalRenderer _hardwareRenderer;
     RenderContext _renderContext = RenderContext();
