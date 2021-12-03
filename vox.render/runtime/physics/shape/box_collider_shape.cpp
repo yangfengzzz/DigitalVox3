@@ -6,11 +6,13 @@
 //
 
 #include "box_collider_shape.h"
+#include "../physics_manager.h"
 
 namespace vox {
 namespace physics {
-BoxColliderShape::BoxColliderShape() {
-    
+BoxColliderShape::BoxColliderShape():ColliderShape() {
+    _pxGeometry = new PxBoxGeometry();
+    _pxShape = PhysicsManager::_nativePhysics()->createShape(*_pxGeometry, *_material);
 }
 
 math::Float3 BoxColliderShape::size() {

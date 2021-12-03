@@ -16,7 +16,11 @@ namespace vox {
 namespace physics {
 class ColliderShape {
 public:
+    ColliderShape();
+    
     Collider* collider();
+    
+    int uniqueID();
     
 public:
     void setLocalPose(const math::Transform &pose);
@@ -28,17 +32,15 @@ public:
     math::Float3 position() const;
     
 public:
-    void setMaterial(const PhysicsMaterial& materials);
+    void setMaterial(PxMaterial* materials);
+    
+    PxMaterial* material();
     
 public:
     PxFilterData queryFilterData();
     
     void setQueryFilterData(const PxFilterData &data);
-    
-    int uniqueID();
-    
-    void setUniqueID(int id);
-    
+        
 public:
     bool trigger();
     
@@ -51,10 +53,14 @@ public:
 protected:
     friend class Collider;
     
-    math::Transform _pose;
     PxShape* _pxShape;
     PxGeometry* _pxGeometry;
+    PxMaterial* _material;
+
     Collider* _collider;
+
+    size_t _id;
+    math::Transform _pose;
 };
 
 }

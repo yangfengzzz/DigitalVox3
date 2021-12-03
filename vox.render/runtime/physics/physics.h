@@ -14,6 +14,7 @@
 
 namespace vox {
 namespace physics {
+//MARK: - Forward Declare
 class PhysicsMaterial;
 class ColliderShape;
 using ColliderShapePtr = std::shared_ptr<ColliderShape>;
@@ -21,11 +22,12 @@ class Collider;
 
 using namespace physx;
 
+//MARK: - PxPhysics
 class Physics {
 public:
     Physics();
     
-    PhysicsMaterial createMaterial(PxReal staticFriction, PxReal dynamicFriction, PxReal restitution);
+    PxPhysics* operator()();
     
 private:
     PxPhysics* _physics;

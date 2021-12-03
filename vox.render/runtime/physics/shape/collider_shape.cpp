@@ -6,10 +6,15 @@
 //
 
 #include "collider_shape.h"
-#include "../physics_material.h"
+#include "../physics_manager.h"
 
 namespace vox {
 namespace physics {
+ColliderShape::ColliderShape():
+_material(PhysicsManager::_nativePhysics()->createMaterial(0, 0, 0)) {
+    _id = PhysicsManager::_idGenerator++;
+}
+
 Collider* ColliderShape::collider() {
     return _collider;
 }
@@ -35,10 +40,15 @@ math::Float3 ColliderShape::position() const {
     return _pose.translation;
 }
 
-void ColliderShape::setMaterial(const PhysicsMaterial& material) {
-    std::vector<PxMaterial *> materials(1, nullptr);
-    materials[0] = material.handle();
+void ColliderShape::setMaterial(PxMaterial* material) {
+    _material = material;
+    
+    std::vector<PxMaterial *> materials = {material};
     _pxShape->setMaterials(materials.data(), 1);
+}
+
+PxMaterial* ColliderShape::material() {
+    return _material;
 }
 
 PxFilterData ColliderShape::queryFilterData() {
@@ -51,10 +61,6 @@ void ColliderShape::setQueryFilterData(const PxFilterData &data) {
 
 int ColliderShape::uniqueID() {
     return _pxShape->getQueryFilterData().word0;
-}
-
-void ColliderShape::setUniqueID(int id) {
-    _pxShape->setQueryFilterData(PxFilterData(id, 0, 0, 0));
 }
 
 bool ColliderShape::trigger() {
