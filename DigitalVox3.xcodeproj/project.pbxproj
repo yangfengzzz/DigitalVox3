@@ -75,6 +75,8 @@
 		04161059275A07CE006CD384 /* fixed_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161057275A07CE006CD384 /* fixed_joint.h */; };
 		0416105C275A0CF4006CD384 /* spherical_joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416105A275A0CF4006CD384 /* spherical_joint.cpp */; };
 		0416105D275A0CF4006CD384 /* spherical_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416105B275A0CF4006CD384 /* spherical_joint.h */; };
+		04161060275A112E006CD384 /* hinge_joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416105E275A112E006CD384 /* hinge_joint.cpp */; };
+		04161061275A112E006CD384 /* hinge_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416105F275A112E006CD384 /* hinge_joint.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -414,6 +416,8 @@
 		04161057275A07CE006CD384 /* fixed_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fixed_joint.h; sourceTree = "<group>"; };
 		0416105A275A0CF4006CD384 /* spherical_joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = spherical_joint.cpp; sourceTree = "<group>"; };
 		0416105B275A0CF4006CD384 /* spherical_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spherical_joint.h; sourceTree = "<group>"; };
+		0416105E275A112E006CD384 /* hinge_joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hinge_joint.cpp; sourceTree = "<group>"; };
+		0416105F275A112E006CD384 /* hinge_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hinge_joint.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -873,6 +877,8 @@
 				04161056275A07CE006CD384 /* fixed_joint.cpp */,
 				0416105B275A0CF4006CD384 /* spherical_joint.h */,
 				0416105A275A0CF4006CD384 /* spherical_joint.cpp */,
+				0416105F275A112E006CD384 /* hinge_joint.h */,
+				0416105E275A112E006CD384 /* hinge_joint.cpp */,
 			);
 			path = joint;
 			sourceTree = "<group>";
@@ -1590,6 +1596,7 @@
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
 				0434A29F27590D71009AD4EA /* collider.h in Headers */,
 				04CE39542752589700204B8E /* material.h in Headers */,
+				04161061275A112E006CD384 /* hinge_joint.h in Headers */,
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE397527526F6E00204B8E /* model_mesh.h in Headers */,
@@ -1748,6 +1755,7 @@
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
 				04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */,
+				04161060275A112E006CD384 /* hinge_joint.cpp in Sources */,
 				04CE399F2753A83C00204B8E /* particle.metal in Sources */,
 				04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
