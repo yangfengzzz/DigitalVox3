@@ -22,7 +22,7 @@ namespace physics {
  */
 class PhysicsManager {
 public:
-    static size_t _idGenerator;
+    static uint32_t _idGenerator;
     static Physics _nativePhysics;
     
     PhysicsManager();
@@ -116,6 +116,9 @@ private:
      * @param collider - StaticCollider or DynamicCollider.
      */
     void _removeCollider(Collider* collider);
+    
+    bool _raycast(const math::Ray& ray, float distance,
+                  std::function<void(uint32_t, float, math::Float3, math::Float3)> outHitResult);
     
 private:
     PxControllerManager* _nativeCharacterControllerManager;

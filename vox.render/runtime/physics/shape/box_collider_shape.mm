@@ -13,7 +13,7 @@ namespace physics {
 BoxColliderShape::BoxColliderShape():ColliderShape() {
     _nativeGeometry = new PxBoxGeometry();
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
-    _nativeShape->setQueryFilterData(PxFilterData(static_cast<uint32_t>(PhysicsManager::_idGenerator++), 0, 0, 0));
+    _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
 }
 
 math::Float3 BoxColliderShape::size() {

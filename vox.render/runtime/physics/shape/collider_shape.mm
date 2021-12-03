@@ -58,7 +58,7 @@ void ColliderShape::setQueryFilterData(const PxFilterData &data) {
     _nativeShape->setQueryFilterData(data);
 }
 
-int ColliderShape::uniqueID() {
+uint32_t ColliderShape::uniqueID() {
     return _nativeShape->getQueryFilterData().word0;
 }
 

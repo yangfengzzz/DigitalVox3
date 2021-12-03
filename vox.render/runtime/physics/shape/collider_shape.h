@@ -39,7 +39,7 @@ public:
     
     PxFilterData queryFilterData();
 
-    int uniqueID();
+    uint32_t uniqueID();
         
 public:
     bool trigger();
