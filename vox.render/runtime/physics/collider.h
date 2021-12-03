@@ -37,7 +37,7 @@ public:
     
     void _onDestroy() override;
     
-private:
+protected:
     ssize_t _index = -1;
     std::unique_ptr<UpdateFlag> _updateFlag;
     physx::PxRigidActor * _nativeActor;
