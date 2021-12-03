@@ -12,7 +12,7 @@ namespace vox {
 namespace physics {
 PlaneColliderShape::PlaneColliderShape() {
     _nativeGeometry = std::make_shared<PxPlaneGeometry>();
-    _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
+    _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial, true);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
     setLocalPose(_pose);
 }

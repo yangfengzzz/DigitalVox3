@@ -13,7 +13,7 @@ namespace physics {
 BoxColliderShape::BoxColliderShape():ColliderShape() {
     auto halfExtent = _half * _pose.scale;
     _nativeGeometry = std::make_shared<PxBoxGeometry>(halfExtent.x, halfExtent.y, halfExtent.z);
-    _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
+    _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial, true);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
     setLocalPose(_pose);
 }

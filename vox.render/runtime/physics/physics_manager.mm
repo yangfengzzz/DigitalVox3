@@ -87,12 +87,12 @@ PhysicsManager::PhysicsManager(){
         
         auto scripts = shape1->collider()->entity()->scripts();
         for (const auto& script : scripts) {
-            script->onTriggerEnter(shape2.get());
+            script->onTriggerEnter(shape2);
         }
         
         scripts = shape2->collider()->entity()->scripts();
         for (const auto& script : scripts) {
-            script->onTriggerEnter(shape1.get());
+            script->onTriggerEnter(shape1);
         }
     };
     onTriggerExit = [&](PxShape *obj1, PxShape *obj2) {
@@ -101,12 +101,12 @@ PhysicsManager::PhysicsManager(){
         
         auto scripts = shape1->collider()->entity()->scripts();
         for (const auto& script : scripts) {
-            script->onTriggerExit(shape2.get());
+            script->onTriggerExit(shape2);
         }
         
         scripts = shape2->collider()->entity()->scripts();
         for (const auto& script : scripts) {
-            script->onTriggerExit(shape1.get());
+            script->onTriggerExit(shape1);
         }
     };
     onTriggerStay = [&](PxShape *obj1, PxShape *obj2) { };

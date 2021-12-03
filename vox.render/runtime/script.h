@@ -13,6 +13,7 @@
 namespace vox {
 namespace physics {
 class ColliderShape;
+using ColliderShapePtr = std::shared_ptr<ColliderShape>;
 }
 
 /**
@@ -65,20 +66,20 @@ public:
      * Called when the collision enter.
      * @param other ColliderShape
      */
-    virtual void onTriggerEnter(physics::ColliderShape* other) {}
+    virtual void onTriggerEnter(physics::ColliderShapePtr other) {}
 
     /**
      * Called when the collision stay.
      * @remarks onTriggerStay is called every frame while the collision stay.
      * @param other ColliderShape
      */
-    virtual void onTriggerExit(physics::ColliderShape* other) {}
+    virtual void onTriggerExit(physics::ColliderShapePtr other) {}
 
     /**
      * Called when the collision exit.
      * @param other ColliderShape
      */
-    virtual void onTriggerStay(physics::ColliderShape* other) {}
+    virtual void onTriggerStay(physics::ColliderShapePtr other) {}
     
     /**
      * Called when the pointer is down while over the ColliderShape.
