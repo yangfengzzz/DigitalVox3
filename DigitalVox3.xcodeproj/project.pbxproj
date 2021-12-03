@@ -81,6 +81,8 @@
 		04161065275A1336006CD384 /* spring_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161063275A1336006CD384 /* spring_joint.h */; };
 		04161068275A1506006CD384 /* translational_joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04161066275A1506006CD384 /* translational_joint.cpp */; };
 		04161069275A1506006CD384 /* translational_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 04161067275A1506006CD384 /* translational_joint.h */; };
+		0416106C275A18E5006CD384 /* configurable_joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0416106A275A18E5006CD384 /* configurable_joint.cpp */; };
+		0416106D275A18E5006CD384 /* configurable_joint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0416106B275A18E5006CD384 /* configurable_joint.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -426,6 +428,8 @@
 		04161063275A1336006CD384 /* spring_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spring_joint.h; sourceTree = "<group>"; };
 		04161066275A1506006CD384 /* translational_joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = translational_joint.cpp; sourceTree = "<group>"; };
 		04161067275A1506006CD384 /* translational_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = translational_joint.h; sourceTree = "<group>"; };
+		0416106A275A18E5006CD384 /* configurable_joint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = configurable_joint.cpp; sourceTree = "<group>"; };
+		0416106B275A18E5006CD384 /* configurable_joint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configurable_joint.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -891,6 +895,8 @@
 				0416105A275A0CF4006CD384 /* spherical_joint.cpp */,
 				04161067275A1506006CD384 /* translational_joint.h */,
 				04161066275A1506006CD384 /* translational_joint.cpp */,
+				0416106B275A18E5006CD384 /* configurable_joint.h */,
+				0416106A275A18E5006CD384 /* configurable_joint.cpp */,
 			);
 			path = joint;
 			sourceTree = "<group>";
@@ -1613,6 +1619,7 @@
 				04160FF22750944F006CD384 /* entity.h in Headers */,
 				04160FFF275096FD006CD384 /* updateFlag.h in Headers */,
 				04CE397527526F6E00204B8E /* model_mesh.h in Headers */,
+				0416106D275A18E5006CD384 /* configurable_joint.h in Headers */,
 				0416103827599B05006CD384 /* physics_manager.h in Headers */,
 				0416101A2755DB7C006CD384 /* spherical.h in Headers */,
 				04CE39AD2755003B00204B8E /* blinn_phong_material.h in Headers */,
@@ -1845,6 +1852,7 @@
 				04160FF12750944F006CD384 /* entity.mm in Sources */,
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,
 				04160FED27509277006CD384 /* engine_object.cpp in Sources */,
+				0416106C275A18E5006CD384 /* configurable_joint.cpp in Sources */,
 				04CE37EF274D167F00204B8E /* animation_optimizer.cc in Sources */,
 				0416100E2750E1A9006CD384 /* components_manager.mm in Sources */,
 				04CE39112751AE5B00204B8E /* shader_program.mm in Sources */,
