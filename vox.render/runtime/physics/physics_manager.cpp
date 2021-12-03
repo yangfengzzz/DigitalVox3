@@ -124,6 +124,52 @@ PhysicsManager::PhysicsManager(){
     sceneDesc.flags |= PxSceneFlag::eENABLE_CCD;
     
     _nativePhysicsManager = _nativePhysics()->createScene(sceneDesc);
+    _nativeCharacterControllerManager = PxCreateControllerManager(*_nativePhysicsManager);
+}
+
+void PhysicsManager::_update(float deltaTime) {
+    _nativePhysicsManager->simulate(deltaTime);
+    _nativePhysicsManager->fetchResults();
+}
+
+void PhysicsManager::_addColliderShape(const ColliderShapePtr& colliderShape) {
+    
+}
+
+void PhysicsManager::_removeColliderShape(const ColliderShapePtr& colliderShape) {
+    
+}
+
+void PhysicsManager::_addCollider(Collider* collider) {
+    
+}
+
+void PhysicsManager::_removeCollider(Collider* collider) {
+    
+}
+
+bool PhysicsManager::raycast(const math::Ray& ray) {
+    return false;
+}
+
+bool PhysicsManager::raycast(const math::Ray& ray, HitResult& outHitResult) {
+    return false;
+}
+
+bool PhysicsManager::raycast(const math::Ray& ray, float distance) {
+    return false;
+}
+
+bool PhysicsManager::raycast(const math::Ray& ray, float distance, HitResult&  outHitResult) {
+    return false;
+}
+
+bool PhysicsManager::raycast(const math::Ray& ray, float distance, Layer layerMask) {
+    return false;
+}
+
+bool PhysicsManager::raycast(const math::Ray& ray, float distance, Layer layerMask, HitResult&  outHitResult) {
+    return false;
 }
 
 }

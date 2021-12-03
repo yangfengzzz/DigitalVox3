@@ -10,16 +10,104 @@
 
 #include "physics.h"
 #include <unordered_map>
+#include "maths/ray.h"
+#include "hit_result.h"
+#include "../layer.h"
 
 namespace vox {
 namespace physics {
-/// A physics manager is a collection of bodies and constraints which can interact.
+/**
+ * A physics manager is a collection of bodies and constraints which can interact.
+ */
 class PhysicsManager {
 public:
     static size_t _idGenerator;
     static Physics _nativePhysics;
     
     PhysicsManager();
+    
+private:
+    /**
+     * Call on every frame to update pose of objects.
+     * @internal
+     */
+    void _update(float deltaTime);
+    
+    /**
+     * Add ColliderShape into the manager.
+     * @param colliderShape - The Collider Shape.
+     */
+    void _addColliderShape(const ColliderShapePtr& colliderShape);
+    
+    /**
+     * Remove ColliderShape.
+     * @param colliderShape - The Collider Shape.
+     */
+    void _removeColliderShape(const ColliderShapePtr& colliderShape);
+    
+    /**
+     * Add collider into the manager.
+     * @param collider - StaticCollider or DynamicCollider.
+     */
+    void _addCollider(Collider* collider);
+    
+    /**
+     * Remove collider.
+     * @param collider - StaticCollider or DynamicCollider.
+     */
+    void _removeCollider(Collider* collider);
+    
+public:
+    /**
+     * Casts a ray through the Scene and returns the first hit.
+     * @param ray - The ray
+     * @returns Returns True if the ray intersects with a collider, otherwise false
+     */
+    bool raycast(const math::Ray& ray);
+
+    /**
+     * Casts a ray through the Scene and returns the first hit.
+     * @param ray - The ray
+     * @param outHitResult - If true is returned, outHitResult will contain more detailed collision information
+     * @returns Returns True if the ray intersects with a collider, otherwise false
+     */
+    bool raycast(const math::Ray& ray, HitResult& outHitResult);
+
+    /**
+     * Casts a ray through the Scene and returns the first hit.
+     * @param ray - The ray
+     * @param distance - The max distance the ray should check
+     * @returns Returns True if the ray intersects with a collider, otherwise false
+     */
+    bool raycast(const math::Ray& ray, float distance);
+
+    /**
+     * Casts a ray through the Scene and returns the first hit.
+     * @param ray - The ray
+     * @param distance - The max distance the ray should check
+     * @param outHitResult - If true is returned, outHitResult will contain more detailed collision information
+     * @returns Returns True if the ray intersects with a collider, otherwise false
+     */
+    bool raycast(const math::Ray& ray, float distance, HitResult&  outHitResult);
+
+    /**
+     * Casts a ray through the Scene and returns the first hit.
+     * @param ray - The ray
+     * @param distance - The max distance the ray should check
+     * @param layerMask - Layer mask that is used to selectively ignore Colliders when casting
+     * @returns Returns True if the ray intersects with a collider, otherwise false
+     */
+    bool raycast(const math::Ray& ray, float distance, Layer layerMask);
+
+    /**
+     * Casts a ray through the Scene and returns the first hit.
+     * @param ray - The ray
+     * @param distance - The max distance the ray should check
+     * @param layerMask - Layer mask that is used to selectively ignore Colliders when casting
+     * @param outHitResult - If true is returned, outHitResult will contain more detailed collision information
+     * @returns Returns True if the ray intersects with a collider, otherwise false.
+     */
+    bool raycast(const math::Ray& ray, float distance, Layer layerMask, HitResult&  outHitResult);
     
 private:
     PxControllerManager* _nativeCharacterControllerManager;
@@ -30,7 +118,7 @@ private:
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactEnter;
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactExit;
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactStay;
-
+    
     std::function<void(PxShape *obj1, PxShape *obj2)> onTriggerEnter;
     std::function<void(PxShape *obj1, PxShape *obj2)> onTriggerExit;
     std::function<void(PxShape *obj1, PxShape *obj2)> onTriggerStay;
