@@ -11,6 +11,10 @@
 #include "component.h"
 
 namespace vox {
+namespace physics {
+class ColliderShape;
+}
+
 /**
  * Script class, used for logic writing.
  */
@@ -56,6 +60,25 @@ public:
      * @param camera - Current camera.
      */
     virtual void onEndRender(Camera* camera) {}
+    
+    /**
+     * Called when the collision enter.
+     * @param other ColliderShape
+     */
+    virtual void onTriggerEnter(physics::ColliderShape* other) {}
+
+    /**
+     * Called when the collision stay.
+     * @remarks onTriggerStay is called every frame while the collision stay.
+     * @param other ColliderShape
+     */
+    virtual void onTriggerExit(physics::ColliderShape* other) {}
+
+    /**
+     * Called when the collision exit.
+     * @param other ColliderShape
+     */
+    virtual void onTriggerStay(physics::ColliderShape* other) {}
     
     /**
      * Called when the pointer is down while over the ColliderShape.

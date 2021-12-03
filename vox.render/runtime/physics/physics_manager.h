@@ -9,6 +9,7 @@
 #define physics_manager_hpp
 
 #include "physics.h"
+#include <unordered_map>
 
 namespace vox {
 namespace physics {
@@ -18,7 +19,21 @@ public:
     static size_t _idGenerator;
     static Physics _nativePhysics;
     
+    PhysicsManager();
     
+private:
+    PxControllerManager* _nativeCharacterControllerManager;
+    PxScene* _nativePhysicsManager;
+    
+    std::unordered_map<uint32_t, ColliderShapePtr> _physicalObjectsMap;
+    
+    std::function<void(PxShape *obj1, PxShape *obj2)> onContactEnter;
+    std::function<void(PxShape *obj1, PxShape *obj2)> onContactExit;
+    std::function<void(PxShape *obj1, PxShape *obj2)> onContactStay;
+
+    std::function<void(PxShape *obj1, PxShape *obj2)> onTriggerEnter;
+    std::function<void(PxShape *obj1, PxShape *obj2)> onTriggerExit;
+    std::function<void(PxShape *obj1, PxShape *obj2)> onTriggerStay;
 };
 
 }

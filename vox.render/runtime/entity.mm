@@ -292,4 +292,9 @@ void Entity::_setTransformDirty() {
     }
 }
 
+std::vector<Script*> Entity::scripts() {
+    return _scripts;
+}
+
+
 }

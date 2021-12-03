@@ -27,7 +27,7 @@ public:
     /** The layer the entity belongs to. */
     Layer layer = Layer::Layer0;
     /** Transform component. */
-    Transform* transform;
+    vox::Transform* transform;
     
     /**
      * Create a entity.
@@ -184,11 +184,14 @@ public:
      */
     void destroy();
     
+public:
+    std::vector<Script*> scripts();
+    
 private:
     friend class Scene;
     friend class Component;
     friend class ComponentsManager;
-    friend class Transform;
+    friend class vox::Transform;
     friend class Script;
     
     void _removeComponent(Component* component);
