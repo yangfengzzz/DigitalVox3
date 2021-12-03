@@ -11,7 +11,7 @@
 namespace vox {
 namespace physics {
 CapsuleColliderShape::CapsuleColliderShape() {
-    _nativeGeometry = std::make_shared<PxCapsuleGeometry>();
+    _nativeGeometry = std::make_shared<PxCapsuleGeometry>(_radius * std::max(_pose.scale.x, _pose.scale.z), _height * _pose.scale.y);
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
     setLocalPose(_pose);

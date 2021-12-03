@@ -61,11 +61,11 @@ public:
 protected:
     friend class Collider;
     
-    PxShape* _nativeShape;
-    std::shared_ptr<PxGeometry> _nativeGeometry;
-    PxMaterial* _nativeMaterial;
+    PxShape* _nativeShape = nullptr;
+    std::shared_ptr<PxGeometry> _nativeGeometry = nullptr;
+    PxMaterial* _nativeMaterial = nullptr;
     
-    Collider* _collider;
+    Collider* _collider = nullptr;
     
     math::Transform _pose;
     static const float halfSqrt;

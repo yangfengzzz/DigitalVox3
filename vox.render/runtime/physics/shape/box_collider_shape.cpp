@@ -11,7 +11,8 @@
 namespace vox {
 namespace physics {
 BoxColliderShape::BoxColliderShape():ColliderShape() {
-    _nativeGeometry = std::make_shared<PxBoxGeometry>();
+    auto halfExtent = _half * _pose.scale;
+    _nativeGeometry = std::make_shared<PxBoxGeometry>(halfExtent.x, halfExtent.y, halfExtent.z);
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
     _nativeShape->setQueryFilterData(PxFilterData(PhysicsManager::_idGenerator++, 0, 0, 0));
     setLocalPose(_pose);
