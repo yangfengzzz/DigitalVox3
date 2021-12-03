@@ -11,18 +11,19 @@
 namespace vox {
 namespace physics {
 BoxColliderShape::BoxColliderShape():ColliderShape() {
-    _pxGeometry = new PxBoxGeometry();
-    _pxShape = PhysicsManager::_nativePhysics()->createShape(*_pxGeometry, *_material);
+    _nativeGeometry = new PxBoxGeometry();
+    _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial);
+    _nativeShape->setQueryFilterData(PxFilterData(static_cast<uint32_t>(PhysicsManager::_idGenerator++), 0, 0, 0));
 }
 
 math::Float3 BoxColliderShape::size() {
-    const auto& extent = static_cast<PxBoxGeometry*>(_pxGeometry)->halfExtents;
+    const auto& extent = static_cast<PxBoxGeometry*>(_nativeGeometry)->halfExtents;
     return math::Float3(extent.x, extent.y, extent.z);
 }
 
 void BoxColliderShape::setSize(const math::Float3& half) {
-    static_cast<PxBoxGeometry*>(_pxGeometry)->halfExtents = PxVec3(half.x, half.y, half.z);
-    _pxShape->setGeometry(*_pxGeometry);
+    static_cast<PxBoxGeometry*>(_nativeGeometry)->halfExtents = PxVec3(half.x, half.y, half.z);
+    _nativeShape->setGeometry(*_nativeGeometry);
 }
 
 }

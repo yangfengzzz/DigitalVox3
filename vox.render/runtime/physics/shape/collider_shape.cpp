@@ -11,8 +11,7 @@
 namespace vox {
 namespace physics {
 ColliderShape::ColliderShape():
-_material(PhysicsManager::_nativePhysics()->createMaterial(0, 0, 0)) {
-    _id = PhysicsManager::_idGenerator++;
+_nativeMaterial(PhysicsManager::_nativePhysics()->createMaterial(0, 0, 0)) {
 }
 
 Collider* ColliderShape::collider() {
@@ -24,7 +23,7 @@ void ColliderShape::setLocalPose(const math::Transform &pose) {
     
     const auto& p = pose.translation;
     const auto& q = pose.rotation;
-    _pxShape->setLocalPose(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
+    _nativeShape->setLocalPose(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
 }
 
 math::Transform ColliderShape::localPose() const {
@@ -41,43 +40,43 @@ math::Float3 ColliderShape::position() const {
 }
 
 void ColliderShape::setMaterial(PxMaterial* material) {
-    _material = material;
+    _nativeMaterial = material;
     
     std::vector<PxMaterial *> materials = {material};
-    _pxShape->setMaterials(materials.data(), 1);
+    _nativeShape->setMaterials(materials.data(), 1);
 }
 
 PxMaterial* ColliderShape::material() {
-    return _material;
+    return _nativeMaterial;
 }
 
 PxFilterData ColliderShape::queryFilterData() {
-    return _pxShape->getQueryFilterData();
+    return _nativeShape->getQueryFilterData();
 }
 
 void ColliderShape::setQueryFilterData(const PxFilterData &data) {
-    _pxShape->setQueryFilterData(data);
+    _nativeShape->setQueryFilterData(data);
 }
 
 int ColliderShape::uniqueID() {
-    return _pxShape->getQueryFilterData().word0;
+    return _nativeShape->getQueryFilterData().word0;
 }
 
 bool ColliderShape::trigger() {
-    return _pxShape->getFlags().isSet(PxShapeFlag::Enum::eTRIGGER_SHAPE);
+    return _nativeShape->getFlags().isSet(PxShapeFlag::Enum::eTRIGGER_SHAPE);
 }
 
 void ColliderShape::setTrigger(bool isTrigger) {
-    _pxShape->setFlag(PxShapeFlag::Enum::eSIMULATION_SHAPE, !isTrigger);
-    _pxShape->setFlag(PxShapeFlag::Enum::eTRIGGER_SHAPE, isTrigger);
+    _nativeShape->setFlag(PxShapeFlag::Enum::eSIMULATION_SHAPE, !isTrigger);
+    _nativeShape->setFlag(PxShapeFlag::Enum::eTRIGGER_SHAPE, isTrigger);
 }
 
 bool ColliderShape::sceneQuery() {
-    return _pxShape->getFlags().isSet(PxShapeFlag::Enum::eSCENE_QUERY_SHAPE);
+    return _nativeShape->getFlags().isSet(PxShapeFlag::Enum::eSCENE_QUERY_SHAPE);
 }
 
 void ColliderShape::setSceneQuery(bool isQuery) {
-    _pxShape->setFlag(PxShapeFlag::Enum::eSCENE_QUERY_SHAPE, isQuery);
+    _nativeShape->setFlag(PxShapeFlag::Enum::eSCENE_QUERY_SHAPE, isQuery);
 }
 
 }

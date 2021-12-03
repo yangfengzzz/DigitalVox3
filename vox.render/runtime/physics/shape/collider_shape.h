@@ -19,9 +19,7 @@ public:
     ColliderShape();
     
     Collider* collider();
-    
-    int uniqueID();
-    
+        
 public:
     void setLocalPose(const math::Transform &pose);
     
@@ -37,9 +35,11 @@ public:
     PxMaterial* material();
     
 public:
-    PxFilterData queryFilterData();
-    
     void setQueryFilterData(const PxFilterData &data);
+    
+    PxFilterData queryFilterData();
+
+    int uniqueID();
         
 public:
     bool trigger();
@@ -53,13 +53,12 @@ public:
 protected:
     friend class Collider;
     
-    PxShape* _pxShape;
-    PxGeometry* _pxGeometry;
-    PxMaterial* _material;
+    PxShape* _nativeShape;
+    PxGeometry* _nativeGeometry;
+    PxMaterial* _nativeMaterial;
 
     Collider* _collider;
 
-    size_t _id;
     math::Transform _pose;
 };
 

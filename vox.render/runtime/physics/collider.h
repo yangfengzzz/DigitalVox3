@@ -20,9 +20,9 @@ class Collider: public Component {
 public:
     Collider(Entity* entity);
     
-    void addShape(const ColliderShape& shape);
+    void addShape(const ColliderShapePtr& shape);
     
-    void removeShape(const ColliderShape& shape);
+    void removeShape(const ColliderShapePtr& shape);
     
     void clearShapes();
     
@@ -40,7 +40,7 @@ public:
 private:
     ssize_t _index = -1;
     std::unique_ptr<UpdateFlag> _updateFlag;
-    physx::PxRigidActor * _pxActor;
+    physx::PxRigidActor * _nativeActor;
     std::vector<ColliderShapePtr> _shapes;
 };
 

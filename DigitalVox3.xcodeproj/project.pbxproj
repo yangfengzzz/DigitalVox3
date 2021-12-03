@@ -797,10 +797,10 @@
 			isa = PBXGroup;
 			children = (
 				0416103427590176006CD384 /* shape */,
-				041610292758690C006CD384 /* physics.h */,
-				041610282758690C006CD384 /* physics.cpp */,
 				0434A29D27590D71009AD4EA /* collider.h */,
 				0434A29C27590D71009AD4EA /* collider.cpp */,
+				041610292758690C006CD384 /* physics.h */,
+				041610282758690C006CD384 /* physics.cpp */,
 				0416103627599B05006CD384 /* physics_manager.h */,
 				0416103527599B05006CD384 /* physics_manager.cpp */,
 			);
