@@ -17,12 +17,20 @@ BoxColliderShape::BoxColliderShape():ColliderShape() {
 }
 
 math::Float3 BoxColliderShape::size() {
-    const auto& extent = static_cast<PxBoxGeometry*>(_nativeGeometry)->halfExtents;
-    return math::Float3(extent.x, extent.y, extent.z);
+    return _half;
 }
 
 void BoxColliderShape::setSize(const math::Float3& half) {
-    static_cast<PxBoxGeometry*>(_nativeGeometry)->halfExtents = PxVec3(half.x, half.y, half.z);
+    _half = half;
+    auto halfExtent = _half * _pose.scale;
+    static_cast<PxBoxGeometry*>(_nativeGeometry)->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
+    _nativeShape->setGeometry(*_nativeGeometry);
+}
+
+void BoxColliderShape::setWorldScale(const math::Float3& scale) {
+    _pose.scale = scale;
+    auto halfExtent = _half * _pose.scale;
+    static_cast<PxBoxGeometry*>(_nativeGeometry)->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
     _nativeShape->setGeometry(*_nativeGeometry);
 }
 

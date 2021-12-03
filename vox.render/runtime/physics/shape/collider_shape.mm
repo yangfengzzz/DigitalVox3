@@ -10,8 +10,11 @@
 
 namespace vox {
 namespace physics {
+const float ColliderShape::halfSqrt = 0.70710678118655;
 ColliderShape::ColliderShape():
 _nativeMaterial(PhysicsManager::_nativePhysics()->createMaterial(0, 0, 0)) {
+    _pose.rotation = math::Quaternion(0, 0, halfSqrt, halfSqrt);
+    _pose.scale = math::Float3(1, 1, 1);
 }
 
 Collider* ColliderShape::collider() {

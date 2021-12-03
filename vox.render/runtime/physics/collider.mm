@@ -51,14 +51,15 @@ void Collider::clearShapes() {
 
 void Collider::_onUpdate() {
     if (_updateFlag->flag) {
-        const auto& p = entity()->transform->worldPosition();
-        const auto& q = entity()->transform->worldRotationQuaternion();
+        const auto& transform = entity()->transform;
+        const auto& p = transform->worldPosition();
+        const auto& q = transform->worldRotationQuaternion();
         _nativeActor->setGlobalPose(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
         _updateFlag->flag = false;
 
-        // let worldScale = transform!.lossyWorldScale;
+        const auto worldScale = transform->lossyWorldScale();
         for (auto& _shape : _shapes) {
-        //    _shape->_nativeShape->setWorldScale(worldScale);
+            _shape->setWorldScale(worldScale);
         }
     }
 }

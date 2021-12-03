@@ -18,10 +18,14 @@ public:
     
     math::Float3 size();
     
-    void setSize(const math::Float3& half);
+    void setSize(const math::Float3& value);
+    
+    void setWorldScale(const math::Float3& scale) override;
+    
+private:
+    math::Float3 _half = math::Float3(0.5, 0.5, 0.5);
 };
 
 }
 }
-
 #endif /* box_collider_shape_hpp */

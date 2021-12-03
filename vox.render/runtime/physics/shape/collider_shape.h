@@ -29,6 +29,8 @@ public:
     
     math::Float3 position() const;
     
+    virtual void setWorldScale(const math::Float3& scale) = 0;
+    
 public:
     void setMaterial(PxMaterial* materials);
     
@@ -60,9 +62,9 @@ protected:
     Collider* _collider;
 
     math::Transform _pose;
+    static const float halfSqrt;
 };
 
 }
 }
-
 #endif /* collider_shape_hpp */
