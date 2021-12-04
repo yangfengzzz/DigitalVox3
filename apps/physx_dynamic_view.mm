@@ -39,7 +39,7 @@ struct Apps {
         cameraEntity->addComponent<vox::Camera>();
         cameraEntity->addComponent<control::OrbitControl>();
         
-//        addPlane(math::Float3(30, 0.1, 30), math::Float3(), math::Quaternion());
+        addPlane(math::Float3(30, 0.1, 30), math::Float3(), math::Quaternion());
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 5; j++) {
                 addBox(math::Float3(1, 1, 1),
@@ -82,7 +82,7 @@ struct Apps {
         auto boxColliderShape = std::make_shared<physics::BoxColliderShape>();
         boxColliderShape->setSize(math::Float3(size.x, size.y, size.z));
         
-        auto boxCollider = boxEntity->addComponent<physics::StaticCollider>();
+        auto boxCollider = boxEntity->addComponent<physics::DynamicCollider>();
         boxCollider->addShape(boxColliderShape);
         
         return boxEntity;

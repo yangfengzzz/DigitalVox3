@@ -14,7 +14,8 @@ namespace physics {
 DynamicCollider::DynamicCollider(Entity* entity):
 Collider(entity) {
     const auto& p = entity->transform->worldPosition();
-    const auto& q = entity->transform->worldRotationQuaternion();
+    auto q = entity->transform->worldRotationQuaternion();
+    q = Normalize(q);
     
     _nativeActor = PhysicsManager::_nativePhysics()->createRigidDynamic(PxTransform(PxVec3(p.x, p.y, p.z),
                                                                                     PxQuat(q.x, q.y, q.z, q.w)));

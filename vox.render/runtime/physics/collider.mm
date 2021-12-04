@@ -57,7 +57,8 @@ void Collider::_onUpdate() {
     if (_updateFlag->flag) {
         const auto& transform = entity()->transform;
         const auto& p = transform->worldPosition();
-        const auto& q = transform->worldRotationQuaternion();
+        auto q = transform->worldRotationQuaternion();
+        q = Normalize(q);
         _nativeActor->setGlobalPose(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
         _updateFlag->flag = false;
 

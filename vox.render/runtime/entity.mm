@@ -63,38 +63,6 @@ Entity* Entity::parent() {
     return _parent;
 }
 
-void Entity::setParent(Entity* entity) {
-    if (entity != _parent) {
-        const auto oldParent = _removeFromParent();
-        auto newParent = _parent = entity;
-        if (newParent) {
-            newParent->_children.push_back(EntityPtr(this));
-            const auto parentScene = newParent->_scene;
-            if (_scene != parentScene) {
-                Entity::_traverseSetOwnerScene(this, parentScene);
-            }
-            
-            if (newParent->_isActiveInHierarchy) {
-                if (!_isActiveInHierarchy && _isActive) {
-                    _processActive();
-                }
-            } else {
-                if (_isActiveInHierarchy) {
-                    _processInActive();
-                }
-            }
-        } else {
-            if (_isActiveInHierarchy) {
-                _processInActive();
-            }
-            if (oldParent) {
-                Entity::_traverseSetOwnerScene(this, nullptr);
-            }
-        }
-        _setTransformDirty();
-    }
-}
-
 const std::vector<EntityPtr> Entity::children() const {
     return _children;
 }
@@ -108,11 +76,38 @@ Scene* Entity::scene() {
 }
 
 void Entity::addChild(EntityPtr child) {
-    child->setParent(this);
+    if (child->_parent != this) {
+        child->_removeFromParent();
+        child->_parent = this;
+        _children.push_back(child);
+        if (child->_scene != _scene) {
+            Entity::_traverseSetOwnerScene(child.get(), _scene);
+        }
+        
+        if (_isActiveInHierarchy) {
+            if (!child->_isActiveInHierarchy && child->_isActive) {
+                child->_processActive();
+            }
+        } else {
+            if (child->_isActiveInHierarchy) {
+                child->_processInActive();
+            }
+        }
+        child->_setTransformDirty();
+    }
 }
 
 void Entity::removeChild(EntityPtr child) {
-    child->setParent(nullptr);
+    if (child->_parent == this) {
+        child->_removeFromParent();
+        child->_parent = nullptr;
+        
+        if (child->_isActiveInHierarchy) {
+            child->_processInActive();
+        }
+        Entity::_traverseSetOwnerScene(child.get(), nullptr);
+        child->_setTransformDirty();
+    }
 }
 
 EntityPtr Entity::getChild(int index) {
@@ -136,7 +131,7 @@ EntityPtr Entity::findByName(const std::string &name) {
 EntityPtr Entity::createChild(const std::string &name) {
     auto child = std::make_shared<Entity>(engine(), name);
     child->layer = layer;
-    child->setParent(this);
+    addChild(child);
     return child;
 }
 
@@ -192,7 +187,7 @@ void Entity::destroy() {
     if (_parent != nullptr) {
         auto &parentChildren = _parent->_children;
         parentChildren.erase(std::remove_if(parentChildren.begin(), parentChildren.end(),
-                                             [&](const auto& child) {
+                                            [&](const auto& child) {
             return child.get() == this;
         }), parentChildren.end());
     }
@@ -219,7 +214,7 @@ void Entity::_removeScript(Script *script) {
 }
 
 Entity* Entity::_removeFromParent() {
-    const auto &oldParent = _parent;
+    auto oldParent = _parent;
     if (oldParent != nullptr) {
         auto &oldParentChildren = oldParent->_children;
         oldParentChildren.erase(std::remove_if(oldParentChildren.begin(), oldParentChildren.end(),

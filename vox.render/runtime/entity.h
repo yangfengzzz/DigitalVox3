@@ -52,9 +52,6 @@ public:
      */
     Entity* parent();
     
-    void setParent(Entity* entity);
-    
-    
     /**
      * Number of the children entities
      */
