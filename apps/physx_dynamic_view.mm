@@ -83,7 +83,7 @@ int main(int, char**) {
     
     auto addBox = [&](const math::Float3& size, const math::Float3& position, const math::Quaternion& rotation) {
         auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
-        boxMtl->setBaseColor(math::Color(0.8, 0.3, 0.3, 1.0));
+        boxMtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto boxEntity = rootEntity->createChild("BoxEntity");
         auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
         
@@ -95,7 +95,7 @@ int main(int, char**) {
         auto physicsBox = std::make_shared<physics::BoxColliderShape>();
         physicsBox->setSize(math::Float3(size.x, size.y, size.z));
         physicsBox->material()->setStaticFriction(1);
-        physicsBox->material()->setDynamicFriction(1);
+        physicsBox->material()->setDynamicFriction(2);
         physicsBox->material()->setRestitution(0.1);
         physicsBox->setTrigger(false);
         
@@ -210,7 +210,7 @@ int main(int, char**) {
                    Quaternion(0, 0, 0.3, 0.7));
         }
     }
-    createChain(math::Float3(0.0, 25.0, -10.0), math::Quaternion(), 10, 2.0);
+    createChain(math::Float3(0.0, 25.0, -10.0), math::Quaternion(), 5, 2.0);
     
     
     engine.run();
