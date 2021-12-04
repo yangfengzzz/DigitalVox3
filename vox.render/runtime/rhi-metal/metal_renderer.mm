@@ -22,16 +22,20 @@ resouceCache(this) {
     // self.resouceCache = ResourceCache(self);
     library = [device newDefaultLibrary];
     
-    depthTexture = buildTexture(MTLPixelFormatDepth32Float, canvas.width(), canvas.height());
     colorPixelFormat = MTLPixelFormatBGRA8Unorm;
     samplerState = buildSamplerState();
     
     ImGui_ImplMetal_Init(device);
     
+    int width, height;
+    glfwGetFramebufferSize(canvas.handle(), &width, &height);
+    depthTexture = buildTexture(MTLPixelFormatDepth32Float, width, height);
+
     NSWindow *nswin = glfwGetCocoaWindow(canvas.handle());
     layer = [CAMetalLayer layer];
     layer.device = device;
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
+    layer.drawableSize = CGSizeMake(width, height);
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
 }
@@ -91,8 +95,8 @@ void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camer
             0, 1}];
     } else {
         const auto &viewport = camera->viewport();
-        double width = canvas.width();
-        double height = canvas.height();
+        int width, height;
+        glfwGetFramebufferSize(canvas.handle(), &width, &height);
         
         [renderEncoder setViewport:MTLViewport{
             viewport.x * width,
