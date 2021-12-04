@@ -12,8 +12,11 @@
 namespace vox {
 namespace physics {
 ConfigurableJoint::ConfigurableJoint(Collider* collider0, Collider* collider1) {
-    _nativeJoint = PxD6JointCreate(*PhysicsManager::_nativePhysics(), collider0->handle(), PxTransform(),
-                                   collider1->handle(), PxTransform());
+    auto actor0 = collider0? collider0->handle() : nullptr;
+    auto actor1 = collider1? collider1->handle() : nullptr;
+    _nativeJoint = PxD6JointCreate(*PhysicsManager::_nativePhysics(),
+                                   actor0, PxTransform(PxVec3(), PxQuat(0, 0, 0, 1)),
+                                   actor1, PxTransform(PxVec3(), PxQuat(0, 0, 0, 1)));
 }
 
 void ConfigurableJoint::setMotion(PxD6Axis::Enum axis, PxD6Motion::Enum type) {

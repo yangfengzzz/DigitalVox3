@@ -12,8 +12,11 @@
 namespace vox {
 namespace physics {
 HingeJoint::HingeJoint(Collider* collider0, Collider* collider1) {
-    _nativeJoint = PxRevoluteJointCreate(*PhysicsManager::_nativePhysics(), collider0->handle(), PxTransform(),
-                                          collider1->handle(), PxTransform());
+    auto actor0 = collider0? collider0->handle() : nullptr;
+    auto actor1 = collider1? collider1->handle() : nullptr;
+    _nativeJoint = PxRevoluteJointCreate(*PhysicsManager::_nativePhysics(),
+                                         actor0, PxTransform(PxVec3(), PxQuat(0, 0, 0, 1)),
+                                         actor1, PxTransform(PxVec3(), PxQuat(0, 0, 0, 1)));
 }
 
 float HingeJoint::angle() const {

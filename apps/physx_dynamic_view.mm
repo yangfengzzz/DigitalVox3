@@ -193,7 +193,7 @@ int main(int, char**) {
             auto joint = physics::FixedJoint(prevCollider, currentCollider);
             math::Transform localPose;
             localPose.translation = prevCollider != nil ? offset : position;
-            localPose.rotation = prevCollider != nil ? Quaternion() : Normalize(rotation);
+            localPose.rotation = prevCollider != nil ? Quaternion() : rotation;
             joint.setLocalPose(physx::PxJointActorIndex::Enum::eACTOR0, localPose);
             localPose.translation = math::Float3(0, separation / 2, 0);
             localPose.rotation = Quaternion();
