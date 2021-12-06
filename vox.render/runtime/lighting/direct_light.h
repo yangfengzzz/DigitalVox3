@@ -27,7 +27,9 @@ public:
     DirectLight(Entity* entity);
 
 private:
-    void _appendData(size_t lightIndex);
+    friend class LightManager;
+    
+    void _appendData(size_t lightIndex) override;
     
     static void _updateShaderData(ShaderData& shaderData);
     

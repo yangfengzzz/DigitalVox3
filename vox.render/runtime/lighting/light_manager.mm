@@ -29,7 +29,44 @@ void LightManager::detachRenderLight(Light* light) {
 }
 
 void LightManager::_updateShaderData(ShaderData& shaderData) {
+    /**
+     * ambientLight and envMapLight only use the last one in the scene
+     * */
+    size_t directLightCount = 0;
+    size_t pointLightCount = 0;
+    size_t spotLightCount = 0;
     
+    for (size_t i = 0; i < visibleLights.size(); i++) {
+        const auto& light = visibleLights[i];
+        if (dynamic_cast<DirectLight*>(light) != nullptr) {
+            light->_appendData(directLightCount++);
+        } else if (dynamic_cast<PointLight*>(light) != nullptr) {
+            light->_appendData(pointLightCount++);
+        } else if (dynamic_cast<SpotLight*>(light) != nullptr) {
+            light->_appendData(spotLightCount++);
+        }
+    }
+    
+    if (directLightCount) {
+        DirectLight::_updateShaderData(shaderData);
+        shaderData.enableMacro(DIRECT_LIGHT_COUNT, std::make_pair(directLightCount, MTLDataTypeInt));
+    } else {
+        shaderData.disableMacro(DIRECT_LIGHT_COUNT);
+    }
+    
+    if (pointLightCount) {
+        PointLight::_updateShaderData(shaderData);
+        shaderData.enableMacro(POINT_LIGHT_COUNT, std::make_pair(pointLightCount, MTLDataTypeInt));
+    } else {
+        shaderData.disableMacro(POINT_LIGHT_COUNT);
+    }
+    
+    if (spotLightCount) {
+        SpotLight::_updateShaderData(shaderData);
+        shaderData.enableMacro(SPOT_LIGHT_COUNT, std::make_pair(spotLightCount, MTLDataTypeInt));
+    } else {
+        shaderData.disableMacro(SPOT_LIGHT_COUNT);
+    }
 }
 
 }

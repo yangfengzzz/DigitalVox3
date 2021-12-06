@@ -29,6 +29,8 @@ public:
      */
     math::Matrix inverseViewMatrix();
     
+    virtual void _appendData(size_t lightIndex) = 0;
+    
 protected:
     /**
      * Each type of light source is at most 10, beyond which it will not take effect.
