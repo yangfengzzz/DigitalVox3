@@ -144,6 +144,7 @@ void Scene::_updateShaderData() {
     ShaderMacroCollection::unionCollection(engine()->_macroCollection,
                                            shaderData._macroCollection,
                                            _globalShaderMacro);
+    light_manager._updateShaderData(shaderData);
 }
 
 void Scene::_removeEntity(EntityPtr entity) {

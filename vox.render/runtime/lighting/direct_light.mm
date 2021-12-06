@@ -13,6 +13,9 @@ namespace vox {
 ShaderProperty DirectLight::_colorProperty = Shader::createProperty("u_directLightColor", ShaderDataGroup::Scene);
 ShaderProperty DirectLight::_directionProperty = Shader::createProperty("u_directLightDirection", ShaderDataGroup::Scene);
 
+std::array<math::Color, Light::_maxLight> DirectLight::_combinedColor = {};
+std::array<math::Float3, Light::_maxLight> DirectLight::_combinedDirection = {};
+
 DirectLight::DirectLight(Entity* entity):
 Light(entity) {}
 

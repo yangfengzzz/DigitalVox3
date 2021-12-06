@@ -14,6 +14,10 @@ ShaderProperty PointLight::_colorProperty = Shader::createProperty("u_pointLight
 ShaderProperty PointLight::_positionProperty = Shader::createProperty("u_pointLightPosition", ShaderDataGroup::Scene);
 ShaderProperty PointLight::_distanceProperty = Shader::createProperty("u_pointLightDistance", ShaderDataGroup::Scene);
 
+std::array<math::Color, Light::_maxLight> PointLight::_combinedColor = {};
+std::array<math::Float3, Light::_maxLight> PointLight::_combinedPosition = {};
+std::array<float, Light::_maxLight> PointLight::_combinedDistance = {};
+
 PointLight::PointLight(Entity* entity):
 Light(entity) {}
 

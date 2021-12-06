@@ -17,6 +17,13 @@ ShaderProperty SpotLight::_distanceProperty = Shader::createProperty("u_spotLigh
 ShaderProperty SpotLight::_angleCosProperty = Shader::createProperty("u_spotLightAngleCos", ShaderDataGroup::Scene);
 ShaderProperty SpotLight::_penumbraCosProperty = Shader::createProperty("u_spotLightPenumbraCos", ShaderDataGroup::Scene);
 
+std::array<math::Color, Light::_maxLight> SpotLight::_combinedColor = {};
+std::array<math::Float3, Light::_maxLight> SpotLight::_combinedPosition = {};
+std::array<math::Float3, Light::_maxLight> SpotLight::_combinedDirection = {};
+std::array<float, Light::_maxLight> SpotLight::_combinedDistance = {};
+std::array<float, Light::_maxLight> SpotLight::_combinedAngleCos = {};
+std::array<float, Light::_maxLight> SpotLight::_combinedPenumbraCos = {};
+
 SpotLight::SpotLight(Entity* entity):
 Light(entity) {}
 
