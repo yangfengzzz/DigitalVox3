@@ -29,6 +29,8 @@ public:
     math::Float2 position;
     
 private:
+    friend class PointerManager;
+    
     size_t _uniqueID;
     bool _needUpdate = true;
     

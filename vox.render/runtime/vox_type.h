@@ -11,6 +11,7 @@
 #include <memory>
 
 namespace vox {
+class Canvas;
 class Engine;
 class Scene;
 using ScenePtr = std::shared_ptr<Scene>;
