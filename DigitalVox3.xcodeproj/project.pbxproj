@@ -99,6 +99,8 @@
 		0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A29927590B86009AD4EA /* box_collider_shape.h */; };
 		0434A29E27590D71009AD4EA /* collider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A29C27590D71009AD4EA /* collider.mm */; };
 		0434A29F27590D71009AD4EA /* collider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A29D27590D71009AD4EA /* collider.h */; };
+		0434A2A3275E3F91009AD4EA /* spherical_harmonics3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2A1275E3F91009AD4EA /* spherical_harmonics3.cpp */; };
+		0434A2A4275E3F91009AD4EA /* spherical_harmonics3.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2A2275E3F91009AD4EA /* spherical_harmonics3.h */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -470,6 +472,8 @@
 		0434A29927590B86009AD4EA /* box_collider_shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = box_collider_shape.h; sourceTree = "<group>"; };
 		0434A29C27590D71009AD4EA /* collider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = collider.mm; sourceTree = "<group>"; };
 		0434A29D27590D71009AD4EA /* collider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collider.h; sourceTree = "<group>"; };
+		0434A2A1275E3F91009AD4EA /* spherical_harmonics3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = spherical_harmonics3.cpp; sourceTree = "<group>"; };
+		0434A2A2275E3F91009AD4EA /* spherical_harmonics3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spherical_harmonics3.h; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -1109,6 +1113,8 @@
 				04160FC4274F6124006CD384 /* bounding_frustum.cpp */,
 				04160FC9274F6374006CD384 /* collision_util.h */,
 				04160FC8274F6374006CD384 /* collision_util.cpp */,
+				0434A2A2275E3F91009AD4EA /* spherical_harmonics3.h */,
+				0434A2A1275E3F91009AD4EA /* spherical_harmonics3.cpp */,
 			);
 			path = maths;
 			sourceTree = "<group>";
@@ -1730,6 +1736,7 @@
 				04CE39B5275508D900204B8E /* pbr_base_material.h in Headers */,
 				04CE39B12755052E00204B8E /* unlit_material.h in Headers */,
 				04CE395D27525E2500204B8E /* render_context.h in Headers */,
+				0434A2A4275E3F91009AD4EA /* spherical_harmonics3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
 				0434A29F27590D71009AD4EA /* collider.h in Headers */,
@@ -1925,6 +1932,7 @@
 				04CE37CE274D167E00204B8E /* animation_utils.cc in Sources */,
 				04CE37D0274D167E00204B8E /* local_to_model_job.cc in Sources */,
 				04CE39352751CE9D00204B8E /* depth_state.mm in Sources */,
+				0434A2A3275E3F91009AD4EA /* spherical_harmonics3.cpp in Sources */,
 				04CE37D2274D167F00204B8E /* sampling_job.cc in Sources */,
 				04CE395C27525E2500204B8E /* render_context.mm in Sources */,
 				04CE37D4274D167F00204B8E /* blending_job.cc in Sources */,
