@@ -8,6 +8,7 @@
 #ifndef orbit_control_hpp
 #define orbit_control_hpp
 
+#include "../canvas.h"
 #include "../script.h"
 #include "maths/vec_float.h"
 #include "spherical.h"
@@ -327,6 +328,12 @@ private:
     math::Float2 _zoomStart;
     math::Float2 _zoomEnd;
     math::Float2 _zoomDelta;
+    
+    ssize_t cursorCallbackIndex = -1;
+    Canvas::CursorPosFunc cursorPosCallback;
+    Canvas::ScrollFunc scrollCallback;
+    Canvas::KeyFunc keyCallback;
+    Canvas::MouseButtonFunc mouseButtonCallback;
 };
 
 }

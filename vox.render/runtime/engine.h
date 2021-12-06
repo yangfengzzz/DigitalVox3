@@ -26,12 +26,12 @@ public:
     MetalRenderer _hardwareRenderer;
     RenderContext _renderContext = RenderContext();
     
-    Engine(Canvas canvas);
+    Engine(Canvas* canvas);
     
     /**
      * The canvas to use for rendering.
      */
-    Canvas canvas() {
+    Canvas* canvas() {
         return _canvas;
     }
     
@@ -101,7 +101,7 @@ public:
 protected:
     void _render(ScenePtr scene, float deltaTime);
     
-    Canvas _canvas;
+    Canvas* _canvas;
     
 private:
     friend class Scene;

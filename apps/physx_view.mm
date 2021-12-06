@@ -23,8 +23,8 @@
 using namespace vox;
 
 int main(int, char**) {
-    auto canvas = Canvas(1280, 720, "vox.render");
-    auto engine = Engine(canvas);
+    auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
+    auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
     

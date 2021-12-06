@@ -21,7 +21,7 @@ class MetalRenderer {
 public:
     const int maxAnisotropy = 8;
     
-    Canvas canvas;
+    Canvas* canvas;
     ResourceCache resouceCache;
     id <MTLDevice> device;
     id <MTLCommandQueue> commandQueue;
@@ -35,7 +35,7 @@ public:
     MTLPixelFormat colorPixelFormat;
     id <MTLSamplerState> samplerState;
     
-    explicit MetalRenderer(Canvas canvas);
+    explicit MetalRenderer(Canvas* canvas);
     
     id <MTLSamplerState> buildSamplerState();
     

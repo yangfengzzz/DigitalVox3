@@ -12,7 +12,7 @@
 #include "shader/shader_pool.h"
 
 namespace vox {
-Engine::Engine(Canvas canvas):_canvas(canvas), _hardwareRenderer(canvas) {
+Engine::Engine(Canvas* canvas):_canvas(canvas), _hardwareRenderer(canvas) {
     ShaderPool::initialization();
     
     _sceneManager.setActiveScene(std::make_shared<Scene>(this, "DefaultScene"));
@@ -82,7 +82,7 @@ void Engine::resume() {
     _isPaused = false;
     timer().reset();
     
-    while (!_canvas.shouldClose()) {
+    while (!_canvas->shouldClose()) {
         update();
     }
 }

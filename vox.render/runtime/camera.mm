@@ -58,7 +58,7 @@ void Camera::setFieldOfView(float value) {
 float Camera::aspectRatio() {
     const auto& canvas = _entity->engine()->canvas();
     if (_customAspectRatio == std::nullopt) {
-        return (canvas.width() * _viewport.z) / (canvas.height() * _viewport.w);
+        return (canvas->width() * _viewport.z) / (canvas->height() * _viewport.w);
     } else {
         return _customAspectRatio.value();
     }
@@ -114,13 +114,13 @@ void Camera::setProjectionMatrix(const Matrix& value) {
 Matrix Camera::projectionMatrix() {
     const auto& canvas = _entity->engine()->canvas();
     if ((!_isProjectionDirty || _isProjMatSetting) &&
-        _lastAspectSize.x == canvas.width() &&
-        _lastAspectSize.y == canvas.height()) {
+        _lastAspectSize.x == canvas->width() &&
+        _lastAspectSize.y == canvas->height()) {
         return _projectionMatrix;
     }
     _isProjectionDirty = false;
-    _lastAspectSize.x = canvas.width();
-    _lastAspectSize.y = canvas.height();
+    _lastAspectSize.x = canvas->width();
+    _lastAspectSize.y = canvas->height();
     if (!_isOrthographic) {
         _projectionMatrix = Matrix::perspective(degreeToRadian(_fieldOfView),
                                                 aspectRatio(),
@@ -195,36 +195,36 @@ Ray Camera::viewportPointToRay(const Float2& point) {
 Float2 Camera::screenToViewportPoint(const Float2& point) {
     const auto& canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
-    return Float2((point.x / canvas.width() - viewport.x) / viewport.z,
-                  (point.y / canvas.height() - viewport.y) / viewport.w);
+    return Float2((point.x / canvas->width() - viewport.x) / viewport.z,
+                  (point.y / canvas->height() - viewport.y) / viewport.w);
 }
 
 Float3 Camera::screenToViewportPoint(const Float3& point) {
     const auto& canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
-    return Float3((point.x / canvas.width() - viewport.x) / viewport.z,
-                  (point.y / canvas.height() - viewport.y) / viewport.w, 0);
+    return Float3((point.x / canvas->width() - viewport.x) / viewport.z,
+                  (point.y / canvas->height() - viewport.y) / viewport.w, 0);
 }
 
 Float2 Camera::viewportToScreenPoint(const Float2& point) {
     const auto& canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
-    return Float2((viewport.x + point.x * viewport.z) * canvas.width(),
-                  (viewport.y + point.y * viewport.w) * canvas.height());
+    return Float2((viewport.x + point.x * viewport.z) * canvas->width(),
+                  (viewport.y + point.y * viewport.w) * canvas->height());
 }
 
 Float3 Camera::viewportToScreenPoint(const Float3& point) {
     const auto& canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
-    return Float3((viewport.x + point.x * viewport.z) * canvas.width(),
-                  (viewport.y + point.y * viewport.w) * canvas.height(), 0);
+    return Float3((viewport.x + point.x * viewport.z) * canvas->width(),
+                  (viewport.y + point.y * viewport.w) * canvas->height(), 0);
 }
 
 Float4 Camera::viewportToScreenPoint(const Float4& point) {
     const auto& canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
-    return Float4((viewport.x + point.x * viewport.z) * canvas.width(),
-                  (viewport.y + point.y * viewport.w) * canvas.height(), 0, 0);
+    return Float4((viewport.x + point.x * viewport.z) * canvas->width(),
+                  (viewport.y + point.y * viewport.w) * canvas->height(), 0, 0);
 }
 
 Float4 Camera::worldToScreenPoint(const Float3& point) {

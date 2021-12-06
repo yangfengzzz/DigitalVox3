@@ -35,25 +35,50 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 OrbitControl::OrbitControl(Entity* entity):
 Script(entity),
 camera(entity) {
-    window = engine()->canvas().handle();
+    window = engine()->canvas()->handle();
     
-    glfwSetWindowUserPointer(window, this);
-    glfwSetMouseButtonCallback(window, mouseButtonCallback);
-    glfwSetScrollCallback(window, scrollCallback);
-    glfwSetKeyCallback(window, keyCallback);
+    cursorPosCallback = [&](GLFWwindow* window, double xpos, double ypos) {
+        onMouseMove(xpos, ypos);
+    };
+    
+    scrollCallback = [&](GLFWwindow* window, double xoffset, double yoffset) {
+        onMouseWheel(xoffset, yoffset);
+    };
+
+    keyCallback = [&](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        onKeyDown(key);
+    };
+    
+    mouseButtonCallback = [&](GLFWwindow* window, int button, int action, int mods){
+        if (action == GLFW_PRESS) {
+            onMouseDown(button);
+            Canvas::cursor_callbacks.push_back(cursorPosCallback);
+            cursorCallbackIndex = Canvas::cursor_callbacks.size() - 1;
+        } else {
+            onMouseUp();
+            if (cursorCallbackIndex != -1) {
+                Canvas::cursor_callbacks.erase(Canvas::cursor_callbacks.begin() + cursorCallbackIndex);
+                cursorCallbackIndex = -1;
+            }
+        }
+    };
+    
+    Canvas::mouse_button_callbacks.push_back(mouseButtonCallback);
+    Canvas::key_callbacks.push_back(keyCallback);
+    Canvas::scroll_callbacks.push_back(scrollCallback);
 }
 
 void OrbitControl::onDisable() {
-    glfwSetCursorPosCallback(window, nullptr);
+//    glfwSetCursorPosCallback(window, nullptr);
 }
 
 void OrbitControl::onDestroy() {
-    glfwSetWindowUserPointer(window, nullptr);
-    glfwSetMouseButtonCallback(window, nullptr);
-    glfwSetScrollCallback(window, nullptr);
-    glfwSetKeyCallback(window, nullptr);
-    
-    glfwSetCursorPosCallback(window, nullptr);
+//    glfwSetWindowUserPointer(window, nullptr);
+//    glfwSetMouseButtonCallback(window, nullptr);
+//    glfwSetScrollCallback(window, nullptr);
+//    glfwSetKeyCallback(window, nullptr);
+//
+//    glfwSetCursorPosCallback(window, nullptr);
 }
 
 void OrbitControl::onUpdate(float dtime) {

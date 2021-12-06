@@ -14,6 +14,34 @@ static void glfw_error_callback(int error, const char* description)
 }
 
 namespace vox {
+std::vector<Canvas::CursorPosFunc> Canvas::cursor_callbacks = {};
+void Canvas::cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
+    for (auto& callback : cursor_callbacks) {
+        callback(window, xpos, ypos);
+    }
+}
+
+std::vector<Canvas::MouseButtonFunc> Canvas::mouse_button_callbacks = {};
+void Canvas::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+    for (auto& callback : mouse_button_callbacks) {
+        callback(window, button, action, mods);
+    }
+}
+
+std::vector<Canvas::ScrollFunc> Canvas::scroll_callbacks = {};
+void Canvas::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+    for (auto& callback : scroll_callbacks) {
+        callback(window, xoffset, yoffset);
+    }
+}
+
+std::vector<Canvas::KeyFunc> Canvas::key_callbacks = {};
+void Canvas::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    for (auto& callback : key_callbacks) {
+        callback(window, key, scancode, action, mods);
+    }
+}
+
 Canvas::Canvas(int width, int height, const char* title) {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
@@ -33,10 +61,24 @@ Canvas::Canvas(int width, int height, const char* title) {
     // Setup style
     ImGui::StyleColorsDark();
     
+    glfwSetCursorPosCallback(window, cursorPosCallback);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetScrollCallback(window, scrollCallback);
+    glfwSetKeyCallback(window, keyCallback);
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-
+    
     _width = width;
     _height = height;
+}
+
+Canvas::~Canvas() {
+    cursor_callbacks.clear();
+    mouse_button_callbacks.clear();
+    scroll_callbacks.clear();
+    key_callbacks.clear();
+    
+//    glfwDestroyWindow(window);
+//    glfwTerminate();
 }
 
 int Canvas::width() const {

@@ -13,7 +13,7 @@
 #include "../../gui/imgui_impl_metal.h"
 
 namespace vox {
-MetalRenderer::MetalRenderer(Canvas canvas):
+MetalRenderer::MetalRenderer(Canvas* canvas):
 canvas(canvas),
 resouceCache(this) {
     device = MTLCreateSystemDefaultDevice();
@@ -28,10 +28,10 @@ resouceCache(this) {
     ImGui_ImplMetal_Init(device);
     
     int width, height;
-    glfwGetFramebufferSize(canvas.handle(), &width, &height);
+    glfwGetFramebufferSize(canvas->handle(), &width, &height);
     depthTexture = buildTexture(MTLPixelFormatDepth32Float, width, height);
 
-    NSWindow *nswin = glfwGetCocoaWindow(canvas.handle());
+    NSWindow *nswin = glfwGetCocoaWindow(canvas->handle());
     layer = [CAMetalLayer layer];
     layer.device = device;
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
@@ -96,7 +96,7 @@ void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camer
     } else {
         const auto &viewport = camera->viewport();
         int width, height;
-        glfwGetFramebufferSize(canvas.handle(), &width, &height);
+        glfwGetFramebufferSize(canvas->handle(), &width, &height);
         
         [renderEncoder setViewport:MTLViewport{
             viewport.x * width,

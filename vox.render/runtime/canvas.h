@@ -12,6 +12,7 @@
 #define GLFW_EXPOSE_NATIVE_COCOA
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
+#include <vector>
 #include "maths/vec_float.h"
 
 namespace vox {
@@ -23,6 +24,8 @@ using namespace math;
 class Canvas  {
 public:
     Canvas(int width, int height, const char* title);
+    
+    ~Canvas();
     
     int width() const;
 
@@ -59,7 +62,22 @@ public:
 
     float getContentScaleFactor() const;
     
+public:
+    using CursorPosFunc = std::function<void(GLFWwindow* window, double xpos, double ypos)>;
+    static std::vector<CursorPosFunc> cursor_callbacks;
+    using MouseButtonFunc = std::function<void(GLFWwindow* window, int button, int action, int mods)>;
+    static std::vector<MouseButtonFunc> mouse_button_callbacks;
+    using ScrollFunc = std::function<void(GLFWwindow* window, double xoffset, double yoffset)>;
+    static std::vector<ScrollFunc> scroll_callbacks;
+    using KeyFunc = std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>;
+    static std::vector<KeyFunc> key_callbacks;
+
 private:
+    static void cursorPosCallback(GLFWwindow* window, double xpos, double ypos);
+    static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+    static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+    static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+        
     GLFWwindow* window;
     
     int _width;
