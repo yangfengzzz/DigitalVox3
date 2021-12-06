@@ -113,6 +113,8 @@
 		04A79AD2275E0DC500182CCB /* pointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD0275E0DC500182CCB /* pointer.h */; };
 		04A79AD6275E0F8D00182CCB /* pointer_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AD4275E0F8D00182CCB /* pointer_manager.mm */; };
 		04A79AD7275E0F8D00182CCB /* pointer_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD5275E0F8D00182CCB /* pointer_manager.h */; };
+		04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AD8275E2C4F00182CCB /* InputManager.mm */; };
+		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -483,6 +485,8 @@
 		04A79AD3275E0DFE00182CCB /* pointer_phase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer_phase.h; sourceTree = "<group>"; };
 		04A79AD4275E0F8D00182CCB /* pointer_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pointer_manager.mm; sourceTree = "<group>"; };
 		04A79AD5275E0F8D00182CCB /* pointer_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer_manager.h; sourceTree = "<group>"; };
+		04A79AD8275E2C4F00182CCB /* InputManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = InputManager.mm; sourceTree = "<group>"; };
+		04A79AD9275E2C4F00182CCB /* InputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -980,6 +984,8 @@
 			children = (
 				04A79ACD275E0D9900182CCB /* enums */,
 				04A79ACE275E0DAD00182CCB /* pointer */,
+				04A79AD9275E2C4F00182CCB /* InputManager.h */,
+				04A79AD8275E2C4F00182CCB /* InputManager.mm */,
 			);
 			path = input;
 			sourceTree = "<group>";
@@ -1698,6 +1704,7 @@
 				04CE397D2753491200204B8E /* buffer_mesh.h in Headers */,
 				04CE394B2751E3E600204B8E /* shader.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
+				04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */,
 				04CE3958275259FA00204B8E /* renderer.h in Headers */,
 				041610442759CC06006CD384 /* dynamic_collider.h in Headers */,
 				0416107A275A5DB1006CD384 /* capsule_character_controller.h in Headers */,
@@ -2004,6 +2011,7 @@
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04161058275A07CE006CD384 /* fixed_joint.cpp in Sources */,
 				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
+				04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */,
 				04CE396027525EC700204B8E /* render_element.mm in Sources */,
 				04CE38FF27519FB500204B8E /* metal_renderer.mm in Sources */,
 				04CE390C2751AB6B00204B8E /* mesh_buffer.mm in Sources */,

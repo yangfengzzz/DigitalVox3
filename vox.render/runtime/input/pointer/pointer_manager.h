@@ -57,6 +57,8 @@ private:
     
     
 private:
+    friend class InputManager;
+    
     enum PointerKeyEvent {
         Down,
         Up,
