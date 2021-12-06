@@ -33,7 +33,7 @@ protected:
     /**
      * Each type of light source is at most 10, beyond which it will not take effect.
      * */
-    static size_t _maxLight;
+    static constexpr size_t _maxLight = 10;
     
 private:
     /**

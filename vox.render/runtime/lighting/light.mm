@@ -9,8 +9,6 @@
 #include "../scene.h"
 
 namespace vox {
-size_t Light::_maxLight = 10;
-
 Light::Light(Entity* entity):
 Component(entity) {}
 
