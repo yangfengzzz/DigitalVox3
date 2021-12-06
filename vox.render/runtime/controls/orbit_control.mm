@@ -10,28 +10,6 @@
 
 namespace vox {
 namespace control {
-void cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
-    static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onMouseMove(xpos, ypos);
-}
-
-void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
-    if (action == GLFW_PRESS) {
-        static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onMouseDown(button);
-        glfwSetCursorPosCallback(window, cursorPosCallback);
-    } else {
-        static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onMouseUp();
-        glfwSetCursorPosCallback(window, nullptr);
-    }
-}
-
-void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
-    static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onMouseWheel(xoffset, yoffset);
-}
-
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    static_cast<OrbitControl*>(glfwGetWindowUserPointer(window))->onKeyDown(key);
-}
-
 OrbitControl::OrbitControl(Entity* entity):
 Script(entity),
 camera(entity) {
