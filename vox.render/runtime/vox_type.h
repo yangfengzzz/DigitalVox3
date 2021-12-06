@@ -27,6 +27,7 @@ class Camera;
 class Renderer;
 class Script;
 class Animator;
+class Light;
 
 class ShaderProgram;
 class RenderPipelineState;
