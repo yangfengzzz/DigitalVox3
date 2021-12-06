@@ -70,11 +70,11 @@ void BaseMaterial::setRenderFace(const RenderFace& newValue) {
     }
 }
 
-const BlendMode& BaseMaterial::blendMode() {
+const BlendMode::Enum& BaseMaterial::blendMode() {
     return _blendMode;
 }
 
-void BaseMaterial::setBlendMode(const BlendMode& newValue) {
+void BaseMaterial::setBlendMode(const BlendMode::Enum& newValue) {
     _blendMode = newValue;
     
     auto& target = renderState.blendState.targetBlendState;

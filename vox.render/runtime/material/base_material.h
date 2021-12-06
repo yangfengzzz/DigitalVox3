@@ -35,8 +35,8 @@ public:
     /// Alpha blend mode.
     /// - Remark:
     /// Only take effect when `isTransparent` is `true`.
-    const BlendMode& blendMode();
-    void setBlendMode(const BlendMode& newValue);
+    const BlendMode::Enum& blendMode();
+    void setBlendMode(const BlendMode::Enum& newValue);
     
     /// Create a BaseMaterial instance.
     /// - Parameters:
@@ -49,7 +49,7 @@ private:
     
     RenderFace _renderFace = RenderFace::Back;
     bool _isTransparent = false;
-    BlendMode _blendMode = BlendMode::Normal;
+    BlendMode::Enum _blendMode = BlendMode::Enum::Normal;
 };
 
 }

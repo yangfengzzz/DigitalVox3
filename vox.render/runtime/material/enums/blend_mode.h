@@ -9,11 +9,14 @@
 #define blend_mode_h
 
 /// Alpha blend mode.
-enum BlendMode {
-    /// SRC ALPHA * SRC + (1 - SRC ALPHA) * DEST
-    Normal,
-    /// SRC ALPHA * SRC + ONE * DEST
-    Additive
+struct BlendMode {
+    enum Enum {
+        /// SRC ALPHA * SRC + (1 - SRC ALPHA) * DEST
+        Normal,
+        /// SRC ALPHA * SRC + ONE * DEST
+        Additive
+    };
 };
+
 
 #endif /* blend_mode_h */

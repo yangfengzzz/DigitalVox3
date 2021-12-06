@@ -14,6 +14,7 @@
 #include "shader/shader_data.h"
 #include "background.h"
 #include "lighting/light_manager.h"
+#include "lighting/ambient_light.h"
 
 namespace vox {
 class Camera;
@@ -41,6 +42,11 @@ public:
      * @param name - Name
      */
     Scene(Engine* engine, std::string name = "");
+    
+    /**
+     * Ambient light.
+     */
+    AmbientLight& ambientLight();
     
     /**
      * Count of root entities.
@@ -117,6 +123,7 @@ private:
     
     bool _destroyed = false;
     std::vector<EntityPtr> _rootEntities;
+    AmbientLight _ambientLight;
 };
 
 }

@@ -11,7 +11,13 @@
 #include "log.h"
 
 namespace vox {
-Scene::Scene(Engine* engine, std::string name):EngineObject(engine), name(name) {
+Scene::Scene(Engine* engine, std::string name):
+EngineObject(engine),
+name(name),
+_ambientLight(this) {}
+
+AmbientLight& Scene::ambientLight() {
+    return _ambientLight;
 }
 
 size_t Scene::rootEntitiesCount() {
