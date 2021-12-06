@@ -12,6 +12,7 @@
 #include "../shader/shader_property.h"
 #include "maths/spherical_harmonics3.h"
 #include <Metal/Metal.h>
+#include "../shaderlib/shader_common.h"
 
 namespace vox {
 /**
@@ -36,6 +37,8 @@ struct DiffuseMode {
  */
 class AmbientLight {
 public:
+    AmbientLight(Scene* value);
+    
     /**
      * Whether to decode from specularTexture with RGBM format.
      */
@@ -88,24 +91,20 @@ public:
 
     void setSpecularIntensity(float value);
     
-private:
-    void _setScene(Scene* value);
-    
+private:    
     std::array<float, 27> _preComputeSH(const math::SphericalHarmonics3& sh);
     
     static ShaderProperty _envMapProperty;
     static ShaderProperty _diffuseSHProperty;
     static ShaderProperty _specularTextureProperty;
     
-    math::SphericalHarmonics3 _diffuseSphericalHarmonics;
-    math::Color _diffuseSolidColor = math::Color(0.212, 0.227, 0.259);
-    float _diffuseIntensity = 1.0;
-    id<MTLTexture> _specularReflection;
-    float _specularIntensity = 1.0;
-    DiffuseMode::Enum _diffuseMode = DiffuseMode::Enum::SolidColor;
-    std::array<float, 27> _shArray;
     Scene* _scene;
     bool _specularTextureDecodeRGBM = false;
+    DiffuseMode::Enum _diffuseMode = DiffuseMode::Enum::SolidColor;
+    math::SphericalHarmonics3 _diffuseSphericalHarmonics;
+    std::array<float, 27> _shArray;
+    id<MTLTexture> _specularReflection;
+    EnvMapLight _envMapLight;
 };
 
 }

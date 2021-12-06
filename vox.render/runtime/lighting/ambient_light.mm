@@ -14,6 +14,16 @@ ShaderProperty AmbientLight::_envMapProperty = Shader::createProperty("u_envMapL
 ShaderProperty AmbientLight::_diffuseSHProperty = Shader::createProperty("u_env_sh", ShaderDataGroup::Scene);
 ShaderProperty AmbientLight::_specularTextureProperty  = Shader::createProperty("u_env_specularTexture", ShaderDataGroup::Scene);
 
+AmbientLight::AmbientLight(Scene* value) {
+    _scene = value;
+    if (!value) return;
+    
+    _envMapLight.diffuse = simd_make_float3(0.212, 0.227, 0.259);
+    _envMapLight.diffuseIntensity = 1.0;
+    _envMapLight.specularIntensity = 1.0;
+    _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+}
+
 bool AmbientLight::specularTextureDecodeRGBM() {
     return _specularTextureDecodeRGBM;
 }
@@ -38,11 +48,11 @@ void AmbientLight::setDiffuseMode(DiffuseMode::Enum value) {
 }
 
 math::Color AmbientLight::diffuseSolidColor() {
-    return _diffuseSolidColor;
+    return math::Color(_envMapLight.diffuse.x, _envMapLight.diffuse.y, _envMapLight.diffuse.z);
 }
 
 void AmbientLight::setDiffuseSolidColor(const math::Color& value) {
-    
+    _envMapLight.diffuse = simd_make_float3(value.r, value.g, value.b);
 }
 
 const math::SphericalHarmonics3& AmbientLight::diffuseSphericalHarmonics() {
@@ -50,15 +60,21 @@ const math::SphericalHarmonics3& AmbientLight::diffuseSphericalHarmonics() {
 }
 
 void AmbientLight::setDiffuseSphericalHarmonics(const math::SphericalHarmonics3& value) {
+    _diffuseSphericalHarmonics = value;
+    if (!_scene) return;
     
+    _scene->shaderData.setData(AmbientLight::_diffuseSHProperty, _preComputeSH(value));
 }
 
 float AmbientLight::diffuseIntensity() {
-    return _diffuseIntensity;
+    return _envMapLight.diffuseIntensity;
 }
 
 void AmbientLight::setDiffuseIntensity(float value) {
-    
+    _envMapLight.diffuseIntensity = value;
+    if (!_scene) return;
+
+    _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
 }
 
 id<MTLTexture> AmbientLight::specularTexture() {
@@ -66,19 +82,28 @@ id<MTLTexture> AmbientLight::specularTexture() {
 }
 
 void AmbientLight::setSpecularTexture(id<MTLTexture> value) {
-    
+    _specularReflection = value;
+    if (!_scene) return;
+
+    auto& shaderData = _scene->shaderData;
+
+    if (value) {
+      shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+      shaderData.enableMacro(HAS_SPECULAR_ENV);
+    } else {
+      shaderData.disableMacro(HAS_SPECULAR_ENV);
+    }
 }
 
 float AmbientLight::specularIntensity() {
-    return _specularIntensity;
+    return _envMapLight.specularIntensity;
 }
 
 void AmbientLight::setSpecularIntensity(float value) {
-    
-}
+    _envMapLight.specularIntensity = value;
+    if (!_scene) return;
 
-void AmbientLight::_setScene(Scene* value) {
-    
+    _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
 }
 
 std::array<float, 27> AmbientLight::_preComputeSH(const math::SphericalHarmonics3& sh) {
