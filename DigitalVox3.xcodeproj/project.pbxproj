@@ -109,6 +109,8 @@
 		04A79AC7275DEA4E00182CCB /* spot_light.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AC5275DEA4E00182CCB /* spot_light.h */; };
 		04A79ACA275DED9B00182CCB /* direct_light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AC8275DED9B00182CCB /* direct_light.mm */; };
 		04A79ACB275DED9B00182CCB /* direct_light.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AC9275DED9B00182CCB /* direct_light.h */; };
+		04A79AD1275E0DC500182CCB /* pointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ACF275E0DC500182CCB /* pointer.cpp */; };
+		04A79AD2275E0DC500182CCB /* pointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD0275E0DC500182CCB /* pointer.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -474,6 +476,9 @@
 		04A79AC5275DEA4E00182CCB /* spot_light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spot_light.h; sourceTree = "<group>"; };
 		04A79AC8275DED9B00182CCB /* direct_light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = direct_light.mm; sourceTree = "<group>"; };
 		04A79AC9275DED9B00182CCB /* direct_light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = direct_light.h; sourceTree = "<group>"; };
+		04A79ACF275E0DC500182CCB /* pointer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pointer.cpp; sourceTree = "<group>"; };
+		04A79AD0275E0DC500182CCB /* pointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer.h; sourceTree = "<group>"; };
+		04A79AD3275E0DFE00182CCB /* pointer_phase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer_phase.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -966,6 +971,32 @@
 			path = lighting;
 			sourceTree = "<group>";
 		};
+		04A79ACC275E0D8000182CCB /* input */ = {
+			isa = PBXGroup;
+			children = (
+				04A79ACD275E0D9900182CCB /* enums */,
+				04A79ACE275E0DAD00182CCB /* pointer */,
+			);
+			path = input;
+			sourceTree = "<group>";
+		};
+		04A79ACD275E0D9900182CCB /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				04A79AD3275E0DFE00182CCB /* pointer_phase.h */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
+		04A79ACE275E0DAD00182CCB /* pointer */ = {
+			isa = PBXGroup;
+			children = (
+				04A79AD0275E0DC500182CCB /* pointer.h */,
+				04A79ACF275E0DC500182CCB /* pointer.cpp */,
+			);
+			path = pointer;
+			sourceTree = "<group>";
+		};
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
@@ -1188,6 +1219,7 @@
 				04A79AB7275DE08800182CCB /* lighting */,
 				04CE395927525E0700204B8E /* render_pipeline */,
 				041610162755DB5E006CD384 /* controls */,
+				04A79ACC275E0D8000182CCB /* input */,
 				04161027275868E2006CD384 /* physics */,
 				04CE38F92751992C00204B8E /* timer.h */,
 				04CE38F82751992C00204B8E /* timer.cpp */,
@@ -1625,6 +1657,7 @@
 			files = (
 				04CE38DC274E8C2D00204B8E /* plane.h in Headers */,
 				041610482759EC90006CD384 /* sphere_collider_shape.h in Headers */,
+				04A79AD2275E0DC500182CCB /* pointer.h in Headers */,
 				04CE393F2751D2ED00204B8E /* shader_macro_collection.h in Headers */,
 				04160FEE27509277006CD384 /* engine_object.h in Headers */,
 				04161059275A07CE006CD384 /* fixed_joint.h in Headers */,
@@ -1871,6 +1904,7 @@
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
 				04CE39992753A83C00204B8E /* BRDF.metal in Sources */,
 				04CE39B4275508D900204B8E /* pbr_base_material.mm in Sources */,
+				04A79AD1275E0DC500182CCB /* pointer.cpp in Sources */,
 				04CE3957275259FA00204B8E /* renderer.mm in Sources */,
 				04CE3968275268BB00204B8E /* render_pass.mm in Sources */,
 				04CE37CE274D167E00204B8E /* animation_utils.cc in Sources */,
