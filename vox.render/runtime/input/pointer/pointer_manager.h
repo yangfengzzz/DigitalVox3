@@ -70,7 +70,7 @@ private:
     Canvas* _canvas;
     std::vector<PointerEvent> _nativeEvents;
     std::array<Pointer, 11> _pointerPool{};
-    std::vector<size_t> _keyEventList;
+    std::vector<int> _keyEventList;
     size_t _keyEventCount;
     bool _needOverallPointers = false;
     math::Float2 _currentPosition;
