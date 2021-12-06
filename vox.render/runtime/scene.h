@@ -13,6 +13,7 @@
 #include "entity.h"
 #include "shader/shader_data.h"
 #include "background.h"
+#include "lighting/light_manager.h"
 
 namespace vox {
 class Camera;
@@ -30,6 +31,9 @@ public:
     
     /** Scene-related shader data. */
     ShaderData shaderData = ShaderData();
+    
+    /** Light Manager */
+    LightManager light_manager;
     
     /**
      * Create scene.
