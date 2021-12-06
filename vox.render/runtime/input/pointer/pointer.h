@@ -34,7 +34,7 @@ private:
     size_t _uniqueID;
     bool _needUpdate = true;
     
-    Pointer(size_t id);
+    Pointer(size_t id = -1);
 };
 
 }

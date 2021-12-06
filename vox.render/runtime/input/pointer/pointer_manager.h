@@ -11,6 +11,7 @@
 #include "pointer.h"
 #include "../../vox_type.h"
 #include <vector>
+#include <array>
 
 namespace vox {
 namespace input {
@@ -64,12 +65,11 @@ private:
     
     std::vector<Pointer> _pointers;
     bool _multiPointerEnabled = true;
-    bool _enablePhysics = false;
     
     Engine* _engine;
     Canvas* _canvas;
     std::vector<PointerEvent> _nativeEvents;
-    std::vector<Pointer> _pointerPool;
+    std::array<Pointer, 11> _pointerPool{};
     std::vector<size_t> _keyEventList;
     size_t _keyEventCount;
     bool _needOverallPointers = false;

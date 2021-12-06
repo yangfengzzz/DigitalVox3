@@ -6,10 +6,19 @@
 //
 
 #include "pointer_manager.h"
+#include "../../engine.h"
+#include "../../canvas.h"
 
 namespace vox {
 namespace input {
-PointerManager::PointerManager(Engine* engine) {}
+PointerManager::PointerManager(Engine* engine):
+_engine(engine),
+_canvas(engine->canvas()){
+    auto pointerEventCallback = [&](GLFWwindow* window, int button, int action, int mods) {
+        _nativeEvents.push_back(PointerEvent());
+    };
+    Canvas::mouse_button_callbacks.push_back(pointerEventCallback);
+}
 
 void PointerManager::_update() {
     
