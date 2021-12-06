@@ -64,21 +64,32 @@ camera(entity) {
     };
     
     Canvas::mouse_button_callbacks.push_back(mouseButtonCallback);
+    mouseCallbackIndex = Canvas::mouse_button_callbacks.size() - 1;
     Canvas::key_callbacks.push_back(keyCallback);
+    keyCallbackIndex = Canvas::key_callbacks.size() - 1;
     Canvas::scroll_callbacks.push_back(scrollCallback);
+    scrollCallbackIndex = Canvas::mouse_button_callbacks.size() - 1;
 }
 
 void OrbitControl::onDisable() {
-//    glfwSetCursorPosCallback(window, nullptr);
+    if (cursorCallbackIndex != -1) {
+        Canvas::cursor_callbacks.erase(Canvas::cursor_callbacks.begin() + cursorCallbackIndex);
+        cursorCallbackIndex = -1;
+    }
 }
 
 void OrbitControl::onDestroy() {
-//    glfwSetWindowUserPointer(window, nullptr);
-//    glfwSetMouseButtonCallback(window, nullptr);
-//    glfwSetScrollCallback(window, nullptr);
-//    glfwSetKeyCallback(window, nullptr);
-//
-//    glfwSetCursorPosCallback(window, nullptr);
+    Canvas::mouse_button_callbacks.erase(Canvas::mouse_button_callbacks.begin() + mouseCallbackIndex);
+    mouseCallbackIndex = -1;
+    Canvas::key_callbacks.erase(Canvas::key_callbacks.begin() + keyCallbackIndex);
+    keyCallbackIndex = -1;
+    Canvas::scroll_callbacks.erase(Canvas::scroll_callbacks.begin() + scrollCallbackIndex);
+    scrollCallbackIndex = -1;
+    
+    if (cursorCallbackIndex != -1) {
+        Canvas::cursor_callbacks.erase(Canvas::cursor_callbacks.begin() + cursorCallbackIndex);
+        cursorCallbackIndex = -1;
+    }
 }
 
 void OrbitControl::onUpdate(float dtime) {

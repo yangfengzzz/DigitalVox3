@@ -331,8 +331,11 @@ private:
     
     ssize_t cursorCallbackIndex = -1;
     Canvas::CursorPosFunc cursorPosCallback;
+    ssize_t scrollCallbackIndex = -1;
     Canvas::ScrollFunc scrollCallback;
+    ssize_t keyCallbackIndex = -1;
     Canvas::KeyFunc keyCallback;
+    ssize_t mouseCallbackIndex = -1;
     Canvas::MouseButtonFunc mouseButtonCallback;
 };
 
