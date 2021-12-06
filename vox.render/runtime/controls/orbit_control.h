@@ -190,34 +190,42 @@ public:
     void onTouchEnd();
     
 private:
-    enum STATE {
-        NONE = -1,
-        ROTATE = 0,
-        ZOOM = 1,
-        PAN = 2,
-        TOUCH_ROTATE = 3,
-        TOUCH_ZOOM = 4,
-        TOUCH_PAN = 5
+    struct STATE {
+        enum Enum {
+            NONE = -1,
+            ROTATE = 0,
+            ZOOM = 1,
+            PAN = 2,
+            TOUCH_ROTATE = 3,
+            TOUCH_ZOOM = 4,
+            TOUCH_PAN = 5
+        };
     };
     
-    enum Keys {
-        LEFT = 37,
-        UP = 38,
-        RIGHT = 39,
-        BOTTOM = 40
+    struct Keys {
+        enum Enum {
+            LEFT = 37,
+            UP = 38,
+            RIGHT = 39,
+            BOTTOM = 40
+        };
     };
     
     // Control keys.
-    enum MouseButtons {
-        MouseButtonORBIT = 0,
-        MouseButtonZOOM = 1,
-        MouseButtonPAN = 2
+    struct MouseButtons {
+        enum Enum {
+            ORBIT = 0,
+            ZOOM = 1,
+            PAN = 2
+        };
     };
     
-    enum TouchFingers {
-        TouchFingerORBIT = 1,
-        TouchFingerZOOM = 2,
-        TouchFingerPAN = 3
+    struct TouchFingers {
+        enum Enum {
+            ORBIT = 1,
+            ZOOM = 2,
+            PAN = 3
+        };
     };
     
     EntityPtr camera;
@@ -318,7 +326,7 @@ private:
     math::Float3 _panOffset;
     bool _isMouseUp = true;
     math::Float3 _vPan;
-    STATE _state = STATE::NONE;
+    STATE::Enum _state = STATE::Enum::NONE;
     math::Float2 _rotateStart;
     math::Float2 _rotateEnd;
     math::Float2 _rotateDelta;

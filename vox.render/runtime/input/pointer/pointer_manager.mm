@@ -77,7 +77,7 @@ ssize_t PointerManager::_getIndexByPointerID(size_t pointerId) {
     return -1;
 }
 
-void PointerManager::_addPointer(size_t pointerId, float x, float y, PointerPhase phase) {
+void PointerManager::_addPointer(size_t pointerId, float x, float y, PointerPhase::Enum phase) {
     size_t lastCount = _pointers.size();
     if (lastCount == 0 || _multiPointerEnabled) {
         // Get Pointer smallest index.
@@ -103,7 +103,7 @@ void PointerManager::_removePointer(size_t pointerIndex) {
     _pointers[pointerIndex].phase = PointerPhase::Leave;
 }
 
-void PointerManager::_updatePointer(size_t pointerId, float x, float y, PointerPhase phase) {
+void PointerManager::_updatePointer(size_t pointerId, float x, float y, PointerPhase::Enum phase) {
     auto& updatedPointer = _pointers[pointerId];
     updatedPointer.position = math::Float2(x, y);
     updatedPointer._needUpdate = true;

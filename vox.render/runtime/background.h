@@ -20,7 +20,7 @@ public:
     /// - Note: defaultValue `BackgroundMode.SolidColor`
     /// - Remark: If using `BackgroundMode.Sky` mode and material or mesh of the `sky` is not defined,
     /// it will downgrade to `BackgroundMode.SolidColor`.
-    BackgroundMode mode = BackgroundMode::SolidColor;
+    BackgroundMode::Enum mode = BackgroundMode::Enum::SolidColor;
 
     /// Background solid color.
     /// - Note: defaultValue ` Color(0.25, 0.25, 0.25, 1.0)`

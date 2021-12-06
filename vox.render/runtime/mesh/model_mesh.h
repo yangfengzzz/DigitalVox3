@@ -16,23 +16,25 @@
 namespace vox {
 using namespace math;
 
-enum ValueChanged {
-    Position = 0x1,
-    Normal = 0x2,
-    Color = 0x4,
-    Tangent = 0x8,
-    BoneWeight = 0x10,
-    BoneIndex = 0x20,
-    UV = 0x40,
-    UV1 = 0x80,
-    UV2 = 0x100,
-    UV3 = 0x200,
-    UV4 = 0x400,
-    UV5 = 0x800,
-    UV6 = 0x1000,
-    UV7 = 0x2000,
-    BlendShape = 0x4000,
-    All = 0xffff
+struct ValueChanged {
+    enum Enum {
+        Position = 0x1,
+        Normal = 0x2,
+        Color = 0x4,
+        Tangent = 0x8,
+        BoneWeight = 0x10,
+        BoneIndex = 0x20,
+        UV = 0x40,
+        UV1 = 0x80,
+        UV2 = 0x100,
+        UV3 = 0x200,
+        UV4 = 0x400,
+        UV5 = 0x800,
+        UV6 = 0x1000,
+        UV7 = 0x2000,
+        BlendShape = 0x4000,
+        All = 0xffff
+    };
 };
 
 class ModelMesh: public Mesh {

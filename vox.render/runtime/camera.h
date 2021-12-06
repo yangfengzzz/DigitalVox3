@@ -43,7 +43,7 @@ public:
      * Determining what to clear when rendering by a Camera.
      * @defaultValue `CameraClearFlags.DepthColor`
      */
-    CameraClearFlags clearFlags = CameraClearFlags::DepthColor;
+    CameraClearFlags::Enum clearFlags = CameraClearFlags::Enum::DepthColor;
     
     /**
      * Culling mask - which layers the camera renders.

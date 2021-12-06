@@ -50,11 +50,11 @@ void BaseMaterial::setAlphaCutoff(float newValue) {
     }
 }
 
-const RenderFace& BaseMaterial::renderFace() {
+const RenderFace::Enum& BaseMaterial::renderFace() {
     return _renderFace;
 }
 
-void BaseMaterial::setRenderFace(const RenderFace& newValue) {
+void BaseMaterial::setRenderFace(const RenderFace::Enum& newValue) {
     _renderFace = newValue;
     
     switch (newValue) {

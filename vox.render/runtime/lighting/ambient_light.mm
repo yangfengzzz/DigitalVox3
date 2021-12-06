@@ -10,9 +10,9 @@
 #include "../scene.h"
 
 namespace vox {
-ShaderProperty AmbientLight::_envMapProperty = Shader::createProperty("u_envMapLight", ShaderDataGroup::Scene);
-ShaderProperty AmbientLight::_diffuseSHProperty = Shader::createProperty("u_env_sh", ShaderDataGroup::Scene);
-ShaderProperty AmbientLight::_specularTextureProperty  = Shader::createProperty("u_env_specularTexture", ShaderDataGroup::Scene);
+ShaderProperty AmbientLight::_envMapProperty = Shader::createProperty("u_envMapLight", ShaderDataGroup::Enum::Scene);
+ShaderProperty AmbientLight::_diffuseSHProperty = Shader::createProperty("u_env_sh", ShaderDataGroup::Enum::Scene);
+ShaderProperty AmbientLight::_specularTextureProperty  = Shader::createProperty("u_env_specularTexture", ShaderDataGroup::Enum::Scene);
 
 AmbientLight::AmbientLight(Scene* value) {
     _scene = value;

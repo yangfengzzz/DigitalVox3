@@ -37,11 +37,11 @@ private:
     
     ssize_t _getIndexByPointerID(size_t pointerId);
     
-    void _addPointer(size_t pointerId, float x, float y, PointerPhase phase);
+    void _addPointer(size_t pointerId, float x, float y, PointerPhase::Enum phase);
     
     void _removePointer(size_t pointerIndex);
     
-    void _updatePointer(size_t pointerId, float x, float y, PointerPhase phase);
+    void _updatePointer(size_t pointerId, float x, float y, PointerPhase::Enum phase);
     
     void _handlePointerEvent(std::vector<PointerEvent>& nativeEvents);
     
@@ -59,12 +59,14 @@ private:
 private:
     friend class InputManager;
     
-    enum PointerKeyEvent {
-        Down,
-        Up,
-        Leave
+    struct PointerKeyEvent {
+        enum Enum {
+            Down,
+            Up,
+            Leave
+        };
     };
-    
+
     std::vector<Pointer> _pointers;
     bool _multiPointerEnabled = true;
     
@@ -72,7 +74,7 @@ private:
     Canvas* _canvas;
     std::vector<PointerEvent> _nativeEvents;
     std::array<Pointer, 11> _pointerPool{};
-    std::vector<int> _keyEventList;
+    std::vector<PointerKeyEvent::Enum> _keyEventList;
     size_t _keyEventCount;
     bool _needOverallPointers = false;
     math::Float2 _currentPosition;

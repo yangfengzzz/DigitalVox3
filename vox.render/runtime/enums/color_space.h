@@ -11,11 +11,13 @@
 /**
  * Color Space.
  */
-enum ColorSpace {
-    /** Linear color space. */
-    Linear,
-    /** Gamma color space. */
-    Gamma
+struct ColorSpace {
+    enum Enum {
+        /** Linear color space. */
+        Linear,
+        /** Gamma color space. */
+        Gamma
+    };
 };
 
 #endif /* color_space_h */

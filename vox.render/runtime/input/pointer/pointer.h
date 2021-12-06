@@ -24,7 +24,7 @@ public:
      */
     size_t id;
     /** The phase of pointer. */
-    PointerPhase phase = PointerPhase::Leave;
+    PointerPhase::Enum phase = PointerPhase::Enum::Leave;
     /** The position of the pointer in screen space pixel coordinates. */
     math::Float2 position;
     

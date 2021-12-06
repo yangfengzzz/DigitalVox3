@@ -24,9 +24,9 @@ private:
 
     static int _propertyNameCounter;
     int _uniqueId;
-    ShaderDataGroup _group;
+    ShaderDataGroup::Enum _group;
 
-    ShaderProperty(const std::string& name, ShaderDataGroup group);
+    ShaderProperty(const std::string& name, ShaderDataGroup::Enum group);
 };
 
 }

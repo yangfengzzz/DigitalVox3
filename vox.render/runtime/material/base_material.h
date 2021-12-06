@@ -29,8 +29,8 @@ public:
     void setAlphaCutoff(float newValue);
     
     /// Set which face for render.
-    const RenderFace& renderFace();
-    void setRenderFace(const RenderFace& newValue);
+    const RenderFace::Enum& renderFace();
+    void setRenderFace(const RenderFace::Enum& newValue);
     
     /// Alpha blend mode.
     /// - Remark:
@@ -47,7 +47,7 @@ public:
 private:
     static ShaderProperty _alphaCutoffProp;
     
-    RenderFace _renderFace = RenderFace::Back;
+    RenderFace::Enum _renderFace = RenderFace::Enum::Back;
     bool _isTransparent = false;
     BlendMode::Enum _blendMode = BlendMode::Enum::Normal;
 };

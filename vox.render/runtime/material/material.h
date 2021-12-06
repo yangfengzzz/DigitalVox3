@@ -23,7 +23,7 @@ public:
     /// Shader used by the material.
     Shader* shader;
     /// Render queue type.
-    RenderQueueType renderQueueType = RenderQueueType::Opaque;
+    RenderQueueType::Enum renderQueueType = RenderQueueType::Enum::Opaque;
     /// Shader data.
     ShaderData shaderData = ShaderData();
     /// Render state.

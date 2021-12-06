@@ -11,13 +11,15 @@
 /**
  * Camera clear flags enumeration.
  */
-enum CameraClearFlags {
-    /* Clear depth and color from background. */
-    DepthColor,
-    /* Clear depth only. */
-    Depth,
-    /* Do nothing. */
-    None
+struct CameraClearFlags {
+    enum Enum {
+        /* Clear depth and color from background. */
+        DepthColor,
+        /* Clear depth only. */
+        Depth,
+        /* Do nothing. */
+        None
+    };
 };
 
 #endif /* camera_clear_flags_h */

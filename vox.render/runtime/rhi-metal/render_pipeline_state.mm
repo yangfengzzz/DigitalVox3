@@ -246,7 +246,7 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
 }
 
 void RenderPipelineState::_groupingUniform(const ShaderUniform& uniform,
-                                           const std::optional<ShaderDataGroup>& group, bool isTexture) {
+                                           const std::optional<ShaderDataGroup::Enum>& group, bool isTexture) {
     if (group != std::nullopt) {
         switch (group.value()) {
             case ShaderDataGroup::Scene:

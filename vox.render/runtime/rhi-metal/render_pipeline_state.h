@@ -56,7 +56,7 @@ private:
     void _recordVertexLocation(MTLRenderPipelineReflection* reflection);
     
     void _groupingUniform(const ShaderUniform& uniform,
-                          const std::optional<ShaderDataGroup>& group, bool isTexture);
+                          const std::optional<ShaderDataGroup::Enum>& group, bool isTexture);
 
     void _groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms, bool isTexture);
 

@@ -48,7 +48,7 @@ public:
     /// Get shader property by name.
     /// - Parameter name: Name of the shader property
     /// - Returns: Shader property
-    static ShaderProperty createProperty(const std::string& name, ShaderDataGroup group);
+    static ShaderProperty createProperty(const std::string& name, ShaderDataGroup::Enum group);
     
 private:
     friend class RenderPipelineState;
@@ -57,7 +57,7 @@ private:
     static std::unordered_map<std::string, std::unique_ptr<Shader>> _shaderMap;
     static std::unordered_map<std::string, ShaderProperty> _propertyNameMap;
     
-    static std::optional<ShaderDataGroup> _getShaderPropertyGroup(const std::string& propertyName);
+    static std::optional<ShaderDataGroup::Enum> _getShaderPropertyGroup(const std::string& propertyName);
     
     ShaderProgram* _getShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection);
 

@@ -11,13 +11,15 @@
 /**
  * The Background mode enumeration.
  */
-enum BackgroundMode {
-    /* Solid color. */
-    SolidColor,
-    /* Sky. */
-    Sky,
-    /** Texture */
-    Texture
+struct BackgroundMode {
+    enum Enum {
+        /* Solid color. */
+        SolidColor,
+        /* Sky. */
+        Sky,
+        /** Texture */
+        Texture
+    };
 };
 
 #endif /* background_mode_h */

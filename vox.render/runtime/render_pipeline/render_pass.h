@@ -27,7 +27,7 @@ public:
     MaterialPtr replaceMaterial;
     Layer mask;
     bool renderOverride;
-    std::optional<CameraClearFlags> clearFlags;
+    std::optional<CameraClearFlags::Enum> clearFlags;
     std::optional<math::Color> clearColor;
     
     /// Create a RenderPass.

@@ -9,13 +9,15 @@
 #define render_face_h
 
 /// Set which face for render.
-enum RenderFace {
-    /// Render front face.
-    Front,
-    /// Render back face.
-    Back,
-    /// Render double face.
-    Double
+struct RenderFace {
+    enum Enum {
+        /// Render front face.
+        Front,
+        /// Render back face.
+        Back,
+        /// Render double face.
+        Double
+    };
 };
 
 #endif /* render_face_h */
