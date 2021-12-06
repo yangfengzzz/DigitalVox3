@@ -12,7 +12,11 @@ namespace math {
 SphericalHarmonics3::SphericalHarmonics3() {}
 
 SphericalHarmonics3::SphericalHarmonics3(std::array<float, 27> coefficients):
-coefficients(coefficients) {}
+_coefficients(coefficients) {}
+
+const std::array<float, 27>& SphericalHarmonics3::coefficients() const {
+    return _coefficients;
+}
 
 void SphericalHarmonics3::addLight(const Float3& direction, const Color& c, float deltaSolidAngle) {
     /**
@@ -33,7 +37,7 @@ void SphericalHarmonics3::addLight(const Float3& direction, const Color& c, floa
      */
     
     auto color = c * deltaSolidAngle;
-    auto& coe = coefficients;
+    auto& coe = _coefficients;
     
     const auto bv0 = 0.282095; // basis0 = 0.886227
     const auto bv1 = -0.488603 * direction.y; // basis1 = -0.488603
@@ -83,7 +87,7 @@ Color SphericalHarmonics3::operator()(const Float3& direction) {
      * 2: Math.PI / 4
      */
     
-    const auto& coe = coefficients;
+    const auto& coe = _coefficients;
     
     const auto bv0 = 0.886227; // kernel0 * basis0 = 0.886227
     const auto bv1 = -1.023327 * direction.y; // kernel1 * basis1 = -1.023327
@@ -114,7 +118,7 @@ Color SphericalHarmonics3::operator()(const Float3& direction) {
 }
 
 SphericalHarmonics3 SphericalHarmonics3::operator*(float s) {
-    auto src = coefficients;
+    auto src = _coefficients;
     
     (src[0] *= s); (src[1] *= s); (src[2] *= s);
     (src[3] *= s); (src[4] *= s); (src[5] *= s);

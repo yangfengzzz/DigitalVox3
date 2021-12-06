@@ -26,6 +26,8 @@ public:
     
     SphericalHarmonics3(std::array<float, 27> coefficients);
     
+    const std::array<float, 27>& coefficients() const;
+    
     /**
      * Add light to SphericalHarmonics3.
      * @param direction - Light direction
@@ -49,7 +51,7 @@ public:
     
 private:
   /** The coefficients of SphericalHarmonics3. */
-    std::array<float, 27> coefficients;
+    std::array<float, 27> _coefficients;
 };
 
 }
