@@ -107,6 +107,8 @@
 		04A79AC3275DE5D200182CCB /* point_light.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AC1275DE5D200182CCB /* point_light.h */; };
 		04A79AC6275DEA4E00182CCB /* spot_light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AC4275DEA4E00182CCB /* spot_light.mm */; };
 		04A79AC7275DEA4E00182CCB /* spot_light.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AC5275DEA4E00182CCB /* spot_light.h */; };
+		04A79ACA275DED9B00182CCB /* direct_light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AC8275DED9B00182CCB /* direct_light.mm */; };
+		04A79ACB275DED9B00182CCB /* direct_light.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AC9275DED9B00182CCB /* direct_light.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -470,6 +472,8 @@
 		04A79AC1275DE5D200182CCB /* point_light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = point_light.h; sourceTree = "<group>"; };
 		04A79AC4275DEA4E00182CCB /* spot_light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = spot_light.mm; sourceTree = "<group>"; };
 		04A79AC5275DEA4E00182CCB /* spot_light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spot_light.h; sourceTree = "<group>"; };
+		04A79AC8275DED9B00182CCB /* direct_light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = direct_light.mm; sourceTree = "<group>"; };
+		04A79AC9275DED9B00182CCB /* direct_light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = direct_light.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -956,6 +960,8 @@
 				04A79AC0275DE5D200182CCB /* point_light.mm */,
 				04A79AC5275DEA4E00182CCB /* spot_light.h */,
 				04A79AC4275DEA4E00182CCB /* spot_light.mm */,
+				04A79AC9275DED9B00182CCB /* direct_light.h */,
+				04A79AC8275DED9B00182CCB /* direct_light.mm */,
 			);
 			path = lighting;
 			sourceTree = "<group>";
@@ -1636,6 +1642,7 @@
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				0416103C2759A4C7006CD384 /* static_collider.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
+				04A79ACB275DED9B00182CCB /* direct_light.h in Headers */,
 				0416101E2755DD48006CD384 /* orbit_control.h in Headers */,
 				04CE39A52753AC6D00204B8E /* compute_pipeline_state.h in Headers */,
 				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
@@ -1962,6 +1969,7 @@
 				04CE3818274D167F00204B8E /* imgui_widgets.cpp in Sources */,
 				04CE39422751D7BF00204B8E /* shader_data.mm in Sources */,
 				04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */,
+				04A79ACA275DED9B00182CCB /* direct_light.mm in Sources */,
 				0416104F2759F60D006CD384 /* plane_collider_shape.cpp in Sources */,
 				04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */,
 				04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */,

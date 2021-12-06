@@ -6,6 +6,9 @@
 //
 
 #include "light_manager.h"
+#include "point_light.h"
+#include "spot_light.h"
+#include "direct_light.h"
 #include "../../log.h"
 
 namespace vox {
