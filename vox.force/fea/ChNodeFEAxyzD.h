@@ -15,8 +15,8 @@
 #ifndef CHNODEFEAXYZD_H
 #define CHNODEFEAXYZD_H
 
-#include "chrono/solver/ChVariablesGenericDiagonalMass.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "solver/ChVariablesGenericDiagonalMass.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 namespace fea {

@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkRackpinion.h"
+#include "physics/ChLinkRackpinion.h"
 
 namespace chrono {
 

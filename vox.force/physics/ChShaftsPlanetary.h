@@ -15,9 +15,9 @@
 #ifndef CHSHAFTSPLANETARY_H
 #define CHSHAFTSPLANETARY_H
 
-#include "chrono/physics/ChPhysicsItem.h"
-#include "chrono/physics/ChShaft.h"
-#include "chrono/solver/ChConstraintThreeGeneric.h"
+#include "physics/ChPhysicsItem.h"
+#include "physics/ChShaft.h"
+#include "solver/ChConstraintThreeGeneric.h"
 
 namespace chrono {
 

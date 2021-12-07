@@ -20,7 +20,7 @@ subject to the following restrictions:
 #include "btConvexInternalShape.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
 #include "LinearMath/btVector3.h"
-#include "chrono/core/ChVector.h"
+#include "core/ChVector.h"
 
 /// btCEtriangleShape represents a triangle that is part of a collision mesh. 
 /// This because the default Bullet or GImpact triangle mesh system is not flexible enough to

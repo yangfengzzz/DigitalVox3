@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChConstraintThreeBBShaft.h"
+#include "solver/ChConstraintThreeBBShaft.h"
 
 namespace chrono {
 

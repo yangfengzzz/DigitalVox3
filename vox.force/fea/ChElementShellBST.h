@@ -21,10 +21,10 @@
 #include <vector>
 #include <array>
 
-#include "chrono/fea/ChElementShell.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChMaterialShellKirchhoff.h"
-#include "chrono/solver/ChVariablesGenericDiagonalMass.h"
+#include "fea/ChElementShell.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChMaterialShellKirchhoff.h"
+#include "solver/ChVariablesGenericDiagonalMass.h"
 
 namespace chrono {
 namespace fea {

@@ -13,9 +13,9 @@
 #ifndef CHEMITTERASSET_H
 #define CHEMITTERASSET_H
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/core/ChFrame.h"
-#include "chrono/particlefactory/ChParticleEmitter.h"
+#include "assets/ChAsset.h"
+#include "core/ChFrame.h"
+#include "particlefactory/ChParticleEmitter.h"
 
 namespace chrono {
 

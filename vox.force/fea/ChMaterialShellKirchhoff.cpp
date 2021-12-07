@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChMaterialShellKirchhoff.h"
+#include "fea/ChMaterialShellKirchhoff.h"
 
 namespace chrono {
 namespace fea {

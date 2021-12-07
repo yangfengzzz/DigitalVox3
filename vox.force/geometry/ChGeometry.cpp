@@ -14,7 +14,7 @@
 
 #include <cstdio>
 
-#include "chrono/geometry/ChGeometry.h"
+#include "geometry/ChGeometry.h"
 
 namespace chrono {
 namespace geometry {

@@ -13,7 +13,7 @@
 // =============================================================================
 
 
-#include "chrono/fea/ChBeamSectionCable.h"
+#include "fea/ChBeamSectionCable.h"
 
 
 namespace chrono {

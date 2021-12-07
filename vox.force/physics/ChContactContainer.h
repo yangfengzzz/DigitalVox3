@@ -23,10 +23,10 @@
 #include <list>
 #include <unordered_map>
 
-#include "chrono/collision/ChCollisionInfo.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChContactable.h"
-#include "chrono/physics/ChMaterialSurface.h"
+#include "collision/ChCollisionInfo.h"
+#include "physics/ChBody.h"
+#include "physics/ChContactable.h"
+#include "physics/ChMaterialSurface.h"
 
 namespace chrono {
 

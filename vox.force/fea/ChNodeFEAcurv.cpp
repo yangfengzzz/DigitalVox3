@@ -15,7 +15,7 @@
 // (2nd derivatives of the position vector)
 // =============================================================================
 
-#include "chrono/fea/ChNodeFEAcurv.h"
+#include "fea/ChNodeFEAcurv.h"
 
 namespace chrono {
 namespace fea {

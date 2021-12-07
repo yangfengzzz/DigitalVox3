@@ -15,7 +15,7 @@
 #ifndef CHVARIABLESGENERIC_H
 #define CHVARIABLESGENERIC_H
 
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

@@ -15,10 +15,10 @@
 #ifndef CHCONTACTSURFACENODECLOUD_H
 #define CHCONTACTSURFACENODECLOUD_H
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/fea/ChContactSurface.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "collision/ChCollisionModel.h"
+#include "fea/ChContactSurface.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 namespace fea {

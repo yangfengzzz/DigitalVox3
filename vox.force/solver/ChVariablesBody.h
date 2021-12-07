@@ -15,8 +15,8 @@
 #ifndef CHVARIABLESBODY_H
 #define CHVARIABLESBODY_H
 
-#include "chrono/core/ChMatrix33.h"
-#include "chrono/solver/ChVariables.h"
+#include "core/ChMatrix33.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

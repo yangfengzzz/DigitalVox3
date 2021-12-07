@@ -17,11 +17,11 @@
 
 //#define BEAM_VERBOSE
 
-#include "chrono/fea/ChElementBeam.h"
-#include "chrono/fea/ChBeamSectionCosserat.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
-#include "chrono/geometry/ChBasisToolsBspline.h"
-#include "chrono/core/ChQuadrature.h"
+#include "fea/ChElementBeam.h"
+#include "fea/ChBeamSectionCosserat.h"
+#include "fea/ChNodeFEAxyzrot.h"
+#include "geometry/ChBasisToolsBspline.h"
+#include "core/ChQuadrature.h"
 
 namespace chrono {
 namespace fea {

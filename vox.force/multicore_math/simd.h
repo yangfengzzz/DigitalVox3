@@ -14,10 +14,10 @@
 
 #pragma once
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/ChConfig.h"
+#include "core/ChApiCE.h"
+#include "ChConfig.h"
 
-#include "chrono/multicore_math/ChCudaDefines.h"
+#include "multicore_math/ChCudaDefines.h"
 
 #ifndef __CUDACC__
 

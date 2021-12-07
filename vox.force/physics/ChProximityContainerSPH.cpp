@@ -14,10 +14,10 @@
 
 #include <list>
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChMatterSPH.h"
-#include "chrono/physics/ChProximityContainerSPH.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChBody.h"
+#include "physics/ChMatterSPH.h"
+#include "physics/ChProximityContainerSPH.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

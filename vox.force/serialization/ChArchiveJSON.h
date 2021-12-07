@@ -16,10 +16,10 @@
 #include "core/ChLog.h"
 #include "core/ChMathematics.h"
 
-#include "chrono_thirdparty/rapidjson/document.h"
-#include "chrono_thirdparty/rapidjson/prettywriter.h"
-#include "chrono_thirdparty/rapidjson/filereadstream.h"
-#include "chrono_thirdparty/rapidjson/filewritestream.h"
+#include <rapidjson/document.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/filewritestream.h>
 
 #include <stack>
 #include <fstream>

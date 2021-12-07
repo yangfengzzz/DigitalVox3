@@ -15,7 +15,7 @@
 #define DWORD unsigned int
 
 #include <cstdio>
-#include "chrono/parallel/ChThreadsPOSIX.h"
+#include "parallel/ChThreadsPOSIX.h"
 
 #define checkPThreadFunction(returnValue)                                                       \
     if (0 != returnValue) {                                                                     \

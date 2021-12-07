@@ -13,8 +13,8 @@
 #ifndef CHASSETLEVEL_H
 #define CHASSETLEVEL_H
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/core/ChFrame.h"
+#include "assets/ChAsset.h"
+#include "core/ChFrame.h"
 
 namespace chrono {
 

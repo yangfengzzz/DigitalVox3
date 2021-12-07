@@ -15,16 +15,16 @@
 #ifndef CHPARTICLEEMITTER_H
 #define CHPARTICLEEMITTER_H
 
-#include "chrono/particlefactory/ChRandomShapeCreator.h"
-#include "chrono/particlefactory/ChRandomParticlePosition.h"
-#include "chrono/particlefactory/ChRandomParticleAlignment.h"
-#include "chrono/particlefactory/ChRandomParticleVelocity.h"
+#include "particlefactory/ChRandomShapeCreator.h"
+#include "particlefactory/ChRandomParticlePosition.h"
+#include "particlefactory/ChRandomParticleAlignment.h"
+#include "particlefactory/ChRandomParticleVelocity.h"
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChDistribution.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChMathematics.h"
+#include "core/ChVector.h"
+#include "core/ChMatrix.h"
+#include "core/ChDistribution.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

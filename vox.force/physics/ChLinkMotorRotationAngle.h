@@ -15,7 +15,7 @@
 #ifndef CHLINKMOTORROTATIONANGLE_H
 #define CHLINKMOTORROTATIONANGLE_H
 
-#include "chrono/physics/ChLinkMotorRotation.h"
+#include "physics/ChLinkMotorRotation.h"
 
 namespace chrono {
 

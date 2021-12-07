@@ -15,7 +15,7 @@
 #include <cmath>
 #include <limits>
 
-#include "chrono/motion_functions/ChFunction_Recorder.h"
+#include "motion_functions/ChFunction_Recorder.h"
 
 namespace chrono {
 

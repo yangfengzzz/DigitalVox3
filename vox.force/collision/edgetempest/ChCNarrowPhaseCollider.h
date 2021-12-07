@@ -13,9 +13,9 @@
 #ifndef CHC_NARROWPHASECOLLIDER_H
 #define CHC_NARROWPHASECOLLIDER_H
 
-#include "chrono/collision/edgetempest/ChCCompile.h"
-#include "chrono/collision/edgetempest/ChCCollisionTree.h"
-#include "chrono/collision/ChCollisionPair.h"
+#include "collision/edgetempest/ChCCompile.h"
+#include "collision/edgetempest/ChCCollisionTree.h"
+#include "collision/ChCollisionPair.h"
 
 namespace chrono {
 /// Namespace for classes devoted to

@@ -15,11 +15,11 @@
 
 #include <cmath>
 
-#include "chrono/collision/edgetempest/ChCNarrowPhaseCollider.h"
-#include "chrono/geometry/ChGeometry.h"
-#include "chrono/geometry/ChSphere.h"
-#include "chrono/geometry/ChTriangle.h"
-#include "chrono/geometry/ChBox.h"
+#include "collision/edgetempest/ChCNarrowPhaseCollider.h"
+#include "geometry/ChGeometry.h"
+#include "geometry/ChSphere.h"
+#include "geometry/ChTriangle.h"
+#include "geometry/ChBox.h"
 
 namespace chrono {
 namespace collision {

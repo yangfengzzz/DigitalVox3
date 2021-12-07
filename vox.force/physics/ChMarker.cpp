@@ -12,10 +12,10 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/core/ChGlobal.h"
-#include "chrono/core/ChTransform.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChMarker.h"
+#include "core/ChGlobal.h"
+#include "core/ChTransform.h"
+#include "physics/ChBody.h"
+#include "physics/ChMarker.h"
 
 namespace chrono {
 

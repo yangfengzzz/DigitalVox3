@@ -16,8 +16,8 @@
 #include <cfloat>
 #include <cmath>
 
-#include "chrono/motion_functions/ChFunctionRotation.h"
-#include "chrono/core/ChMatrixMBD.h"
+#include "motion_functions/ChFunctionRotation.h"
+#include "core/ChMatrixMBD.h"
 
 namespace chrono {
 

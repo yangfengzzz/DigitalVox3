@@ -12,22 +12,22 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/collision/ChCollisionModelBullet.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/physics/ChSystem.h"
+#include "collision/ChCollisionModelBullet.h"
+#include "core/ChMath.h"
+#include "physics/ChSystem.h"
 
-#include "chrono/fea/ChContactSurfaceMesh.h"
-#include "chrono/fea/ChElementShellANCF_3423.h"
-#include "chrono/fea/ChElementShellANCF_3443.h"
-#include "chrono/fea/ChElementShellANCF_3833.h"
-#include "chrono/fea/ChElementShellReissner4.h"
-#include "chrono/fea/ChElementCableANCF.h"
-#include "chrono/fea/ChElementBeamANCF_3243.h"
-#include "chrono/fea/ChElementBeamANCF_3333.h"
-#include "chrono/fea/ChElementBeamEuler.h"
-#include "chrono/fea/ChHexahedronFace.h"
-#include "chrono/fea/ChTetrahedronFace.h"
-#include "chrono/fea/ChMesh.h"
+#include "fea/ChContactSurfaceMesh.h"
+#include "fea/ChElementShellANCF_3423.h"
+#include "fea/ChElementShellANCF_3443.h"
+#include "fea/ChElementShellANCF_3833.h"
+#include "fea/ChElementShellReissner4.h"
+#include "fea/ChElementCableANCF.h"
+#include "fea/ChElementBeamANCF_3243.h"
+#include "fea/ChElementBeamANCF_3333.h"
+#include "fea/ChElementBeamEuler.h"
+#include "fea/ChHexahedronFace.h"
+#include "fea/ChTetrahedronFace.h"
+#include "fea/ChMesh.h"
 
 #include <unordered_map>
 #include <map>

@@ -15,7 +15,7 @@
 #ifndef CHFUNCT_POLY345_H
 #define CHFUNCT_POLY345_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Base.h"
 
 namespace chrono {
 

@@ -15,8 +15,8 @@
 #ifndef CHSHAFTSFREEWHEEL_H
 #define CHSHAFTSFREEWHEEL_H
 
-#include "chrono/physics/ChShaftsCouple.h"
-#include "chrono/solver/ChConstraintTwoGenericBoxed.h"
+#include "physics/ChShaftsCouple.h"
+#include "solver/ChConstraintTwoGenericBoxed.h"
 
 namespace chrono {
 

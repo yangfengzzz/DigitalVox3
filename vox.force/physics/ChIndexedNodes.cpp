@@ -15,8 +15,8 @@
 #include <cstdlib>
 #include <algorithm>
 
-#include "chrono/physics/ChIndexedNodes.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChIndexedNodes.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

@@ -19,9 +19,9 @@
 #include <cmath>
 #include <list>
 
-#include "chrono/physics/ChContactContainer.h"
-#include "chrono/physics/ChContactSMC.h"
-#include "chrono/physics/ChContactable.h"
+#include "physics/ChContactContainer.h"
+#include "physics/ChContactSMC.h"
+#include "physics/ChContactable.h"
 
 namespace chrono {
 

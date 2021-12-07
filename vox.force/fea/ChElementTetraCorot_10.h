@@ -17,10 +17,10 @@
 
 #include <cmath>
 
-#include "chrono/fea/ChElementTetrahedron.h"
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/fea/ChElementCorotational.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "fea/ChElementTetrahedron.h"
+#include "fea/ChElementGeneric.h"
+#include "fea/ChElementCorotational.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 namespace fea {

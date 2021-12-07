@@ -15,8 +15,8 @@
 #ifndef CHSHAFTSTORQUEBASE_H
 #define CHSHAFTSTORQUEBASE_H
 
-#include "chrono/physics/ChShaftsCouple.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
+#include "physics/ChShaftsCouple.h"
+#include "solver/ChConstraintTwoGeneric.h"
 
 namespace chrono {
 

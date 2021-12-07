@@ -15,8 +15,8 @@
 #ifndef CHKBLOCKGENERIC_H
 #define CHKBLOCKGENERIC_H
 
-#include "chrono/solver/ChKblock.h"
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChKblock.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

@@ -12,12 +12,12 @@
 // Authors: Andrea Favali, Alessandro Tasora
 // =============================================================================
 
-#include "chrono/collision/ChCollisionModelBullet.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/fea/ChContactSurfaceNodeCloud.h"
-#include "chrono/fea/ChElementShellANCF_3423.h"
-#include "chrono/fea/ChElementTetraCorot_4.h"
-#include "chrono/fea/ChMesh.h"
+#include "collision/ChCollisionModelBullet.h"
+#include "physics/ChSystem.h"
+#include "fea/ChContactSurfaceNodeCloud.h"
+#include "fea/ChElementShellANCF_3423.h"
+#include "fea/ChElementTetraCorot_4.h"
+#include "fea/ChMesh.h"
 
 namespace chrono {
 namespace fea {

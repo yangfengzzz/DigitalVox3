@@ -30,8 +30,8 @@ CODE MODIFIED FROM:
 // Credits: The Clock class was inspired by the Timer classes in 
 // Ogre (www.ogre3d.org).
 
-#include "chrono/core/ChTimer.h"
-#include "chrono/utils/ChProfiler.h"
+#include "core/ChTimer.h"
+#include "utils/ChProfiler.h"
 
 #include <ctime>
 #include <ratio>

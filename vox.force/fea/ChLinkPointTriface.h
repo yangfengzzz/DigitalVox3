@@ -17,11 +17,11 @@
 
 #include <array>
 
-#include "chrono/physics/ChLinkBase.h"
-#include "chrono/solver/ChConstraintTwoTuplesContactN.h"
+#include "physics/ChLinkBase.h"
+#include "solver/ChConstraintTwoTuplesContactN.h"
 
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 

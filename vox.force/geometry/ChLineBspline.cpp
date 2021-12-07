@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/geometry/ChLineBspline.h"
+#include "geometry/ChLineBspline.h"
 
 namespace chrono {
 namespace geometry {

@@ -15,8 +15,8 @@
 #ifndef CHBODYFRAME_H
 #define CHBODYFRAME_H
 
-#include "chrono/core/ChFrameMoving.h"
-#include "chrono/solver/ChVariablesBodyOwnMass.h"
+#include "core/ChFrameMoving.h"
+#include "solver/ChVariablesBodyOwnMass.h"
 
 namespace chrono {
 

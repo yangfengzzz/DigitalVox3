@@ -15,9 +15,9 @@
 #ifndef CHLINKREVOLUTE_H
 #define CHLINKREVOLUTE_H
 
-#include "chrono/physics/ChLink.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/solver/ChConstraintTwoBodies.h"
+#include "physics/ChLink.h"
+#include "physics/ChBody.h"
+#include "solver/ChConstraintTwoBodies.h"
 
 namespace chrono {
 

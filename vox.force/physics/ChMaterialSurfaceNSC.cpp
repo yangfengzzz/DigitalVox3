@@ -14,8 +14,8 @@
 
 #include <algorithm>
 
-#include "chrono/core/ChClassFactory.h"
-#include "chrono/physics/ChMaterialSurfaceNSC.h"
+#include "core/ChClassFactory.h"
+#include "physics/ChMaterialSurfaceNSC.h"
 
 namespace chrono {
 

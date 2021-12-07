@@ -35,12 +35,12 @@
 
 #include <vector>
 
-#include "chrono/fea/ChElementHexahedron.h"
-#include "chrono/fea/ChMaterialHexaANCF.h"
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/fea/ChNodeFEAxyzDDD.h"
-#include "chrono/physics/ChLoadable.h"
+#include "fea/ChElementHexahedron.h"
+#include "fea/ChMaterialHexaANCF.h"
+#include "core/ChQuadrature.h"
+#include "fea/ChElementGeneric.h"
+#include "fea/ChNodeFEAxyzDDD.h"
+#include "physics/ChLoadable.h"
 
 namespace chrono {
 namespace fea {

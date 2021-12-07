@@ -14,10 +14,10 @@
 
 
 
-#include "chrono/motion_functions/ChFunctionRotation_SQUAD.h"
-#include "chrono/motion_functions/ChFunction_Const.h"
-#include "chrono/motion_functions/ChFunction_Ramp.h"
-#include "chrono/geometry/ChBasisToolsBspline.h"
+#include "motion_functions/ChFunctionRotation_SQUAD.h"
+#include "motion_functions/ChFunction_Const.h"
+#include "motion_functions/ChFunction_Ramp.h"
+#include "geometry/ChBasisToolsBspline.h"
 
 namespace chrono {
 

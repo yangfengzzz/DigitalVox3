@@ -19,10 +19,10 @@
 
 #include <map>
 
-#include "chrono/fea/ChElementShellANCF_3423.h"
-#include "chrono/fea/ChElementShellBST.h"
-#include "chrono/fea/ChMesh.h"
-#include "chrono/core/ChMatrix.h"
+#include "fea/ChElementShellANCF_3423.h"
+#include "fea/ChElementShellBST.h"
+#include "fea/ChMesh.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 namespace fea {

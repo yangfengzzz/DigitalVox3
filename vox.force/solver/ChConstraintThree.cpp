@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChConstraintThree.h"
+#include "solver/ChConstraintThree.h"
 
 namespace chrono {
 

@@ -15,10 +15,10 @@
 #ifndef CHSHAFTSMOTORSPEED_H
 #define CHSHAFTSMOTORSPEED_H
 
-#include "chrono/physics/ChShaftsMotor.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
-#include "chrono/solver/ChVariablesGeneric.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "physics/ChShaftsMotor.h"
+#include "solver/ChConstraintTwoGeneric.h"
+#include "solver/ChVariablesGeneric.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 

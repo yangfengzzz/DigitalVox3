@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-#include "chrono/geometry/ChTriangle.h"
+#include "geometry/ChTriangle.h"
 
 namespace chrono {
 namespace geometry {

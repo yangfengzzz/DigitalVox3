@@ -18,7 +18,7 @@
 #ifndef CHSOLVMIN_H
 #define CHSOLVMIN_H
 
-#include "chrono/core/ChFx.h"
+#include "core/ChFx.h"
 
 // forward reference
 struct JSScript;

@@ -16,9 +16,9 @@
 #define CHCONTROLLER_H
 
 #include <cmath>
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/physics/ChObject.h"
+#include "core/ChApiCE.h"
+#include "core/ChMath.h"
+#include "physics/ChObject.h"
 
 namespace chrono {
 

@@ -24,7 +24,7 @@
 %option never-interactive
 
 %top{
-#include "chrono/utils/ChParserAdams.h"
+#include "utils/ChParserAdams.h"
 }
 
 whitespace	[ \t]+

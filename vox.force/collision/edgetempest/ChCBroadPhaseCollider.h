@@ -19,7 +19,7 @@
 
 #include <list>
 
-#include "chrono/collision/edgetempest/ChCMates.h"
+#include "collision/edgetempest/ChCMates.h"
 
 namespace chrono {
 namespace collision {

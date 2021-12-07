@@ -15,7 +15,7 @@
 #ifndef CHLINKPULLEY_H
 #define CHLINKPULLEY_H
 
-#include "chrono/physics/ChLinkLock.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

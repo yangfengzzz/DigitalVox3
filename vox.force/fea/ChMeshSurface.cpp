@@ -12,10 +12,10 @@
 // Authors: Andrea Favali, Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChMeshSurface.h"
-#include "chrono/fea/ChMesh.h"
-#include "chrono/fea/ChTetrahedronFace.h"
-#include "chrono/fea/ChHexahedronFace.h"
+#include "fea/ChMeshSurface.h"
+#include "fea/ChMesh.h"
+#include "fea/ChTetrahedronFace.h"
+#include "fea/ChHexahedronFace.h"
 
 #include <unordered_set>
 #include <map>

@@ -15,9 +15,9 @@
 #ifndef CHLINKMOTIONIMPOSED_H
 #define CHLINKMOTIONIMPOSED_H
 
-#include "chrono/physics/ChLinkMate.h"
-#include "chrono/motion_functions/ChFunctionPosition.h"
-#include "chrono/motion_functions/ChFunctionRotation.h"
+#include "physics/ChLinkMate.h"
+#include "motion_functions/ChFunctionPosition.h"
+#include "motion_functions/ChFunctionRotation.h"
 
 namespace chrono {
 

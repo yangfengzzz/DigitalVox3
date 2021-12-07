@@ -27,8 +27,8 @@
 #pragma warning(4 : 4786)
 #endif
 
-#include "chrono/collision/edgetempest/ChCBroadPhaseCollider.h"
-#include "chrono/geometry/ChGeometry.h"
+#include "collision/edgetempest/ChCBroadPhaseCollider.h"
+#include "geometry/ChGeometry.h"
 
 #ifdef COMPILER_GCC
 #include <ext/hash_map>

@@ -13,7 +13,7 @@
 #ifndef CH_SOLVER_LS_H
 #define CH_SOLVER_LS_H
 
-#include "chrono/solver/ChSolver.h"
+#include "solver/ChSolver.h"
 
 namespace chrono {
 

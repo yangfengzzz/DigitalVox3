@@ -15,7 +15,7 @@
 #ifndef CHFUNCTIONPOSITION_SETPOINT_H
 #define CHFUNCTIONPOSITION_SETPOINT_H
 
-#include "chrono/motion_functions/ChFunctionPosition.h"
+#include "motion_functions/ChFunctionPosition.h"
 
 
 namespace chrono {

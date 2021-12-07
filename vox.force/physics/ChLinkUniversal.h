@@ -15,9 +15,9 @@
 #ifndef CHLINKUNIVERSAL_H
 #define CHLINKUNIVERSAL_H
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChLink.h"
-#include "chrono/solver/ChConstraintTwoBodies.h"
+#include "physics/ChBody.h"
+#include "physics/ChLink.h"
+#include "solver/ChConstraintTwoBodies.h"
 
 namespace chrono {
 

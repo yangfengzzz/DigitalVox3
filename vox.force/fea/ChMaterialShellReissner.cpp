@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChMaterialShellReissner.h"
+#include "fea/ChMaterialShellReissner.h"
 
 namespace chrono {
 namespace fea {

@@ -15,8 +15,8 @@
 #ifndef CHCAPSULESHAPE_H
 #define CHCAPSULESHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChCapsule.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChCapsule.h"
 
 namespace chrono {
 

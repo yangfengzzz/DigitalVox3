@@ -15,7 +15,7 @@
 #ifndef CHGAUSSINTEGRATIONRULE
 #define CHGAUSSINTEGRATIONRULE
 
-#include "chrono/fea/ChGaussPoint.h"
+#include "fea/ChGaussPoint.h"
 
 namespace chrono {
 namespace fea {

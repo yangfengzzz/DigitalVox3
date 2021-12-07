@@ -17,7 +17,7 @@
 #ifndef CHMATERIALSHELLANCF_H
 #define CHMATERIALSHELLANCF_H
 
-#include "chrono/fea/ChElementShell.h"
+#include "fea/ChElementShell.h"
 
 namespace chrono {
 namespace fea {

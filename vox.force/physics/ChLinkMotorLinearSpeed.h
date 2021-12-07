@@ -15,8 +15,8 @@
 #ifndef CHLINKMOTORLINEARSPEED_H
 #define CHLINKMOTORLINEARSPEED_H
 
-#include "chrono/physics/ChLinkMotorLinear.h"
-#include "chrono/solver/ChVariablesGeneric.h"
+#include "physics/ChLinkMotorLinear.h"
+#include "solver/ChVariablesGeneric.h"
 
 namespace chrono {
 

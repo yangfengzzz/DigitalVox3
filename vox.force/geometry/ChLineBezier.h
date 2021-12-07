@@ -21,8 +21,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChBezierCurve.h"
-#include "chrono/geometry/ChLine.h"
+#include "core/ChBezierCurve.h"
+#include "geometry/ChLine.h"
 
 namespace chrono {
 namespace geometry {

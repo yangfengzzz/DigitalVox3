@@ -18,8 +18,8 @@
 #include <cmath>
 #include <vector>
 
-#include "chrono/geometry/ChLine.h"
-#include "chrono/geometry/ChBasisToolsBspline.h"
+#include "geometry/ChLine.h"
+#include "geometry/ChBasisToolsBspline.h"
 
 namespace chrono {
 namespace geometry {

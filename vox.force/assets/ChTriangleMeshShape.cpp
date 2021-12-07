@@ -12,7 +12,7 @@
 // Authors: Alesandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/assets/ChTriangleMeshShape.h"
+#include "assets/ChTriangleMeshShape.h"
 
 namespace chrono {
 

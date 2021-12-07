@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChColor.h"
-#include "chrono/core/ChClassFactory.h"
+#include "assets/ChColor.h"
+#include "core/ChClassFactory.h"
 
 namespace chrono {
 

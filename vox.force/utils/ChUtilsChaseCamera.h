@@ -28,8 +28,8 @@
 #ifndef CH_UTILS_CHASECAMERA_H
 #define CH_UTILS_CHASECAMERA_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/physics/ChBody.h"
+#include "core/ChApiCE.h"
+#include "physics/ChBody.h"
 
 namespace chrono {
 namespace utils {

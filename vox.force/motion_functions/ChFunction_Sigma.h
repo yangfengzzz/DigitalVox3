@@ -15,7 +15,7 @@
 #ifndef CHFUNCT_SIGMA_H
 #define CHFUNCT_SIGMA_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Base.h"
 
 namespace chrono {
 

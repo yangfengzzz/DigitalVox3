@@ -15,10 +15,10 @@
 #ifndef CH_COLLISION_ALGORITHMS_BULLET_H
 #define CH_COLLISION_ALGORITHMS_BULLET_H
 
-#include "chrono/core/ChVector.h"
+#include "core/ChVector.h"
 
-#include "chrono/collision/bullet/btBulletCollisionCommon.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h"
+#include "collision/bullet/btBulletCollisionCommon.h"
+#include "collision/bullet/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h"
 
 namespace chrono {
 namespace collision {

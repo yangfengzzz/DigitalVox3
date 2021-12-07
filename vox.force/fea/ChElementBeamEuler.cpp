@@ -14,7 +14,7 @@
 
 //#define BEAM_VERBOSE
 
-#include "chrono/fea/ChElementBeamEuler.h"
+#include "fea/ChElementBeamEuler.h"
 
 namespace chrono {
 namespace fea {

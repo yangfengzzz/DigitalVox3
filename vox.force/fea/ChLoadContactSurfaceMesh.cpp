@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChLoadContactSurfaceMesh.h"
-#include "chrono/fea/ChMesh.h"
-#include "chrono/physics/ChSystem.h"
+#include "fea/ChLoadContactSurfaceMesh.h"
+#include "fea/ChMesh.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace fea {

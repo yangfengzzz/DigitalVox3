@@ -16,9 +16,9 @@
 #define CHLINKMOTORLINEARDRIVELINE_H
 
 
-#include "chrono/physics/ChLinkMotorLinear.h"
-#include "chrono/physics/ChShaft.h"
-#include "chrono/physics/ChShaftsBody.h"
+#include "physics/ChLinkMotorLinear.h"
+#include "physics/ChShaft.h"
+#include "physics/ChShaftsBody.h"
 
 namespace chrono {
 

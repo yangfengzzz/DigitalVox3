@@ -15,7 +15,7 @@
 #ifndef CHINDEXEDNODES_H
 #define CHINDEXEDNODES_H
 
-#include "chrono/physics/ChNodeBase.h"
+#include "physics/ChNodeBase.h"
 
 namespace chrono {
 

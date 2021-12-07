@@ -15,8 +15,8 @@
 #ifndef CHCYLINDERSHAPE_H
 #define CHCYLINDERSHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChCylinder.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChCylinder.h"
 
 namespace chrono {
 

@@ -15,21 +15,21 @@
 #include <memory>
 #include <array>
 
-#include "chrono/collision/ChCollisionSystemBullet.h"
-#include "chrono/collision/ChCollisionUtilsBullet.h"
-#include "chrono/collision/ChConvexDecomposition.h"
-#include "chrono/collision/ChCollisionModelBullet.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/bt2DShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btBarrelShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCEtriangleShape.h"
-#include "chrono/collision/bullet/btBulletCollisionCommon.h"
-#include "chrono/collision/gimpact/GIMPACT/Bullet/btGImpactCollisionAlgorithm.h"
-#include "chrono/collision/gimpact/GIMPACTUtils/btGImpactConvexDecompositionShape.h"
-#include "chrono/geometry/ChLineArc.h"
-#include "chrono/geometry/ChLineSegment.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
-#include "chrono/physics/ChPhysicsItem.h"
-#include "chrono/physics/ChSystem.h"
+#include "collision/ChCollisionSystemBullet.h"
+#include "collision/ChCollisionUtilsBullet.h"
+#include "collision/ChConvexDecomposition.h"
+#include "collision/ChCollisionModelBullet.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/bt2DShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btBarrelShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCEtriangleShape.h"
+#include "collision/bullet/btBulletCollisionCommon.h"
+#include "collision/gimpact/GIMPACT/Bullet/btGImpactCollisionAlgorithm.h"
+#include "collision/gimpact/GIMPACTUtils/btGImpactConvexDecompositionShape.h"
+#include "geometry/ChLineArc.h"
+#include "geometry/ChLineSegment.h"
+#include "geometry/ChTriangleMeshConnected.h"
+#include "physics/ChPhysicsItem.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace collision {

@@ -15,7 +15,7 @@
 #ifndef CHLINKGEAR_H
 #define CHLINKGEAR_H
 
-#include "chrono/physics/ChLinkLock.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

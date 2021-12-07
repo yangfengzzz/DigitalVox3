@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/physics/ChLinkMotorRotationSpeed.h"
+#include "physics/ChLinkMotorRotationSpeed.h"
 
 namespace chrono {
 

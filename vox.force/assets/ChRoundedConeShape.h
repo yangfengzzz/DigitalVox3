@@ -15,8 +15,8 @@
 #ifndef CHROUNDEDCONESHAPE_H
 #define CHROUNDEDCONESHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChRoundedCone.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChRoundedCone.h"
 
 namespace chrono {
 

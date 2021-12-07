@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/motion_functions/ChFunction_Mocap.h"
+#include "motion_functions/ChFunction_Mocap.h"
 
 namespace chrono {
 

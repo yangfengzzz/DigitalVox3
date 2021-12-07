@@ -13,10 +13,10 @@
 #ifndef CHC_AABBCOLLIDER_H
 #define CHC_AABBCOLLIDER_H
 
-#include "chrono/collision/ChCollisionPair.h"
-#include "chrono/collision/edgetempest/ChCCompile.h"
-#include "chrono/collision/edgetempest/ChCAABBTree.h"
-#include "chrono/collision/edgetempest/ChCNarrowPhaseCollider.h"
+#include "collision/ChCollisionPair.h"
+#include "collision/edgetempest/ChCCompile.h"
+#include "collision/edgetempest/ChCAABBTree.h"
+#include "collision/edgetempest/ChCNarrowPhaseCollider.h"
 
 namespace chrono {
 namespace collision {

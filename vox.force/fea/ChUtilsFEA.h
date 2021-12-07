@@ -21,7 +21,7 @@
 
 #include <cmath>
 
-#include "chrono/core/ChMatrixNM.h"
+#include "core/ChMatrixNM.h"
 
 namespace chrono {
 namespace fea {

@@ -14,11 +14,11 @@
 // Four node shell with geom.exact kinematics
 // =============================================================================
 
-#include "chrono/core/ChException.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/timestepper/ChState.h"
-#include "chrono/fea/ChElementShellReissner4.h"
-#include "chrono/fea/ChRotUtils.h"
+#include "core/ChException.h"
+#include "physics/ChSystem.h"
+#include "timestepper/ChState.h"
+#include "fea/ChElementShellReissner4.h"
+#include "fea/ChRotUtils.h"
 #include <cmath>
 
 #define CHUSE_ANS

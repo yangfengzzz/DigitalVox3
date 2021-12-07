@@ -15,9 +15,9 @@
 #include <cstdlib>
 #include <algorithm>
 
-#include "chrono/core/ChTransform.h"
-#include "chrono/physics/ChConveyor.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChTransform.h"
+#include "physics/ChConveyor.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

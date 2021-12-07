@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChObjShapeFile.h"
+#include "assets/ChObjShapeFile.h"
 
 namespace chrono {
 

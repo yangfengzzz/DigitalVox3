@@ -14,9 +14,9 @@
 #define CHTHREADSPOSIX_H
 
 #include <string>
-#include "chrono/core/ChApiCE.h"
-#include "chrono/parallel/ChThreadsFunct.h"
-#include "chrono/collision/bullet/LinearMath/btAlignedObjectArray.h"
+#include "core/ChApiCE.h"
+#include "parallel/ChThreadsFunct.h"
+#include "collision/bullet/LinearMath/btAlignedObjectArray.h"
 
 // macOS platform-specific headers:
 #if defined(__APPLE__)

@@ -14,8 +14,8 @@
 
 
 
-#include "chrono/motion_functions/ChFunctionPosition_setpoint.h"
-#include "chrono/motion_functions/ChFunction_Const.h"
+#include "motion_functions/ChFunctionPosition_setpoint.h"
+#include "motion_functions/ChFunction_Const.h"
 
 namespace chrono {
 

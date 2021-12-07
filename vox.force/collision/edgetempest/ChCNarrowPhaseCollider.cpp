@@ -13,9 +13,9 @@
 #include <cstdio>
 #include <cstring>
 
-#include "chrono/collision/edgetempest/ChCMatVec.h"
-#include "chrono/collision/edgetempest/ChCGetTime.h"
-#include "chrono/collision/edgetempest/ChCNarrowPhaseCollider.h"
+#include "collision/edgetempest/ChCMatVec.h"
+#include "collision/edgetempest/ChCGetTime.h"
+#include "collision/edgetempest/ChCNarrowPhaseCollider.h"
 
 namespace chrono {
 namespace collision {

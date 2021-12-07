@@ -29,7 +29,7 @@
 
 #include <cmath>
 
-#include "chrono/utils/ChUtilsChaseCamera.h"
+#include "utils/ChUtilsChaseCamera.h"
 
 namespace chrono {
 namespace utils {

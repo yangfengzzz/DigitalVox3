@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/collision/ChCollisionShape.h"
+#include "collision/ChCollisionShape.h"
 
 namespace chrono {
 namespace collision {

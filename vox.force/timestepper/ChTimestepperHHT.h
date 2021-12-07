@@ -15,7 +15,7 @@
 #ifndef CHTIMESTEPPER_HHT_H
 #define CHTIMESTEPPER_HHT_H
 
-#include "chrono/timestepper/ChTimestepper.h"
+#include "timestepper/ChTimestepper.h"
 
 namespace chrono {
 

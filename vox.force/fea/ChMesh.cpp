@@ -19,15 +19,15 @@
 #include <sstream>
 #include <string>
 
-#include "chrono/core/ChMath.h"
-#include "chrono/physics/ChLoad.h"
-#include "chrono/physics/ChObject.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChMath.h"
+#include "physics/ChLoad.h"
+#include "physics/ChObject.h"
+#include "physics/ChSystem.h"
 
-#include "chrono/fea/ChElementTetraCorot_4.h"
-#include "chrono/fea/ChMesh.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "fea/ChElementTetraCorot_4.h"
+#include "fea/ChMesh.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 namespace fea {

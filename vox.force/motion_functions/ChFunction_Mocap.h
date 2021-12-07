@@ -15,7 +15,7 @@
 #ifndef CHFUNCT_MOCAP_H
 #define CHFUNCT_MOCAP_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Base.h"
 
 namespace chrono {
 

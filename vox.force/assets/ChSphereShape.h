@@ -15,8 +15,8 @@
 #ifndef CHOBJSPHERESHAPE_H
 #define CHOBJSPHERESHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChSphere.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChSphere.h"
 
 namespace chrono {
 

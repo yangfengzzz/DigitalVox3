@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChVisualization.h"
+#include "assets/ChVisualization.h"
 
 namespace chrono {
 

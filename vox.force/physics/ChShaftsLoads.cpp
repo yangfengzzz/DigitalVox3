@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/physics/ChShaftsLoads.h"
+#include "physics/ChShaftsLoads.h"
 
 namespace chrono {
 

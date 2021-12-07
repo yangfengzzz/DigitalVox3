@@ -15,9 +15,9 @@
 #ifndef CH_CONTACT_NSC_ROLLING_H
 #define CH_CONTACT_NSC_ROLLING_H
 
-#include "chrono/physics/ChContactNSC.h"
-#include "chrono/solver/ChConstraintTwoTuplesRollingN.h"
-#include "chrono/solver/ChConstraintTwoTuplesRollingT.h"
+#include "physics/ChContactNSC.h"
+#include "solver/ChConstraintTwoTuplesRollingN.h"
+#include "solver/ChConstraintTwoTuplesRollingT.h"
 
 namespace chrono {
 

@@ -13,7 +13,7 @@
 #ifndef CHCONSTRAINTTWOTUPLESCONTACTN_H
 #define CHCONSTRAINTTWOTUPLESCONTACTN_H
 
-#include "chrono/solver/ChConstraintTwoTuplesFrictionT.h"
+#include "solver/ChConstraintTwoTuplesFrictionT.h"
 
 namespace chrono {
 

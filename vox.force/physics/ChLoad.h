@@ -15,14 +15,14 @@
 #ifndef CHLOAD_H
 #define CHLOAD_H
 
-#include "chrono/physics/ChLoader.h"
-#include "chrono/physics/ChLoaderU.h"
-#include "chrono/physics/ChLoaderUV.h"
-#include "chrono/physics/ChLoaderUVW.h"
-#include "chrono/physics/ChObject.h"
-#include "chrono/solver/ChKblockGeneric.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/timestepper/ChState.h"
+#include "physics/ChLoader.h"
+#include "physics/ChLoaderU.h"
+#include "physics/ChLoaderUV.h"
+#include "physics/ChLoaderUVW.h"
+#include "physics/ChObject.h"
+#include "solver/ChKblockGeneric.h"
+#include "solver/ChSystemDescriptor.h"
+#include "timestepper/ChState.h"
 
 namespace chrono {
 

@@ -18,7 +18,7 @@
 //
 // =============================================================================
 
-#include "chrono/physics/ChLinkBushing.h"
+#include "physics/ChLinkBushing.h"
 
 namespace chrono {
 

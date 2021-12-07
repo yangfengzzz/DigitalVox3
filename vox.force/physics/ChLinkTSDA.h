@@ -23,10 +23,10 @@
 #ifndef CH_LINK_TSDA_H
 #define CH_LINK_TSDA_H
 
-#include "chrono/physics/ChLink.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/solver/ChVariablesGenericDiagonalMass.h"
-#include "chrono/solver/ChKblockGeneric.h"
+#include "physics/ChLink.h"
+#include "physics/ChBody.h"
+#include "solver/ChVariablesGenericDiagonalMass.h"
+#include "solver/ChKblockGeneric.h"
 
 namespace chrono {
 

@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/assets/ChPathShape.h"
+#include "assets/ChPathShape.h"
 
 namespace chrono {
 

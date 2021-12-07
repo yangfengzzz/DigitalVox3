@@ -18,7 +18,7 @@
 // Application to Static and Linearized Dynamic Examples.J.Comput.Nonlinear Dynam, 8 (2) : 021004, 2012.
 // =============================================================================
 
-#include "chrono/fea/ChMaterialBeamANCF.h"
+#include "fea/ChMaterialBeamANCF.h"
 
 namespace chrono {
 namespace fea {

@@ -18,7 +18,7 @@
 #include <cmath>
 #include <vector>
 
-#include "chrono/core/ChMatrix.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 namespace geometry {

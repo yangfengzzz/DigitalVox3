@@ -11,7 +11,7 @@
 // =============================================================================
 // Authors: Alessandro Tasora
 // =============================================================================
-#include "chrono/assets/ChCamera.h"
+#include "assets/ChCamera.h"
 
 namespace chrono {
 

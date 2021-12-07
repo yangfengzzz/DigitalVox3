@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkMate.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChLinkMate.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

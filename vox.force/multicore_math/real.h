@@ -18,10 +18,10 @@
 
 #pragma once
 
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
-#include "chrono/ChConfig.h"
-#include "chrono/multicore_math/ChCudaDefines.h"
+#include "ChConfig.h"
+#include "multicore_math/ChCudaDefines.h"
 
 #include <cmath>
 #include <cfloat>
@@ -29,9 +29,9 @@
 // If the user specified using doubles, define the real type as double
 // Also set some constants. The same is done if floats were specified.
 #if defined(USE_COLLISION_DOUBLE)
-    #include "chrono/multicore_math/real_double.h"
+    #include "multicore_math/real_double.h"
 #else
-    #include "chrono/multicore_math/real_single.h"
+    #include "multicore_math/real_single.h"
 #endif
 
 namespace chrono {

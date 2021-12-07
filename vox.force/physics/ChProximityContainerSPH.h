@@ -17,7 +17,7 @@
 
 #include <list>
 
-#include "chrono/physics/ChProximityContainer.h"
+#include "physics/ChProximityContainer.h"
 
 namespace chrono {
 

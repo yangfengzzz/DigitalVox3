@@ -15,10 +15,10 @@
 #ifndef CHLINKLOCK_H
 #define CHLINKLOCK_H
 
-#include "chrono/physics/ChLimit.h"
-#include "chrono/physics/ChLinkForce.h"
-#include "chrono/physics/ChLinkMarkers.h"
-#include "chrono/physics/ChLinkMask.h"
+#include "physics/ChLimit.h"
+#include "physics/ChLinkForce.h"
+#include "physics/ChLinkMarkers.h"
+#include "physics/ChLinkMask.h"
 
 namespace chrono {
 

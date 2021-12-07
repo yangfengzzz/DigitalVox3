@@ -12,19 +12,19 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/collision/ChCollisionAlgorithmsBullet.h"
-#include "chrono/collision/ChCollisionModelBullet.h"
-#include "chrono/collision/ChCollisionUtils.h"
-#include "chrono/collision/ChCollisionUtilsBullet.h"
+#include "core/ChMathematics.h"
+#include "collision/ChCollisionAlgorithmsBullet.h"
+#include "collision/ChCollisionModelBullet.h"
+#include "collision/ChCollisionUtils.h"
+#include "collision/ChCollisionUtilsBullet.h"
 
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btSphereShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCylinderShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btBoxShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCylindricalShellShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCapsuleShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/bt2DShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCEtriangleShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btSphereShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCylinderShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btBoxShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCylindricalShellShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCapsuleShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/bt2DShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCEtriangleShape.h"
 
 namespace chrono {
 namespace collision {

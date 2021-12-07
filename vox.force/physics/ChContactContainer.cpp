@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChContactContainer.h"
+#include "physics/ChContactContainer.h"
 
 namespace chrono {
 

@@ -14,8 +14,8 @@
 
 
 
-#include "chrono/motion_functions/ChFunctionRotation_axis.h"
-#include "chrono/motion_functions/ChFunction_Const.h"
+#include "motion_functions/ChFunctionRotation_axis.h"
+#include "motion_functions/ChFunction_Const.h"
 
 namespace chrono {
 

@@ -15,7 +15,7 @@
 #ifndef CHFUNCT_FILLET3_H
 #define CHFUNCT_FILLET3_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Base.h"
 
 namespace chrono {
 

@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChBarrelShape.h"
+#include "assets/ChBarrelShape.h"
 
 namespace chrono {
 

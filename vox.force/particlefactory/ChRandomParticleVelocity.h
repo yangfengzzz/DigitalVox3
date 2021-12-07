@@ -17,10 +17,10 @@
 
 #include <memory>
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChDistribution.h"
+#include "core/ChMathematics.h"
+#include "core/ChVector.h"
+#include "core/ChMatrix.h"
+#include "core/ChDistribution.h"
 
 namespace chrono {
 namespace particlefactory {

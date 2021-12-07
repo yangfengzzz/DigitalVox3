@@ -15,9 +15,9 @@
 #ifndef CH_DIRECTSOLVER_LS_H
 #define CH_DIRECTSOLVER_LS_H
 
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChTimer.h"
-#include "chrono/solver/ChSolverLS.h"
+#include "core/ChMatrix.h"
+#include "core/ChTimer.h"
+#include "solver/ChSolverLS.h"
 
 #include <Eigen/SparseLU>
 

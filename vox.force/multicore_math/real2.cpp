@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-#include "chrono/multicore_math/real2.h"
+#include "multicore_math/real2.h"
 
 namespace chrono {
 

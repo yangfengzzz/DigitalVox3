@@ -21,7 +21,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "chrono_thirdparty/rapidxml/rapidxml.hpp"
+#include <rapidxml/rapidxml.hpp>
 
 #include <stack>
 #include <fstream>

@@ -15,7 +15,7 @@
 #ifndef CHNODEFEABASE_H
 #define CHNODEFEABASE_H
 
-#include "chrono/physics/ChNodeBase.h"
+#include "physics/ChNodeBase.h"
 
 namespace chrono {
 namespace fea {

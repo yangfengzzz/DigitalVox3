@@ -15,10 +15,10 @@
 // neighbouring triangles) as in the BST Basic Shell Triangle (Onate et al.)
 // =============================================================================
 
-#include "chrono/core/ChException.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/timestepper/ChState.h"
-#include "chrono/fea/ChElementShellBST.h"
+#include "core/ChException.h"
+#include "physics/ChSystem.h"
+#include "timestepper/ChState.h"
+#include "fea/ChElementShellBST.h"
 #include <cmath>
 
 

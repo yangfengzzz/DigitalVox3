@@ -22,16 +22,16 @@
 #include <string>
 #include <cctype>
 
-#include "chrono/core/ChMath.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChMath.h"
+#include "physics/ChSystem.h"
 
 #include <array>
-#include "chrono/fea/ChElementShellANCF_3423.h"
-#include "chrono/fea/ChElementTetraCorot_4.h"
-#include "chrono/fea/ChMeshFileLoader.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "fea/ChElementShellANCF_3423.h"
+#include "fea/ChElementTetraCorot_4.h"
+#include "fea/ChMeshFileLoader.h"
+#include "fea/ChNodeFEAxyz.h"
 
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
 namespace chrono {
 namespace fea {

@@ -20,7 +20,7 @@
 #ifndef CH_SYSTEM_NSC_H
 #define CH_SYSTEM_NSC_H
 
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

@@ -23,10 +23,10 @@
 #include <valarray>
 #include <vector>
 
-#include <chrono/motion_functions/ChFunction_Recorder.h>
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChVector.h"
+#include "motion_functions/ChFunction_Recorder.h"
+#include "core/ChApiCE.h"
+#include "core/ChMathematics.h"
+#include "core/ChVector.h"
 
 namespace chrono {
 

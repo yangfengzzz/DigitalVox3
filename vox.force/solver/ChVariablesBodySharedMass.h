@@ -15,7 +15,7 @@
 #ifndef CHVARIABLESBODYSHAREDMASS_H
 #define CHVARIABLESBODYSHAREDMASS_H
 
-#include "chrono/solver/ChVariablesBody.h"
+#include "solver/ChVariablesBody.h"
 
 namespace chrono {
 

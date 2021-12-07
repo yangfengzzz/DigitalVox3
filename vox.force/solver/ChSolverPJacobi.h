@@ -15,7 +15,7 @@
 #ifndef CHSOLVERJACOBI_H
 #define CHSOLVERJACOBI_H
 
-#include "chrono/solver/ChIterativeSolverVI.h"
+#include "solver/ChIterativeSolverVI.h"
 
 namespace chrono {
 

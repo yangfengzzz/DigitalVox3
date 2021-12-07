@@ -15,8 +15,8 @@
 #ifndef CHLINK_H
 #define CHLINK_H
 
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChLinkBase.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChLinkBase.h"
 
 namespace chrono {
 

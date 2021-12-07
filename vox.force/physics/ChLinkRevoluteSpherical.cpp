@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkRevoluteSpherical.h"
+#include "physics/ChLinkRevoluteSpherical.h"
 
 namespace chrono {
 

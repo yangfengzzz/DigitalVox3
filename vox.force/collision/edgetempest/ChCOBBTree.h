@@ -13,8 +13,8 @@
 #ifndef CHC_OBBTREE
 #define CHC_OBBTREE
 
-#include "chrono/collision/edgetempest/ChCCollisionTree.h"
-#include "chrono/collision/edgetempest/ChCOBB.h"
+#include "collision/edgetempest/ChCCollisionTree.h"
+#include "collision/edgetempest/ChCOBB.h"
 
 namespace chrono {
 namespace collision {

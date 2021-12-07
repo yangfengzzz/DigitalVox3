@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/geometry/ChLineNurbs.h"
+#include "geometry/ChLineNurbs.h"
 
 namespace chrono {
 namespace geometry {

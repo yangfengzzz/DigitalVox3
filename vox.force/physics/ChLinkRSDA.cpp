@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkRSDA.h"
+#include "physics/ChLinkRSDA.h"
 
 namespace chrono {
 

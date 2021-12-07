@@ -15,9 +15,9 @@
 #ifndef CHCONTINUUMMATERIAL_H
 #define CHCONTINUUMMATERIAL_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/core/ChTensors.h"
+#include "core/ChApiCE.h"
+#include "core/ChMath.h"
+#include "core/ChTensors.h"
 
 namespace chrono {
 namespace fea {

@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkRevoluteTranslational.h"
+#include "physics/ChLinkRevoluteTranslational.h"
 
 namespace chrono {
 

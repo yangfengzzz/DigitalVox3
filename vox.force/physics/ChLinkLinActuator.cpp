@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkLinActuator.h"
+#include "physics/ChLinkLinActuator.h"
 
 namespace chrono {
 

@@ -13,7 +13,7 @@
 #ifndef CHLOADERUV_H
 #define CHLOADERUV_H
 
-#include "chrono/physics/ChLoader.h"
+#include "physics/ChLoader.h"
 
 namespace chrono {
 

@@ -22,10 +22,10 @@
 
 #include <cmath>
 
-#include "chrono/fea/ChElementShellANCF_3423.h"
-#include "chrono/core/ChException.h"
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/physics/ChSystem.h"
+#include "fea/ChElementShellANCF_3423.h"
+#include "core/ChException.h"
+#include "core/ChQuadrature.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace fea {

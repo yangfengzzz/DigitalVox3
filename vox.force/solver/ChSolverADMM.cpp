@@ -12,11 +12,11 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/solver/ChSolverADMM.h"
-#include "chrono/core/ChMathematics.h"
+#include "solver/ChSolverADMM.h"
+#include "core/ChMathematics.h"
 
-#include "chrono/solver/ChIterativeSolverLS.h"
-#include "chrono/core/ChSparsityPatternLearner.h"
+#include "solver/ChIterativeSolverLS.h"
+#include "core/ChSparsityPatternLearner.h"
 
 namespace chrono {
 

@@ -17,8 +17,8 @@
 
 #include <cmath>
 
-#include "chrono/geometry/ChLine.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "geometry/ChLine.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 namespace geometry {

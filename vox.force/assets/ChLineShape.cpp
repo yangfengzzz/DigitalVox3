@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/assets/ChLineShape.h"
+#include "assets/ChLineShape.h"
 
 namespace chrono {
 

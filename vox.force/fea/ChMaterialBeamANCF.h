@@ -21,7 +21,7 @@
 #ifndef CHMATERIALBEAMANCF_H
 #define CHMATERIALBEAMANCF_H
 
-#include "chrono/fea/ChElementBeam.h"
+#include "fea/ChElementBeam.h"
 
 namespace chrono {
 namespace fea {

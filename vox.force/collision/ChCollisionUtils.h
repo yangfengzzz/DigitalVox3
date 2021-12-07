@@ -15,8 +15,8 @@
 #ifndef CH_COLLISION_UTILS_H
 #define CH_COLLISION_UTILS_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/physics/ChBody.h"
+#include "core/ChApiCE.h"
+#include "physics/ChBody.h"
 
 namespace chrono {
 namespace collision {

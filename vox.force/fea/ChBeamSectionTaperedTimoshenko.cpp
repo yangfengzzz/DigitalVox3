@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChBeamSectionTaperedTimoshenko.h"
+#include "fea/ChBeamSectionTaperedTimoshenko.h"
 
 namespace chrono {
 namespace fea {

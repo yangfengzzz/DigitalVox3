@@ -15,8 +15,8 @@
 #ifndef CHNODEFEAXYZP_H
 #define CHNODEFEAXYZP_H
 
-#include "chrono/solver/ChVariablesGeneric.h"
-#include "chrono/fea/ChNodeFEAbase.h"
+#include "solver/ChVariablesGeneric.h"
+#include "fea/ChNodeFEAbase.h"
 
 namespace chrono {
 namespace fea {

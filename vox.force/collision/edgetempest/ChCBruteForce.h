@@ -13,8 +13,8 @@
 #ifndef CHC_BRUTEFORCE_H
 #define CHC_BRUTEFORCE_H
 
-#include "chrono/geometry/ChGeometry.h"
-#include "chrono/collision/edgetempest/ChCBroadPhaseCollider.h"
+#include "geometry/ChGeometry.h"
+#include "collision/edgetempest/ChCBroadPhaseCollider.h"
 
 namespace chrono {
 namespace collision {

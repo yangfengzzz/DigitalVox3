@@ -13,8 +13,8 @@
 #ifndef CHSURFACESHAPE_H
 #define CHSURFACESHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChSurface.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChSurface.h"
 
 namespace chrono {
 

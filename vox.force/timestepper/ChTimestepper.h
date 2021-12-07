@@ -16,11 +16,11 @@
 #define CHTIMESTEPPER_H
 
 #include <cstdlib>
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/serialization/ChArchive.h"
-#include "chrono/timestepper/ChIntegrable.h"
-#include "chrono/timestepper/ChState.h"
+#include "core/ChApiCE.h"
+#include "core/ChMath.h"
+#include "serialization/ChArchive.h"
+#include "timestepper/ChIntegrable.h"
+#include "timestepper/ChState.h"
 
 namespace chrono {
 

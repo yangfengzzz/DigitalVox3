@@ -21,7 +21,7 @@
 #ifndef CHVISUALMATERIAL_H
 #define CHVISUALMATERIAL_H
 
-#include "chrono/assets/ChAsset.h"
+#include "assets/ChAsset.h"
 
 namespace chrono {
 

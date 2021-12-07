@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/physics/ChSystem.h"
-#include "chrono/fea/ChBuilderBeam.h"
+#include "physics/ChSystem.h"
+#include "fea/ChBuilderBeam.h"
 
 namespace chrono {
 namespace fea {

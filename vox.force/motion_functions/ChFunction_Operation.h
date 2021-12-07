@@ -15,8 +15,8 @@
 #ifndef CHFUNCT_OPERATION_H
 #define CHFUNCT_OPERATION_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
-#include "chrono/motion_functions/ChFunction_Const.h"
+#include "motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Const.h"
 
 namespace chrono {
 

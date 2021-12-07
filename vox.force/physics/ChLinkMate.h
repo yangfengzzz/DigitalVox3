@@ -15,8 +15,8 @@
 #ifndef CHLINKMATE_H
 #define CHLINKMATE_H
 
-#include "chrono/physics/ChLink.h"
-#include "chrono/physics/ChLinkMask.h"
+#include "physics/ChLink.h"
+#include "physics/ChLinkMask.h"
 
 namespace chrono {
 

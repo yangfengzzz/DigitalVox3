@@ -17,15 +17,15 @@
 //
 // =============================================================================
 
-#include "chrono/physics/ChBodyEasy.h"
+#include "physics/ChBodyEasy.h"
 
-#include "chrono/assets/ChBoxShape.h"
-#include "chrono/assets/ChCylinderShape.h"
-#include "chrono/assets/ChEllipsoidShape.h"
-#include "chrono/assets/ChObjShapeFile.h"
-#include "chrono/assets/ChSphereShape.h"
-#include "chrono/assets/ChTriangleMeshShape.h"
-#include "chrono/collision/ChCollisionUtilsBullet.h"
+#include "assets/ChBoxShape.h"
+#include "assets/ChCylinderShape.h"
+#include "assets/ChEllipsoidShape.h"
+#include "assets/ChObjShapeFile.h"
+#include "assets/ChSphereShape.h"
+#include "assets/ChTriangleMeshShape.h"
+#include "collision/ChCollisionUtilsBullet.h"
 
 namespace chrono {
 

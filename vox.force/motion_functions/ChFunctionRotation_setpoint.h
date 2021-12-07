@@ -15,7 +15,7 @@
 #ifndef CHFUNCTIONROTATION_SETPOINT_H
 #define CHFUNCTIONROTATION_SETPOINT_H
 
-#include "chrono/motion_functions/ChFunctionRotation.h"
+#include "motion_functions/ChFunctionRotation.h"
 
 
 namespace chrono {

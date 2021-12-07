@@ -15,7 +15,7 @@
 #ifndef CHLINKCLEARANCE_H
 #define CHLINKCLEARANCE_H
 
-#include "chrono/physics/ChLinkLock.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

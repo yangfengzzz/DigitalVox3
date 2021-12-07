@@ -19,9 +19,9 @@
 
 #include <iostream>
 
-#include "chrono/multicore_math/ChCudaDefines.h"
-#include "chrono/multicore_math/real3.h"
-#include "chrono/multicore_math/simd.h"
+#include "multicore_math/ChCudaDefines.h"
+#include "multicore_math/real3.h"
+#include "multicore_math/simd.h"
 
 #define S2 _make_short2
 #define U3 _make_uvec3

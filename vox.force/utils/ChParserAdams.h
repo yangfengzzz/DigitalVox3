@@ -23,9 +23,9 @@
 #include <map>
 #include <sstream>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/physics/ChBodyAuxRef.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChApiCE.h"
+#include "physics/ChBodyAuxRef.h"
+#include "physics/ChSystem.h"
 
 enum TokenType {
     MARKER,

@@ -20,10 +20,10 @@
 #ifndef CHLOADSXYZROTNODE_H
 #define CHLOADSXYZROTNODE_H
 
-#include "chrono/physics/ChLoad.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "physics/ChLoad.h"
+#include "fea/ChNodeFEAxyzrot.h"
+#include "physics/ChBody.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 namespace fea {

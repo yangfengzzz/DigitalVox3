@@ -15,11 +15,11 @@
 #ifndef CHELEMENTBEAMTAPEREDTIMOSHENKOFPM_H
 #define CHELEMENTBEAMTAPEREDTIMOSHENKOFPM_H
 
-#include "chrono/fea/ChBeamSectionTaperedTimoshenkoFPM.h"
-#include "chrono/fea/ChElementBeamTaperedTimoshenko.h"
-#include "chrono/fea/ChElementBeam.h"
-#include "chrono/fea/ChElementCorotational.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "fea/ChBeamSectionTaperedTimoshenkoFPM.h"
+#include "fea/ChElementBeamTaperedTimoshenko.h"
+#include "fea/ChElementBeam.h"
+#include "fea/ChElementCorotational.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 namespace fea {

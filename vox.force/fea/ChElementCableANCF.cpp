@@ -16,8 +16,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/fea/ChElementCableANCF.h"
+#include "core/ChQuadrature.h"
+#include "fea/ChElementCableANCF.h"
 
 namespace chrono {
 namespace fea {

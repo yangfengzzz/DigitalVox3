@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChEmitterAsset.h"
-#include "chrono/physics/ChBody.h"
+#include "assets/ChEmitterAsset.h"
+#include "physics/ChBody.h"
 
 namespace chrono {
 

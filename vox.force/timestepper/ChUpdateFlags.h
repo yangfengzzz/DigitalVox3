@@ -15,7 +15,7 @@
 #ifndef CHUPDATEFLAGS_H
 #define CHUPDATEFLAGS_H
 
-#include "chrono/core/ChBitmaskEnums.h"
+#include "core/ChBitmaskEnums.h"
 
 namespace chrono {
 

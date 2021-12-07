@@ -15,15 +15,15 @@
 #ifndef CHVISUALIZATIONFEAMESH_H
 #define CHVISUALIZATIONFEAMESH_H
 
-#include "chrono/assets/ChAssetLevel.h"
-#include "chrono/assets/ChColor.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "assets/ChAssetLevel.h"
+#include "assets/ChColor.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
-#include "chrono/fea/ChMesh.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChNodeFEAxyzP.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
-#include "chrono/fea/ChNodeFEAxyzDD.h"
+#include "fea/ChMesh.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyzP.h"
+#include "fea/ChNodeFEAxyzrot.h"
+#include "fea/ChNodeFEAxyzDD.h"
 
 namespace chrono {
 namespace fea {

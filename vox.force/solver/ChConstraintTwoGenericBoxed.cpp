@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChConstraintTwoGenericBoxed.h"
+#include "solver/ChConstraintTwoGenericBoxed.h"
 
 namespace chrono {
 

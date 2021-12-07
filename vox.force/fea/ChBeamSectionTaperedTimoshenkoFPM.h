@@ -15,8 +15,8 @@
 #ifndef CHBEAMSECTIONTAPEREDTIMOSHENKOFPM_H
 #define CHBEAMSECTIONTAPEREDTIMOSHENKOFPM_H
 
-#include "chrono/core/ChMath.h"
-#include "chrono/fea/ChBeamSectionTaperedTimoshenko.h"
+#include "core/ChMath.h"
+#include "fea/ChBeamSectionTaperedTimoshenko.h"
 
 namespace chrono {
 namespace fea {

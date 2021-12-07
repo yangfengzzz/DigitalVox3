@@ -13,9 +13,9 @@
 #ifndef CHLOADABLE_H
 #define CHLOADABLE_H
 
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/solver/ChVariables.h"
+#include "core/ChMatrix.h"
+#include "core/ChVector.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

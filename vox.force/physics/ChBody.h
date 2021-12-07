@@ -17,15 +17,15 @@
 
 #include <cmath>
 
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChContactable.h"
-#include "chrono/physics/ChForce.h"
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/physics/ChMarker.h"
-#include "chrono/physics/ChPhysicsItem.h"
-#include "chrono/collision/ChCollisionSystem.h"
-#include "chrono/solver/ChConstraint.h"
-#include "chrono/solver/ChVariablesBodyOwnMass.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChContactable.h"
+#include "physics/ChForce.h"
+#include "physics/ChLoadable.h"
+#include "physics/ChMarker.h"
+#include "physics/ChPhysicsItem.h"
+#include "collision/ChCollisionSystem.h"
+#include "solver/ChConstraint.h"
+#include "solver/ChVariablesBodyOwnMass.h"
 
 namespace chrono {
 

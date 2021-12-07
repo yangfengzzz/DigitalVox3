@@ -18,8 +18,8 @@
 #include <cmath>
 #include <vector>
 
-#include "chrono/core/ChMath.h"
-#include "chrono/solver/ChConstraintTwoBodies.h"
+#include "core/ChMath.h"
+#include "solver/ChConstraintTwoBodies.h"
 
 namespace chrono {
 

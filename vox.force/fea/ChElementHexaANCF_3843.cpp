@@ -34,8 +34,8 @@
 // will likely result in numerical issues with the element.
 // =============================================================================
 
-#include "chrono/fea/ChElementHexaANCF_3843.h"
-#include "chrono/physics/ChSystem.h"
+#include "fea/ChElementHexaANCF_3843.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace fea {

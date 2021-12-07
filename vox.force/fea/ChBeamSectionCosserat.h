@@ -15,8 +15,8 @@
 #ifndef CHBEAMSECTIONCOSSERAT_H
 #define CHBEAMSECTIONCOSSERAT_H
 
-#include "chrono/fea/ChBeamSection.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "fea/ChBeamSection.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 namespace fea {

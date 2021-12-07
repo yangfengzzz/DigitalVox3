@@ -15,7 +15,7 @@
 #ifndef CHCONSTRAINTTWOGENERICBOXED_H
 #define CHCONSTRAINTTWOGENERICBOXED_H
 
-#include "chrono/solver/ChConstraintTwoGeneric.h"
+#include "solver/ChConstraintTwoGeneric.h"
 
 namespace chrono {
 

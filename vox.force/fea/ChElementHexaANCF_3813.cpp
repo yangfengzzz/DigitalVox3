@@ -19,9 +19,9 @@
 //// - reconsider the use of large static matrices
 //// - more use of Eigen expressions
 
-#include "chrono/core/ChException.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/fea/ChElementHexaANCF_3813.h"
+#include "core/ChException.h"
+#include "physics/ChSystem.h"
+#include "fea/ChElementHexaANCF_3813.h"
 
 namespace chrono {
 namespace fea {

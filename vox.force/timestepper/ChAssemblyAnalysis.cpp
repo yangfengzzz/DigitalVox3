@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/core/ChMath.h"
-#include "chrono/timestepper/ChAssemblyAnalysis.h"
+#include "core/ChMath.h"
+#include "timestepper/ChAssemblyAnalysis.h"
 
 namespace chrono {
 

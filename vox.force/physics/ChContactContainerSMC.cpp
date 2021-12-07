@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChContactContainerSMC.h"
-#include "chrono/physics/ChSystemSMC.h"
+#include "physics/ChContactContainerSMC.h"
+#include "physics/ChSystemSMC.h"
 
 namespace chrono {
 

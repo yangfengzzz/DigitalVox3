@@ -15,8 +15,8 @@
 #ifndef CHLOADCONTACTSURFACEMESH_H
 #define CHLOADCONTACTSURFACEMESH_H
 
-#include "chrono/physics/ChLoadsXYZnode.h"
-#include "chrono/fea/ChContactSurfaceMesh.h"
+#include "physics/ChLoadsXYZnode.h"
+#include "fea/ChContactSurfaceMesh.h"
 
 namespace chrono {
 namespace fea {

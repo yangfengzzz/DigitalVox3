@@ -15,8 +15,8 @@
 #ifndef CHFUNCTIONROTATION_AXIS_H
 #define CHFUNCTIONROTATION_AXIS_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
-#include "chrono/motion_functions/ChFunctionRotation.h"
+#include "motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunctionRotation.h"
 
 
 namespace chrono {

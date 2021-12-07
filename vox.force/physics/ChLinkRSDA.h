@@ -20,7 +20,7 @@
 #ifndef CH_LINK_RSDA_H
 #define CH_LINK_RSDA_H
 
-#include "chrono/physics/ChLinkMarkers.h"
+#include "physics/ChLinkMarkers.h"
 
 namespace chrono {
 

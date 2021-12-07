@@ -15,15 +15,15 @@
 // Description: Vectorized implementation of a 3d vector
 // =============================================================================
 
-#include "chrono/multicore_math/simd.h"
-#include "chrono/multicore_math/real3.h"
+#include "multicore_math/simd.h"
+#include "multicore_math/real3.h"
 
 #if defined(USE_SSE)
-    #include "chrono/multicore_math/simd_sse.h"
+    #include "multicore_math/simd_sse.h"
 #elif defined(USE_AVX)
-    #include "chrono/multicore_math/simd_avx.h"
+    #include "multicore_math/simd_avx.h"
 #else
-    #include "chrono/multicore_math/simd_non.h"
+    #include "multicore_math/simd_non.h"
 #endif
 
 #include <iostream>

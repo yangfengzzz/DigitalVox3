@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkUniversal.h"
+#include "physics/ChLinkUniversal.h"
 
 namespace chrono {
 

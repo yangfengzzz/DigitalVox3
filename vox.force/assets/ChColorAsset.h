@@ -15,8 +15,8 @@
 #ifndef CHCOLORASSET_H
 #define CHCOLORASSET_H
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/assets/ChColor.h"
+#include "assets/ChAsset.h"
+#include "assets/ChColor.h"
 
 namespace chrono {
 

@@ -17,12 +17,12 @@
 
 #pragma once
 
-#include "chrono/multicore_math/real.h"
-#include "chrono/multicore_math/real2.h"
-#include "chrono/multicore_math/real3.h"
-#include "chrono/multicore_math/real4.h"
-#include "chrono/multicore_math/other_types.h"
-#include "chrono/multicore_math/utility.h"
+#include "multicore_math/real.h"
+#include "multicore_math/real2.h"
+#include "multicore_math/real3.h"
+#include "multicore_math/real4.h"
+#include "multicore_math/other_types.h"
+#include "multicore_math/utility.h"
 
 #undef _GLIBCXX_ATOMIC_BUILTINS
 #undef _GLIBCXX_USE_INT128
@@ -34,7 +34,7 @@
 // -----------------------------------------------------------------------------
 
 // Always include ChConfig.h *before* any Thrust headers!
-#include "chrono/ChConfig.h"
+#include "ChConfig.h"
 #include <thrust/reduce.h>
 #include <thrust/gather.h>
 #include <thrust/scan.h>

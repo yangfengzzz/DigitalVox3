@@ -16,7 +16,7 @@
 #include <cfloat>
 #include <cmath>
 
-#include "chrono/motion_functions/ChFunctionPosition.h"
+#include "motion_functions/ChFunctionPosition.h"
 
 namespace chrono {
 

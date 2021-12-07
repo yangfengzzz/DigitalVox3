@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChElementTetraCorot_10.h"
+#include "fea/ChElementTetraCorot_10.h"
 
 namespace chrono {
 namespace fea {

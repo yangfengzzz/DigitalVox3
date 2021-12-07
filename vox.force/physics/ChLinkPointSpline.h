@@ -15,8 +15,8 @@
 #ifndef CHLINKPOINTSPLINE_H
 #define CHLINKPOINTSPLINE_H
 
-#include "chrono/geometry/ChLine.h"
-#include "chrono/physics/ChLinkLock.h"
+#include "geometry/ChLine.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

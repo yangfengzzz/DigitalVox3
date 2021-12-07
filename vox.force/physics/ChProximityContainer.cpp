@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChProximityContainer.h"
+#include "physics/ChProximityContainer.h"
 
 namespace chrono {
 

@@ -14,9 +14,9 @@
 
 
 
-#include "chrono/motion_functions/ChFunctionPosition_line.h"
-#include "chrono/motion_functions/ChFunction_Ramp.h"
-#include "chrono/geometry/ChLineSegment.h"
+#include "motion_functions/ChFunctionPosition_line.h"
+#include "motion_functions/ChFunction_Ramp.h"
+#include "geometry/ChLineSegment.h"
 
 namespace chrono {
 

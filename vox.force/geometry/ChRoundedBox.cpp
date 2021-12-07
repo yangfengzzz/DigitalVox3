@@ -14,8 +14,8 @@
 
 #include <cstdio>
 
-#include "chrono/core/ChTransform.h"
-#include "chrono/geometry/ChRoundedBox.h"
+#include "core/ChTransform.h"
+#include "geometry/ChRoundedBox.h"
 
 namespace chrono {
 namespace geometry {

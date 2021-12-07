@@ -20,7 +20,7 @@
 #include <array>
 #include <vector>
 
-#include "chrono/fea/ChElementShell.h"
+#include "fea/ChElementShell.h"
 
 namespace chrono {
 namespace fea {

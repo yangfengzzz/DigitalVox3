@@ -15,8 +15,8 @@
 #ifndef CHASSET_H
 #define CHASSET_H
 
-#include "chrono/core/ChCoordsys.h"
-#include "chrono/serialization/ChArchive.h"
+#include "core/ChCoordsys.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 

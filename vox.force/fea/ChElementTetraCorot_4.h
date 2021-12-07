@@ -17,13 +17,13 @@
 
 #include <cmath>
 
-#include "chrono/fea/ChElementTetrahedron.h"
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/fea/ChElementCorotational.h"
-#include "chrono/fea/ChContinuumPoisson3D.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChNodeFEAxyzP.h"
-#include "chrono/core/ChTensors.h"
+#include "fea/ChElementTetrahedron.h"
+#include "fea/ChElementGeneric.h"
+#include "fea/ChElementCorotational.h"
+#include "fea/ChContinuumPoisson3D.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyzP.h"
+#include "core/ChTensors.h"
 
 namespace chrono {
 namespace fea {

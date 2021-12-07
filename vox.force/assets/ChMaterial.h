@@ -16,9 +16,9 @@
 #include <string>
 #include <vector>
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/assets/ChColor.h"
-#include "chrono/serialization/ChArchive.h"
+#include "assets/ChAsset.h"
+#include "assets/ChColor.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 

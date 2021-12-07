@@ -13,11 +13,11 @@
 #ifndef CHCONTACTTUPLE_H
 #define CHCONTACTTUPLE_H
 
-#include "chrono/core/ChFrame.h"
-#include "chrono/solver/ChConstraintTwoTuplesContactN.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/collision/ChCollisionInfo.h"
+#include "core/ChFrame.h"
+#include "solver/ChConstraintTwoTuplesContactN.h"
+#include "solver/ChSystemDescriptor.h"
+#include "collision/ChCollisionModel.h"
+#include "collision/ChCollisionInfo.h"
 
 namespace chrono {
 

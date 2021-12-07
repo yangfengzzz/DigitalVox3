@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChIndexedNodes.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/fea/ChLinkPointFrame.h"
+#include "physics/ChIndexedNodes.h"
+#include "physics/ChSystem.h"
+#include "fea/ChLinkPointFrame.h"
 
 namespace chrono {
 namespace fea {

@@ -15,8 +15,8 @@
 #include <cstdio>
 #include <iostream>
 
-#include "chrono/geometry/ChTriangleMeshSoup.h"
-#include "chrono_thirdparty/tinyobjloader/tiny_obj_loader.h"
+#include "geometry/ChTriangleMeshSoup.h"
+#include <tinyobjloader/tiny_obj_loader.h>
 
 namespace chrono {
 namespace geometry {

@@ -15,8 +15,8 @@
 #ifndef CH_ITERATIVESOLVER_VI_H
 #define CH_ITERATIVESOLVER_VI_H
 
-#include "chrono/solver/ChSolverVI.h"
-#include "chrono/solver/ChIterativeSolver.h"
+#include "solver/ChSolverVI.h"
+#include "solver/ChIterativeSolver.h"
 
 namespace chrono {
 

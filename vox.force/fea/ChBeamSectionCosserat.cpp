@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChBeamSectionCosserat.h"
-#include "chrono/core/ChMatrixMBD.h"
+#include "fea/ChBeamSectionCosserat.h"
+#include "core/ChMatrixMBD.h"
 #include <math.h>
 
 namespace chrono {

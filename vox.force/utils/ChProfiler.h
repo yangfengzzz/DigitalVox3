@@ -45,7 +45,7 @@ CODE MODIFIED FROM:
 #include <ctime>
 #include <ratio>
 #include <chrono>
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
 namespace chrono {
 namespace utils {

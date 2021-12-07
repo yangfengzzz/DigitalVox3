@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/assets/ChSurfaceShape.h"
+#include "assets/ChSurfaceShape.h"
 
 namespace chrono {
 

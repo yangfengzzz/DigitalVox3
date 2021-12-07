@@ -15,7 +15,7 @@
 #ifndef CH_COLLISION_PAIR_H
 #define CH_COLLISION_PAIR_H
 
-#include "chrono/geometry/ChGeometry.h"
+#include "geometry/ChGeometry.h"
 
 namespace chrono {
 namespace collision {

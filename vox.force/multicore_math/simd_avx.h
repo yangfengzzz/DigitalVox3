@@ -12,8 +12,8 @@
 // Authors: Hammad Mazhar, Radu Serban
 // =============================================================================
 
-#include "chrono/multicore_math/simd.h"
-#include "chrono/multicore_math/real.h"
+#include "multicore_math/simd.h"
+#include "multicore_math/real.h"
 
 using namespace chrono;
 

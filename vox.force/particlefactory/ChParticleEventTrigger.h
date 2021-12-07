@@ -17,8 +17,8 @@
 
 #include <unordered_map>
 
-#include "chrono/physics/ChSystem.h"
-#include "chrono/geometry/ChBox.h"
+#include "physics/ChSystem.h"
+#include "geometry/ChBox.h"
 
 namespace chrono {
 namespace particlefactory {

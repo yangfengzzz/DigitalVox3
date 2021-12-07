@@ -21,14 +21,14 @@
 
 #include <vector>
 
-#include "chrono/ChConfig.h"
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChCoordsys.h"
-#include "chrono/core/ChMatrix33.h"
-#include "chrono/geometry/ChLinePath.h"
-#include "chrono/geometry/ChTriangleMesh.h"
-#include "chrono/physics/ChContactable.h"
-#include "chrono/collision/ChCollisionShape.h"
+#include "ChConfig.h"
+#include "core/ChApiCE.h"
+#include "core/ChCoordsys.h"
+#include "core/ChMatrix33.h"
+#include "geometry/ChLinePath.h"
+#include "geometry/ChTriangleMesh.h"
+#include "physics/ChContactable.h"
+#include "collision/ChCollisionShape.h"
 
 namespace chrono {
 

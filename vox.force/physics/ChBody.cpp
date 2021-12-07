@@ -15,16 +15,16 @@
 #include <cstdlib>
 #include <algorithm>
 
-#include "chrono/core/ChGlobal.h"
-#include "chrono/core/ChTransform.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChForce.h"
-#include "chrono/physics/ChMarker.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChGlobal.h"
+#include "core/ChTransform.h"
+#include "physics/ChBody.h"
+#include "physics/ChForce.h"
+#include "physics/ChMarker.h"
+#include "physics/ChSystem.h"
 
-#include "chrono/collision/ChCollisionModelBullet.h"
+#include "collision/ChCollisionModelBullet.h"
 #ifdef CHRONO_COLLISION
-    #include "chrono/collision/ChCollisionModelChrono.h"
+    #include "collision/ChCollisionModelChrono.h"
 #endif
 
 namespace chrono {

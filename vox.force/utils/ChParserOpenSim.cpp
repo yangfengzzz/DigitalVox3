@@ -21,24 +21,24 @@
 //
 // =============================================================================
 
-#include "chrono/utils/ChParserOpenSim.h"
-#include "chrono_thirdparty/filesystem/path.h"
-#include "chrono_thirdparty/filesystem/resolver.h"
-#include "chrono_thirdparty/rapidxml/rapidxml_print.hpp"
-#include "chrono_thirdparty/rapidxml/rapidxml_utils.hpp"
+#include "utils/ChParserOpenSim.h"
+#include <filesystem/path.h>
+#include <filesystem/resolver.h>
+#include <rapidxml/rapidxml_print.hpp>
+#include <rapidxml/rapidxml_utils.hpp>
 
-#include "chrono/core/ChCubicSpline.h"
-#include "chrono/core/ChFrame.h"
-#include "chrono/physics/ChSystemNSC.h"
-#include "chrono/physics/ChSystemSMC.h"
+#include "core/ChCubicSpline.h"
+#include "core/ChFrame.h"
+#include "physics/ChSystemNSC.h"
+#include "physics/ChSystemSMC.h"
 
-#include "chrono/assets/ChColorAsset.h"
-#include "chrono/assets/ChCylinderShape.h"
-#include "chrono/assets/ChObjShapeFile.h"
-#include "chrono/assets/ChSphereShape.h"
-#include "chrono/utils/ChUtilsCreators.h"
+#include "assets/ChColorAsset.h"
+#include "assets/ChCylinderShape.h"
+#include "assets/ChObjShapeFile.h"
+#include "assets/ChSphereShape.h"
+#include "utils/ChUtilsCreators.h"
 
-#include "chrono/utils/ChUtilsInputOutput.h"
+#include "utils/ChUtilsInputOutput.h"
 
 #include <cstring>
 #include <utility>

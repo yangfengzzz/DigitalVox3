@@ -19,7 +19,7 @@
 
 #include <vector>
 
-#include "chrono/core/ChMatrix33.h"
+#include "core/ChMatrix33.h"
 
 namespace chrono {
 namespace fea {

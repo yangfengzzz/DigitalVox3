@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLimit.h"
+#include "physics/ChLimit.h"
 
 namespace chrono {
 

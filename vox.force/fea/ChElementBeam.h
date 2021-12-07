@@ -15,7 +15,7 @@
 #ifndef CHELEMENTBEAM_H
 #define CHELEMENTBEAM_H
 
-#include "chrono/fea/ChElementGeneric.h"
+#include "fea/ChElementGeneric.h"
 
 namespace chrono {
 namespace fea {

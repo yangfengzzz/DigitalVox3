@@ -13,7 +13,7 @@
 #ifndef CHOPENMP_H
 #define CHOPENMP_H
 
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
 #ifdef _OPENMP
 #include <omp.h>

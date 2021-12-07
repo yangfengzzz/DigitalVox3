@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChMatrixCorotation.h"
+#include "fea/ChMatrixCorotation.h"
 
 namespace chrono {
 namespace fea {

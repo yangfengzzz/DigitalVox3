@@ -15,12 +15,12 @@
 #ifndef CHCONTACTSURFACEMESH_H
 #define CHCONTACTSURFACEMESH_H
 
-#include "chrono/fea/ChContactSurface.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/collision/ChCollisionUtils.h"
-#include "chrono/physics/ChLoaderUV.h"
+#include "fea/ChContactSurface.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyzrot.h"
+#include "collision/ChCollisionModel.h"
+#include "collision/ChCollisionUtils.h"
+#include "physics/ChLoaderUV.h"
 
 namespace chrono {
 namespace fea {

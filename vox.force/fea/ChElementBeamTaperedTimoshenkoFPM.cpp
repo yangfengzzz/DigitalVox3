@@ -13,8 +13,8 @@
 // =============================================================================
 
 //#define BEAM_VERBOSE
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/fea/ChElementBeamTaperedTimoshenkoFPM.h"
+#include "core/ChQuadrature.h"
+#include "fea/ChElementBeamTaperedTimoshenkoFPM.h"
 
 namespace chrono {
 namespace fea {

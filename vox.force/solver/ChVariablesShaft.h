@@ -15,7 +15,7 @@
 #ifndef CHVARIABLESSHAFT_H
 #define CHVARIABLESSHAFT_H
 
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

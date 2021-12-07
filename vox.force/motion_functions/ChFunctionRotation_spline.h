@@ -15,8 +15,8 @@
 #ifndef CHFUNCTIONROTATION_SPLINE_H
 #define CHFUNCTIONROTATION_SPLINE_H
 
-#include "chrono/motion_functions/ChFunctionRotation.h"
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunctionRotation.h"
+#include "motion_functions/ChFunction_Base.h"
 
 
 namespace chrono {

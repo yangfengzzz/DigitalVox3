@@ -14,21 +14,21 @@
 
 #include <algorithm>
 
-#include "chrono/collision/ChCollisionSystemBullet.h"
+#include "collision/ChCollisionSystemBullet.h"
 #ifdef CHRONO_COLLISION
-    #include "chrono/collision/ChCollisionSystemChrono.h"
+    #include "collision/ChCollisionSystemChrono.h"
 #endif
-#include "chrono/physics/ChProximityContainer.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/solver/ChSolverAPGD.h"
-#include "chrono/solver/ChSolverBB.h"
-#include "chrono/solver/ChSolverPJacobi.h"
-#include "chrono/solver/ChSolverPMINRES.h"
-#include "chrono/solver/ChSolverPSOR.h"
-#include "chrono/solver/ChSolverPSSOR.h"
-#include "chrono/solver/ChIterativeSolverLS.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/utils/ChProfiler.h"
+#include "physics/ChProximityContainer.h"
+#include "physics/ChSystem.h"
+#include "solver/ChSolverAPGD.h"
+#include "solver/ChSolverBB.h"
+#include "solver/ChSolverPJacobi.h"
+#include "solver/ChSolverPMINRES.h"
+#include "solver/ChSolverPSOR.h"
+#include "solver/ChSolverPSSOR.h"
+#include "solver/ChIterativeSolverLS.h"
+#include "core/ChMatrix.h"
+#include "utils/ChProfiler.h"
 
 using namespace chrono::collision;
 

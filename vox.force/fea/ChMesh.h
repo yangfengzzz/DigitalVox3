@@ -18,13 +18,13 @@
 #include <cstdlib>
 #include <cmath>
 
-#include "chrono/core/ChTimer.h"
-#include "chrono/physics/ChIndexedNodes.h"
-#include "chrono/fea/ChContinuumMaterial.h"
-#include "chrono/fea/ChContactSurface.h"
-#include "chrono/fea/ChElementBase.h"
-#include "chrono/fea/ChMeshSurface.h"
-#include "chrono/fea/ChNodeFEAbase.h"
+#include "core/ChTimer.h"
+#include "physics/ChIndexedNodes.h"
+#include "fea/ChContinuumMaterial.h"
+#include "fea/ChContactSurface.h"
+#include "fea/ChElementBase.h"
+#include "fea/ChMeshSurface.h"
+#include "fea/ChNodeFEAbase.h"
 
 namespace chrono {
 

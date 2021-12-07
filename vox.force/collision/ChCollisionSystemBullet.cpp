@@ -12,13 +12,13 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChContactContainer.h"
-#include "chrono/physics/ChProximityContainer.h"
-#include "chrono/collision/ChCollisionSystemBullet.h"
-#include "chrono/collision/ChCollisionModelBullet.h"
-#include "chrono/collision/ChCollisionAlgorithmsBullet.h"
-#include "chrono/collision/gimpact/GIMPACT/Bullet/btGImpactCollisionAlgorithm.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionDispatch/btCollisionDispatcherMt.h"
+#include "physics/ChContactContainer.h"
+#include "physics/ChProximityContainer.h"
+#include "collision/ChCollisionSystemBullet.h"
+#include "collision/ChCollisionModelBullet.h"
+#include "collision/ChCollisionAlgorithmsBullet.h"
+#include "collision/gimpact/GIMPACT/Bullet/btGImpactCollisionAlgorithm.h"
+#include "collision/bullet/BulletCollision/CollisionDispatch/btCollisionDispatcherMt.h"
 
 extern btScalar gContactBreakingThreshold;
 

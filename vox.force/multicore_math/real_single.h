@@ -19,7 +19,7 @@
 #include <cmath>
 #include <cfloat>
 
-#include "chrono/multicore_math/ChCudaDefines.h"
+#include "multicore_math/ChCudaDefines.h"
 
 namespace chrono {
 

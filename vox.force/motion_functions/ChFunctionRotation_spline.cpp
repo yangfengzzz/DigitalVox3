@@ -14,10 +14,10 @@
 
 
 
-#include "chrono/motion_functions/ChFunctionRotation_spline.h"
-#include "chrono/motion_functions/ChFunction_Const.h"
-#include "chrono/motion_functions/ChFunction_Ramp.h"
-#include "chrono/geometry/ChBasisToolsBspline.h"
+#include "motion_functions/ChFunctionRotation_spline.h"
+#include "motion_functions/ChFunction_Const.h"
+#include "motion_functions/ChFunction_Ramp.h"
+#include "geometry/ChBasisToolsBspline.h"
 
 namespace chrono {
 

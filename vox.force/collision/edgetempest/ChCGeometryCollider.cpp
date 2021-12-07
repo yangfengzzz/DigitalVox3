@@ -13,13 +13,13 @@
 #include <cstdio>
 #include <cmath>
 
-#include "chrono/collision/edgetempest/ChCGeometryCollider.h"
-#include "chrono/collision/edgetempest/ChCOBB.h"
-#include "chrono/collision/ChCollisionUtils.h"
-#include "chrono/core/ChTransform.h"
-#include "chrono/geometry/ChBox.h"
-#include "chrono/geometry/ChSphere.h"
-#include "chrono/geometry/ChTriangle.h"
+#include "collision/edgetempest/ChCGeometryCollider.h"
+#include "collision/edgetempest/ChCOBB.h"
+#include "collision/ChCollisionUtils.h"
+#include "core/ChTransform.h"
+#include "geometry/ChBox.h"
+#include "geometry/ChSphere.h"
+#include "geometry/ChTriangle.h"
 
 #define COLL_PRECISION 0.000001
 

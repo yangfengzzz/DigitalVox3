@@ -15,7 +15,7 @@
 #ifndef CHSHAFTSTORQUE_H
 #define CHSHAFTSTORQUE_H
 
-#include "chrono/physics/ChShaftsTorqueBase.h"
+#include "physics/ChShaftsTorqueBase.h"
 
 namespace chrono {
 

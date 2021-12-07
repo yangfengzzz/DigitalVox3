@@ -16,12 +16,12 @@
 #ifndef CH_ELEMENT_HEXA_ANCF_3813_H
 #define CH_ELEMENT_HEXA_ANCF_3813_H
 
-#include "chrono/fea/ChElementHexahedron.h"
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
-#include "chrono/fea/ChContinuumMaterial.h"
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/physics/ChLoadable.h"
+#include "fea/ChElementHexahedron.h"
+#include "fea/ChElementGeneric.h"
+#include "fea/ChNodeFEAxyz.h"
+#include "fea/ChContinuumMaterial.h"
+#include "core/ChQuadrature.h"
+#include "physics/ChLoadable.h"
 
 namespace chrono {
 namespace fea {

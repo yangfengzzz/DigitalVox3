@@ -17,17 +17,17 @@
 
 #pragma once
 
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChVector2.h"
-#include "chrono/core/ChQuaternion.h"
-#include "chrono/core/ChMatrix33.h"
+#include "core/ChVector.h"
+#include "core/ChVector2.h"
+#include "core/ChQuaternion.h"
+#include "core/ChMatrix33.h"
 
-#include "chrono/multicore_math/real.h"
-#include "chrono/multicore_math/real2.h"
-#include "chrono/multicore_math/real3.h"
-#include "chrono/multicore_math/real4.h"
-#include "chrono/multicore_math/matrix.h"
-#include "chrono/multicore_math/other_types.h"
+#include "multicore_math/real.h"
+#include "multicore_math/real2.h"
+#include "multicore_math/real3.h"
+#include "multicore_math/real4.h"
+#include "multicore_math/matrix.h"
+#include "multicore_math/other_types.h"
 
 namespace chrono {
 

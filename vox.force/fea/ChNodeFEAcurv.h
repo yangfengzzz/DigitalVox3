@@ -18,8 +18,8 @@
 #ifndef CHNODEFEACURV_H
 #define CHNODEFEACURV_H
 
-#include "chrono/solver/ChVariablesGenericDiagonalMass.h"
-#include "chrono/fea/ChNodeFEAbase.h"
+#include "solver/ChVariablesGenericDiagonalMass.h"
+#include "fea/ChNodeFEAbase.h"
 
 namespace chrono {
 namespace fea {

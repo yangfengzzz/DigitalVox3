@@ -15,9 +15,9 @@
 #ifndef CHNODEFEAXYZ_H
 #define CHNODEFEAXYZ_H
 
-#include "chrono/physics/ChNodeXYZ.h"
-#include "chrono/solver/ChVariablesNode.h"
-#include "chrono/fea/ChNodeFEAbase.h"
+#include "physics/ChNodeXYZ.h"
+#include "solver/ChVariablesNode.h"
+#include "fea/ChNodeFEAbase.h"
 
 namespace chrono {
 namespace fea {

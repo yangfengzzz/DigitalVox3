@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkScrew.h"
+#include "physics/ChLinkScrew.h"
 
 namespace chrono {
 

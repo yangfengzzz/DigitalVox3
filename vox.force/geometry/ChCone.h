@@ -15,7 +15,7 @@
 #ifndef CHC_CONE_H
 #define CHC_CONE_H
 
-#include "chrono/geometry/ChGeometry.h"
+#include "geometry/ChGeometry.h"
 
 namespace chrono {
 namespace geometry {

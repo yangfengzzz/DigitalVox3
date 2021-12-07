@@ -18,13 +18,13 @@
 #include <cfloat>
 #include <memory.h>
 
-#include "chrono/collision/ChCollisionUtils.h"
-#include "chrono/core/ChGlobal.h"
-#include "chrono/core/ChTransform.h"
-#include "chrono/geometry/ChBox.h"
-#include "chrono/geometry/ChSphere.h"
-#include "chrono/geometry/ChTriangle.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "collision/ChCollisionUtils.h"
+#include "core/ChGlobal.h"
+#include "core/ChTransform.h"
+#include "geometry/ChBox.h"
+#include "geometry/ChSphere.h"
+#include "geometry/ChTriangle.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
 namespace chrono {
 namespace collision {

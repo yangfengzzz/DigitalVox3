@@ -17,7 +17,7 @@
 #ifndef CH_HEXAHEDRON_H
 #define CH_HEXAHEDRON_H
 
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 namespace fea {

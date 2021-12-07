@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChSphereShape.h"
+#include "assets/ChSphereShape.h"
 
 namespace chrono {
 

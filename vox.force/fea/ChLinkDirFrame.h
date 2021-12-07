@@ -15,10 +15,10 @@
 #ifndef CHLINKDIRFRAME_H
 #define CHLINKDIRFRAME_H
 
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChLinkBase.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
-#include "chrono/fea/ChNodeFEAxyzD.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChLinkBase.h"
+#include "solver/ChConstraintTwoGeneric.h"
+#include "fea/ChNodeFEAxyzD.h"
 
 namespace chrono {
 

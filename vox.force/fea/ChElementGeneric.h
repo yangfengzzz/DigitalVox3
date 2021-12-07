@@ -15,9 +15,9 @@
 #ifndef CHELEMENTGENERIC_H
 #define CHELEMENTGENERIC_H
 
-#include "chrono/solver/ChKblockGeneric.h"
-#include "chrono/solver/ChVariablesNode.h"
-#include "chrono/fea/ChElementBase.h"
+#include "solver/ChKblockGeneric.h"
+#include "solver/ChVariablesNode.h"
+#include "fea/ChElementBase.h"
 
 namespace chrono {
 namespace fea {

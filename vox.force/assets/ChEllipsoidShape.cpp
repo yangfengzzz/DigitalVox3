@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/assets/ChEllipsoidShape.h"
+#include "assets/ChEllipsoidShape.h"
 
 namespace chrono {
 

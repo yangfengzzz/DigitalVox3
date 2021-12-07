@@ -18,11 +18,11 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "chrono/core/ChFrameMoving.h"
-#include "chrono/core/ChLog.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/motion_functions/ChFunction.h"
-#include "chrono/physics/ChObject.h"
+#include "core/ChFrameMoving.h"
+#include "core/ChLog.h"
+#include "core/ChMath.h"
+#include "motion_functions/ChFunction.h"
+#include "physics/ChObject.h"
 
 namespace chrono {
 

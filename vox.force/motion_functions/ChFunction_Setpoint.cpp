@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/motion_functions/ChFunction_Setpoint.h"
+#include "motion_functions/ChFunction_Setpoint.h"
 
 namespace chrono {
 

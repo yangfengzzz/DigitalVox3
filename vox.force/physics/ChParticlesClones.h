@@ -17,10 +17,10 @@
 
 #include <cmath>
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/physics/ChContactable.h"
-#include "chrono/physics/ChIndexedParticles.h"
-#include "chrono/solver/ChVariablesBodySharedMass.h"
+#include "collision/ChCollisionModel.h"
+#include "physics/ChContactable.h"
+#include "physics/ChIndexedParticles.h"
+#include "solver/ChVariablesBodySharedMass.h"
 
 namespace chrono {
 

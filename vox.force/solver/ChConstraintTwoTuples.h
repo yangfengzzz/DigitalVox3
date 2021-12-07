@@ -15,7 +15,7 @@
 #ifndef CHCONSTRAINTTWOTUPLES_H
 #define CHCONSTRAINTTWOTUPLES_H
 
-#include "chrono/solver/ChConstraintTuple.h"
+#include "solver/ChConstraintTuple.h"
 
 namespace chrono {
 

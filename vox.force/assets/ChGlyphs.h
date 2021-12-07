@@ -13,9 +13,9 @@
 #ifndef CHGLYPHS_H
 #define CHGLYPHS_H
 
-#include "chrono/assets/ChColor.h"
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/core/ChMatrix.h"
+#include "assets/ChColor.h"
+#include "assets/ChVisualization.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

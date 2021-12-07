@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChContactContainerNSC.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/solver/ChConstraintTwoTuplesContactN.h"
+#include "physics/ChContactContainerNSC.h"
+#include "physics/ChSystem.h"
+#include "solver/ChConstraintTwoTuplesContactN.h"
 
 namespace chrono {
 

@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChIterativeSolver.h"
+#include "solver/ChIterativeSolver.h"
 
 namespace chrono {
 

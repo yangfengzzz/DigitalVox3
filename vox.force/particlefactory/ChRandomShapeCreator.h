@@ -20,15 +20,15 @@
 
 #include <memory>
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChDistribution.h"
-#include "chrono/geometry/ChSphere.h"
-#include "chrono/geometry/ChBox.h"
-#include "chrono/geometry/ChCylinder.h"
-#include "chrono/physics/ChBodyEasy.h"
-#include "chrono/physics/ChMaterialSurfaceNSC.h"
+#include "core/ChMathematics.h"
+#include "core/ChVector.h"
+#include "core/ChMatrix.h"
+#include "core/ChDistribution.h"
+#include "geometry/ChSphere.h"
+#include "geometry/ChBox.h"
+#include "geometry/ChCylinder.h"
+#include "physics/ChBodyEasy.h"
+#include "physics/ChMaterialSurfaceNSC.h"
 
 namespace chrono {
 namespace particlefactory {

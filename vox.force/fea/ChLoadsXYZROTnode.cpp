@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChLoadsXYZROTnode.h"
+#include "fea/ChLoadsXYZROTnode.h"
 
 namespace chrono {
 namespace fea {

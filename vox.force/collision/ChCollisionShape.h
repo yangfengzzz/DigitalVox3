@@ -15,8 +15,8 @@
 #ifndef CH_COLLISION_SHAPE
 #define CH_COLLISION_SHAPE
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/physics/ChMaterialSurface.h"
+#include "core/ChApiCE.h"
+#include "physics/ChMaterialSurface.h"
 
 namespace chrono {
 namespace collision {

@@ -18,8 +18,8 @@
 
 #include <algorithm>
 
-#include "chrono/utils/ChFilters.h"
-#include "chrono/core/ChMatrix.h"
+#include "utils/ChFilters.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 namespace utils {

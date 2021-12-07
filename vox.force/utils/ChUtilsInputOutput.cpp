@@ -14,20 +14,20 @@
 //
 // =============================================================================
 
-#include "chrono/assets/ChBoxShape.h"
-#include "chrono/assets/ChCapsuleShape.h"
-#include "chrono/assets/ChColorAsset.h"
-#include "chrono/assets/ChConeShape.h"
-#include "chrono/assets/ChCylinderShape.h"
-#include "chrono/assets/ChEllipsoidShape.h"
-#include "chrono/assets/ChLineShape.h"
-#include "chrono/assets/ChPointPointDrawing.h"
-#include "chrono/assets/ChRoundedBoxShape.h"
-#include "chrono/assets/ChRoundedCylinderShape.h"
-#include "chrono/assets/ChSphereShape.h"
-#include "chrono/assets/ChTriangleMeshShape.h"
-#include "chrono/geometry/ChLineBezier.h"
-#include "chrono/utils/ChUtilsInputOutput.h"
+#include "assets/ChBoxShape.h"
+#include "assets/ChCapsuleShape.h"
+#include "assets/ChColorAsset.h"
+#include "assets/ChConeShape.h"
+#include "assets/ChCylinderShape.h"
+#include "assets/ChEllipsoidShape.h"
+#include "assets/ChLineShape.h"
+#include "assets/ChPointPointDrawing.h"
+#include "assets/ChRoundedBoxShape.h"
+#include "assets/ChRoundedCylinderShape.h"
+#include "assets/ChSphereShape.h"
+#include "assets/ChTriangleMeshShape.h"
+#include "geometry/ChLineBezier.h"
+#include "utils/ChUtilsInputOutput.h"
 
 namespace chrono {
 namespace utils {

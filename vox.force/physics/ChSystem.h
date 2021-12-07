@@ -23,21 +23,21 @@
 #include <iostream>
 #include <list>
 
-#include "chrono/core/ChGlobal.h"
-#include "chrono/core/ChLog.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/core/ChTimer.h"
-#include "chrono/collision/ChCollisionSystem.h"
-#include "chrono/parallel/ChOpenMP.h"
-#include "chrono/physics/ChAssembly.h"
-#include "chrono/physics/ChContactContainer.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/solver/ChSolver.h"
-#include "chrono/timestepper/ChAssemblyAnalysis.h"
-#include "chrono/timestepper/ChIntegrable.h"
-#include "chrono/timestepper/ChTimestepper.h"
-#include "chrono/timestepper/ChTimestepperHHT.h"
-#include "chrono/timestepper/ChStaticAnalysis.h"
+#include "core/ChGlobal.h"
+#include "core/ChLog.h"
+#include "core/ChMath.h"
+#include "core/ChTimer.h"
+#include "collision/ChCollisionSystem.h"
+#include "parallel/ChOpenMP.h"
+#include "physics/ChAssembly.h"
+#include "physics/ChContactContainer.h"
+#include "solver/ChSystemDescriptor.h"
+#include "solver/ChSolver.h"
+#include "timestepper/ChAssemblyAnalysis.h"
+#include "timestepper/ChIntegrable.h"
+#include "timestepper/ChTimestepper.h"
+#include "timestepper/ChTimestepperHHT.h"
+#include "timestepper/ChStaticAnalysis.h"
 
 namespace chrono {
 

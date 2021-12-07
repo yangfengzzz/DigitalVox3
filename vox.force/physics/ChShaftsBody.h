@@ -15,9 +15,9 @@
 #ifndef CHSHAFTSBODY_H
 #define CHSHAFTSBODY_H
 
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChShaft.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChShaft.h"
+#include "solver/ChConstraintTwoGeneric.h"
 
 namespace chrono {
 

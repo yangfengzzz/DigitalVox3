@@ -14,8 +14,8 @@
 
 #include <cstdio>
 
-#include "chrono/geometry/ChTriangle.h"
-#include "chrono/collision/ChCollisionUtils.h"
+#include "geometry/ChTriangle.h"
+#include "collision/ChCollisionUtils.h"
 
 namespace chrono {
 namespace geometry {

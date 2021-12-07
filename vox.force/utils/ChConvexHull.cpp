@@ -22,7 +22,7 @@
 #include <iostream>
 #include <iterator>
 
-#include "chrono/utils/ChConvexHull.h"
+#include "utils/ChConvexHull.h"
 
 namespace chrono {
 namespace utils {

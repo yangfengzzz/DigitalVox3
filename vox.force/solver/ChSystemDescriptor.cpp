@@ -12,10 +12,10 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/solver/ChConstraintTwoTuplesContactN.h"
-#include "chrono/solver/ChConstraintTwoTuplesFrictionT.h"
-#include "chrono/core/ChMatrix.h"
+#include "solver/ChSystemDescriptor.h"
+#include "solver/ChConstraintTwoTuplesContactN.h"
+#include "solver/ChConstraintTwoTuplesFrictionT.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

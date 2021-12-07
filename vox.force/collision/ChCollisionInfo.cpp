@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/collision/ChCollisionInfo.h"
+#include "collision/ChCollisionInfo.h"
 
 namespace chrono {
 namespace collision {

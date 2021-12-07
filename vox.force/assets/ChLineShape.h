@@ -15,9 +15,9 @@
 #ifndef CHLINESHAPE_H
 #define CHLINESHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChLine.h"
-#include "chrono/geometry/ChLineSegment.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChLine.h"
+#include "geometry/ChLineSegment.h"
 
 namespace chrono {
 

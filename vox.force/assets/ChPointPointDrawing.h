@@ -13,7 +13,7 @@
 #ifndef CHLINESHAPEPP_H
 #define CHLINESHAPEPP_H
 
-#include "chrono/assets/ChLineShape.h"
+#include "assets/ChLineShape.h"
 
 namespace chrono {
 

@@ -12,7 +12,7 @@
 // Authors: Michael Taylor, Antonio Recuero, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChMaterialHexaANCF.h"
+#include "fea/ChMaterialHexaANCF.h"
 
 namespace chrono {
 namespace fea {

@@ -15,10 +15,10 @@
 #ifndef CHLOADSXYZNODE_H
 #define CHLOADSXYZNODE_H
 
-#include "chrono/physics/ChLoad.h"
-#include "chrono/physics/ChNodeXYZ.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "physics/ChLoad.h"
+#include "physics/ChNodeXYZ.h"
+#include "physics/ChBody.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 

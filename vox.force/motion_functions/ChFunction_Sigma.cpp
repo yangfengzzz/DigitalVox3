@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/motion_functions/ChFunction_Sigma.h"
+#include "motion_functions/ChFunction_Sigma.h"
 
 namespace chrono {
 

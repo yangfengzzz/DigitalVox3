@@ -15,7 +15,7 @@
 #ifndef CHSHAFTSTORSIONSPRING_H
 #define CHSHAFTSTORSIONSPRING_H
 
-#include "chrono/physics/ChShaftsTorqueBase.h"
+#include "physics/ChShaftsTorqueBase.h"
 
 namespace chrono {
 

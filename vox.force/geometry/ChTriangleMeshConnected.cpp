@@ -44,7 +44,7 @@
 #include <map>
 #include <unordered_map>
 
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
 namespace chrono {
 namespace geometry {

@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/physics/ChLinkMotionImposed.h"
-#include "chrono/motion_functions/ChFunctionRotation_ABCfunctions.h"
-#include "chrono/motion_functions/ChFunctionPosition_XYZfunctions.h"
+#include "physics/ChLinkMotionImposed.h"
+#include "motion_functions/ChFunctionRotation_ABCfunctions.h"
+#include "motion_functions/ChFunctionPosition_XYZfunctions.h"
 
 namespace chrono {
 

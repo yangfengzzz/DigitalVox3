@@ -21,10 +21,10 @@
 #include <memory>
 #include <vector>
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/collision/ChCollisionShapeBullet.h"
-#include "chrono/geometry/ChLinePath.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCompoundShape.h"
+#include "collision/ChCollisionModel.h"
+#include "collision/ChCollisionShapeBullet.h"
+#include "geometry/ChLinePath.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCompoundShape.h"
 
 // forward references
 class btCollisionObject;

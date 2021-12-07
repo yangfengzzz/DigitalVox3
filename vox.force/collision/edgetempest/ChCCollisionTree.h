@@ -15,8 +15,8 @@
 
 #include <vector>
 
-#include "chrono/geometry/ChGeometry.h"
-#include "chrono/collision/edgetempest/ChCAbsoluteAABB.h"
+#include "geometry/ChGeometry.h"
+#include "collision/edgetempest/ChCAbsoluteAABB.h"
 
 #define CH_COLL_ENVELOPE 0.0022
 

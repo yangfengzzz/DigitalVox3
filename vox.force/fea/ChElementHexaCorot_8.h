@@ -15,11 +15,11 @@
 #ifndef CH_ELEMENT_HEXA_COROT_8_H
 #define CH_ELEMENT_HEXA_COROT_8_H
 
-#include "chrono/fea/ChElementHexahedron.h"
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/fea/ChElementCorotational.h"
-#include "chrono/fea/ChGaussIntegrationRule.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "fea/ChElementHexahedron.h"
+#include "fea/ChElementGeneric.h"
+#include "fea/ChElementCorotational.h"
+#include "fea/ChGaussIntegrationRule.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 namespace fea {

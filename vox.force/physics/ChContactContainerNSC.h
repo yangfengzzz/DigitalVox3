@@ -17,10 +17,10 @@
 
 #include <list>
 
-#include "chrono/physics/ChContactContainer.h"
-#include "chrono/physics/ChContactNSC.h"
-#include "chrono/physics/ChContactNSCrolling.h"
-#include "chrono/physics/ChContactable.h"
+#include "physics/ChContactContainer.h"
+#include "physics/ChContactNSC.h"
+#include "physics/ChContactNSCrolling.h"
+#include "physics/ChContactable.h"
 
 namespace chrono {
 

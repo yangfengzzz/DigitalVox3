@@ -13,8 +13,8 @@
 #ifndef CHOBJCONESHAPE_H
 #define CHOBJCONESHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChCone.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChCone.h"
 
 namespace chrono {
 

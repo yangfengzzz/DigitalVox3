@@ -13,9 +13,9 @@
 #ifndef CH_COLLISION_INFO_H
 #define CH_COLLISION_INFO_H
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChVector.h"
+#include "collision/ChCollisionModel.h"
+#include "core/ChApiCE.h"
+#include "core/ChVector.h"
 
 namespace chrono {
 namespace collision {

@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChColorAsset.h"
+#include "assets/ChColorAsset.h"
 
 namespace chrono {
 

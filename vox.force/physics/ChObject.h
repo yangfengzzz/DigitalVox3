@@ -22,8 +22,8 @@
 #include <memory>
 #include <string>
 
-#include "chrono/core/ChLog.h"
-#include "chrono/core/ChMath.h"
+#include "core/ChLog.h"
+#include "core/ChMath.h"
 
 #include <vector>
 

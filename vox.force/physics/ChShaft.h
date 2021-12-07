@@ -15,9 +15,9 @@
 #ifndef CHSHAFT_H
 #define CHSHAFT_H
 
-#include "chrono/physics/ChPhysicsItem.h"
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/solver/ChVariablesShaft.h"
+#include "physics/ChPhysicsItem.h"
+#include "physics/ChLoadable.h"
+#include "solver/ChVariablesShaft.h"
 
 
 namespace chrono {

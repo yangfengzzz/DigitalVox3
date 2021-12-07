@@ -14,7 +14,7 @@
 
 //#define BEAM_VERBOSE
 
-#include "chrono/fea/ChElementBeamTaperedTimoshenko.h"
+#include "fea/ChElementBeamTaperedTimoshenko.h"
 
 namespace chrono {
 namespace fea {

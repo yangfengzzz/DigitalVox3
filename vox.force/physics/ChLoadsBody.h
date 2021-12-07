@@ -36,9 +36,9 @@
 #ifndef CHLOADSBODY_H
 #define CHLOADSBODY_H
 
-#include "chrono/motion_functions/ChFunction.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChLoad.h"
+#include "motion_functions/ChFunction.h"
+#include "physics/ChBody.h"
+#include "physics/ChLoad.h"
 
 namespace chrono {
 

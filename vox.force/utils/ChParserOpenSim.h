@@ -22,13 +22,13 @@
 #include <functional>
 #include <map>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/physics/ChBodyAuxRef.h"
-#include "chrono/physics/ChLoadContainer.h"
-#include "chrono/physics/ChLoadsBody.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChApiCE.h"
+#include "physics/ChBodyAuxRef.h"
+#include "physics/ChLoadContainer.h"
+#include "physics/ChLoadsBody.h"
+#include "physics/ChSystem.h"
 
-#include "chrono_thirdparty/rapidxml/rapidxml.hpp"
+#include <rapidxml/rapidxml.hpp>
 
 namespace chrono {
 

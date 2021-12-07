@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-#include "chrono/timestepper/ChTimestepperHHT.h"
+#include "timestepper/ChTimestepperHHT.h"
 
 namespace chrono {
 

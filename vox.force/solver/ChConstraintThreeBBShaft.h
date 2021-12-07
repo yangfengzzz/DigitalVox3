@@ -15,8 +15,8 @@
 #ifndef CHCONSTRAINTTHREEBBSHAFT_H
 #define CHCONSTRAINTTHREEBBSHAFT_H
 
-#include "chrono/solver/ChConstraintThree.h"
-#include "chrono/solver/ChVariablesBody.h"
+#include "solver/ChConstraintThree.h"
+#include "solver/ChVariablesBody.h"
 
 namespace chrono {
 

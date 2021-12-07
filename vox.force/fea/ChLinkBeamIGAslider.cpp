@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChLinkBeamIGAslider.h"
-#include "chrono/physics/ChSystem.h"
+#include "fea/ChLinkBeamIGAslider.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace fea {

@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChVariablesGenericDiagonalMass.h"
+#include "solver/ChVariablesGenericDiagonalMass.h"
 
 namespace chrono {
 

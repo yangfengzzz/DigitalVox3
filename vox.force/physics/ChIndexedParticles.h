@@ -17,8 +17,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChFrameMoving.h"
-#include "chrono/physics/ChPhysicsItem.h"
+#include "core/ChFrameMoving.h"
+#include "physics/ChPhysicsItem.h"
 
 namespace chrono {
 

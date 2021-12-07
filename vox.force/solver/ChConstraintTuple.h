@@ -15,8 +15,8 @@
 #ifndef CHCONSTRAINTTUPLE_H
 #define CHCONSTRAINTTUPLE_H
 
-#include "chrono/solver/ChConstraint.h"
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChConstraint.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

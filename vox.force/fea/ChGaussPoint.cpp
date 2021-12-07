@@ -12,7 +12,7 @@
 // Authors: Andrea Favali
 // =============================================================================
 
-#include "chrono/fea/ChGaussPoint.h"
+#include "fea/ChGaussPoint.h"
 
 namespace chrono {
 namespace fea {

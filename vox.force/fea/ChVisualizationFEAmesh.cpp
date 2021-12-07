@@ -12,25 +12,25 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChGlyphs.h"
-#include "chrono/assets/ChTriangleMeshShape.h"
+#include "assets/ChGlyphs.h"
+#include "assets/ChTriangleMeshShape.h"
 
-#include "chrono/fea/ChContactSurfaceMesh.h"
-#include "chrono/fea/ChContactSurfaceNodeCloud.h"
-#include "chrono/fea/ChElementCableANCF.h"
-#include "chrono/fea/ChElementBeamANCF_3243.h"
-#include "chrono/fea/ChElementBeamANCF_3333.h"
-#include "chrono/fea/ChElementBeamEuler.h"
-#include "chrono/fea/ChElementBeamTaperedTimoshenko.h"
-#include "chrono/fea/ChElementBeamTaperedTimoshenkoFPM.h"
-#include "chrono/fea/ChElementBeamIGA.h"
-#include "chrono/fea/ChElementShell.h"
-#include "chrono/fea/ChElementShellReissner4.h"
-#include "chrono/fea/ChElementShellBST.h"
-#include "chrono/fea/ChElementTetraCorot_4.h"
-#include "chrono/fea/ChTetrahedronFace.h"
-#include "chrono/fea/ChHexahedronFace.h"
-#include "chrono/fea/ChVisualizationFEAmesh.h"
+#include "fea/ChContactSurfaceMesh.h"
+#include "fea/ChContactSurfaceNodeCloud.h"
+#include "fea/ChElementCableANCF.h"
+#include "fea/ChElementBeamANCF_3243.h"
+#include "fea/ChElementBeamANCF_3333.h"
+#include "fea/ChElementBeamEuler.h"
+#include "fea/ChElementBeamTaperedTimoshenko.h"
+#include "fea/ChElementBeamTaperedTimoshenkoFPM.h"
+#include "fea/ChElementBeamIGA.h"
+#include "fea/ChElementShell.h"
+#include "fea/ChElementShellReissner4.h"
+#include "fea/ChElementShellBST.h"
+#include "fea/ChElementTetraCorot_4.h"
+#include "fea/ChTetrahedronFace.h"
+#include "fea/ChHexahedronFace.h"
+#include "fea/ChVisualizationFEAmesh.h"
 
 namespace chrono {
 namespace fea {

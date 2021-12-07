@@ -22,9 +22,9 @@
 #ifndef CHLOADSBEAM_H
 #define CHLOADSBEAM_H
 
-#include "chrono/physics/ChLoad.h"
-#include "chrono/physics/ChLoaderU.h"
-#include "chrono/fea/ChElementBeam.h"
+#include "physics/ChLoad.h"
+#include "physics/ChLoaderU.h"
+#include "fea/ChElementBeam.h"
 
 namespace chrono {
 namespace fea {

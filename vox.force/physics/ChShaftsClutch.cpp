@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChShaft.h"
-#include "chrono/physics/ChShaftsClutch.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChShaft.h"
+#include "physics/ChShaftsClutch.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

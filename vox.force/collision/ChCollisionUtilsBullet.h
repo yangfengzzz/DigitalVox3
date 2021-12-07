@@ -17,11 +17,11 @@
 
 #include <vector>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
-#include "chrono/collision/bullet/LinearMath/btVector3.h"
-#include "chrono/collision/bullet/LinearMath/btMinMax.h"
+#include "core/ChApiCE.h"
+#include "core/ChVector.h"
+#include "geometry/ChTriangleMeshConnected.h"
+#include "collision/bullet/LinearMath/btVector3.h"
+#include "collision/bullet/LinearMath/btMinMax.h"
 
 namespace chrono {
 namespace collision {

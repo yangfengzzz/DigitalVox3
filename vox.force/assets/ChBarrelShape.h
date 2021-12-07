@@ -15,7 +15,7 @@
 #ifndef CHBARRELSHAPE_H
 #define CHBARRELSHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
+#include "assets/ChVisualization.h"
 
 namespace chrono {
 

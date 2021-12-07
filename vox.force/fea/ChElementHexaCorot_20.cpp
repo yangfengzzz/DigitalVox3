@@ -12,7 +12,7 @@
 // Authors: Andrea Favali, Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChElementHexaCorot_20.h"
+#include "fea/ChElementHexaCorot_20.h"
 
 namespace chrono {
 namespace fea {

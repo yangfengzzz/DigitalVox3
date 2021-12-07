@@ -18,9 +18,9 @@
 #pragma once
 #include <cstring>
 
-#include "chrono/multicore_math/simd.h"
-#include "chrono/multicore_math/real2.h"
-#include "chrono/multicore_math/real3.h"
+#include "multicore_math/simd.h"
+#include "multicore_math/real2.h"
+#include "multicore_math/real3.h"
 
 namespace chrono {
 

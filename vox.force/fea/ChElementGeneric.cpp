@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/physics/ChLoad.h"
+#include "fea/ChElementGeneric.h"
+#include "physics/ChLoadable.h"
+#include "physics/ChLoad.h"
 
 namespace chrono {
 namespace fea {

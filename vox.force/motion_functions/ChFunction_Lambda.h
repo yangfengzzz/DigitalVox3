@@ -15,8 +15,8 @@
 #ifndef CHFUNCT_LAMBDA_H
 #define CHFUNCT_LAMBDA_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
-#include "chrono_thirdparty/yafel/DualNumber.hpp"
+#include "motion_functions/ChFunction_Base.h"
+#include <yafel/DualNumber.hpp>
 
 namespace chrono {
 

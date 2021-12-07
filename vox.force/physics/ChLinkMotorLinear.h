@@ -15,7 +15,7 @@
 #ifndef CHLINKMOTORLINEAR_H
 #define CHLINKMOTORLINEAR_H
 
-#include "chrono/physics/ChLinkMotor.h"
+#include "physics/ChLinkMotor.h"
 
 namespace chrono {
 

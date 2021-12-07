@@ -22,22 +22,22 @@
 //
 // =============================================================================
 
-#include "chrono/utils/ChParserAdams.h"
+#include "utils/ChParserAdams.h"
 
-#include "chrono/core/ChFrame.h"
+#include "core/ChFrame.h"
 
-#include "chrono/physics/ChLinkRackpinion.h"
-#include "chrono/physics/ChSystemNSC.h"
-#include "chrono/physics/ChSystemSMC.h"
+#include "physics/ChLinkRackpinion.h"
+#include "physics/ChSystemNSC.h"
+#include "physics/ChSystemSMC.h"
 
-#include "chrono/assets/ChBoxShape.h"
-#include "chrono/assets/ChColorAsset.h"
-#include "chrono/assets/ChCylinderShape.h"
-#include "chrono/assets/ChEllipsoidShape.h"
-#include "chrono/assets/ChObjShapeFile.h"
-#include "chrono/assets/ChSphereShape.h"
+#include "assets/ChBoxShape.h"
+#include "assets/ChColorAsset.h"
+#include "assets/ChCylinderShape.h"
+#include "assets/ChEllipsoidShape.h"
+#include "assets/ChObjShapeFile.h"
+#include "assets/ChSphereShape.h"
 
-#include "chrono/utils/ChUtilsCreators.h"
+#include "utils/ChUtilsCreators.h"
 
 #include <fstream>
 

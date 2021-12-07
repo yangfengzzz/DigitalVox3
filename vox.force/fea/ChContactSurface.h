@@ -19,10 +19,10 @@
 #ifndef CHCONTACTSURFACE_H
 #define CHCONTACTSURFACE_H
 
-#include "chrono/fea/ChElementBase.h"
-#include "chrono/physics/ChContactable.h"
-#include "chrono/physics/ChMaterialSurfaceSMC.h"
-#include "chrono/physics/ChMaterialSurfaceNSC.h"
+#include "fea/ChElementBase.h"
+#include "physics/ChContactable.h"
+#include "physics/ChMaterialSurfaceSMC.h"
+#include "physics/ChMaterialSurfaceNSC.h"
 
 namespace chrono {
 namespace fea {

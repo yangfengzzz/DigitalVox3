@@ -15,7 +15,7 @@
 #ifndef CH_MATERIALSURFACE_NSC_H
 #define CH_MATERIALSURFACE_NSC_H
 
-#include "chrono/physics/ChMaterialSurface.h"
+#include "physics/ChMaterialSurface.h"
 
 namespace chrono {
 

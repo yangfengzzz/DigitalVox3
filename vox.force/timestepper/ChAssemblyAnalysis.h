@@ -15,9 +15,9 @@
 #ifndef CHASSEMBLYANALYSIS_H
 #define CHASSEMBLYANALYSIS_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/timestepper/ChState.h"
-#include "chrono/timestepper/ChIntegrable.h"
+#include "core/ChApiCE.h"
+#include "timestepper/ChState.h"
+#include "timestepper/ChIntegrable.h"
 
 namespace chrono {
 

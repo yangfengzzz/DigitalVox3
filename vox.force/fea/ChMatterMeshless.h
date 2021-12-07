@@ -17,11 +17,11 @@
 
 #include <cmath>
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/physics/ChIndexedNodes.h"
-#include "chrono/physics/ChNodeXYZ.h"
-#include "chrono/fea/ChContinuumMaterial.h"
-#include "chrono/solver/ChVariablesNode.h"
+#include "collision/ChCollisionModel.h"
+#include "physics/ChIndexedNodes.h"
+#include "physics/ChNodeXYZ.h"
+#include "fea/ChContinuumMaterial.h"
+#include "solver/ChVariablesNode.h"
 
 namespace chrono {
 

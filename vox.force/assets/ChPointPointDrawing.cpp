@@ -10,11 +10,11 @@
 //
 // =============================================================================
 
-#include "chrono/assets/ChPointPointDrawing.h"
-#include "chrono/physics/ChLinkMarkers.h"
-#include "chrono/physics/ChLinkDistance.h"
-#include "chrono/physics/ChLinkRevoluteSpherical.h"
-#include "chrono/physics/ChLinkTSDA.h"
+#include "assets/ChPointPointDrawing.h"
+#include "physics/ChLinkMarkers.h"
+#include "physics/ChLinkDistance.h"
+#include "physics/ChLinkRevoluteSpherical.h"
+#include "physics/ChLinkTSDA.h"
 
 namespace chrono {
 

@@ -15,8 +15,8 @@
 #ifndef CHBEAMSECTIONSHAPE_H
 #define CHBEAMSECTIONSHAPE_H
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChVector.h"
+#include "core/ChMathematics.h"
+#include "core/ChVector.h"
 #include <vector>
 
 namespace chrono {

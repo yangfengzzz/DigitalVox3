@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChElementBar.h"
+#include "fea/ChElementBar.h"
 
 namespace chrono {
 namespace fea {

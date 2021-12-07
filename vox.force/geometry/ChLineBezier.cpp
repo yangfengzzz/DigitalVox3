@@ -18,8 +18,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/geometry/ChLineBezier.h"
+#include "core/ChMathematics.h"
+#include "geometry/ChLineBezier.h"
 
 namespace chrono {
 namespace geometry {

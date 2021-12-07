@@ -17,8 +17,8 @@
 
 #include <vector>
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
 namespace chrono {
 

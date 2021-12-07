@@ -31,8 +31,8 @@
 // with Linear Viscoelastic Materials, Simulation Based Engineering Lab, University of Wisconsin-Madison; 2021.
 // =============================================================================
 
-#include "chrono/fea/ChElementBeamANCF_3333.h"
-#include "chrono/physics/ChSystem.h"
+#include "fea/ChElementBeamANCF_3333.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace fea {

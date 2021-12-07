@@ -15,8 +15,8 @@
 #ifndef CHOBJSBOXSHAPE_H
 #define CHOBJSBOXSHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChBox.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChBox.h"
 
 namespace chrono {
 

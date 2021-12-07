@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChSolverPSSOR.h"
-#include "chrono/core/ChMathematics.h"
+#include "solver/ChSolverPSSOR.h"
+#include "core/ChMathematics.h"
 
 namespace chrono {
 

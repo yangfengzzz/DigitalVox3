@@ -15,8 +15,8 @@
 #ifndef CHSHAFTSMOTORTORQUE_H
 #define CHSHAFTSMOTORTORQUE_H
 
-#include "chrono/motion_functions/ChFunction.h"
-#include "chrono/physics/ChShaftsMotor.h"
+#include "motion_functions/ChFunction.h"
+#include "physics/ChShaftsMotor.h"
 
 namespace chrono {
 

@@ -20,8 +20,8 @@
 #ifndef CH_BENCHMARK_H
 #define CH_BENCHMARK_H
 
-#include "chrono_thirdparty/googlebenchmark/include/benchmark/benchmark.h"
-#include "chrono/physics/ChSystem.h"
+#include <googlebenchmark/include/benchmark/benchmark.h>
+#include "physics/ChSystem.h"
 
 namespace chrono {
 namespace utils {

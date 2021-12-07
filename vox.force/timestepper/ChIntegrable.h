@@ -17,9 +17,9 @@
 
 #include <cstdlib>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/timestepper/ChState.h"
+#include "core/ChApiCE.h"
+#include "core/ChMath.h"
+#include "timestepper/ChState.h"
 
 namespace chrono {
 

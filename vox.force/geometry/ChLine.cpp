@@ -19,7 +19,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include "chrono/geometry/ChLine.h"
+#include "geometry/ChLine.h"
 
 namespace chrono {
 namespace geometry {

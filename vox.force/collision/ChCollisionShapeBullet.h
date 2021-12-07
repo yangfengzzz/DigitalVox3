@@ -15,8 +15,8 @@
 #ifndef CH_COLLISION_SHAPE_BULLET
 #define CH_COLLISION_SHAPE_BULLET
 
-#include "chrono/collision/ChCollisionShape.h"
-#include "chrono/collision/bullet/BulletCollision/CollisionShapes/btCollisionShape.h"
+#include "collision/ChCollisionShape.h"
+#include "collision/bullet/BulletCollision/CollisionShapes/btCollisionShape.h"
 
 namespace chrono {
 namespace collision {

@@ -15,7 +15,7 @@
 #ifndef CHBODYAUXREF_H
 #define CHBODYAUXREF_H
 
-#include "chrono/physics/ChBody.h"
+#include "physics/ChBody.h"
 
 namespace chrono {
 

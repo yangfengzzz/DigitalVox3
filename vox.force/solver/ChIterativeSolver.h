@@ -19,8 +19,8 @@
 #ifndef CH_ITERATIVESOLVER_H
 #define CH_ITERATIVESOLVER_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/solver/ChSystemDescriptor.h"
+#include "core/ChApiCE.h"
+#include "solver/ChSystemDescriptor.h"
 
 namespace chrono {
 

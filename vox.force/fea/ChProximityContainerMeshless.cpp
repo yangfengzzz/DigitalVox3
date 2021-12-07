@@ -12,10 +12,10 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/fea/ChMatterMeshless.h"
-#include "chrono/fea/ChProximityContainerMeshless.h"
+#include "physics/ChBody.h"
+#include "physics/ChSystem.h"
+#include "fea/ChMatterMeshless.h"
+#include "fea/ChProximityContainerMeshless.h"
 
 namespace chrono {
 

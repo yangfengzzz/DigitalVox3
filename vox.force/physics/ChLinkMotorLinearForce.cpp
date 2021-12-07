@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/physics/ChLinkMotorLinearForce.h"
+#include "physics/ChLinkMotorLinearForce.h"
 
 namespace chrono {
 

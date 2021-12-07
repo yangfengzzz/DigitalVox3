@@ -27,8 +27,8 @@
 #ifndef CH_ITERATIVESOLVER_LS_H
 #define CH_ITERATIVESOLVER_LS_H
 
-#include "chrono/solver/ChSolverLS.h"
-#include "chrono/solver/ChIterativeSolver.h"
+#include "solver/ChSolverLS.h"
+#include "solver/ChIterativeSolver.h"
 
 #include <Eigen/IterativeLinearSolvers>
 #include <unsupported/Eigen/IterativeSolvers>

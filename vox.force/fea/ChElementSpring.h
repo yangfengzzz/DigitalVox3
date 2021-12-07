@@ -15,8 +15,8 @@
 #ifndef CHELEMENTSPRING_H
 #define CHELEMENTSPRING_H
 
-#include "chrono/fea/ChElementGeneric.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "fea/ChElementGeneric.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 namespace fea {

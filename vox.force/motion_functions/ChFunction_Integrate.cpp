@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/motion_functions/ChFunction_Integrate.h"
-#include "chrono/motion_functions/ChFunction_Const.h"
+#include "motion_functions/ChFunction_Integrate.h"
+#include "motion_functions/ChFunction_Const.h"
 
 namespace chrono {
 

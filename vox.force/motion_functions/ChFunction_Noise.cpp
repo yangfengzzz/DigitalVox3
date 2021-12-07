@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/motion_functions/ChFunction_Noise.h"
+#include "motion_functions/ChFunction_Noise.h"
 
 namespace chrono {
 

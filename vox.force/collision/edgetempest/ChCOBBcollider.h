@@ -13,11 +13,11 @@
 #ifndef CHC_OBBCOLLIDER
 #define CHC_OBBCOLLIDER
 
-#include "chrono/collision/ChCollisionPair.h"
+#include "collision/ChCollisionPair.h"
 
-#include "chrono/collision/edgetempest/ChCCompile.h"
-#include "chrono/collision/edgetempest/ChCOBBTree.h"
-#include "chrono/collision/edgetempest/ChCNarrowPhaseCollider.h"
+#include "collision/edgetempest/ChCCompile.h"
+#include "collision/edgetempest/ChCOBBTree.h"
+#include "collision/edgetempest/ChCNarrowPhaseCollider.h"
 
 namespace chrono {
 namespace collision {

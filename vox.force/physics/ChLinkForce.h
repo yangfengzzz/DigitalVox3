@@ -18,8 +18,8 @@
 #include <cfloat>
 #include <cmath>
 
-#include "chrono/core/ChMath.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "core/ChMath.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 

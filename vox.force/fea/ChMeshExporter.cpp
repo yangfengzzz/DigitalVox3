@@ -11,7 +11,7 @@
 // =============================================================================
 // Authors: Milad Rakhsha
 // =============================================================================
-#include "chrono/fea/ChMeshExporter.h"
+#include "fea/ChMeshExporter.h"
 
 namespace chrono {
 namespace fea {

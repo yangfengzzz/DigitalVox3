@@ -17,12 +17,12 @@
 
 #pragma once
 
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
-#include "chrono/multicore_math/ChCudaDefines.h"
-#include "chrono/multicore_math/real2.h"
-#include "chrono/multicore_math/real3.h"
-#include "chrono/multicore_math/real4.h"
+#include "multicore_math/ChCudaDefines.h"
+#include "multicore_math/real2.h"
+#include "multicore_math/real3.h"
+#include "multicore_math/real4.h"
 
 namespace chrono {
 

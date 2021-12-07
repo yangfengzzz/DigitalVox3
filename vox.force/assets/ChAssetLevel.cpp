@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChAssetLevel.h"
+#include "assets/ChAssetLevel.h"
 
 namespace chrono {
 

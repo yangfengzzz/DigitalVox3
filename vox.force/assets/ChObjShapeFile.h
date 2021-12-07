@@ -13,7 +13,7 @@
 #ifndef CHOBJSHAPEFILE_H
 #define CHOBJSHAPEFILE_H
 
-#include "chrono/assets/ChVisualization.h"
+#include "assets/ChVisualization.h"
 
 namespace chrono {
 

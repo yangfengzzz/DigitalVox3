@@ -15,9 +15,9 @@
 #ifndef CHLINKMARKERS_H
 #define CHLINKMARKERS_H
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChLink.h"
-#include "chrono/physics/ChMarker.h"
+#include "physics/ChBody.h"
+#include "physics/ChLink.h"
+#include "physics/ChMarker.h"
 
 namespace chrono {
 

@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChKblockGeneric.h"
+#include "solver/ChKblockGeneric.h"
 
 namespace chrono {
 

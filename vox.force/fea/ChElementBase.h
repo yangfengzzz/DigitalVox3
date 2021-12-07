@@ -15,11 +15,11 @@
 #ifndef CHELEMENTBASE_H
 #define CHELEMENTBASE_H
 
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/core/ChMath.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/fea/ChContinuumMaterial.h"
-#include "chrono/fea/ChNodeFEAbase.h"
+#include "physics/ChLoadable.h"
+#include "core/ChMath.h"
+#include "solver/ChSystemDescriptor.h"
+#include "fea/ChContinuumMaterial.h"
+#include "fea/ChNodeFEAbase.h"
 
 namespace chrono {
 namespace fea {

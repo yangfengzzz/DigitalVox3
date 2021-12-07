@@ -12,7 +12,7 @@
 
 #include <cstdlib>
 
-#include "chrono/timestepper/ChStaticAnalysis.h"
+#include "timestepper/ChStaticAnalysis.h"
 
 namespace chrono {
 

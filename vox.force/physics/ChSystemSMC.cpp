@@ -19,13 +19,13 @@
 
 #include <limits>
 
-#include "chrono/physics/ChSystemSMC.h"
-#include "chrono/physics/ChContactContainerSMC.h"
+#include "physics/ChSystemSMC.h"
+#include "physics/ChContactContainerSMC.h"
 
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/solver/ChIterativeSolverLS.h"
+#include "solver/ChSystemDescriptor.h"
+#include "solver/ChIterativeSolverLS.h"
 
-#include "chrono/collision/ChCollisionSystemBullet.h"
+#include "collision/ChCollisionSystemBullet.h"
 
 namespace chrono {
 

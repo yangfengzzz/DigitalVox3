@@ -15,13 +15,13 @@
 #ifndef CH_CONTACT_NSC_H
 #define CH_CONTACT_NSC_H
 
-#include "chrono/core/ChFrame.h"
-#include "chrono/solver/ChConstraintTwoTuplesContactN.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/physics/ChContactTuple.h"
-#include "chrono/physics/ChContactContainer.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChFrame.h"
+#include "solver/ChConstraintTwoTuplesContactN.h"
+#include "solver/ChSystemDescriptor.h"
+#include "collision/ChCollisionModel.h"
+#include "physics/ChContactTuple.h"
+#include "physics/ChContactContainer.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

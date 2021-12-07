@@ -13,9 +13,9 @@
 #include <cstdlib>
 #include <cmath>
 
-#include "chrono/collision/edgetempest/ChCOBB.h"
-#include "chrono/collision/edgetempest/ChCMatVec.h"
-#include "chrono/collision/ChCollisionPair.h"
+#include "collision/edgetempest/ChCOBB.h"
+#include "collision/edgetempest/ChCMatVec.h"
+#include "collision/ChCollisionPair.h"
 
 namespace chrono {
 namespace collision {

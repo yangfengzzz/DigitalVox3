@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/fea/ChContactSurface.h"
+#include "fea/ChContactSurface.h"
 
 namespace chrono {
 namespace fea {

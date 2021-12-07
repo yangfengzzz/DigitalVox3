@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-#include "chrono/timestepper/ChIntegrable.h"
+#include "timestepper/ChIntegrable.h"
 
 namespace chrono {
 

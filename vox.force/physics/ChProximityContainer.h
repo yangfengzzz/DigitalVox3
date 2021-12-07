@@ -15,8 +15,8 @@
 #ifndef CH_PROXIMITY_CONTAINER_H
 #define CH_PROXIMITY_CONTAINER_H
 
-#include "chrono/collision/ChCollisionInfo.h"
-#include "chrono/physics/ChPhysicsItem.h"
+#include "collision/ChCollisionInfo.h"
+#include "physics/ChPhysicsItem.h"
 
 namespace chrono {
 

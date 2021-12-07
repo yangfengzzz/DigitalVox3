@@ -15,8 +15,8 @@
 #ifndef CHCONSTRAINTTWOBODIES_H
 #define CHCONSTRAINTTWOBODIES_H
 
-#include "chrono/solver/ChConstraintTwo.h"
-#include "chrono/solver/ChVariablesBody.h"
+#include "solver/ChConstraintTwo.h"
+#include "solver/ChVariablesBody.h"
 
 namespace chrono {
 

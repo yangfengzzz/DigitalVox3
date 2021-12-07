@@ -13,9 +13,9 @@
 #ifndef CHCONTACTABLE_H
 #define CHCONTACTABLE_H
 
-#include "chrono/solver/ChConstraintTuple.h"
-#include "chrono/core/ChMatrix33.h"
-#include "chrono/timestepper/ChState.h"
+#include "solver/ChConstraintTuple.h"
+#include "core/ChMatrix33.h"
+#include "timestepper/ChState.h"
 
 namespace chrono {
 

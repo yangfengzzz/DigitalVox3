@@ -15,21 +15,21 @@
 #ifndef CHBUILDERBEAM_H
 #define CHBUILDERBEAM_H
 
-#include "chrono/fea/ChMesh.h"
-#include "chrono/fea/ChElementBeamEuler.h"
-#include "chrono/fea/ChElementBeamIGA.h"
-#include "chrono/fea/ChElementCableANCF.h"
-#include "chrono/fea/ChElementBeamANCF_3333.h"
-#include "chrono/fea/ChElementBeamTaperedTimoshenko.h"
-#include "chrono/fea/ChElementBeamTaperedTimoshenkoFPM.h"
-#include "chrono/fea/ChContactSurfaceNodeCloud.h"
+#include "fea/ChMesh.h"
+#include "fea/ChElementBeamEuler.h"
+#include "fea/ChElementBeamIGA.h"
+#include "fea/ChElementCableANCF.h"
+#include "fea/ChElementBeamANCF_3333.h"
+#include "fea/ChElementBeamTaperedTimoshenko.h"
+#include "fea/ChElementBeamTaperedTimoshenkoFPM.h"
+#include "fea/ChContactSurfaceNodeCloud.h"
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChLinkMate.h"
-#include "chrono/physics/ChLinkMotorLinearSpeed.h"
-#include "chrono/physics/ChMaterialSurfaceSMC.h"
+#include "physics/ChBody.h"
+#include "physics/ChLinkMate.h"
+#include "physics/ChLinkMotorLinearSpeed.h"
+#include "physics/ChMaterialSurfaceSMC.h"
 
-#include "chrono/geometry/ChLineBspline.h"
+#include "geometry/ChLineBspline.h"
 
 namespace chrono {
 namespace fea {

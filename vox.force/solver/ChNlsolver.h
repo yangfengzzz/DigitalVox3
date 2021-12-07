@@ -20,8 +20,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMatrix.h"
+#include "core/ChApiCE.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

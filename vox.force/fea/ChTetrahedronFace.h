@@ -17,7 +17,7 @@
 #ifndef CH_TETRAHEDRON_FACE_H
 #define CH_TETRAHEDRON_FACE_H
 
-#include "chrono/fea/ChElementTetrahedron.h"
+#include "fea/ChElementTetrahedron.h"
 
 namespace chrono {
 namespace fea {

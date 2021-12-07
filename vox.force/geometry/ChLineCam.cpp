@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/geometry/ChLineCam.h"
+#include "geometry/ChLineCam.h"
 
 namespace chrono {
 namespace geometry {

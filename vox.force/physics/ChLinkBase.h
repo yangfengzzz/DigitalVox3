@@ -15,8 +15,8 @@
 #ifndef CHLINKBASE_H
 #define CHLINKBASE_H
 
-#include "chrono/core/ChLog.h"
-#include "chrono/physics/ChPhysicsItem.h"
+#include "core/ChLog.h"
+#include "physics/ChPhysicsItem.h"
 
 namespace chrono {
 

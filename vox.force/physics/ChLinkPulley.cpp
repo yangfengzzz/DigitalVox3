@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLinkPulley.h"
+#include "physics/ChLinkPulley.h"
 
 namespace chrono {
 

@@ -16,10 +16,10 @@
 #define CHASSEMBLY_H
 
 #include <cmath>
-#include "chrono/fea/ChMesh.h"
-#include "chrono/physics/ChBodyAuxRef.h"
-#include "chrono/physics/ChShaft.h"
-#include "chrono/physics/ChLinksAll.h"
+#include "fea/ChMesh.h"
+#include "physics/ChBodyAuxRef.h"
+#include "physics/ChShaft.h"
+#include "physics/ChLinksAll.h"
 
 namespace chrono {
 

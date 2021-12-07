@@ -12,9 +12,9 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChSolverAPGD.h"
+#include "solver/ChSolverAPGD.h"
 
-#include "chrono/core/ChStream.h"
+#include "core/ChStream.h"
 
 #include <iostream>
 #include <sstream>

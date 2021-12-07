@@ -15,8 +15,8 @@
 #ifndef CHFUNCTIONPOSITION_XYZFUNCTIONS_H
 #define CHFUNCTIONPOSITION_XYZFUNCTIONS_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
-#include "chrono/motion_functions/ChFunctionPosition.h"
+#include "motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunctionPosition.h"
 
 
 namespace chrono {

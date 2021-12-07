@@ -22,8 +22,8 @@
 #include <vector>
 #include <unordered_map>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChVector2.h"
+#include "core/ChApiCE.h"
+#include "core/ChVector2.h"
 
 namespace chrono {
 namespace utils {

@@ -40,12 +40,12 @@
 #include <fstream>
 #include <functional>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChBezierCurve.h"
-#include "chrono/assets/ChColor.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/utils/ChUtilsCreators.h"
+#include "core/ChApiCE.h"
+#include "core/ChBezierCurve.h"
+#include "assets/ChColor.h"
+#include "geometry/ChTriangleMeshConnected.h"
+#include "physics/ChSystem.h"
+#include "utils/ChUtilsCreators.h"
 
 namespace chrono {
 namespace utils {

@@ -1,5 +1,5 @@
 #line 1 "ChAdamsTokenizer.yy.cpp"
-#include "chrono/utils/ChParserAdams.h"
+#include "utils/ChParserAdams.h"
 
 #line 4 "ChAdamsTokenizer.yy.cpp"
 

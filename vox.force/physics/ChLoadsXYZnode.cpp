@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLoadsXYZnode.h"
+#include "physics/ChLoadsXYZnode.h"
 
 namespace chrono {
 

@@ -12,7 +12,7 @@
 // Authors: Andrea Favali
 // =============================================================================
 
-#include "chrono/fea/ChGaussIntegrationRule.h"
+#include "fea/ChGaussIntegrationRule.h"
 
 namespace chrono {
 namespace fea {

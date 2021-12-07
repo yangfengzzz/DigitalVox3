@@ -15,10 +15,10 @@
 #include <cstdlib>
 #include <algorithm>
 
-#include "chrono/core/ChGlobal.h"
-#include "chrono/core/ChTransform.h"
-#include "chrono/physics/ChIndexedParticles.h"
-#include "chrono/physics/ChSystem.h"
+#include "core/ChGlobal.h"
+#include "core/ChTransform.h"
+#include "physics/ChIndexedParticles.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

@@ -19,9 +19,9 @@
 
 #include <vector>
 
-#include "chrono/fea/ChElementShell.h"
-#include "chrono/fea/ChMaterialShellANCF.h"
-#include "chrono/fea/ChNodeFEAxyzD.h"
+#include "fea/ChElementShell.h"
+#include "fea/ChMaterialShellANCF.h"
+#include "fea/ChNodeFEAxyzD.h"
 
 namespace chrono {
 namespace fea {

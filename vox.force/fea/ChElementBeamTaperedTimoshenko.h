@@ -15,10 +15,10 @@
 #ifndef CHELEMENTBEAMTAPEREDTIMOSHENKO_H
 #define CHELEMENTBEAMTAPEREDTIMOSHENKO_H
 
-#include "chrono/fea/ChBeamSectionTaperedTimoshenko.h"
-#include "chrono/fea/ChElementBeam.h"
-#include "chrono/fea/ChElementCorotational.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "fea/ChBeamSectionTaperedTimoshenko.h"
+#include "fea/ChElementBeam.h"
+#include "fea/ChElementCorotational.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 namespace fea {

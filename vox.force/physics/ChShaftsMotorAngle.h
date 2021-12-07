@@ -15,9 +15,9 @@
 #ifndef CHSHAFTSMOTORANGLE_H
 #define CHSHAFTSMOTORANGLE_H
 
-#include "chrono/physics/ChShaftsMotor.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "physics/ChShaftsMotor.h"
+#include "solver/ChConstraintTwoGeneric.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 

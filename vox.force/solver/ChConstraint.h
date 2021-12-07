@@ -15,9 +15,9 @@
 #ifndef CHCONSTRAINT_H
 #define CHCONSTRAINT_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChClassFactory.h"
-#include "chrono/core/ChMatrix.h"
+#include "core/ChApiCE.h"
+#include "core/ChClassFactory.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

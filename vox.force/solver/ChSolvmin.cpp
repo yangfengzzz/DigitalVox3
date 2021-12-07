@@ -20,8 +20,8 @@
 #include <malloc.h>
 #endif
 
-#include "chrono/core/ChLog.h"
-#include "chrono/solver/ChSolvmin.h"
+#include "core/ChLog.h"
+#include "solver/ChSolvmin.h"
 
 namespace chrono {
 

@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChLoadBodyMesh.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChLoadBodyMesh.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

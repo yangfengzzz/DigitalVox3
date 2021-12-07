@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/physics/ChBodyFrame.h"
+#include "physics/ChBodyFrame.h"
 
 namespace chrono {
 

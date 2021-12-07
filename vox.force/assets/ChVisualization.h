@@ -13,11 +13,11 @@
 #ifndef CHVISUALIZATION_H
 #define CHVISUALIZATION_H
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/assets/ChColor.h"
-#include "chrono/core/ChMath.h"
+#include "assets/ChAsset.h"
+#include "assets/ChColor.h"
+#include "core/ChMath.h"
 
-#include "chrono/assets/ChVisualMaterial.h"
+#include "assets/ChVisualMaterial.h"
 
 namespace chrono {
 

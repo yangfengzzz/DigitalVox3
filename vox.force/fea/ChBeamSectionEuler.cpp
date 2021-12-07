@@ -13,9 +13,9 @@
 // =============================================================================
 
 
-#include "chrono/fea/ChBeamSectionEuler.h"
-#include "chrono/core/ChMatrixMBD.h"
-#include "chrono/core/ChMatrix33.h"
+#include "fea/ChBeamSectionEuler.h"
+#include "core/ChMatrixMBD.h"
+#include "core/ChMatrix33.h"
 
 
 namespace chrono {

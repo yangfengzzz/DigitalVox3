@@ -18,8 +18,8 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "chrono/core/ChGlobal.h"
-#include "chrono/physics/ChObject.h"
+#include "core/ChGlobal.h"
+#include "physics/ChObject.h"
 
 namespace chrono {
 

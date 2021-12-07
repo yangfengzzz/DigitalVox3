@@ -13,8 +13,8 @@
 #ifndef CHC_AABBTREE_H
 #define CHC_AABBTREE_H
 
-#include "chrono/collision/edgetempest/ChCCollisionTree.h"
-#include "chrono/collision/edgetempest/ChCAABB.h"
+#include "collision/edgetempest/ChCCollisionTree.h"
+#include "collision/edgetempest/ChCAABB.h"
 
 namespace chrono {
 namespace collision {

@@ -15,7 +15,7 @@
 #ifndef CHFUNCT_NOISE_H
 #define CHFUNCT_NOISE_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Base.h"
 
 namespace chrono {
 

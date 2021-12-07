@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/physics/ChBody.h"
+#include "collision/ChCollisionModel.h"
+#include "physics/ChBody.h"
 
 namespace chrono {
 namespace collision {

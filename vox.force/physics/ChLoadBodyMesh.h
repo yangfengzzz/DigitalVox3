@@ -15,8 +15,8 @@
 #ifndef CHLOADBODYMESH_H
 #define CHLOADBODYMESH_H
 
-#include "chrono/geometry/ChTriangleMeshConnected.h"
-#include "chrono/physics/ChLoadsBody.h"
+#include "geometry/ChTriangleMeshConnected.h"
+#include "physics/ChLoadsBody.h"
 
 namespace chrono {
 

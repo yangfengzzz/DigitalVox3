@@ -15,7 +15,7 @@
 #ifndef CHLINKRACKPINION_H
 #define CHLINKRACKPINION_H
 
-#include "chrono/physics/ChLinkMate.h"
+#include "physics/ChLinkMate.h"
 
 namespace chrono {
 

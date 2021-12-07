@@ -22,9 +22,9 @@
 #include <cstring>
 #include <list>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChFilePS.h"
-#include "chrono/core/ChMath.h"
+#include "core/ChApiCE.h"
+#include "core/ChFilePS.h"
+#include "core/ChMath.h"
 
 namespace chrono {
 

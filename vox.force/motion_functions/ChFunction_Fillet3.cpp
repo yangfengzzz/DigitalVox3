@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/motion_functions/ChFunction_Fillet3.h"
+#include "motion_functions/ChFunction_Fillet3.h"
 
 namespace chrono {
 

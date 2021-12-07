@@ -15,9 +15,9 @@
 #ifndef CHFUNCTIONPOSITION_LINE_H
 #define CHFUNCTIONPOSITION_LINE_H
 
-#include "chrono/geometry/ChLine.h"
-#include "chrono/motion_functions/ChFunctionPosition.h"
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "geometry/ChLine.h"
+#include "motion_functions/ChFunctionPosition.h"
+#include "motion_functions/ChFunction_Base.h"
 
 
 namespace chrono {

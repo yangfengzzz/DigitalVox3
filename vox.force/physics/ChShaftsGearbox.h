@@ -15,10 +15,10 @@
 #ifndef CHSHAFTSGEARBOX_H
 #define CHSHAFTSGEARBOX_H
 
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChPhysicsItem.h"
-#include "chrono/physics/ChShaft.h"
-#include "chrono/solver/ChConstraintThreeGeneric.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChPhysicsItem.h"
+#include "physics/ChShaft.h"
+#include "solver/ChConstraintThreeGeneric.h"
 
 namespace chrono {
 

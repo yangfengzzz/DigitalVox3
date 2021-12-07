@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "chrono/multicore_math/real.h"
+#include "multicore_math/real.h"
 
 namespace chrono {
 

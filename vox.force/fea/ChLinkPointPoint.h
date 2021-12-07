@@ -15,9 +15,9 @@
 #ifndef CHLINKPOINTPOINT_H
 #define CHLINKPOINTPOINT_H
 
-#include "chrono/physics/ChLinkBase.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "physics/ChLinkBase.h"
+#include "solver/ChConstraintTwoGeneric.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 

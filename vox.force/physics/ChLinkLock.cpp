@@ -16,8 +16,8 @@
 ////    Serialization/deserialization of unique_ptr members is currently commented
 ////    out until support for unique_ptr is implemented in ChArchive.
 
-#include "chrono/physics/ChSystem.h"
-#include "chrono/physics/ChLinkLock.h"
+#include "physics/ChSystem.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

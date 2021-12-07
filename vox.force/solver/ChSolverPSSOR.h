@@ -15,7 +15,7 @@
 #ifndef CHSOLVERSYMMSOR_H
 #define CHSOLVERSYMMSOR_H
 
-#include "chrono/solver/ChIterativeSolverVI.h"
+#include "solver/ChIterativeSolverVI.h"
 
 namespace chrono {
 

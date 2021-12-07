@@ -14,9 +14,9 @@
 
 #include <cmath>
 
-#include "chrono/solver/ChNlsolver.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChMathematics.h"
+#include "solver/ChNlsolver.h"
+#include "core/ChMatrix.h"
+#include "core/ChMathematics.h"
 
 namespace chrono {
 

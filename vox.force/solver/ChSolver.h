@@ -17,9 +17,9 @@
 
 #include <vector>
 
-#include "chrono/solver/ChConstraint.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChConstraint.h"
+#include "solver/ChSystemDescriptor.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

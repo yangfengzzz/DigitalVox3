@@ -36,10 +36,10 @@
 
 #include <vector>
 
-#include "chrono/fea/ChMaterialBeamANCF.h"
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/fea/ChElementBeam.h"
-#include "chrono/fea/ChNodeFEAxyzDD.h"
+#include "fea/ChMaterialBeamANCF.h"
+#include "core/ChQuadrature.h"
+#include "fea/ChElementBeam.h"
+#include "fea/ChNodeFEAxyzDD.h"
 
 namespace chrono {
 namespace fea {

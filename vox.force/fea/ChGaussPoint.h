@@ -15,9 +15,9 @@
 #ifndef CHGAUSSPOINT
 #define CHGAUSSPOINT
 
-#include "chrono/core/ChMath.h"
-#include "chrono/core/ChTensors.h"
-#include "chrono/solver/ChSystemDescriptor.h"
+#include "core/ChMath.h"
+#include "core/ChTensors.h"
+#include "solver/ChSystemDescriptor.h"
 
 namespace chrono {
 namespace fea {

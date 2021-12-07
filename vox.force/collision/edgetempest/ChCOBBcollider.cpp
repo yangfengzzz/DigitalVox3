@@ -13,12 +13,12 @@
 #include <cstdio>
 #include <cstring>
 
-#include "chrono/collision/edgetempest/ChCMatVec.h"
-#include "chrono/collision/edgetempest/ChCGetTime.h"
-#include "chrono/collision/edgetempest/ChCOBBcollider.h"
-#include "chrono/collision/edgetempest/ChCGeometryCollider.h"
+#include "collision/edgetempest/ChCMatVec.h"
+#include "collision/edgetempest/ChCGetTime.h"
+#include "collision/edgetempest/ChCOBBcollider.h"
+#include "collision/edgetempest/ChCGeometryCollider.h"
 
-#include "chrono/core/ChTransform.h"
+#include "core/ChTransform.h"
 
 namespace chrono {
 namespace collision {

@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/utils/ChCompositeInertia.h"
+#include "utils/ChCompositeInertia.h"
 
 namespace chrono {
 namespace utils {

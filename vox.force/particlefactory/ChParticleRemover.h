@@ -15,7 +15,7 @@
 #ifndef CHPARTICLEREMOVER_H
 #define CHPARTICLEREMOVER_H
 
-#include "chrono/particlefactory/ChParticleProcessor.h"
+#include "particlefactory/ChParticleProcessor.h"
 
 namespace chrono {
 namespace particlefactory {

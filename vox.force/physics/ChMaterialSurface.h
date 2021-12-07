@@ -17,8 +17,8 @@
 
 #include <algorithm>
 
-#include "chrono/core/ChClassFactory.h"
-#include "chrono/serialization/ChArchive.h"
+#include "core/ChClassFactory.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 

@@ -16,7 +16,7 @@
 #include <cmath>
 #include <cstdio>
 
-#include "chrono/collision/edgetempest/ChCCompile.h"
+#include "collision/edgetempest/ChCCompile.h"
 
 namespace chrono {
 namespace collision {

@@ -15,8 +15,8 @@
 #ifndef CHLOADCONTAINER_H
 #define CHLOADCONTAINER_H
 
-#include "chrono/physics/ChLoad.h"
-#include "chrono/physics/ChPhysicsItem.h"
+#include "physics/ChLoad.h"
+#include "physics/ChPhysicsItem.h"
 
 namespace chrono {
 

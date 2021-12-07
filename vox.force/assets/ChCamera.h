@@ -15,8 +15,8 @@
 #ifndef CHCAMERA_H
 #define CHCAMERA_H
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/core/ChVector.h"
+#include "assets/ChAsset.h"
+#include "core/ChVector.h"
 
 namespace chrono {
 

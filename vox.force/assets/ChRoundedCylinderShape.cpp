@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChRoundedCylinderShape.h"
+#include "assets/ChRoundedCylinderShape.h"
 
 namespace chrono {
 

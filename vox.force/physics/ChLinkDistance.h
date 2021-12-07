@@ -15,8 +15,8 @@
 #ifndef CHLINKDISTANCE_H
 #define CHLINKDISTANCE_H
 
-#include "chrono/physics/ChLink.h"
-#include "chrono/solver/ChConstraintTwoBodies.h"
+#include "physics/ChLink.h"
+#include "solver/ChConstraintTwoBodies.h"
 
 namespace chrono {
 /// Class for enforcing a fixed polar distance

@@ -14,19 +14,19 @@
 //
 // =============================================================================
 
-#include "chrono/utils/ChUtilsCreators.h"
+#include "utils/ChUtilsCreators.h"
 
-#include "chrono/assets/ChBoxShape.h"
-#include "chrono/assets/ChCapsuleShape.h"
-#include "chrono/assets/ChConeShape.h"
-#include "chrono/assets/ChCylinderShape.h"
-#include "chrono/assets/ChEllipsoidShape.h"
-#include "chrono/assets/ChRoundedBoxShape.h"
-#include "chrono/assets/ChRoundedCylinderShape.h"
-#include "chrono/assets/ChSphereShape.h"
-#include "chrono/assets/ChTriangleMeshShape.h"
+#include "assets/ChBoxShape.h"
+#include "assets/ChCapsuleShape.h"
+#include "assets/ChConeShape.h"
+#include "assets/ChCylinderShape.h"
+#include "assets/ChEllipsoidShape.h"
+#include "assets/ChRoundedBoxShape.h"
+#include "assets/ChRoundedCylinderShape.h"
+#include "assets/ChSphereShape.h"
+#include "assets/ChTriangleMeshShape.h"
 
-#include "chrono_thirdparty/tinyobjloader/tiny_obj_loader.h"
+#include <tinyobjloader/tiny_obj_loader.h>
 
 namespace chrono {
 using namespace geometry;

@@ -15,7 +15,7 @@
 #ifndef CHSHAFTSCOUPLE_H
 #define CHSHAFTSCOUPLE_H
 
-#include "chrono/physics/ChShaft.h"
+#include "physics/ChShaft.h"
 
 namespace chrono {
 

@@ -15,8 +15,8 @@
 #ifndef CHSHAFTSLOADS_H
 #define CHSHAFTSLOADS_H
 
-#include "chrono/physics/ChShaft.h"
-#include "chrono/physics/ChLoad.h"
+#include "physics/ChShaft.h"
+#include "physics/ChLoad.h"
 
 namespace chrono {
 

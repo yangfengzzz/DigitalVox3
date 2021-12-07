@@ -19,11 +19,11 @@
 
 #include <algorithm>
 
-#include "chrono/physics/ChSystemNSC.h"
-#include "chrono/physics/ChContactContainerNSC.h"
-#include "chrono/physics/ChProximityContainer.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/collision/ChCollisionSystemBullet.h"
+#include "physics/ChSystemNSC.h"
+#include "physics/ChContactContainerNSC.h"
+#include "physics/ChProximityContainer.h"
+#include "physics/ChSystem.h"
+#include "collision/ChCollisionSystemBullet.h"
 
 namespace chrono {
 

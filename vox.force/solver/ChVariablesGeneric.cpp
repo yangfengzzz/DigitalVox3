@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChVariablesGeneric.h"
+#include "solver/ChVariablesGeneric.h"
 
 namespace chrono {
 

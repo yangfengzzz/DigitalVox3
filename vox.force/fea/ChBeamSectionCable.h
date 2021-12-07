@@ -16,7 +16,7 @@
 #define CHBEAMSECTIONCABLE_H
 
 
-#include "chrono/fea/ChBeamSection.h"
+#include "fea/ChBeamSection.h"
 
 namespace chrono {
 namespace fea {

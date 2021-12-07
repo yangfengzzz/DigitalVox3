@@ -14,7 +14,7 @@
 
 #include <cstdio>
 
-#include "chrono/geometry/ChRoundedCone.h"
+#include "geometry/ChRoundedCone.h"
 
 namespace chrono {
 namespace geometry {

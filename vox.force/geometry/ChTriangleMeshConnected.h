@@ -19,7 +19,7 @@
 #include <cmath>
 #include <map>
 
-#include "chrono/geometry/ChTriangleMesh.h"
+#include "geometry/ChTriangleMesh.h"
 
 namespace chrono {
 namespace geometry {

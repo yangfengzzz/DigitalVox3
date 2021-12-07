@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/fea/ChBeamSectionShape.h"
+#include "fea/ChBeamSectionShape.h"
 
 namespace chrono {
 namespace fea {

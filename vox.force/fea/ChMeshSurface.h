@@ -15,8 +15,8 @@
 #ifndef CHMESHSURFACE_H
 #define CHMESHSURFACE_H
 
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/fea/ChElementBase.h"
+#include "physics/ChLoadable.h"
+#include "fea/ChElementBase.h"
 
 namespace chrono {
 namespace fea {

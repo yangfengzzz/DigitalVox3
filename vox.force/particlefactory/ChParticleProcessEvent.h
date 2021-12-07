@@ -15,8 +15,8 @@
 #ifndef CHPARTICLEPROCESSEVENT_H
 #define CHPARTICLEPROCESSEVENT_H
 
-#include "chrono/physics/ChSystem.h"
-#include "chrono/particlefactory/ChParticleEventTrigger.h"
+#include "physics/ChSystem.h"
+#include "particlefactory/ChParticleEventTrigger.h"
 
 namespace chrono {
 namespace particlefactory {

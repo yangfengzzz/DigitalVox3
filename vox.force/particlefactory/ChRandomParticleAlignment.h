@@ -15,7 +15,7 @@
 #ifndef CHRANDOMPARTICLEALIGNMENT_H
 #define CHRANDOMPARTICLEALIGNMENT_H
 
-#include "chrono/core/ChQuaternion.h"
+#include "core/ChQuaternion.h"
 
 namespace chrono {
 namespace particlefactory {

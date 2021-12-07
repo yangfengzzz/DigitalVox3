@@ -12,7 +12,7 @@
 // Authors: Bryan Peterson, Milad Rakhsha, Antonio Recuero, Radu Serban
 // =============================================================================
 
-#include "chrono/fea/ChMaterialShellANCF.h"
+#include "fea/ChMaterialShellANCF.h"
 
 namespace chrono {
 namespace fea {

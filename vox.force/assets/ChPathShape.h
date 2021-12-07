@@ -15,10 +15,10 @@
 #ifndef CHPATHSHAPE_H
 #define CHPATHSHAPE_H
 
-#include "chrono/assets/ChVisualization.h"
-#include "chrono/geometry/ChLineArc.h"
-#include "chrono/geometry/ChLinePath.h"
-#include "chrono/geometry/ChLineSegment.h"
+#include "assets/ChVisualization.h"
+#include "geometry/ChLineArc.h"
+#include "geometry/ChLinePath.h"
+#include "geometry/ChLineSegment.h"
 
 namespace chrono {
 

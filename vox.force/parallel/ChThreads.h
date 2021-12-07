@@ -13,14 +13,14 @@
 #ifndef CHTHREADS_H
 #define CHTHREADS_H
 
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
 #if defined _WIN32
-#include "chrono/parallel/ChThreadsWIN32.h"
+#include "parallel/ChThreadsWIN32.h"
 #endif
 
 #if (defined(__linux__) || defined(__APPLE__) || defined(__FreeBSD__) || defined(__EMSCRIPTEN__))
-#include "chrono/parallel/ChThreadsPOSIX.h"
+#include "parallel/ChThreadsPOSIX.h"
 #endif
 
 namespace chrono {

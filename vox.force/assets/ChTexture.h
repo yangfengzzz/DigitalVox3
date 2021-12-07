@@ -15,7 +15,7 @@
 #ifndef CHTEXTURE_H
 #define CHTEXTURE_H
 
-#include "chrono/assets/ChAsset.h"
+#include "assets/ChAsset.h"
 
 namespace chrono {
 

@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/geometry/ChLineSegment.h"
-#include "chrono/physics/ChLinkTrajectory.h"
+#include "geometry/ChLineSegment.h"
+#include "physics/ChLinkTrajectory.h"
 
 namespace chrono {
 

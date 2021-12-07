@@ -15,9 +15,9 @@
 #ifndef CHCOLOR_H
 #define CHCOLOR_H
 
-#include "chrono/core/ChClassFactory.h"
-#include "chrono/core/ChStream.h"
-#include "chrono/serialization/ChArchive.h"
+#include "core/ChClassFactory.h"
+#include "core/ChStream.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 

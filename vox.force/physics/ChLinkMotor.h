@@ -15,9 +15,9 @@
 #ifndef CHLINKMOTOR_H
 #define CHLINKMOTOR_H
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChLinkMate.h"
-#include "chrono/motion_functions/ChFunction.h"
+#include "physics/ChBody.h"
+#include "physics/ChLinkMate.h"
+#include "motion_functions/ChFunction.h"
 
 namespace chrono {
 

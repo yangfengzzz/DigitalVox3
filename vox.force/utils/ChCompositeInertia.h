@@ -15,10 +15,10 @@
 #ifndef CH_COMPOSITE_INERTIA_H
 #define CH_COMPOSITE_INERTIA_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChMatrix33.h"
-#include "chrono/core/ChFrame.h"
+#include "core/ChApiCE.h"
+#include "core/ChVector.h"
+#include "core/ChMatrix33.h"
+#include "core/ChFrame.h"
 
 namespace chrono {
 namespace utils {

@@ -15,8 +15,8 @@
 #ifndef CHSHAFTSGEAR_H
 #define CHSHAFTSGEAR_H
 
-#include "chrono/physics/ChShaftsCouple.h"
-#include "chrono/solver/ChConstraintTwoGeneric.h"
+#include "physics/ChShaftsCouple.h"
+#include "solver/ChConstraintTwoGeneric.h"
 
 namespace chrono {
 

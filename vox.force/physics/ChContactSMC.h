@@ -23,16 +23,16 @@
 #include <algorithm>
 #include <limits>
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/core/ChFrame.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/solver/ChKblockGeneric.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/physics/ChContactContainer.h"
-#include "chrono/physics/ChContactTuple.h"
-#include "chrono/physics/ChMaterialSurfaceSMC.h"
-#include "chrono/physics/ChSystemSMC.h"
-#include "chrono/timestepper/ChState.h"
+#include "collision/ChCollisionModel.h"
+#include "core/ChFrame.h"
+#include "core/ChMatrix.h"
+#include "solver/ChKblockGeneric.h"
+#include "solver/ChSystemDescriptor.h"
+#include "physics/ChContactContainer.h"
+#include "physics/ChContactTuple.h"
+#include "physics/ChMaterialSurfaceSMC.h"
+#include "physics/ChSystemSMC.h"
+#include "timestepper/ChState.h"
 
 namespace chrono {
 

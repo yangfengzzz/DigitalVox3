@@ -15,10 +15,10 @@
 #include <algorithm>
 #include <cmath>
 
-#include "chrono/physics/ChMaterialSurface.h"
-#include "chrono/physics/ChMaterialSurfaceSMC.h"
-#include "chrono/physics/ChMaterialSurfaceNSC.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChMaterialSurface.h"
+#include "physics/ChMaterialSurfaceSMC.h"
+#include "physics/ChMaterialSurfaceNSC.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

@@ -15,8 +15,8 @@
 #ifndef CHCOROTATIONAL_H
 #define CHCOROTATIONAL_H
 
-#include "chrono/fea/ChPolarDecomposition.h"
-#include "chrono/fea/ChMatrixCorotation.h"
+#include "fea/ChPolarDecomposition.h"
+#include "fea/ChMatrixCorotation.h"
 
 namespace chrono {
 namespace fea {

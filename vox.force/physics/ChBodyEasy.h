@@ -20,11 +20,11 @@
 #ifndef CHBODYEASY_H
 #define CHBODYEASY_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChBodyAuxRef.h"
-#include "chrono/collision/ChCollisionModelBullet.h"
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "core/ChApiCE.h"
+#include "physics/ChBody.h"
+#include "physics/ChBodyAuxRef.h"
+#include "collision/ChCollisionModelBullet.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
 namespace chrono {
 

@@ -20,9 +20,9 @@
 //// - more use of Eigen expressions
 //// - split up the ridiculously big switch cases!
 
-#include "chrono/core/ChException.h"
-#include "chrono/core/ChQuadrature.h"
-#include "chrono/fea/ChElementHexaANCF_3813_9.h"
+#include "core/ChException.h"
+#include "core/ChQuadrature.h"
+#include "fea/ChElementHexaANCF_3813_9.h"
 
 namespace chrono {
 namespace fea {

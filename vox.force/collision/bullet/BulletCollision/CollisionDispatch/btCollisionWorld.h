@@ -81,8 +81,8 @@ class btSerializer;
 #include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
-#include "chrono/core/ChTimer.h"      // ***CHRONO***
-#include "chrono/utils/ChProfiler.h"  // ***CHRONO***
+#include "core/ChTimer.h"      // ***CHRONO***
+#include "utils/ChProfiler.h"  // ***CHRONO***
 
 ///CollisionWorld is interface and container for the collision detection
 class btCollisionWorld

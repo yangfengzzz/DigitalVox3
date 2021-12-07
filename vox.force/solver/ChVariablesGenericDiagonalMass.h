@@ -15,7 +15,7 @@
 #ifndef CHVARIABLESGENERICDIAGONALMASS_H
 #define CHVARIABLESGENERICDIAGONALMASS_H
 
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

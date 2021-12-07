@@ -15,7 +15,7 @@
 #ifndef CHFUNCT_CONSTACC_H
 #define CHFUNCT_CONSTACC_H
 
-#include "chrono/motion_functions/ChFunction_Base.h"
+#include "motion_functions/ChFunction_Base.h"
 
 namespace chrono {
 

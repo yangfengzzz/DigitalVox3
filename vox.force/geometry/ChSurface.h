@@ -17,8 +17,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChFilePS.h"
-#include "chrono/geometry/ChGeometry.h"
+#include "core/ChFilePS.h"
+#include "geometry/ChGeometry.h"
 
 namespace chrono {
 namespace geometry {

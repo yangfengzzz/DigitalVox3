@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/collision/ChConvexDecomposition.h"
-#include "chrono_thirdparty/HACDv2/wavefront.h"
+#include "collision/ChConvexDecomposition.h"
+#include <HACDv2/wavefront.h>
 
 namespace chrono {
 namespace collision {

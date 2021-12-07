@@ -15,8 +15,8 @@
 #ifndef CHSOLVERADMM_H
 #define CHSOLVERADMM_H
 
-#include "chrono/solver/ChIterativeSolverVI.h"
-#include "chrono/solver/ChDirectSolverLS.h"
+#include "solver/ChIterativeSolverVI.h"
+#include "solver/ChDirectSolverLS.h"
 
 namespace chrono {
 

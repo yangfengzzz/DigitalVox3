@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-#include "chrono/geometry/ChVolume.h"
+#include "geometry/ChVolume.h"
 
 namespace chrono {
 namespace geometry {

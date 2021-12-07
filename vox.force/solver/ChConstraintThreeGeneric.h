@@ -15,8 +15,8 @@
 #ifndef CHCONSTRAINTTHREEGENERIC_H
 #define CHCONSTRAINTTHREEGENERIC_H
 
-#include "chrono/solver/ChConstraintThree.h"
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChConstraintThree.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

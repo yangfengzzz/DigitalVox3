@@ -15,8 +15,8 @@
 #ifndef CHMATRIXCOROTATION_H
 #define CHMATRIXCOROTATION_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMatrix33.h"
+#include "core/ChApiCE.h"
+#include "core/ChMatrix33.h"
 
 namespace chrono {
 namespace fea {

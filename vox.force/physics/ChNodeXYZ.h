@@ -15,10 +15,10 @@
 #ifndef CHNODEXYZ_H
 #define CHNODEXYZ_H
 
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/physics/ChNodeBase.h"
-#include "chrono/solver/ChVariablesBodyOwnMass.h"
-#include "chrono/solver/ChVariablesNode.h"
+#include "physics/ChLoadable.h"
+#include "physics/ChNodeBase.h"
+#include "solver/ChVariablesBodyOwnMass.h"
+#include "solver/ChVariablesNode.h"
 
 namespace chrono {
 

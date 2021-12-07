@@ -15,8 +15,8 @@
 #include <algorithm>
 #include <cmath>
 
-#include "chrono/physics/ChMaterialSurfaceSMC.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChMaterialSurfaceSMC.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

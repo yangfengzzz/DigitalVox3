@@ -15,9 +15,9 @@
 #ifndef CH_COLLISION_SYSTEM_BULLET_H
 #define CH_COLLISION_SYSTEM_BULLET_H
 
-#include "chrono/collision/ChCollisionSystem.h"
-#include "chrono/collision/bullet/btBulletCollisionCommon.h"
-#include "chrono/core/ChApiCE.h"
+#include "collision/ChCollisionSystem.h"
+#include "collision/bullet/btBulletCollisionCommon.h"
+#include "core/ChApiCE.h"
 
 namespace chrono {
 namespace collision {

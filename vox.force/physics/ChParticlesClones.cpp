@@ -15,12 +15,12 @@
 #include <cstdlib>
 #include <algorithm>
 
-#include "chrono/core/ChGlobal.h"
-#include "chrono/core/ChTransform.h"
-#include "chrono/physics/ChSystem.h"
-#include "chrono/physics/ChParticlesClones.h"
-#include "chrono/physics/ChMaterialSurfaceNSC.h"
-#include "chrono/collision/ChCollisionModelBullet.h"
+#include "core/ChGlobal.h"
+#include "core/ChTransform.h"
+#include "physics/ChSystem.h"
+#include "physics/ChParticlesClones.h"
+#include "physics/ChMaterialSurfaceNSC.h"
+#include "collision/ChCollisionModelBullet.h"
 
 namespace chrono {
 

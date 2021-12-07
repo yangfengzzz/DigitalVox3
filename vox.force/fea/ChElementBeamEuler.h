@@ -15,10 +15,10 @@
 #ifndef CHELEMENTBEAMEULER_H
 #define CHELEMENTBEAMEULER_H
 
-#include "chrono/fea/ChBeamSectionEuler.h"
-#include "chrono/fea/ChElementBeam.h"
-#include "chrono/fea/ChElementCorotational.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "fea/ChBeamSectionEuler.h"
+#include "fea/ChElementBeam.h"
+#include "fea/ChElementCorotational.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 namespace fea {

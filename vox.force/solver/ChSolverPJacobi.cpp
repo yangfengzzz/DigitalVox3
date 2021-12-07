@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/solver/ChSolverPJacobi.h"
-#include "chrono/core/ChMathematics.h"
+#include "solver/ChSolverPJacobi.h"
+#include "core/ChMathematics.h"
 
 namespace chrono {
 

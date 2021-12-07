@@ -14,7 +14,7 @@
 
 #include <cstdio>
 
-#include "chrono/geometry/ChEllipsoid.h"
+#include "geometry/ChEllipsoid.h"
 
 namespace chrono {
 namespace geometry {

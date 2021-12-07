@@ -15,11 +15,11 @@
 #ifndef CHNODEFEAXYZROT_H
 #define CHNODEFEAXYZROT_H
 
-#include "chrono/core/ChFrameMoving.h"
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChLoadable.h"
-#include "chrono/solver/ChVariablesBodyOwnMass.h"
-#include "chrono/fea/ChNodeFEAbase.h"
+#include "core/ChFrameMoving.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChLoadable.h"
+#include "solver/ChVariablesBodyOwnMass.h"
+#include "fea/ChNodeFEAbase.h"
 
 namespace chrono {
 namespace fea {

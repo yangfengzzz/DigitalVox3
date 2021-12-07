@@ -15,12 +15,12 @@
 #ifndef CHPHYSICSITEM_H
 #define CHPHYSICSITEM_H
 
-#include "chrono/assets/ChAsset.h"
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/core/ChFrame.h"
-#include "chrono/physics/ChObject.h"
-#include "chrono/solver/ChSystemDescriptor.h"
-#include "chrono/timestepper/ChState.h"
+#include "assets/ChAsset.h"
+#include "collision/ChCollisionModel.h"
+#include "core/ChFrame.h"
+#include "physics/ChObject.h"
+#include "solver/ChSystemDescriptor.h"
+#include "timestepper/ChState.h"
 
 namespace chrono {
 

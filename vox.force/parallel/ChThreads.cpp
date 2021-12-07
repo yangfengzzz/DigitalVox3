@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/parallel/ChThreads.h"
+#include "parallel/ChThreads.h"
 
 namespace chrono {
 

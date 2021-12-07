@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChGlyphs.h"
+#include "assets/ChGlyphs.h"
 
 namespace chrono {
 

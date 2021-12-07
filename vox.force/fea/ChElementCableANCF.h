@@ -17,10 +17,10 @@
 #ifndef CHELEMENTCABLEANCF_H
 #define CHELEMENTCABLEANCF_H
 
-#include "chrono/core/ChVector.h"
-#include "chrono/fea/ChBeamSectionCable.h"
-#include "chrono/fea/ChElementBeam.h"
-#include "chrono/fea/ChNodeFEAxyzD.h"
+#include "core/ChVector.h"
+#include "fea/ChBeamSectionCable.h"
+#include "fea/ChElementBeam.h"
+#include "fea/ChNodeFEAxyzD.h"
 
 namespace chrono {
 namespace fea {

@@ -14,11 +14,11 @@
 #ifndef CHMESHEXPORTER_H_
 #define CHMESHEXPORTER_H_
 
-#include "chrono/fea/ChElementHexaANCF_3813.h"
-#include "chrono/fea/ChElementCableANCF.h"
-#include "chrono/fea/ChElementShellANCF_3423.h"
-#include "chrono/fea/ChMesh.h"
-#include "chrono/fea/ChNodeFEAxyz.h"
+#include "fea/ChElementHexaANCF_3813.h"
+#include "fea/ChElementCableANCF.h"
+#include "fea/ChElementShellANCF_3423.h"
+#include "fea/ChMesh.h"
+#include "fea/ChNodeFEAxyz.h"
 
 namespace chrono {
 namespace fea {

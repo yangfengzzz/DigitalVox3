@@ -15,11 +15,11 @@
 #ifndef CH_CONVEX_DECOMPOSITION_H
 #define CH_CONVEX_DECOMPOSITION_H
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/geometry/ChTriangleMeshSoup.h"
+#include "core/ChApiCE.h"
+#include "geometry/ChTriangleMeshSoup.h"
 
-#include "chrono_thirdparty/HACD/hacdHACD.h"
-#include "chrono_thirdparty/HACDv2/HACD.h"
+#include <HACD/hacdHACD.h>
+#include <HACDv2/HACD.h>
 
 namespace chrono {
 namespace collision {

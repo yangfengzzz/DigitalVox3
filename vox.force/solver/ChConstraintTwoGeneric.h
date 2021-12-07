@@ -15,8 +15,8 @@
 #ifndef CHCONSTRAINTTWOGENERIC_H
 #define CHCONSTRAINTTWOGENERIC_H
 
-#include "chrono/solver/ChConstraintTwo.h"
-#include "chrono/solver/ChVariables.h"
+#include "solver/ChConstraintTwo.h"
+#include "solver/ChVariables.h"
 
 namespace chrono {
 

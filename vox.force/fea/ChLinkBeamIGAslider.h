@@ -15,12 +15,12 @@
 #ifndef CHLINKBEAMIGASLIDER_H
 #define CHLINKBEAMIGASLIDER_H
 
-#include "chrono/physics/ChBodyFrame.h"
-#include "chrono/physics/ChLinkBase.h"
-#include "chrono/solver/ChConstraintNgeneric.h"
+#include "physics/ChBodyFrame.h"
+#include "physics/ChLinkBase.h"
+#include "solver/ChConstraintNgeneric.h"
 
-#include "chrono/fea/ChElementBeamIGA.h"
-#include "chrono/fea/ChNodeFEAxyzrot.h"
+#include "fea/ChElementBeamIGA.h"
+#include "fea/ChNodeFEAxyzrot.h"
 
 namespace chrono {
 

@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/assets/ChRoundedBoxShape.h"
+#include "assets/ChRoundedBoxShape.h"
 
 namespace chrono {
 

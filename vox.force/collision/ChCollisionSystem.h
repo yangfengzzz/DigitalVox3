@@ -15,10 +15,10 @@
 #ifndef CH_COLLISIONSYSTEM_H
 #define CH_COLLISIONSYSTEM_H
 
-#include "chrono/collision/ChCollisionModel.h"
-#include "chrono/collision/ChCollisionInfo.h"
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChFrame.h"
+#include "collision/ChCollisionModel.h"
+#include "collision/ChCollisionInfo.h"
+#include "core/ChApiCE.h"
+#include "core/ChFrame.h"
 
 namespace chrono {
 

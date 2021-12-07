@@ -19,8 +19,8 @@
 
 #include <cmath>
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChLinkLock.h"
+#include "physics/ChBody.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

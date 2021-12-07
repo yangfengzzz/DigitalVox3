@@ -15,8 +15,8 @@
 #ifndef CHLINKTRAJECTORY_H
 #define CHLINKTRAJECTORY_H
 
-#include "chrono/geometry/ChLine.h"
-#include "chrono/physics/ChLinkLock.h"
+#include "geometry/ChLine.h"
+#include "physics/ChLinkLock.h"
 
 namespace chrono {
 

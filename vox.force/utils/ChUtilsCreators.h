@@ -34,18 +34,18 @@
 #include <string>
 #include <vector>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChQuaternion.h"
-#include "chrono/core/ChVector.h"
+#include "core/ChApiCE.h"
+#include "core/ChQuaternion.h"
+#include "core/ChVector.h"
 
-#include "chrono/physics/ChBody.h"
-#include "chrono/physics/ChMaterialSurfaceNSC.h"
-#include "chrono/physics/ChMaterialSurfaceSMC.h"
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChBody.h"
+#include "physics/ChMaterialSurfaceNSC.h"
+#include "physics/ChMaterialSurfaceSMC.h"
+#include "physics/ChSystem.h"
 
-#include "chrono/geometry/ChTriangleMeshConnected.h"
+#include "geometry/ChTriangleMeshConnected.h"
 
-#include "chrono/collision/ChConvexDecomposition.h"
+#include "collision/ChConvexDecomposition.h"
 
 namespace chrono {
 namespace utils {

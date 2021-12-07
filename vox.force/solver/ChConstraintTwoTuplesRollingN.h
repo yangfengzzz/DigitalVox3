@@ -15,8 +15,8 @@
 #ifndef CHCONSTRAINTTWOTUPLESROLLINGN_H
 #define CHCONSTRAINTTWOTUPLESROLLINGN_H
 
-#include "chrono/solver/ChConstraintTwoTuplesContactN.h"
-#include "chrono/solver/ChConstraintTwoTuplesRollingT.h"
+#include "solver/ChConstraintTwoTuplesContactN.h"
+#include "solver/ChConstraintTwoTuplesRollingT.h"
 
 namespace chrono {
 

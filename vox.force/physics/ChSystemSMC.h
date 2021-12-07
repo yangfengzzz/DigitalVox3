@@ -22,7 +22,7 @@
 
 #include <algorithm>
 
-#include "chrono/physics/ChSystem.h"
+#include "physics/ChSystem.h"
 
 namespace chrono {
 

@@ -15,7 +15,7 @@
 #ifndef CHC_ROUNDEDCYLINDER_H
 #define CHC_ROUNDEDCYLINDER_H
 
-#include "chrono/geometry/ChGeometry.h"
+#include "geometry/ChGeometry.h"
 
 namespace chrono {
 namespace geometry {

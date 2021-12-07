@@ -15,7 +15,7 @@
 #ifndef CHBEAMSECTIONEULER_H
 #define CHBEAMSECTIONEULER_H
 
-#include "chrono/fea/ChBeamSection.h"
+#include "fea/ChBeamSection.h"
 
 namespace chrono {
 namespace fea {

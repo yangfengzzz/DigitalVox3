@@ -15,8 +15,8 @@
 #ifndef CHLINKMOTORROTATIONSPEED_H
 #define CHLINKMOTORROTATIONSPEED_H
 
-#include "chrono/physics/ChLinkMotorRotation.h"
-#include "chrono/solver/ChVariablesGeneric.h"
+#include "physics/ChLinkMotorRotation.h"
+#include "solver/ChVariablesGeneric.h"
 
 namespace chrono {
 
