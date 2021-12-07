@@ -1020,8 +1020,248 @@
 		0434A2BF275F97A1009AD4EA /* vox.force */ = {
 			isa = PBXGroup;
 			children = (
+				0434A2E6275F9A57009AD4EA /* physics */,
+				0434A2E5275F9A4E009AD4EA /* solver */,
+				0434A2E4275F9A44009AD4EA /* fea */,
+				0434A2E3275F9A37009AD4EA /* particlefactory */,
+				0434A2E2275F9A29009AD4EA /* multicore_math */,
+				0434A2E1275F9A1C009AD4EA /* parallel */,
+				0434A2E0275F9A0D009AD4EA /* assets */,
+				0434A2DF275F99F7009AD4EA /* utils */,
+				0434A2DE275F99EA009AD4EA /* timestepper */,
+				0434A2CD275F9900009AD4EA /* collision */,
+				0434A2CC275F98F0009AD4EA /* motion_functions */,
+				0434A2C9275F98BF009AD4EA /* core */,
+				0434A2CA275F98CE009AD4EA /* serialization */,
+				0434A2CB275F98E0009AD4EA /* geometry */,
 			);
 			path = vox.force;
+			sourceTree = "<group>";
+		};
+		0434A2C9275F98BF009AD4EA /* core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		0434A2CA275F98CE009AD4EA /* serialization */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = serialization;
+			sourceTree = "<group>";
+		};
+		0434A2CB275F98E0009AD4EA /* geometry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = geometry;
+			sourceTree = "<group>";
+		};
+		0434A2CC275F98F0009AD4EA /* motion_functions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = motion_functions;
+			sourceTree = "<group>";
+		};
+		0434A2CD275F9900009AD4EA /* collision */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2D8275F9998009AD4EA /* gimpact */,
+				0434A2D7275F9987009AD4EA /* edgetempest */,
+				0434A2CE275F990E009AD4EA /* bullet */,
+			);
+			path = collision;
+			sourceTree = "<group>";
+		};
+		0434A2CE275F990E009AD4EA /* bullet */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2D0275F9924009AD4EA /* LinearMath */,
+				0434A2CF275F9918009AD4EA /* BulletCollision */,
+			);
+			path = bullet;
+			sourceTree = "<group>";
+		};
+		0434A2CF275F9918009AD4EA /* BulletCollision */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2D6275F9972009AD4EA /* NarrowPhaseCollision */,
+				0434A2D5275F9964009AD4EA /* Gimpact */,
+				0434A2D4275F9958009AD4EA /* CollisionShapes */,
+				0434A2D3275F994A009AD4EA /* CollisionDispatch */,
+				0434A2D2275F993E009AD4EA /* BroadphaseCollision */,
+			);
+			path = BulletCollision;
+			sourceTree = "<group>";
+		};
+		0434A2D0275F9924009AD4EA /* LinearMath */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2D1275F992E009AD4EA /* TaskScheduler */,
+			);
+			path = LinearMath;
+			sourceTree = "<group>";
+		};
+		0434A2D1275F992E009AD4EA /* TaskScheduler */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TaskScheduler;
+			sourceTree = "<group>";
+		};
+		0434A2D2275F993E009AD4EA /* BroadphaseCollision */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BroadphaseCollision;
+			sourceTree = "<group>";
+		};
+		0434A2D3275F994A009AD4EA /* CollisionDispatch */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollisionDispatch;
+			sourceTree = "<group>";
+		};
+		0434A2D4275F9958009AD4EA /* CollisionShapes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollisionShapes;
+			sourceTree = "<group>";
+		};
+		0434A2D5275F9964009AD4EA /* Gimpact */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Gimpact;
+			sourceTree = "<group>";
+		};
+		0434A2D6275F9972009AD4EA /* NarrowPhaseCollision */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NarrowPhaseCollision;
+			sourceTree = "<group>";
+		};
+		0434A2D7275F9987009AD4EA /* edgetempest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = edgetempest;
+			sourceTree = "<group>";
+		};
+		0434A2D8275F9998009AD4EA /* gimpact */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2DB275F99B8009AD4EA /* GIMPACTUtils */,
+				0434A2DA275F99AF009AD4EA /* GIMPACT */,
+				0434A2D9275F99A4009AD4EA /* ConvexDecomposition */,
+			);
+			path = gimpact;
+			sourceTree = "<group>";
+		};
+		0434A2D9275F99A4009AD4EA /* ConvexDecomposition */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ConvexDecomposition;
+			sourceTree = "<group>";
+		};
+		0434A2DA275F99AF009AD4EA /* GIMPACT */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2DD275F99D0009AD4EA /* Bullet */,
+				0434A2DC275F99C5009AD4EA /* core */,
+			);
+			path = GIMPACT;
+			sourceTree = "<group>";
+		};
+		0434A2DB275F99B8009AD4EA /* GIMPACTUtils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GIMPACTUtils;
+			sourceTree = "<group>";
+		};
+		0434A2DC275F99C5009AD4EA /* core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		0434A2DD275F99D0009AD4EA /* Bullet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bullet;
+			sourceTree = "<group>";
+		};
+		0434A2DE275F99EA009AD4EA /* timestepper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = timestepper;
+			sourceTree = "<group>";
+		};
+		0434A2DF275F99F7009AD4EA /* utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		0434A2E0275F9A0D009AD4EA /* assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		0434A2E1275F9A1C009AD4EA /* parallel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = parallel;
+			sourceTree = "<group>";
+		};
+		0434A2E2275F9A29009AD4EA /* multicore_math */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = multicore_math;
+			sourceTree = "<group>";
+		};
+		0434A2E3275F9A37009AD4EA /* particlefactory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = particlefactory;
+			sourceTree = "<group>";
+		};
+		0434A2E4275F9A44009AD4EA /* fea */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = fea;
+			sourceTree = "<group>";
+		};
+		0434A2E5275F9A4E009AD4EA /* solver */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = solver;
+			sourceTree = "<group>";
+		};
+		0434A2E6275F9A57009AD4EA /* physics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = physics;
 			sourceTree = "<group>";
 		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
@@ -1976,11 +2216,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				0434A2BD275F97A1009AD4EA /* vox.force */,
 				04CE3780274D156200204B8E /* vox.render */,
 				04CE367B274D077100204B8E /* apps */,
 				04CE382B274D17B300204B8E /* unit_tests */,
 				0434A2AC275F96AB009AD4EA /* editor */,
-				0434A2BD275F97A1009AD4EA /* vox.force */,
 			);
 		};
 /* End PBXProject section */
@@ -2387,6 +2627,7 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = ./vox.force;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -2403,6 +2644,7 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = ./vox.force;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
