@@ -8,6 +8,7 @@
 #include "ambient_light.h"
 #include "../shader/shader.h"
 #include "../scene.h"
+#include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
 ShaderProperty AmbientLight::_envMapProperty = Shader::createProperty("u_envMapLight", ShaderDataGroup::Enum::Scene);
@@ -22,6 +23,11 @@ AmbientLight::AmbientLight(Scene* value) {
     _envMapLight.diffuseIntensity = 1.0;
     _envMapLight.specularIntensity = 1.0;
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+    
+    RenderPipelineState::register_fragment_uploader<EnvMapLight>([](const EnvMapLight& x, size_t location,
+                                                                    id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(EnvMapLight) atIndex:location];
+    });
 }
 
 bool AmbientLight::specularTextureDecodeRGBM() {
@@ -73,7 +79,7 @@ float AmbientLight::diffuseIntensity() {
 void AmbientLight::setDiffuseIntensity(float value) {
     _envMapLight.diffuseIntensity = value;
     if (!_scene) return;
-
+    
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
 }
 
@@ -84,14 +90,14 @@ id<MTLTexture> AmbientLight::specularTexture() {
 void AmbientLight::setSpecularTexture(id<MTLTexture> value) {
     _specularReflection = value;
     if (!_scene) return;
-
+    
     auto& shaderData = _scene->shaderData;
-
+    
     if (value) {
-      shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
-      shaderData.enableMacro(HAS_SPECULAR_ENV);
+        shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+        shaderData.enableMacro(HAS_SPECULAR_ENV);
     } else {
-      shaderData.disableMacro(HAS_SPECULAR_ENV);
+        shaderData.disableMacro(HAS_SPECULAR_ENV);
     }
 }
 
@@ -102,7 +108,7 @@ float AmbientLight::specularIntensity() {
 void AmbientLight::setSpecularIntensity(float value) {
     _envMapLight.specularIntensity = value;
     if (!_scene) return;
-
+    
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
 }
 
