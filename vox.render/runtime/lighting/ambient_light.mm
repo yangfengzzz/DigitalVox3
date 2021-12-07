@@ -64,6 +64,7 @@ math::Color AmbientLight::diffuseSolidColor() {
 
 void AmbientLight::setDiffuseSolidColor(const math::Color& value) {
     _envMapLight.diffuse = simd_make_float3(value.r, value.g, value.b);
+    _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
 }
 
 const math::SphericalHarmonics3& AmbientLight::diffuseSphericalHarmonics() {
