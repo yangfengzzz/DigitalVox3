@@ -39,10 +39,10 @@
 #include <iostream>
 #include <sstream>
 
-#include "chrono/core/ChBezierCurve.h"
+#include "core/ChBezierCurve.h"
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChMatrix.h"
+#include "core/ChMathematics.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

@@ -15,9 +15,9 @@
 #ifndef CHARCHIVEXML_H
 #define CHARCHIVEXML_H
 
-#include "chrono/serialization/ChArchive.h"
-#include "chrono/core/ChLog.h"
-#include "chrono/core/ChMathematics.h"
+#include "serialization/ChArchive.h"
+#include "core/ChLog.h"
+#include "core/ChMathematics.h"
 #include <iostream>
 #include <fstream>
 

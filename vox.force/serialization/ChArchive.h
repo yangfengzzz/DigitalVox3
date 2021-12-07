@@ -22,10 +22,10 @@
 #include <memory>
 #include <algorithm>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChStream.h"
-#include "chrono/core/ChClassFactory.h"
-#include "chrono/core/ChTemplateExpressions.h"
+#include "core/ChApiCE.h"
+#include "core/ChStream.h"
+#include "core/ChClassFactory.h"
+#include "core/ChTemplateExpressions.h"
 
 namespace chrono {
 

@@ -16,8 +16,8 @@
 #define CHMATRIX_H
 
 // Include these before ChMatrixEigenExtensions
-#include "chrono/serialization/ChArchive.h"
-#include "chrono/serialization/ChArchiveAsciiDump.h"
+#include "serialization/ChArchive.h"
+#include "serialization/ChArchiveAsciiDump.h"
 
 // -----------------------------------------------------------------------------
 
@@ -52,13 +52,13 @@ struct eigen_static_assert_exception {
 
 // -----------------------------------------------------------------------------
 
-#define EIGEN_MATRIXBASE_PLUGIN "chrono/core/ChMatrixEigenExtensions.h"
-#define EIGEN_SPARSEMATRIX_PLUGIN "chrono/core/ChSparseMatrixEigenExtensions.h"
+#define EIGEN_MATRIXBASE_PLUGIN "core/ChMatrixEigenExtensions.h"
+#define EIGEN_SPARSEMATRIX_PLUGIN "core/ChSparseMatrixEigenExtensions.h"
 #include "Eigen/Dense"
 #include "Eigen/Sparse"
 
-#include "chrono/ChConfig.h"
-#include "chrono/core/ChTypes.h"
+#include "ChConfig.h"
+#include "core/ChTypes.h"
 
 namespace chrono {
 

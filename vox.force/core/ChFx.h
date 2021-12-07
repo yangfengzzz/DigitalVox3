@@ -16,7 +16,7 @@
 #ifndef CHFX_H
 #define CHFX_H
 
-#include "chrono/core/ChMath.h"
+#include "core/ChMath.h"
 
 namespace chrono {
 

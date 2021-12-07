@@ -108,6 +108,64 @@
 		0434A2B7275F9759009AD4EA /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		0434A2B8275F975F009AD4EA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		0434A2B9275F9763009AD4EA /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04161014275474AE006CD384 /* ModelIO.framework */; };
+		0434A2E9275F9B66009AD4EA /* ChVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2E7275F9B66009AD4EA /* ChVersion.h */; };
+		0434A2EA275F9B66009AD4EA /* ChConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2E8275F9B66009AD4EA /* ChConfig.h */; };
+		0434A31D275F9B79009AD4EA /* ChSparseMatrixEigenExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2EB275F9B77009AD4EA /* ChSparseMatrixEigenExtensions.h */; };
+		0434A31E275F9B79009AD4EA /* ChSparsityPatternLearner.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2EC275F9B77009AD4EA /* ChSparsityPatternLearner.h */; };
+		0434A31F275F9B79009AD4EA /* ChRealtimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2ED275F9B77009AD4EA /* ChRealtimeStep.h */; };
+		0434A320275F9B79009AD4EA /* ChVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2EE275F9B77009AD4EA /* ChVector.cpp */; };
+		0434A321275F9B79009AD4EA /* ChTemplateExpressions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2EF275F9B77009AD4EA /* ChTemplateExpressions.h */; };
+		0434A322275F9B79009AD4EA /* ChDistribution.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F0275F9B77009AD4EA /* ChDistribution.h */; };
+		0434A323275F9B79009AD4EA /* ChTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F1275F9B77009AD4EA /* ChTypes.h */; };
+		0434A324275F9B79009AD4EA /* ChQuaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2F2275F9B77009AD4EA /* ChQuaternion.cpp */; };
+		0434A325275F9B79009AD4EA /* ChCubicSpline.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F3275F9B77009AD4EA /* ChCubicSpline.h */; };
+		0434A326275F9B79009AD4EA /* ChFilePS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F4275F9B77009AD4EA /* ChFilePS.h */; };
+		0434A327275F9B79009AD4EA /* ChQuaternion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F5275F9B77009AD4EA /* ChQuaternion.h */; };
+		0434A328275F9B79009AD4EA /* ChLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F6275F9B77009AD4EA /* ChLog.h */; };
+		0434A329275F9B79009AD4EA /* ChMatrixMBD.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F7275F9B77009AD4EA /* ChMatrixMBD.h */; };
+		0434A32A275F9B79009AD4EA /* ChQuadrature.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2F8275F9B77009AD4EA /* ChQuadrature.h */; };
+		0434A32B275F9B79009AD4EA /* ChFilePS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2F9275F9B77009AD4EA /* ChFilePS.cpp */; };
+		0434A32C275F9B79009AD4EA /* ChClassFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2FA275F9B78009AD4EA /* ChClassFactory.cpp */; };
+		0434A32D275F9B79009AD4EA /* ChVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2FB275F9B78009AD4EA /* ChVector.h */; };
+		0434A32E275F9B79009AD4EA /* ChBezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2FC275F9B78009AD4EA /* ChBezierCurve.cpp */; };
+		0434A32F275F9B79009AD4EA /* ChFrameMoving.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2FD275F9B78009AD4EA /* ChFrameMoving.h */; };
+		0434A330275F9B79009AD4EA /* ChTensors.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2FE275F9B78009AD4EA /* ChTensors.h */; };
+		0434A331275F9B79009AD4EA /* ChChrono.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2FF275F9B78009AD4EA /* ChChrono.h */; };
+		0434A332275F9B79009AD4EA /* ChAlignedAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A300275F9B78009AD4EA /* ChAlignedAllocator.h */; };
+		0434A333275F9B79009AD4EA /* ChMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A301275F9B78009AD4EA /* ChMath.h */; };
+		0434A334275F9B79009AD4EA /* ChLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A302275F9B78009AD4EA /* ChLog.cpp */; };
+		0434A335275F9B79009AD4EA /* ChCoordsys.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A303275F9B78009AD4EA /* ChCoordsys.cpp */; };
+		0434A336275F9B79009AD4EA /* ChClassFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A304275F9B78009AD4EA /* ChClassFactory.h */; };
+		0434A337275F9B79009AD4EA /* ChStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A305275F9B78009AD4EA /* ChStream.cpp */; };
+		0434A338275F9B79009AD4EA /* ChGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A306275F9B78009AD4EA /* ChGlobal.h */; };
+		0434A339275F9B79009AD4EA /* ChBezierCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A307275F9B78009AD4EA /* ChBezierCurve.h */; };
+		0434A33A275F9B79009AD4EA /* ChDistribution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A308275F9B78009AD4EA /* ChDistribution.cpp */; };
+		0434A33B275F9B79009AD4EA /* ChMatrix33.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A309275F9B78009AD4EA /* ChMatrix33.h */; };
+		0434A33C275F9B79009AD4EA /* ChFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A30A275F9B78009AD4EA /* ChFrame.h */; };
+		0434A33D275F9B79009AD4EA /* ChTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A30B275F9B78009AD4EA /* ChTransform.h */; };
+		0434A33E275F9B79009AD4EA /* ChGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A30C275F9B78009AD4EA /* ChGlobal.cpp */; };
+		0434A33F275F9B79009AD4EA /* ChMathematics.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A30D275F9B79009AD4EA /* ChMathematics.h */; };
+		0434A340275F9B79009AD4EA /* ChVector2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A30E275F9B79009AD4EA /* ChVector2.h */; };
+		0434A341275F9B79009AD4EA /* ChMatrixEigenExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A30F275F9B79009AD4EA /* ChMatrixEigenExtensions.h */; };
+		0434A342275F9B79009AD4EA /* ChCubicSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A310275F9B79009AD4EA /* ChCubicSpline.cpp */; };
+		0434A343275F9B79009AD4EA /* ChException.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A311275F9B79009AD4EA /* ChException.h */; };
+		0434A344275F9B79009AD4EA /* ChMathematics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A312275F9B79009AD4EA /* ChMathematics.cpp */; };
+		0434A345275F9B79009AD4EA /* ChCoordsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A313275F9B79009AD4EA /* ChCoordsys.h */; };
+		0434A346275F9B79009AD4EA /* ChFx.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A314275F9B79009AD4EA /* ChFx.h */; };
+		0434A347275F9B79009AD4EA /* ChBitmaskEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A315275F9B79009AD4EA /* ChBitmaskEnums.h */; };
+		0434A348275F9B79009AD4EA /* ChLists.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A316275F9B79009AD4EA /* ChLists.h */; };
+		0434A349275F9B79009AD4EA /* ChApiCE.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A317275F9B79009AD4EA /* ChApiCE.h */; };
+		0434A34A275F9B79009AD4EA /* ChQuadrature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A318275F9B79009AD4EA /* ChQuadrature.cpp */; };
+		0434A34B275F9B79009AD4EA /* ChStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A319275F9B79009AD4EA /* ChStream.h */; };
+		0434A34C275F9B79009AD4EA /* ChTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A31A275F9B79009AD4EA /* ChTimer.h */; };
+		0434A34D275F9B79009AD4EA /* ChMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A31B275F9B79009AD4EA /* ChMatrix.h */; };
+		0434A34E275F9B79009AD4EA /* ChPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A31C275F9B79009AD4EA /* ChPlatform.h */; };
+		0434A355275F9B89009AD4EA /* ChArchiveAsciiDump.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A34F275F9B89009AD4EA /* ChArchiveAsciiDump.h */; };
+		0434A356275F9B89009AD4EA /* ChArchiveJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A350275F9B89009AD4EA /* ChArchiveJSON.h */; };
+		0434A357275F9B89009AD4EA /* ChArchiveXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A351275F9B89009AD4EA /* ChArchiveXML.h */; };
+		0434A358275F9B89009AD4EA /* ChArchiveBinary.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A352275F9B89009AD4EA /* ChArchiveBinary.h */; };
+		0434A359275F9B89009AD4EA /* ChArchiveExplorer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A353275F9B89009AD4EA /* ChArchiveExplorer.h */; };
+		0434A35A275F9B89009AD4EA /* ChArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A354275F9B89009AD4EA /* ChArchive.h */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -497,6 +555,65 @@
 		0434A2AF275F96AB009AD4EA /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		0434A2B4275F96DC009AD4EA /* editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = editor.entitlements; sourceTree = "<group>"; };
 		0434A2BE275F97A1009AD4EA /* libvox.force.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libvox.force.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		0434A2E7275F9B66009AD4EA /* ChVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChVersion.h; sourceTree = "<group>"; };
+		0434A2E8275F9B66009AD4EA /* ChConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChConfig.h; sourceTree = "<group>"; };
+		0434A2EB275F9B77009AD4EA /* ChSparseMatrixEigenExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChSparseMatrixEigenExtensions.h; sourceTree = "<group>"; };
+		0434A2EC275F9B77009AD4EA /* ChSparsityPatternLearner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChSparsityPatternLearner.h; sourceTree = "<group>"; };
+		0434A2ED275F9B77009AD4EA /* ChRealtimeStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChRealtimeStep.h; sourceTree = "<group>"; };
+		0434A2EE275F9B77009AD4EA /* ChVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChVector.cpp; sourceTree = "<group>"; };
+		0434A2EF275F9B77009AD4EA /* ChTemplateExpressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChTemplateExpressions.h; sourceTree = "<group>"; };
+		0434A2F0275F9B77009AD4EA /* ChDistribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChDistribution.h; sourceTree = "<group>"; };
+		0434A2F1275F9B77009AD4EA /* ChTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChTypes.h; sourceTree = "<group>"; };
+		0434A2F2275F9B77009AD4EA /* ChQuaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChQuaternion.cpp; sourceTree = "<group>"; };
+		0434A2F3275F9B77009AD4EA /* ChCubicSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCubicSpline.h; sourceTree = "<group>"; };
+		0434A2F4275F9B77009AD4EA /* ChFilePS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChFilePS.h; sourceTree = "<group>"; };
+		0434A2F5275F9B77009AD4EA /* ChQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChQuaternion.h; sourceTree = "<group>"; };
+		0434A2F6275F9B77009AD4EA /* ChLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChLog.h; sourceTree = "<group>"; };
+		0434A2F7275F9B77009AD4EA /* ChMatrixMBD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChMatrixMBD.h; sourceTree = "<group>"; };
+		0434A2F8275F9B77009AD4EA /* ChQuadrature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChQuadrature.h; sourceTree = "<group>"; };
+		0434A2F9275F9B77009AD4EA /* ChFilePS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChFilePS.cpp; sourceTree = "<group>"; };
+		0434A2FA275F9B78009AD4EA /* ChClassFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChClassFactory.cpp; sourceTree = "<group>"; };
+		0434A2FB275F9B78009AD4EA /* ChVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChVector.h; sourceTree = "<group>"; };
+		0434A2FC275F9B78009AD4EA /* ChBezierCurve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChBezierCurve.cpp; sourceTree = "<group>"; };
+		0434A2FD275F9B78009AD4EA /* ChFrameMoving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChFrameMoving.h; sourceTree = "<group>"; };
+		0434A2FE275F9B78009AD4EA /* ChTensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChTensors.h; sourceTree = "<group>"; };
+		0434A2FF275F9B78009AD4EA /* ChChrono.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChChrono.h; sourceTree = "<group>"; };
+		0434A300275F9B78009AD4EA /* ChAlignedAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChAlignedAllocator.h; sourceTree = "<group>"; };
+		0434A301275F9B78009AD4EA /* ChMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChMath.h; sourceTree = "<group>"; };
+		0434A302275F9B78009AD4EA /* ChLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChLog.cpp; sourceTree = "<group>"; };
+		0434A303275F9B78009AD4EA /* ChCoordsys.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCoordsys.cpp; sourceTree = "<group>"; };
+		0434A304275F9B78009AD4EA /* ChClassFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChClassFactory.h; sourceTree = "<group>"; };
+		0434A305275F9B78009AD4EA /* ChStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChStream.cpp; sourceTree = "<group>"; };
+		0434A306275F9B78009AD4EA /* ChGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChGlobal.h; sourceTree = "<group>"; };
+		0434A307275F9B78009AD4EA /* ChBezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChBezierCurve.h; sourceTree = "<group>"; };
+		0434A308275F9B78009AD4EA /* ChDistribution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChDistribution.cpp; sourceTree = "<group>"; };
+		0434A309275F9B78009AD4EA /* ChMatrix33.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChMatrix33.h; sourceTree = "<group>"; };
+		0434A30A275F9B78009AD4EA /* ChFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChFrame.h; sourceTree = "<group>"; };
+		0434A30B275F9B78009AD4EA /* ChTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChTransform.h; sourceTree = "<group>"; };
+		0434A30C275F9B78009AD4EA /* ChGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChGlobal.cpp; sourceTree = "<group>"; };
+		0434A30D275F9B79009AD4EA /* ChMathematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChMathematics.h; sourceTree = "<group>"; };
+		0434A30E275F9B79009AD4EA /* ChVector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChVector2.h; sourceTree = "<group>"; };
+		0434A30F275F9B79009AD4EA /* ChMatrixEigenExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChMatrixEigenExtensions.h; sourceTree = "<group>"; };
+		0434A310275F9B79009AD4EA /* ChCubicSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCubicSpline.cpp; sourceTree = "<group>"; };
+		0434A311275F9B79009AD4EA /* ChException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChException.h; sourceTree = "<group>"; };
+		0434A312275F9B79009AD4EA /* ChMathematics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChMathematics.cpp; sourceTree = "<group>"; };
+		0434A313275F9B79009AD4EA /* ChCoordsys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCoordsys.h; sourceTree = "<group>"; };
+		0434A314275F9B79009AD4EA /* ChFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChFx.h; sourceTree = "<group>"; };
+		0434A315275F9B79009AD4EA /* ChBitmaskEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChBitmaskEnums.h; sourceTree = "<group>"; };
+		0434A316275F9B79009AD4EA /* ChLists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChLists.h; sourceTree = "<group>"; };
+		0434A317275F9B79009AD4EA /* ChApiCE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChApiCE.h; sourceTree = "<group>"; };
+		0434A318275F9B79009AD4EA /* ChQuadrature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChQuadrature.cpp; sourceTree = "<group>"; };
+		0434A319275F9B79009AD4EA /* ChStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChStream.h; sourceTree = "<group>"; };
+		0434A31A275F9B79009AD4EA /* ChTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChTimer.h; sourceTree = "<group>"; };
+		0434A31B275F9B79009AD4EA /* ChMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChMatrix.h; sourceTree = "<group>"; };
+		0434A31C275F9B79009AD4EA /* ChPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChPlatform.h; sourceTree = "<group>"; };
+		0434A34F275F9B89009AD4EA /* ChArchiveAsciiDump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChArchiveAsciiDump.h; sourceTree = "<group>"; };
+		0434A350275F9B89009AD4EA /* ChArchiveJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChArchiveJSON.h; sourceTree = "<group>"; };
+		0434A351275F9B89009AD4EA /* ChArchiveXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChArchiveXML.h; sourceTree = "<group>"; };
+		0434A352275F9B89009AD4EA /* ChArchiveBinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChArchiveBinary.h; sourceTree = "<group>"; };
+		0434A353275F9B89009AD4EA /* ChArchiveExplorer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChArchiveExplorer.h; sourceTree = "<group>"; };
+		0434A354275F9B89009AD4EA /* ChArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChArchive.h; sourceTree = "<group>"; };
+		0434A35F275F9CBA009AD4EA /* libexternal.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libexternal.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -852,6 +969,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0434A35D275F9CBA009AD4EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04CE3679274D077100204B8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1020,6 +1144,10 @@
 		0434A2BF275F97A1009AD4EA /* vox.force */ = {
 			isa = PBXGroup;
 			children = (
+				0434A2E8275F9B66009AD4EA /* ChConfig.h */,
+				0434A2E7275F9B66009AD4EA /* ChVersion.h */,
+				0434A2C9275F98BF009AD4EA /* core */,
+				0434A2CA275F98CE009AD4EA /* serialization */,
 				0434A2E6275F9A57009AD4EA /* physics */,
 				0434A2E5275F9A4E009AD4EA /* solver */,
 				0434A2E4275F9A44009AD4EA /* fea */,
@@ -1031,8 +1159,6 @@
 				0434A2DE275F99EA009AD4EA /* timestepper */,
 				0434A2CD275F9900009AD4EA /* collision */,
 				0434A2CC275F98F0009AD4EA /* motion_functions */,
-				0434A2C9275F98BF009AD4EA /* core */,
-				0434A2CA275F98CE009AD4EA /* serialization */,
 				0434A2CB275F98E0009AD4EA /* geometry */,
 			);
 			path = vox.force;
@@ -1041,6 +1167,56 @@
 		0434A2C9275F98BF009AD4EA /* core */ = {
 			isa = PBXGroup;
 			children = (
+				0434A300275F9B78009AD4EA /* ChAlignedAllocator.h */,
+				0434A317275F9B79009AD4EA /* ChApiCE.h */,
+				0434A2FC275F9B78009AD4EA /* ChBezierCurve.cpp */,
+				0434A307275F9B78009AD4EA /* ChBezierCurve.h */,
+				0434A315275F9B79009AD4EA /* ChBitmaskEnums.h */,
+				0434A2FF275F9B78009AD4EA /* ChChrono.h */,
+				0434A2FA275F9B78009AD4EA /* ChClassFactory.cpp */,
+				0434A304275F9B78009AD4EA /* ChClassFactory.h */,
+				0434A303275F9B78009AD4EA /* ChCoordsys.cpp */,
+				0434A313275F9B79009AD4EA /* ChCoordsys.h */,
+				0434A310275F9B79009AD4EA /* ChCubicSpline.cpp */,
+				0434A2F3275F9B77009AD4EA /* ChCubicSpline.h */,
+				0434A308275F9B78009AD4EA /* ChDistribution.cpp */,
+				0434A2F0275F9B77009AD4EA /* ChDistribution.h */,
+				0434A311275F9B79009AD4EA /* ChException.h */,
+				0434A2F9275F9B77009AD4EA /* ChFilePS.cpp */,
+				0434A2F4275F9B77009AD4EA /* ChFilePS.h */,
+				0434A30A275F9B78009AD4EA /* ChFrame.h */,
+				0434A2FD275F9B78009AD4EA /* ChFrameMoving.h */,
+				0434A314275F9B79009AD4EA /* ChFx.h */,
+				0434A30C275F9B78009AD4EA /* ChGlobal.cpp */,
+				0434A306275F9B78009AD4EA /* ChGlobal.h */,
+				0434A316275F9B79009AD4EA /* ChLists.h */,
+				0434A302275F9B78009AD4EA /* ChLog.cpp */,
+				0434A2F6275F9B77009AD4EA /* ChLog.h */,
+				0434A301275F9B78009AD4EA /* ChMath.h */,
+				0434A312275F9B79009AD4EA /* ChMathematics.cpp */,
+				0434A30D275F9B79009AD4EA /* ChMathematics.h */,
+				0434A31B275F9B79009AD4EA /* ChMatrix.h */,
+				0434A309275F9B78009AD4EA /* ChMatrix33.h */,
+				0434A30F275F9B79009AD4EA /* ChMatrixEigenExtensions.h */,
+				0434A2F7275F9B77009AD4EA /* ChMatrixMBD.h */,
+				0434A31C275F9B79009AD4EA /* ChPlatform.h */,
+				0434A318275F9B79009AD4EA /* ChQuadrature.cpp */,
+				0434A2F8275F9B77009AD4EA /* ChQuadrature.h */,
+				0434A2F2275F9B77009AD4EA /* ChQuaternion.cpp */,
+				0434A2F5275F9B77009AD4EA /* ChQuaternion.h */,
+				0434A2ED275F9B77009AD4EA /* ChRealtimeStep.h */,
+				0434A2EB275F9B77009AD4EA /* ChSparseMatrixEigenExtensions.h */,
+				0434A2EC275F9B77009AD4EA /* ChSparsityPatternLearner.h */,
+				0434A305275F9B78009AD4EA /* ChStream.cpp */,
+				0434A319275F9B79009AD4EA /* ChStream.h */,
+				0434A2EF275F9B77009AD4EA /* ChTemplateExpressions.h */,
+				0434A2FE275F9B78009AD4EA /* ChTensors.h */,
+				0434A31A275F9B79009AD4EA /* ChTimer.h */,
+				0434A30B275F9B78009AD4EA /* ChTransform.h */,
+				0434A2F1275F9B77009AD4EA /* ChTypes.h */,
+				0434A2EE275F9B77009AD4EA /* ChVector.cpp */,
+				0434A2FB275F9B78009AD4EA /* ChVector.h */,
+				0434A30E275F9B79009AD4EA /* ChVector2.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1048,6 +1224,12 @@
 		0434A2CA275F98CE009AD4EA /* serialization */ = {
 			isa = PBXGroup;
 			children = (
+				0434A354275F9B89009AD4EA /* ChArchive.h */,
+				0434A34F275F9B89009AD4EA /* ChArchiveAsciiDump.h */,
+				0434A352275F9B89009AD4EA /* ChArchiveBinary.h */,
+				0434A353275F9B89009AD4EA /* ChArchiveExplorer.h */,
+				0434A350275F9B89009AD4EA /* ChArchiveJSON.h */,
+				0434A351275F9B89009AD4EA /* ChArchiveXML.h */,
 			);
 			path = serialization;
 			sourceTree = "<group>";
@@ -1264,6 +1446,13 @@
 			path = physics;
 			sourceTree = "<group>";
 		};
+		0434A360275F9CBA009AD4EA /* external */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1321,6 +1510,7 @@
 				04CE367E274D077100204B8E /* apps */,
 				04CE382D274D17B300204B8E /* unit_tests */,
 				0434A2AE275F96AB009AD4EA /* editor */,
+				0434A360275F9CBA009AD4EA /* external */,
 				04CE367D274D077100204B8E /* Products */,
 				04CE369E274D096600204B8E /* Frameworks */,
 			);
@@ -1334,6 +1524,7 @@
 				04CE382C274D17B300204B8E /* unit_tests */,
 				0434A2AD275F96AB009AD4EA /* editor */,
 				0434A2BE275F97A1009AD4EA /* libvox.force.dylib */,
+				0434A35F275F9CBA009AD4EA /* libexternal.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1977,6 +2168,58 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0434A326275F9B79009AD4EA /* ChFilePS.h in Headers */,
+				0434A341275F9B79009AD4EA /* ChMatrixEigenExtensions.h in Headers */,
+				0434A327275F9B79009AD4EA /* ChQuaternion.h in Headers */,
+				0434A33F275F9B79009AD4EA /* ChMathematics.h in Headers */,
+				0434A34C275F9B79009AD4EA /* ChTimer.h in Headers */,
+				0434A33C275F9B79009AD4EA /* ChFrame.h in Headers */,
+				0434A355275F9B89009AD4EA /* ChArchiveAsciiDump.h in Headers */,
+				0434A346275F9B79009AD4EA /* ChFx.h in Headers */,
+				0434A345275F9B79009AD4EA /* ChCoordsys.h in Headers */,
+				0434A322275F9B79009AD4EA /* ChDistribution.h in Headers */,
+				0434A2E9275F9B66009AD4EA /* ChVersion.h in Headers */,
+				0434A331275F9B79009AD4EA /* ChChrono.h in Headers */,
+				0434A329275F9B79009AD4EA /* ChMatrixMBD.h in Headers */,
+				0434A34B275F9B79009AD4EA /* ChStream.h in Headers */,
+				0434A31F275F9B79009AD4EA /* ChRealtimeStep.h in Headers */,
+				0434A330275F9B79009AD4EA /* ChTensors.h in Headers */,
+				0434A343275F9B79009AD4EA /* ChException.h in Headers */,
+				0434A31E275F9B79009AD4EA /* ChSparsityPatternLearner.h in Headers */,
+				0434A328275F9B79009AD4EA /* ChLog.h in Headers */,
+				0434A31D275F9B79009AD4EA /* ChSparseMatrixEigenExtensions.h in Headers */,
+				0434A2EA275F9B66009AD4EA /* ChConfig.h in Headers */,
+				0434A339275F9B79009AD4EA /* ChBezierCurve.h in Headers */,
+				0434A332275F9B79009AD4EA /* ChAlignedAllocator.h in Headers */,
+				0434A34D275F9B79009AD4EA /* ChMatrix.h in Headers */,
+				0434A321275F9B79009AD4EA /* ChTemplateExpressions.h in Headers */,
+				0434A356275F9B89009AD4EA /* ChArchiveJSON.h in Headers */,
+				0434A340275F9B79009AD4EA /* ChVector2.h in Headers */,
+				0434A359275F9B89009AD4EA /* ChArchiveExplorer.h in Headers */,
+				0434A33D275F9B79009AD4EA /* ChTransform.h in Headers */,
+				0434A357275F9B89009AD4EA /* ChArchiveXML.h in Headers */,
+				0434A32F275F9B79009AD4EA /* ChFrameMoving.h in Headers */,
+				0434A349275F9B79009AD4EA /* ChApiCE.h in Headers */,
+				0434A35A275F9B89009AD4EA /* ChArchive.h in Headers */,
+				0434A33B275F9B79009AD4EA /* ChMatrix33.h in Headers */,
+				0434A32A275F9B79009AD4EA /* ChQuadrature.h in Headers */,
+				0434A347275F9B79009AD4EA /* ChBitmaskEnums.h in Headers */,
+				0434A323275F9B79009AD4EA /* ChTypes.h in Headers */,
+				0434A336275F9B79009AD4EA /* ChClassFactory.h in Headers */,
+				0434A338275F9B79009AD4EA /* ChGlobal.h in Headers */,
+				0434A325275F9B79009AD4EA /* ChCubicSpline.h in Headers */,
+				0434A348275F9B79009AD4EA /* ChLists.h in Headers */,
+				0434A34E275F9B79009AD4EA /* ChPlatform.h in Headers */,
+				0434A32D275F9B79009AD4EA /* ChVector.h in Headers */,
+				0434A333275F9B79009AD4EA /* ChMath.h in Headers */,
+				0434A358275F9B89009AD4EA /* ChArchiveBinary.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0434A35B275F9CBA009AD4EA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2124,6 +2367,23 @@
 			productReference = 0434A2BE275F97A1009AD4EA /* libvox.force.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		0434A35E275F9CBA009AD4EA /* external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0434A367275F9CBA009AD4EA /* Build configuration list for PBXNativeTarget "external" */;
+			buildPhases = (
+				0434A35B275F9CBA009AD4EA /* Headers */,
+				0434A35C275F9CBA009AD4EA /* Sources */,
+				0434A35D275F9CBA009AD4EA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = external;
+			productName = external;
+			productReference = 0434A35F275F9CBA009AD4EA /* libexternal.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		04CE367B274D077100204B8E /* apps */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "apps" */;
@@ -2192,6 +2452,9 @@
 					0434A2BD275F97A1009AD4EA = {
 						CreatedOnToolsVersion = 13.1;
 					};
+					0434A35E275F9CBA009AD4EA = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					04CE367B274D077100204B8E = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -2221,6 +2484,7 @@
 				04CE367B274D077100204B8E /* apps */,
 				04CE382B274D17B300204B8E /* unit_tests */,
 				0434A2AC275F96AB009AD4EA /* editor */,
+				0434A35E275F9CBA009AD4EA /* external */,
 			);
 		};
 /* End PBXProject section */
@@ -2235,6 +2499,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0434A2BB275F97A1009AD4EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0434A32C275F9B79009AD4EA /* ChClassFactory.cpp in Sources */,
+				0434A344275F9B79009AD4EA /* ChMathematics.cpp in Sources */,
+				0434A342275F9B79009AD4EA /* ChCubicSpline.cpp in Sources */,
+				0434A34A275F9B79009AD4EA /* ChQuadrature.cpp in Sources */,
+				0434A334275F9B79009AD4EA /* ChLog.cpp in Sources */,
+				0434A32B275F9B79009AD4EA /* ChFilePS.cpp in Sources */,
+				0434A335275F9B79009AD4EA /* ChCoordsys.cpp in Sources */,
+				0434A337275F9B79009AD4EA /* ChStream.cpp in Sources */,
+				0434A32E275F9B79009AD4EA /* ChBezierCurve.cpp in Sources */,
+				0434A324275F9B79009AD4EA /* ChQuaternion.cpp in Sources */,
+				0434A33A275F9B79009AD4EA /* ChDistribution.cpp in Sources */,
+				0434A320275F9B79009AD4EA /* ChVector.cpp in Sources */,
+				0434A33E275F9B79009AD4EA /* ChGlobal.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0434A35C275F9CBA009AD4EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2619,6 +2903,7 @@
 		0434A2C7275F97A1009AD4EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2626,14 +2911,112 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					ChronoEngine_EXPORTS,
+					CH_API_COMPILE,
+					CH_IGNORE_DEPRECATED,
+					BT_THREADSAFE,
+					BT_USE_OPENMP,
+					BP_USE_FIXEDPOINT_INT_32,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = ./vox.force;
+				HEADER_SEARCH_PATHS = (
+					./vox.force,
+					./external,
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-march=native",
+					"-msse4.2",
+					"-march=native",
+					"-mavx2",
+					"-march=native",
+					"-mfma",
+					"-march=native",
+					"-msse4.2",
+					"-march=native",
+					"-mavx2",
+					"-march=native",
+					"-mfma",
+					"-march=native",
+					"-msse4.2",
+					"-march=native",
+					"-mavx2",
+					"-march=native",
+					"-mfma",
+					"-D_DEBUG",
+					"-DDEBUG",
+					"-fPIC",
+					"-Wno-unknown-warning-option",
+					"-Wno-reorder-ctor",
+					"-Wno-pragma-pack",
+					"-Wno-unused-local-typedef",
+					"-Wno-unused-function",
+					"-Wno-unused-parameter",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
 		0434A2C8275F97A1009AD4EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					ChronoEngine_EXPORTS,
+					CH_API_COMPILE,
+					CH_IGNORE_DEPRECATED,
+					BT_THREADSAFE,
+					BT_USE_OPENMP,
+					BP_USE_FIXEDPOINT_INT_32,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					./vox.force,
+					./external,
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-march=native",
+					"-msse4.2",
+					"-march=native",
+					"-mavx2",
+					"-march=native",
+					"-mfma",
+					"-DNDEBUG",
+					"-march=native",
+					"-msse4.2",
+					"-march=native",
+					"-mavx2",
+					"-march=native",
+					"-mfma",
+					"-march=native",
+					"-msse4.2",
+					"-march=native",
+					"-mavx2",
+					"-march=native",
+					"-mfma",
+					"-DNDEBUG",
+					"-fPIC",
+					"-Wno-unknown-warning-option",
+					"-Wno-reorder-ctor",
+					"-Wno-pragma-pack",
+					"-Wno-unused-local-typedef",
+					"-Wno-unused-function",
+					"-Wno-unused-parameter",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0434A368275F9CBA009AD4EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -2644,7 +3027,22 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				HEADER_SEARCH_PATHS = ./vox.force;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0434A369275F9CBA009AD4EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3132,6 +3530,15 @@
 			buildConfigurations = (
 				0434A2C7275F97A1009AD4EA /* Debug */,
 				0434A2C8275F97A1009AD4EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0434A367275F9CBA009AD4EA /* Build configuration list for PBXNativeTarget "external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0434A368275F9CBA009AD4EA /* Debug */,
+				0434A369275F9CBA009AD4EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -15,8 +15,8 @@
 
 #include <cstddef>
 
-#include "chrono/ChVersion.h"
-#include "chrono/core/ChPlatform.h"
+#include "ChVersion.h"
+#include "core/ChPlatform.h"
 
 // When compiling this library, remember to define CH_API_COMPILE
 // (so that the symbols with 'ChApi' in front of them will be

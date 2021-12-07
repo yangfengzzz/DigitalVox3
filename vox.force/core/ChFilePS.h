@@ -13,10 +13,10 @@
 #ifndef CHFILEPS_H
 #define CHFILEPS_H
 
-#include "chrono/core/ChStream.h"
-//#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChVector2.h"
+#include "core/ChStream.h"
+//#include "core/ChMatrix.h"
+#include "core/ChVector.h"
+#include "core/ChVector2.h"
 
 namespace chrono {
 

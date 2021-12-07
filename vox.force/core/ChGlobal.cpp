@@ -12,9 +12,9 @@
 
 #include <cstring>
 
-#include "chrono/core/ChGlobal.h"
+#include "core/ChGlobal.h"
 
-#include "chrono_thirdparty/filesystem/path.h"
+#include <filesystem/path.h>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include "Windows.h"

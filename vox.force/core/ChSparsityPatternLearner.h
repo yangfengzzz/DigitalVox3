@@ -15,7 +15,7 @@
 #ifndef CHSPARSITYPATTERNLEARNER_H
 #define CHSPARSITYPATTERNLEARNER_H
 
-#include "chrono/core/ChMatrix.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

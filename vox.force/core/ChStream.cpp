@@ -15,9 +15,9 @@
 #include <cerrno>
 #include <iterator>
 
-#include "chrono/core/ChStream.h"
-#include "chrono/core/ChException.h"
-#include "chrono/core/ChLog.h"
+#include "core/ChStream.h"
+#include "core/ChException.h"
+#include "core/ChLog.h"
 
 namespace chrono {
 

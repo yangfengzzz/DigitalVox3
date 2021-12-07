@@ -21,8 +21,8 @@
 #include <cstdlib>
 #include <cmath>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMath.h"
+#include "core/ChApiCE.h"
+#include "core/ChMath.h"
 
 namespace chrono {
 

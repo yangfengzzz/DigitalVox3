@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/core/ChClassFactory.h"
+#include "core/ChClassFactory.h"
 
 namespace chrono {
 

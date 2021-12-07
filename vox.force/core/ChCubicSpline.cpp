@@ -21,8 +21,8 @@
 #include <iostream>
 #include <sstream>
 
-#include "chrono/core/ChCubicSpline.h"
-#include "chrono/core/ChMatrix.h"
+#include "core/ChCubicSpline.h"
+#include "core/ChMatrix.h"
 
 namespace chrono {
 

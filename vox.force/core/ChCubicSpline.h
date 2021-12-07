@@ -22,8 +22,8 @@
 #include <vector>
 #include <string>
 
-#include "chrono/core/ChApiCE.h"
-//#include "chrono/serialization/ChArchive.h"
+#include "core/ChApiCE.h"
+//#include "serialization/ChArchive.h"
 
 namespace chrono {
 

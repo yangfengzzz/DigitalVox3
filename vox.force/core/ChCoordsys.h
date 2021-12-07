@@ -13,8 +13,8 @@
 #ifndef CHCOORDSYS_H
 #define CHCOORDSYS_H
 
-#include "chrono/core/ChQuaternion.h"
-#include "chrono/core/ChVector.h"
+#include "core/ChQuaternion.h"
+#include "core/ChVector.h"
 
 namespace chrono {
 

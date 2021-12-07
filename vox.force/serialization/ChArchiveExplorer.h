@@ -13,7 +13,7 @@
 #ifndef CHARCHIVEEXPLORER_H
 #define CHARCHIVEEXPLORER_H
 
-#include "chrono/serialization/ChArchive.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 

@@ -10,7 +10,7 @@
 //
 // =============================================================================
 
-#include "chrono/core/ChCoordsys.h"
+#include "core/ChCoordsys.h"
 
 namespace chrono {
 

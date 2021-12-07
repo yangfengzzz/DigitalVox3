@@ -19,10 +19,10 @@
 #include <algorithm>
 #include <limits>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChMathematics.h"
+#include "core/ChApiCE.h"
+#include "core/ChMatrix.h"
+#include "core/ChVector.h"
+#include "core/ChMathematics.h"
 
 namespace chrono {
 

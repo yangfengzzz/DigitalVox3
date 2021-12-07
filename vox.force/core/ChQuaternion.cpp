@@ -14,8 +14,8 @@
 
 #include <cmath>
 
-#include "chrono/core/ChQuaternion.h"
-#include "chrono/core/ChMatrix33.h"
+#include "core/ChQuaternion.h"
+#include "core/ChMatrix33.h"
 
 namespace chrono {
 

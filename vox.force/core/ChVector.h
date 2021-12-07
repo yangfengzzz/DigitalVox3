@@ -19,10 +19,10 @@
 #include <cmath>
 #include <limits>
 
-#include "chrono/core/ChClassFactory.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/serialization/ChArchive.h"
-#include "chrono/serialization/ChArchiveAsciiDump.h"
+#include "core/ChClassFactory.h"
+#include "core/ChMatrix.h"
+#include "serialization/ChArchive.h"
+#include "serialization/ChArchiveAsciiDump.h"
 
 namespace chrono {
 

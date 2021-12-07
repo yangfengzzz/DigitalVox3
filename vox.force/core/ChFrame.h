@@ -15,11 +15,11 @@
 #ifndef CHFRAME_H
 #define CHFRAME_H
 
-#include "chrono/core/ChCoordsys.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChMatrix33.h"
-#include "chrono/core/ChMatrixMBD.h"
-#include "chrono/core/ChTransform.h"
+#include "core/ChCoordsys.h"
+#include "core/ChMatrix.h"
+#include "core/ChMatrix33.h"
+#include "core/ChMatrixMBD.h"
+#include "core/ChTransform.h"
 
 namespace chrono {
 

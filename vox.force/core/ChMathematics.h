@@ -17,7 +17,7 @@
 #include <cfloat>
 #include <cassert>
 
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
 namespace chrono {
 // CONSTANTS

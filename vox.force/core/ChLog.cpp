@@ -17,7 +17,7 @@
 #include <cstring>
 #include <cstdarg>
 
-#include "chrono/core/ChLog.h"
+#include "core/ChLog.h"
 
 // This check is here, but could be in any other C::E cpp source.
 #ifndef CH_API_COMPILE

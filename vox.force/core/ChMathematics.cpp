@@ -12,7 +12,7 @@
 // Authors: Alessandro Tasora
 // =============================================================================
 
-#include "chrono/core/ChMathematics.h"
+#include "core/ChMathematics.h"
 
 namespace chrono {
 

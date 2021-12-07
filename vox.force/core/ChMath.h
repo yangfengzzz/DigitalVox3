@@ -18,11 +18,11 @@
 // This header is just a trick to include quickly the
 // following headers, all at once with a single #include "core/ChMath.h" statement
 
-#include "chrono/core/ChMathematics.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/core/ChQuaternion.h"
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChMatrix33.h"
-#include "chrono/core/ChCoordsys.h"
+#include "core/ChMathematics.h"
+#include "core/ChVector.h"
+#include "core/ChQuaternion.h"
+#include "core/ChMatrix.h"
+#include "core/ChMatrix33.h"
+#include "core/ChCoordsys.h"
 
 #endif

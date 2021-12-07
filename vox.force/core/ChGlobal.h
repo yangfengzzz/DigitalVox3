@@ -14,7 +14,7 @@
 #define CHGLOBAL_H
 
 #include <string>
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
 namespace chrono {
 

@@ -22,8 +22,8 @@
 #include <vector>
 #include <ios>
 
-#include "chrono/core/ChException.h"
-#include "chrono/core/ChApiCE.h"
+#include "core/ChException.h"
+#include "core/ChApiCE.h"
 
 namespace chrono {
 /// Ugly hack added by hammad to get code to compile on osx.

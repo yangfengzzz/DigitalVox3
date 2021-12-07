@@ -13,7 +13,7 @@
 #ifndef CHARCHIVEASCIIDUMP_H
 #define CHARCHIVEASCIIDUMP_H
 
-#include "chrono/serialization/ChArchive.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 

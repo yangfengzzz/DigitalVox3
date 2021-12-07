@@ -12,7 +12,7 @@
 // Authors: Radu Serban
 // =============================================================================
 
-#include "chrono/core/ChVector.h"
+#include "core/ChVector.h"
 
 namespace chrono {
 

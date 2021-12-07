@@ -36,8 +36,8 @@
 #include <typeindex>
 #include <unordered_map>
 
-#include "chrono/core/ChLog.h"
-#include "chrono/core/ChTemplateExpressions.h"
+#include "core/ChLog.h"
+#include "core/ChTemplateExpressions.h"
 
 namespace chrono {
 

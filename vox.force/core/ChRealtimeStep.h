@@ -17,7 +17,7 @@
 
 #include <limits>
 
-#include "chrono/core/ChTimer.h"
+#include "core/ChTimer.h"
 
 namespace chrono {
 

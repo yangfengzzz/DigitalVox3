@@ -15,7 +15,7 @@
 #ifndef CHFRAMEMOVING_H
 #define CHFRAMEMOVING_H
 
-#include "chrono/core/ChFrame.h"
+#include "core/ChFrame.h"
 
 namespace chrono {
 

@@ -14,7 +14,7 @@
 #define CHTEMPLATEEXPRESSION_H
 
 
-#include "chrono/core/ChApiCE.h"
+#include "core/ChApiCE.h"
 
 
 namespace chrono {

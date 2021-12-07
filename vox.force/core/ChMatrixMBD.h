@@ -19,8 +19,8 @@
 #ifndef CHMATRIXMBD_H
 #define CHMATRIXMBD_H
 
-#include "chrono/core/ChMatrix.h"
-#include "chrono/core/ChCoordsys.h"
+#include "core/ChMatrix.h"
+#include "core/ChCoordsys.h"
 
 namespace chrono {
 

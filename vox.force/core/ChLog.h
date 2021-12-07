@@ -16,8 +16,8 @@
 
 #include <cassert>
 
-#include "chrono/core/ChStream.h"
-#include "chrono/core/ChApiCE.h"
+#include "core/ChStream.h"
+#include "core/ChApiCE.h"
 
 namespace chrono {
 

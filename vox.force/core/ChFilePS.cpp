@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-#include "chrono/core/ChFilePS.h"
+#include "core/ChFilePS.h"
 
 namespace chrono {
 

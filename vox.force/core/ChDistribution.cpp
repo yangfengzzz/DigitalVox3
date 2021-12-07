@@ -12,8 +12,8 @@
 // Authors: Alessandro Tasora, Radu Serban
 // =============================================================================
 
-#include "chrono/core/ChDistribution.h"
-#include "chrono/core/ChMathematics.h"
+#include "core/ChDistribution.h"
+#include "core/ChMathematics.h"
 
 namespace chrono {
 

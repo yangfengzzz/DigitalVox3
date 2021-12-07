@@ -12,9 +12,9 @@
 #ifndef CHARCHIVEJSON_H
 #define CHARCHIVEJSON_H
 
-#include "chrono/serialization/ChArchive.h"
-#include "chrono/core/ChLog.h"
-#include "chrono/core/ChMathematics.h"
+#include "serialization/ChArchive.h"
+#include "core/ChLog.h"
+#include "core/ChMathematics.h"
 
 #include "chrono_thirdparty/rapidjson/document.h"
 #include "chrono_thirdparty/rapidjson/prettywriter.h"

@@ -40,10 +40,10 @@
 #include <string>
 #include <vector>
 
-#include "chrono/core/ChApiCE.h"
-#include "chrono/core/ChFrame.h"
-#include "chrono/core/ChVector.h"
-#include "chrono/serialization/ChArchive.h"
+#include "core/ChApiCE.h"
+#include "core/ChFrame.h"
+#include "core/ChVector.h"
+#include "serialization/ChArchive.h"
 
 namespace chrono {
 
