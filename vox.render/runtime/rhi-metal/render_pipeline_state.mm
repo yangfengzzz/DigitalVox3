@@ -10,12 +10,6 @@
 #include "../shader/shader.h"
 #include "maths/matrix.h"
 #include "log.h"
-#include <iomanip>
-#include <type_traits>
-#include <typeindex>
-#include <typeinfo>
-#include <unordered_map>
-#include <iostream>
 
 namespace vox {
 RenderPipelineState::RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor):
@@ -43,97 +37,80 @@ void RenderPipelineState::groupingOtherUniformBlock() {
     }
 }
 
-namespace {
-template<class T, class F>
-inline std::pair<const std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
-to_any_visitor(F const &f) {
-    return {
-        std::type_index(typeid(T)),
-        [g = f](std::any const &a, size_t location, id <MTLRenderCommandEncoder> encoder)
-        {
-            if constexpr (std::is_void_v<T>)
-                g();
-            else
-                g(std::any_cast<T const&>(a), location, encoder);
-        }
-    };
-}
-
-static std::unordered_map<
+std::unordered_map<
 std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
-vertex_any_visitor {
-    to_any_visitor<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+RenderPipelineState::vertex_any_uploader {
+    to_any_uploader<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(int) atIndex:location];
     }),
-    to_any_visitor<float>([](const float& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<float>([](const float& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(float) atIndex:location];
     }),
-    to_any_visitor<Float2>([](const Float2& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Float2>([](const Float2& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(Float2) atIndex:location];
     }),
-    to_any_visitor<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(Float3) atIndex:location];
     }),
-    to_any_visitor<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(Float4) atIndex:location];
     }),
-    to_any_visitor<Color>([](const Color& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Color>([](const Color& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(Color) atIndex:location];
     }),
-    to_any_visitor<Matrix>([](const Matrix& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Matrix>([](const Matrix& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(Matrix) atIndex:location];
     }),
-    to_any_visitor<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBuffer:x offset:0 atIndex:location];
     }),
-    to_any_visitor<id<MTLTexture>>([](const id<MTLTexture>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<id<MTLTexture>>([](const id<MTLTexture>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexTexture:x atIndex:location];
     }),
 };
 
-static std::unordered_map<
+std::unordered_map<
 std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
-fragment_any_visitor {
-    to_any_visitor<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+RenderPipelineState::fragment_any_uploader {
+    to_any_uploader<int>([](const int& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(int) atIndex:location];
     }),
-    to_any_visitor<float>([](const float& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<float>([](const float& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(float) atIndex:location];
     }),
-    to_any_visitor<Float2>([](const Float2& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Float2>([](const Float2& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(Float2) atIndex:location];
     }),
-    to_any_visitor<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(Float3) atIndex:location];
     }),
-    to_any_visitor<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(Float4) atIndex:location];
     }),
-    to_any_visitor<Color>([](const Color& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Color>([](const Color& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(Color) atIndex:location];
     }),
-    to_any_visitor<Matrix>([](const Matrix& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<Matrix>([](const Matrix& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(Matrix) atIndex:location];
     }),
-    to_any_visitor<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<id<MTLBuffer>>([](const id<MTLBuffer>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBuffer:x offset:0 atIndex:location];
     }),
-    to_any_visitor<id<MTLTexture>>([](const id<MTLTexture>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+    to_any_uploader<id<MTLTexture>>([](const id<MTLTexture>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentTexture:x atIndex:location];
     }),
 };
 
-inline void process(const ShaderUniform& uniform, const std::any& a, id <MTLRenderCommandEncoder> encoder)
-{
-    const auto& any_visitor = uniform.type == MTLFunctionTypeVertex? vertex_any_visitor: fragment_any_visitor;
-    if (const auto it = any_visitor.find(std::type_index(a.type()));
-        it != any_visitor.cend()) {
+void RenderPipelineState::process(const ShaderUniform& uniform, const std::any& a, id <MTLRenderCommandEncoder> encoder) {
+    const auto& any_uploader = uniform.type == MTLFunctionTypeVertex?
+    RenderPipelineState::vertex_any_uploader: RenderPipelineState::fragment_any_uploader;
+    
+    if (const auto it = any_uploader.find(std::type_index(a.type()));
+        it != any_uploader.cend()) {
         it->second(a, uniform.location, encoder);
     } else {
         log::Log() << "Unregistered type "<< std::quoted(a.type().name());
     }
-}
-
 }
 
 void RenderPipelineState::uploadAll(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
