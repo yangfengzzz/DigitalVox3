@@ -8,6 +8,7 @@
 #include "direct_light.h"
 #include "../shader/shader.h"
 #include "../entity.h"
+#include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
 ShaderProperty DirectLight::_colorProperty = Shader::createProperty("u_directLightColor", ShaderDataGroup::Scene);
@@ -17,7 +18,17 @@ std::array<math::Color, Light::_maxLight> DirectLight::_combinedColor = {};
 std::array<math::Float3, Light::_maxLight> DirectLight::_combinedDirection = {};
 
 DirectLight::DirectLight(Entity* entity):
-Light(entity) {}
+Light(entity) {
+    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::_maxLight>>(
+    [](const std::array<math::Color, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::_maxLight>) atIndex:location];
+    });
+    
+    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::_maxLight>>(
+    [](const std::array<math::Float3, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::_maxLight>) atIndex:location];
+    });
+}
 
 void DirectLight::_appendData(size_t lightIndex) {
     _combinedColor[lightIndex] = color * intensity;

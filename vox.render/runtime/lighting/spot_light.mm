@@ -8,6 +8,7 @@
 #include "spot_light.h"
 #include "../shader/shader.h"
 #include "../entity.h"
+#include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
 ShaderProperty SpotLight::_colorProperty = Shader::createProperty("u_spotLightColor", ShaderDataGroup::Scene);
@@ -25,7 +26,22 @@ std::array<float, Light::_maxLight> SpotLight::_combinedAngleCos = {};
 std::array<float, Light::_maxLight> SpotLight::_combinedPenumbraCos = {};
 
 SpotLight::SpotLight(Entity* entity):
-Light(entity) {}
+Light(entity) {
+    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::_maxLight>>(
+    [](const std::array<math::Color, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::_maxLight>) atIndex:location];
+    });
+    
+    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::_maxLight>>(
+    [](const std::array<math::Float3, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::_maxLight>) atIndex:location];
+    });
+    
+    RenderPipelineState::register_fragment_uploader<std::array<float, Light::_maxLight>>(
+    [](const std::array<float, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, Light::_maxLight>) atIndex:location];
+    });
+}
 
 void SpotLight::_appendData(size_t lightIndex) {
     _combinedColor[lightIndex] = color * intensity;

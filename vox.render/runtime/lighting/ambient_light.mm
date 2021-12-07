@@ -28,6 +28,11 @@ AmbientLight::AmbientLight(Scene* value) {
                                                                     id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(EnvMapLight) atIndex:location];
     });
+    
+    RenderPipelineState::register_fragment_uploader<std::array<float, 27>>(
+    [](const std::array<float, 27>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, 27>) atIndex:location];
+    });
 }
 
 bool AmbientLight::specularTextureDecodeRGBM() {
