@@ -17,7 +17,7 @@
 #include "collision/ChCollisionSystemBullet.h"
 #include "collision/ChCollisionModelBullet.h"
 #include "collision/ChCollisionAlgorithmsBullet.h"
-#include "collision/gimpact/GIMPACT/Bullet/btGImpactCollisionAlgorithm.h"
+#include "collision/bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
 #include "collision/bullet/BulletCollision/CollisionDispatch/btCollisionDispatcherMt.h"
 
 extern btScalar gContactBreakingThreshold;

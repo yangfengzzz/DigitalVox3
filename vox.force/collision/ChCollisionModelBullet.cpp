@@ -23,8 +23,7 @@
 #include "collision/bullet/BulletCollision/CollisionShapes/btBarrelShape.h"
 #include "collision/bullet/BulletCollision/CollisionShapes/btCEtriangleShape.h"
 #include "collision/bullet/btBulletCollisionCommon.h"
-#include "collision/gimpact/GIMPACT/Bullet/btGImpactCollisionAlgorithm.h"
-#include "collision/gimpact/GIMPACTUtils/btGImpactConvexDecompositionShape.h"
+#include "collision/bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
 #include "geometry/ChLineArc.h"
 #include "geometry/ChLineSegment.h"
 #include "geometry/ChTriangleMeshConnected.h"
@@ -497,23 +496,6 @@ class btConvexTriangleMeshShape_handlemesh : public btConvexTriangleMeshShape {
         : btConvexTriangleMeshShape(meshInterface), minterface(meshInterface){};
 
     ~btConvexTriangleMeshShape_handlemesh() {
-        if (minterface)
-            delete minterface;
-        minterface = 0;  // also delete the mesh interface
-    }
-};
-
-class btGImpactConvexDecompositionShape_handlemesh : public btGImpactConvexDecompositionShape {
-    btStridingMeshInterface* minterface;
-
-  public:
-    btGImpactConvexDecompositionShape_handlemesh(btStridingMeshInterface* meshInterface)
-        : btGImpactConvexDecompositionShape(meshInterface, btVector3(1.f, 1.f, 1.f), btScalar(0.01)),
-          minterface(meshInterface){
-              // setLocalScaling(btVector3(1.f,1.f,1.f));
-          };
-
-    virtual ~btGImpactConvexDecompositionShape_handlemesh() {
         if (minterface)
             delete minterface;
         minterface = 0;  // also delete the mesh interface

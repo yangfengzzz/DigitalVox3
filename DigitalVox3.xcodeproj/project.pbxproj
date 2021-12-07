@@ -837,88 +837,6 @@
 		0434A8B4275FA05D009AD4EA /* ChCollisionShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A89A275FA05C009AD4EA /* ChCollisionShape.h */; };
 		0434A8B5275FA05D009AD4EA /* ChCollisionShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434A89B275FA05C009AD4EA /* ChCollisionShape.cpp */; };
 		0434A8B6275FA05D009AD4EA /* ChCollisionModelBullet.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A89C275FA05D009AD4EA /* ChCollisionModelBullet.h */; };
-		0434A8B9275FA080009AD4EA /* btGImpactConvexDecompositionShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8B7275FA080009AD4EA /* btGImpactConvexDecompositionShape.h */; };
-		0434A8DD275FA096009AD4EA /* bestfitobb.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8BF275FA094009AD4EA /* bestfitobb.h */; };
-		0434A8DE275FA096009AD4EA /* Jamfile in Sources */ = {isa = PBXBuildFile; fileRef = 0434A8C0275FA094009AD4EA /* Jamfile */; };
-		0434A8E1275FA096009AD4EA /* cd_vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8C3275FA094009AD4EA /* cd_vector.h */; };
-		0434A8E2275FA096009AD4EA /* ConvexBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8C4275FA094009AD4EA /* ConvexBuilder.h */; };
-		0434A8E4275FA096009AD4EA /* bestfit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8C6275FA094009AD4EA /* bestfit.h */; };
-		0434A8E5275FA096009AD4EA /* float_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8C7275FA095009AD4EA /* float_math.h */; };
-		0434A8E6275FA096009AD4EA /* fitsphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8C8275FA095009AD4EA /* fitsphere.h */; };
-		0434A8E7275FA096009AD4EA /* planetri.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8C9275FA095009AD4EA /* planetri.h */; };
-		0434A8E8275FA096009AD4EA /* meshvolume.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8CA275FA095009AD4EA /* meshvolume.h */; };
-		0434A8EB275FA096009AD4EA /* cd_hull.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8CD275FA095009AD4EA /* cd_hull.h */; };
-		0434A8ED275FA096009AD4EA /* ConvexDecomposition.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8CF275FA095009AD4EA /* ConvexDecomposition.h */; };
-		0434A8EF275FA096009AD4EA /* splitplane.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8D1275FA095009AD4EA /* splitplane.h */; };
-		0434A8F2275FA096009AD4EA /* concavity.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8D4275FA096009AD4EA /* concavity.h */; };
-		0434A8F3275FA096009AD4EA /* cd_wavefront.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8D5275FA096009AD4EA /* cd_wavefront.h */; };
-		0434A8F4275FA096009AD4EA /* raytri.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8D6275FA096009AD4EA /* raytri.h */; };
-		0434A8F5275FA096009AD4EA /* vlookup.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8D7275FA096009AD4EA /* vlookup.h */; };
-		0434A922275FA0AA009AD4EA /* btGImpactMassUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8F7275FA0A6009AD4EA /* btGImpactMassUtil.h */; };
-		0434A923275FA0AA009AD4EA /* gim_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8F8275FA0A6009AD4EA /* gim_math.h */; };
-		0434A924275FA0AA009AD4EA /* gim_hash_table.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8F9275FA0A6009AD4EA /* gim_hash_table.h */; };
-		0434A925275FA0AA009AD4EA /* gim_box_collision.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8FA275FA0A6009AD4EA /* gim_box_collision.h */; };
-		0434A926275FA0AA009AD4EA /* btGenericPoolAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8FB275FA0A7009AD4EA /* btGenericPoolAllocator.h */; };
-		0434A927275FA0AA009AD4EA /* gim_clip_polygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8FC275FA0A7009AD4EA /* gim_clip_polygon.h */; };
-		0434A928275FA0AA009AD4EA /* gim_bitset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8FD275FA0A7009AD4EA /* gim_bitset.h */; };
-		0434A929275FA0AA009AD4EA /* btContactProcessing.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8FE275FA0A7009AD4EA /* btContactProcessing.h */; };
-		0434A92A275FA0AA009AD4EA /* btGImpactBvhStructs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A8FF275FA0A7009AD4EA /* btGImpactBvhStructs.h */; };
-		0434A92B275FA0AA009AD4EA /* gim_linear_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A900275FA0A7009AD4EA /* gim_linear_math.h */; };
-		0434A92C275FA0AA009AD4EA /* gim_radixsort.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A901275FA0A7009AD4EA /* gim_radixsort.h */; };
-		0434A92D275FA0AA009AD4EA /* btGImpactQuantizedBvh.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A902275FA0A7009AD4EA /* btGImpactQuantizedBvh.h */; };
-		0434A92E275FA0AA009AD4EA /* btGImpactBvh.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A903275FA0A7009AD4EA /* btGImpactBvh.h */; };
-		0434A930275FA0AA009AD4EA /* btGImpactCollisionAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A905275FA0A7009AD4EA /* btGImpactCollisionAlgorithm.h */; };
-		0434A932275FA0AA009AD4EA /* btGeometryOperations.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A907275FA0A8009AD4EA /* btGeometryOperations.h */; };
-		0434A934275FA0AA009AD4EA /* gim_pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A909275FA0A8009AD4EA /* gim_pair.h */; };
-		0434A937275FA0AA009AD4EA /* btGImpactShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A90C275FA0A8009AD4EA /* btGImpactShape.h */; };
-		0434A938275FA0AA009AD4EA /* btQuantization.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A90D275FA0A8009AD4EA /* btQuantization.h */; };
-		0434A939275FA0AA009AD4EA /* gim_array.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A90E275FA0A8009AD4EA /* gim_array.h */; };
-		0434A93A275FA0AA009AD4EA /* btCompoundFromGimpact.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A90F275FA0A8009AD4EA /* btCompoundFromGimpact.h */; };
-		0434A93D275FA0AA009AD4EA /* btContactProcessingStructs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A912275FA0A9009AD4EA /* btContactProcessingStructs.h */; };
-		0434A93F275FA0AA009AD4EA /* btGImpactQuantizedBvhStructs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A914275FA0A9009AD4EA /* btGImpactQuantizedBvhStructs.h */; };
-		0434A940275FA0AA009AD4EA /* btTriangleShapeEx.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A915275FA0A9009AD4EA /* btTriangleShapeEx.h */; };
-		0434A941275FA0AA009AD4EA /* btClipPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A916275FA0A9009AD4EA /* btClipPolygon.h */; };
-		0434A942275FA0AA009AD4EA /* gim_geom_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A917275FA0A9009AD4EA /* gim_geom_types.h */; };
-		0434A944275FA0AA009AD4EA /* gim_memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A919275FA0A9009AD4EA /* gim_memory.h */; };
-		0434A945275FA0AA009AD4EA /* btBoxCollision.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A91A275FA0A9009AD4EA /* btBoxCollision.h */; };
-		0434A947275FA0AA009AD4EA /* gim_tri_collision.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A91C275FA0A9009AD4EA /* gim_tri_collision.h */; };
-		0434A948275FA0AA009AD4EA /* gim_contact.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A91D275FA0AA009AD4EA /* gim_contact.h */; };
-		0434A949275FA0AA009AD4EA /* gim_geometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A91E275FA0AA009AD4EA /* gim_geometry.h */; };
-		0434A94B275FA0AA009AD4EA /* gim_basic_geometry_operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A920275FA0AA009AD4EA /* gim_basic_geometry_operations.h */; };
-		0434A94C275FA0AA009AD4EA /* gim_box_set.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A921275FA0AA009AD4EA /* gim_box_set.h */; };
-		0434A961275FA0B7009AD4EA /* gim_clip_polygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A94D275FA0B5009AD4EA /* gim_clip_polygon.h */; };
-		0434A962275FA0B7009AD4EA /* gim_geometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A94E275FA0B5009AD4EA /* gim_geometry.h */; };
-		0434A963275FA0B7009AD4EA /* gim_basic_geometry_operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A94F275FA0B5009AD4EA /* gim_basic_geometry_operations.h */; };
-		0434A965275FA0B7009AD4EA /* gim_memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A951275FA0B5009AD4EA /* gim_memory.h */; };
-		0434A966275FA0B7009AD4EA /* gim_box_set.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A952275FA0B5009AD4EA /* gim_box_set.h */; };
-		0434A967275FA0B7009AD4EA /* gim_geom_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A953275FA0B6009AD4EA /* gim_geom_types.h */; };
-		0434A968275FA0B7009AD4EA /* gim_bitset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A954275FA0B6009AD4EA /* gim_bitset.h */; };
-		0434A969275FA0B7009AD4EA /* gim_radixsort.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A955275FA0B6009AD4EA /* gim_radixsort.h */; };
-		0434A96A275FA0B7009AD4EA /* gim_array.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A956275FA0B6009AD4EA /* gim_array.h */; };
-		0434A96C275FA0B7009AD4EA /* gim_pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A958275FA0B6009AD4EA /* gim_pair.h */; };
-		0434A96D275FA0B7009AD4EA /* gim_tri_collision.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A959275FA0B6009AD4EA /* gim_tri_collision.h */; };
-		0434A96E275FA0B7009AD4EA /* gim_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A95A275FA0B6009AD4EA /* gim_math.h */; };
-		0434A970275FA0B7009AD4EA /* gim_box_collision.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A95C275FA0B6009AD4EA /* gim_box_collision.h */; };
-		0434A971275FA0B7009AD4EA /* gim_contact.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A95D275FA0B6009AD4EA /* gim_contact.h */; };
-		0434A972275FA0B7009AD4EA /* gim_linear_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A95E275FA0B6009AD4EA /* gim_linear_math.h */; };
-		0434A974275FA0B7009AD4EA /* gim_hash_table.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A960275FA0B7009AD4EA /* gim_hash_table.h */; };
-		0434A990275FA0CA009AD4EA /* ChCAABBTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A976275FA0C8009AD4EA /* ChCAABBTree.h */; };
-		0434A991275FA0CA009AD4EA /* ChCAABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A977275FA0C8009AD4EA /* ChCAABB.h */; };
-		0434A992275FA0CA009AD4EA /* ChCBroadPhaseCollider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A978275FA0C8009AD4EA /* ChCBroadPhaseCollider.h */; };
-		0434A994275FA0CA009AD4EA /* ChCBruteForce.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A97A275FA0C8009AD4EA /* ChCBruteForce.h */; };
-		0434A995275FA0CA009AD4EA /* ChCOBB.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A97B275FA0C8009AD4EA /* ChCOBB.h */; };
-		0434A996275FA0CA009AD4EA /* ChCAABBcollider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A97C275FA0C8009AD4EA /* ChCAABBcollider.h */; };
-		0434A998275FA0CA009AD4EA /* ChCGeometryCollider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A97E275FA0C8009AD4EA /* ChCGeometryCollider.h */; };
-		0434A999275FA0CA009AD4EA /* ChCOBBTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A97F275FA0C8009AD4EA /* ChCOBBTree.h */; };
-		0434A99A275FA0CA009AD4EA /* ChCOBBcollider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A980275FA0C9009AD4EA /* ChCOBBcollider.h */; };
-		0434A99D275FA0CA009AD4EA /* ChCCollisionTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A983275FA0C9009AD4EA /* ChCCollisionTree.h */; };
-		0434A99E275FA0CA009AD4EA /* ChCGetTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A984275FA0C9009AD4EA /* ChCGetTime.h */; };
-		0434A99F275FA0CA009AD4EA /* ChCCompile.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A985275FA0C9009AD4EA /* ChCCompile.h */; };
-		0434A9A2275FA0CA009AD4EA /* ChCMatVec.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A988275FA0C9009AD4EA /* ChCMatVec.h */; };
-		0434A9A4275FA0CA009AD4EA /* ChCNarrowPhaseCollider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A98A275FA0C9009AD4EA /* ChCNarrowPhaseCollider.h */; };
-		0434A9A5275FA0CA009AD4EA /* ChCMates.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A98B275FA0C9009AD4EA /* ChCMates.h */; };
-		0434A9A6275FA0CA009AD4EA /* ChCSweepAndPrune.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A98C275FA0CA009AD4EA /* ChCSweepAndPrune.h */; };
-		0434A9A7275FA0CA009AD4EA /* ChCAbsoluteAABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A98D275FA0CA009AD4EA /* ChCAbsoluteAABB.h */; };
 		0434A9D3275FA0E1009AD4EA /* btStackAlloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A9A9275FA0DD009AD4EA /* btStackAlloc.h */; };
 		0434A9D4275FA0E1009AD4EA /* btThreads.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A9AA275FA0DD009AD4EA /* btThreads.h */; };
 		0434A9D5275FA0E1009AD4EA /* btMatrixX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A9AB275FA0DD009AD4EA /* btMatrixX.h */; };
@@ -2397,127 +2315,6 @@
 		0434A89A275FA05C009AD4EA /* ChCollisionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCollisionShape.h; sourceTree = "<group>"; };
 		0434A89B275FA05C009AD4EA /* ChCollisionShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCollisionShape.cpp; sourceTree = "<group>"; };
 		0434A89C275FA05D009AD4EA /* ChCollisionModelBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCollisionModelBullet.h; sourceTree = "<group>"; };
-		0434A8B7275FA080009AD4EA /* btGImpactConvexDecompositionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactConvexDecompositionShape.h; sourceTree = "<group>"; };
-		0434A8B8275FA080009AD4EA /* btGImpactConvexDecompositionShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGImpactConvexDecompositionShape.cpp; sourceTree = "<group>"; };
-		0434A8BB275FA093009AD4EA /* concavity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = concavity.cpp; sourceTree = "<group>"; };
-		0434A8BC275FA094009AD4EA /* ConvexDecomposition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConvexDecomposition.cpp; sourceTree = "<group>"; };
-		0434A8BD275FA094009AD4EA /* bestfitobb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bestfitobb.cpp; sourceTree = "<group>"; };
-		0434A8BE275FA094009AD4EA /* cd_hull.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cd_hull.cpp; sourceTree = "<group>"; };
-		0434A8BF275FA094009AD4EA /* bestfitobb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bestfitobb.h; sourceTree = "<group>"; };
-		0434A8C0275FA094009AD4EA /* Jamfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.jam; path = Jamfile; sourceTree = "<group>"; };
-		0434A8C1275FA094009AD4EA /* ConvexBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConvexBuilder.cpp; sourceTree = "<group>"; };
-		0434A8C2275FA094009AD4EA /* cd_wavefront.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cd_wavefront.cpp; sourceTree = "<group>"; };
-		0434A8C3275FA094009AD4EA /* cd_vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cd_vector.h; sourceTree = "<group>"; };
-		0434A8C4275FA094009AD4EA /* ConvexBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvexBuilder.h; sourceTree = "<group>"; };
-		0434A8C5275FA094009AD4EA /* float_math.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = float_math.cpp; sourceTree = "<group>"; };
-		0434A8C6275FA094009AD4EA /* bestfit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bestfit.h; sourceTree = "<group>"; };
-		0434A8C7275FA095009AD4EA /* float_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float_math.h; sourceTree = "<group>"; };
-		0434A8C8275FA095009AD4EA /* fitsphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fitsphere.h; sourceTree = "<group>"; };
-		0434A8C9275FA095009AD4EA /* planetri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planetri.h; sourceTree = "<group>"; };
-		0434A8CA275FA095009AD4EA /* meshvolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meshvolume.h; sourceTree = "<group>"; };
-		0434A8CB275FA095009AD4EA /* fitsphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fitsphere.cpp; sourceTree = "<group>"; };
-		0434A8CC275FA095009AD4EA /* planetri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = planetri.cpp; sourceTree = "<group>"; };
-		0434A8CD275FA095009AD4EA /* cd_hull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cd_hull.h; sourceTree = "<group>"; };
-		0434A8CE275FA095009AD4EA /* meshvolume.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meshvolume.cpp; sourceTree = "<group>"; };
-		0434A8CF275FA095009AD4EA /* ConvexDecomposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvexDecomposition.h; sourceTree = "<group>"; };
-		0434A8D0275FA095009AD4EA /* bestfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bestfit.cpp; sourceTree = "<group>"; };
-		0434A8D1275FA095009AD4EA /* splitplane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = splitplane.h; sourceTree = "<group>"; };
-		0434A8D2275FA095009AD4EA /* splitplane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = splitplane.cpp; sourceTree = "<group>"; };
-		0434A8D3275FA095009AD4EA /* raytri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = raytri.cpp; sourceTree = "<group>"; };
-		0434A8D4275FA096009AD4EA /* concavity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concavity.h; sourceTree = "<group>"; };
-		0434A8D5275FA096009AD4EA /* cd_wavefront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cd_wavefront.h; sourceTree = "<group>"; };
-		0434A8D6275FA096009AD4EA /* raytri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = raytri.h; sourceTree = "<group>"; };
-		0434A8D7275FA096009AD4EA /* vlookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vlookup.h; sourceTree = "<group>"; };
-		0434A8D8275FA096009AD4EA /* vlookup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vlookup.cpp; sourceTree = "<group>"; };
-		0434A8F7275FA0A6009AD4EA /* btGImpactMassUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactMassUtil.h; sourceTree = "<group>"; };
-		0434A8F8275FA0A6009AD4EA /* gim_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_math.h; sourceTree = "<group>"; };
-		0434A8F9275FA0A6009AD4EA /* gim_hash_table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_hash_table.h; sourceTree = "<group>"; };
-		0434A8FA275FA0A6009AD4EA /* gim_box_collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_box_collision.h; sourceTree = "<group>"; };
-		0434A8FB275FA0A7009AD4EA /* btGenericPoolAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGenericPoolAllocator.h; sourceTree = "<group>"; };
-		0434A8FC275FA0A7009AD4EA /* gim_clip_polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_clip_polygon.h; sourceTree = "<group>"; };
-		0434A8FD275FA0A7009AD4EA /* gim_bitset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_bitset.h; sourceTree = "<group>"; };
-		0434A8FE275FA0A7009AD4EA /* btContactProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btContactProcessing.h; sourceTree = "<group>"; };
-		0434A8FF275FA0A7009AD4EA /* btGImpactBvhStructs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactBvhStructs.h; sourceTree = "<group>"; };
-		0434A900275FA0A7009AD4EA /* gim_linear_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_linear_math.h; sourceTree = "<group>"; };
-		0434A901275FA0A7009AD4EA /* gim_radixsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_radixsort.h; sourceTree = "<group>"; };
-		0434A902275FA0A7009AD4EA /* btGImpactQuantizedBvh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactQuantizedBvh.h; sourceTree = "<group>"; };
-		0434A903275FA0A7009AD4EA /* btGImpactBvh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactBvh.h; sourceTree = "<group>"; };
-		0434A904275FA0A7009AD4EA /* gim_tri_collision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_tri_collision.cpp; sourceTree = "<group>"; };
-		0434A905275FA0A7009AD4EA /* btGImpactCollisionAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactCollisionAlgorithm.h; sourceTree = "<group>"; };
-		0434A906275FA0A8009AD4EA /* btGImpactBvh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGImpactBvh.cpp; sourceTree = "<group>"; };
-		0434A907275FA0A8009AD4EA /* btGeometryOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGeometryOperations.h; sourceTree = "<group>"; };
-		0434A908275FA0A8009AD4EA /* gim_box_set.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_box_set.cpp; sourceTree = "<group>"; };
-		0434A909275FA0A8009AD4EA /* gim_pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_pair.h; sourceTree = "<group>"; };
-		0434A90A275FA0A8009AD4EA /* btGImpactShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGImpactShape.cpp; sourceTree = "<group>"; };
-		0434A90B275FA0A8009AD4EA /* btGenericPoolAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGenericPoolAllocator.cpp; sourceTree = "<group>"; };
-		0434A90C275FA0A8009AD4EA /* btGImpactShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactShape.h; sourceTree = "<group>"; };
-		0434A90D275FA0A8009AD4EA /* btQuantization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btQuantization.h; sourceTree = "<group>"; };
-		0434A90E275FA0A8009AD4EA /* gim_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_array.h; sourceTree = "<group>"; };
-		0434A90F275FA0A8009AD4EA /* btCompoundFromGimpact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btCompoundFromGimpact.h; sourceTree = "<group>"; };
-		0434A910275FA0A8009AD4EA /* btGImpactCollisionAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGImpactCollisionAlgorithm.cpp; sourceTree = "<group>"; };
-		0434A911275FA0A9009AD4EA /* gim_memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_memory.cpp; sourceTree = "<group>"; };
-		0434A912275FA0A9009AD4EA /* btContactProcessingStructs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btContactProcessingStructs.h; sourceTree = "<group>"; };
-		0434A913275FA0A9009AD4EA /* btContactProcessing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btContactProcessing.cpp; sourceTree = "<group>"; };
-		0434A914275FA0A9009AD4EA /* btGImpactQuantizedBvhStructs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGImpactQuantizedBvhStructs.h; sourceTree = "<group>"; };
-		0434A915275FA0A9009AD4EA /* btTriangleShapeEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btTriangleShapeEx.h; sourceTree = "<group>"; };
-		0434A916275FA0A9009AD4EA /* btClipPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btClipPolygon.h; sourceTree = "<group>"; };
-		0434A917275FA0A9009AD4EA /* gim_geom_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_geom_types.h; sourceTree = "<group>"; };
-		0434A918275FA0A9009AD4EA /* btTriangleShapeEx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btTriangleShapeEx.cpp; sourceTree = "<group>"; };
-		0434A919275FA0A9009AD4EA /* gim_memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_memory.h; sourceTree = "<group>"; };
-		0434A91A275FA0A9009AD4EA /* btBoxCollision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBoxCollision.h; sourceTree = "<group>"; };
-		0434A91B275FA0A9009AD4EA /* gim_contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_contact.cpp; sourceTree = "<group>"; };
-		0434A91C275FA0A9009AD4EA /* gim_tri_collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_tri_collision.h; sourceTree = "<group>"; };
-		0434A91D275FA0AA009AD4EA /* gim_contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_contact.h; sourceTree = "<group>"; };
-		0434A91E275FA0AA009AD4EA /* gim_geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_geometry.h; sourceTree = "<group>"; };
-		0434A91F275FA0AA009AD4EA /* btGImpactQuantizedBvh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGImpactQuantizedBvh.cpp; sourceTree = "<group>"; };
-		0434A920275FA0AA009AD4EA /* gim_basic_geometry_operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_basic_geometry_operations.h; sourceTree = "<group>"; };
-		0434A921275FA0AA009AD4EA /* gim_box_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_box_set.h; sourceTree = "<group>"; };
-		0434A94D275FA0B5009AD4EA /* gim_clip_polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_clip_polygon.h; sourceTree = "<group>"; };
-		0434A94E275FA0B5009AD4EA /* gim_geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_geometry.h; sourceTree = "<group>"; };
-		0434A94F275FA0B5009AD4EA /* gim_basic_geometry_operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_basic_geometry_operations.h; sourceTree = "<group>"; };
-		0434A950275FA0B5009AD4EA /* gim_memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_memory.cpp; sourceTree = "<group>"; };
-		0434A951275FA0B5009AD4EA /* gim_memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_memory.h; sourceTree = "<group>"; };
-		0434A952275FA0B5009AD4EA /* gim_box_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_box_set.h; sourceTree = "<group>"; };
-		0434A953275FA0B6009AD4EA /* gim_geom_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_geom_types.h; sourceTree = "<group>"; };
-		0434A954275FA0B6009AD4EA /* gim_bitset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_bitset.h; sourceTree = "<group>"; };
-		0434A955275FA0B6009AD4EA /* gim_radixsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_radixsort.h; sourceTree = "<group>"; };
-		0434A956275FA0B6009AD4EA /* gim_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_array.h; sourceTree = "<group>"; };
-		0434A957275FA0B6009AD4EA /* gim_contact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_contact.cpp; sourceTree = "<group>"; };
-		0434A958275FA0B6009AD4EA /* gim_pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_pair.h; sourceTree = "<group>"; };
-		0434A959275FA0B6009AD4EA /* gim_tri_collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_tri_collision.h; sourceTree = "<group>"; };
-		0434A95A275FA0B6009AD4EA /* gim_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_math.h; sourceTree = "<group>"; };
-		0434A95B275FA0B6009AD4EA /* gim_tri_collision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_tri_collision.cpp; sourceTree = "<group>"; };
-		0434A95C275FA0B6009AD4EA /* gim_box_collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_box_collision.h; sourceTree = "<group>"; };
-		0434A95D275FA0B6009AD4EA /* gim_contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_contact.h; sourceTree = "<group>"; };
-		0434A95E275FA0B6009AD4EA /* gim_linear_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_linear_math.h; sourceTree = "<group>"; };
-		0434A95F275FA0B7009AD4EA /* gim_box_set.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gim_box_set.cpp; sourceTree = "<group>"; };
-		0434A960275FA0B7009AD4EA /* gim_hash_table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gim_hash_table.h; sourceTree = "<group>"; };
-		0434A975275FA0C8009AD4EA /* ChCCollisionTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCCollisionTree.cpp; sourceTree = "<group>"; };
-		0434A976275FA0C8009AD4EA /* ChCAABBTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCAABBTree.h; sourceTree = "<group>"; };
-		0434A977275FA0C8009AD4EA /* ChCAABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCAABB.h; sourceTree = "<group>"; };
-		0434A978275FA0C8009AD4EA /* ChCBroadPhaseCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCBroadPhaseCollider.h; sourceTree = "<group>"; };
-		0434A979275FA0C8009AD4EA /* ChCAABBcollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCAABBcollider.cpp; sourceTree = "<group>"; };
-		0434A97A275FA0C8009AD4EA /* ChCBruteForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCBruteForce.h; sourceTree = "<group>"; };
-		0434A97B275FA0C8009AD4EA /* ChCOBB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCOBB.h; sourceTree = "<group>"; };
-		0434A97C275FA0C8009AD4EA /* ChCAABBcollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCAABBcollider.h; sourceTree = "<group>"; };
-		0434A97D275FA0C8009AD4EA /* ChCOBB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCOBB.cpp; sourceTree = "<group>"; };
-		0434A97E275FA0C8009AD4EA /* ChCGeometryCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCGeometryCollider.h; sourceTree = "<group>"; };
-		0434A97F275FA0C8009AD4EA /* ChCOBBTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCOBBTree.h; sourceTree = "<group>"; };
-		0434A980275FA0C9009AD4EA /* ChCOBBcollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCOBBcollider.h; sourceTree = "<group>"; };
-		0434A981275FA0C9009AD4EA /* ChCNarrowPhaseCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCNarrowPhaseCollider.cpp; sourceTree = "<group>"; };
-		0434A982275FA0C9009AD4EA /* ChCAABB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCAABB.cpp; sourceTree = "<group>"; };
-		0434A983275FA0C9009AD4EA /* ChCCollisionTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCCollisionTree.h; sourceTree = "<group>"; };
-		0434A984275FA0C9009AD4EA /* ChCGetTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCGetTime.h; sourceTree = "<group>"; };
-		0434A985275FA0C9009AD4EA /* ChCCompile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCCompile.h; sourceTree = "<group>"; };
-		0434A986275FA0C9009AD4EA /* ChCOBBTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCOBBTree.cpp; sourceTree = "<group>"; };
-		0434A987275FA0C9009AD4EA /* ChCAABBTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCAABBTree.cpp; sourceTree = "<group>"; };
-		0434A988275FA0C9009AD4EA /* ChCMatVec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCMatVec.h; sourceTree = "<group>"; };
-		0434A989275FA0C9009AD4EA /* ChCGeometryCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCGeometryCollider.cpp; sourceTree = "<group>"; };
-		0434A98A275FA0C9009AD4EA /* ChCNarrowPhaseCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCNarrowPhaseCollider.h; sourceTree = "<group>"; };
-		0434A98B275FA0C9009AD4EA /* ChCMates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCMates.h; sourceTree = "<group>"; };
-		0434A98C275FA0CA009AD4EA /* ChCSweepAndPrune.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCSweepAndPrune.h; sourceTree = "<group>"; };
-		0434A98D275FA0CA009AD4EA /* ChCAbsoluteAABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChCAbsoluteAABB.h; sourceTree = "<group>"; };
-		0434A98E275FA0CA009AD4EA /* ChCOBBcollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChCOBBcollider.cpp; sourceTree = "<group>"; };
 		0434A9A9275FA0DD009AD4EA /* btStackAlloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btStackAlloc.h; sourceTree = "<group>"; };
 		0434A9AA275FA0DD009AD4EA /* btThreads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btThreads.h; sourceTree = "<group>"; };
 		0434A9AB275FA0DD009AD4EA /* btMatrixX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btMatrixX.h; sourceTree = "<group>"; };
@@ -3625,6 +3422,7 @@
 		0434A2CD275F9900009AD4EA /* collision */ = {
 			isa = PBXGroup;
 			children = (
+				0434A2CE275F990E009AD4EA /* bullet */,
 				0434ABE7275FA2DD009AD4EA /* ChConvexDecomposition.cpp */,
 				0434ABE8275FA2DD009AD4EA /* ChConvexDecomposition.h */,
 				0434A88D275FA05B009AD4EA /* ChCollisionAlgorithmsBullet.cpp */,
@@ -3646,9 +3444,6 @@
 				0434A887275FA05B009AD4EA /* ChCollisionUtils.h */,
 				0434A892275FA05C009AD4EA /* ChCollisionUtilsBullet.cpp */,
 				0434A888275FA05B009AD4EA /* ChCollisionUtilsBullet.h */,
-				0434A2D8275F9998009AD4EA /* gimpact */,
-				0434A2D7275F9987009AD4EA /* edgetempest */,
-				0434A2CE275F990E009AD4EA /* bullet */,
 			);
 			path = collision;
 			sourceTree = "<group>";
@@ -4008,181 +3803,6 @@
 				0434AA1A275FA10E009AD4EA /* btVoronoiSimplexSolver.h */,
 			);
 			path = NarrowPhaseCollision;
-			sourceTree = "<group>";
-		};
-		0434A2D7275F9987009AD4EA /* edgetempest */ = {
-			isa = PBXGroup;
-			children = (
-				0434A982275FA0C9009AD4EA /* ChCAABB.cpp */,
-				0434A977275FA0C8009AD4EA /* ChCAABB.h */,
-				0434A979275FA0C8009AD4EA /* ChCAABBcollider.cpp */,
-				0434A97C275FA0C8009AD4EA /* ChCAABBcollider.h */,
-				0434A987275FA0C9009AD4EA /* ChCAABBTree.cpp */,
-				0434A976275FA0C8009AD4EA /* ChCAABBTree.h */,
-				0434A98D275FA0CA009AD4EA /* ChCAbsoluteAABB.h */,
-				0434A978275FA0C8009AD4EA /* ChCBroadPhaseCollider.h */,
-				0434A97A275FA0C8009AD4EA /* ChCBruteForce.h */,
-				0434A975275FA0C8009AD4EA /* ChCCollisionTree.cpp */,
-				0434A983275FA0C9009AD4EA /* ChCCollisionTree.h */,
-				0434A985275FA0C9009AD4EA /* ChCCompile.h */,
-				0434A989275FA0C9009AD4EA /* ChCGeometryCollider.cpp */,
-				0434A97E275FA0C8009AD4EA /* ChCGeometryCollider.h */,
-				0434A984275FA0C9009AD4EA /* ChCGetTime.h */,
-				0434A98B275FA0C9009AD4EA /* ChCMates.h */,
-				0434A988275FA0C9009AD4EA /* ChCMatVec.h */,
-				0434A981275FA0C9009AD4EA /* ChCNarrowPhaseCollider.cpp */,
-				0434A98A275FA0C9009AD4EA /* ChCNarrowPhaseCollider.h */,
-				0434A97D275FA0C8009AD4EA /* ChCOBB.cpp */,
-				0434A97B275FA0C8009AD4EA /* ChCOBB.h */,
-				0434A98E275FA0CA009AD4EA /* ChCOBBcollider.cpp */,
-				0434A980275FA0C9009AD4EA /* ChCOBBcollider.h */,
-				0434A986275FA0C9009AD4EA /* ChCOBBTree.cpp */,
-				0434A97F275FA0C8009AD4EA /* ChCOBBTree.h */,
-				0434A98C275FA0CA009AD4EA /* ChCSweepAndPrune.h */,
-			);
-			path = edgetempest;
-			sourceTree = "<group>";
-		};
-		0434A2D8275F9998009AD4EA /* gimpact */ = {
-			isa = PBXGroup;
-			children = (
-				0434A2DB275F99B8009AD4EA /* GIMPACTUtils */,
-				0434A2DA275F99AF009AD4EA /* GIMPACT */,
-				0434A2D9275F99A4009AD4EA /* ConvexDecomposition */,
-			);
-			path = gimpact;
-			sourceTree = "<group>";
-		};
-		0434A2D9275F99A4009AD4EA /* ConvexDecomposition */ = {
-			isa = PBXGroup;
-			children = (
-				0434A8D0275FA095009AD4EA /* bestfit.cpp */,
-				0434A8C6275FA094009AD4EA /* bestfit.h */,
-				0434A8BD275FA094009AD4EA /* bestfitobb.cpp */,
-				0434A8BF275FA094009AD4EA /* bestfitobb.h */,
-				0434A8BE275FA094009AD4EA /* cd_hull.cpp */,
-				0434A8CD275FA095009AD4EA /* cd_hull.h */,
-				0434A8C3275FA094009AD4EA /* cd_vector.h */,
-				0434A8C2275FA094009AD4EA /* cd_wavefront.cpp */,
-				0434A8D5275FA096009AD4EA /* cd_wavefront.h */,
-				0434A8BB275FA093009AD4EA /* concavity.cpp */,
-				0434A8D4275FA096009AD4EA /* concavity.h */,
-				0434A8C1275FA094009AD4EA /* ConvexBuilder.cpp */,
-				0434A8C4275FA094009AD4EA /* ConvexBuilder.h */,
-				0434A8BC275FA094009AD4EA /* ConvexDecomposition.cpp */,
-				0434A8CF275FA095009AD4EA /* ConvexDecomposition.h */,
-				0434A8CB275FA095009AD4EA /* fitsphere.cpp */,
-				0434A8C8275FA095009AD4EA /* fitsphere.h */,
-				0434A8C5275FA094009AD4EA /* float_math.cpp */,
-				0434A8C7275FA095009AD4EA /* float_math.h */,
-				0434A8C0275FA094009AD4EA /* Jamfile */,
-				0434A8CE275FA095009AD4EA /* meshvolume.cpp */,
-				0434A8CA275FA095009AD4EA /* meshvolume.h */,
-				0434A8CC275FA095009AD4EA /* planetri.cpp */,
-				0434A8C9275FA095009AD4EA /* planetri.h */,
-				0434A8D3275FA095009AD4EA /* raytri.cpp */,
-				0434A8D6275FA096009AD4EA /* raytri.h */,
-				0434A8D2275FA095009AD4EA /* splitplane.cpp */,
-				0434A8D1275FA095009AD4EA /* splitplane.h */,
-				0434A8D8275FA096009AD4EA /* vlookup.cpp */,
-				0434A8D7275FA096009AD4EA /* vlookup.h */,
-			);
-			path = ConvexDecomposition;
-			sourceTree = "<group>";
-		};
-		0434A2DA275F99AF009AD4EA /* GIMPACT */ = {
-			isa = PBXGroup;
-			children = (
-				0434A2DD275F99D0009AD4EA /* Bullet */,
-				0434A2DC275F99C5009AD4EA /* core */,
-			);
-			path = GIMPACT;
-			sourceTree = "<group>";
-		};
-		0434A2DB275F99B8009AD4EA /* GIMPACTUtils */ = {
-			isa = PBXGroup;
-			children = (
-				0434A8B8275FA080009AD4EA /* btGImpactConvexDecompositionShape.cpp */,
-				0434A8B7275FA080009AD4EA /* btGImpactConvexDecompositionShape.h */,
-			);
-			path = GIMPACTUtils;
-			sourceTree = "<group>";
-		};
-		0434A2DC275F99C5009AD4EA /* core */ = {
-			isa = PBXGroup;
-			children = (
-				0434A956275FA0B6009AD4EA /* gim_array.h */,
-				0434A94F275FA0B5009AD4EA /* gim_basic_geometry_operations.h */,
-				0434A954275FA0B6009AD4EA /* gim_bitset.h */,
-				0434A95C275FA0B6009AD4EA /* gim_box_collision.h */,
-				0434A95F275FA0B7009AD4EA /* gim_box_set.cpp */,
-				0434A952275FA0B5009AD4EA /* gim_box_set.h */,
-				0434A94D275FA0B5009AD4EA /* gim_clip_polygon.h */,
-				0434A957275FA0B6009AD4EA /* gim_contact.cpp */,
-				0434A95D275FA0B6009AD4EA /* gim_contact.h */,
-				0434A953275FA0B6009AD4EA /* gim_geom_types.h */,
-				0434A94E275FA0B5009AD4EA /* gim_geometry.h */,
-				0434A960275FA0B7009AD4EA /* gim_hash_table.h */,
-				0434A95E275FA0B6009AD4EA /* gim_linear_math.h */,
-				0434A95A275FA0B6009AD4EA /* gim_math.h */,
-				0434A950275FA0B5009AD4EA /* gim_memory.cpp */,
-				0434A951275FA0B5009AD4EA /* gim_memory.h */,
-				0434A958275FA0B6009AD4EA /* gim_pair.h */,
-				0434A955275FA0B6009AD4EA /* gim_radixsort.h */,
-				0434A95B275FA0B6009AD4EA /* gim_tri_collision.cpp */,
-				0434A959275FA0B6009AD4EA /* gim_tri_collision.h */,
-			);
-			path = core;
-			sourceTree = "<group>";
-		};
-		0434A2DD275F99D0009AD4EA /* Bullet */ = {
-			isa = PBXGroup;
-			children = (
-				0434A91A275FA0A9009AD4EA /* btBoxCollision.h */,
-				0434A916275FA0A9009AD4EA /* btClipPolygon.h */,
-				0434A90F275FA0A8009AD4EA /* btCompoundFromGimpact.h */,
-				0434A913275FA0A9009AD4EA /* btContactProcessing.cpp */,
-				0434A8FE275FA0A7009AD4EA /* btContactProcessing.h */,
-				0434A912275FA0A9009AD4EA /* btContactProcessingStructs.h */,
-				0434A90B275FA0A8009AD4EA /* btGenericPoolAllocator.cpp */,
-				0434A8FB275FA0A7009AD4EA /* btGenericPoolAllocator.h */,
-				0434A907275FA0A8009AD4EA /* btGeometryOperations.h */,
-				0434A906275FA0A8009AD4EA /* btGImpactBvh.cpp */,
-				0434A903275FA0A7009AD4EA /* btGImpactBvh.h */,
-				0434A8FF275FA0A7009AD4EA /* btGImpactBvhStructs.h */,
-				0434A910275FA0A8009AD4EA /* btGImpactCollisionAlgorithm.cpp */,
-				0434A905275FA0A7009AD4EA /* btGImpactCollisionAlgorithm.h */,
-				0434A8F7275FA0A6009AD4EA /* btGImpactMassUtil.h */,
-				0434A91F275FA0AA009AD4EA /* btGImpactQuantizedBvh.cpp */,
-				0434A902275FA0A7009AD4EA /* btGImpactQuantizedBvh.h */,
-				0434A914275FA0A9009AD4EA /* btGImpactQuantizedBvhStructs.h */,
-				0434A90A275FA0A8009AD4EA /* btGImpactShape.cpp */,
-				0434A90C275FA0A8009AD4EA /* btGImpactShape.h */,
-				0434A90D275FA0A8009AD4EA /* btQuantization.h */,
-				0434A918275FA0A9009AD4EA /* btTriangleShapeEx.cpp */,
-				0434A915275FA0A9009AD4EA /* btTriangleShapeEx.h */,
-				0434A90E275FA0A8009AD4EA /* gim_array.h */,
-				0434A920275FA0AA009AD4EA /* gim_basic_geometry_operations.h */,
-				0434A8FD275FA0A7009AD4EA /* gim_bitset.h */,
-				0434A8FA275FA0A6009AD4EA /* gim_box_collision.h */,
-				0434A908275FA0A8009AD4EA /* gim_box_set.cpp */,
-				0434A921275FA0AA009AD4EA /* gim_box_set.h */,
-				0434A8FC275FA0A7009AD4EA /* gim_clip_polygon.h */,
-				0434A91B275FA0A9009AD4EA /* gim_contact.cpp */,
-				0434A91D275FA0AA009AD4EA /* gim_contact.h */,
-				0434A917275FA0A9009AD4EA /* gim_geom_types.h */,
-				0434A91E275FA0AA009AD4EA /* gim_geometry.h */,
-				0434A8F9275FA0A6009AD4EA /* gim_hash_table.h */,
-				0434A900275FA0A7009AD4EA /* gim_linear_math.h */,
-				0434A8F8275FA0A6009AD4EA /* gim_math.h */,
-				0434A911275FA0A9009AD4EA /* gim_memory.cpp */,
-				0434A919275FA0A9009AD4EA /* gim_memory.h */,
-				0434A909275FA0A8009AD4EA /* gim_pair.h */,
-				0434A901275FA0A7009AD4EA /* gim_radixsort.h */,
-				0434A904275FA0A7009AD4EA /* gim_tri_collision.cpp */,
-				0434A91C275FA0A9009AD4EA /* gim_tri_collision.h */,
-			);
-			path = Bullet;
 			sourceTree = "<group>";
 		};
 		0434A2DE275F99EA009AD4EA /* timestepper */ = {
@@ -5615,7 +5235,6 @@
 				0434AB8E275FA142009AD4EA /* btEmptyCollisionAlgorithm.h in Headers */,
 				0434AA3A275FA10F009AD4EA /* btSubSimplexConvexCast.h in Headers */,
 				0434A3FD275F9F88009AD4EA /* ChFunctionPosition_setpoint.h in Headers */,
-				0434A961275FA0B7009AD4EA /* gim_clip_polygon.h in Headers */,
 				0434A553275F9FC5009AD4EA /* ChInertiaUtils.h in Headers */,
 				0434AA3D275FA10F009AD4EA /* btMinkowskiPenetrationDepthSolver.h in Headers */,
 				0434A9E4275FA0E1009AD4EA /* btList.h in Headers */,
@@ -5635,7 +5254,6 @@
 				0434A577275F9FC5009AD4EA /* ChLinkForce.h in Headers */,
 				0434A7E4275FA014009AD4EA /* matrix.h in Headers */,
 				0434A5FF275F9FD2009AD4EA /* ChTriangleMeshConnected.h in Headers */,
-				0434A926275FA0AA009AD4EA /* btGenericPoolAllocator.h in Headers */,
 				0434AB86275FA142009AD4EA /* btInternalEdgeUtility.h in Headers */,
 				0434A511275F9FC5009AD4EA /* ChProximityContainer.h in Headers */,
 				0434A65E275F9FEA009AD4EA /* ChSolverPSOR.h in Headers */,
@@ -5645,7 +5263,6 @@
 				0434AB01275FA136009AD4EA /* btBoxShape.h in Headers */,
 				0434AB37275FA136009AD4EA /* btTriangleInfoMap.h in Headers */,
 				0434A846275FA03D009AD4EA /* ChConeShape.h in Headers */,
-				0434A8E1275FA096009AD4EA /* cd_vector.h in Headers */,
 				0434A78B275FA004009AD4EA /* ChElementShellANCF_3443.h in Headers */,
 				0434A4EE275F9FC5009AD4EA /* ChBodyAuxRef.h in Headers */,
 				0434AA77275FA120009AD4EA /* btContactProcessingStructs.h in Headers */,
@@ -5656,7 +5273,6 @@
 				0434A842275FA03D009AD4EA /* ChBarrelShape.h in Headers */,
 				0434A7AA275FA004009AD4EA /* ChNodeFEAxyzDDD.h in Headers */,
 				0434A593275F9FC6009AD4EA /* ChLinkPointSpline.h in Headers */,
-				0434A995275FA0CA009AD4EA /* ChCOBB.h in Headers */,
 				0434A33F275F9B79009AD4EA /* ChMathematics.h in Headers */,
 				0434A679275F9FEA009AD4EA /* ChConstraintTwoBodies.h in Headers */,
 				0434ABB4275FA143009AD4EA /* btCollisionWorld.h in Headers */,
@@ -5686,7 +5302,6 @@
 				0434A761275FA004009AD4EA /* ChContinuumElectrostatics.h in Headers */,
 				0434A33C275F9B79009AD4EA /* ChFrame.h in Headers */,
 				0434ABD8275FA149009AD4EA /* btDbvt.h in Headers */,
-				0434A922275FA0AA009AD4EA /* btGImpactMassUtil.h in Headers */,
 				0434AB0A275FA136009AD4EA /* btTriangleCallback.h in Headers */,
 				0434A57B275F9FC5009AD4EA /* ChShaftsGearboxAngled.h in Headers */,
 				0434A56A275F9FC5009AD4EA /* ChContactNSC.h in Headers */,
@@ -5695,7 +5310,6 @@
 				0434AA7F275FA120009AD4EA /* btQuantization.h in Headers */,
 				0434AA83275FA120009AD4EA /* gim_array.h in Headers */,
 				0434AA7E275FA120009AD4EA /* gim_tri_collision.h in Headers */,
-				0434A965275FA0B7009AD4EA /* gim_memory.h in Headers */,
 				0434A73F275FA004009AD4EA /* ChLinkPointPoint.h in Headers */,
 				0434A68A275F9FEA009AD4EA /* ChKblock.h in Headers */,
 				0434A778275FA004009AD4EA /* ChElementSpring.h in Headers */,
@@ -5715,7 +5329,6 @@
 				0434A411275F9F88009AD4EA /* ChFunction_Fillet3.h in Headers */,
 				0434A9E3275FA0E1009AD4EA /* btIDebugDraw.h in Headers */,
 				0434A866275FA03D009AD4EA /* ChRoundedCylinderShape.h in Headers */,
-				0434A99A275FA0CA009AD4EA /* ChCOBBcollider.h in Headers */,
 				0434A847275FA03D009AD4EA /* ChGlyphs.h in Headers */,
 				0434A355275F9B89009AD4EA /* ChArchiveAsciiDump.h in Headers */,
 				0434A559275F9FC5009AD4EA /* ChForce.h in Headers */,
@@ -5728,20 +5341,15 @@
 				0434A66A275F9FEA009AD4EA /* ChVariablesBody.h in Headers */,
 				0434A509275F9FC5009AD4EA /* ChPhysicsItem.h in Headers */,
 				0434A54F275F9FC5009AD4EA /* ChContactContainerSMC.h in Headers */,
-				0434A925275FA0AA009AD4EA /* gim_box_collision.h in Headers */,
-				0434A938275FA0AA009AD4EA /* btQuantization.h in Headers */,
 				0434A345275F9B79009AD4EA /* ChCoordsys.h in Headers */,
 				0434A738275FA004009AD4EA /* ChElementBeamIGA.h in Headers */,
-				0434A8E4275FA096009AD4EA /* bestfit.h in Headers */,
 				0434A5D9275F9FD2009AD4EA /* ChCone.h in Headers */,
 				0434A4F7275F9FC5009AD4EA /* ChLinkLinActuator.h in Headers */,
-				0434A962275FA0B7009AD4EA /* gim_geometry.h in Headers */,
 				0434A881275FA047009AD4EA /* ChTimestepperHHT.h in Headers */,
 				0434A7E5275FA014009AD4EA /* real_double.h in Headers */,
 				0434A4FD275F9FC5009AD4EA /* ChLinkMotorLinearSpeed.h in Headers */,
 				0434A65A275F9FEA009AD4EA /* ChSolverBB.h in Headers */,
 				0434A597275F9FC6009AD4EA /* ChShaftsPlanetary.h in Headers */,
-				0434A932275FA0AA009AD4EA /* btGeometryOperations.h in Headers */,
 				0434A5F7275F9FD2009AD4EA /* ChCylinder.h in Headers */,
 				0434A768275FA004009AD4EA /* ChMaterialShellReissner.h in Headers */,
 				0434A5F3275F9FD2009AD4EA /* ChGeometry.h in Headers */,
@@ -5749,10 +5357,8 @@
 				0434A540275F9FC5009AD4EA /* ChLinkRevoluteSpherical.h in Headers */,
 				0434A322275F9B79009AD4EA /* ChDistribution.h in Headers */,
 				0434AB39275FA136009AD4EA /* btConvexPointCloudShape.h in Headers */,
-				0434A972275FA0B7009AD4EA /* gim_linear_math.h in Headers */,
 				0434A8AD275FA05D009AD4EA /* ChCollisionModel.h in Headers */,
 				0434A5D1275F9FD2009AD4EA /* ChLineBezier.h in Headers */,
-				0434A991275FA0CA009AD4EA /* ChCAABB.h in Headers */,
 				0434A50A275F9FC5009AD4EA /* ChBodyFrame.h in Headers */,
 				0434A38B275F9F78009AD4EA /* ChUtilsGeometry.h in Headers */,
 				0434A8AE275FA05D009AD4EA /* ChCollisionAlgorithmsBullet.h in Headers */,
@@ -5775,9 +5381,6 @@
 				0434AB0F275FA136009AD4EA /* btCollisionMargin.h in Headers */,
 				0434A4E3275F9FC5009AD4EA /* ChLoader.h in Headers */,
 				0434A58B275F9FC5009AD4EA /* ChMatterSPH.h in Headers */,
-				0434A9A6275FA0CA009AD4EA /* ChCSweepAndPrune.h in Headers */,
-				0434A963275FA0B7009AD4EA /* gim_basic_geometry_operations.h in Headers */,
-				0434A996275FA0CA009AD4EA /* ChCAABBcollider.h in Headers */,
 				0434A329275F9B79009AD4EA /* ChMatrixMBD.h in Headers */,
 				0434AA33275FA10F009AD4EA /* btPolyhedralContactClipping.h in Headers */,
 				0434A40B275F9F88009AD4EA /* ChFunctionRotation_ABCfunctions.h in Headers */,
@@ -5785,19 +5388,16 @@
 				0434AB21275FA136009AD4EA /* btMiniSDF.h in Headers */,
 				0434A73C275FA004009AD4EA /* ChElementHexaCorot_20.h in Headers */,
 				0434AA35275FA10F009AD4EA /* btRaycastCallback.h in Headers */,
-				0434A8E7275FA096009AD4EA /* planetri.h in Headers */,
 				0434A76E275FA004009AD4EA /* ChMeshFileLoader.h in Headers */,
 				0434A4DE275F9FC5009AD4EA /* ChShaftsLoads.h in Headers */,
 				0434A31F275F9B79009AD4EA /* ChRealtimeStep.h in Headers */,
 				0434A856275FA03D009AD4EA /* ChCamera.h in Headers */,
 				0434A567275F9FC5009AD4EA /* ChLinkUniversal.h in Headers */,
-				0434A942275FA0AA009AD4EA /* gim_geom_types.h in Headers */,
 				0434A39C275F9F78009AD4EA /* ChProfiler.h in Headers */,
 				0434AA24275FA10F009AD4EA /* btComputeGjkEpaPenetration.h in Headers */,
 				0434AB46275FA136009AD4EA /* btPolyhedralConvexShape.h in Headers */,
 				0434AB2B275FA136009AD4EA /* btTriangleIndexVertexArray.h in Headers */,
 				0434AB24275FA136009AD4EA /* btConvexHullShape.h in Headers */,
-				0434A941275FA0AA009AD4EA /* btClipPolygon.h in Headers */,
 				0434A77A275FA004009AD4EA /* ChElementBar.h in Headers */,
 				0434A54E275F9FC5009AD4EA /* ChShaftsTorqueConverter.h in Headers */,
 				0434A748275FA004009AD4EA /* ChNodeFEAcurv.h in Headers */,
@@ -5811,12 +5411,10 @@
 				0434AAFA275FA136009AD4EA /* btBarrelShape.h in Headers */,
 				0434A733275FA004009AD4EA /* ChElementShellBST.h in Headers */,
 				0434A3EF275F9F88009AD4EA /* ChFunction_Poly345.h in Headers */,
-				0434A928275FA0AA009AD4EA /* gim_bitset.h in Headers */,
 				0434A8B6275FA05D009AD4EA /* ChCollisionModelBullet.h in Headers */,
 				0434A860275FA03D009AD4EA /* ChVisualization.h in Headers */,
 				0434AA39275FA10F009AD4EA /* btGjkConvexCast.h in Headers */,
 				0434A39A275F9F78009AD4EA /* ChUtilsSamplers.h in Headers */,
-				0434A92C275FA0AA009AD4EA /* gim_radixsort.h in Headers */,
 				0434A330275F9B79009AD4EA /* ChTensors.h in Headers */,
 				0434A666275F9FEA009AD4EA /* ChVariablesGeneric.h in Headers */,
 				0434A68D275F9FEA009AD4EA /* ChIterativeSolver.h in Headers */,
@@ -5829,12 +5427,10 @@
 				0434A58A275F9FC5009AD4EA /* ChContactNSCrolling.h in Headers */,
 				0434A5D4275F9FD2009AD4EA /* ChLinePoly.h in Headers */,
 				0434A777275FA004009AD4EA /* ChElementTetraCorot_4.h in Headers */,
-				0434A8EB275FA096009AD4EA /* cd_hull.h in Headers */,
 				0434ABD4275FA149009AD4EA /* btBroadphaseProxy.h in Headers */,
 				0434A9DA275FA0E1009AD4EA /* btQuickprof.h in Headers */,
 				0434AA8F275FA120009AD4EA /* btGeometryOperations.h in Headers */,
 				0434A551275F9FC5009AD4EA /* ChShaftsFreewheel.h in Headers */,
-				0434A945275FA0AA009AD4EA /* btBoxCollision.h in Headers */,
 				0434A3ED275F9F88009AD4EA /* ChFunction_Operation.h in Headers */,
 				0434A9E9275FA0E1009AD4EA /* btTransformUtil.h in Headers */,
 				0434A398275F9F78009AD4EA /* ChCompositeInertia.h in Headers */,
@@ -5844,7 +5440,6 @@
 				0434A5D7275F9FD2009AD4EA /* ChLinePath.h in Headers */,
 				0434A4E0275F9FC5009AD4EA /* ChLoad.h in Headers */,
 				0434AAF3275FA136009AD4EA /* btCylinderShape.h in Headers */,
-				0434A994275FA0CA009AD4EA /* ChCBruteForce.h in Headers */,
 				0434A40E275F9F88009AD4EA /* ChFunction_Mirror.h in Headers */,
 				0434A4DD275F9FC5009AD4EA /* ChLinkMotorLinearForce.h in Headers */,
 				0434A878275FA047009AD4EA /* ChState.h in Headers */,
@@ -5859,20 +5454,15 @@
 				0434A31E275F9B79009AD4EA /* ChSparsityPatternLearner.h in Headers */,
 				0434A732275FA004009AD4EA /* ChMatterMeshless.h in Headers */,
 				0434AA91275FA120009AD4EA /* btCompoundFromGimpact.h in Headers */,
-				0434A8F5275FA096009AD4EA /* vlookup.h in Headers */,
 				0434A51E275F9FC5009AD4EA /* ChLinkBrake.h in Headers */,
 				0434A699275F9FEA009AD4EA /* ChSolverADMM.h in Headers */,
-				0434A8B9275FA080009AD4EA /* btGImpactConvexDecompositionShape.h in Headers */,
 				0434A845275FA03D009AD4EA /* ChSphereShape.h in Headers */,
 				0434A855275FA03D009AD4EA /* ChCylinderShape.h in Headers */,
-				0434A947275FA0AA009AD4EA /* gim_tri_collision.h in Headers */,
 				0434ABDD275FA149009AD4EA /* btBroadphaseInterface.h in Headers */,
 				0434A5F4275F9FD2009AD4EA /* ChCapsule.h in Headers */,
 				0434A869275FA03D009AD4EA /* ChPointPointDrawing.h in Headers */,
-				0434A999275FA0CA009AD4EA /* ChCOBBTree.h in Headers */,
 				0434A582275F9FC5009AD4EA /* ChLoadContainer.h in Headers */,
 				0434A52B275F9FC5009AD4EA /* ChShaftsGearbox.h in Headers */,
-				0434A92B275FA0AA009AD4EA /* gim_linear_math.h in Headers */,
 				0434A328275F9B79009AD4EA /* ChLog.h in Headers */,
 				0434A5FD275F9FD2009AD4EA /* ChSurfaceNurbs.h in Headers */,
 				0434A9F6275FA0E1009AD4EA /* btSerializer.h in Headers */,
@@ -5881,13 +5471,11 @@
 				0434A7B6275FA004009AD4EA /* ChElementTetraCorot_10.h in Headers */,
 				0434A8B4275FA05D009AD4EA /* ChCollisionShape.h in Headers */,
 				0434A393275F9F78009AD4EA /* ChParserAdams.h in Headers */,
-				0434A9A5275FA0CA009AD4EA /* ChCMates.h in Headers */,
 				0434A65D275F9FEA009AD4EA /* ChKblockGeneric.h in Headers */,
 				0434AB1E275FA136009AD4EA /* btMultiSphereShape.h in Headers */,
 				0434A781275FA004009AD4EA /* ChElementBeam.h in Headers */,
 				0434A31D275F9B79009AD4EA /* ChSparseMatrixEigenExtensions.h in Headers */,
 				0434A9E2275FA0E1009AD4EA /* btPolarDecomposition.h in Headers */,
-				0434A930275FA0AA009AD4EA /* btGImpactCollisionAlgorithm.h in Headers */,
 				0434A3F7275F9F88009AD4EA /* ChFunctionRotation_spline.h in Headers */,
 				0434A2EA275F9B66009AD4EA /* ChConfig.h in Headers */,
 				0434A8A3275FA05D009AD4EA /* ChCollisionSystem.h in Headers */,
@@ -5898,11 +5486,8 @@
 				0434AB26275FA136009AD4EA /* btCylindricalShellShape.h in Headers */,
 				0434A7C4275FA005009AD4EA /* ChRandomParticleVelocity.h in Headers */,
 				0434A9DC275FA0E1009AD4EA /* btAabbUtil2.h in Headers */,
-				0434A940275FA0AA009AD4EA /* btTriangleShapeEx.h in Headers */,
-				0434A9A2275FA0CA009AD4EA /* ChCMatVec.h in Headers */,
 				0434AA87275FA120009AD4EA /* btTriangleShapeEx.h in Headers */,
 				0434AA71275FA120009AD4EA /* btGImpactQuantizedBvhStructs.h in Headers */,
-				0434A8DD275FA096009AD4EA /* bestfitobb.h in Headers */,
 				0434A512275F9FC5009AD4EA /* ChLoadBodyMesh.h in Headers */,
 				0434AB42275FA136009AD4EA /* btConvex2dShape.h in Headers */,
 				0434A53E275F9FC5009AD4EA /* ChProximityContainerSPH.h in Headers */,
@@ -5918,7 +5503,6 @@
 				0434A7C7275FA005009AD4EA /* ChRandomParticleAlignment.h in Headers */,
 				0434A7E9275FA014009AD4EA /* ChMulticoreMath.h in Headers */,
 				0434ABE4275FA149009AD4EA /* btAxisSweep3Internal.h in Headers */,
-				0434A94C275FA0AA009AD4EA /* gim_box_set.h in Headers */,
 				0434A76F275FA004009AD4EA /* ChBeamSectionCable.h in Headers */,
 				0434AB19275FA136009AD4EA /* btCollisionShape.h in Headers */,
 				0434A84C275FA03D009AD4EA /* ChTexture.h in Headers */,
@@ -5933,12 +5517,9 @@
 				0434A79C275FA004009AD4EA /* ChMaterialShellANCF.h in Headers */,
 				0434A4EA275F9FC5009AD4EA /* ChMarker.h in Headers */,
 				0434A7A8275FA004009AD4EA /* ChBeamSectionEuler.h in Headers */,
-				0434A934275FA0AA009AD4EA /* gim_pair.h in Headers */,
-				0434A96C275FA0B7009AD4EA /* gim_pair.h in Headers */,
 				0434A9E5275FA0E1009AD4EA /* btConvexHull.h in Headers */,
 				0434A68C275F9FEA009AD4EA /* ChConstraintTuple.h in Headers */,
 				0434AB3E275FA136009AD4EA /* btMaterial.h in Headers */,
-				0434A966275FA0B7009AD4EA /* gim_box_set.h in Headers */,
 				0434A7CA275FA005009AD4EA /* ChParticleRemover.h in Headers */,
 				0434A5E1275F9FD2009AD4EA /* ChBasisToolsNurbs.h in Headers */,
 				0434A7C9275FA005009AD4EA /* ChRandomShapeCreator.h in Headers */,
@@ -5949,20 +5530,16 @@
 				0434AA3E275FA10F009AD4EA /* btConvexCast.h in Headers */,
 				0434A518275F9FC5009AD4EA /* ChLinkMotorRotation.h in Headers */,
 				0434A3F8275F9F88009AD4EA /* ChFunction_Integrate.h in Headers */,
-				0434A8E5275FA096009AD4EA /* float_math.h in Headers */,
 				0434A544275F9FC5009AD4EA /* ChLinkRevolute.h in Headers */,
 				0434A655275F9FEA009AD4EA /* ChIterativeSolverLS.h in Headers */,
 				0434A575275F9FC5009AD4EA /* ChShaftsTorsionSpring.h in Headers */,
 				0434A9DB275FA0E1009AD4EA /* btMotionState.h in Headers */,
 				0434A687275F9FEA009AD4EA /* ChConstraintTwo.h in Headers */,
 				0434AA7A275FA120009AD4EA /* gim_geometry.h in Headers */,
-				0434A93A275FA0AA009AD4EA /* btCompoundFromGimpact.h in Headers */,
 				0434AB91275FA143009AD4EA /* btSphereBoxCollisionAlgorithm.h in Headers */,
 				0434A83F275FA03D009AD4EA /* ChSurfaceShape.h in Headers */,
-				0434A990275FA0CA009AD4EA /* ChCAABBTree.h in Headers */,
 				0434A77E275FA004009AD4EA /* ChBeamSectionShape.h in Headers */,
 				0434A9E7275FA0E1009AD4EA /* btScalar.h in Headers */,
-				0434A92A275FA0AA009AD4EA /* btGImpactBvhStructs.h in Headers */,
 				0434A787275FA004009AD4EA /* ChElementShell.h in Headers */,
 				0434A863275FA03D009AD4EA /* ChVisualMaterial.h in Headers */,
 				0434A9F3275FA0E1009AD4EA /* btMatrix3x3.h in Headers */,
@@ -5972,7 +5549,6 @@
 				0434A795275FA004009AD4EA /* ChPolarDecomposition.h in Headers */,
 				0434A677275F9FEA009AD4EA /* ChSystemDescriptor.h in Headers */,
 				0434A397275F9F78009AD4EA /* ChUtilsChaseCamera.h in Headers */,
-				0434A8E2275FA096009AD4EA /* ConvexBuilder.h in Headers */,
 				0434A67A275F9FEA009AD4EA /* ChConstraintThree.h in Headers */,
 				0434A73B275FA004009AD4EA /* ChElementHexaANCF_3813_9.h in Headers */,
 				0434A7FA275FA02C009AD4EA /* ChOpenMP.h in Headers */,
@@ -5987,18 +5563,15 @@
 				0434A340275F9B79009AD4EA /* ChVector2.h in Headers */,
 				0434A657275F9FEA009AD4EA /* ChSolverPMINRES.h in Headers */,
 				0434A737275FA004009AD4EA /* ChNodeFEAbase.h in Headers */,
-				0434A8ED275FA096009AD4EA /* ConvexDecomposition.h in Headers */,
 				0434AA95275FA120009AD4EA /* gim_clip_polygon.h in Headers */,
 				0434ABB7275FA143009AD4EA /* btCompoundCollisionAlgorithm.h in Headers */,
 				0434A359275F9B89009AD4EA /* ChArchiveExplorer.h in Headers */,
 				0434A5D5275F9FD2009AD4EA /* ChBasisToolsBspline.h in Headers */,
-				0434A8EF275FA096009AD4EA /* splitplane.h in Headers */,
 				0434A7C2275FA005009AD4EA /* ChParticleProcessor.h in Headers */,
 				0434A68E275F9FEA009AD4EA /* ChConstraintTwoTuplesRollingN.h in Headers */,
 				0434A76A275FA004009AD4EA /* ChElementCableANCF.h in Headers */,
 				0434AA81275FA120009AD4EA /* gim_pair.h in Headers */,
 				0434A9F2275FA0E1009AD4EA /* btGrahamScan2dConvexHull.h in Headers */,
-				0434A968275FA0B7009AD4EA /* gim_bitset.h in Headers */,
 				0434A598275F9FC6009AD4EA /* ChLinkRackpinion.h in Headers */,
 				0434AA30275FA10F009AD4EA /* btMprPenetration.h in Headers */,
 				0434AB96275FA143009AD4EA /* SphereTriangleDetector.h in Headers */,
@@ -6006,7 +5579,6 @@
 				0434A765275FA004009AD4EA /* ChBuilderBeam.h in Headers */,
 				0434AA25275FA10F009AD4EA /* btGjkPairDetector.h in Headers */,
 				0434A8A2275FA05D009AD4EA /* ChCollisionUtilsBullet.h in Headers */,
-				0434A970275FA0B7009AD4EA /* gim_box_collision.h in Headers */,
 				0434A33D275F9B79009AD4EA /* ChTransform.h in Headers */,
 				0434AA8D275FA120009AD4EA /* gim_linear_math.h in Headers */,
 				0434AB04275FA136009AD4EA /* btCompoundShape.h in Headers */,
@@ -6022,28 +5594,22 @@
 				0434A357275F9B89009AD4EA /* ChArchiveXML.h in Headers */,
 				0434A406275F9F88009AD4EA /* ChFunction_Sequence.h in Headers */,
 				0434A776275FA004009AD4EA /* ChNodeFEAxyzrot.h in Headers */,
-				0434A92E275FA0AA009AD4EA /* btGImpactBvh.h in Headers */,
 				0434A513275F9FC5009AD4EA /* ChMaterialSurfaceSMC.h in Headers */,
 				0434A32F275F9B79009AD4EA /* ChFrameMoving.h in Headers */,
 				0434A83A275FA03D009AD4EA /* ChRoundedBoxShape.h in Headers */,
 				0434AB2F275FA136009AD4EA /* btConvexInternalShape.h in Headers */,
-				0434A96D275FA0B7009AD4EA /* gim_tri_collision.h in Headers */,
 				0434A8A4275FA05D009AD4EA /* ChCollisionShapeBullet.h in Headers */,
 				0434A349275F9B79009AD4EA /* ChApiCE.h in Headers */,
 				0434A75E275FA004009AD4EA /* ChMaterialShellKirchhoff.h in Headers */,
 				0434AB93275FA143009AD4EA /* btConvex2dConvex2dAlgorithm.h in Headers */,
-				0434A939275FA0AA009AD4EA /* gim_array.h in Headers */,
 				0434ABA6275FA143009AD4EA /* btCollisionDispatcher.h in Headers */,
 				0434A755275FA004009AD4EA /* ChGaussPoint.h in Headers */,
 				0434A408275F9F88009AD4EA /* ChFunction_Base.h in Headers */,
-				0434A944275FA0AA009AD4EA /* gim_memory.h in Headers */,
 				0434A7C3275FA005009AD4EA /* ChRandomParticlePosition.h in Headers */,
 				0434AA2C275FA10F009AD4EA /* btGjkEpa3.h in Headers */,
 				0434A35A275F9B89009AD4EA /* ChArchive.h in Headers */,
 				0434A33B275F9B79009AD4EA /* ChMatrix33.h in Headers */,
-				0434A9A4275FA0CA009AD4EA /* ChCNarrowPhaseCollider.h in Headers */,
 				0434A5E2275F9FD2009AD4EA /* ChVolume.h in Headers */,
-				0434A969275FA0B7009AD4EA /* gim_radixsort.h in Headers */,
 				0434A7A5275FA004009AD4EA /* ChElementBeamTaperedTimoshenkoFPM.h in Headers */,
 				0434A55B275F9FC5009AD4EA /* ChLinkMotionImposed.h in Headers */,
 				0434A580275F9FC5009AD4EA /* ChLinkRSDA.h in Headers */,
@@ -6054,8 +5620,6 @@
 				0434A5F2275F9FD2009AD4EA /* ChTriangle.h in Headers */,
 				0434A40D275F9F88009AD4EA /* ChFunction_Sigma.h in Headers */,
 				0434A9F1275FA0E1009AD4EA /* btRandom.h in Headers */,
-				0434A974275FA0B7009AD4EA /* gim_hash_table.h in Headers */,
-				0434A9A7275FA0CA009AD4EA /* ChCAbsoluteAABB.h in Headers */,
 				0434A4E2275F9FC5009AD4EA /* ChLinkPulley.h in Headers */,
 				0434A4F5275F9FC5009AD4EA /* ChLinkMotorRotationAngle.h in Headers */,
 				0434A3EA275F9F88009AD4EA /* ChFunction_Oscilloscope.h in Headers */,
@@ -6064,7 +5628,6 @@
 				0434A55F275F9FC5009AD4EA /* ChLinkMarkers.h in Headers */,
 				0434A74B275FA004009AD4EA /* ChElementBeamANCF_3243.h in Headers */,
 				0434A32A275F9B79009AD4EA /* ChQuadrature.h in Headers */,
-				0434A8E8275FA096009AD4EA /* meshvolume.h in Headers */,
 				0434AB3C275FA136009AD4EA /* btCEtriangleShape.h in Headers */,
 				0434AB30275FA136009AD4EA /* btMinkowskiSumShape.h in Headers */,
 				0434A652275F9FEA009AD4EA /* ChConstraintNgeneric.h in Headers */,
@@ -6076,8 +5639,6 @@
 				0434AA3B275FA10F009AD4EA /* btVoronoiSimplexSolver.h in Headers */,
 				0434A5D0275F9FD2009AD4EA /* ChLine.h in Headers */,
 				0434A401275F9F88009AD4EA /* ChFunction_Derive.h in Headers */,
-				0434A937275FA0AA009AD4EA /* btGImpactShape.h in Headers */,
-				0434A998275FA0CA009AD4EA /* ChCGeometryCollider.h in Headers */,
 				0434A58C275F9FC6009AD4EA /* ChLinkBase.h in Headers */,
 				0434A347275F9B79009AD4EA /* ChBitmaskEnums.h in Headers */,
 				0434A743275FA004009AD4EA /* ChUtilsFEA.h in Headers */,
@@ -6093,11 +5654,9 @@
 				0434A7ED275FA014009AD4EA /* simd_non.h in Headers */,
 				0434A836275FA03D009AD4EA /* ChLineShape.h in Headers */,
 				0434A579275F9FC5009AD4EA /* ChSystem.h in Headers */,
-				0434A971275FA0B7009AD4EA /* gim_contact.h in Headers */,
 				0434A9F9275FA0E1009AD4EA /* btGeometryUtil.h in Headers */,
 				0434A3F9275F9F88009AD4EA /* ChFunctionPosition.h in Headers */,
 				0434A797275FA004009AD4EA /* ChLinkBeamIGAslider.h in Headers */,
-				0434A923275FA0AA009AD4EA /* gim_math.h in Headers */,
 				0434A5CE275F9FD2009AD4EA /* ChTriangleMesh.h in Headers */,
 				0434A73A275FA004009AD4EA /* ChLoadsXYZROTnode.h in Headers */,
 				0434A507275F9FC5009AD4EA /* ChLinkMotorRotationSpeed.h in Headers */,
@@ -6109,8 +5668,6 @@
 				0434A7E1275FA014009AD4EA /* real4.h in Headers */,
 				0434A9DF275FA0E1009AD4EA /* btQuadWord.h in Headers */,
 				0434A323275F9B79009AD4EA /* ChTypes.h in Headers */,
-				0434A967275FA0B7009AD4EA /* gim_geom_types.h in Headers */,
-				0434A93F275FA0AA009AD4EA /* btGImpactQuantizedBvhStructs.h in Headers */,
 				0434A756275FA004009AD4EA /* ChBeamSectionCosserat.h in Headers */,
 				0434A550275F9FC5009AD4EA /* ChSystemSMC.h in Headers */,
 				0434A680275F9FEA009AD4EA /* ChVariablesShaft.h in Headers */,
@@ -6127,9 +5684,7 @@
 				0434A38D275F9F78009AD4EA /* ChFilters.h in Headers */,
 				0434ABB2275FA143009AD4EA /* btConvexConcaveCollisionAlgorithm.h in Headers */,
 				0434A78A275FA004009AD4EA /* ChMaterialHexaANCF.h in Headers */,
-				0434A93D275FA0AA009AD4EA /* btContactProcessingStructs.h in Headers */,
 				0434A656275F9FEA009AD4EA /* ChVariablesBodySharedMass.h in Headers */,
-				0434A927275FA0AA009AD4EA /* gim_clip_polygon.h in Headers */,
 				0434A665275F9FEA009AD4EA /* ChConstraintThreeGeneric.h in Headers */,
 				0434ABB1275FA143009AD4EA /* btCollisionCreateFunc.h in Headers */,
 				0434A50C275F9FC5009AD4EA /* ChLinkMotorLinear.h in Headers */,
@@ -6166,7 +5721,6 @@
 				0434AA78275FA120009AD4EA /* gim_basic_geometry_operations.h in Headers */,
 				0434AB88275FA142009AD4EA /* btManifoldResult.h in Headers */,
 				0434A9E1275FA0E1009AD4EA /* btDefaultMotionState.h in Headers */,
-				0434A949275FA0AA009AD4EA /* gim_geometry.h in Headers */,
 				0434A51F275F9FC5009AD4EA /* ChLinksAll.h in Headers */,
 				0434A529275F9FC5009AD4EA /* ChLinkMotorRotationTorque.h in Headers */,
 				0434A52E275F9FC5009AD4EA /* ChContactContainer.h in Headers */,
@@ -6174,17 +5728,13 @@
 				0434A55A275F9FC5009AD4EA /* ChLinkMotorLinearPosition.h in Headers */,
 				0434A4FE275F9FC5009AD4EA /* ChParticlesClones.h in Headers */,
 				0434ABBB275FA143009AD4EA /* btCompoundCompoundCollisionAlgorithm.h in Headers */,
-				0434A99E275FA0CA009AD4EA /* ChCGetTime.h in Headers */,
 				0434AA8A275FA120009AD4EA /* gim_box_set.h in Headers */,
 				0434A41D275F9F88009AD4EA /* ChFunction_Lambda.h in Headers */,
 				0434A389275F9F78009AD4EA /* ChConvexHull.h in Headers */,
-				0434A948275FA0AA009AD4EA /* gim_contact.h in Headers */,
-				0434A8E6275FA096009AD4EA /* fitsphere.h in Headers */,
 				0434A65B275F9FEA009AD4EA /* ChConstraintTwoTuples.h in Headers */,
 				0434A89D275FA05D009AD4EA /* ChCollisionInfo.h in Headers */,
 				0434A789275FA004009AD4EA /* ChTetrahedronFace.h in Headers */,
 				0434A521275F9FC5009AD4EA /* ChIndexedParticles.h in Headers */,
-				0434A8F4275FA096009AD4EA /* raytri.h in Headers */,
 				0434A682275F9FEA009AD4EA /* ChSolverLS.h in Headers */,
 				0434AA74275FA120009AD4EA /* gim_hash_table.h in Headers */,
 				0434A5EA275F9FD2009AD4EA /* ChLineBspline.h in Headers */,
@@ -6192,13 +5742,10 @@
 				0434A87E275FA047009AD4EA /* ChAssemblyAnalysis.h in Headers */,
 				0434AB22275FA136009AD4EA /* btConvexTriangleMeshShape.h in Headers */,
 				0434A57A275F9FC5009AD4EA /* ChLinkTrajectory.h in Headers */,
-				0434A96E275FA0B7009AD4EA /* gim_math.h in Headers */,
-				0434A992275FA0CA009AD4EA /* ChCBroadPhaseCollider.h in Headers */,
 				0434A4DC275F9FC5009AD4EA /* ChShaftsGear.h in Headers */,
 				0434A67D275F9FEA009AD4EA /* ChIterativeSolverVI.h in Headers */,
 				0434A7A2275FA004009AD4EA /* ChNodeFEAxyzD.h in Headers */,
 				0434A574275F9FC5009AD4EA /* ChShaftsMotorTorque.h in Headers */,
-				0434A96A275FA0B7009AD4EA /* gim_array.h in Headers */,
 				0434AB25275FA136009AD4EA /* bt2DShape.h in Headers */,
 				0434AB8D275FA142009AD4EA /* btSphereTriangleCollisionAlgorithm.h in Headers */,
 				0434A9DD275FA0E1009AD4EA /* btPoolAllocator.h in Headers */,
@@ -6213,7 +5760,6 @@
 				0434A325275F9B79009AD4EA /* ChCubicSpline.h in Headers */,
 				0434A746275FA004009AD4EA /* ChLinkDirFrame.h in Headers */,
 				0434A9D5275FA0E1009AD4EA /* btMatrixX.h in Headers */,
-				0434A99F275FA0CA009AD4EA /* ChCCompile.h in Headers */,
 				0434A9F7275FA0E1009AD4EA /* btAlignedObjectArray.h in Headers */,
 				0434AB2A275FA136009AD4EA /* btStridingMeshInterface.h in Headers */,
 				0434A404275F9F88009AD4EA /* ChFunction_Sine.h in Headers */,
@@ -6222,13 +5768,10 @@
 				0434A7E8275FA014009AD4EA /* real_single.h in Headers */,
 				0434AA29275FA10F009AD4EA /* btManifoldPoint.h in Headers */,
 				0434A77F275FA004009AD4EA /* ChBeamSectionTaperedTimoshenko.h in Headers */,
-				0434A8F2275FA096009AD4EA /* concavity.h in Headers */,
 				0434AB36275FA136009AD4EA /* btSdfCollisionShape.h in Headers */,
-				0434A92D275FA0AA009AD4EA /* btGImpactQuantizedBvh.h in Headers */,
 				0434AB06275FA136009AD4EA /* btTriangleMeshShape.h in Headers */,
 				0434A348275F9B79009AD4EA /* ChLists.h in Headers */,
 				0434A668275F9FEA009AD4EA /* ChVariables.h in Headers */,
-				0434A99D275FA0CA009AD4EA /* ChCCollisionTree.h in Headers */,
 				0434AAFF275FA136009AD4EA /* btConeShape.h in Headers */,
 				0434A736275FA004009AD4EA /* ChHexahedronFace.h in Headers */,
 				0434A880275FA047009AD4EA /* ChStaticAnalysis.h in Headers */,
@@ -6246,18 +5789,14 @@
 				0434AB02275FA136009AD4EA /* btMultimaterialTriangleMeshShape.h in Headers */,
 				0434A698275F9FEA009AD4EA /* ChSolverAPGD.h in Headers */,
 				0434A7A7275FA004009AD4EA /* ChLinkPointFrame.h in Headers */,
-				0434A94B275FA0AA009AD4EA /* gim_basic_geometry_operations.h in Headers */,
 				0434A34E275F9B79009AD4EA /* ChPlatform.h in Headers */,
-				0434A924275FA0AA009AD4EA /* gim_hash_table.h in Headers */,
 				0434A32D275F9B79009AD4EA /* ChVector.h in Headers */,
 				0434A7E2275FA014009AD4EA /* utility.h in Headers */,
 				0434A3F1275F9F88009AD4EA /* ChFunction_Recorder.h in Headers */,
 				0434A333275F9B79009AD4EA /* ChMath.h in Headers */,
 				0434A750275FA004009AD4EA /* ChContactSurfaceNodeCloud.h in Headers */,
-				0434A8F3275FA096009AD4EA /* cd_wavefront.h in Headers */,
 				0434AB00275FA136009AD4EA /* btHeightfieldTerrainShape.h in Headers */,
 				0434AB27275FA136009AD4EA /* btBvhTriangleMeshShape.h in Headers */,
-				0434A929275FA0AA009AD4EA /* btContactProcessing.h in Headers */,
 				0434A9EA275FA0E1009AD4EA /* btVector3.h in Headers */,
 				0434A541275F9FC5009AD4EA /* ChLinkMotor.h in Headers */,
 				0434AB92275FA143009AD4EA /* btBox2dBox2dCollisionAlgorithm.h in Headers */,
@@ -6905,7 +6444,6 @@
 				0434AA2A275FA10F009AD4EA /* btPersistentManifold.cpp in Sources */,
 				0434AB0B275FA136009AD4EA /* btCylindricalShellShape.cpp in Sources */,
 				0434A5F9275F9FD2009AD4EA /* ChVolume.cpp in Sources */,
-				0434A8DE275FA096009AD4EA /* Jamfile in Sources */,
 				0434A696275F9FEA009AD4EA /* ChNlsolver.cpp in Sources */,
 				0434AA85275FA120009AD4EA /* btGImpactBvh.cpp in Sources */,
 				0434A678275F9FEA009AD4EA /* ChVariablesNode.cpp in Sources */,
