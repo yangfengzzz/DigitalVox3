@@ -496,6 +496,7 @@
 		0434A2AD275F96AB009AD4EA /* editor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = editor; sourceTree = BUILT_PRODUCTS_DIR; };
 		0434A2AF275F96AB009AD4EA /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		0434A2B4275F96DC009AD4EA /* editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = editor.entitlements; sourceTree = "<group>"; };
+		0434A2BE275F97A1009AD4EA /* libvox.force.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libvox.force.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -844,6 +845,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0434A2BC275F97A1009AD4EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04CE3679274D077100204B8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1009,6 +1017,13 @@
 			path = editor;
 			sourceTree = "<group>";
 		};
+		0434A2BF275F97A1009AD4EA /* vox.force */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = vox.force;
+			sourceTree = "<group>";
+		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,6 +1076,7 @@
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
+				0434A2BF275F97A1009AD4EA /* vox.force */,
 				04CE3782274D156200204B8E /* vox.render */,
 				04CE367E274D077100204B8E /* apps */,
 				04CE382D274D17B300204B8E /* unit_tests */,
@@ -1077,6 +1093,7 @@
 				04CE3781274D156200204B8E /* libvox.render.dylib */,
 				04CE382C274D17B300204B8E /* unit_tests */,
 				0434A2AD275F96AB009AD4EA /* editor */,
+				0434A2BE275F97A1009AD4EA /* libvox.force.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1716,6 +1733,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0434A2BA275F97A1009AD4EA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04CE377D274D156200204B8E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1843,6 +1867,23 @@
 			productReference = 0434A2AD275F96AB009AD4EA /* editor */;
 			productType = "com.apple.product-type.tool";
 		};
+		0434A2BD275F97A1009AD4EA /* vox.force */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0434A2C6275F97A1009AD4EA /* Build configuration list for PBXNativeTarget "vox.force" */;
+			buildPhases = (
+				0434A2BA275F97A1009AD4EA /* Headers */,
+				0434A2BB275F97A1009AD4EA /* Sources */,
+				0434A2BC275F97A1009AD4EA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vox.force;
+			productName = vox.force;
+			productReference = 0434A2BE275F97A1009AD4EA /* libvox.force.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		04CE367B274D077100204B8E /* apps */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "apps" */;
@@ -1908,6 +1949,9 @@
 					0434A2AC275F96AB009AD4EA = {
 						CreatedOnToolsVersion = 13.1;
 					};
+					0434A2BD275F97A1009AD4EA = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					04CE367B274D077100204B8E = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -1936,6 +1980,7 @@
 				04CE367B274D077100204B8E /* apps */,
 				04CE382B274D17B300204B8E /* unit_tests */,
 				0434A2AC275F96AB009AD4EA /* editor */,
+				0434A2BD275F97A1009AD4EA /* vox.force */,
 			);
 		};
 /* End PBXProject section */
@@ -1946,6 +1991,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0434A2B0275F96AB009AD4EA /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0434A2BB275F97A1009AD4EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2321,6 +2373,38 @@
 					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/include",
 					/usr/local/include,
 				);
+			};
+			name = Release;
+		};
+		0434A2C7275F97A1009AD4EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0434A2C8275F97A1009AD4EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -2797,6 +2881,15 @@
 			buildConfigurations = (
 				0434A2B1275F96AB009AD4EA /* Debug */,
 				0434A2B2275F96AB009AD4EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0434A2C6275F97A1009AD4EA /* Build configuration list for PBXNativeTarget "vox.force" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0434A2C7275F97A1009AD4EA /* Debug */,
+				0434A2C8275F97A1009AD4EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
