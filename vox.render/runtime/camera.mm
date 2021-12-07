@@ -302,8 +302,7 @@ void Camera::_updateShaderData(const RenderContext& context) {
     shaderData.setData(Camera::_vpMatrixProperty, context._viewProjectMatrix);
     shaderData.setData(Camera::_inverseViewMatrixProperty, _transform->worldMatrix());
     shaderData.setData(Camera::_inverseProjectionMatrixProperty, inverseProjectionMatrix());
-    auto pos = _transform->worldPosition();
-    shaderData.setData(Camera::_cameraPositionProperty, math::Float3(pos.x, pos.y, pos.z));
+    shaderData.setData(Camera::_cameraPositionProperty, _transform->worldPosition());
 }
 
 Matrix Camera::invViewProjMat() {

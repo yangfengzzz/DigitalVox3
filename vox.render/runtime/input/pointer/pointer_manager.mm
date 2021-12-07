@@ -37,6 +37,8 @@ void PointerManager::_update() {
                 case PointerKeyEvent::Up:
                     _firePointerUpAndClick(rayCastEntity);
                     break;
+                default:
+                    break;
             }
         }
         _firePointerExitAndEnter(rayCastEntity);

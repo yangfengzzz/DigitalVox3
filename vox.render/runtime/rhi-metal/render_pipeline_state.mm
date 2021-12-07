@@ -50,7 +50,7 @@ RenderPipelineState::vertex_any_uploader {
         [encoder setVertexBytes: &x length:sizeof(Float2) atIndex:location];
     }),
     to_any_uploader<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: &x length:sizeof(Float3) atIndex:location];
+        [encoder setVertexBytes: &x length:16 atIndex:location]; // float3 simd is extented from float4
     }),
     to_any_uploader<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(Float4) atIndex:location];
@@ -82,7 +82,7 @@ RenderPipelineState::fragment_any_uploader {
         [encoder setFragmentBytes: &x length:sizeof(Float2) atIndex:location];
     }),
     to_any_uploader<Float3>([](const Float3& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: &x length:sizeof(Float3) atIndex:location];
+        [encoder setFragmentBytes: &x length:16 atIndex:location]; // float3 simd is extented from float4
     }),
     to_any_uploader<Float4>([](const Float4& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(Float4) atIndex:location];
