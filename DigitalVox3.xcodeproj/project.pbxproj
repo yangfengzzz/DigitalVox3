@@ -102,6 +102,12 @@
 		0434A2A4275E3F91009AD4EA /* spherical_harmonics3.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2A2275E3F91009AD4EA /* spherical_harmonics3.h */; };
 		0434A2A7275E438C009AD4EA /* ambient_light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2A5275E438C009AD4EA /* ambient_light.mm */; };
 		0434A2A8275E438C009AD4EA /* ambient_light.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A2A6275E438C009AD4EA /* ambient_light.h */; };
+		0434A2B0275F96AB009AD4EA /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2AF275F96AB009AD4EA /* main.mm */; };
+		0434A2B5275F9744009AD4EA /* libvox.render.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE3781274D156200204B8E /* libvox.render.dylib */; };
+		0434A2B6275F9750009AD4EA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
+		0434A2B7275F9759009AD4EA /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
+		0434A2B8275F975F009AD4EA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
+		0434A2B9275F9763009AD4EA /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04161014275474AE006CD384 /* ModelIO.framework */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -356,6 +362,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0434A2AB275F96AB009AD4EA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		04CE367A274D077100204B8E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,6 +493,9 @@
 		0434A2A2275E3F91009AD4EA /* spherical_harmonics3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spherical_harmonics3.h; sourceTree = "<group>"; };
 		0434A2A5275E438C009AD4EA /* ambient_light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ambient_light.mm; sourceTree = "<group>"; };
 		0434A2A6275E438C009AD4EA /* ambient_light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ambient_light.h; sourceTree = "<group>"; };
+		0434A2AD275F96AB009AD4EA /* editor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = editor; sourceTree = BUILT_PRODUCTS_DIR; };
+		0434A2AF275F96AB009AD4EA /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		0434A2B4275F96DC009AD4EA /* editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = editor.entitlements; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -814,6 +832,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0434A2AA275F96AB009AD4EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0434A2B9275F9763009AD4EA /* ModelIO.framework in Frameworks */,
+				0434A2B8275F975F009AD4EA /* MetalKit.framework in Frameworks */,
+				0434A2B7275F9759009AD4EA /* Metal.framework in Frameworks */,
+				0434A2B6275F9750009AD4EA /* QuartzCore.framework in Frameworks */,
+				0434A2B5275F9744009AD4EA /* libvox.render.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04CE3679274D077100204B8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -970,6 +1000,15 @@
 			path = character_controller;
 			sourceTree = "<group>";
 		};
+		0434A2AE275F96AB009AD4EA /* editor */ = {
+			isa = PBXGroup;
+			children = (
+				0434A2B4275F96DC009AD4EA /* editor.entitlements */,
+				0434A2AF275F96AB009AD4EA /* main.mm */,
+			);
+			path = editor;
+			sourceTree = "<group>";
+		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1064,7 @@
 				04CE3782274D156200204B8E /* vox.render */,
 				04CE367E274D077100204B8E /* apps */,
 				04CE382D274D17B300204B8E /* unit_tests */,
+				0434A2AE275F96AB009AD4EA /* editor */,
 				04CE367D274D077100204B8E /* Products */,
 				04CE369E274D096600204B8E /* Frameworks */,
 			);
@@ -1036,6 +1076,7 @@
 				04CE367C274D077100204B8E /* apps */,
 				04CE3781274D156200204B8E /* libvox.render.dylib */,
 				04CE382C274D17B300204B8E /* unit_tests */,
+				0434A2AD275F96AB009AD4EA /* editor */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1785,6 +1826,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0434A2AC275F96AB009AD4EA /* editor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0434A2B3275F96AB009AD4EA /* Build configuration list for PBXNativeTarget "editor" */;
+			buildPhases = (
+				0434A2A9275F96AB009AD4EA /* Sources */,
+				0434A2AA275F96AB009AD4EA /* Frameworks */,
+				0434A2AB275F96AB009AD4EA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = editor;
+			productName = editor;
+			productReference = 0434A2AD275F96AB009AD4EA /* editor */;
+			productType = "com.apple.product-type.tool";
+		};
 		04CE367B274D077100204B8E /* apps */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "apps" */;
@@ -1847,6 +1905,9 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					0434A2AC275F96AB009AD4EA = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					04CE367B274D077100204B8E = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -1874,11 +1935,20 @@
 				04CE3780274D156200204B8E /* vox.render */,
 				04CE367B274D077100204B8E /* apps */,
 				04CE382B274D17B300204B8E /* unit_tests */,
+				0434A2AC275F96AB009AD4EA /* editor */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0434A2A9275F96AB009AD4EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0434A2B0275F96AB009AD4EA /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04CE3678274D077100204B8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2135,6 +2205,125 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0434A2B1275F96AB009AD4EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = editor/editor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					DISABLE_CUDA_PHYSX,
+					PX_PHYSX_CORE_EXPORTS,
+					_DEBUG,
+					"'PX_DEBUG=1'",
+					"'PX_CHECKED=1'",
+					"'PX_NVTX=0'",
+					"'PX_SUPPORT_PVD=1'",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = ./vox.render;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/Users/yangfeng/Desktop/PhysX/physx/bin/mac.x86_64/debug,
+					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/lib/clang/debug",
+				);
+				OTHER_LDFLAGS = (
+					"-lglfw",
+					"-lPhysX_static_64",
+					"-lPhysXCommon_static_64",
+					"-lPhysXFoundation_static_64",
+					"-lPhysXPvdSDK_static_64",
+					"-lPhysXExtensions_static_64",
+					"-lPhysXCharacterKinematic_static_64",
+					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/lib/clang/debug/libfbxsdk.a",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/Users/yangfeng/Desktop/PhysX/physx/source/common/src/mac,
+					/Users/yangfeng/Desktop/PhysX/physx/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/common/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/common/src,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/contact,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/common,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/convex,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/distance,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/sweep,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/gjk,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/intersection,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/mesh,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/hf,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/pcm,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/ccd,
+					/Users/yangfeng/Desktop/PhysX/physx/source/physxgpu/include,
+					/Users/yangfeng/Desktop/PhysX/physx/../pxshared/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/foundation/include,
+					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/include",
+					/usr/local/include,
+				);
+			};
+			name = Debug;
+		};
+		0434A2B2275F96AB009AD4EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = editor/editor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					DISABLE_CUDA_PHYSX,
+					PX_PHYSX_CORE_EXPORTS,
+					NDEBUG,
+					"'PX_SUPPORT_PVD=0'",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = ./vox.render;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/Users/yangfeng/Desktop/PhysX/physx/bin/mac.x86_64/debug,
+					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/lib/clang/release",
+				);
+				OTHER_LDFLAGS = (
+					"-lglfw",
+					"-lPhysX_static_64",
+					"-lPhysXCommon_static_64",
+					"-lPhysXFoundation_static_64",
+					"-lPhysXPvdSDK_static_64",
+					"-lPhysXExtensions_static_64",
+					"-lPhysXCharacterKinematic_static_64",
+					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/lib/clang/release/libfbxsdk.a",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/Users/yangfeng/Desktop/PhysX/physx/source/common/src/mac,
+					/Users/yangfeng/Desktop/PhysX/physx/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/common/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/common/src,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/contact,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/common,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/convex,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/distance,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/sweep,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/gjk,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/intersection,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/mesh,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/hf,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/pcm,
+					/Users/yangfeng/Desktop/PhysX/physx/source/geomutils/src/ccd,
+					/Users/yangfeng/Desktop/PhysX/physx/source/physxgpu/include,
+					/Users/yangfeng/Desktop/PhysX/physx/../pxshared/include,
+					/Users/yangfeng/Desktop/PhysX/physx/source/foundation/include,
+					"/Applications/Autodesk/FBX\\ SDK/2016.1.2/include",
+					/usr/local/include,
+				);
+			};
+			name = Release;
+		};
 		04CE3681274D077100204B8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2603,6 +2792,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0434A2B3275F96AB009AD4EA /* Build configuration list for PBXNativeTarget "editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0434A2B1275F96AB009AD4EA /* Debug */,
+				0434A2B2275F96AB009AD4EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		04CE3677274D077100204B8E /* Build configuration list for PBXProject "DigitalVox3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
