@@ -6,6 +6,9 @@
 //
 
 #include "color_render_pass.h"
+#include "../camera.h"
+#include "../engine.h"
+#include <GLFW/glfw3.h>
 
 namespace vox {
 namespace picker {
@@ -53,6 +56,32 @@ void ColorRenderPass::pick(const math::Float2& pos) {
 
 
 std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera* camera) {
+    const auto& screenPoint = _pickPos;
+    auto window =  camera->engine()->canvas()->handle();
+    int clientWidth, clientHeight;
+    glfwGetWindowSize(window, &clientWidth, &clientHeight);
+    int canvasWidth, canvasHeight;
+    glfwGetFramebufferSize(window, &canvasWidth, &canvasHeight);
+    
+    const auto px = (screenPoint.x / clientWidth) * canvasWidth;
+    const auto py = (screenPoint.y / clientHeight) * canvasHeight;
+    
+    const auto viewport = camera->viewport();
+    const auto viewWidth = (viewport.z - viewport.x) * canvasWidth;
+    const auto viewHeight = (viewport.w - viewport.y) * canvasHeight;
+    
+    const auto nx = (px - viewport.x) / viewWidth;
+    const auto ny = (py - viewport.y) / viewHeight;
+    auto texture = renderTarget.colorAttachments[0].texture;
+    const auto left = std::floor(nx * (texture.width - 1));
+    const auto bottom = std::floor((1 - ny) * (texture.height - 1));
+    std::array<uint8_t, 4> pixel;
+    
+    [renderTarget.colorAttachments[0].texture getBytes:pixel.data()
+                                           bytesPerRow:sizeof(uint8_t)*4
+                                            fromRegion:MTLRegionMake2D(left, bottom, 1, 1)
+                                           mipmapLevel:0];
+    
     return {};
 }
 
