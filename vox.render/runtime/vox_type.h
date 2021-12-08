@@ -34,6 +34,7 @@ class ShaderProgram;
 class RenderPipelineState;
 class ComputePipelineState;
 class RenderPass;
+class RenderElement;
 class RenderQueue;
 class MetalRenderer;
 
