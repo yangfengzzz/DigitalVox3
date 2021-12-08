@@ -220,7 +220,7 @@ public:
     /// Add render pass.
     /// - Parameters:
     ///   - pass: RenderPass object.
-    void addRenderPass(std::unique_ptr<RenderPass>& pass);
+    void addRenderPass(std::unique_ptr<RenderPass>&& pass);
     
     /// Add render pass.
     /// - Parameters:

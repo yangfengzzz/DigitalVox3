@@ -18,7 +18,7 @@ _alphaTestQueue(RenderQueue(camera->engine())),
 _transparentQueue(RenderQueue(camera->engine())){
     auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
     _defaultPass = pass.get();
-    addRenderPass(pass);
+    addRenderPass(std::move(pass));
 }
 
 void BasicRenderPipeline::destroy() {
@@ -103,7 +103,7 @@ RenderPass* BasicRenderPipeline::defaultRenderPass() {
     return _defaultPass;
 }
 
-void BasicRenderPipeline::addRenderPass(std::unique_ptr<RenderPass>& pass) {
+void BasicRenderPipeline::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
     _renderPassArray.emplace_back(std::move(pass));
     std::sort(_renderPassArray.begin(), _renderPassArray.end(),
               [](const std::unique_ptr<RenderPass>& p1, const std::unique_ptr<RenderPass>& p2){

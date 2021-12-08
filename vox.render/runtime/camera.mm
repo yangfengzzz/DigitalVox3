@@ -321,8 +321,8 @@ Matrix Camera::inverseProjectionMatrix() {
     return _inverseProjectionMatrix;
 }
 
-void Camera::addRenderPass(std::unique_ptr<RenderPass>& pass) {
-    _renderPipeline.addRenderPass(pass);
+void Camera::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
+    _renderPipeline.addRenderPass(std::move(pass));
 }
 
 void Camera::addRenderPass(const std::string& name,
