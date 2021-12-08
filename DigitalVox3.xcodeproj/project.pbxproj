@@ -91,6 +91,8 @@
 		0431558B276087A60070FBEC /* framebuffer-picker-color.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0431558A276087A60070FBEC /* framebuffer-picker-color.metal */; };
 		0431558E276088920070FBEC /* color_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431558C276088910070FBEC /* color_material.mm */; };
 		0431558F276088920070FBEC /* color_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431558D276088910070FBEC /* color_material.h */; };
+		0431559227608E300070FBEC /* color_render_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431559027608E300070FBEC /* color_render_pass.mm */; };
+		0431559327608E300070FBEC /* color_render_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431559127608E300070FBEC /* color_render_pass.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -1572,6 +1574,8 @@
 		0431558A276087A60070FBEC /* framebuffer-picker-color.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "framebuffer-picker-color.metal"; sourceTree = "<group>"; };
 		0431558C276088910070FBEC /* color_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = color_material.mm; sourceTree = "<group>"; };
 		0431558D276088910070FBEC /* color_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_material.h; sourceTree = "<group>"; };
+		0431559027608E300070FBEC /* color_render_pass.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = color_render_pass.mm; sourceTree = "<group>"; };
+		0431559127608E300070FBEC /* color_render_pass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_render_pass.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -3198,6 +3202,8 @@
 				0431558A276087A60070FBEC /* framebuffer-picker-color.metal */,
 				0431558D276088910070FBEC /* color_material.h */,
 				0431558C276088910070FBEC /* color_material.mm */,
+				0431559127608E300070FBEC /* color_render_pass.h */,
+				0431559027608E300070FBEC /* color_render_pass.mm */,
 			);
 			path = framebuffer_picker;
 			sourceTree = "<group>";
@@ -5920,6 +5926,7 @@
 				04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				0416105D275A0CF4006CD384 /* spherical_joint.h in Headers */,
+				0431559327608E300070FBEC /* color_render_pass.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				04A79AC7275DEA4E00182CCB /* spot_light.h in Headers */,
@@ -6645,6 +6652,7 @@
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
 				041610542759FCF1006CD384 /* joint.cpp in Sources */,
 				04161075275A5AC4006CD384 /* box_character_controller.mm in Sources */,
+				0431559227608E300070FBEC /* color_render_pass.mm in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
 				04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */,
