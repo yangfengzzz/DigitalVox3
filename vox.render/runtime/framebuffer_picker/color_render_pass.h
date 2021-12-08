@@ -20,7 +20,7 @@ class ColorRenderPass :public RenderPass {
 public:
     ColorRenderPass(const std::string& name, int priority, MTLRenderPassDescriptor* renderTarget, Layer mask, Engine* engine);
 
-    void setPickFunctor(std::function<void(void)> func);
+    void setPickFunctor(std::function<void(Renderer*, MeshPtr)> func);
     
 public:
     MaterialPtr material(const RenderElement& element) override;
@@ -45,11 +45,11 @@ public:
     /**
      * Get pixel color value from framebuffer.
      */
-    void readColorFromRenderTarget(Camera* camera);
+    std::array<uint8_t, 4> readColorFromRenderTarget(Camera* camera);
     
 private:
     bool _needPick;
-    std::function<void(void)> _onPick;
+    std::function<void(Renderer*, MeshPtr)> _onPick;
     math::Float2 _pickPos;
     std::shared_ptr<ColorMaterial> _material;
 };

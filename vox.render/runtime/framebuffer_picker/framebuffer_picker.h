@@ -32,7 +32,7 @@ public:
      * Set the callback function after pick up.
      * @param fun Callback function. if there is an renderer selected, the parameter 1 is {component, primitive }, otherwise it is undefined
      */
-    void setPickFunctor(std::function<void(void)> fun);
+    void setPickFunctor(std::function<void(Renderer*, MeshPtr)> fun);
 
     /**
      * Pick the object at the screen coordinate position.

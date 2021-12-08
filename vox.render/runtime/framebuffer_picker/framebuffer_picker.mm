@@ -24,7 +24,7 @@ FramebufferPicker::FramebufferPicker(Entity* entity):
 Script(entity) {
 }
 
-void FramebufferPicker::setPickFunctor(std::function<void(void)> func) {
+void FramebufferPicker::setPickFunctor(std::function<void(Renderer*, MeshPtr)> func) {
     colorRenderPass->setPickFunctor(func);
 }
 
