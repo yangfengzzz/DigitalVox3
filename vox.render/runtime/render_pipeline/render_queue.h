@@ -22,7 +22,7 @@ public:
     /// Push a render element.
     void pushPrimitive(RenderElement element);
 
-    void render(Camera* camera, MaterialPtr replaceMaterial, Layer mask);
+    void render(Camera* camera, RenderPass* pass);
     
     /// Clear collection.
     void clear();

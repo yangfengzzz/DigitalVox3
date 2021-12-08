@@ -23,7 +23,7 @@ void RenderQueue::pushPrimitive(RenderElement element) {
     items.push_back(element);
 }
 
-void RenderQueue::render(Camera* camera, MaterialPtr replaceMaterial, Layer mask) {
+void RenderQueue::render(Camera* camera, RenderPass* pass) {
     if (items.size() == 0) {
         return;
     }
@@ -39,7 +39,7 @@ void RenderQueue::render(Camera* camera, MaterialPtr replaceMaterial, Layer mask
         const auto& item = items[i];
         const auto& renderPassFlag = item.component->entity()->layer;
 
-        if ((renderPassFlag & mask) == 0) {
+        if ((renderPassFlag & pass->mask) == 0) {
             continue;
         }
 
@@ -47,12 +47,12 @@ void RenderQueue::render(Camera* camera, MaterialPtr replaceMaterial, Layer mask
         auto compileMacros = ShaderMacroCollection();
         const auto& element = item;
         const auto& renderer = element.component;
-        const auto& material = (replaceMaterial != nil) ? replaceMaterial : element.material;
+        auto material = pass->material(element);
+        if (material == nullptr) {
+            material = element.material;
+        }
         const auto& rendererData = renderer->shaderData;
         const auto& materialData = material->shaderData;
-
-        // @todo: temporary solution
-        // material->_preRender(element);
 
         // union render global macro and material self macro.
         ShaderMacroCollection::unionCollection(

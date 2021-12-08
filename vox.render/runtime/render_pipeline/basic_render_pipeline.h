@@ -36,10 +36,6 @@ public:
     void render(const RenderContext& context, std::optional<TextureCubeFace> cubeFace = std::nullopt,
                 int mipLevel = 0);
     
-    void _drawRenderPass(RenderPass& pass, Camera* camera,
-                         std::optional<TextureCubeFace> cubeFace = std::nullopt,
-                         int mipLevel = 0);
-    
     /// Push a render element to the render queue.
     /// - Parameter element: Render element
     void pushPrimitive(const RenderElement& element);
@@ -48,12 +44,12 @@ public:
     
 public:
     /// Default render pass.
-    RenderPass defaultRenderPass();
+    RenderPass* defaultRenderPass();
     
     /// Add render pass.
     /// - Parameters:
     ///   - pass: RenderPass object.
-    void addRenderPass(const RenderPass& pass);
+    void addRenderPass(std::unique_ptr<RenderPass>& pass);
     
     /// Add render pass.
     /// - Parameters:
@@ -65,7 +61,6 @@ public:
     void addRenderPass(const std::string& name,
                        int priority = 0,
                        MTLRenderPassDescriptor* renderTarget = nullptr,
-                       MaterialPtr replaceMaterial = nullptr,
                        Layer mask = Layer::Everything);
     
     /// Remove render pass by name or render pass object.
@@ -74,11 +69,16 @@ public:
     
     /// Remove render pass by name or render pass object.
     /// - Parameter pass: render pass object
-    void removeRenderPass(const RenderPass& pass);
+    void removeRenderPass(const RenderPass* pass);
     
     /// Get render pass by name.
     /// - Parameter name: Render pass name
-    std::optional<RenderPass> getRenderPass(const std::string& name);
+    RenderPass* getRenderPass(const std::string& name);
+    
+private:
+    void _drawRenderPass(RenderPass* pass, Camera* camera,
+                         std::optional<TextureCubeFace> cubeFace = std::nullopt,
+                         int mipLevel = 0);
     
 private:
     RenderQueue _opaqueQueue;
@@ -86,8 +86,8 @@ private:
     RenderQueue _alphaTestQueue;
 
     Camera* _camera;
-    RenderPass _defaultPass;
-    std::vector<RenderPass> _renderPassArray;
+    RenderPass* _defaultPass;
+    std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
     Float2 _lastCanvasSize = Float2();
 };
 

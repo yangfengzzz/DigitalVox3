@@ -11,6 +11,7 @@
 #include "../vox_type.h"
 #include "../layer.h"
 #include "../enums/camera_clear_flags.h"
+#include "render_element.h"
 #include "maths/color.h"
 #include <Metal/Metal.h>
 #include <string>
@@ -24,7 +25,6 @@ public:
     bool enabled;
     int priority;
     MTLRenderPassDescriptor* renderTarget;
-    MaterialPtr replaceMaterial;
     Layer mask;
     bool renderOverride;
     std::optional<CameraClearFlags::Enum> clearFlags;
@@ -40,8 +40,9 @@ public:
     RenderPass(const std::string& name = "",
                int priority = 0,
                MTLRenderPassDescriptor* renderTarget = nullptr,
-               MaterialPtr replaceMaterial = nullptr,
                Layer mask = Layer::Everything);
+    
+    virtual MaterialPtr material(const RenderElement& element) { return nullptr; }
     
     /// Rendering callback, will be executed if renderOverride is set to true.
     /// - Parameters:

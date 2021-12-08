@@ -16,8 +16,9 @@ _camera(camera),
 _opaqueQueue(RenderQueue(camera->engine())),
 _alphaTestQueue(RenderQueue(camera->engine())),
 _transparentQueue(RenderQueue(camera->engine())){
-    _defaultPass = RenderPass("default", 0, nullptr, nullptr);
-    addRenderPass(_defaultPass);
+    auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
+    _defaultPass = pass.get();
+    addRenderPass(pass);
 }
 
 void BasicRenderPipeline::destroy() {
@@ -39,51 +40,51 @@ void BasicRenderPipeline::render(const RenderContext& context,
     _transparentQueue.sort(RenderQueue::_compareFromFarToNear);
     
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
-        _drawRenderPass(_renderPassArray[i], _camera, cubeFace, mipLevel);
+        _drawRenderPass(_renderPassArray[i].get(), _camera, cubeFace, mipLevel);
     }
 }
 
-void BasicRenderPipeline::_drawRenderPass(RenderPass& pass, Camera* camera,
+void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
                                           std::optional<TextureCubeFace> cubeFace, int mipLevel) {
-    pass.preRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
-
-    if (pass.enabled) {
+    pass->preRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+    
+    if (pass->enabled) {
         const auto& engine = camera->engine();
         const auto& scene = camera->scene();
         const auto& background = scene->background;
         auto& rhi = engine->_hardwareRenderer;
-
+        
         // prepare to load render target
         MTLRenderPassDescriptor* renderTarget;
         if (camera->renderTarget() != nullptr) {
             renderTarget = camera->renderTarget();
         } else {
-            renderTarget = pass.renderTarget;
+            renderTarget = pass->renderTarget;
         }
         rhi.activeRenderTarget(renderTarget);
         // set clear flag
-        const auto& clearFlags = pass.clearFlags != std::nullopt ? pass.clearFlags.value(): camera->clearFlags;
-        const auto& color = pass.clearColor != std::nullopt? pass.clearColor.value(): background.solidColor;
+        const auto& clearFlags = pass->clearFlags != std::nullopt ? pass->clearFlags.value(): camera->clearFlags;
+        const auto& color = pass->clearColor != std::nullopt? pass->clearColor.value(): background.solidColor;
         if (clearFlags != CameraClearFlags::None) {
             rhi.clearRenderTarget(clearFlags, color);
         }
-
+        
         // command encoder
         rhi.beginRenderPass(renderTarget, camera, mipLevel);
-        if (pass.renderOverride) {
-            pass.render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+        if (pass->renderOverride) {
+            pass->render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
         } else {
-            _opaqueQueue.render(camera, pass.replaceMaterial, pass.mask);
-            _alphaTestQueue.render(camera, pass.replaceMaterial, pass.mask);
+            _opaqueQueue.render(camera, pass);
+            _alphaTestQueue.render(camera, pass);
             if (background.mode == BackgroundMode::Sky) {
                 // _drawSky(engine, camera, background!.sky);
             }
-            _transparentQueue.render(camera, pass.replaceMaterial, pass.mask);
+            _transparentQueue.render(camera, pass);
         }
         rhi.endRenderPass();
     }
-
-    pass.postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+    
+    pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
 }
 
 void BasicRenderPipeline::pushPrimitive(const RenderElement& element) {
@@ -98,28 +99,27 @@ void BasicRenderPipeline::pushPrimitive(const RenderElement& element) {
     }
 }
 
-RenderPass BasicRenderPipeline::defaultRenderPass() {
+RenderPass* BasicRenderPipeline::defaultRenderPass() {
     return _defaultPass;
 }
 
-void BasicRenderPipeline::addRenderPass(const RenderPass& pass) {
-    _renderPassArray.push_back(pass);
+void BasicRenderPipeline::addRenderPass(std::unique_ptr<RenderPass>& pass) {
+    _renderPassArray.emplace_back(std::move(pass));
     std::sort(_renderPassArray.begin(), _renderPassArray.end(),
-              [](const RenderPass& p1, const RenderPass& p2){
-        return p1.priority - p2.priority;
+              [](const std::unique_ptr<RenderPass>& p1, const std::unique_ptr<RenderPass>& p2){
+        return p1->priority - p2->priority;
     });
 }
 
 void BasicRenderPipeline::addRenderPass(const std::string& name,
                                         int priority,
                                         MTLRenderPassDescriptor* renderTarget,
-                                        MaterialPtr replaceMaterial,
                                         Layer mask) {
-    auto renderPass = RenderPass(name, priority, renderTarget, replaceMaterial, mask);
-    _renderPassArray.push_back(renderPass);
+    auto renderPass = std::make_unique<RenderPass>(name, priority, renderTarget, mask);
+    _renderPassArray.emplace_back(std::move(renderPass));
     std::sort(_renderPassArray.begin(), _renderPassArray.end(),
-              [](const RenderPass& p1, const RenderPass& p2){
-        return p1.priority - p2.priority;
+              [](const std::unique_ptr<RenderPass>& p1, const std::unique_ptr<RenderPass>& p2){
+        return p1->priority - p2->priority;
     });
 }
 
@@ -127,7 +127,7 @@ void BasicRenderPipeline::removeRenderPass(const std::string& name) {
     ssize_t index = -1;
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         const auto& pass = _renderPassArray[i];
-        if (pass.name == name) index = i;
+        if (pass->name == name) index = i;
     }
     
     if (index != -1) {
@@ -135,11 +135,11 @@ void BasicRenderPipeline::removeRenderPass(const std::string& name) {
     }
 }
 
-void BasicRenderPipeline::removeRenderPass(const RenderPass& pass) {
+void BasicRenderPipeline::removeRenderPass(const RenderPass* p) {
     ssize_t index = -1;
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         const auto& pass = _renderPassArray[i];
-        if (pass.name == pass.name) index = i;
+        if (pass->name == p->name) index = i;
     }
     
     if (index != -1) {
@@ -147,13 +147,13 @@ void BasicRenderPipeline::removeRenderPass(const RenderPass& pass) {
     }
 }
 
-std::optional<RenderPass> BasicRenderPipeline::getRenderPass(const std::string& name) {
+RenderPass* BasicRenderPipeline::getRenderPass(const std::string& name) {
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         const auto& pass = _renderPassArray[i];
-        if (pass.name == name) return pass;
+        if (pass->name == name) return pass.get();
     }
     
-    return std::nullopt;
+    return nullptr;
 }
 
 }
