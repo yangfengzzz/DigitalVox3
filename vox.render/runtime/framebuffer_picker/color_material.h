@@ -29,23 +29,23 @@ public:
     /**
      * Convert id to RGB color value, 0 and 0xffffff are illegal values.
      */
-    math::Float3 id2Color(size_t id);
+    math::Float3 id2Color(uint32_t id);
     
     /**
      * Convert RGB color to id.
      * @param color - Color
      */
-    size_t color2Id(const math::Float3& color);
+    uint32_t color2Id(const std::array<uint8_t, 4>& color);
     
     /**
      * Get renderer element by color.
      */
-    std::pair<Renderer*, MeshPtr> getObjectByColor(const math::Float3& color);
+    std::pair<Renderer*, MeshPtr> getObjectByColor(const std::array<uint8_t, 4>& color);
     
     void _preRender(const RenderElement& renderElement);
     
 private:
-    size_t _currentId = 0;
+    uint32_t _currentId = 0;
     std::unordered_map<size_t, std::pair<Renderer*, MeshPtr>> _primitivesMap;
 };
 
