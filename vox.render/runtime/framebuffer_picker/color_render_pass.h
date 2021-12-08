@@ -40,7 +40,7 @@ public:
     /**
      * Pick up coordinate pixels.
      */
-    void pick(float x, float y);
+    void pick(const math::Float2& pos);
     
     /**
      * Get pixel color value from framebuffer.

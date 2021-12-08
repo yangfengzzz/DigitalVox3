@@ -32,7 +32,7 @@ void ColorRenderPass::postRender(Camera* camera, const RenderQueue& opaqueQueue,
     
 }
 
-void ColorRenderPass::pick(float x, float y) {
+void ColorRenderPass::pick(const math::Float2& pos) {
     
 }
 

@@ -217,6 +217,32 @@ public:
     void render(std::optional<TextureCubeFace> cubeFace = std::nullopt, int mipLevel = 0);
     
 public:
+    /// Add render pass.
+    /// - Parameters:
+    ///   - pass: RenderPass object.
+    void addRenderPass(std::unique_ptr<RenderPass>& pass);
+    
+    /// Add render pass.
+    /// - Parameters:
+    ///   - name: The name of this Pass.
+    ///   - priority: Priority, less than 0 before the default pass, greater than 0 after the default pass
+    ///   - renderTarget: The specified Render Target
+    ///   - replaceMaterial: Replaced material
+    ///   - mask: Perform bit and operations with Entity.Layer to filter the objects that this Pass needs to render
+    void addRenderPass(const std::string& name,
+                       int priority = 0,
+                       MTLRenderPassDescriptor* renderTarget = nullptr,
+                       Layer mask = Layer::Everything);
+    
+    /// Remove render pass by name or render pass object.
+    /// - Parameter name: Render pass name
+    void removeRenderPass(const std::string& name);
+    
+    /// Remove render pass by name or render pass object.
+    /// - Parameter pass: render pass object
+    void removeRenderPass(const RenderPass* pass);
+    
+public:
     void _onActive() override;
     
     void _onInActive() override;

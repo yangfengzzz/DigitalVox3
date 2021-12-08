@@ -93,6 +93,8 @@
 		0431558F276088920070FBEC /* color_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431558D276088910070FBEC /* color_material.h */; };
 		0431559227608E300070FBEC /* color_render_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431559027608E300070FBEC /* color_render_pass.mm */; };
 		0431559327608E300070FBEC /* color_render_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431559127608E300070FBEC /* color_render_pass.h */; };
+		04315596276090790070FBEC /* framebuffer_picker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04315594276090790070FBEC /* framebuffer_picker.mm */; };
+		04315597276090790070FBEC /* framebuffer_picker.h in Headers */ = {isa = PBXBuildFile; fileRef = 04315595276090790070FBEC /* framebuffer_picker.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -1576,6 +1578,8 @@
 		0431558D276088910070FBEC /* color_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_material.h; sourceTree = "<group>"; };
 		0431559027608E300070FBEC /* color_render_pass.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = color_render_pass.mm; sourceTree = "<group>"; };
 		0431559127608E300070FBEC /* color_render_pass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_render_pass.h; sourceTree = "<group>"; };
+		04315594276090790070FBEC /* framebuffer_picker.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = framebuffer_picker.mm; sourceTree = "<group>"; };
+		04315595276090790070FBEC /* framebuffer_picker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framebuffer_picker.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -3204,6 +3208,8 @@
 				0431558C276088910070FBEC /* color_material.mm */,
 				0431559127608E300070FBEC /* color_render_pass.h */,
 				0431559027608E300070FBEC /* color_render_pass.mm */,
+				04315595276090790070FBEC /* framebuffer_picker.h */,
+				04315594276090790070FBEC /* framebuffer_picker.mm */,
 			);
 			path = framebuffer_picker;
 			sourceTree = "<group>";
@@ -5895,6 +5901,7 @@
 				04CE39A92754F5DA00204B8E /* base_material.h in Headers */,
 				04CE39832753678E00204B8E /* background.h in Headers */,
 				04CE39042751A84000204B8E /* render_pipeline_state.h in Headers */,
+				04315597276090790070FBEC /* framebuffer_picker.h in Headers */,
 				0416102B2758690C006CD384 /* physics.h in Headers */,
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				0416103C2759A4C7006CD384 /* static_collider.h in Headers */,
@@ -6635,6 +6642,7 @@
 				04A79ABE275DE28100182CCB /* light.mm in Sources */,
 				04160FF62750955C006CD384 /* component.mm in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
+				04315596276090790070FBEC /* framebuffer_picker.mm in Sources */,
 				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
 				041610432759CC06006CD384 /* dynamic_collider.cpp in Sources */,
 				0416102127578322006CD384 /* anim_loader.cpp in Sources */,
