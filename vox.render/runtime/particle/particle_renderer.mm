@@ -395,7 +395,25 @@ void ParticleRenderer::stop() {
 }
 
 MaterialPtr ParticleRenderer::_createMaterial() {
-    return nullptr;
+    auto material = std::make_shared<Material>(engine(), Shader::find("particle-shader"));
+    auto& renderState = material->renderState;
+    auto& target = renderState.blendState.targetBlendState;
+    
+    target.enabled = true;
+    target.sourceColorBlendFactor = MTLBlendFactorSourceAlpha;
+    target.destinationColorBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+    target.sourceAlphaBlendFactor = MTLBlendFactorOne;
+    target.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+    
+    renderState.depthState.writeEnabled = false;
+    
+    material->renderQueueType = RenderQueueType::Enum::Transparent;
+    
+    setIsUseOriginColor(true);
+    setIs2d(true);
+    setIsFadeOut(true);
+    
+    return material;
 }
 
 MeshPtr ParticleRenderer::_createMesh() {
@@ -403,7 +421,11 @@ MeshPtr ParticleRenderer::_createMesh() {
 }
 
 void ParticleRenderer::_updateBuffer() {
-    
+    for (size_t x = 0; x < _maxCount; x++) {
+      _updateSingleBuffer(x);
+    }
+
+    memcpy([_vertexBuffer contents], _vertices.data(), sizeof(float) * _vertices.size());
 }
 
 void ParticleRenderer::_updateSingleBuffer(size_t i) {
