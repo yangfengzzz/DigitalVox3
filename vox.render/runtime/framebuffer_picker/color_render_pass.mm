@@ -82,7 +82,7 @@ std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera* camera
                                             fromRegion:MTLRegionMake2D(left, bottom, 1, 1)
                                            mipmapLevel:0];
     
-    return {};
+    return pixel;
 }
 
 }

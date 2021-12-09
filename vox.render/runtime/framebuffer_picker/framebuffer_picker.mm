@@ -31,6 +31,7 @@ Script(entity) {
     descriptor.width = 1024;
     descriptor.height = 1024;
     descriptor.pixelFormat = MTLPixelFormatRGBA8Uint;
+    descriptor.usage = MTLTextureUsageRenderTarget;
     colorRenderTarget.colorAttachments[0].texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:descriptor];
 }
 
