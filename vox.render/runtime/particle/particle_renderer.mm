@@ -19,7 +19,12 @@ id<MTLTexture> ParticleRenderer::texture() {
 }
 
 void ParticleRenderer::setTexture(id<MTLTexture> texture) {
-    
+    if (texture) {
+        shaderData.enableMacro(HAS_PARTICLE_TEXTURE);
+        getMaterial()->shaderData.setData("u_texture", texture);
+    } else {
+        shaderData.disableMacro(HAS_PARTICLE_TEXTURE);
+    }
 }
 
 math::Float3 ParticleRenderer::position() {
@@ -27,7 +32,8 @@ math::Float3 ParticleRenderer::position() {
 }
 
 void ParticleRenderer::setPosition(const math::Float3& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Position;
+    _position = value;
 }
 
 math::Float3 ParticleRenderer::positionRandomness() {
@@ -35,7 +41,8 @@ math::Float3 ParticleRenderer::positionRandomness() {
 }
 
 void ParticleRenderer::setPositionRandomness(const math::Float3& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Position;
+    _positionRandomness = value;
 }
 
 const std::vector<math::Float3>& ParticleRenderer::positionArray() const {
@@ -43,7 +50,8 @@ const std::vector<math::Float3>& ParticleRenderer::positionArray() const {
 }
 
 void ParticleRenderer::setPositionArray(const std::vector<math::Float3>& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Position;
+    _positionArray = value;
 }
 
 math::Float3 ParticleRenderer::velocity() {
@@ -51,7 +59,8 @@ math::Float3 ParticleRenderer::velocity() {
 }
 
 void ParticleRenderer::setVelocity(const math::Float3& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Velocity;
+    _velocity = value;
 }
 
 math::Float3 ParticleRenderer::velocityRandomness() {
@@ -59,7 +68,8 @@ math::Float3 ParticleRenderer::velocityRandomness() {
 }
 
 void ParticleRenderer::setVelocityRandomness(const math::Float3& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Velocity;
+    _velocityRandomness = value;
 }
 
 math::Float3 ParticleRenderer::acceleration() {
@@ -67,7 +77,8 @@ math::Float3 ParticleRenderer::acceleration() {
 }
 
 void ParticleRenderer::setAcceleration(const math::Float3& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Acceleration;
+    _acceleration = value;
 }
 
 math::Float3 ParticleRenderer::accelerationRandomness() {
@@ -75,7 +86,8 @@ math::Float3 ParticleRenderer::accelerationRandomness() {
 }
 
 void ParticleRenderer::setAccelerationRandomness(const math::Float3& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Acceleration;
+    _accelerationRandomness = value;
 }
 
 math::Color ParticleRenderer::color() {
@@ -83,7 +95,8 @@ math::Color ParticleRenderer::color() {
 }
 
 void ParticleRenderer::setColor(const math::Color& value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Color;
+    _color = value;
 }
 
 float ParticleRenderer::colorRandomness() {
@@ -91,7 +104,8 @@ float ParticleRenderer::colorRandomness() {
 }
 
 void ParticleRenderer::setColorRandomness(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Color;
+    _colorRandomness = value;
 }
 
 float ParticleRenderer::size() {
@@ -99,7 +113,8 @@ float ParticleRenderer::size() {
 }
 
 void ParticleRenderer::setSize(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Size;
+    _size = value;
 }
 
 float ParticleRenderer::sizeRandomness() {
@@ -107,7 +122,8 @@ float ParticleRenderer::sizeRandomness() {
 }
 
 void ParticleRenderer::setSizeRandomness(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Size;
+    _sizeRandomness = value;
 }
 
 float ParticleRenderer::alpha() {
@@ -115,7 +131,8 @@ float ParticleRenderer::alpha() {
 }
 
 void ParticleRenderer::setAlpha(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Alpha;
+    _alpha = value;
 }
 
 float ParticleRenderer::alphaRandomness() {
@@ -123,7 +140,8 @@ float ParticleRenderer::alphaRandomness() {
 }
 
 void ParticleRenderer::setAlphaRandomness(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Alpha;
+    _alphaRandomness = value;
 }
 
 float ParticleRenderer::angle() {
@@ -131,7 +149,8 @@ float ParticleRenderer::angle() {
 }
 
 void ParticleRenderer::setAngle(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::StartAngle;
+    _startAngle = value;
 }
 
 float ParticleRenderer::angleRandomness() {
@@ -139,7 +158,8 @@ float ParticleRenderer::angleRandomness() {
 }
 
 void ParticleRenderer::setAngleRandomness(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::StartAngle;
+    _startAngleRandomness = value;
 }
 
 float ParticleRenderer::rotateVelocity() {
@@ -147,7 +167,8 @@ float ParticleRenderer::rotateVelocity() {
 }
 
 void ParticleRenderer::setRotateVelocity(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::RotateVelocity;
+    _rotateVelocity = value;
 }
 
 float ParticleRenderer::rotateVelocityRandomness() {
@@ -155,7 +176,8 @@ float ParticleRenderer::rotateVelocityRandomness() {
 }
 
 void ParticleRenderer::setRotateVelocityRandomness(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::RotateVelocity;
+    _rotateVelocityRandomness = value;
 }
 
 float ParticleRenderer::lifetime() {
@@ -163,7 +185,9 @@ float ParticleRenderer::lifetime() {
 }
 
 void ParticleRenderer::setLifetime(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::LifeTime;
+    _lifetime = value;
+    _onceTime = 0;
 }
 
 float ParticleRenderer::startTimeRandomness() {
@@ -171,7 +195,9 @@ float ParticleRenderer::startTimeRandomness() {
 }
 
 void ParticleRenderer::setStartTimeRandomness(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::StartTime;
+    _startTimeRandomness = value;
+    _onceTime = 0;
 }
 
 float ParticleRenderer::scale() {
@@ -179,7 +205,8 @@ float ParticleRenderer::scale() {
 }
 
 void ParticleRenderer::setScale(float value) {
-    
+    _updateDirtyFlag |= DirtyFlagType::Enum::Scale;
+    _scale = value;
 }
 
 size_t ParticleRenderer::maxCount() {
@@ -187,7 +214,16 @@ size_t ParticleRenderer::maxCount() {
 }
 
 void ParticleRenderer::setMaxCount(size_t value) {
+    _isStart = false;
+    _isInit = false;
+    _maxCount = value;
+    _updateDirtyFlag = DirtyFlagType::Enum::Everything;
+    // mesh = _createMesh();
     
+    _updateBuffer();
+    
+    _isInit = true;
+    shaderData.setData("u_time", 0.f);
 }
 
 bool ParticleRenderer::isOnce() {
@@ -195,7 +231,9 @@ bool ParticleRenderer::isOnce() {
 }
 
 void ParticleRenderer::setIsOnce(bool value) {
-    
+    _time = 0;
+    shaderData.setData("u_once", value ? 1.f : 0.f);
+    _isOnce = value;
 }
 
 bool ParticleRenderer::isRotateToVelocity() {
@@ -203,7 +241,13 @@ bool ParticleRenderer::isRotateToVelocity() {
 }
 
 void ParticleRenderer::setIsRotateToVelocity(bool value) {
+    if (value) {
+        shaderData.enableMacro(NEED_ROTATE_TO_VELOCITY);
+    } else {
+        shaderData.disableMacro(NEED_ROTATE_TO_VELOCITY);
+    }
     
+    _isRotateToVelocity = value;
 }
 
 bool ParticleRenderer::isUseOriginColor() {
@@ -211,7 +255,13 @@ bool ParticleRenderer::isUseOriginColor() {
 }
 
 void ParticleRenderer::setIsUseOriginColor(bool value) {
+    if (value) {
+        shaderData.enableMacro(NEED_USE_ORIGIN_COLOR);
+    } else {
+        shaderData.disableMacro(NEED_USE_ORIGIN_COLOR);
+    }
     
+    _isUseOriginColor = value;
 }
 
 bool ParticleRenderer::isScaleByLifetime() {
@@ -219,7 +269,13 @@ bool ParticleRenderer::isScaleByLifetime() {
 }
 
 void ParticleRenderer::setIsScaleByLifetime(bool value) {
+    if (value) {
+        shaderData.enableMacro(NEED_SCALE_BY_LIFE_TIME);
+    } else {
+        shaderData.disableMacro(NEED_SCALE_BY_LIFE_TIME);
+    }
     
+    _isScaleByLifetime = value;
 }
 
 bool ParticleRenderer::is2d() {
@@ -227,7 +283,14 @@ bool ParticleRenderer::is2d() {
 }
 
 void ParticleRenderer::setIs2d(bool value) {
+    if (value) {
+        shaderData.enableMacro(IS_2D);
+    } else {
+        shaderData.disableMacro(IS_2D);
+        getMaterial()->renderState.rasterState.cullMode = MTLCullModeNone;
+    }
     
+    _is2d = value;
 }
 
 bool ParticleRenderer::isFadeIn() {
@@ -235,7 +298,13 @@ bool ParticleRenderer::isFadeIn() {
 }
 
 void ParticleRenderer::setIsFadeIn(bool value) {
+    if (value) {
+        shaderData.enableMacro(NEED_FADE_IN);
+    } else {
+        shaderData.disableMacro(NEED_FADE_IN);
+    }
     
+    _isFadeIn = value;
 }
 
 bool ParticleRenderer::isFadeOut() {
@@ -243,7 +312,13 @@ bool ParticleRenderer::isFadeOut() {
 }
 
 void ParticleRenderer::setIsFadeOut(bool value) {
+    if (value) {
+        shaderData.enableMacro(NEED_FADE_OUT);
+    } else {
+        shaderData.disableMacro(NEED_FADE_OUT);
+    }
     
+    _isFadeOut = value;
 }
 
 bool ParticleRenderer::playOnEnable() {
@@ -251,7 +326,13 @@ bool ParticleRenderer::playOnEnable() {
 }
 
 void ParticleRenderer::setPlayOnEnable(bool value) {
+    _playOnEnable = value;
     
+    if (value) {
+        start();
+    } else {
+        stop();
+    }
 }
 
 ParticleRendererBlendMode::Enum ParticleRenderer::blendMode() {
@@ -259,23 +340,58 @@ ParticleRendererBlendMode::Enum ParticleRenderer::blendMode() {
 }
 
 void ParticleRenderer::setBlendMode(ParticleRendererBlendMode::Enum value) {
+    auto& blendState = getMaterial()->renderState.blendState;
+    auto& target = blendState.targetBlendState;
     
+    if (value == ParticleRendererBlendMode::Enum::Transparent) {
+        target.enabled = true;
+        target.sourceColorBlendFactor = MTLBlendFactorSourceAlpha;
+        target.destinationColorBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+        target.sourceAlphaBlendFactor = MTLBlendFactorOne;
+        target.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+    } else if (value == ParticleRendererBlendMode::Enum::Additive) {
+        target.enabled = true;
+        target.sourceColorBlendFactor = MTLBlendFactorSourceAlpha;
+        target.destinationColorBlendFactor = MTLBlendFactorOne;
+        target.sourceAlphaBlendFactor = MTLBlendFactorOne;
+        target.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
+    }
+    
+    _blendMode = value;
 }
 
 void ParticleRenderer::update(float deltaTime) {
+    if (!_isInit || !_isStart) {
+        return;
+    }
     
+    // Stop after play once
+    if (_isOnce && _time > _onceTime) {
+        return stop();
+    }
+    
+    if (_updateDirtyFlag) {
+        _updateBuffer();
+        _updateDirtyFlag = 0;
+    }
+    
+    _time += deltaTime / 1000;
+    shaderData.setData("u_time", _time);
 }
 
 void ParticleRenderer::_onEnable() {
-    
+    if (_playOnEnable) {
+        start();
+    }
 }
 
 void ParticleRenderer::start() {
-    
+    _isStart = true;
+    _time = 0;
 }
 
 void ParticleRenderer::stop() {
-    
+    _isStart = false;
 }
 
 MaterialPtr ParticleRenderer::_createMaterial() {
