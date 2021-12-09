@@ -45,6 +45,8 @@ public:
     void _preRender(const RenderElement& renderElement);
     
 private:
+    static ShaderProperty _colorProp;
+
     uint32_t _currentId = 0;
     std::unordered_map<size_t, std::pair<Renderer*, MeshPtr>> _primitivesMap;
 };

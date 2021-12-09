@@ -12,6 +12,8 @@
 
 namespace vox {
 namespace picker {
+ShaderProperty ColorMaterial::_colorProp = Shader::createProperty("u_colorId", ShaderDataGroup::Renderer);
+
 ColorMaterial::ColorMaterial(Engine* engine):
 Material(engine, Shader::find("framebuffer-picker-color")){
 }
@@ -27,7 +29,7 @@ math::Float3 ColorMaterial::id2Color(uint32_t id) {
         return math::Float3(0, 0, 0);
     }
     
-    return math::Float3((id & 0xff) / 255, ((id & 0xff00) >> 8) / 255, ((id & 0xff0000) >> 16) / 255);
+    return math::Float3((id & 0xff) / 255.0, ((id & 0xff00) >> 8) / 255.0, ((id & 0xff0000) >> 16) / 255.0);
 }
 
 uint32_t ColorMaterial::color2Id(const std::array<uint8_t, 4>& color) {

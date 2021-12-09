@@ -15,6 +15,7 @@ namespace picker {
 ColorRenderPass::ColorRenderPass(const std::string& name, int priority,
                                  MTLRenderPassDescriptor* renderTarget, Layer mask, Engine* engine):
 RenderPass(name, priority, renderTarget, mask){
+    Shader::create("framebuffer-picker-color", "vertex_picker", "fragment_picker");
     _material = std::make_shared<ColorMaterial>(engine);
     _needPick = false;
 }
