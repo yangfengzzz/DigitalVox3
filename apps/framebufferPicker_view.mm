@@ -13,6 +13,7 @@
 #include "../vox.render/runtime/material/blinn_phong_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/point_light.h"
+#include "../vox.render/runtime/framebuffer_picker/framebuffer_picker.h"
 #include <random>
 
 using namespace vox;
@@ -28,7 +29,7 @@ int main(int, char**) {
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
-    cameraEntity->addComponent<vox::Camera>();
+    auto camera = cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
     
     // init point light
@@ -57,6 +58,13 @@ int main(int, char**) {
     sphereMtl->setBaseColor(math::Color(u(e), u(e), u(e), 1));
     sphereRenderer->setMesh(PrimitiveMesh::createSphere(&engine, radius));
     sphereRenderer->setMaterial(sphereMtl);
+    
+    // add framebuffer picker component
+    auto framebufferPicker = rootEntity->addComponent<picker::FramebufferPicker>();
+    framebufferPicker->setCamera(camera);
+    framebufferPicker->setPickFunctor([&](Renderer *, MeshPtr){
+        std::cout<<"lala"<<std::endl;
+    });
     
     engine.run();
 }
