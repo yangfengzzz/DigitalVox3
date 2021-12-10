@@ -34,8 +34,7 @@ public:
     /**
      * Determine whether to pick up.
      */
-    void postRender(Camera* camera, const RenderQueue& opaqueQueue,
-                    const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;
+    void execute(Camera* camera);
     
     /**
      * Pick up coordinate pixels.

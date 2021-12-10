@@ -43,6 +43,8 @@ public:
     
     void onUpdate(float deltaTime) override;
     
+    void onEndFrame() override;
+    
     void onDestroy() override;
     
 private:

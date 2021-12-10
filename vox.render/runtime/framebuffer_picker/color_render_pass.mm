@@ -39,8 +39,7 @@ void ColorRenderPass::preRender(Camera* camera, const RenderQueue& opaqueQueue,
     }
 }
 
-void ColorRenderPass::postRender(Camera* camera, const RenderQueue& opaqueQueue,
-                                 const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {
+void ColorRenderPass::execute(Camera* camera) {
     if (_needPick) {
         auto color = readColorFromRenderTarget(camera);
         auto object = _material->getObjectByColor(color);

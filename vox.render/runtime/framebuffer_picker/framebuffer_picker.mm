@@ -61,6 +61,12 @@ void FramebufferPicker::onUpdate(float deltaTime) {
     }
 }
 
+void FramebufferPicker::onEndFrame() {
+    if (_camera) {
+        colorRenderPass->execute(_camera);
+    }
+}
+
 void FramebufferPicker::onDestroy() {
     if (!_camera->destroyed()) {
         _camera->removeRenderPass(colorRenderPass);
