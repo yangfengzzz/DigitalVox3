@@ -27,8 +27,12 @@ public:
     void removeOnUpdateScript(Script* script);
     
     void addOnLateUpdateScript(Script* script);
-
+    
     void removeOnLateUpdateScript(Script* script);
+    
+    void addOnEndFrameScript(Script* script);
+    
+    void removeOnEndFrameScript(Script* script);
     
     void addDestroyComponent(Script* component);
     
@@ -43,7 +47,7 @@ public:
     
 public:
     void addOnUpdateAnimators(Animator* animator);
-
+    
     void removeOnUpdateAnimators(Animator* animator);
     
 public:
@@ -53,6 +57,8 @@ public:
     
     void callScriptOnLateUpdate(float deltaTime);
     
+    void callScriptOnEndFrame();
+    
     void callRendererOnUpdate(float deltaTime);
     
     void callRender(const RenderContext& context);
@@ -60,7 +66,7 @@ public:
     void callAnimatorUpdate(float deltaTime);
     
     void callComponentDestroy();
-
+    
     void callCameraOnBeginRender(Camera* camera);
     
     void callCameraOnEndRender(Camera* camera);
@@ -75,6 +81,7 @@ private:
     std::vector<Script *> _onStartScripts;
     std::vector<Script *> _onUpdateScripts;
     std::vector<Script *> _onLateUpdateScripts;
+    std::vector<Script *> _onEndFrameScripts;
     std::vector<Script *> _destroyComponents;
     
     // Animatior

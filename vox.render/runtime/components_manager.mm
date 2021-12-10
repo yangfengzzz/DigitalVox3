@@ -43,6 +43,16 @@ void ComponentsManager::removeOnLateUpdateScript(Script* script) {
     script->_onLateUpdateIndex = -1;
 }
 
+void ComponentsManager::addOnEndFrameScript(Script* script) {
+    script->_onEndFrameIndex = _onEndFrameScripts.size();
+    _onEndFrameScripts.push_back(script);
+}
+
+void ComponentsManager::removeOnEndFrameScript(Script* script) {
+    _onEndFrameScripts.erase(_onEndFrameScripts.begin() + script->_onEndFrameIndex);
+    script->_onEndFrameIndex = -1;
+}
+
 void ComponentsManager::addDestroyComponent(Script* component) {
     _destroyComponents.push_back(component);
 }
@@ -107,6 +117,16 @@ void ComponentsManager::callScriptOnLateUpdate(float deltaTime) {
         const auto& element = onLateUpdateScripts[i];
         if (element->_started) {
             element->onLateUpdate(deltaTime);
+        }
+    }
+}
+
+void ComponentsManager::callScriptOnEndFrame() {
+    const auto& onEndFrameScripts = _onEndFrameScripts;
+    for (size_t i = 0; i < onEndFrameScripts.size(); i++) {
+        const auto& element = onEndFrameScripts[i];
+        if (element->_started) {
+            element->onEndFrame();
         }
     }
 }

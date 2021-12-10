@@ -63,6 +63,11 @@ public:
     virtual void onEndRender(Camera* camera) {}
     
     /**
+     * Called after command buffer commit.
+     */
+    virtual void onEndFrame() {}
+    
+    /**
      * Called when the collision enter.
      * @param other ColliderShape
      */
@@ -141,6 +146,7 @@ private:
     ssize_t _onLateUpdateIndex = -1;
     ssize_t _onPreRenderIndex = -1;
     ssize_t _onPostRenderIndex = -1;
+    ssize_t _onEndFrameIndex = -1;
     ssize_t _entityCacheIndex = -1;
 };
 

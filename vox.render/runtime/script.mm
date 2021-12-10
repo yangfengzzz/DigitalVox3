@@ -23,8 +23,10 @@ void Script::_onEnable() {
     if (!_started) {
         componentsManager.addOnStartScript(this);
     }
+    //todo fix
     componentsManager.addOnUpdateScript(this);
     componentsManager.addOnLateUpdateScript(this);
+    componentsManager.addOnEndFrameScript(this);
     _entity->_addScript(this);
     onEnable();
 }
@@ -41,6 +43,9 @@ void Script::_onDisable() {
     }
     if (_onLateUpdateIndex != -1) {
         componentsManager.removeOnLateUpdateScript(this);
+    }
+    if (_onEndFrameIndex != -1) {
+        componentsManager.removeOnEndFrameScript(this);
     }
     if (_entityCacheIndex != -1) {
         _entity->_removeScript(this);

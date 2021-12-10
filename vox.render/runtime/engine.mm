@@ -112,6 +112,7 @@ void Engine::update() {
         _hardwareRenderer.begin();
         _render(scene, deltaTime);
         _hardwareRenderer.end();
+        _componentsManager.callScriptOnEndFrame();
     }
     _componentsManager.callComponentDestroy();
 }
