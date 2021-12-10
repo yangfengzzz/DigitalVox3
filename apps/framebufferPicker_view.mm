@@ -62,8 +62,10 @@ int main(int, char**) {
     // add framebuffer picker component
     auto framebufferPicker = rootEntity->addComponent<picker::FramebufferPicker>();
     framebufferPicker->setCamera(camera);
-    framebufferPicker->setPickFunctor([&](Renderer *, MeshPtr){
-        std::cout<<"lala"<<std::endl;
+    framebufferPicker->setPickFunctor([&](Renderer *render, MeshPtr mesh){
+        if (render && mesh) {
+            static_cast<BlinnPhongMaterial*>(render->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
+        }
     });
     
     Canvas::mouse_button_callbacks.push_back([&](GLFWwindow* window, int button, int action, int mods){

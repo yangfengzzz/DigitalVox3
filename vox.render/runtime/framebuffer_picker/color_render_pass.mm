@@ -86,7 +86,7 @@ std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera* camera
     
     [renderTarget.colorAttachments[0].texture getBytes:pixel.data()
                                            bytesPerRow:sizeof(uint8_t)*4
-                                            fromRegion:MTLRegionMake2D(left, bottom, 1, 1)
+                                            fromRegion:MTLRegionMake2D(left, canvasHeight - bottom, 1, 1)
                                            mipmapLevel:0];
     
     return pixel;

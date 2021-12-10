@@ -82,7 +82,7 @@ vertex VertexOut vertex_picker(const VertexIn in [[stage_in]],
 fragment float4 fragment_picker(VertexOut in [[stage_in]],
                                sampler textureSampler [[sampler(0)]],
                                constant float3 &u_colorId [[buffer(0)]]) {    
-    return float4(u_colorId, 1.0);
+    return float4(u_colorId.zyx, 1.0); // BGRA
 }
 
 

@@ -37,7 +37,12 @@ uint32_t ColorMaterial::color2Id(const std::array<uint8_t, 4>& color) {
 }
 
 std::pair<Renderer*, MeshPtr> ColorMaterial::getObjectByColor(const std::array<uint8_t, 4>& color) {
-    return _primitivesMap[color2Id(color)];
+    auto iter = _primitivesMap.find(color2Id(color));
+    if (iter != _primitivesMap.end()) {
+        return iter->second;
+    } else {
+        return std::make_pair(nullptr, nullptr);
+    }
 }
 
 void ColorMaterial::_preRender(const RenderElement& renderElement) {
