@@ -19,7 +19,7 @@ namespace picker {
 class ColorRenderPass :public RenderPass {
 public:
     ColorRenderPass(const std::string& name, int priority, MTLRenderPassDescriptor* renderTarget, Layer mask, Engine* engine);
-
+    
     void setPickFunctor(std::function<void(Renderer*, MeshPtr)> func);
     
 public:
@@ -30,6 +30,9 @@ public:
      */
     void preRender(Camera* camera, const RenderQueue& opaqueQueue,
                    const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;
+    
+    void postRender(Camera* camera, const RenderQueue& opaqueQueue,
+                    const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;
     
     /**
      * Determine whether to pick up.

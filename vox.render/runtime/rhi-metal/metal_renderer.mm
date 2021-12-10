@@ -57,6 +57,7 @@ void MetalRenderer::begin() {
 void MetalRenderer::end() {
     [commandBuffer presentDrawable:drawable];
     [commandBuffer commit];
+    [commandBuffer waitUntilCompleted];
 }
 
 void MetalRenderer::activeRenderTarget(MTLRenderPassDescriptor *renderTarget) {

@@ -54,6 +54,13 @@ void ColorRenderPass::pick(const math::Float2& pos) {
     _needPick = true;
 }
 
+void ColorRenderPass::postRender(Camera* camera, const RenderQueue& opaqueQueue,
+                                 const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {
+    auto blit = [camera->engine()->_hardwareRenderer.commandBuffer blitCommandEncoder];
+    [blit synchronizeResource:renderTarget.colorAttachments[0].texture];
+    [blit endEncoding];
+}
+
 
 std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera* camera) {
     const auto& screenPoint = _pickPos;
