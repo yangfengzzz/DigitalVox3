@@ -28,9 +28,9 @@ private:
     void editTransform(float *cameraView, float *cameraProjection, float *matrix, bool editTransformDecomposition);
     
 private:
-    Camera *camera;
-    picker::FramebufferPicker *picker;
-    Renderer *render;
+    Camera *camera = nullptr;
+    picker::FramebufferPicker *picker = nullptr;
+    Renderer *render = nullptr;
     
     //used for gui
     float fov;

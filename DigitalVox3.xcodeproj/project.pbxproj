@@ -1201,6 +1201,8 @@
 		0434AC782765C6A5009AD4EA /* framebufferPicker_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC71276230AD009AD4EA /* framebufferPicker_view.mm */; };
 		0434AC7B2765C871009AD4EA /* imgui_zmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */; };
 		0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7C2765CA8C009AD4EA /* gizmo.mm */; };
+		0434AC81276601B5009AD4EA /* grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7F276601B5009AD4EA /* grid.mm */; };
+		0434AC872766132C009AD4EA /* editor-grid.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC84276611C5009AD4EA /* editor-grid.metal */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -2695,6 +2697,9 @@
 		0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_zmo.cpp; sourceTree = "<group>"; };
 		0434AC7C2765CA8C009AD4EA /* gizmo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gizmo.mm; sourceTree = "<group>"; };
 		0434AC7D2765CA8C009AD4EA /* gizmo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gizmo.h; sourceTree = "<group>"; };
+		0434AC7F276601B5009AD4EA /* grid.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = grid.mm; sourceTree = "<group>"; };
+		0434AC80276601B5009AD4EA /* grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
+		0434AC84276611C5009AD4EA /* editor-grid.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "editor-grid.metal"; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -3248,6 +3253,8 @@
 				0434AC752765C4F4009AD4EA /* gui_entry.mm */,
 				0434AC7D2765CA8C009AD4EA /* gizmo.h */,
 				0434AC7C2765CA8C009AD4EA /* gizmo.mm */,
+				0434AC80276601B5009AD4EA /* grid.h */,
+				0434AC7F276601B5009AD4EA /* grid.mm */,
 			);
 			path = editor;
 			sourceTree = "<group>";
@@ -4556,6 +4563,13 @@
 			name = HACD2;
 			sourceTree = "<group>";
 		};
+		0434AC882766133E009AD4EA /* editor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = editor;
+			sourceTree = "<group>";
+		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -5263,6 +5277,8 @@
 				04CE39922753A83C00204B8E /* unlit.metal */,
 				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
 				04CE39912753A83C00204B8E /* SkinningShader.metal */,
+				0434AC882766133E009AD4EA /* editor */,
+				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 			);
 			path = shaderlib;
 			sourceTree = "<group>";
@@ -6191,6 +6207,7 @@
 				0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */,
 				0434AC772765C4F4009AD4EA /* gui_entry.mm in Sources */,
 				0434A2B0275F96AB009AD4EA /* main.mm in Sources */,
+				0434AC81276601B5009AD4EA /* grid.mm in Sources */,
 				0434AC7B2765C871009AD4EA /* imgui_zmo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6760,6 +6777,7 @@
 				0416105C275A0CF4006CD384 /* spherical_joint.cpp in Sources */,
 				04CE37E6274D167F00204B8E /* raw_animation.cc in Sources */,
 				04CE397C2753491200204B8E /* buffer_mesh.mm in Sources */,
+				0434AC872766132C009AD4EA /* editor-grid.metal in Sources */,
 				04CE399A2753A83C00204B8E /* pbr.metal in Sources */,
 				04CE37E7274D167F00204B8E /* raw_animation_utils.cc in Sources */,
 				04CE391A2751B23400204B8E /* shader_pool.mm in Sources */,

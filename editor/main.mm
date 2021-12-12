@@ -23,6 +23,7 @@
 
 #include "gui_entry.h"
 #include "gizmo.h"
+#include "grid.h"
 #include <random>
 
 using namespace vox;
@@ -35,6 +36,8 @@ int main(int, char **) {
     scene->ambientLight().setDiffuseSolidColor(math::Color(1, 1, 1));
     
     auto rootEntity = scene->createRootEntity();
+    rootEntity->addComponent<editor::Grid>();
+    
     //    rootEntity->addComponent<editor::GUIEntry>();
     
     auto cameraEntity = rootEntity->createChild("camera");

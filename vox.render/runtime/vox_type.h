@@ -26,6 +26,7 @@ class Material;
 using MaterialPtr = std::shared_ptr<Material>;
 class Camera;
 class Renderer;
+class MeshRenderer;
 class Script;
 class Animator;
 class Light;
