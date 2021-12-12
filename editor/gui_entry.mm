@@ -10,8 +10,8 @@
 
 namespace vox {
 namespace editor {
-GUIEntry::GUIEntry(Entity* entity):
-Script(entity){
+GUIEntry::GUIEntry(Entity *entity) :
+Script(entity) {
 }
 
 void GUIEntry::onUpdate(float deltaTime) {

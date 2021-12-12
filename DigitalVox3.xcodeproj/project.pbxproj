@@ -1199,6 +1199,8 @@
 		0434AC6F275FA593009AD4EA /* dgSmallDeterminant.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434AC45275FA592009AD4EA /* dgSmallDeterminant.h */; };
 		0434AC772765C4F4009AD4EA /* gui_entry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC752765C4F4009AD4EA /* gui_entry.mm */; };
 		0434AC782765C6A5009AD4EA /* framebufferPicker_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC71276230AD009AD4EA /* framebufferPicker_view.mm */; };
+		0434AC7B2765C871009AD4EA /* imgui_zmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */; };
+		0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7C2765CA8C009AD4EA /* gizmo.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -2689,6 +2691,10 @@
 		0434AC71276230AD009AD4EA /* framebufferPicker_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = framebufferPicker_view.mm; sourceTree = "<group>"; };
 		0434AC752765C4F4009AD4EA /* gui_entry.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gui_entry.mm; sourceTree = "<group>"; };
 		0434AC762765C4F4009AD4EA /* gui_entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui_entry.h; sourceTree = "<group>"; };
+		0434AC792765C871009AD4EA /* imgui_zmo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_zmo.h; sourceTree = "<group>"; };
+		0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_zmo.cpp; sourceTree = "<group>"; };
+		0434AC7C2765CA8C009AD4EA /* gizmo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gizmo.mm; sourceTree = "<group>"; };
+		0434AC7D2765CA8C009AD4EA /* gizmo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gizmo.h; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -3234,10 +3240,14 @@
 		0434A2AE275F96AB009AD4EA /* editor */ = {
 			isa = PBXGroup;
 			children = (
+				0434AC792765C871009AD4EA /* imgui_zmo.h */,
+				0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */,
 				0434A2B4275F96DC009AD4EA /* editor.entitlements */,
 				0434A2AF275F96AB009AD4EA /* main.mm */,
 				0434AC762765C4F4009AD4EA /* gui_entry.h */,
 				0434AC752765C4F4009AD4EA /* gui_entry.mm */,
+				0434AC7D2765CA8C009AD4EA /* gizmo.h */,
+				0434AC7C2765CA8C009AD4EA /* gizmo.mm */,
 			);
 			path = editor;
 			sourceTree = "<group>";
@@ -6178,8 +6188,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */,
 				0434AC772765C4F4009AD4EA /* gui_entry.mm in Sources */,
 				0434A2B0275F96AB009AD4EA /* main.mm in Sources */,
+				0434AC7B2765C871009AD4EA /* imgui_zmo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

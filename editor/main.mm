@@ -22,25 +22,27 @@
 #include "../vox.render/runtime/lighting/point_light.h"
 
 #include "gui_entry.h"
+#include "gizmo.h"
 #include <random>
 
 using namespace vox;
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
+    scene->ambientLight().setDiffuseSolidColor(math::Color(1, 1, 1));
     
     auto rootEntity = scene->createRootEntity();
-    rootEntity->addComponent<editor::GUIEntry>();
+    //    rootEntity->addComponent<editor::GUIEntry>();
     
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
-    cameraEntity->addComponent<control::OrbitControl>();
+    //    cameraEntity->addComponent<control::OrbitControl>();
+    cameraEntity->addComponent<editor::Gizmo>();
     
     // init point light
     auto light = rootEntity->createChild("light");
@@ -80,13 +82,14 @@ int main(int, char**) {
     sphereColliderShape->setTrigger(true);
     sphereCollider->addShape(sphereColliderShape);
     
-    class MoveScript:public Script {
+    class MoveScript : public Script {
         math::Float3 pos = math::Float3(-5, 0, 0);
         float vel = 4;
         int8_t velSign = -1;
         
     public:
-        MoveScript(Entity* entity):Script(entity) {}
+        MoveScript(Entity *entity) : Script(entity) {
+        }
         
         void onUpdate(float deltaTime) override {
             if (pos.x >= 5) {
@@ -102,23 +105,23 @@ int main(int, char**) {
     };
     
     // Collision Detection
-    class CollisionScript: public Script {
-        MeshRenderer* sphereRenderer;
+    class CollisionScript : public Script {
+        MeshRenderer *sphereRenderer;
         std::default_random_engine e;
         std::uniform_real_distribution<float> u;
         
     public:
-        CollisionScript(Entity* entity):Script(entity) {
+        CollisionScript(Entity *entity) : Script(entity) {
             sphereRenderer = entity->getComponent<MeshRenderer>();
             u = std::uniform_real_distribution<float>(0, 1);
         }
         
         void onTriggerExit(physics::ColliderShapePtr other) override {
-            static_cast<BlinnPhongMaterial*>(sphereRenderer->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
+            static_cast<BlinnPhongMaterial *>(sphereRenderer->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
         }
         
         void onTriggerEnter(physics::ColliderShapePtr other) override {
-            static_cast<BlinnPhongMaterial*>(sphereRenderer->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
+            static_cast<BlinnPhongMaterial *>(sphereRenderer->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
         }
     };
     

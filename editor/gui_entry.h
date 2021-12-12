@@ -12,9 +12,9 @@
 
 namespace vox {
 namespace editor {
-class GUIEntry:public Script {
+class GUIEntry : public Script {
 public:
-    GUIEntry(Entity* entity);
+    GUIEntry(Entity *entity);
     
     void onUpdate(float deltaTime) override;
 };
