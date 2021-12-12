@@ -111,6 +111,14 @@ void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camer
 }
 
 void MetalRenderer::endRenderPass() {
+    ImDrawData *draw_data = ImGui::GetDrawData();
+    if (draw_data != nullptr) {
+        [renderEncoder pushDebugGroup:@"Dear ImGui rendering"];
+        ImGui_ImplMetal_NewFrame(renderPassDescriptor);
+        ImGui_ImplMetal_RenderDrawData(draw_data, commandBuffer, renderEncoder);
+        [renderEncoder popDebugGroup];
+    }
+    
     [renderEncoder endEncoding];
 }
 

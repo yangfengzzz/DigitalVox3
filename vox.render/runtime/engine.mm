@@ -8,6 +8,7 @@
 #include "engine.h"
 #include "camera.h"
 #include "log.h"
+#include "../gui/imgui_impl_glfw.h"
 #include "material/material.h"
 #include "shader/shader_pool.h"
 
@@ -105,6 +106,8 @@ void Engine::update() {
         _physicsManager.callCharacterControllerOnLateUpdate();
         
         glfwPollEvents();
+        ImGui_ImplGlfw_NewFrame();
+        
         _componentsManager.callScriptOnUpdate(deltaTime);
         _componentsManager.callAnimatorUpdate(deltaTime);
         _componentsManager.callScriptOnLateUpdate(deltaTime);

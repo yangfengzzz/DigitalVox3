@@ -20,6 +20,8 @@
 #include "../vox.render/runtime/physics/shape/box_collider_shape.h"
 #include "../vox.render/runtime/physics/shape/sphere_collider_shape.h"
 #include "../vox.render/runtime/lighting/point_light.h"
+
+#include "gui_entry.h"
 #include <random>
 
 using namespace vox;
@@ -32,6 +34,8 @@ int main(int, char**) {
     scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
     
     auto rootEntity = scene->createRootEntity();
+    rootEntity->addComponent<editor::GUIEntry>();
+    
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
