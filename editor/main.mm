@@ -38,10 +38,10 @@ int main(int, char **) {
     //    rootEntity->addComponent<editor::GUIEntry>();
     
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(10, 10, 10);
+    cameraEntity->transform->setPosition(0, 0, -10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
-    //    cameraEntity->addComponent<control::OrbitControl>();
+    cameraEntity->addComponent<control::OrbitControl>();
     cameraEntity->addComponent<editor::Gizmo>();
     
     // init point light

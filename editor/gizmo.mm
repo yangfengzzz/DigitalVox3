@@ -90,12 +90,6 @@ void Gizmo::onUpdate(float deltaTime) {
     ImGui::Render();
 }
 
-static const float identityMatrix[16] =
-{1.f, 0.f, 0.f, 0.f,
-    0.f, 1.f, 0.f, 0.f,
-    0.f, 0.f, 1.f, 0.f,
-    0.f, 0.f, 0.f, 1.f};
-
 void Gizmo::editTransform(float *cameraView, float *cameraProjection, float *matrix, bool editTransformDecomposition) {
     static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::LOCAL);
     static bool useSnap = false;
@@ -169,7 +163,6 @@ void Gizmo::editTransform(float *cameraView, float *cameraProjection, float *mat
     float viewManipulateTop = 0;
     ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
     
-    ImGuizmo::DrawGrid(cameraView, cameraProjection, identityMatrix, 100.f);
     ImGuizmo::Manipulate(cameraView, cameraProjection, mCurrentGizmoOperation, mCurrentGizmoMode,
                          matrix, NULL, useSnap ? &snap[0] : NULL, boundSizing ? bounds : NULL, boundSizingSnap ? boundsSnap : NULL);
     
