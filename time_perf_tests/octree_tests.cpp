@@ -26,7 +26,7 @@ public:
   vox::Octree<Triangle3> queryEngine;
 
   void SetUp(const ::benchmark::State &) override {
-    std::ifstream file("../resources/bunny.obj");
+    std::ifstream file("../models/bunny.obj");
 
     if (file) {
       triMesh.readObj(&file);

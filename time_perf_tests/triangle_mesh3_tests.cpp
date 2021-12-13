@@ -20,7 +20,7 @@ protected:
   vox::TriangleMesh3 triMesh;
 
   void SetUp(const ::benchmark::State &) override {
-    std::ifstream file("../resources/bunny.obj");
+    std::ifstream file("../models/bunny.obj");
 
     if (file) {
       triMesh.readObj(&file);

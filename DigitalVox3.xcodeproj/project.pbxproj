@@ -464,6 +464,127 @@
 		0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7C2765CA8C009AD4EA /* gizmo.mm */; };
 		0434AC81276601B5009AD4EA /* grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7F276601B5009AD4EA /* grid.mm */; };
 		0434AC872766132C009AD4EA /* editor-grid.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC84276611C5009AD4EA /* editor-grid.metal */; };
+		0434AD132767790B009AD4EA /* particle_system_data2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9727677900009AD4EA /* particle_system_data2_tests.cpp */; };
+		0434AD142767790B009AD4EA /* array2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9827677900009AD4EA /* array2_tests.cpp */; };
+		0434AD152767790B009AD4EA /* face_centered_grid3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9927677900009AD4EA /* face_centered_grid3_tests.cpp */; };
+		0434AD162767790B009AD4EA /* samplers_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9A27677900009AD4EA /* samplers_tests.cpp */; };
+		0434AD172767790B009AD4EA /* ray3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9B27677900009AD4EA /* ray3_tests.cpp */; };
+		0434AD182767790B009AD4EA /* collider_set3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9C27677900009AD4EA /* collider_set3_tests.cpp */; };
+		0434AD192767790B009AD4EA /* sph_kernels3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9D27677900009AD4EA /* sph_kernels3_tests.cpp */; };
+		0434AD1A2767790B009AD4EA /* sph_kernels2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9E27677901009AD4EA /* sph_kernels2_tests.cpp */; };
+		0434AD1B2767790B009AD4EA /* physics_animation_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9F27677901009AD4EA /* physics_animation_tests.cpp */; };
+		0434AD1C2767790B009AD4EA /* volume_particle_emitter2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA027677901009AD4EA /* volume_particle_emitter2_tests.cpp */; };
+		0434AD1D2767790B009AD4EA /* array_view1_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA127677901009AD4EA /* array_view1_tests.cpp */; };
+		0434AD1E2767790B009AD4EA /* surface_to_implicit3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA227677901009AD4EA /* surface_to_implicit3_tests.cpp */; };
+		0434AD1F2767790B009AD4EA /* triangle3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA327677901009AD4EA /* triangle3_tests.cpp */; };
+		0434AD202767790B009AD4EA /* point_parallel_hash_grid_searcher3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA427677901009AD4EA /* point_parallel_hash_grid_searcher3_tests.cpp */; };
+		0434AD212767790B009AD4EA /* pci_sph_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA527677901009AD4EA /* pci_sph_solver3_tests.cpp */; };
+		0434AD222767790B009AD4EA /* transform2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA627677901009AD4EA /* transform2_tests.cpp */; };
+		0434AD232767790B009AD4EA /* transform3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA727677901009AD4EA /* transform3_tests.cpp */; };
+		0434AD242767790B009AD4EA /* fdm_mg_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA827677901009AD4EA /* fdm_mg_solver2_tests.cpp */; };
+		0434AD252767790B009AD4EA /* point_particle_emitter3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACA927677901009AD4EA /* point_particle_emitter3_tests.cpp */; };
+		0434AD262767790B009AD4EA /* std_utils_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACAA27677901009AD4EA /* std_utils_tests.cpp */; };
+		0434AD272767790B009AD4EA /* animation_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACAB27677902009AD4EA /* animation_tests.cpp */; };
+		0434AD282767790B009AD4EA /* ray2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACAC27677902009AD4EA /* ray2_tests.cpp */; };
+		0434AD292767790B009AD4EA /* fdm_utils_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACAD27677902009AD4EA /* fdm_utils_tests.cpp */; };
+		0434AD2A2767790B009AD4EA /* custom_implicit_surface2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACAE27677902009AD4EA /* custom_implicit_surface2_tests.cpp */; };
+		0434AD2B2767790B009AD4EA /* point_hash_grid_searcher3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACAF27677902009AD4EA /* point_hash_grid_searcher3_tests.cpp */; };
+		0434AD2C2767790B009AD4EA /* cg_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB027677902009AD4EA /* cg_tests.cpp */; };
+		0434AD2D2767790B009AD4EA /* cell_centered_scalar_grid2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB127677902009AD4EA /* cell_centered_scalar_grid2_tests.cpp */; };
+		0434AD2E2767790B009AD4EA /* sphere3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB227677902009AD4EA /* sphere3_tests.cpp */; };
+		0434AD2F2767790B009AD4EA /* vector2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB327677902009AD4EA /* vector2_tests.cpp */; };
+		0434AD302767790B009AD4EA /* cell_centered_vector_grid3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB427677902009AD4EA /* cell_centered_vector_grid3_tests.cpp */; };
+		0434AD312767790B009AD4EA /* array_view_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB527677902009AD4EA /* array_view_tests.cpp */; };
+		0434AD322767790B009AD4EA /* fdm_mg_linear_system2_tests.cpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB727677903009AD4EA /* fdm_mg_linear_system2_tests.cpp.cpp */; };
+		0434AD332767790B009AD4EA /* matrix3x3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB827677903009AD4EA /* matrix3x3_tests.cpp */; };
+		0434AD342767790B009AD4EA /* fdm_cg_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACB927677903009AD4EA /* fdm_cg_solver3_tests.cpp */; };
+		0434AD352767790B009AD4EA /* mg_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACBA27677903009AD4EA /* mg_tests.cpp */; };
+		0434AD362767790B009AD4EA /* array_utils_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACBB27677903009AD4EA /* array_utils_tests.cpp */; };
+		0434AD372767790B009AD4EA /* implicit_surface_set3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACBC27677903009AD4EA /* implicit_surface_set3_tests.cpp */; };
+		0434AD382767790B009AD4EA /* vector_n_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACBD27677903009AD4EA /* vector_n_tests.cpp */; };
+		0434AD392767790B009AD4EA /* box2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACBE27677903009AD4EA /* box2_tests.cpp */; };
+		0434AD3A2767790B009AD4EA /* sph_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACBF27677903009AD4EA /* sph_solver3_tests.cpp */; };
+		0434AD3B2767790B009AD4EA /* timer_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC027677903009AD4EA /* timer_tests.cpp */; };
+		0434AD3C2767790B009AD4EA /* triangle_mesh_to_sdf_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC127677903009AD4EA /* triangle_mesh_to_sdf_tests.cpp */; };
+		0434AD3D2767790B009AD4EA /* fdm_jacobi_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC227677904009AD4EA /* fdm_jacobi_solver2_tests.cpp */; };
+		0434AD3E2767790B009AD4EA /* vector4_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC327677904009AD4EA /* vector4_tests.cpp */; };
+		0434AD3F2767790B009AD4EA /* array_view2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC427677904009AD4EA /* array_view2_tests.cpp */; };
+		0434AD402767790B009AD4EA /* svd_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC527677904009AD4EA /* svd_tests.cpp */; };
+		0434AD412767790B009AD4EA /* math_utils_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC627677904009AD4EA /* math_utils_tests.cpp */; };
+		0434AD422767790B009AD4EA /* fdm_mgpcg_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC727677904009AD4EA /* fdm_mgpcg_solver2_tests.cpp */; };
+		0434AD432767790B009AD4EA /* list_query_engine2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC827677904009AD4EA /* list_query_engine2_tests.cpp */; };
+		0434AD442767790B009AD4EA /* surface_set3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACC927677904009AD4EA /* surface_set3_tests.cpp */; };
+		0434AD452767790B009AD4EA /* vertex_centered_vector_grid3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACCA27677904009AD4EA /* vertex_centered_vector_grid3_tests.cpp */; };
+		0434AD462767790B009AD4EA /* sph_system_data3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACCB27677904009AD4EA /* sph_system_data3_tests.cpp */; };
+		0434AD472767790B009AD4EA /* point_simple_list_searcher2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACCC27677904009AD4EA /* point_simple_list_searcher2_tests.cpp */; };
+		0434AD482767790B009AD4EA /* unit_tests_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACCD27677904009AD4EA /* unit_tests_utils.cpp */; };
+		0434AD492767790B009AD4EA /* particle_system_solvers_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACCE27677905009AD4EA /* particle_system_solvers_tests.cpp */; };
+		0434AD4A2767790B009AD4EA /* fdm_gauss_seidel_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACCF27677905009AD4EA /* fdm_gauss_seidel_solver3_tests.cpp */; };
+		0434AD4B2767790B009AD4EA /* array1_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD027677905009AD4EA /* array1_tests.cpp */; };
+		0434AD4C2767790B009AD4EA /* blas_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD127677905009AD4EA /* blas_tests.cpp */; };
+		0434AD4D2767790B009AD4EA /* fdm_iccg_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD227677905009AD4EA /* fdm_iccg_solver2_tests.cpp */; };
+		0434AD4E2767790B009AD4EA /* volume_particle_emitter3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD327677905009AD4EA /* volume_particle_emitter3_tests.cpp */; };
+		0434AD4F2767790B009AD4EA /* array_samplers_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD427677905009AD4EA /* array_samplers_tests.cpp */; };
+		0434AD502767790B009AD4EA /* fdm_jacobi_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD527677905009AD4EA /* fdm_jacobi_solver3_tests.cpp */; };
+		0434AD512767790B009AD4EA /* fdm_mgpcg_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD627677905009AD4EA /* fdm_mgpcg_solver3_tests.cpp */; };
+		0434AD522767790B009AD4EA /* sph_system_data2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD727677905009AD4EA /* sph_system_data2_tests.cpp */; };
+		0434AD532767790B009AD4EA /* vertex_centered_scalar_grid2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD827677905009AD4EA /* vertex_centered_scalar_grid2_tests.cpp */; };
+		0434AD542767790B009AD4EA /* cylinder3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACD927677905009AD4EA /* cylinder3_tests.cpp */; };
+		0434AD552767790B009AD4EA /* marching_cubes_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACDA27677906009AD4EA /* marching_cubes_tests.cpp */; };
+		0434AD562767790B009AD4EA /* array_view3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACDC27677906009AD4EA /* array_view3_tests.cpp */; };
+		0434AD572767790B009AD4EA /* octree_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACDD27677906009AD4EA /* octree_tests.cpp */; };
+		0434AD582767790B009AD4EA /* vector_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACDE27677906009AD4EA /* vector_tests.cpp */; };
+		0434AD592767790B009AD4EA /* fdm_gauss_seidel_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACDF27677906009AD4EA /* fdm_gauss_seidel_solver2_tests.cpp */; };
+		0434AD5A2767790B009AD4EA /* implicit_surface_set2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE027677906009AD4EA /* implicit_surface_set2_tests.cpp */; };
+		0434AD5B2767790B009AD4EA /* point_hash_grid_searcher2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE127677906009AD4EA /* point_hash_grid_searcher2_tests.cpp */; };
+		0434AD5C2767790B009AD4EA /* point_simple_list_searcher3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE227677906009AD4EA /* point_simple_list_searcher3_tests.cpp */; };
+		0434AD5D2767790B009AD4EA /* parallel_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE327677906009AD4EA /* parallel_tests.cpp */; };
+		0434AD5E2767790B009AD4EA /* quaternion_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE427677906009AD4EA /* quaternion_tests.cpp */; };
+		0434AD5F2767790B009AD4EA /* fdm_cg_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE527677907009AD4EA /* fdm_cg_solver2_tests.cpp */; };
+		0434AD602767790B009AD4EA /* pde_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE627677907009AD4EA /* pde_tests.cpp */; };
+		0434AD612767790B009AD4EA /* level_set_solvers_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE727677907009AD4EA /* level_set_solvers_tests.cpp */; };
+		0434AD622767790B009AD4EA /* plane2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE827677907009AD4EA /* plane2_tests.cpp */; };
+		0434AD632767790B009AD4EA /* matrix_mxn_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACE927677907009AD4EA /* matrix_mxn_tests.cpp */; };
+		0434AD642767790B009AD4EA /* point_parallel_hash_grid_searcher2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACEA27677907009AD4EA /* point_parallel_hash_grid_searcher2_tests.cpp */; };
+		0434AD652767790B009AD4EA /* bounding_box_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACEB27677907009AD4EA /* bounding_box_tests.cpp */; };
+		0434AD662767790B009AD4EA /* plane3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACEC27677907009AD4EA /* plane3_tests.cpp */; };
+		0434AD672767790B009AD4EA /* point_kdtree_searcher3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACED27677907009AD4EA /* point_kdtree_searcher3_tests.cpp */; };
+		0434AD682767790B009AD4EA /* cell_centered_vector_grid2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACEE27677907009AD4EA /* cell_centered_vector_grid2_tests.cpp */; };
+		0434AD692767790B009AD4EA /* sphere2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACEF27677908009AD4EA /* sphere2_tests.cpp */; };
+		0434AD6A2767790B009AD4EA /* fdm_iccg_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF027677908009AD4EA /* fdm_iccg_solver3_tests.cpp */; };
+		0434AD6B2767790B009AD4EA /* box3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF127677908009AD4EA /* box3_tests.cpp */; };
+		0434AD6C2767790B009AD4EA /* matrix_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF227677908009AD4EA /* matrix_tests.cpp */; };
+		0434AD6D2767790B009AD4EA /* custom_implicit_surface3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF327677908009AD4EA /* custom_implicit_surface3_tests.cpp */; };
+		0434AD6E2767790B009AD4EA /* rigid_body_collider3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF427677908009AD4EA /* rigid_body_collider3_tests.cpp */; };
+		0434AD6F2767790B009AD4EA /* surface_set2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF527677908009AD4EA /* surface_set2_tests.cpp */; };
+		0434AD702767790B009AD4EA /* surface_to_implicit2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF627677908009AD4EA /* surface_to_implicit2_tests.cpp */; };
+		0434AD712767790B009AD4EA /* rigid_body_collider2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF727677908009AD4EA /* rigid_body_collider2_tests.cpp */; };
+		0434AD722767790B009AD4EA /* array3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF827677908009AD4EA /* array3_tests.cpp */; };
+		0434AD732767790B009AD4EA /* bounding_box3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACF927677908009AD4EA /* bounding_box3_tests.cpp */; };
+		0434AD742767790B009AD4EA /* vector3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACFB27677909009AD4EA /* vector3_tests.cpp */; };
+		0434AD752767790B009AD4EA /* vertex_centered_vector_grid2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACFC27677909009AD4EA /* vertex_centered_vector_grid2_tests.cpp */; };
+		0434AD762767790B009AD4EA /* matrix_csr_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACFD27677909009AD4EA /* matrix_csr_tests.cpp */; };
+		0434AD772767790B009AD4EA /* point_kdtree_searcher2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACFE27677909009AD4EA /* point_kdtree_searcher2_tests.cpp */; };
+		0434AD782767790B009AD4EA /* bvh3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434ACFF27677909009AD4EA /* bvh3_tests.cpp */; };
+		0434AD792767790B009AD4EA /* collider_set2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0027677909009AD4EA /* collider_set2_tests.cpp */; };
+		0434AD7A2767790B009AD4EA /* pci_sph_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0127677909009AD4EA /* pci_sph_solver2_tests.cpp */; };
+		0434AD7B2767790B009AD4EA /* point_particle_emitter2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0227677909009AD4EA /* point_particle_emitter2_tests.cpp */; };
+		0434AD7C2767790B009AD4EA /* implicit_triangle_mesh3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0327677909009AD4EA /* implicit_triangle_mesh3_tests.cpp */; };
+		0434AD7D2767790B009AD4EA /* vertex_centered_scalar_grid3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0427677909009AD4EA /* vertex_centered_scalar_grid3_tests.cpp */; };
+		0434AD7E2767790B009AD4EA /* face_centered_grid2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0527677909009AD4EA /* face_centered_grid2_tests.cpp */; };
+		0434AD7F2767790B009AD4EA /* cell_centered_scalar_grid3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD062767790A009AD4EA /* cell_centered_scalar_grid3_tests.cpp */; };
+		0434AD802767790B009AD4EA /* particle_system_data3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD072767790A009AD4EA /* particle_system_data3_tests.cpp */; };
+		0434AD812767790B009AD4EA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD082767790A009AD4EA /* main.cpp */; };
+		0434AD822767790B009AD4EA /* quadtree_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD092767790A009AD4EA /* quadtree_tests.cpp */; };
+		0434AD832767790B009AD4EA /* matrix4x4_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0A2767790A009AD4EA /* matrix4x4_tests.cpp */; };
+		0434AD842767790B009AD4EA /* bounding_box2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0B2767790A009AD4EA /* bounding_box2_tests.cpp */; };
+		0434AD852767790B009AD4EA /* list_query_engine3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0C2767790A009AD4EA /* list_query_engine3_tests.cpp */; };
+		0434AD862767790B009AD4EA /* bvh2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0E2767790A009AD4EA /* bvh2_tests.cpp */; };
+		0434AD872767790B009AD4EA /* matrix2x2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD0F2767790A009AD4EA /* matrix2x2_tests.cpp */; };
+		0434AD882767790B009AD4EA /* sph_solver2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD102767790A009AD4EA /* sph_solver2_tests.cpp */; };
+		0434AD892767790B009AD4EA /* triangle_mesh3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD112767790A009AD4EA /* triangle_mesh3_tests.cpp */; };
+		0434AD8A2767790B009AD4EA /* fdm_mg_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD122767790A009AD4EA /* fdm_mg_solver3_tests.cpp */; };
+		0434AD8D27677954009AD4EA /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -714,6 +835,13 @@
 			remoteGlobalIDString = 043155A52767475D0070FBEC;
 			remoteInfo = vox.geometry;
 		};
+		0434AD8B27677951009AD4EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04CE3674274D077100204B8E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 043155A52767475D0070FBEC;
+			remoteInfo = vox.geometry;
+		};
 		04CE3822274D173D00204B8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04CE3674274D077100204B8E /* Project object */;
@@ -750,6 +878,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		0434A2AB275F96AB009AD4EA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		0434AC8E276778DE009AD4EA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -1248,6 +1385,130 @@
 		0434AC7F276601B5009AD4EA /* grid.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = grid.mm; sourceTree = "<group>"; };
 		0434AC80276601B5009AD4EA /* grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		0434AC84276611C5009AD4EA /* editor-grid.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "editor-grid.metal"; sourceTree = "<group>"; };
+		0434AC90276778DE009AD4EA /* unit_tests.geo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = unit_tests.geo; sourceTree = BUILT_PRODUCTS_DIR; };
+		0434AC9727677900009AD4EA /* particle_system_data2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle_system_data2_tests.cpp; sourceTree = "<group>"; };
+		0434AC9827677900009AD4EA /* array2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array2_tests.cpp; sourceTree = "<group>"; };
+		0434AC9927677900009AD4EA /* face_centered_grid3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = face_centered_grid3_tests.cpp; sourceTree = "<group>"; };
+		0434AC9A27677900009AD4EA /* samplers_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = samplers_tests.cpp; sourceTree = "<group>"; };
+		0434AC9B27677900009AD4EA /* ray3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ray3_tests.cpp; sourceTree = "<group>"; };
+		0434AC9C27677900009AD4EA /* collider_set3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = collider_set3_tests.cpp; sourceTree = "<group>"; };
+		0434AC9D27677900009AD4EA /* sph_kernels3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_kernels3_tests.cpp; sourceTree = "<group>"; };
+		0434AC9E27677901009AD4EA /* sph_kernels2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_kernels2_tests.cpp; sourceTree = "<group>"; };
+		0434AC9F27677901009AD4EA /* physics_animation_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physics_animation_tests.cpp; sourceTree = "<group>"; };
+		0434ACA027677901009AD4EA /* volume_particle_emitter2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = volume_particle_emitter2_tests.cpp; sourceTree = "<group>"; };
+		0434ACA127677901009AD4EA /* array_view1_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_view1_tests.cpp; sourceTree = "<group>"; };
+		0434ACA227677901009AD4EA /* surface_to_implicit3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = surface_to_implicit3_tests.cpp; sourceTree = "<group>"; };
+		0434ACA327677901009AD4EA /* triangle3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangle3_tests.cpp; sourceTree = "<group>"; };
+		0434ACA427677901009AD4EA /* point_parallel_hash_grid_searcher3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_parallel_hash_grid_searcher3_tests.cpp; sourceTree = "<group>"; };
+		0434ACA527677901009AD4EA /* pci_sph_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pci_sph_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACA627677901009AD4EA /* transform2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform2_tests.cpp; sourceTree = "<group>"; };
+		0434ACA727677901009AD4EA /* transform3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform3_tests.cpp; sourceTree = "<group>"; };
+		0434ACA827677901009AD4EA /* fdm_mg_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mg_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434ACA927677901009AD4EA /* point_particle_emitter3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_particle_emitter3_tests.cpp; sourceTree = "<group>"; };
+		0434ACAA27677901009AD4EA /* std_utils_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = std_utils_tests.cpp; sourceTree = "<group>"; };
+		0434ACAB27677902009AD4EA /* animation_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animation_tests.cpp; sourceTree = "<group>"; };
+		0434ACAC27677902009AD4EA /* ray2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ray2_tests.cpp; sourceTree = "<group>"; };
+		0434ACAD27677902009AD4EA /* fdm_utils_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_utils_tests.cpp; sourceTree = "<group>"; };
+		0434ACAE27677902009AD4EA /* custom_implicit_surface2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = custom_implicit_surface2_tests.cpp; sourceTree = "<group>"; };
+		0434ACAF27677902009AD4EA /* point_hash_grid_searcher3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_hash_grid_searcher3_tests.cpp; sourceTree = "<group>"; };
+		0434ACB027677902009AD4EA /* cg_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cg_tests.cpp; sourceTree = "<group>"; };
+		0434ACB127677902009AD4EA /* cell_centered_scalar_grid2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cell_centered_scalar_grid2_tests.cpp; sourceTree = "<group>"; };
+		0434ACB227677902009AD4EA /* sphere3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sphere3_tests.cpp; sourceTree = "<group>"; };
+		0434ACB327677902009AD4EA /* vector2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2_tests.cpp; sourceTree = "<group>"; };
+		0434ACB427677902009AD4EA /* cell_centered_vector_grid3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cell_centered_vector_grid3_tests.cpp; sourceTree = "<group>"; };
+		0434ACB527677902009AD4EA /* array_view_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_view_tests.cpp; sourceTree = "<group>"; };
+		0434ACB627677902009AD4EA /* unit_tests_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unit_tests_utils.h; sourceTree = "<group>"; };
+		0434ACB727677903009AD4EA /* fdm_mg_linear_system2_tests.cpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mg_linear_system2_tests.cpp.cpp; sourceTree = "<group>"; };
+		0434ACB827677903009AD4EA /* matrix3x3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix3x3_tests.cpp; sourceTree = "<group>"; };
+		0434ACB927677903009AD4EA /* fdm_cg_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_cg_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACBA27677903009AD4EA /* mg_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mg_tests.cpp; sourceTree = "<group>"; };
+		0434ACBB27677903009AD4EA /* array_utils_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_utils_tests.cpp; sourceTree = "<group>"; };
+		0434ACBC27677903009AD4EA /* implicit_surface_set3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = implicit_surface_set3_tests.cpp; sourceTree = "<group>"; };
+		0434ACBD27677903009AD4EA /* vector_n_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector_n_tests.cpp; sourceTree = "<group>"; };
+		0434ACBE27677903009AD4EA /* box2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box2_tests.cpp; sourceTree = "<group>"; };
+		0434ACBF27677903009AD4EA /* sph_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACC027677903009AD4EA /* timer_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer_tests.cpp; sourceTree = "<group>"; };
+		0434ACC127677903009AD4EA /* triangle_mesh_to_sdf_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangle_mesh_to_sdf_tests.cpp; sourceTree = "<group>"; };
+		0434ACC227677904009AD4EA /* fdm_jacobi_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_jacobi_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434ACC327677904009AD4EA /* vector4_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector4_tests.cpp; sourceTree = "<group>"; };
+		0434ACC427677904009AD4EA /* array_view2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_view2_tests.cpp; sourceTree = "<group>"; };
+		0434ACC527677904009AD4EA /* svd_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = svd_tests.cpp; sourceTree = "<group>"; };
+		0434ACC627677904009AD4EA /* math_utils_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = math_utils_tests.cpp; sourceTree = "<group>"; };
+		0434ACC727677904009AD4EA /* fdm_mgpcg_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mgpcg_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434ACC827677904009AD4EA /* list_query_engine2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list_query_engine2_tests.cpp; sourceTree = "<group>"; };
+		0434ACC927677904009AD4EA /* surface_set3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = surface_set3_tests.cpp; sourceTree = "<group>"; };
+		0434ACCA27677904009AD4EA /* vertex_centered_vector_grid3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_centered_vector_grid3_tests.cpp; sourceTree = "<group>"; };
+		0434ACCB27677904009AD4EA /* sph_system_data3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_system_data3_tests.cpp; sourceTree = "<group>"; };
+		0434ACCC27677904009AD4EA /* point_simple_list_searcher2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_simple_list_searcher2_tests.cpp; sourceTree = "<group>"; };
+		0434ACCD27677904009AD4EA /* unit_tests_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unit_tests_utils.cpp; sourceTree = "<group>"; };
+		0434ACCE27677905009AD4EA /* particle_system_solvers_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle_system_solvers_tests.cpp; sourceTree = "<group>"; };
+		0434ACCF27677905009AD4EA /* fdm_gauss_seidel_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_gauss_seidel_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACD027677905009AD4EA /* array1_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array1_tests.cpp; sourceTree = "<group>"; };
+		0434ACD127677905009AD4EA /* blas_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = blas_tests.cpp; sourceTree = "<group>"; };
+		0434ACD227677905009AD4EA /* fdm_iccg_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_iccg_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434ACD327677905009AD4EA /* volume_particle_emitter3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = volume_particle_emitter3_tests.cpp; sourceTree = "<group>"; };
+		0434ACD427677905009AD4EA /* array_samplers_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_samplers_tests.cpp; sourceTree = "<group>"; };
+		0434ACD527677905009AD4EA /* fdm_jacobi_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_jacobi_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACD627677905009AD4EA /* fdm_mgpcg_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mgpcg_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACD727677905009AD4EA /* sph_system_data2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_system_data2_tests.cpp; sourceTree = "<group>"; };
+		0434ACD827677905009AD4EA /* vertex_centered_scalar_grid2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_centered_scalar_grid2_tests.cpp; sourceTree = "<group>"; };
+		0434ACD927677905009AD4EA /* cylinder3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cylinder3_tests.cpp; sourceTree = "<group>"; };
+		0434ACDA27677906009AD4EA /* marching_cubes_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = marching_cubes_tests.cpp; sourceTree = "<group>"; };
+		0434ACDC27677906009AD4EA /* array_view3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_view3_tests.cpp; sourceTree = "<group>"; };
+		0434ACDD27677906009AD4EA /* octree_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = octree_tests.cpp; sourceTree = "<group>"; };
+		0434ACDE27677906009AD4EA /* vector_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector_tests.cpp; sourceTree = "<group>"; };
+		0434ACDF27677906009AD4EA /* fdm_gauss_seidel_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_gauss_seidel_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434ACE027677906009AD4EA /* implicit_surface_set2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = implicit_surface_set2_tests.cpp; sourceTree = "<group>"; };
+		0434ACE127677906009AD4EA /* point_hash_grid_searcher2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_hash_grid_searcher2_tests.cpp; sourceTree = "<group>"; };
+		0434ACE227677906009AD4EA /* point_simple_list_searcher3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_simple_list_searcher3_tests.cpp; sourceTree = "<group>"; };
+		0434ACE327677906009AD4EA /* parallel_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parallel_tests.cpp; sourceTree = "<group>"; };
+		0434ACE427677906009AD4EA /* quaternion_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quaternion_tests.cpp; sourceTree = "<group>"; };
+		0434ACE527677907009AD4EA /* fdm_cg_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_cg_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434ACE627677907009AD4EA /* pde_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pde_tests.cpp; sourceTree = "<group>"; };
+		0434ACE727677907009AD4EA /* level_set_solvers_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = level_set_solvers_tests.cpp; sourceTree = "<group>"; };
+		0434ACE827677907009AD4EA /* plane2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plane2_tests.cpp; sourceTree = "<group>"; };
+		0434ACE927677907009AD4EA /* matrix_mxn_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_mxn_tests.cpp; sourceTree = "<group>"; };
+		0434ACEA27677907009AD4EA /* point_parallel_hash_grid_searcher2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_parallel_hash_grid_searcher2_tests.cpp; sourceTree = "<group>"; };
+		0434ACEB27677907009AD4EA /* bounding_box_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_box_tests.cpp; sourceTree = "<group>"; };
+		0434ACEC27677907009AD4EA /* plane3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plane3_tests.cpp; sourceTree = "<group>"; };
+		0434ACED27677907009AD4EA /* point_kdtree_searcher3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_kdtree_searcher3_tests.cpp; sourceTree = "<group>"; };
+		0434ACEE27677907009AD4EA /* cell_centered_vector_grid2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cell_centered_vector_grid2_tests.cpp; sourceTree = "<group>"; };
+		0434ACEF27677908009AD4EA /* sphere2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sphere2_tests.cpp; sourceTree = "<group>"; };
+		0434ACF027677908009AD4EA /* fdm_iccg_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_iccg_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434ACF127677908009AD4EA /* box3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box3_tests.cpp; sourceTree = "<group>"; };
+		0434ACF227677908009AD4EA /* matrix_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_tests.cpp; sourceTree = "<group>"; };
+		0434ACF327677908009AD4EA /* custom_implicit_surface3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = custom_implicit_surface3_tests.cpp; sourceTree = "<group>"; };
+		0434ACF427677908009AD4EA /* rigid_body_collider3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_collider3_tests.cpp; sourceTree = "<group>"; };
+		0434ACF527677908009AD4EA /* surface_set2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = surface_set2_tests.cpp; sourceTree = "<group>"; };
+		0434ACF627677908009AD4EA /* surface_to_implicit2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = surface_to_implicit2_tests.cpp; sourceTree = "<group>"; };
+		0434ACF727677908009AD4EA /* rigid_body_collider2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rigid_body_collider2_tests.cpp; sourceTree = "<group>"; };
+		0434ACF827677908009AD4EA /* array3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array3_tests.cpp; sourceTree = "<group>"; };
+		0434ACF927677908009AD4EA /* bounding_box3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_box3_tests.cpp; sourceTree = "<group>"; };
+		0434ACFA27677909009AD4EA /* fdm_linear_system_solver_test_helper3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdm_linear_system_solver_test_helper3.h; sourceTree = "<group>"; };
+		0434ACFB27677909009AD4EA /* vector3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector3_tests.cpp; sourceTree = "<group>"; };
+		0434ACFC27677909009AD4EA /* vertex_centered_vector_grid2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_centered_vector_grid2_tests.cpp; sourceTree = "<group>"; };
+		0434ACFD27677909009AD4EA /* matrix_csr_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_csr_tests.cpp; sourceTree = "<group>"; };
+		0434ACFE27677909009AD4EA /* point_kdtree_searcher2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_kdtree_searcher2_tests.cpp; sourceTree = "<group>"; };
+		0434ACFF27677909009AD4EA /* bvh3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bvh3_tests.cpp; sourceTree = "<group>"; };
+		0434AD0027677909009AD4EA /* collider_set2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = collider_set2_tests.cpp; sourceTree = "<group>"; };
+		0434AD0127677909009AD4EA /* pci_sph_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pci_sph_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434AD0227677909009AD4EA /* point_particle_emitter2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_particle_emitter2_tests.cpp; sourceTree = "<group>"; };
+		0434AD0327677909009AD4EA /* implicit_triangle_mesh3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = implicit_triangle_mesh3_tests.cpp; sourceTree = "<group>"; };
+		0434AD0427677909009AD4EA /* vertex_centered_scalar_grid3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_centered_scalar_grid3_tests.cpp; sourceTree = "<group>"; };
+		0434AD0527677909009AD4EA /* face_centered_grid2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = face_centered_grid2_tests.cpp; sourceTree = "<group>"; };
+		0434AD062767790A009AD4EA /* cell_centered_scalar_grid3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cell_centered_scalar_grid3_tests.cpp; sourceTree = "<group>"; };
+		0434AD072767790A009AD4EA /* particle_system_data3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle_system_data3_tests.cpp; sourceTree = "<group>"; };
+		0434AD082767790A009AD4EA /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0434AD092767790A009AD4EA /* quadtree_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quadtree_tests.cpp; sourceTree = "<group>"; };
+		0434AD0A2767790A009AD4EA /* matrix4x4_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix4x4_tests.cpp; sourceTree = "<group>"; };
+		0434AD0B2767790A009AD4EA /* bounding_box2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_box2_tests.cpp; sourceTree = "<group>"; };
+		0434AD0C2767790A009AD4EA /* list_query_engine3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list_query_engine3_tests.cpp; sourceTree = "<group>"; };
+		0434AD0D2767790A009AD4EA /* fdm_linear_system_solver_test_helper2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdm_linear_system_solver_test_helper2.h; sourceTree = "<group>"; };
+		0434AD0E2767790A009AD4EA /* bvh2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bvh2_tests.cpp; sourceTree = "<group>"; };
+		0434AD0F2767790A009AD4EA /* matrix2x2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix2x2_tests.cpp; sourceTree = "<group>"; };
+		0434AD102767790A009AD4EA /* sph_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_solver2_tests.cpp; sourceTree = "<group>"; };
+		0434AD112767790A009AD4EA /* triangle_mesh3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangle_mesh3_tests.cpp; sourceTree = "<group>"; };
+		0434AD122767790A009AD4EA /* fdm_mg_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mg_solver3_tests.cpp; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -1623,6 +1884,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0434AC8D276778DE009AD4EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0434AD8D27677954009AD4EA /* libvox.geometry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2255,18 +2524,18 @@
 			isa = PBXGroup;
 			children = (
 				0431586C27674CE70070FBEC /* main.cpp */,
-				0431586E27674CE70070FBEC /* bvh3_tests.cpp */,
-				0431586B27674CE70070FBEC /* fdm_linear_systems_tests.cpp */,
-				0431586627674CE70070FBEC /* list_query_engine3_tests.cpp */,
-				0431586827674CE70070FBEC /* matrix_mxn_tests.cpp */,
-				0431586227674CE70070FBEC /* octree_tests.cpp */,
 				0431586D27674CE70070FBEC /* parallel_tests.cpp */,
-				0431586727674CE70070FBEC /* particle_system_solver3_tests.cpp */,
-				0431586A27674CE70070FBEC /* point_hash_grid_searcher3_tests.cpp */,
-				0431586427674CE70070FBEC /* point_kdtree_searcher3_tests.cpp */,
-				0431586927674CE70070FBEC /* point_parallel_hash_grid_searcher3_tests.cpp */,
+				0431586827674CE70070FBEC /* matrix_mxn_tests.cpp */,
+				0431586B27674CE70070FBEC /* fdm_linear_systems_tests.cpp */,
 				0431586127674CE70070FBEC /* triangle_mesh_to_sdf_tests.cpp */,
 				0431586327674CE70070FBEC /* triangle_mesh3_tests.cpp */,
+				0431586E27674CE70070FBEC /* bvh3_tests.cpp */,
+				0431586227674CE70070FBEC /* octree_tests.cpp */,
+				0431586627674CE70070FBEC /* list_query_engine3_tests.cpp */,
+				0431586427674CE70070FBEC /* point_kdtree_searcher3_tests.cpp */,
+				0431586A27674CE70070FBEC /* point_hash_grid_searcher3_tests.cpp */,
+				0431586927674CE70070FBEC /* point_parallel_hash_grid_searcher3_tests.cpp */,
+				0431586727674CE70070FBEC /* particle_system_solver3_tests.cpp */,
 				0431586527674CE70070FBEC /* volume_particle_emitter3_tests.cpp */,
 			);
 			path = time_perf_tests;
@@ -2323,6 +2592,160 @@
 				0431560A276748B90070FBEC /* volume_grid_emitter3.h */,
 			);
 			path = grid_emitters;
+			sourceTree = "<group>";
+		};
+		0434AC91276778DE009AD4EA /* unit_tests.geo */ = {
+			isa = PBXGroup;
+			children = (
+				0434AD082767790A009AD4EA /* main.cpp */,
+				0434ACC027677903009AD4EA /* timer_tests.cpp */,
+				0434ACE327677906009AD4EA /* parallel_tests.cpp */,
+				0434ACAA27677901009AD4EA /* std_utils_tests.cpp */,
+				0434ACCD27677904009AD4EA /* unit_tests_utils.cpp */,
+				0434ACB627677902009AD4EA /* unit_tests_utils.h */,
+				0434ACC627677904009AD4EA /* math_utils_tests.cpp */,
+				0434ACDE27677906009AD4EA /* vector_tests.cpp */,
+				0434ACB327677902009AD4EA /* vector2_tests.cpp */,
+				0434ACFB27677909009AD4EA /* vector3_tests.cpp */,
+				0434ACC327677904009AD4EA /* vector4_tests.cpp */,
+				0434ACD027677905009AD4EA /* array1_tests.cpp */,
+				0434AC9827677900009AD4EA /* array2_tests.cpp */,
+				0434ACF827677908009AD4EA /* array3_tests.cpp */,
+				0434ACBB27677903009AD4EA /* array_utils_tests.cpp */,
+				0434ACB527677902009AD4EA /* array_view_tests.cpp */,
+				0434ACA127677901009AD4EA /* array_view1_tests.cpp */,
+				0434ACC427677904009AD4EA /* array_view2_tests.cpp */,
+				0434ACDC27677906009AD4EA /* array_view3_tests.cpp */,
+				0434ACD427677905009AD4EA /* array_samplers_tests.cpp */,
+				0434ACBA27677903009AD4EA /* mg_tests.cpp */,
+				0434ACD127677905009AD4EA /* blas_tests.cpp */,
+				0434ACB027677902009AD4EA /* cg_tests.cpp */,
+				0434ACC527677904009AD4EA /* svd_tests.cpp */,
+				0434ACBD27677903009AD4EA /* vector_n_tests.cpp */,
+				0434ACF227677908009AD4EA /* matrix_tests.cpp */,
+				0434AD0F2767790A009AD4EA /* matrix2x2_tests.cpp */,
+				0434ACB827677903009AD4EA /* matrix3x3_tests.cpp */,
+				0434AD0A2767790A009AD4EA /* matrix4x4_tests.cpp */,
+				0434ACE927677907009AD4EA /* matrix_mxn_tests.cpp */,
+				0434ACFD27677909009AD4EA /* matrix_csr_tests.cpp */,
+				0434ACE427677906009AD4EA /* quaternion_tests.cpp */,
+				0434ACA627677901009AD4EA /* transform2_tests.cpp */,
+				0434ACA727677901009AD4EA /* transform3_tests.cpp */,
+				0434ACE527677907009AD4EA /* fdm_cg_solver2_tests.cpp */,
+				0434ACB927677903009AD4EA /* fdm_cg_solver3_tests.cpp */,
+				0434ACDF27677906009AD4EA /* fdm_gauss_seidel_solver2_tests.cpp */,
+				0434ACCF27677905009AD4EA /* fdm_gauss_seidel_solver3_tests.cpp */,
+				0434ACD227677905009AD4EA /* fdm_iccg_solver2_tests.cpp */,
+				0434ACF027677908009AD4EA /* fdm_iccg_solver3_tests.cpp */,
+				0434ACC227677904009AD4EA /* fdm_jacobi_solver2_tests.cpp */,
+				0434ACD527677905009AD4EA /* fdm_jacobi_solver3_tests.cpp */,
+				0434AD0D2767790A009AD4EA /* fdm_linear_system_solver_test_helper2.h */,
+				0434ACFA27677909009AD4EA /* fdm_linear_system_solver_test_helper3.h */,
+				0434ACB727677903009AD4EA /* fdm_mg_linear_system2_tests.cpp.cpp */,
+				0434ACA827677901009AD4EA /* fdm_mg_solver2_tests.cpp */,
+				0434AD122767790A009AD4EA /* fdm_mg_solver3_tests.cpp */,
+				0434ACC727677904009AD4EA /* fdm_mgpcg_solver2_tests.cpp */,
+				0434ACD627677905009AD4EA /* fdm_mgpcg_solver3_tests.cpp */,
+				0434ACAD27677902009AD4EA /* fdm_utils_tests.cpp */,
+				0434AD8E27677B27009AD4EA /* base */,
+				0434ACEB27677907009AD4EA /* bounding_box_tests.cpp */,
+				0434AD0B2767790A009AD4EA /* bounding_box2_tests.cpp */,
+				0434ACF927677908009AD4EA /* bounding_box3_tests.cpp */,
+				0434ACAC27677902009AD4EA /* ray2_tests.cpp */,
+				0434AC9B27677900009AD4EA /* ray3_tests.cpp */,
+				0434ACE827677907009AD4EA /* plane2_tests.cpp */,
+				0434ACEC27677907009AD4EA /* plane3_tests.cpp */,
+				0434ACEF27677908009AD4EA /* sphere2_tests.cpp */,
+				0434ACB227677902009AD4EA /* sphere3_tests.cpp */,
+				0434ACBE27677903009AD4EA /* box2_tests.cpp */,
+				0434ACF127677908009AD4EA /* box3_tests.cpp */,
+				0434ACD927677905009AD4EA /* cylinder3_tests.cpp */,
+				0434ACA327677901009AD4EA /* triangle3_tests.cpp */,
+				0434AD112767790A009AD4EA /* triangle_mesh3_tests.cpp */,
+				0434ACF527677908009AD4EA /* surface_set2_tests.cpp */,
+				0434ACC927677904009AD4EA /* surface_set3_tests.cpp */,
+				0434ACF627677908009AD4EA /* surface_to_implicit2_tests.cpp */,
+				0434ACA227677901009AD4EA /* surface_to_implicit3_tests.cpp */,
+				0434ACAE27677902009AD4EA /* custom_implicit_surface2_tests.cpp */,
+				0434ACF327677908009AD4EA /* custom_implicit_surface3_tests.cpp */,
+				0434ACE027677906009AD4EA /* implicit_surface_set2_tests.cpp */,
+				0434ACBC27677903009AD4EA /* implicit_surface_set3_tests.cpp */,
+				0434AD0327677909009AD4EA /* implicit_triangle_mesh3_tests.cpp */,
+				0434AD0E2767790A009AD4EA /* bvh2_tests.cpp */,
+				0434ACFF27677909009AD4EA /* bvh3_tests.cpp */,
+				0434AD092767790A009AD4EA /* quadtree_tests.cpp */,
+				0434ACDD27677906009AD4EA /* octree_tests.cpp */,
+				0434ACC827677904009AD4EA /* list_query_engine2_tests.cpp */,
+				0434AD0C2767790A009AD4EA /* list_query_engine3_tests.cpp */,
+				0434ACDA27677906009AD4EA /* marching_cubes_tests.cpp */,
+				0434ACC127677903009AD4EA /* triangle_mesh_to_sdf_tests.cpp */,
+				0434AD8F27677BBD009AD4EA /* geometry */,
+				0434ACF727677908009AD4EA /* rigid_body_collider2_tests.cpp */,
+				0434ACF427677908009AD4EA /* rigid_body_collider3_tests.cpp */,
+				0434AD0027677909009AD4EA /* collider_set2_tests.cpp */,
+				0434AC9C27677900009AD4EA /* collider_set3_tests.cpp */,
+				0434ACAB27677902009AD4EA /* animation_tests.cpp */,
+				0434AC9F27677901009AD4EA /* physics_animation_tests.cpp */,
+				0434ACE127677906009AD4EA /* point_hash_grid_searcher2_tests.cpp */,
+				0434ACAF27677902009AD4EA /* point_hash_grid_searcher3_tests.cpp */,
+				0434ACFE27677909009AD4EA /* point_kdtree_searcher2_tests.cpp */,
+				0434ACED27677907009AD4EA /* point_kdtree_searcher3_tests.cpp */,
+				0434ACEA27677907009AD4EA /* point_parallel_hash_grid_searcher2_tests.cpp */,
+				0434ACA427677901009AD4EA /* point_parallel_hash_grid_searcher3_tests.cpp */,
+				0434ACCC27677904009AD4EA /* point_simple_list_searcher2_tests.cpp */,
+				0434ACE227677906009AD4EA /* point_simple_list_searcher3_tests.cpp */,
+				0434AC9A27677900009AD4EA /* samplers_tests.cpp */,
+				0434AD0227677909009AD4EA /* point_particle_emitter2_tests.cpp */,
+				0434ACA927677901009AD4EA /* point_particle_emitter3_tests.cpp */,
+				0434ACA027677901009AD4EA /* volume_particle_emitter2_tests.cpp */,
+				0434ACD327677905009AD4EA /* volume_particle_emitter3_tests.cpp */,
+				0434AC9727677900009AD4EA /* particle_system_data2_tests.cpp */,
+				0434AD072767790A009AD4EA /* particle_system_data3_tests.cpp */,
+				0434ACCE27677905009AD4EA /* particle_system_solvers_tests.cpp */,
+				0434AC9E27677901009AD4EA /* sph_kernels2_tests.cpp */,
+				0434AC9D27677900009AD4EA /* sph_kernels3_tests.cpp */,
+				0434AD102767790A009AD4EA /* sph_solver2_tests.cpp */,
+				0434ACBF27677903009AD4EA /* sph_solver3_tests.cpp */,
+				0434ACD727677905009AD4EA /* sph_system_data2_tests.cpp */,
+				0434ACCB27677904009AD4EA /* sph_system_data3_tests.cpp */,
+				0434AD0127677909009AD4EA /* pci_sph_solver2_tests.cpp */,
+				0434ACA527677901009AD4EA /* pci_sph_solver3_tests.cpp */,
+				0434AD9027677C4A009AD4EA /* particle */,
+				0434AD0527677909009AD4EA /* face_centered_grid2_tests.cpp */,
+				0434AC9927677900009AD4EA /* face_centered_grid3_tests.cpp */,
+				0434ACB127677902009AD4EA /* cell_centered_scalar_grid2_tests.cpp */,
+				0434AD062767790A009AD4EA /* cell_centered_scalar_grid3_tests.cpp */,
+				0434ACEE27677907009AD4EA /* cell_centered_vector_grid2_tests.cpp */,
+				0434ACB427677902009AD4EA /* cell_centered_vector_grid3_tests.cpp */,
+				0434ACD827677905009AD4EA /* vertex_centered_scalar_grid2_tests.cpp */,
+				0434AD0427677909009AD4EA /* vertex_centered_scalar_grid3_tests.cpp */,
+				0434ACFC27677909009AD4EA /* vertex_centered_vector_grid2_tests.cpp */,
+				0434ACCA27677904009AD4EA /* vertex_centered_vector_grid3_tests.cpp */,
+				0434ACE727677907009AD4EA /* level_set_solvers_tests.cpp */,
+				0434ACE627677907009AD4EA /* pde_tests.cpp */,
+			);
+			path = unit_tests.geo;
+			sourceTree = "<group>";
+		};
+		0434AD8E27677B27009AD4EA /* base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		0434AD8F27677BBD009AD4EA /* geometry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = geometry;
+			sourceTree = "<group>";
+		};
+		0434AD9027677C4A009AD4EA /* particle */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = particle;
 			sourceTree = "<group>";
 		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
@@ -2382,6 +2805,7 @@
 				04CE367E274D077100204B8E /* apps */,
 				0434A2AE275F96AB009AD4EA /* editor */,
 				04CE382D274D17B300204B8E /* unit_tests */,
+				0434AC91276778DE009AD4EA /* unit_tests.geo */,
 				0431584727674C960070FBEC /* mem_perf_tests */,
 				0431585227674CB80070FBEC /* time_perf_tests */,
 				0434A360275F9CBA009AD4EA /* external */,
@@ -2401,6 +2825,7 @@
 				043155A62767475D0070FBEC /* libvox.geometry.a */,
 				0431584627674C960070FBEC /* mem_perf_tests */,
 				0431585127674CB80070FBEC /* time_perf_tests */,
+				0434AC90276778DE009AD4EA /* unit_tests.geo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3473,6 +3898,24 @@
 			productReference = 0434A35F275F9CBA009AD4EA /* libexternal.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		0434AC8F276778DE009AD4EA /* unit_tests.geo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0434AC94276778DE009AD4EA /* Build configuration list for PBXNativeTarget "unit_tests.geo" */;
+			buildPhases = (
+				0434AC8C276778DE009AD4EA /* Sources */,
+				0434AC8D276778DE009AD4EA /* Frameworks */,
+				0434AC8E276778DE009AD4EA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0434AD8C27677951009AD4EA /* PBXTargetDependency */,
+			);
+			name = unit_tests.geo;
+			productName = unit_tests.geo;
+			productReference = 0434AC90276778DE009AD4EA /* unit_tests.geo */;
+			productType = "com.apple.product-type.tool";
+		};
 		04CE367B274D077100204B8E /* apps */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04CE3683274D077100204B8E /* Build configuration list for PBXNativeTarget "apps" */;
@@ -3550,6 +3993,9 @@
 					0434A35E275F9CBA009AD4EA = {
 						CreatedOnToolsVersion = 13.1;
 					};
+					0434AC8F276778DE009AD4EA = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					04CE367B274D077100204B8E = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -3579,6 +4025,7 @@
 				04CE367B274D077100204B8E /* apps */,
 				0434A2AC275F96AB009AD4EA /* editor */,
 				04CE382B274D17B300204B8E /* unit_tests */,
+				0434AC8F276778DE009AD4EA /* unit_tests.geo */,
 				0431584527674C960070FBEC /* mem_perf_tests */,
 				0431585027674CB80070FBEC /* time_perf_tests */,
 				0434A35E275F9CBA009AD4EA /* external */,
@@ -3752,6 +4199,133 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0434AC8C276778DE009AD4EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0434AD782767790B009AD4EA /* bvh3_tests.cpp in Sources */,
+				0434AD252767790B009AD4EA /* point_particle_emitter3_tests.cpp in Sources */,
+				0434AD772767790B009AD4EA /* point_kdtree_searcher2_tests.cpp in Sources */,
+				0434AD862767790B009AD4EA /* bvh2_tests.cpp in Sources */,
+				0434AD5E2767790B009AD4EA /* quaternion_tests.cpp in Sources */,
+				0434AD3B2767790B009AD4EA /* timer_tests.cpp in Sources */,
+				0434AD7D2767790B009AD4EA /* vertex_centered_scalar_grid3_tests.cpp in Sources */,
+				0434AD202767790B009AD4EA /* point_parallel_hash_grid_searcher3_tests.cpp in Sources */,
+				0434AD7A2767790B009AD4EA /* pci_sph_solver2_tests.cpp in Sources */,
+				0434AD692767790B009AD4EA /* sphere2_tests.cpp in Sources */,
+				0434AD352767790B009AD4EA /* mg_tests.cpp in Sources */,
+				0434AD242767790B009AD4EA /* fdm_mg_solver2_tests.cpp in Sources */,
+				0434AD162767790B009AD4EA /* samplers_tests.cpp in Sources */,
+				0434AD792767790B009AD4EA /* collider_set2_tests.cpp in Sources */,
+				0434AD702767790B009AD4EA /* surface_to_implicit2_tests.cpp in Sources */,
+				0434AD4B2767790B009AD4EA /* array1_tests.cpp in Sources */,
+				0434AD7E2767790B009AD4EA /* face_centered_grid2_tests.cpp in Sources */,
+				0434AD1E2767790B009AD4EA /* surface_to_implicit3_tests.cpp in Sources */,
+				0434AD582767790B009AD4EA /* vector_tests.cpp in Sources */,
+				0434AD1A2767790B009AD4EA /* sph_kernels2_tests.cpp in Sources */,
+				0434AD7B2767790B009AD4EA /* point_particle_emitter2_tests.cpp in Sources */,
+				0434AD292767790B009AD4EA /* fdm_utils_tests.cpp in Sources */,
+				0434AD2F2767790B009AD4EA /* vector2_tests.cpp in Sources */,
+				0434AD4D2767790B009AD4EA /* fdm_iccg_solver2_tests.cpp in Sources */,
+				0434AD152767790B009AD4EA /* face_centered_grid3_tests.cpp in Sources */,
+				0434AD272767790B009AD4EA /* animation_tests.cpp in Sources */,
+				0434AD8A2767790B009AD4EA /* fdm_mg_solver3_tests.cpp in Sources */,
+				0434AD342767790B009AD4EA /* fdm_cg_solver3_tests.cpp in Sources */,
+				0434AD762767790B009AD4EA /* matrix_csr_tests.cpp in Sources */,
+				0434AD3D2767790B009AD4EA /* fdm_jacobi_solver2_tests.cpp in Sources */,
+				0434AD842767790B009AD4EA /* bounding_box2_tests.cpp in Sources */,
+				0434AD6D2767790B009AD4EA /* custom_implicit_surface3_tests.cpp in Sources */,
+				0434AD2D2767790B009AD4EA /* cell_centered_scalar_grid2_tests.cpp in Sources */,
+				0434AD2E2767790B009AD4EA /* sphere3_tests.cpp in Sources */,
+				0434AD222767790B009AD4EA /* transform2_tests.cpp in Sources */,
+				0434AD542767790B009AD4EA /* cylinder3_tests.cpp in Sources */,
+				0434AD192767790B009AD4EA /* sph_kernels3_tests.cpp in Sources */,
+				0434AD872767790B009AD4EA /* matrix2x2_tests.cpp in Sources */,
+				0434AD492767790B009AD4EA /* particle_system_solvers_tests.cpp in Sources */,
+				0434AD712767790B009AD4EA /* rigid_body_collider2_tests.cpp in Sources */,
+				0434AD672767790B009AD4EA /* point_kdtree_searcher3_tests.cpp in Sources */,
+				0434AD262767790B009AD4EA /* std_utils_tests.cpp in Sources */,
+				0434AD552767790B009AD4EA /* marching_cubes_tests.cpp in Sources */,
+				0434AD472767790B009AD4EA /* point_simple_list_searcher2_tests.cpp in Sources */,
+				0434AD5D2767790B009AD4EA /* parallel_tests.cpp in Sources */,
+				0434AD682767790B009AD4EA /* cell_centered_vector_grid2_tests.cpp in Sources */,
+				0434AD6F2767790B009AD4EA /* surface_set2_tests.cpp in Sources */,
+				0434AD522767790B009AD4EA /* sph_system_data2_tests.cpp in Sources */,
+				0434AD1B2767790B009AD4EA /* physics_animation_tests.cpp in Sources */,
+				0434AD722767790B009AD4EA /* array3_tests.cpp in Sources */,
+				0434AD6B2767790B009AD4EA /* box3_tests.cpp in Sources */,
+				0434AD4E2767790B009AD4EA /* volume_particle_emitter3_tests.cpp in Sources */,
+				0434AD462767790B009AD4EA /* sph_system_data3_tests.cpp in Sources */,
+				0434AD1F2767790B009AD4EA /* triangle3_tests.cpp in Sources */,
+				0434AD4A2767790B009AD4EA /* fdm_gauss_seidel_solver3_tests.cpp in Sources */,
+				0434AD382767790B009AD4EA /* vector_n_tests.cpp in Sources */,
+				0434AD432767790B009AD4EA /* list_query_engine2_tests.cpp in Sources */,
+				0434AD7F2767790B009AD4EA /* cell_centered_scalar_grid3_tests.cpp in Sources */,
+				0434AD282767790B009AD4EA /* ray2_tests.cpp in Sources */,
+				0434AD442767790B009AD4EA /* surface_set3_tests.cpp in Sources */,
+				0434AD392767790B009AD4EA /* box2_tests.cpp in Sources */,
+				0434AD4C2767790B009AD4EA /* blas_tests.cpp in Sources */,
+				0434AD302767790B009AD4EA /* cell_centered_vector_grid3_tests.cpp in Sources */,
+				0434AD312767790B009AD4EA /* array_view_tests.cpp in Sources */,
+				0434AD892767790B009AD4EA /* triangle_mesh3_tests.cpp in Sources */,
+				0434AD3F2767790B009AD4EA /* array_view2_tests.cpp in Sources */,
+				0434AD602767790B009AD4EA /* pde_tests.cpp in Sources */,
+				0434AD412767790B009AD4EA /* math_utils_tests.cpp in Sources */,
+				0434AD5F2767790B009AD4EA /* fdm_cg_solver2_tests.cpp in Sources */,
+				0434AD822767790B009AD4EA /* quadtree_tests.cpp in Sources */,
+				0434AD5B2767790B009AD4EA /* point_hash_grid_searcher2_tests.cpp in Sources */,
+				0434AD3A2767790B009AD4EA /* sph_solver3_tests.cpp in Sources */,
+				0434AD1C2767790B009AD4EA /* volume_particle_emitter2_tests.cpp in Sources */,
+				0434AD422767790B009AD4EA /* fdm_mgpcg_solver2_tests.cpp in Sources */,
+				0434AD562767790B009AD4EA /* array_view3_tests.cpp in Sources */,
+				0434AD4F2767790B009AD4EA /* array_samplers_tests.cpp in Sources */,
+				0434AD652767790B009AD4EA /* bounding_box_tests.cpp in Sources */,
+				0434AD3C2767790B009AD4EA /* triangle_mesh_to_sdf_tests.cpp in Sources */,
+				0434AD6C2767790B009AD4EA /* matrix_tests.cpp in Sources */,
+				0434AD742767790B009AD4EA /* vector3_tests.cpp in Sources */,
+				0434AD622767790B009AD4EA /* plane2_tests.cpp in Sources */,
+				0434AD362767790B009AD4EA /* array_utils_tests.cpp in Sources */,
+				0434AD802767790B009AD4EA /* particle_system_data3_tests.cpp in Sources */,
+				0434AD7C2767790B009AD4EA /* implicit_triangle_mesh3_tests.cpp in Sources */,
+				0434AD642767790B009AD4EA /* point_parallel_hash_grid_searcher2_tests.cpp in Sources */,
+				0434AD232767790B009AD4EA /* transform3_tests.cpp in Sources */,
+				0434AD452767790B009AD4EA /* vertex_centered_vector_grid3_tests.cpp in Sources */,
+				0434AD592767790B009AD4EA /* fdm_gauss_seidel_solver2_tests.cpp in Sources */,
+				0434AD1D2767790B009AD4EA /* array_view1_tests.cpp in Sources */,
+				0434AD332767790B009AD4EA /* matrix3x3_tests.cpp in Sources */,
+				0434AD142767790B009AD4EA /* array2_tests.cpp in Sources */,
+				0434AD2C2767790B009AD4EA /* cg_tests.cpp in Sources */,
+				0434AD372767790B009AD4EA /* implicit_surface_set3_tests.cpp in Sources */,
+				0434AD512767790B009AD4EA /* fdm_mgpcg_solver3_tests.cpp in Sources */,
+				0434AD612767790B009AD4EA /* level_set_solvers_tests.cpp in Sources */,
+				0434AD6E2767790B009AD4EA /* rigid_body_collider3_tests.cpp in Sources */,
+				0434AD832767790B009AD4EA /* matrix4x4_tests.cpp in Sources */,
+				0434AD632767790B009AD4EA /* matrix_mxn_tests.cpp in Sources */,
+				0434AD322767790B009AD4EA /* fdm_mg_linear_system2_tests.cpp.cpp in Sources */,
+				0434AD212767790B009AD4EA /* pci_sph_solver3_tests.cpp in Sources */,
+				0434AD852767790B009AD4EA /* list_query_engine3_tests.cpp in Sources */,
+				0434AD662767790B009AD4EA /* plane3_tests.cpp in Sources */,
+				0434AD5C2767790B009AD4EA /* point_simple_list_searcher3_tests.cpp in Sources */,
+				0434AD882767790B009AD4EA /* sph_solver2_tests.cpp in Sources */,
+				0434AD402767790B009AD4EA /* svd_tests.cpp in Sources */,
+				0434AD2A2767790B009AD4EA /* custom_implicit_surface2_tests.cpp in Sources */,
+				0434AD532767790B009AD4EA /* vertex_centered_scalar_grid2_tests.cpp in Sources */,
+				0434AD6A2767790B009AD4EA /* fdm_iccg_solver3_tests.cpp in Sources */,
+				0434AD132767790B009AD4EA /* particle_system_data2_tests.cpp in Sources */,
+				0434AD752767790B009AD4EA /* vertex_centered_vector_grid2_tests.cpp in Sources */,
+				0434AD2B2767790B009AD4EA /* point_hash_grid_searcher3_tests.cpp in Sources */,
+				0434AD182767790B009AD4EA /* collider_set3_tests.cpp in Sources */,
+				0434AD5A2767790B009AD4EA /* implicit_surface_set2_tests.cpp in Sources */,
+				0434AD502767790B009AD4EA /* fdm_jacobi_solver3_tests.cpp in Sources */,
+				0434AD172767790B009AD4EA /* ray3_tests.cpp in Sources */,
+				0434AD3E2767790B009AD4EA /* vector4_tests.cpp in Sources */,
+				0434AD732767790B009AD4EA /* bounding_box3_tests.cpp in Sources */,
+				0434AD482767790B009AD4EA /* unit_tests_utils.cpp in Sources */,
+				0434AD572767790B009AD4EA /* octree_tests.cpp in Sources */,
+				0434AD812767790B009AD4EA /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4014,6 +4588,11 @@
 			target = 043155A52767475D0070FBEC /* vox.geometry */;
 			targetProxy = 0431588027674D290070FBEC /* PBXContainerItemProxy */;
 		};
+		0434AD8C27677951009AD4EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 043155A52767475D0070FBEC /* vox.geometry */;
+			targetProxy = 0434AD8B27677951009AD4EA /* PBXContainerItemProxy */;
+		};
 		04CE3823274D173D00204B8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 04CE3780274D156200204B8E /* vox.render */;
@@ -4058,6 +4637,7 @@
 		0431584B27674C960070FBEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4074,6 +4654,7 @@
 		0431584C27674C960070FBEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4090,6 +4671,7 @@
 		0431585627674CB90070FBEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4103,6 +4685,7 @@
 		0431585727674CB90070FBEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -4269,6 +4852,42 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0434AC95276778DE009AD4EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lgtest",
+					"-lgtest_main",
+					"-lgmock",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = /usr/local/include;
+			};
+			name = Debug;
+		};
+		0434AC96276778DE009AD4EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SL5L673UU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lgtest",
+					"-lgtest_main",
+					"-lgmock",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = /usr/local/include;
 			};
 			name = Release;
 		};
@@ -4781,6 +5400,15 @@
 			buildConfigurations = (
 				0434A368275F9CBA009AD4EA /* Debug */,
 				0434A369275F9CBA009AD4EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0434AC94276778DE009AD4EA /* Build configuration list for PBXNativeTarget "unit_tests.geo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0434AC95276778DE009AD4EA /* Debug */,
+				0434AC96276778DE009AD4EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -20,7 +20,7 @@ protected:
   vox::VertexCenteredScalarGrid3 grid;
 
   void SetUp(const ::benchmark::State &) override {
-    std::ifstream file("../resources/bunny.obj");
+    std::ifstream file("../models/bunny.obj");
 
     if (file) {
       [[maybe_unused]] bool isLoaded = triMesh.readObj(&file);
