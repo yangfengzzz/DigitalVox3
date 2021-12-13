@@ -48,6 +48,15 @@ int main(int, char**) {
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, cubeSize, cubeSize, cubeSize));
     boxRenderer->setMaterial(boxMtl);
+    
+    auto planeEntity = rootEntity->createChild("PlaneEntity");
+    auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
+    planeMtl->setRenderFace(RenderFace::Enum::Double);
+    
+    auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
+    planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
+    planeRenderer->setMaterial(planeMtl);
 
     engine.run();
 }
