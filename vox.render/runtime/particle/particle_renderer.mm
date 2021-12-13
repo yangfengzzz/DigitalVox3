@@ -19,6 +19,10 @@ float ParticleRenderer::_getRandom() {
     return u(e);
 }
 
+ShaderProperty ParticleRenderer::_textureProp = Shader::createProperty("u_texture", ShaderDataGroup::Renderer);
+ShaderProperty ParticleRenderer::_timeProp = Shader::createProperty("u_time", ShaderDataGroup::Renderer);
+ShaderProperty ParticleRenderer::_onceProp = Shader::createProperty("u_once", ShaderDataGroup::Renderer);
+
 ParticleRenderer::ParticleRenderer(Entity* entity):
 MeshRenderer(entity) {
     setMaterial(_createMaterial());
@@ -643,11 +647,12 @@ void ParticleRenderer::_updateSingleBuffer(size_t i) {
 }
 
 void ParticleRenderer::_updateSingleUv(size_t i, size_t k0, size_t k1, size_t k2, size_t k3) {
-    const auto texture = std::any_cast<id<MTLTexture>>(getMaterial()->shaderData.getData("u_texture"));
+    const auto texture = getMaterial()->shaderData.getData("u_texture");
     
-    if (texture) {
-        const auto width = texture.width;
-        const auto height = texture.height;
+    if (!texture.has_value()) {
+        auto realValue = std::any_cast<id<MTLTexture>>(texture);
+        const auto width = realValue.width;
+        const auto height = realValue.height;
         
         if (!spriteSheet.empty()) {
             const auto& sheet = spriteSheet[i % spriteSheet.size()];

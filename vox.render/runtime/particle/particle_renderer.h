@@ -300,6 +300,10 @@ private:
     static std::default_random_engine e;
     static std::uniform_real_distribution<float> u;
     
+    static ShaderProperty _textureProp;
+    static ShaderProperty _timeProp;
+    static ShaderProperty _onceProp;
+
     uint32_t _vertexStride;
     std::vector<float> _vertices;
     id<MTLBuffer> _vertexBuffer;
