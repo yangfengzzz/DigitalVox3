@@ -10,13 +10,15 @@
 #include "../vox.render/runtime/mesh/mesh_renderer.h"
 #include "../vox.render/runtime/mesh/model_mesh.h"
 #include "../vox.render/runtime/engine.h"
-#include "../vox.render/runtime/material/material.h"
+#include "../vox.render/runtime/material/base_material.h"
 
 namespace vox {
 namespace editor {
-class GridMaterial: public Material {
+class GridMaterial: public BaseMaterial {
 public:
-    GridMaterial(Engine* engine): Material(engine, Shader::find("editor-grid")) {}
+    GridMaterial(Engine* engine): BaseMaterial(engine, Shader::find("editor-grid")) {
+        setIsTransparent(true);
+    }
 };
 
 Grid::Grid(Entity *entity):
