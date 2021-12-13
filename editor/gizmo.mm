@@ -12,6 +12,7 @@
 #include "../vox.render/runtime/camera.h"
 #include "../vox.render/runtime/renderer.h"
 #include "../vox.render/runtime/framebuffer_picker/framebuffer_picker.h"
+#include "../vox.render/runtime/controls/orbit_control.h"
 
 namespace vox {
 namespace editor {
@@ -38,6 +39,10 @@ Script(entity) {
 }
 
 void Gizmo::onUpdate(float deltaTime) {
+    if (controller == nullptr) {
+        controller = entity()->getComponent<control::OrbitControl>();
+    }
+    
     // Main loop
     ImGui::NewFrame();
     
@@ -76,6 +81,10 @@ void Gizmo::onUpdate(float deltaTime) {
     ImGui::Separator();
     
     if (render != nullptr) {
+        if (controller && ImGuizmo::IsOver()) {
+            controller->setEnabled(false);
+        }
+        
         auto modelMat = render->entity()->transform->localMatrix();
         editTransform(cameraView.elements.data(), cameraProjection.elements.data(),
                       modelMat.elements.data(), true);
@@ -83,6 +92,7 @@ void Gizmo::onUpdate(float deltaTime) {
         cameraView = invert(cameraView);
         camera->entity()->transform->setWorldMatrix(cameraView);
     }
+    controller->setEnabled(true);
     
     ImGui::End();
     

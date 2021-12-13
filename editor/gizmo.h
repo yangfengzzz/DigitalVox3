@@ -16,6 +16,9 @@ namespace vox {
 namespace picker {
 class FramebufferPicker;
 }
+namespace control {
+class OrbitControl;
+}
 
 namespace editor {
 class Gizmo : public Script {
@@ -31,6 +34,7 @@ private:
     Camera *camera = nullptr;
     picker::FramebufferPicker *picker = nullptr;
     Renderer *render = nullptr;
+    control::OrbitControl * controller = nullptr;
     
     //used for gui
     float fov;
