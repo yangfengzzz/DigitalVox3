@@ -10,6 +10,7 @@
 
 #include "../renderer.h"
 #include "maths/color.h"
+#include <random>
 
 namespace vox {
 struct DirtyFlagType {
@@ -45,6 +46,11 @@ struct ParticleRendererBlendMode {
 class ParticleRenderer :public Renderer {
 public:
     ParticleRenderer(Entity* entity);
+    
+    /**
+     * Sprite sheet of texture.
+     */
+    std::vector<math::Float4> spriteSheet;
     
     /**
      * Texture of particle.
@@ -290,10 +296,9 @@ private:
     void _updateSingleUv(size_t i, size_t k0, size_t k1, size_t k2, size_t k3);
     
 private:
-    /** The max number of indices that Uint16Array can support. */
-    static size_t _uint16VertexLimit;
-    
     static float _getRandom();
+    static std::default_random_engine e;
+    static std::uniform_real_distribution<float> u;
     
     uint32_t _vertexStride;
     std::vector<float> _vertices;

@@ -6,12 +6,19 @@
 //
 
 #include "particle_renderer.h"
+#include "../../maths/math_ex.h"
 #include "../material/material.h"
 #include "../mesh/buffer_mesh.h"
 #include "../entity.h"
 #include "../engine.h"
 
 namespace vox {
+std::default_random_engine ParticleRenderer::e{};
+std::uniform_real_distribution<float> ParticleRenderer::u = std::uniform_real_distribution<float>(0, 1);
+float ParticleRenderer::_getRandom() {
+    return u(e);
+}
+
 ParticleRenderer::ParticleRenderer(Entity* entity):
 Renderer(entity) {
     setMaterial(_createMaterial());
@@ -480,7 +487,7 @@ MeshPtr ParticleRenderer::_createMesh() {
     mesh->setVertexDescriptor(descriptor);
     mesh->setVertexBufferBinding(vertexBuffer, vertexStride);
     mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size(), MDLMeshBufferTypeIndex), MTLIndexTypeUInt32);
-
+    
     _vertexBuffer = vertexBuffer;
     _vertexStride = vertexStride / 4;
     _vertices = vertices;
@@ -496,11 +503,237 @@ void ParticleRenderer::_updateBuffer() {
 }
 
 void ParticleRenderer::_updateSingleBuffer(size_t i) {
+    const auto offset = i * 4;
     
+    const auto k0 = offset * _vertexStride;
+    const auto k1 = (offset + 1) * _vertexStride;
+    const auto k2 = (offset + 2) * _vertexStride;
+    const auto k3 = (offset + 3) * _vertexStride;
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Position) {
+        auto& x = _position.x;
+        auto& y = _position.y;
+        auto& z = _position.z;
+        
+        if (!_positionArray.empty()) {
+            if (_positionArray.size() != _maxCount) {
+                assert(false && "The length of positionArray must be equal to maxCount.");
+            }
+            const auto& pos = _positionArray[i];
+            
+            x += pos.x;
+            y += pos.y;
+            z += pos.z;
+        } else {
+            x += _getRandom() * _positionRandomness.x;
+            y += _getRandom() * _positionRandomness.y;
+            z += _getRandom() * _positionRandomness.z;
+        }
+        
+        _vertices[k0] = _vertices[k1] = _vertices[k2] = _vertices[k3] = x;
+        _vertices[k0 + 1] = _vertices[k1 + 1] = _vertices[k2 + 1] = _vertices[k3 + 1] = y;
+        _vertices[k0 + 2] = _vertices[k1 + 2] = _vertices[k2 + 2] = _vertices[k3 + 2] = z;
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Velocity) {
+        _vertices[k0 + 3] =
+        _vertices[k1 + 3] =
+        _vertices[k2 + 3] =
+        _vertices[k3 + 3] =
+        _velocity.x + _getRandom() * _velocityRandomness.x;
+        _vertices[k0 + 4] =
+        _vertices[k1 + 4] =
+        _vertices[k2 + 4] =
+        _vertices[k3 + 4] =
+        _velocity.y + _getRandom() * _velocityRandomness.y;
+        _vertices[k0 + 5] =
+        _vertices[k1 + 5] =
+        _vertices[k2 + 5] =
+        _vertices[k3 + 5] =
+        _velocity.z + _getRandom() * _velocityRandomness.z;
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Acceleration) {
+        _vertices[k0 + 6] =
+        _vertices[k1 + 6] =
+        _vertices[k2 + 6] =
+        _vertices[k3 + 6] =
+        _acceleration.x + _getRandom() * _accelerationRandomness.x;
+        _vertices[k0 + 7] =
+        _vertices[k1 + 7] =
+        _vertices[k2 + 7] =
+        _vertices[k3 + 7] =
+        _acceleration.y + _getRandom() * _accelerationRandomness.y;
+        _vertices[k0 + 8] =
+        _vertices[k1 + 8] =
+        _vertices[k2 + 8] =
+        _vertices[k3 + 8] =
+        _acceleration.z + _getRandom() * _accelerationRandomness.z;
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Color) {
+        _vertices[k0 + 9] =
+        _vertices[k1 + 9] =
+        _vertices[k2 + 9] =
+        _vertices[k3 + 9] = math::Clamp<float>(_color.r + _getRandom() * _colorRandomness, 0, 1);
+        
+        _vertices[k0 + 10] =
+        _vertices[k1 + 10] =
+        _vertices[k2 + 10] =
+        _vertices[k3 + 10] = math::Clamp<float>(_color.g + _getRandom() * _colorRandomness, 0, 1);
+        _vertices[k0 + 11] =
+        _vertices[k1 + 11] =
+        _vertices[k2 + 11] =
+        _vertices[k3 + 11] = math::Clamp<float>(_color.b + _getRandom() * _colorRandomness, 0, 1);
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Alpha) {
+        _vertices[k0 + 12] =
+        _vertices[k1 + 12] =
+        _vertices[k2 + 12] =
+        _vertices[k3 + 12] = math::Clamp<float>(_alpha + _getRandom() * _alphaRandomness, 0, 1);
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::StartTime) {
+        _vertices[k0 + 13] =
+        _vertices[k1 + 13] =
+        _vertices[k2 + 13] =
+        _vertices[k3 + 13] = u(e) * _startTimeRandomness;
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::LifeTime) {
+        _vertices[k0 + 14] =
+        _vertices[k1 + 14] =
+        _vertices[k2 + 14] =
+        _vertices[k3 + 14] =
+        _lifetime + _getRandom() * _lifetime;
+    }
+    
+    // Update the duration of play once when startTime or lifetime changes.
+    if (_updateDirtyFlag & DirtyFlagType::Enum::StartTime || _updateDirtyFlag & DirtyFlagType::Enum::LifeTime) {
+        _onceTime = std::max(_onceTime, _vertices[k0 + 13] + _vertices[k0 + 14]);
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Size) {
+        _vertices[k0 + 15] =
+        _vertices[k1 + 15] =
+        _vertices[k2 + 15] =
+        _vertices[k3 + 15] = std::max<float>(_size + _getRandom() * _sizeRandomness * _size * 2, 0.f);
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::Scale) {
+        _vertices[k0 + 16] = _vertices[k1 + 16] = _vertices[k2 + 16] = _vertices[k3 + 16] = _scale;
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::StartAngle) {
+        _vertices[k0 + 17] =
+        _vertices[k1 + 17] =
+        _vertices[k2 + 17] =
+        _vertices[k3 + 17] = _startAngle + _getRandom() * M_PI * _startAngleRandomness * 2;
+    }
+    
+    if (_updateDirtyFlag & DirtyFlagType::Enum::RotateVelocity) {
+        _vertices[k0 + 18] =
+        _vertices[k1 + 18] =
+        _vertices[k2 + 18] =
+        _vertices[k3 + 18] = _rotateVelocity + _getRandom() * _rotateVelocityRandomness;
+    }
+    
+    _updateSingleUv(i, k0, k1, k2, k3);
 }
 
 void ParticleRenderer::_updateSingleUv(size_t i, size_t k0, size_t k1, size_t k2, size_t k3) {
+    const auto texture = std::any_cast<id<MTLTexture>>(getMaterial()->shaderData.getData("u_texture"));
     
+    if (texture) {
+        const auto width = texture.width;
+        const auto height = texture.height;
+        
+        if (!spriteSheet.empty()) {
+            const auto& sheet = spriteSheet[i % spriteSheet.size()];
+            const auto& x = sheet.x;
+            const auto& y = sheet.y;
+            const auto& w = sheet.z;
+            const auto& h = sheet.w;
+            
+            const auto u = x / width;
+            const auto v = y / height;
+            const auto p = u + w / width;
+            const auto q = v + h / height;
+            const auto ratio = h / w;
+            
+            // left bottom
+            _vertices[k0 + 19] = u;
+            _vertices[k0 + 20] = q;
+            _vertices[k0 + 21] = ratio;
+            
+            // right bottom
+            _vertices[k1 + 19] = p;
+            _vertices[k1 + 20] = q;
+            _vertices[k1 + 21] = ratio;
+            
+            // right top
+            _vertices[k2 + 19] = p;
+            _vertices[k2 + 20] = v;
+            _vertices[k2 + 21] = ratio;
+            
+            // left top
+            _vertices[k3 + 19] = u;
+            _vertices[k3 + 20] = v;
+            _vertices[k3 + 21] = ratio;
+        } else {
+            const auto ratio = height / width;
+            
+            // left bottom
+            _vertices[k0 + 19] = 0;
+            _vertices[k0 + 20] = 1;
+            _vertices[k0 + 21] = ratio;
+            
+            // right bottom
+            _vertices[k1 + 19] = 1;
+            _vertices[k1 + 20] = 1;
+            _vertices[k1 + 21] = ratio;
+            
+            // right top
+            _vertices[k2 + 19] = 1;
+            _vertices[k2 + 20] = 0;
+            _vertices[k2 + 21] = ratio;
+            
+            // left top
+            _vertices[k3 + 19] = 0;
+            _vertices[k3 + 20] = 0;
+            _vertices[k3 + 21] = ratio;
+        }
+    } else {
+        // left bottom
+        _vertices[k0 + 19] = 0;
+        _vertices[k0 + 20] = 0;
+        _vertices[k0 + 21] = 1;
+        
+        // right bottom
+        _vertices[k1 + 19] = 1;
+        _vertices[k1 + 20] = 0;
+        _vertices[k1 + 21] = 1;
+        
+        // right top
+        _vertices[k2 + 19] = 1;
+        _vertices[k2 + 20] = 1;
+        _vertices[k2 + 21] = 1;
+        
+        // left top
+        _vertices[k3 + 19] = 0;
+        _vertices[k3 + 20] = 1;
+        _vertices[k3 + 21] = 1;
+    }
+    
+    _vertices[k0 + 22] = -0.5;
+    _vertices[k0 + 23] = -0.5;
+    _vertices[k1 + 22] = 0.5;
+    _vertices[k1 + 23] = -0.5;
+    _vertices[k2 + 22] = 0.5;
+    _vertices[k2 + 23] = 0.5;
+    _vertices[k3 + 22] = -0.5;
+    _vertices[k3 + 23] = 0.5;
 }
 
 
