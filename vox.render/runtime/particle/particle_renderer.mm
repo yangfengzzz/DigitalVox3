@@ -394,6 +394,7 @@ void ParticleRenderer::update(float deltaTime) {
 }
 
 void ParticleRenderer::_onEnable() {
+    MeshRenderer::_onEnable();
     if (_playOnEnable) {
         start();
     }
