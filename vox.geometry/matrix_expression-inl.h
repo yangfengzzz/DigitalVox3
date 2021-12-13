@@ -594,9 +594,9 @@ void MatrixExpression<T, Rows, Cols, Derived>::inverse(
     }
 
     // Make all rows except this one 0 in current column
-    for (int k = i + 1; k < n; k++) {
+    for (size_t k = i + 1; k < n; k++) {
       T c = -a(k, i) / a(i, i);
-      for (int j = i; j < n; j++) {
+      for (size_t j = i; j < n; j++) {
         if (i == j) {
           a(k, j) = 0;
         } else {
@@ -610,9 +610,9 @@ void MatrixExpression<T, Rows, Cols, Derived>::inverse(
   }
 
   for (int l = 0; l < n; l++) {
-    for (int i = n - 1; i >= 0; i--) {
+    for (size_t i = n - 1; i >= 0; i--) {
       result(i, l) = result(i, l) / a(i, i);
-      for (int k = i - 1; k >= 0; k--) {
+      for (size_t k = i - 1; k >= 0; k--) {
         result(k, l) -= a(k, i) * result(i, l);
       }
     }

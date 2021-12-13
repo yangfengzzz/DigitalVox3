@@ -6,9 +6,9 @@
 
 #include "common.h"
 
-#include "grids/collocated_vector_grid.h"
-#include "grids/face_centered_grid.h"
-#include "implicit_surfaces/surface_to_implicit.h"
+#include "../grids/collocated_vector_grid.h"
+#include "../grids/face_centered_grid.h"
+#include "../implicit_surfaces/surface_to_implicit.h"
 #include "level_set_utils.h"
 #include "volume_grid_emitter2.h"
 

@@ -8,8 +8,8 @@
 #define INCLUDE_JET_VOLUME_GRID_EMITTER2_H_
 
 #include "grid_emitter2.h"
-#include "grids/scalar_grid.h"
-#include "grids/vector_grid.h"
+#include "../grids/scalar_grid.h"
+#include "../grids/vector_grid.h"
 
 namespace vox {
 
