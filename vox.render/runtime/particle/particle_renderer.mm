@@ -7,6 +7,9 @@
 
 #include "particle_renderer.h"
 #include "../material/material.h"
+#include "../mesh/buffer_mesh.h"
+#include "../entity.h"
+#include "../engine.h"
 
 namespace vox {
 ParticleRenderer::ParticleRenderer(Entity* entity):
@@ -417,14 +420,78 @@ MaterialPtr ParticleRenderer::_createMaterial() {
 }
 
 MeshPtr ParticleRenderer::_createMesh() {
-    return nullptr;
+    auto mesh = std::make_shared<BufferMesh>(_entity->engine(), "particleMesh");
+    const auto vertexStride = 96;
+    const auto vertexCount = _maxCount * 4;
+    const auto vertexFloatCount = vertexCount * vertexStride;
+    auto vertices = std::vector<float>(vertexFloatCount);
+    auto indices = std::vector<uint32_t>(6 * _maxCount);
+    
+    for (uint32_t i = 0, idx = 0; i < _maxCount; ++i) {
+        uint32_t startIndex = i * 4;
+        indices[idx++] = startIndex;
+        indices[idx++] = startIndex + 1;
+        indices[idx++] = startIndex + 2;
+        indices[idx++] = startIndex;
+        indices[idx++] = startIndex + 2;
+        indices[idx++] = startIndex + 3;
+    }
+    
+    MDLVertexDescriptor* descriptor = [[MDLVertexDescriptor alloc]init];
+    descriptor.attributes[0] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_position"
+                                     format:MDLVertexFormatFloat3
+                                     offset:0 bufferIndex:0];
+    descriptor.attributes[1] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_velocity"
+                                     format:MDLVertexFormatFloat3
+                                     offset:12 bufferIndex:0];
+    descriptor.attributes[2] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_acceleration"
+                                     format:MDLVertexFormatFloat3
+                                     offset:24 bufferIndex:0];
+    descriptor.attributes[3] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_color"
+                                     format:MDLVertexFormatFloat4
+                                     offset:36 bufferIndex:0];
+    descriptor.attributes[4] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_lifeAndSize"
+                                     format:MDLVertexFormatFloat4
+                                     offset:52 bufferIndex:0];
+    descriptor.attributes[5] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_rotation"
+                                     format:MDLVertexFormatFloat2
+                                     offset:68 bufferIndex:0];
+    descriptor.attributes[6] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_uv"
+                                     format:MDLVertexFormatFloat3
+                                     offset:76 bufferIndex:0];
+    descriptor.attributes[7] =
+    [[MDLVertexAttribute alloc]initWithName:@"a_normalizedUv"
+                                     format:MDLVertexFormatFloat2
+                                     offset:88 bufferIndex:0];
+    
+    auto vertexBuffer = [_engine->_hardwareRenderer.device newBufferWithLength:vertexFloatCount * 4
+                                                                       options:MTLResourceStorageModeShared];
+    auto indexBuffer = [_engine->_hardwareRenderer.device newBufferWithBytes:indices.data()
+                                                                      length:indices.size() * sizeof(uint32_t)
+                                                                     options:MTLResourceStorageModeShared];
+    
+    mesh->setVertexDescriptor(descriptor);
+    mesh->setVertexBufferBinding(vertexBuffer, vertexStride);
+    mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size(), MDLMeshBufferTypeIndex), MTLIndexTypeUInt32);
+
+    _vertexBuffer = vertexBuffer;
+    _vertexStride = vertexStride / 4;
+    _vertices = vertices;
+    return mesh;
 }
 
 void ParticleRenderer::_updateBuffer() {
     for (size_t x = 0; x < _maxCount; x++) {
-      _updateSingleBuffer(x);
+        _updateSingleBuffer(x);
     }
-
+    
     memcpy([_vertexBuffer contents], _vertices.data(), sizeof(float) * _vertices.size());
 }
 
