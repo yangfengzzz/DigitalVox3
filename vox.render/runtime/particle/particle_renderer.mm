@@ -25,6 +25,7 @@ ShaderProperty ParticleRenderer::_onceProp = Shader::createProperty("u_once", Sh
 
 ParticleRenderer::ParticleRenderer(Entity* entity):
 MeshRenderer(entity) {
+    setIsOnce(false);
     setMaterial(_createMaterial());
 }
 
@@ -482,7 +483,8 @@ MeshPtr ParticleRenderer::_createMesh() {
     [[MDLVertexAttribute alloc]initWithName:@"a_normalizedUv"
                                      format:MDLVertexFormatFloat2
                                      offset:88 bufferIndex:0];
-    
+    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:96];
+
     auto vertexBuffer = [_engine->_hardwareRenderer.device newBufferWithLength:vertexFloatCount * 4
                                                                        options:MTLResourceStorageModeShared];
     auto indexBuffer = [_engine->_hardwareRenderer.device newBufferWithBytes:indices.data()
@@ -491,7 +493,8 @@ MeshPtr ParticleRenderer::_createMesh() {
     
     mesh->setVertexDescriptor(descriptor);
     mesh->setVertexBufferBinding(vertexBuffer, vertexStride);
-    mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size(), MDLMeshBufferTypeIndex), MTLIndexTypeUInt32);
+    mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size() * sizeof(uint32_t), MDLMeshBufferTypeIndex),
+                     MTLIndexTypeUInt32, indices.size());
     
     _vertexBuffer = vertexBuffer;
     _vertexStride = vertexStride / 4;
