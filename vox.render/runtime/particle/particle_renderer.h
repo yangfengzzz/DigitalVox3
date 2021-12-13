@@ -8,7 +8,7 @@
 #ifndef particle_renderer_hpp
 #define particle_renderer_hpp
 
-#include "../renderer.h"
+#include "../mesh/mesh_renderer.h"
 #include "maths/color.h"
 #include <random>
 
@@ -43,7 +43,7 @@ struct ParticleRendererBlendMode {
 /**
  * Particle Renderer Component.
  */
-class ParticleRenderer :public Renderer {
+class ParticleRenderer :public MeshRenderer {
 public:
     ParticleRenderer(Entity* entity);
     

@@ -20,7 +20,7 @@ float ParticleRenderer::_getRandom() {
 }
 
 ParticleRenderer::ParticleRenderer(Entity* entity):
-Renderer(entity) {
+MeshRenderer(entity) {
     setMaterial(_createMaterial());
 }
 
@@ -228,7 +228,7 @@ void ParticleRenderer::setMaxCount(size_t value) {
     _isInit = false;
     _maxCount = value;
     _updateDirtyFlag = DirtyFlagType::Enum::Everything;
-    // mesh = _createMesh();
+    setMesh(_createMesh());
     
     _updateBuffer();
     
