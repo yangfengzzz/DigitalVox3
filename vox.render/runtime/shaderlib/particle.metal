@@ -33,20 +33,18 @@ matrix_float2x2 rotation2d(float angle) {
     float s = sin(angle);
     float c = cos(angle);
     
-    return matrix_float2x2(
-                           c, -s,
-                           s, c
-                           );
+    return matrix_float2x2(c, -s,
+                           s, c);
 }
 
 vertex VertexOut vertex_particle(const VertexIn vertexIn [[stage_in]],
-                                 constant float &u_time [[buffer(0)]],
-                                 constant bool &u_once [[buffer(1)]],
-                                 constant matrix_float4x4 &u_MVPMat [[buffer(2)]],
-                                 constant matrix_float4x4 &u_viewInvMat [[buffer(3), function_constant(is2D)]],
-                                 constant matrix_float4x4 &u_projMat [[buffer(4), function_constant(is2D)]],
-                                 constant matrix_float4x4 &u_viewMat [[buffer(5), function_constant(is2D)]],
-                                 constant matrix_float4x4 &u_modelMat [[buffer(6), function_constant(is2D)]]) {
+                                 constant float &u_time [[buffer(10)]],
+                                 constant bool &u_once [[buffer(11)]],
+                                 constant matrix_float4x4 &u_MVPMat [[buffer(12)]],
+                                 constant matrix_float4x4 &u_viewInvMat [[buffer(13), function_constant(is2D)]],
+                                 constant matrix_float4x4 &u_projMat [[buffer(14), function_constant(is2D)]],
+                                 constant matrix_float4x4 &u_viewMat [[buffer(15), function_constant(is2D)]],
+                                 constant matrix_float4x4 &u_modelMat [[buffer(16), function_constant(is2D)]]) {
     VertexOut out;
     
     out.v_color = vertexIn.a_color;

@@ -14,7 +14,7 @@
 
 namespace vox {
 std::default_random_engine ParticleRenderer::e{};
-std::uniform_real_distribution<float> ParticleRenderer::u = std::uniform_real_distribution<float>(0, 1);
+std::uniform_real_distribution<float> ParticleRenderer::u = std::uniform_real_distribution<float>(-0.5, 0.5);
 float ParticleRenderer::_getRandom() {
     return u(e);
 }
@@ -390,7 +390,7 @@ void ParticleRenderer::update(float deltaTime) {
         _updateDirtyFlag = 0;
     }
     
-    _time += deltaTime / 1000;
+    _time += deltaTime;
     shaderData.setData("u_time", _time);
 }
 
@@ -483,7 +483,7 @@ MeshPtr ParticleRenderer::_createMesh() {
     [[MDLVertexAttribute alloc]initWithName:@"a_normalizedUv"
                                      format:MDLVertexFormatFloat2
                                      offset:88 bufferIndex:0];
-    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:96];
+    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:vertexStride];
 
     auto vertexBuffer = [_engine->_hardwareRenderer.device newBufferWithLength:vertexFloatCount * 4
                                                                        options:MTLResourceStorageModeShared];
@@ -519,9 +519,9 @@ void ParticleRenderer::_updateSingleBuffer(size_t i) {
     const auto k3 = (offset + 3) * _vertexStride;
     
     if (_updateDirtyFlag & DirtyFlagType::Enum::Position) {
-        auto& x = _position.x;
-        auto& y = _position.y;
-        auto& z = _position.z;
+        auto x = _position.x;
+        auto y = _position.y;
+        auto z = _position.z;
         
         if (!_positionArray.empty()) {
             if (_positionArray.size() != _maxCount) {
@@ -606,7 +606,7 @@ void ParticleRenderer::_updateSingleBuffer(size_t i) {
         _vertices[k0 + 13] =
         _vertices[k1 + 13] =
         _vertices[k2 + 13] =
-        _vertices[k3 + 13] = u(e) * _startTimeRandomness;
+        _vertices[k3 + 13] = (u(e) + 0.5) * _startTimeRandomness;
     }
     
     if (_updateDirtyFlag & DirtyFlagType::Enum::LifeTime) {
