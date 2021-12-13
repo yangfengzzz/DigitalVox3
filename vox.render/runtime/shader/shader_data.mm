@@ -19,7 +19,12 @@ std::any ShaderData::getData(const std::string& property_name) {
 }
 
 std::any ShaderData::getData(const ShaderProperty& property) {
-    return _properties[property._uniqueId];
+    auto iter = _properties.find(property._uniqueId);
+    if (iter != _properties.end()) {
+        return iter->second;
+    } else {
+        return std::nullopt;
+    }
 }
 
 void ShaderData::setData(const std::string& property_name, std::any value) {

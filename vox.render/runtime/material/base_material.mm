@@ -101,6 +101,7 @@ void BaseMaterial::setBlendMode(const BlendMode::Enum& newValue) {
 
 BaseMaterial::BaseMaterial(Engine* engine, Shader* shader):
 Material(engine, shader){
+    setBlendMode(BlendMode::Enum::Normal);
     shaderData.setData(BaseMaterial::_alphaCutoffProp, 0.0f);
 }
 

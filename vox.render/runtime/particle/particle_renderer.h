@@ -8,8 +8,9 @@
 #ifndef particle_renderer_hpp
 #define particle_renderer_hpp
 
-#include "../renderer.h"
+#include "../mesh/mesh_renderer.h"
 #include "maths/color.h"
+#include <random>
 
 namespace vox {
 struct DirtyFlagType {
@@ -42,9 +43,14 @@ struct ParticleRendererBlendMode {
 /**
  * Particle Renderer Component.
  */
-class ParticleRenderer :public Renderer {
+class ParticleRenderer :public MeshRenderer {
 public:
     ParticleRenderer(Entity* entity);
+    
+    /**
+     * Sprite sheet of texture.
+     */
+    std::vector<math::Float4> spriteSheet;
     
     /**
      * Texture of particle.
@@ -290,11 +296,14 @@ private:
     void _updateSingleUv(size_t i, size_t k0, size_t k1, size_t k2, size_t k3);
     
 private:
-    /** The max number of indices that Uint16Array can support. */
-    static size_t _uint16VertexLimit;
-    
     static float _getRandom();
+    static std::default_random_engine e;
+    static std::uniform_real_distribution<float> u;
     
+    static ShaderProperty _textureProp;
+    static ShaderProperty _timeProp;
+    static ShaderProperty _onceProp;
+
     uint32_t _vertexStride;
     std::vector<float> _vertices;
     id<MTLBuffer> _vertexBuffer;

@@ -63,13 +63,16 @@ float4 grid(float3 fragPos3D, float scale, bool drawAxis) {
     float line = min(grid.x, grid.y);
     float minimumz = min(derivative.y, 1.0);
     float minimumx = min(derivative.x, 1.0);
-    float4 color = float4(0.2, 0.2, 0.2, 1.0 - min(line, 1.0));
+    float4 color = float4(0.9, 0.9, 0.9, 1.0 - min(line, 1.0));
     // z axis
-    if(fragPos3D.x > -1 * minimumx && fragPos3D.x < 1 * minimumx)
-        color.z = 1.0;
+    if(fragPos3D.x > -1 * minimumx && fragPos3D.x < 1 * minimumx) {
+        color = float4(0.0, 0.0, 1.0, 1.0);
+    }
     // x axis
-    if(fragPos3D.z > -1 * minimumz && fragPos3D.z < 1 * minimumz)
-        color.x = 1.0;
+    if(fragPos3D.z > -1 * minimumz && fragPos3D.z < 1 * minimumz) {
+        color = float4(1.0, 0.0, 0.0, 1.0);
+    }
+    
     return color;
 }
 
@@ -108,10 +111,6 @@ fragment fragmentOut fragment_grid(VertexOut in [[stage_in]]) {
     out.color = (grid(fragPos3D, 1, true)) * float(t > 0);
     out.color *= fading;
     out.depth = depth;
-
-    if (out.color.a < 0.2) {
-        discard_fragment();
-    }
     
     return out;
 }

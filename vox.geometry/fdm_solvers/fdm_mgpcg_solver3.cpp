@@ -1,0 +1,80 @@
+// Copyright (c) 2018 Doyub Kim
+//
+// I am making my contributions/submissions to this project solely in my
+// personal capacity and am not conveying any rights to any intellectual
+// property of any third parties.
+
+#include "../common.h"
+
+#include "../cg.h"
+#include "../mg.h"
+#include "fdm_mgpcg_solver3.h"
+
+#include <utility>
+
+using namespace vox;
+
+void FdmMgpcgSolver3::Preconditioner::build(FdmMgLinearSystem3 *system_, MgParameters<FdmBlas3> mgParams_) {
+  system = system_;
+  mgParams = std::move(mgParams_);
+}
+
+void FdmMgpcgSolver3::Preconditioner::solve(const FdmVector3 &b, FdmVector3 *x) const {
+  // Copy dimension
+  FdmMgVector3 mgX = system->x;
+  FdmMgVector3 mgB = system->x;
+  FdmMgVector3 mgBuffer = system->x;
+
+  // Copy input to the top
+  mgX.levels.front().copyFrom(*x);
+  mgB.levels.front().copyFrom(b);
+
+  mgVCycle(system->A, mgParams, &mgX, &mgB, &mgBuffer);
+
+  // Copy result to the output
+  x->copyFrom(mgX.levels.front());
+}
+
+//
+
+FdmMgpcgSolver3::FdmMgpcgSolver3(unsigned int numberOfCgIter, size_t maxNumberOfLevels,
+                                 unsigned int numberOfRestrictionIter, unsigned int numberOfCorrectionIter,
+                                 unsigned int numberOfCoarsestIter, unsigned int numberOfFinalIter, double maxTolerance,
+                                 double sorFactor, bool useRedBlackOrdering)
+    : FdmMgSolver3(maxNumberOfLevels, numberOfRestrictionIter, numberOfCorrectionIter, numberOfCoarsestIter,
+                   numberOfFinalIter, maxTolerance, sorFactor, useRedBlackOrdering),
+      _maxNumberOfIterations(numberOfCgIter), _lastNumberOfIterations(0), _tolerance(maxTolerance),
+      _lastResidualNorm(kMaxD) {}
+
+bool FdmMgpcgSolver3::solve(FdmMgLinearSystem3 *system) {
+  Vector3UZ size = system->A.levels.front().size();
+  _r.resize(size);
+  _d.resize(size);
+  _q.resize(size);
+  _s.resize(size);
+
+  system->x.levels.front().fill(0.0);
+  _r.fill(0.0);
+  _d.fill(0.0);
+  _q.fill(0.0);
+  _s.fill(0.0);
+
+  _precond.build(system, params());
+
+  pcg<FdmBlas3, Preconditioner>(system->A.levels.front(), system->b.levels.front(), _maxNumberOfIterations, _tolerance,
+                                &_precond, &system->x.levels.front(), &_r, &_d, &_q, &_s, &_lastNumberOfIterations,
+                                &_lastResidualNorm);
+
+  JET_INFO << "Residual after solving MGPCG: " << _lastResidualNorm
+           << " Number of MGPCG iterations: " << _lastNumberOfIterations;
+
+  return _lastResidualNorm <= _tolerance || _lastNumberOfIterations < _maxNumberOfIterations;
+}
+
+unsigned int FdmMgpcgSolver3::maxNumberOfIterations() const { return _maxNumberOfIterations; }
+
+unsigned int FdmMgpcgSolver3::lastNumberOfIterations() const { return _lastNumberOfIterations; }
+
+double FdmMgpcgSolver3::tolerance() const { return _tolerance; }
+
+double FdmMgpcgSolver3::lastResidual() const { return _lastResidualNorm; }

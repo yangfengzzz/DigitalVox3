@@ -32,7 +32,7 @@ int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
-    scene->background.solidColor = math::Color(0.0, 0.0, 0.0, 1.0);
+    scene->background.solidColor = math::Color(0.9, 0.9, 0.9, 1.0);
     scene->ambientLight().setDiffuseSolidColor(math::Color(1, 1, 1));
     
     auto rootEntity = scene->createRootEntity();
@@ -41,7 +41,7 @@ int main(int, char **) {
     //    rootEntity->addComponent<editor::GUIEntry>();
     
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(0, 0, -10);
+    cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
