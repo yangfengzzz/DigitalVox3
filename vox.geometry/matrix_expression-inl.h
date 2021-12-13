@@ -610,9 +610,9 @@ void MatrixExpression<T, Rows, Cols, Derived>::inverse(
   }
 
   for (int l = 0; l < n; l++) {
-    for (size_t i = n - 1; i >= 0; i--) {
+    for (ssize_t i = n - 1; i >= 0; i--) {
       result(i, l) = result(i, l) / a(i, i);
-      for (size_t k = i - 1; k >= 0; k--) {
+      for (ssize_t k = i - 1; k >= 0; k--) {
         result(k, l) -= a(k, i) * result(i, l);
       }
     }

@@ -34,7 +34,7 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>unit_tests.geo.xcscheme_^#shared#^_</key>
+		<key>unit_tests.geometry.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>

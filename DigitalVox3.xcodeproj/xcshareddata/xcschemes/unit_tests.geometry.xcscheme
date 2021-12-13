@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0434AC8F276778DE009AD4EA"
-               BuildableName = "unit_tests.geo"
-               BlueprintName = "unit_tests.geo"
+               BuildableName = "unit_tests_geo"
+               BlueprintName = "unit_tests.geometry"
                ReferencedContainer = "container:DigitalVox3.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -36,7 +36,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/yangfeng/Desktop/DigitalVox3/unit_tests.geo"
+      customWorkingDirectory = "/Users/yangfeng/Desktop/DigitalVox3/unit_tests.geometry"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0434AC8F276778DE009AD4EA"
-            BuildableName = "unit_tests.geo"
-            BlueprintName = "unit_tests.geo"
+            BuildableName = "unit_tests_geo"
+            BlueprintName = "unit_tests.geometry"
             ReferencedContainer = "container:DigitalVox3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0434AC8F276778DE009AD4EA"
-            BuildableName = "unit_tests.geo"
-            BlueprintName = "unit_tests.geo"
+            BuildableName = "unit_tests_geo"
+            BlueprintName = "unit_tests.geometry"
             ReferencedContainer = "container:DigitalVox3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

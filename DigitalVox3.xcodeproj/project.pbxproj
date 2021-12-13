@@ -1385,7 +1385,7 @@
 		0434AC7F276601B5009AD4EA /* grid.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = grid.mm; sourceTree = "<group>"; };
 		0434AC80276601B5009AD4EA /* grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		0434AC84276611C5009AD4EA /* editor-grid.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "editor-grid.metal"; sourceTree = "<group>"; };
-		0434AC90276778DE009AD4EA /* unit_tests.geo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = unit_tests.geo; sourceTree = BUILT_PRODUCTS_DIR; };
+		0434AC90276778DE009AD4EA /* unit_tests.geometry */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = unit_tests.geometry; sourceTree = BUILT_PRODUCTS_DIR; };
 		0434AC9727677900009AD4EA /* particle_system_data2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle_system_data2_tests.cpp; sourceTree = "<group>"; };
 		0434AC9827677900009AD4EA /* array2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array2_tests.cpp; sourceTree = "<group>"; };
 		0434AC9927677900009AD4EA /* face_centered_grid3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = face_centered_grid3_tests.cpp; sourceTree = "<group>"; };
@@ -1509,6 +1509,7 @@
 		0434AD102767790A009AD4EA /* sph_solver2_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sph_solver2_tests.cpp; sourceTree = "<group>"; };
 		0434AD112767790A009AD4EA /* triangle_mesh3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangle_mesh3_tests.cpp; sourceTree = "<group>"; };
 		0434AD122767790A009AD4EA /* fdm_mg_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mg_solver3_tests.cpp; sourceTree = "<group>"; };
+		0434AD9327677DEC009AD4EA /* unit_tests.geometry.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unit_tests.geometry.entitlements; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -2594,9 +2595,10 @@
 			path = grid_emitters;
 			sourceTree = "<group>";
 		};
-		0434AC91276778DE009AD4EA /* unit_tests.geo */ = {
+		0434AC91276778DE009AD4EA /* unit_tests.geometry */ = {
 			isa = PBXGroup;
 			children = (
+				0434AD9327677DEC009AD4EA /* unit_tests.geometry.entitlements */,
 				0434AD082767790A009AD4EA /* main.cpp */,
 				0434ACC027677903009AD4EA /* timer_tests.cpp */,
 				0434ACE327677906009AD4EA /* parallel_tests.cpp */,
@@ -2724,7 +2726,7 @@
 				0434ACE727677907009AD4EA /* level_set_solvers_tests.cpp */,
 				0434ACE627677907009AD4EA /* pde_tests.cpp */,
 			);
-			path = unit_tests.geo;
+			path = unit_tests.geometry;
 			sourceTree = "<group>";
 		};
 		0434AD8E27677B27009AD4EA /* base */ = {
@@ -2805,7 +2807,7 @@
 				04CE367E274D077100204B8E /* apps */,
 				0434A2AE275F96AB009AD4EA /* editor */,
 				04CE382D274D17B300204B8E /* unit_tests */,
-				0434AC91276778DE009AD4EA /* unit_tests.geo */,
+				0434AC91276778DE009AD4EA /* unit_tests.geometry */,
 				0431584727674C960070FBEC /* mem_perf_tests */,
 				0431585227674CB80070FBEC /* time_perf_tests */,
 				0434A360275F9CBA009AD4EA /* external */,
@@ -2825,7 +2827,7 @@
 				043155A62767475D0070FBEC /* libvox.geometry.a */,
 				0431584627674C960070FBEC /* mem_perf_tests */,
 				0431585127674CB80070FBEC /* time_perf_tests */,
-				0434AC90276778DE009AD4EA /* unit_tests.geo */,
+				0434AC90276778DE009AD4EA /* unit_tests.geometry */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3898,9 +3900,9 @@
 			productReference = 0434A35F275F9CBA009AD4EA /* libexternal.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
-		0434AC8F276778DE009AD4EA /* unit_tests.geo */ = {
+		0434AC8F276778DE009AD4EA /* unit_tests.geometry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0434AC94276778DE009AD4EA /* Build configuration list for PBXNativeTarget "unit_tests.geo" */;
+			buildConfigurationList = 0434AC94276778DE009AD4EA /* Build configuration list for PBXNativeTarget "unit_tests.geometry" */;
 			buildPhases = (
 				0434AC8C276778DE009AD4EA /* Sources */,
 				0434AC8D276778DE009AD4EA /* Frameworks */,
@@ -3911,9 +3913,9 @@
 			dependencies = (
 				0434AD8C27677951009AD4EA /* PBXTargetDependency */,
 			);
-			name = unit_tests.geo;
+			name = unit_tests.geometry;
 			productName = unit_tests.geo;
-			productReference = 0434AC90276778DE009AD4EA /* unit_tests.geo */;
+			productReference = 0434AC90276778DE009AD4EA /* unit_tests.geometry */;
 			productType = "com.apple.product-type.tool";
 		};
 		04CE367B274D077100204B8E /* apps */ = {
@@ -4025,7 +4027,7 @@
 				04CE367B274D077100204B8E /* apps */,
 				0434A2AC275F96AB009AD4EA /* editor */,
 				04CE382B274D17B300204B8E /* unit_tests */,
-				0434AC8F276778DE009AD4EA /* unit_tests.geo */,
+				0434AC8F276778DE009AD4EA /* unit_tests.geometry */,
 				0431584527674C960070FBEC /* mem_perf_tests */,
 				0431585027674CB80070FBEC /* time_perf_tests */,
 				0434A35E275F9CBA009AD4EA /* external */,
@@ -4859,13 +4861,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = unit_tests.geometry/unit_tests.geometry.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (
 					"-lgtest",
-					"-lgtest_main",
 					"-lgmock",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4877,13 +4880,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = unit_tests.geometry/unit_tests.geometry.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SL5L673UU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (
 					"-lgtest",
-					"-lgtest_main",
 					"-lgmock",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5404,7 +5408,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0434AC94276778DE009AD4EA /* Build configuration list for PBXNativeTarget "unit_tests.geo" */ = {
+		0434AC94276778DE009AD4EA /* Build configuration list for PBXNativeTarget "unit_tests.geometry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0434AC95276778DE009AD4EA /* Debug */,
