@@ -24,9 +24,32 @@ public:
     
     void update(float deltaTime) override;
     
+    void _render(Camera* camera) override;
+    
+    //!
+    //! \brief      Returns the particle system data.
+    //!
+    //! This function returns the particle system data. The data is created when
+    //! this solver is constructed and also owned by the solver.
+    //!
+    //! \return     The particle system data.
+    //!
+    geometry::ParticleSystemData3Ptr &particleSystemData();
+    
+private:
+    MeshPtr _createMesh();
+    
 private:
     geometry::ParticleSystemData3Ptr _particleSystemData;
     geometry::ParticleSystemSolver3Ptr _particleSolver;
+    
+    size_t _numberOfVertex = 0;
+    id<MTLBuffer> _vertexBuffers;
+    id<MTLBuffer> _indexBuffers;
+    
+    size_t _stride;
+    id<MTLBuffer> _renderBuffers;
+    std::vector<float> _renderRelatedInfo;
 };
 
 }

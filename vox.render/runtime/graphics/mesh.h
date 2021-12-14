@@ -61,6 +61,7 @@ protected:
     friend class PrimitiveMesh;
     friend class MeshRenderer;
     friend class SkinnedMeshRenderer;
+    friend class ParticleRenderer;
     friend class RenderQueue;
     
     std::vector<std::optional<MeshBuffer>> _vertexBuffer;

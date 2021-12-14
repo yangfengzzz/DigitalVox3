@@ -253,6 +253,7 @@ private:
     friend class ComponentsManager;
     friend class MeshRenderer;
     friend class SkinnedMeshRenderer;
+    friend class ParticleRenderer;
     
     void _projMatChange();
     
