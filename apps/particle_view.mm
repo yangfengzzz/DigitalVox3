@@ -12,12 +12,36 @@
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/point_light.h"
 #include "../vox.render/runtime/particle/particle_renderer.h"
+#include <random>
 
 using namespace vox;
 
 class ParticleMaterial: public BaseMaterial {
 public:
     ParticleMaterial(Engine* engine):BaseMaterial(engine, Shader::find("particle-shader")) {}
+};
+
+class ParticleScript: public Script {
+public:
+    ParticleScript(Entity* entity):Script(entity) {
+        _renderer = entity->getComponent<ParticleRenderer>();
+        _particleSystemData = _renderer->particleSystemData();
+    }
+    
+    void onStart() override {
+        auto position = _particleSystemData->positions();
+        for (auto& pos : position) {
+            pos.x = u(e) * 50;
+            pos.y = u(e) * 10;
+        }
+    }
+    
+private:
+    std::default_random_engine e{};
+    std::uniform_real_distribution<float> u = std::uniform_real_distribution<float>(-0.5, 0.5);
+    
+    ParticleRenderer* _renderer;
+    geometry::ParticleSystemData3Ptr _particleSystemData;
 };
 
 int main(int, char**) {
@@ -39,6 +63,8 @@ int main(int, char**) {
     particles->particleSystemData()->resize(100);
     auto pMtl = std::make_shared<ParticleMaterial>(&engine);
     particles->setMaterial(pMtl);
+    
+    particleEntity->addComponent<ParticleScript>();
 
     engine.run();
 }
