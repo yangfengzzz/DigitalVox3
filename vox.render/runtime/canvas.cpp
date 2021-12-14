@@ -61,13 +61,6 @@ Canvas::Canvas(int width, int height, const char* title) {
     if (window == NULL)
         return;
     
-    // Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    // Setup style
-    ImGui::StyleColorsDark();
-    
     glfwSetCursorPosCallback(window, cursorPosCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetScrollCallback(window, scrollCallback);
@@ -78,6 +71,43 @@ Canvas::Canvas(int width, int height, const char* title) {
         _height = height;
     });
     glfwSetWindowSizeCallback(window, windowResizeCallback);
+    
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    
+    ImGuiStyle &style = ImGui::GetStyle();
+
+    // Color scheme
+    style.Colors[ImGuiCol_TitleBg]          = ImVec4(1.0f, 0.0f, 0.0f, 0.6f);
+    style.Colors[ImGuiCol_TitleBgActive]    = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
+    style.Colors[ImGuiCol_MenuBarBg]        = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_Header]           = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_HeaderActive]     = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_HeaderHovered]    = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_FrameBg]          = ImVec4(0.0f, 0.0f, 0.0f, 0.8f);
+    style.Colors[ImGuiCol_CheckMark]        = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
+    style.Colors[ImGuiCol_SliderGrab]       = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_SliderGrabActive] = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
+    style.Colors[ImGuiCol_FrameBgHovered]   = ImVec4(1.0f, 1.0f, 1.0f, 0.1f);
+    style.Colors[ImGuiCol_FrameBgActive]    = ImVec4(1.0f, 1.0f, 1.0f, 0.2f);
+    style.Colors[ImGuiCol_Button]           = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_ButtonHovered]    = ImVec4(1.0f, 0.0f, 0.0f, 0.6f);
+    style.Colors[ImGuiCol_ButtonActive]     = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
+    
+    // Borderless window
+    style.WindowBorderSize = 0.0f;
+
+    // Global scale
+    style.ScaleAllSizes(getDpiFactor());
+    
+    ImGuiIO& io = ImGui::GetIO();
+    io.DisplaySize.x           = static_cast<float>(width);
+    io.DisplaySize.y           = static_cast<float>(height);
+    io.FontGlobalScale         = 1.0f;
+    io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+    io.Fonts->AddFontFromFileTTF("../models/Roboto-Regular.ttf", 16.0f);
+    
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     
     _width = width;
