@@ -11,8 +11,8 @@
 
 #include <random>
 
-using vox::Array1;
-using vox::Vector3D;
+using vox::geometry::Array1;
+using vox::geometry::Vector3D;
 
 class PointHashGridSearcher3 : public ::benchmark::Fixture {
 protected:
@@ -34,7 +34,7 @@ protected:
 
 BENCHMARK_DEFINE_F(PointHashGridSearcher3, Build)(benchmark::State &state) {
   while (state.KeepRunning()) {
-    vox::PointHashGridSearcher3 grid({64, 64, 64}, 1.0 / 64.0);
+    vox::geometry::PointHashGridSearcher3 grid({64, 64, 64}, 1.0 / 64.0);
     grid.build(points);
   }
 }
@@ -43,7 +43,7 @@ BENCHMARK_REGISTER_F(PointHashGridSearcher3, Build)->Arg(1 << 5)->Arg(1 << 10)->
 
 BENCHMARK_DEFINE_F(PointHashGridSearcher3, ForEachNearbyPoints)
 (benchmark::State &state) {
-  vox::PointHashGridSearcher3 grid({64, 64, 64}, 1.0 / 64.0);
+  vox::geometry::PointHashGridSearcher3 grid({64, 64, 64}, 1.0 / 64.0);
   grid.build(points);
 
   size_t cnt = 0;

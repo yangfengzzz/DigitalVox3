@@ -30,14 +30,14 @@ public:
 };
 
 BENCHMARK_DEFINE_F(Parallel, ParallelFor)(benchmark::State &state) {
-  unsigned int oldNumThreads = vox::maxNumberOfThreads();
-  vox::setMaxNumberOfThreads(numThreads);
+  unsigned int oldNumThreads = vox::geometry::maxNumberOfThreads();
+  vox::geometry::setMaxNumberOfThreads(numThreads);
 
   while (state.KeepRunning()) {
-    vox::parallelFor(vox::kZeroSize, n, [this](size_t i) { c[i] = 1.0 / std::sqrt(a[i] / b[i] + 1.0); });
+    vox::geometry::parallelFor(vox::geometry::kZeroSize, n, [this](size_t i) { c[i] = 1.0 / std::sqrt(a[i] / b[i] + 1.0); });
   }
 
-  vox::setMaxNumberOfThreads(oldNumThreads);
+  vox::geometry::setMaxNumberOfThreads(oldNumThreads);
 }
 
 BENCHMARK_REGISTER_F(Parallel, ParallelFor)
@@ -56,18 +56,18 @@ BENCHMARK_REGISTER_F(Parallel, ParallelFor)
     ->Args({1 << 24, 8});
 
 BENCHMARK_DEFINE_F(Parallel, ParallelRangeFor)(benchmark::State &state) {
-  unsigned int oldNumThreads = vox::maxNumberOfThreads();
-  vox::setMaxNumberOfThreads(numThreads);
+  unsigned int oldNumThreads = vox::geometry::maxNumberOfThreads();
+  vox::geometry::setMaxNumberOfThreads(numThreads);
 
   while (state.KeepRunning()) {
-    vox::parallelRangeFor(vox::kZeroSize, n, [this](size_t iBegin, size_t iEnd) {
+    vox::geometry::parallelRangeFor(vox::geometry::kZeroSize, n, [this](size_t iBegin, size_t iEnd) {
       for (size_t i = iBegin; i < iEnd; ++i) {
         c[i] = 1.0 / std::sqrt(a[i] / b[i] + 1.0);
       }
     });
   }
 
-  vox::setMaxNumberOfThreads(oldNumThreads);
+  vox::geometry::setMaxNumberOfThreads(oldNumThreads);
 }
 
 BENCHMARK_REGISTER_F(Parallel, ParallelRangeFor)

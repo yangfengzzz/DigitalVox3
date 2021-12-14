@@ -10,14 +10,14 @@
 #include <fstream>
 #include <random>
 
-using vox::Vector3D;
+using vox::geometry::Vector3D;
 
 class TriangleMeshToSDF : public ::benchmark::Fixture {
 protected:
   std::mt19937 rng{0};
   std::uniform_real_distribution<> dist{0.0, 1.0};
-  vox::TriangleMesh3 triMesh;
-  vox::VertexCenteredScalarGrid3 grid;
+  vox::geometry::TriangleMesh3 triMesh;
+  vox::geometry::VertexCenteredScalarGrid3 grid;
 
   void SetUp(const ::benchmark::State &) override {
     std::ifstream file("../models/bunny.obj");
@@ -27,7 +27,7 @@ protected:
       file.close();
     }
 
-    vox::BoundingBox3D box = triMesh.boundingBox();
+    vox::geometry::BoundingBox3D box = triMesh.boundingBox();
     const Vector3D scale{box.width(), box.height(), box.depth()};
     box.lowerCorner -= 0.2 * scale;
     box.upperCorner += 0.2 * scale;
@@ -39,7 +39,7 @@ protected:
 
 BENCHMARK_DEFINE_F(TriangleMeshToSDF, Call)(benchmark::State &state) {
   while (state.KeepRunning()) {
-    vox::triangleMeshToSdf(triMesh, &grid);
+    vox::geometry::triangleMeshToSdf(triMesh, &grid);
   }
 }
 

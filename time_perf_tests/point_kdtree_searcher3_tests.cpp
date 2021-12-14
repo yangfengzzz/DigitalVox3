@@ -11,8 +11,8 @@
 
 #include <random>
 
-using vox::Array1;
-using vox::Vector3D;
+using vox::geometry::Array1;
+using vox::geometry::Vector3D;
 
 class PointKdTreeSearcher3 : public ::benchmark::Fixture {
 protected:
@@ -34,7 +34,7 @@ protected:
 
 BENCHMARK_DEFINE_F(PointKdTreeSearcher3, Build)(benchmark::State &state) {
   while (state.KeepRunning()) {
-    vox::PointKdTreeSearcher3 tree;
+    vox::geometry::PointKdTreeSearcher3 tree;
     tree.build(points);
   }
 }
@@ -43,7 +43,7 @@ BENCHMARK_REGISTER_F(PointKdTreeSearcher3, Build)->Arg(1 << 5)->Arg(1 << 10)->Ar
 
 BENCHMARK_DEFINE_F(PointKdTreeSearcher3, ForEachNearbyPoints)
 (benchmark::State &state) {
-  vox::PointKdTreeSearcher3 tree;
+  vox::geometry::PointKdTreeSearcher3 tree;
   tree.build(points);
 
   size_t cnt = 0;

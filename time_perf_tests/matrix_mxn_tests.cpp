@@ -11,11 +11,11 @@
 
 #include <random>
 
-using vox::VectorND;
+using vox::geometry::VectorND;
 
 class MatrixMxN : public ::benchmark::Fixture {
 protected:
-  vox::MatrixMxND mat;
+  vox::geometry::MatrixMxND mat;
   VectorND x;
   VectorND y;
 
@@ -28,9 +28,9 @@ protected:
     mat.resize(n, n);
     x.resize(n);
     y.resize(n);
-    vox::forEachIndex(vox::Vector2UZ{}, vox::Vector2UZ{mat.cols(), mat.rows()},
+    vox::geometry::forEachIndex(vox::geometry::Vector2UZ{}, vox::geometry::Vector2UZ{mat.cols(), mat.rows()},
                       [&](size_t j, size_t i) { mat(i, j) = d(rng); });
-    vox::forEachIndex(x.rows(), [&](size_t i) {
+    vox::geometry::forEachIndex(x.rows(), [&](size_t i) {
       x[i] = d(rng);
       y[i] = d(rng);
     });

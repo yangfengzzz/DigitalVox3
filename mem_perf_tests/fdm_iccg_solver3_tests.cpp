@@ -12,6 +12,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(FdmIccgSolver3, Memory) {
   const size_t n = 300;

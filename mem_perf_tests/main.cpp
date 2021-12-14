@@ -9,6 +9,7 @@
 #include "../vox.geometry/logging.h"
 
 using namespace vox;
+using namespace geometry;
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

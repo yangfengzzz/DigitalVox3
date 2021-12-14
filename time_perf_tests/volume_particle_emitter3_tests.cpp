@@ -11,14 +11,14 @@
 
 #include <benchmark/benchmark.h>
 
-using vox::BoundingBox3D;
-using vox::Box3;
-using vox::ImplicitSurfaceSet3;
-using vox::ParticleSystemData3;
+using vox::geometry::BoundingBox3D;
+using vox::geometry::Box3;
+using vox::geometry::ImplicitSurfaceSet3;
+using vox::geometry::ParticleSystemData3;
 
 class VolumeParticleEmitter3 : public ::benchmark::Fixture {
 protected:
-  vox::VolumeParticleEmitter3Ptr emitter;
+  vox::geometry::VolumeParticleEmitter3Ptr emitter;
 
   void SetUp(const ::benchmark::State &) override {
     double dx = 0.2;
@@ -39,9 +39,9 @@ protected:
                     .makeShared();
 
     auto boxSet =
-        ImplicitSurfaceSet3::builder().withExplicitSurfaces(vox::Array1<vox::Surface3Ptr>{box1, box2}).makeShared();
+        ImplicitSurfaceSet3::builder().withExplicitSurfaces(vox::geometry::Array1<vox::geometry::Surface3Ptr>{box1, box2}).makeShared();
 
-    emitter = vox::VolumeParticleEmitter3::builder()
+    emitter = vox::geometry::VolumeParticleEmitter3::builder()
                   .withSurface(boxSet)
                   .withMaxRegion(BoundingBox3D({0, 0, 0}, {lx, ly, lz}))
                   .withSpacing(0.5 * dx)

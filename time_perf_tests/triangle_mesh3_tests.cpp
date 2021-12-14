@@ -11,13 +11,13 @@
 #include <fstream>
 #include <random>
 
-using vox::Vector3D;
+using vox::geometry::Vector3D;
 
 class TriangleMesh3 : public ::benchmark::Fixture {
 protected:
   std::mt19937 rng{0};
   std::uniform_real_distribution<> dist{0.0, 1.0};
-  vox::TriangleMesh3 triMesh;
+  vox::geometry::TriangleMesh3 triMesh;
 
   void SetUp(const ::benchmark::State &) override {
     std::ifstream file("../models/bunny.obj");

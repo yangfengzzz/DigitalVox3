@@ -11,13 +11,13 @@
 
 #include <random>
 
-using vox::Array3;
-using vox::FdmCompressedLinearSystem3;
-using vox::FdmMatrix2;
-using vox::FdmMatrix3;
-using vox::FdmVector2;
-using vox::FdmVector3;
-using vox::Vector3UZ;
+using vox::geometry::Array3;
+using vox::geometry::FdmCompressedLinearSystem3;
+using vox::geometry::FdmMatrix2;
+using vox::geometry::FdmMatrix3;
+using vox::geometry::FdmVector2;
+using vox::geometry::FdmVector3;
+using vox::geometry::Vector3UZ;
 
 class FdmBlas2 : public ::benchmark::Fixture {
 public:
@@ -154,7 +154,7 @@ public:
 
 BENCHMARK_DEFINE_F(FdmBlas2, Mvm)(benchmark::State &state) {
   while (state.KeepRunning()) {
-    vox::FdmBlas2::mvm(m, a, &b);
+    vox::geometry::FdmBlas2::mvm(m, a, &b);
   }
 }
 
@@ -162,7 +162,7 @@ BENCHMARK_REGISTER_F(FdmBlas2, Mvm)->Arg(1 << 6)->Arg(1 << 8)->Arg(1 << 10);
 
 BENCHMARK_DEFINE_F(FdmBlas3, Mvm)(benchmark::State &state) {
   while (state.KeepRunning()) {
-    vox::FdmBlas3::mvm(m, a, &b);
+    vox::geometry::FdmBlas3::mvm(m, a, &b);
   }
 }
 
@@ -170,7 +170,7 @@ BENCHMARK_REGISTER_F(FdmBlas3, Mvm)->Arg(1 << 4)->Arg(1 << 6)->Arg(1 << 8);
 
 BENCHMARK_DEFINE_F(FdmCompressedBlas3, Mvm)(benchmark::State &state) {
   while (state.KeepRunning()) {
-    vox::FdmCompressedBlas3::mvm(system.A, system.b, &system.x);
+    vox::geometry::FdmCompressedBlas3::mvm(system.A, system.b, &system.x);
   }
 }
 

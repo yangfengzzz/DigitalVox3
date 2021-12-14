@@ -12,18 +12,18 @@
 #include <fstream>
 #include <random>
 
-using vox::BoundingBox3D;
-using vox::Ray3D;
-using vox::Triangle3;
-using vox::TriangleMesh3;
-using vox::Vector3D;
+using vox::geometry::BoundingBox3D;
+using vox::geometry::Ray3D;
+using vox::geometry::Triangle3;
+using vox::geometry::TriangleMesh3;
+using vox::geometry::Vector3D;
 
 class Bvh3 : public ::benchmark::Fixture {
 public:
   std::mt19937 rng{0};
   std::uniform_real_distribution<> dist{0.0, 1.0};
   TriangleMesh3 triMesh;
-  vox::Bvh3<Triangle3> queryEngine{};
+  vox::geometry::Bvh3<Triangle3> queryEngine{};
 
   void SetUp(const ::benchmark::State &) override {
     std::ifstream file("../models/bunny.obj");
@@ -33,8 +33,8 @@ public:
       file.close();
     }
 
-    vox::Array1<Triangle3> triangles;
-    vox::Array1<BoundingBox3D> bounds;
+    vox::geometry::Array1<Triangle3> triangles;
+    vox::geometry::Array1<BoundingBox3D> bounds;
     for (size_t i = 0; i < triMesh.numberOfTriangles(); ++i) {
       auto tri = triMesh.triangle(i);
       triangles.append(tri);

@@ -17,13 +17,13 @@ class ParticleSystemSolver3 : public benchmark::Fixture {
 public:
   std::mt19937 rng{0};
   std::uniform_real_distribution<> dist{0.0, 1.0};
-  vox::Array1<vox::Vector3D> points;
-  vox::ParticleSystemSolver3 solver;
-  vox::Frame frame{0, 1.0 / 300.0};
+  vox::geometry::Array1<vox::geometry::Vector3D> points;
+  vox::geometry::ParticleSystemSolver3 solver;
+  vox::geometry::Frame frame{0, 1.0 / 300.0};
 
   void SetUp(benchmark::State &state) override {
-    auto plane = std::make_shared<vox::Plane3>(vox::Vector3D(0, 1, 0), vox::Vector3D());
-    auto collider = std::make_shared<vox::RigidBodyCollider3>(plane);
+    auto plane = std::make_shared<vox::geometry::Plane3>(vox::geometry::Vector3D(0, 1, 0), vox::geometry::Vector3D());
+    auto collider = std::make_shared<vox::geometry::RigidBodyCollider3>(plane);
 
     solver.setCollider(collider);
     solver.setDragCoefficient(0.0);
@@ -51,7 +51,7 @@ public:
     frame.advance();
   }
 
-  vox::Vector3D makeVec() { return vox::Vector3D(dist(rng), dist(rng), dist(rng)); }
+  vox::geometry::Vector3D makeVec() { return vox::geometry::Vector3D(dist(rng), dist(rng), dist(rng)); }
 };
 
 BENCHMARK_DEFINE_F(ParticleSystemSolver3, Update)
