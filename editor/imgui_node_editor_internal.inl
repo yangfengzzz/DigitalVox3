@@ -17,7 +17,7 @@
 
 
 //------------------------------------------------------------------------------
-namespace ax {
+namespace vox {
 namespace NodeEditor {
 namespace Detail {
 

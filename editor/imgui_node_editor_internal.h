@@ -33,13 +33,13 @@
 
 
 //------------------------------------------------------------------------------
-namespace ax {
+namespace vox {
 namespace NodeEditor {
 namespace Detail {
 
 
 //------------------------------------------------------------------------------
-namespace ed = ax::NodeEditor::Detail;
+namespace ed = NodeEditor::Detail;
 namespace json = crude_json;
 
 
@@ -129,14 +129,14 @@ enum class ObjectType {
     Pin
 };
 
-using ax::NodeEditor::PinKind;
-using ax::NodeEditor::StyleColor;
-using ax::NodeEditor::StyleVar;
-using ax::NodeEditor::SaveReasonFlags;
+using NodeEditor::PinKind;
+using NodeEditor::StyleColor;
+using NodeEditor::StyleVar;
+using NodeEditor::SaveReasonFlags;
 
-using ax::NodeEditor::NodeId;
-using ax::NodeEditor::PinId;
-using ax::NodeEditor::LinkId;
+using NodeEditor::NodeId;
+using NodeEditor::PinId;
+using NodeEditor::LinkId;
 
 struct ObjectId final : Details::SafePointerType<ObjectId> {
     using Super = Details::SafePointerType<ObjectId>;
@@ -1416,7 +1416,7 @@ struct HintBuilder {
     ImDrawList *GetBackgroundDrawList();
 };
 
-struct Style : ax::NodeEditor::Style {
+struct Style : NodeEditor::Style {
     void PushColor(StyleColor colorIndex, const ImVec4 &color);
     
     void PopColor(int count = 1);
@@ -1452,8 +1452,8 @@ private:
     vector<VarModifier> m_VarStack;
 };
 
-struct Config : ax::NodeEditor::Config {
-    Config(const ax::NodeEditor::Config *config);
+struct Config : NodeEditor::Config {
+    Config(const NodeEditor::Config *config);
     
     std::string Load();
     
@@ -1483,7 +1483,7 @@ inline SuspendFlags operator&(SuspendFlags lhs, SuspendFlags rhs) {
 
 
 struct EditorContext {
-    EditorContext(const ax::NodeEditor::Config *config = nullptr);
+    EditorContext(const NodeEditor::Config *config = nullptr);
     
     ~EditorContext();
     

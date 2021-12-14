@@ -34,7 +34,7 @@ static bool const value = sizeof(test<T>(0)) == sizeof(yes);               \
 };
 
 
-namespace ax {
+namespace vox {
 namespace NodeEditor {
 namespace Detail {
 
@@ -73,7 +73,7 @@ static inline int GetKeyIndexForD() {
 
 
 //------------------------------------------------------------------------------
-namespace ed = ax::NodeEditor::Detail;
+namespace ed = vox::NodeEditor::Detail;
 
 
 //------------------------------------------------------------------------------
@@ -435,7 +435,7 @@ static void ImDrawList_PathBezierOffset(ImDrawList *drawList, float offset, cons
 static void ImDrawList_AddBezierWithArrows(ImDrawList *drawList, const ImCubicBezierPoints &curve, float thickness,
                                            float startArrowSize, float startArrowWidth, float endArrowSize, float endArrowWidth,
                                            bool fill, ImU32 color, float strokeThickness) {
-    using namespace ax;
+    using namespace vox;
     
     if ((color >> 24) == 0)
         return;
@@ -909,7 +909,7 @@ ImRect ed::Link::GetBounds() const {
 // Editor Context
 //
 //------------------------------------------------------------------------------
-ed::EditorContext::EditorContext(const ax::NodeEditor::Config *config)
+ed::EditorContext::EditorContext(const NodeEditor::Config *config)
 : m_IsFirstFrame(true),
 m_IsWindowActive(false),
 m_ShortcutsEnabled(true),
@@ -4734,9 +4734,9 @@ ImVec4 *ed::Style::GetVarVec4Addr(StyleVar idx) {
 // Config
 //
 //------------------------------------------------------------------------------
-ed::Config::Config(const ax::NodeEditor::Config *config) {
+ed::Config::Config(const NodeEditor::Config *config) {
     if (config)
-        *static_cast<ax::NodeEditor::Config *>(this) = *config;
+        *static_cast<NodeEditor::Config *>(this) = *config;
 }
 
 std::string ed::Config::Load() {
