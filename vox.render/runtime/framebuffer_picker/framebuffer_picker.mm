@@ -26,21 +26,29 @@ void FramebufferPicker::setCamera(Camera* value) {
 
 FramebufferPicker::FramebufferPicker(Entity* entity):
 Script(entity) {
-    colorRenderTarget = [[MTLRenderPassDescriptor alloc] init];
-    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
-    descriptor.width = 2560;
-    descriptor.height = 1440;
-    descriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;
-    descriptor.usage = MTLTextureUsageRenderTarget;
-    colorRenderTarget.colorAttachments[0].texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:descriptor];
+    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+        int buffer_width, buffer_height;
+        glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
+
+        MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+        descriptor.width = buffer_width;
+        descriptor.height = buffer_height;
+        descriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;
+        descriptor.usage = MTLTextureUsageRenderTarget;
+        colorRenderTarget.colorAttachments[0].texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:descriptor];
+        
+        MTLTextureDescriptor* depthDescriptor = [[MTLTextureDescriptor alloc]init];
+        depthDescriptor.width = buffer_width;
+        depthDescriptor.height = buffer_height;
+        depthDescriptor.pixelFormat = MTLPixelFormatDepth32Float;
+        depthDescriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
+        depthDescriptor.storageMode = MTLStorageModePrivate;
+        colorRenderTarget.depthAttachment.texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:depthDescriptor];
+    };
     
-    MTLTextureDescriptor* depthDescriptor = [[MTLTextureDescriptor alloc]init];
-    depthDescriptor.width = 2560;
-    depthDescriptor.height = 1440;
-    depthDescriptor.pixelFormat = MTLPixelFormatDepth32Float;
-    depthDescriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
-    depthDescriptor.storageMode = MTLStorageModePrivate;
-    colorRenderTarget.depthAttachment.texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:depthDescriptor];
+    colorRenderTarget = [[MTLRenderPassDescriptor alloc] init];
+    createFrameBuffer(_engine->canvas()->handle(), 0, 0);
+    Canvas::resize_callbacks.push_back(createFrameBuffer);
 }
 
 void FramebufferPicker::setPickFunctor(std::function<void(Renderer*, MeshPtr)> func) {

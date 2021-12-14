@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0434AC8F276778DE009AD4EA"
-               BuildableName = "unit_tests_geo"
+               BuildableName = "unit_tests.geometry"
                BlueprintName = "unit_tests.geometry"
                ReferencedContainer = "container:DigitalVox3.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0434AC8F276778DE009AD4EA"
-            BuildableName = "unit_tests_geo"
+            BuildableName = "unit_tests.geometry"
             BlueprintName = "unit_tests.geometry"
             ReferencedContainer = "container:DigitalVox3.xcodeproj">
          </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0434AC8F276778DE009AD4EA"
-            BuildableName = "unit_tests_geo"
+            BuildableName = "unit_tests.geometry"
             BlueprintName = "unit_tests.geometry"
             ReferencedContainer = "container:DigitalVox3.xcodeproj">
          </BuildableReference>

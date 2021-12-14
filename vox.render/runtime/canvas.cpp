@@ -42,6 +42,13 @@ void Canvas::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
     }
 }
 
+std::vector<Canvas::ResizeFunc> Canvas::resize_callbacks = {};
+void Canvas::windowResizeCallback(GLFWwindow* window, int width, int height) {
+    for (auto& callback : resize_callbacks) {
+        callback(window, width, height);
+    }
+}
+
 Canvas::Canvas(int width, int height, const char* title) {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
@@ -65,6 +72,12 @@ Canvas::Canvas(int width, int height, const char* title) {
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetScrollCallback(window, scrollCallback);
     glfwSetKeyCallback(window, keyCallback);
+    
+    resize_callbacks.push_back([&](GLFWwindow* window, int width, int height){
+        _width = width;
+        _height = height;
+    });
+    glfwSetWindowSizeCallback(window, windowResizeCallback);
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     
     _width = width;
@@ -77,8 +90,8 @@ Canvas::~Canvas() {
     scroll_callbacks.clear();
     key_callbacks.clear();
     
-//    glfwDestroyWindow(window);
-//    glfwTerminate();
+    glfwDestroyWindow(window);
+    glfwTerminate();
 }
 
 int Canvas::width() const {
@@ -97,17 +110,6 @@ int Canvas::height() const {
 void Canvas::setHeight(float value) {
     _height = value;
     glfwSetWindowSize(window, _width, _height);
-}
-
-Float2 Canvas::scale() {
-    glfwGetWindowContentScale(window, &_scale.x, &_scale.y);
-    return _scale;
-}
-
-void Canvas::setScale(const Float2& value) {
-}
-
-void Canvas::resizeByClientSize(float pixelRatio) {
 }
 
 GLFWwindow* Canvas::handle() {

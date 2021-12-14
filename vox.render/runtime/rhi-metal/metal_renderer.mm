@@ -26,18 +26,22 @@ resouceCache(this) {
     samplerState = buildSamplerState();
     
     ImGui_ImplMetal_Init(device);
-    
-    int width, height;
-    glfwGetFramebufferSize(canvas->handle(), &width, &height);
-    depthTexture = buildTexture(MTLPixelFormatDepth32Float, width, height);
 
     NSWindow *nswin = glfwGetCocoaWindow(canvas->handle());
     layer = [CAMetalLayer layer];
     layer.device = device;
     layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-    layer.drawableSize = CGSizeMake(width, height);
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
+    
+    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+        int buffer_width, buffer_height;
+        glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
+        depthTexture = buildTexture(MTLPixelFormatDepth32Float, buffer_width, buffer_height);
+        layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
+    };
+    createFrameBuffer(canvas->handle(), 0, 0);
+    Canvas::resize_callbacks.push_back(createFrameBuffer);
 }
 
 id <MTLSamplerState> MetalRenderer::buildSamplerState() {

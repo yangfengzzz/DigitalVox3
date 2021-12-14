@@ -35,19 +35,9 @@ public:
 
     void setHeight(float value);
     
-    /**
-     * The scale of canvas, the value is visible width/height divide the render width/height.
-     * @remarks Need to re-assign after modification to ensure that the modification takes effect.
-     */
-    Float2 scale();
-
-    void setScale(const Float2& value);
+    bool isResized();
     
-    /**
-     * Resize the rendering size according to the clientWidth and clientHeight of the canvas.
-     * @param pixelRatio - Pixel ratio
-     */
-    void resizeByClientSize(float pixelRatio);
+    void resetState();
     
     GLFWwindow* handle();
     
@@ -71,18 +61,22 @@ public:
     static std::vector<ScrollFunc> scroll_callbacks;
     using KeyFunc = std::function<void(GLFWwindow* window, int key, int scancode, int action, int mods)>;
     static std::vector<KeyFunc> key_callbacks;
-
+    using ResizeFunc = std::function<void(GLFWwindow* window, int width, int height)>;
+    static std::vector<ResizeFunc> resize_callbacks;
+    
 private:
     static void cursorPosCallback(GLFWwindow* window, double xpos, double ypos);
     static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
     static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-        
-    GLFWwindow* window;
-    
+    static void windowResizeCallback(GLFWwindow* window, int width, int height);
+
+private:
     int _width;
     int _height;
     Float2 _scale = Float2();
+
+    GLFWwindow* window;
 };
 
 }
