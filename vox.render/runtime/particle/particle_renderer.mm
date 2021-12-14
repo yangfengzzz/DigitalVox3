@@ -28,6 +28,19 @@ void ParticleRenderer::update(float deltaTime) {
     if (_particleSolver) {
         _particleSolver->advanceSingleFrame();
     }
+    
+    auto position = _particleSystemData->positions();
+    const auto n_position = position.length();
+    bool shouldResize = _numberOfVertex != n_position;
+    if (shouldResize) {
+        _renderRelatedInfo.resize(n_position*4);
+        for (size_t i = 0; i < _renderRelatedInfo.size(); i += 4) {
+            _renderRelatedInfo[i] = 0.5;
+            _renderRelatedInfo[i+1] = 0.2;
+            _renderRelatedInfo[i+2] = 0.3;
+            _renderRelatedInfo[i+3] = 0.5;
+        }
+    }
 }
 
 void ParticleRenderer::_render(Camera* camera) {
