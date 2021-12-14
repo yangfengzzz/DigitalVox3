@@ -26,7 +26,8 @@ void ParticleRenderer::setParticleSystemSolver(const geometry::ParticleSystemSol
 
 void ParticleRenderer::update(float deltaTime) {
     if (_particleSolver) {
-        _particleSolver->advanceSingleFrame();
+        frame.timeIntervalInSeconds = deltaTime;
+        _particleSolver->update(frame);
     }
     
     auto position = _particleSystemData->positions();

@@ -12,6 +12,11 @@
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/point_light.h"
 #include "../vox.render/runtime/particle/particle_renderer.h"
+
+#include "../vox.geometry/surfaces/plane.h"
+#include "../vox.geometry/colliders/rigid_body_collider.h"
+#include "../vox.geometry/particle_emitter/point_particle_emitter3.h"
+
 #include <random>
 
 using namespace vox;
@@ -29,17 +34,29 @@ public:
     }
     
     void onStart() override {
-        auto position = _particleSystemData->positions();
-        for (auto& pos : position) {
-            pos.x = u(e) * 50;
-            pos.y = u(e) * 10;
-        }
+        geometry::Plane3Ptr plane = std::make_shared<geometry::Plane3>(geometry::Vector3D(0, 1, 0), geometry::Vector3D());
+        geometry::RigidBodyCollider3Ptr collider = std::make_shared<geometry::RigidBodyCollider3>(plane);
+        collider->setFrictionCoefficient(0.01);
+
+        _solver = std::make_shared<geometry::ParticleSystemSolver3>();
+        _solver->setRestitutionCoefficient(0.5);
+        _solver->setCollider(collider);
+
+        geometry::PointParticleEmitter3Ptr emitter =
+            std::make_shared<geometry::PointParticleEmitter3>(geometry::Vector3D(0, 0, 0),
+                                                              geometry::Vector3D(0, 1, 0), 10.0, 15.0);
+        emitter->setMaxNumberOfNewParticlesPerSecond(10);
+        emitter->setMaxNumberOfParticles(100);
+        _solver->setEmitter(emitter);
+        
+        _renderer->setParticleSystemSolver(_solver);
     }
     
 private:
     std::default_random_engine e{};
     std::uniform_real_distribution<float> u = std::uniform_real_distribution<float>(-0.5, 0.5);
-    
+    geometry::ParticleSystemSolver3Ptr _solver;
+
     ParticleRenderer* _renderer;
     geometry::ParticleSystemData3Ptr _particleSystemData;
 };
@@ -53,14 +70,13 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(0, 0, 50);
+    cameraEntity->transform->setPosition(0, 0, 2);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
     
     auto particleEntity = rootEntity->createChild("particle");
     auto particles = particleEntity->addComponent<ParticleRenderer>();
-    particles->particleSystemData()->resize(100);
     auto pMtl = std::make_shared<ParticleMaterial>(&engine);
     particles->setMaterial(pMtl);
     

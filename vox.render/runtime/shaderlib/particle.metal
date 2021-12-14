@@ -25,7 +25,7 @@ vertex VertexOut vertex_particle(const VertexIn vertexIn [[stage_in]],
     VertexOut out;
 
     out.position = u_VPMat * float4(vertexIn.a_position, 1.0);
-    out.pointSize = 50;
+    out.pointSize = 20;
     out.v_color = vertexIn.a_color;
     
     return out;

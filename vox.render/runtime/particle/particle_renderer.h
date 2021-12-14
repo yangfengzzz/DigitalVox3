@@ -42,6 +42,7 @@ private:
     MeshPtr _createMesh();
     
 private:
+    geometry::Frame frame;
     geometry::ParticleSystemData3Ptr _particleSystemData;
     geometry::ParticleSystemSolver3Ptr _particleSolver;
     
