@@ -459,9 +459,8 @@
 		0434A2B7275F9759009AD4EA /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		0434A2B8275F975F009AD4EA /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		0434A2B9275F9763009AD4EA /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04161014275474AE006CD384 /* ModelIO.framework */; };
-		0434AC772765C4F4009AD4EA /* gui_entry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC752765C4F4009AD4EA /* gui_entry.mm */; };
 		0434AC7B2765C871009AD4EA /* imgui_zmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */; };
-		0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7C2765CA8C009AD4EA /* gizmo.mm */; };
+		0434AC7E2765CA8C009AD4EA /* gui_entry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7C2765CA8C009AD4EA /* gui_entry.mm */; };
 		0434AC81276601B5009AD4EA /* grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC7F276601B5009AD4EA /* grid.mm */; };
 		0434AC872766132C009AD4EA /* editor-grid.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC84276611C5009AD4EA /* editor-grid.metal */; };
 		0434AD132767790B009AD4EA /* particle_system_data2_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AC9727677900009AD4EA /* particle_system_data2_tests.cpp */; };
@@ -1376,12 +1375,10 @@
 		0434A2B4275F96DC009AD4EA /* editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = editor.entitlements; sourceTree = "<group>"; };
 		0434A35F275F9CBA009AD4EA /* libexternal.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libexternal.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		0434AC71276230AD009AD4EA /* framebufferPicker_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = framebufferPicker_view.mm; sourceTree = "<group>"; };
-		0434AC752765C4F4009AD4EA /* gui_entry.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gui_entry.mm; sourceTree = "<group>"; };
-		0434AC762765C4F4009AD4EA /* gui_entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui_entry.h; sourceTree = "<group>"; };
 		0434AC792765C871009AD4EA /* imgui_zmo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_zmo.h; sourceTree = "<group>"; };
 		0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_zmo.cpp; sourceTree = "<group>"; };
-		0434AC7C2765CA8C009AD4EA /* gizmo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gizmo.mm; sourceTree = "<group>"; };
-		0434AC7D2765CA8C009AD4EA /* gizmo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gizmo.h; sourceTree = "<group>"; };
+		0434AC7C2765CA8C009AD4EA /* gui_entry.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gui_entry.mm; sourceTree = "<group>"; };
+		0434AC7D2765CA8C009AD4EA /* gui_entry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui_entry.h; sourceTree = "<group>"; };
 		0434AC7F276601B5009AD4EA /* grid.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = grid.mm; sourceTree = "<group>"; };
 		0434AC80276601B5009AD4EA /* grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = grid.h; sourceTree = "<group>"; };
 		0434AC84276611C5009AD4EA /* editor-grid.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "editor-grid.metal"; sourceTree = "<group>"; };
@@ -2549,10 +2546,8 @@
 				0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */,
 				0434A2B4275F96DC009AD4EA /* editor.entitlements */,
 				0434A2AF275F96AB009AD4EA /* main.mm */,
-				0434AC762765C4F4009AD4EA /* gui_entry.h */,
-				0434AC752765C4F4009AD4EA /* gui_entry.mm */,
-				0434AC7D2765CA8C009AD4EA /* gizmo.h */,
-				0434AC7C2765CA8C009AD4EA /* gizmo.mm */,
+				0434AC7D2765CA8C009AD4EA /* gui_entry.h */,
+				0434AC7C2765CA8C009AD4EA /* gui_entry.mm */,
 				0434AC80276601B5009AD4EA /* grid.h */,
 				0434AC7F276601B5009AD4EA /* grid.mm */,
 			);
@@ -4189,8 +4184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0434AC7E2765CA8C009AD4EA /* gizmo.mm in Sources */,
-				0434AC772765C4F4009AD4EA /* gui_entry.mm in Sources */,
+				0434AC7E2765CA8C009AD4EA /* gui_entry.mm in Sources */,
 				0434A2B0275F96AB009AD4EA /* main.mm in Sources */,
 				0434AC81276601B5009AD4EA /* grid.mm in Sources */,
 				0434AC7B2765C871009AD4EA /* imgui_zmo.cpp in Sources */,

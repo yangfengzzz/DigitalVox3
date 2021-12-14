@@ -22,7 +22,6 @@
 #include "../vox.render/runtime/lighting/point_light.h"
 
 #include "gui_entry.h"
-#include "gizmo.h"
 #include "grid.h"
 #include <random>
 
@@ -38,15 +37,12 @@ int main(int, char **) {
     auto rootEntity = scene->createRootEntity();
     rootEntity->addComponent<editor::Grid>();
     
-    //    rootEntity->addComponent<editor::GUIEntry>();
-    
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
-    cameraEntity->addComponent<control::OrbitControl>();
-    cameraEntity->addComponent<editor::Gizmo>();
-    
+    cameraEntity->addComponent<editor::GUIEntry>();
+
     // init point light
     auto light = rootEntity->createChild("light");
     light->transform->setPosition(0, 3, 0);
