@@ -32,18 +32,18 @@ public:
     
     void onUpdate(float deltaTime) override;
     
-    void addEditorComponent(std::unique_ptr<EditorComponent>&& component);
+    void addEditorComponent(std::unique_ptr<EditorComponent> &&component);
     
-    void removeEditorComponent(EditorComponent* component);
+    void removeEditorComponent(EditorComponent *component);
     
 private:
     void editTransform(float *cameraView, float *cameraProjection, float *matrix, bool editTransformDecomposition);
     
 private:
     void imGuiEx_BeginColumn();
-
+    
     void imGuiEx_NextColumn();
-
+    
     void imGuiEx_EndColumn();
     
     void nodeEditor();
@@ -68,17 +68,16 @@ private:
     // pins. Note that connection (aka. link) has its own ID.
     // This is useful later with dealing with selections, deletion
     // or other operations.
-    struct LinkInfo
-    {
+    struct LinkInfo {
         NodeEditor::LinkId Id;
-        NodeEditor::PinId  InputId;
-        NodeEditor::PinId  OutputId;
+        NodeEditor::PinId InputId;
+        NodeEditor::PinId OutputId;
     };
-
-    NodeEditor::EditorContext*   g_Context = nullptr;    // Editor context, required to trace a editor state.
-    bool                 g_FirstFrame = true;    // Flag set for first frame only, some action need to be executed once.
-    ImVector<LinkInfo>   g_Links;                // List of live links. It is dynamic unless you want to create read-only view over nodes.
-    int                  g_NextLinkId = 100;     // Counter to help generate link ids. In real application this will probably based on pointer to user data structure.
+    
+    NodeEditor::EditorContext *g_Context = nullptr;    // Editor context, required to trace a editor state.
+    bool g_FirstFrame = true;    // Flag set for first frame only, some action need to be executed once.
+    ImVector<LinkInfo> g_Links;                // List of live links. It is dynamic unless you want to create read-only view over nodes.
+    int g_NextLinkId = 100;     // Counter to help generate link ids. In real application this will probably based on pointer to user data structure.
     
 private:
     std::vector<std::unique_ptr<EditorComponent>> _editorScripts;

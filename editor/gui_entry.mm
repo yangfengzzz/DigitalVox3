@@ -49,13 +49,13 @@ GUIEntry::~GUIEntry() {
     NodeEditor::DestroyEditor(g_Context);
 }
 
-void GUIEntry::addEditorComponent(std::unique_ptr<EditorComponent>&& component) {
+void GUIEntry::addEditorComponent(std::unique_ptr<EditorComponent> &&component) {
     _editorScripts.emplace_back(std::move(component));
 }
 
-void GUIEntry::removeEditorComponent(EditorComponent* component) {
+void GUIEntry::removeEditorComponent(EditorComponent *component) {
     _editorScripts.erase(std::remove_if(_editorScripts.begin(), _editorScripts.end(),
-                                        [&](const auto& script) {
+                                        [&](const auto &script) {
         return script.get() == component;
     }), _editorScripts.end());
 }
@@ -123,7 +123,7 @@ void GUIEntry::onUpdate(float deltaTime) {
         camera->entity()->transform->setWorldMatrix(cameraView);
     }
     
-    for (auto& component : _editorScripts) {
+    for (auto &component: _editorScripts) {
         component->onUpdate();
     }
     
@@ -229,7 +229,7 @@ void GUIEntry::imGuiEx_EndColumn() {
 }
 
 void GUIEntry::nodeEditor() {
-    auto& io = ImGui::GetIO();
+    auto &io = ImGui::GetIO();
     
     ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
     
@@ -248,8 +248,8 @@ void GUIEntry::nodeEditor() {
     
     // Submit Node A
     NodeEditor::NodeId nodeA_Id = uniqueId++;
-    NodeEditor::PinId  nodeA_InputPinId = uniqueId++;
-    NodeEditor::PinId  nodeA_OutputPinId = uniqueId++;
+    NodeEditor::PinId nodeA_InputPinId = uniqueId++;
+    NodeEditor::PinId nodeA_OutputPinId = uniqueId++;
     
     if (g_FirstFrame)
         NodeEditor::SetNodePosition(nodeA_Id, ImVec2(10, 10));
@@ -266,9 +266,9 @@ void GUIEntry::nodeEditor() {
     
     // Submit Node B
     NodeEditor::NodeId nodeB_Id = uniqueId++;
-    NodeEditor::PinId  nodeB_InputPinId1 = uniqueId++;
-    NodeEditor::PinId  nodeB_InputPinId2 = uniqueId++;
-    NodeEditor::PinId  nodeB_OutputPinId = uniqueId++;
+    NodeEditor::PinId nodeB_InputPinId1 = uniqueId++;
+    NodeEditor::PinId nodeB_InputPinId2 = uniqueId++;
+    NodeEditor::PinId nodeB_OutputPinId = uniqueId++;
     
     if (g_FirstFrame)
         NodeEditor::SetNodePosition(nodeB_Id, ImVec2(210, 60));
@@ -289,7 +289,7 @@ void GUIEntry::nodeEditor() {
     NodeEditor::EndNode();
     
     // Submit Links
-    for (auto& linkInfo : g_Links)
+    for (auto &linkInfo: g_Links)
         NodeEditor::Link(linkInfo.Id, linkInfo.InputId, linkInfo.OutputId);
     
     //
@@ -297,11 +297,9 @@ void GUIEntry::nodeEditor() {
     //
     
     // Handle creation action, returns true if editor want to create new object (node or link)
-    if (NodeEditor::BeginCreate())
-    {
+    if (NodeEditor::BeginCreate()) {
         NodeEditor::PinId inputPinId, outputPinId;
-        if (NodeEditor::QueryNewLink(&inputPinId, &outputPinId))
-        {
+        if (NodeEditor::QueryNewLink(&inputPinId, &outputPinId)) {
             // QueryNewLink returns true if editor want to create new link between pins.
             //
             // Link can be created only for two valid pins, it is up to you to
@@ -317,10 +315,9 @@ void GUIEntry::nodeEditor() {
             if (inputPinId && outputPinId) // both are valid, let's accept link
             {
                 // NodeEditor::AcceptNewItem() return true when user release mouse button.
-                if (NodeEditor::AcceptNewItem())
-                {
+                if (NodeEditor::AcceptNewItem()) {
                     // Since we accepted new link, lets add one to our list of links.
-                    g_Links.push_back({ NodeEditor::LinkId(g_NextLinkId++), inputPinId, outputPinId });
+                    g_Links.push_back({NodeEditor::LinkId(g_NextLinkId++), inputPinId, outputPinId});
                     
                     // Draw new link.
                     NodeEditor::Link(g_Links.back().Id, g_Links.back().InputId, g_Links.back().OutputId);
@@ -336,20 +333,15 @@ void GUIEntry::nodeEditor() {
     
     
     // Handle deletion action
-    if (NodeEditor::BeginDelete())
-    {
+    if (NodeEditor::BeginDelete()) {
         // There may be many links marked for deletion, let's loop over them.
         NodeEditor::LinkId deletedLinkId;
-        while (NodeEditor::QueryDeletedLink(&deletedLinkId))
-        {
+        while (NodeEditor::QueryDeletedLink(&deletedLinkId)) {
             // If you agree that link can be deleted, accept deletion.
-            if (NodeEditor::AcceptDeletedItem())
-            {
+            if (NodeEditor::AcceptDeletedItem()) {
                 // Then remove link from your data.
-                for (auto& link : g_Links)
-                {
-                    if (link.Id == deletedLinkId)
-                    {
+                for (auto &link: g_Links) {
+                    if (link.Id == deletedLinkId) {
                         g_Links.erase(&link);
                         break;
                     }
