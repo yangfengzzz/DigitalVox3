@@ -46,13 +46,25 @@ camera(entity) {
     Canvas::key_callbacks.push_back(keyCallback);
     keyCallbackIndex = Canvas::key_callbacks.size() - 1;
     Canvas::scroll_callbacks.push_back(scrollCallback);
-    scrollCallbackIndex = Canvas::mouse_button_callbacks.size() - 1;
+    scrollCallbackIndex = Canvas::scroll_callbacks.size() - 1;
 }
 
 void OrbitControl::onDisable() {
     if (cursorCallbackIndex != -1) {
         Canvas::cursor_callbacks.erase(Canvas::cursor_callbacks.begin() + cursorCallbackIndex);
         cursorCallbackIndex = -1;
+    }
+    
+    if (scrollCallbackIndex != -1) {
+        Canvas::scroll_callbacks.erase(Canvas::scroll_callbacks.begin() + scrollCallbackIndex);
+        scrollCallbackIndex = -1;
+    }
+}
+
+void OrbitControl::onEnable() {
+    if (scrollCallbackIndex == -1) {
+        Canvas::scroll_callbacks.push_back(scrollCallback);
+        scrollCallbackIndex = Canvas::scroll_callbacks.size() - 1;
     }
 }
 

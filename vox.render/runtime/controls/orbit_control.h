@@ -25,6 +25,8 @@ public:
     
     void onDisable() override;
     
+    void onEnable() override;
+    
     void onDestroy() override;
     
     void onUpdate(float dtime) override;

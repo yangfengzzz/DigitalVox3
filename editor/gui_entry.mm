@@ -66,6 +66,8 @@ void GUIEntry::onUpdate(float deltaTime) {
     
     if (ImGui::IsAnyItemActive()) {
         controller->setEnabled(false);
+    } else {
+        controller->setEnabled(true);
     }
     
     ImGuiIO &io = ImGui::GetIO();
@@ -76,7 +78,9 @@ void GUIEntry::onUpdate(float deltaTime) {
     ImGuizmo::SetOrthographic(camera->isOrthographic());
     ImGuizmo::BeginFrame();
     
-    if (showEditor) {        
+    if (showEditor) {
+        controller->setEnabled(false);
+        
         // Add padding around the text so that the options are not
         // too close to the edges and are easier to interact with.
         // Also add double vertical padding to avoid rounded corners.
@@ -101,6 +105,8 @@ void GUIEntry::onUpdate(float deltaTime) {
         ImGui::PopStyleVar();
     } else {
         ImGui::SetNextWindowPos(ImVec2(10, 10));
+        ImGui::SetNextWindowSize(ImVec2(350,  ImGui::GetIO().DisplaySize.y - 20), ImGuiCond_Always);
+
         ImGui::Begin("Editor");
 
         ImGui::Checkbox("Open Node Editor", &showEditor);
@@ -142,9 +148,7 @@ void GUIEntry::onUpdate(float deltaTime) {
         for (auto &component: _editorScripts) {
             component->onUpdate();
         }
-        
-        controller->setEnabled(true);
-        
+                
         ImGui::End();
     }
     
