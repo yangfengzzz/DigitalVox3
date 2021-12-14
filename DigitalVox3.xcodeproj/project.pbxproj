@@ -440,6 +440,8 @@
 		0431588227674D2C0070FBEC /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
 		0431588827682FC80070FBEC /* debugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0431588627682FC80070FBEC /* debugger.cpp */; };
 		04315889276830DA0070FBEC /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE368B274D089700204B8E /* imgui_demo.cpp */; };
+		0431588C276867BD0070FBEC /* particle_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431588A276867BD0070FBEC /* particle_renderer.mm */; };
+		0431588D276867BD0070FBEC /* particle_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431588B276867BD0070FBEC /* particle_renderer.h */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -1359,6 +1361,8 @@
 		0431588427682DBA0070FBEC /* editor_component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editor_component.h; sourceTree = "<group>"; };
 		0431588627682FC80070FBEC /* debugger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = debugger.cpp; sourceTree = "<group>"; };
 		0431588727682FC80070FBEC /* debugger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debugger.h; sourceTree = "<group>"; };
+		0431588A276867BD0070FBEC /* particle_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = particle_renderer.mm; sourceTree = "<group>"; };
+		0431588B276867BD0070FBEC /* particle_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = particle_renderer.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -2071,6 +2075,8 @@
 			children = (
 				0431559A2760B36A0070FBEC /* fix_renderer.h */,
 				043155992760B36A0070FBEC /* fix_renderer.mm */,
+				0431588B276867BD0070FBEC /* particle_renderer.h */,
+				0431588A276867BD0070FBEC /* particle_renderer.mm */,
 			);
 			path = particle;
 			sourceTree = "<group>";
@@ -3757,6 +3763,7 @@
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				04A79AC7275DEA4E00182CCB /* spot_light.h in Headers */,
 				0434A2A8275E438C009AD4EA /* ambient_light.h in Headers */,
+				0431588D276867BD0070FBEC /* particle_renderer.h in Headers */,
 				04CE397927527B4700204B8E /* primitive_mesh.h in Headers */,
 				0416100B2750A720006CD384 /* scene.h in Headers */,
 				0416102227578322006CD384 /* anim_loader.h in Headers */,
@@ -4384,6 +4391,7 @@
 				04A79AD6275E0F8D00182CCB /* pointer_manager.mm in Sources */,
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
+				0431588C276867BD0070FBEC /* particle_renderer.mm in Sources */,
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
 				04CE39992753A83C00204B8E /* BRDF.metal in Sources */,
 				04CE39B4275508D900204B8E /* pbr_base_material.mm in Sources */,
