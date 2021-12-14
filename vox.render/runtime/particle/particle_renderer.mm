@@ -10,6 +10,7 @@
 #include "../camera.h"
 #include "../mesh/buffer_mesh.h"
 #include <MetalKit/MetalKit.h>
+#include <random>
 
 namespace vox {
 ParticleRenderer::ParticleRenderer(Entity* entity):
@@ -29,7 +30,14 @@ void ParticleRenderer::update(float deltaTime) {
     if (_particleSolver) {
         frame.advance();
         _particleSolver->update(frame);
+        
+        if (frame.index > 1000) {
+            setEnabled(false);
+        }
     }
+    
+    std::default_random_engine e{};
+    std::uniform_real_distribution<float> u = std::uniform_real_distribution<float>(-0.5, 0.5);
     
     auto position = _particleSystemData->positions();
     const auto n_position = position.length();
@@ -37,10 +45,10 @@ void ParticleRenderer::update(float deltaTime) {
     if (shouldResize) {
         _renderRelatedInfo.resize(n_position*4);
         for (size_t i = 0; i < _renderRelatedInfo.size(); i += 4) {
-            _renderRelatedInfo[i] = 0.5;
-            _renderRelatedInfo[i+1] = 0.2;
-            _renderRelatedInfo[i+2] = 0.3;
-            _renderRelatedInfo[i+3] = 0.5;
+            _renderRelatedInfo[i] = u(e);
+            _renderRelatedInfo[i+1] = u(e);
+            _renderRelatedInfo[i+2] = u(e);
+            _renderRelatedInfo[i+3] = 1.0;
         }
     }
 }
@@ -74,13 +82,21 @@ MeshPtr ParticleRenderer::_createMesh() {
     auto position = _particleSystemData->positions();
     const auto n_position = position.length();
     bool shouldResize = _numberOfVertex != n_position;
+    
+    std::vector<float> flatData(n_position * sizeof(float) * 3);
+    for (size_t i = 0; i < n_position; i++) {
+        flatData[3*i] = position[i].x;
+        flatData[3*i+1] = position[i].y;
+        flatData[3*i+2] = position[i].z;
+    }
+    
     if (_vertexBuffers == nullptr || shouldResize) {
-        _vertexBuffers = [device newBufferWithBytes:position.data()
+        _vertexBuffers = [device newBufferWithBytes:flatData.data()
                                              length:n_position * sizeof(float) * 3
                                             options:NULL];
         _numberOfVertex = n_position;
     } else {
-        memcpy([_vertexBuffers contents], position.data(),n_position * sizeof(float) * 3);
+        memcpy([_vertexBuffers contents], flatData.data(), n_position * sizeof(float) * 3);
     }
     
     if (_indexBuffers == nullptr || shouldResize) {

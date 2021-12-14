@@ -8,7 +8,10 @@
 #include "../vox.render/runtime/canvas.h"
 #include "../vox.render/runtime/engine.h"
 #include "../vox.render/runtime/camera.h"
+#include "../vox.render/runtime/mesh/mesh_renderer.h"
+#include "../vox.render/runtime/mesh/primitive_mesh.h"
 #include "../vox.render/runtime/material/base_material.h"
+#include "../vox.render/runtime/material/blinn_phong_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/point_light.h"
 #include "../vox.render/runtime/particle/particle_renderer.h"
@@ -23,7 +26,9 @@ using namespace vox;
 
 class ParticleMaterial: public BaseMaterial {
 public:
-    ParticleMaterial(Engine* engine):BaseMaterial(engine, Shader::find("particle-shader")) {}
+    ParticleMaterial(Engine* engine):BaseMaterial(engine, Shader::find("particle-shader")) {
+        setIsTransparent(true);
+    }
 };
 
 class ParticleScript: public Script {
@@ -45,8 +50,8 @@ public:
         geometry::PointParticleEmitter3Ptr emitter =
             std::make_shared<geometry::PointParticleEmitter3>(geometry::Vector3D(0, 0, 0),
                                                               geometry::Vector3D(0, 1, 0), 10.0, 15.0);
-        emitter->setMaxNumberOfNewParticlesPerSecond(10);
-        emitter->setMaxNumberOfParticles(100);
+        emitter->setMaxNumberOfNewParticlesPerSecond(100);
+        emitter->setMaxNumberOfParticles(1000);
         _solver->setEmitter(emitter);
         
         _renderer->setParticleSystemSolver(_solver);
@@ -70,7 +75,7 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(0, 0, 2);
+    cameraEntity->transform->setPosition(5, 5, 5);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
@@ -81,6 +86,15 @@ int main(int, char**) {
     particles->setMaterial(pMtl);
     
     particleEntity->addComponent<ParticleScript>();
+    
+    auto planeEntity = rootEntity->createChild("PlaneEntity");
+    auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl->setBaseColor(math::Color(0.5, 0.5, 0.5, 1.0));
+    planeMtl->setRenderFace(RenderFace::Enum::Double);
+    
+    auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
+    planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
+    planeRenderer->setMaterial(planeMtl);
 
     engine.run();
 }
