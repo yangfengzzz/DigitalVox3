@@ -9,6 +9,8 @@
 #define particle_renderer_hpp
 
 #include "../renderer.h"
+#include "../../../vox.geometry/particle_system_data.h"
+#include "../../../vox.geometry/particle_system_solver3.h"
 
 namespace vox {
 /**
@@ -18,8 +20,13 @@ class ParticleRenderer :public Renderer {
 public:
     ParticleRenderer(Entity* entity);
     
-private:
+    void setParticleSystemSolver(const geometry::ParticleSystemSolver3Ptr solver);
     
+    void update(float deltaTime) override;
+    
+private:
+    geometry::ParticleSystemData3Ptr _particleSystemData;
+    geometry::ParticleSystemSolver3Ptr _particleSolver;
 };
 
 }

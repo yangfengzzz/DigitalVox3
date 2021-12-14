@@ -11,4 +11,17 @@ namespace vox {
 ParticleRenderer::ParticleRenderer(Entity* entity):
 Renderer(entity) {}
 
+void ParticleRenderer::setParticleSystemSolver(const geometry::ParticleSystemSolver3Ptr solver) {
+    _particleSolver = solver;
+    solver->setParticleSystemData(_particleSystemData);
+}
+
+void ParticleRenderer::update(float deltaTime) {
+    if (_particleSolver) {
+        _particleSolver->advanceSingleFrame();
+    }
+    
+    
+}
+
 }
