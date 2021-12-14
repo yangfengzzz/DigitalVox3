@@ -1,11 +1,11 @@
 //
-//  particle_renderer.cpp
+//  fix_renderer.cpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/12/8.
 //
 
-#include "particle_renderer.h"
+#include "fix_renderer.h"
 #include "../../maths/math_ex.h"
 #include "../material/material.h"
 #include "../mesh/buffer_mesh.h"

@@ -5,8 +5,8 @@
 //  Created by 杨丰 on 2021/12/8.
 //
 
-#ifndef particle_renderer_hpp
-#define particle_renderer_hpp
+#ifndef fix_particle_renderer_hpp
+#define fix_particle_renderer_hpp
 
 #include "../mesh/mesh_renderer.h"
 #include "maths/color.h"
@@ -346,4 +346,4 @@ private:
 
 }
 
-#endif /* particle_renderer_hpp */
+#endif /* fix_particle_renderer_hpp */
