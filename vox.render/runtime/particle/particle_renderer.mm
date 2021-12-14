@@ -21,12 +21,13 @@ Renderer(entity) {
 
 void ParticleRenderer::setParticleSystemSolver(const geometry::ParticleSystemSolver3Ptr solver) {
     _particleSolver = solver;
+    solver->emitter()->setTarget(_particleSystemData);
     solver->setParticleSystemData(_particleSystemData);
 }
 
 void ParticleRenderer::update(float deltaTime) {
     if (_particleSolver) {
-        frame.timeIntervalInSeconds = deltaTime;
+        frame.advance();
         _particleSolver->update(frame);
     }
     
@@ -75,11 +76,11 @@ MeshPtr ParticleRenderer::_createMesh() {
     bool shouldResize = _numberOfVertex != n_position;
     if (_vertexBuffers == nullptr || shouldResize) {
         _vertexBuffers = [device newBufferWithBytes:position.data()
-                                             length:n_position * sizeof(float)
+                                             length:n_position * sizeof(float) * 3
                                             options:NULL];
-        _numberOfVertex = position.length();
+        _numberOfVertex = n_position;
     } else {
-        memcpy([_vertexBuffers contents], position.data(),n_position * sizeof(float));
+        memcpy([_vertexBuffers contents], position.data(),n_position * sizeof(float) * 3);
     }
     
     if (_indexBuffers == nullptr || shouldResize) {
