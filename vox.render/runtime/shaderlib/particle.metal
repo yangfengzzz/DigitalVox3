@@ -11,7 +11,7 @@ using namespace metal;
 
 typedef struct {
     float3 a_position [[attribute(0)]];
-    float4 a_color [[attribute(3)]];
+    float4 a_color [[attribute(1)]];
 } VertexIn;
 
 typedef struct {
@@ -25,7 +25,7 @@ vertex VertexOut vertex_particle(const VertexIn vertexIn [[stage_in]],
     VertexOut out;
 
     out.position = u_VPMat * float4(vertexIn.a_position, 1.0);
-    out.pointSize = 10;
+    out.pointSize = 50;
     out.v_color = vertexIn.a_color;
     
     return out;

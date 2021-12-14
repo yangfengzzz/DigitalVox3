@@ -26,6 +26,8 @@ public:
     
     void _render(Camera* camera) override;
     
+    void _updateBounds(BoundingBox& worldBounds) override;
+    
     //!
     //! \brief      Returns the particle system data.
     //!

@@ -61,6 +61,11 @@ void ParticleRenderer::_render(Camera* camera) {
     }
 }
 
+void ParticleRenderer::_updateBounds(BoundingBox& worldBounds) {
+    worldBounds.min = Float3(-10, -10, -10);
+    worldBounds.max = Float3(10, 10, 10);
+}
+
 MeshPtr ParticleRenderer::_createMesh() {
     auto device = engine()->_hardwareRenderer.device;
     
@@ -99,11 +104,13 @@ MeshPtr ParticleRenderer::_createMesh() {
     vertexDescriptor.attributes[1] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeColor
                                                                        format:MDLVertexFormatFloat4 offset:0 bufferIndex:1];
     vertexDescriptor.layouts[0] = [[MDLVertexBufferLayout alloc] initWithStride:sizeof(float) * 3];
-    vertexDescriptor.layouts[1] = [[MDLVertexBufferLayout alloc] initWithStride:sizeof(float) * 3];
+    vertexDescriptor.layouts[1] = [[MDLVertexBufferLayout alloc] initWithStride:sizeof(float) * 4];
     
     auto mesh = std::make_shared<BufferMesh>(_engine);
     mesh->setVertexDescriptor(vertexDescriptor);
     mesh->setVertexBufferBinding(_vertexBuffers, 0, 0);
+    mesh->setVertexBufferBinding(_renderBuffers, 0, 1);
+
     mesh->addSubMesh(MeshBuffer(_indexBuffers,
                                 n_position * sizeof(uint32_t),
                                 MDLMeshBufferTypeIndex),
