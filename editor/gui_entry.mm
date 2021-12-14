@@ -76,60 +76,77 @@ void GUIEntry::onUpdate(float deltaTime) {
     ImGuizmo::SetOrthographic(camera->isOrthographic());
     ImGuizmo::BeginFrame();
     
-    ImGui::SetNextWindowPos(ImVec2(1024, 100));
-    ImGui::SetNextWindowSize(ImVec2(256, 256));
-    
-    // create a window and insert the inspector
-    ImGui::SetNextWindowPos(ImVec2(10, 10));
-    ImGui::SetNextWindowSize(ImVec2(360, 340));
-    ImGui::Begin("Editor");
-    
-    ImGui::Checkbox("Show Editor", &showEditor);
-    if (showEditor) {
+    if (showEditor) {        
+        // Add padding around the text so that the options are not
+        // too close to the edges and are easier to interact with.
+        // Also add double vertical padding to avoid rounded corners.
+        const float window_padding = ImGui::CalcTextSize("T").x;
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{window_padding, window_padding * 2.0f});
+        ImGui::SetNextWindowBgAlpha(0.0);
+        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize, ImGuiCond_Always);
+        ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+        const ImGuiWindowFlags flags   = (ImGuiWindowFlags_NoMove |
+                                          ImGuiWindowFlags_NoTitleBar|
+                                        ImGuiWindowFlags_NoScrollbar |
+                                        ImGuiWindowFlags_NoResize |
+                                        ImGuiWindowFlags_AlwaysAutoResize |
+                                        ImGuiWindowFlags_AlwaysUseWindowPadding |
+                                        ImGuiWindowFlags_NoSavedSettings);
+        bool                   is_open = true;
+        ImGui::Begin("Options", &is_open, flags);
+        
         nodeEditor();
-    }
-    
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-    ImGui::Separator();
-    
-    ImGui::Text("Camera");
-    ImGui::SliderFloat("Fov", &fov, 20.f, 110.f);
-    camera->setFieldOfView(fov);
-    
-    ImGui::Text("X: %f Y: %f", io.MousePos.x, io.MousePos.y);
-    if (ImGuizmo::IsUsing()) {
-        ImGui::Text("Using gizmo");
+        
+        ImGui::End();
+        ImGui::PopStyleVar();
     } else {
-        ImGui::Text(ImGuizmo::IsOver() ? "Over gizmo" : "");
-        ImGui::SameLine();
-        ImGui::Text(ImGuizmo::IsOver(ImGuizmo::TRANSLATE) ? "Over translate gizmo" : "");
-        ImGui::SameLine();
-        ImGui::Text(ImGuizmo::IsOver(ImGuizmo::ROTATE) ? "Over rotate gizmo" : "");
-        ImGui::SameLine();
-        ImGui::Text(ImGuizmo::IsOver(ImGuizmo::SCALE) ? "Over scale gizmo" : "");
-    }
-    ImGui::Separator();
-    
-    if (render != nullptr) {
-        if (ImGuizmo::IsOver()) {
-            controller->setEnabled(false);
+        ImGui::SetNextWindowPos(ImVec2(10, 10));
+        ImGui::Begin("Editor");
+
+        ImGui::Checkbox("Open Node Editor", &showEditor);
+
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Separator();
+        
+        ImGui::Text("Camera");
+        ImGui::SliderFloat("Fov", &fov, 20.f, 110.f);
+        camera->setFieldOfView(fov);
+        
+        ImGui::Text("X: %f Y: %f", io.MousePos.x, io.MousePos.y);
+        if (ImGuizmo::IsUsing()) {
+            ImGui::Text("Using gizmo");
+        } else {
+            ImGui::Text(ImGuizmo::IsOver() ? "Over gizmo" : "");
+            ImGui::SameLine();
+            ImGui::Text(ImGuizmo::IsOver(ImGuizmo::TRANSLATE) ? "Over translate gizmo" : "");
+            ImGui::SameLine();
+            ImGui::Text(ImGuizmo::IsOver(ImGuizmo::ROTATE) ? "Over rotate gizmo" : "");
+            ImGui::SameLine();
+            ImGui::Text(ImGuizmo::IsOver(ImGuizmo::SCALE) ? "Over scale gizmo" : "");
+        }
+        ImGui::Separator();
+        
+        if (render != nullptr) {
+            if (ImGuizmo::IsOver()) {
+                controller->setEnabled(false);
+            }
+            
+            auto modelMat = render->entity()->transform->localMatrix();
+            editTransform(cameraView.elements.data(), cameraProjection.elements.data(),
+                          modelMat.elements.data(), true);
+            render->entity()->transform->setLocalMatrix(modelMat);
+            cameraView = invert(cameraView);
+            camera->entity()->transform->setWorldMatrix(cameraView);
         }
         
-        auto modelMat = render->entity()->transform->localMatrix();
-        editTransform(cameraView.elements.data(), cameraProjection.elements.data(),
-                      modelMat.elements.data(), true);
-        render->entity()->transform->setLocalMatrix(modelMat);
-        cameraView = invert(cameraView);
-        camera->entity()->transform->setWorldMatrix(cameraView);
+        for (auto &component: _editorScripts) {
+            component->onUpdate();
+        }
+        
+        controller->setEnabled(true);
+        
+        ImGui::End();
     }
-    
-    for (auto &component: _editorScripts) {
-        component->onUpdate();
-    }
-    
-    controller->setEnabled(true);
-    
-    ImGui::End();
     
     // Rendering
     ImGui::Render();
@@ -229,9 +246,7 @@ void GUIEntry::imGuiEx_EndColumn() {
 }
 
 void GUIEntry::nodeEditor() {
-    auto &io = ImGui::GetIO();
-    
-    ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
+    ImGui::Checkbox("Close Node Editor", &showEditor);
     
     ImGui::Separator();
     
