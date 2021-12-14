@@ -10,7 +10,9 @@
 
 #include "../vox.render/runtime/script.h"
 #include "../vox.render/gui/imgui.h"
+#include "editor_component.h"
 #include "imgui_zmo.h"
+#include <vector>
 
 namespace vox {
 namespace picker {
@@ -27,6 +29,10 @@ public:
     
     void onUpdate(float deltaTime) override;
     
+    void addEditorComponent(std::unique_ptr<EditorComponent>&& component);
+    
+    void removeEditorComponent(EditorComponent* component);
+    
 private:
     void editTransform(float *cameraView, float *cameraProjection, float *matrix, bool editTransformDecomposition);
     
@@ -42,6 +48,9 @@ private:
     float fov;
     float camDistance = 8.f;
     ImGuizmo::OPERATION mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+    
+private:
+    std::vector<std::unique_ptr<EditorComponent>> _editorScripts;
 };
 
 }

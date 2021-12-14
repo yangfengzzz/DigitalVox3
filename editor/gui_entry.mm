@@ -40,6 +40,17 @@ Script(entity) {
     });
 }
 
+void GUIEntry::addEditorComponent(std::unique_ptr<EditorComponent>&& component) {
+    _editorScripts.emplace_back(std::move(component));
+}
+
+void GUIEntry::removeEditorComponent(EditorComponent* component) {
+    _editorScripts.erase(std::remove_if(_editorScripts.begin(), _editorScripts.end(),
+                                        [&](const auto& script) {
+        return script.get() == component;
+    }), _editorScripts.end());
+}
+
 void GUIEntry::onUpdate(float deltaTime) {
     // Main loop
     ImGui::NewFrame();
@@ -96,6 +107,11 @@ void GUIEntry::onUpdate(float deltaTime) {
         cameraView = invert(cameraView);
         camera->entity()->transform->setWorldMatrix(cameraView);
     }
+    
+    for (auto& component : _editorScripts) {
+        component->onUpdate();
+    }
+    
     controller->setEnabled(true);
     
     ImGui::End();

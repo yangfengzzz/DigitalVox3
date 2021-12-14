@@ -439,6 +439,7 @@
 		0431587C27674CE80070FBEC /* bvh3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0431586E27674CE70070FBEC /* bvh3_tests.cpp */; };
 		0431587F27674D200070FBEC /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
 		0431588227674D2C0070FBEC /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
+		0431588827682FC80070FBEC /* debugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0431588627682FC80070FBEC /* debugger.cpp */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
 		0434A28F2757B0B1009AD4EA /* skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */; };
 		0434A2922757B385009AD4EA /* animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A2902757B385009AD4EA /* animator.mm */; };
@@ -1356,6 +1357,9 @@
 		0431586C27674CE70070FBEC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0431586D27674CE70070FBEC /* parallel_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parallel_tests.cpp; sourceTree = "<group>"; };
 		0431586E27674CE70070FBEC /* bvh3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bvh3_tests.cpp; sourceTree = "<group>"; };
+		0431588427682DBA0070FBEC /* editor_component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = editor_component.h; sourceTree = "<group>"; };
+		0431588627682FC80070FBEC /* debugger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = debugger.cpp; sourceTree = "<group>"; };
+		0431588727682FC80070FBEC /* debugger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debugger.h; sourceTree = "<group>"; };
 		0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skinned_mesh_renderer.mm; sourceTree = "<group>"; };
 		0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		0434A2902757B385009AD4EA /* animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = animator.mm; sourceTree = "<group>"; };
@@ -2546,10 +2550,13 @@
 				0434AC7A2765C871009AD4EA /* imgui_zmo.cpp */,
 				0434A2B4275F96DC009AD4EA /* editor.entitlements */,
 				0434A2AF275F96AB009AD4EA /* main.mm */,
-				0434AC7D2765CA8C009AD4EA /* gui_entry.h */,
-				0434AC7C2765CA8C009AD4EA /* gui_entry.mm */,
 				0434AC80276601B5009AD4EA /* grid.h */,
 				0434AC7F276601B5009AD4EA /* grid.mm */,
+				0434AC7D2765CA8C009AD4EA /* gui_entry.h */,
+				0434AC7C2765CA8C009AD4EA /* gui_entry.mm */,
+				0431588427682DBA0070FBEC /* editor_component.h */,
+				0431588727682FC80070FBEC /* debugger.h */,
+				0431588627682FC80070FBEC /* debugger.cpp */,
 			);
 			path = editor;
 			sourceTree = "<group>";
@@ -4184,6 +4191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0431588827682FC80070FBEC /* debugger.cpp in Sources */,
 				0434AC7E2765CA8C009AD4EA /* gui_entry.mm in Sources */,
 				0434A2B0275F96AB009AD4EA /* main.mm in Sources */,
 				0434AC81276601B5009AD4EA /* grid.mm in Sources */,
