@@ -6,12 +6,12 @@
 //
 
 #include "debugger.h"
-
+#include "../vox.render/gui/imgui.h"
 
 namespace vox {
 namespace editor {
 void Debugger::onUpdate() {
-    
+    ImGui::ShowDemoWindow();
 }
 
 }

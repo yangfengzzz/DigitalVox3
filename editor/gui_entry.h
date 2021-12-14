@@ -27,6 +27,8 @@ class GUIEntry : public Script {
 public:
     GUIEntry(Entity *entity);
     
+    ~GUIEntry();
+    
     void onUpdate(float deltaTime) override;
     
     void addEditorComponent(std::unique_ptr<EditorComponent>&& component);

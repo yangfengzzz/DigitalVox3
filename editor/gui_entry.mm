@@ -40,6 +40,10 @@ Script(entity) {
     });
 }
 
+GUIEntry::~GUIEntry() {
+    _editorScripts.clear();
+}
+
 void GUIEntry::addEditorComponent(std::unique_ptr<EditorComponent>&& component) {
     _editorScripts.emplace_back(std::move(component));
 }

@@ -25,6 +25,8 @@
 #include "grid.h"
 #include <random>
 
+#include "debugger.h"
+
 using namespace vox;
 
 int main(int, char **) {
@@ -41,8 +43,12 @@ int main(int, char **) {
     cameraEntity->transform->setPosition(10, 10, 10);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
-    cameraEntity->addComponent<editor::GUIEntry>();
+    auto guiEntry = cameraEntity->addComponent<editor::GUIEntry>();
 
+    auto demo = std::make_unique<editor::Debugger>();
+    guiEntry->addEditorComponent(std::move(demo));
+    
+    //MARK: - Basic Scene
     // init point light
     auto light = rootEntity->createChild("light");
     light->transform->setPosition(0, 3, 0);
