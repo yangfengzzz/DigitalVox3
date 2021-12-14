@@ -10,6 +10,7 @@
 #include "surface_to_implicit.h"
 
 namespace vox {
+namespace geometry {
 template <size_t N>
 ImplicitSurfaceSet<N>::ImplicitSurfaceSet(ConstArrayView1<std::shared_ptr<ImplicitSurface<N>>> surfaces,
                                           const Transform<N> &transform, bool isNormalFlipped)
@@ -277,3 +278,4 @@ template class ImplicitSurfaceSet<2>;
 template class ImplicitSurfaceSet<3>;
 
 } // namespace vox
+} // namespace geometry

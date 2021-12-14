@@ -18,6 +18,7 @@
 #include <utility>
 
 namespace vox {
+namespace geometry {
 
 namespace {
 constexpr double DEFAULT_FAST_WINDING_NUMBER_ACCURACY = 2.0;
@@ -691,7 +692,7 @@ double TriangleMesh3::fastWindingNumber(const Vector3D &q, size_t rootNodeIndex,
 
   const Vector3D &treeN = _wnAreaWeightedNormalSums[rootNodeIndex];
   const BoundingBox3D &treeBound = _bvh.nodeBound(rootNodeIndex);
-  const Vector3D treeRVec = vox::max(treeP - treeBound.lowerCorner, treeBound.upperCorner - treeP);
+  const Vector3D treeRVec = vox::geometry::max(treeP - treeBound.lowerCorner, treeBound.upperCorner - treeP);
   const double treeR = treeRVec.length();
 
   if (qToP2 > square(accuracy * treeR)) {
@@ -757,3 +758,4 @@ TriangleMesh3Ptr TriangleMesh3::Builder::makeShared() const {
 }
 
 } // namespace vox
+} // namespace geometry

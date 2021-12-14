@@ -14,6 +14,7 @@
 #include <functional>
 
 namespace vox {
+namespace geometry {
 
 // Derived type should be constructable.
 template <typename T, size_t Rows, size_t Cols, typename Derived> class MatrixDenseBase {
@@ -132,7 +133,8 @@ private:
   const Derived &derived() const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "matrix_dense_base-inl.h"
 

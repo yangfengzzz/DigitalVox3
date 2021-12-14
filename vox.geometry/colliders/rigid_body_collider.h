@@ -10,6 +10,7 @@
 #include "../collider.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> class AngularVelocity {};
 
@@ -108,6 +109,7 @@ private:
   AngularVelocity<N> _angularVelocity;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_RIGID_BODY_COLLIDER_H_

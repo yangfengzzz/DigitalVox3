@@ -10,6 +10,7 @@
 #include "../points_to_implicit3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D points-to-implicit converter using Anisotropic kernels.
@@ -52,6 +53,7 @@ private:
 //! Shared pointer for the AnisotropicPointsToImplicit3 type.
 using AnisotropicPointsToImplicit3Ptr = std::shared_ptr<AnisotropicPointsToImplicit3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ANISOTROPIC_POINTS_TO_IMPLICIT3_H_

@@ -10,6 +10,7 @@
 #include "macros.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Returns true if \p phi is inside the implicit surface (< 0).
@@ -95,7 +96,8 @@ template <typename T> T fractionInsideSdf(T phi0, T phi1);
 //!
 template <typename T> T fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft, T phiTopRight);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "level_set_utils-inl.h"
 

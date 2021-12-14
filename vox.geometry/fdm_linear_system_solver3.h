@@ -12,6 +12,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for 3-D finite difference-type linear system solver.
 class FdmLinearSystemSolver3 {
@@ -44,6 +45,7 @@ public:
 //! Shared pointer type for the FdmLinearSystemSolver3.
 using FdmLinearSystemSolver3Ptr = std::shared_ptr<FdmLinearSystemSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_LINEAR_SYSTEM_SOLVER3_H_

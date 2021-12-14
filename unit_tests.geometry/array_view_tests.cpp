@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ConstArrayView, Constructors) {
   Array2<double> arr = {{1, 2}, {3, 4}, {5, 6}};

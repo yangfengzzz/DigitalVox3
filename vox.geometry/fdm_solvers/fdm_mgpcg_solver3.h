@@ -10,6 +10,7 @@
 #include "fdm_mg_solver3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D finite difference-type linear system solver using Multigrid
@@ -77,6 +78,7 @@ private:
 //! Shared pointer type for the FdmMgpcgSolver3.
 using FdmMgpcgSolver3Ptr = std::shared_ptr<FdmMgpcgSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_MGPCG_SOLVER3_H_

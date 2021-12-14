@@ -9,6 +9,7 @@
 #include "custom_vector_field.h"
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -164,3 +165,4 @@ template class CustomVectorField<2>;
 template class CustomVectorField<3>;
 
 } // namespace vox
+} // namespace geometry

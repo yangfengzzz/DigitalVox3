@@ -9,6 +9,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 GridEmitterSet2::GridEmitterSet2(const std::vector<GridEmitter2Ptr> &emitters) {
   for (const auto &e : emitters) {

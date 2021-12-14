@@ -12,6 +12,7 @@
 #include <algorithm>
 
 namespace vox {
+namespace geometry {
 
 inline Vector2D computeDragForce(double dragCoefficient, double radius, const Vector2D &velocity) {
   // Stokes's drag force assuming our Reynolds number is very low.
@@ -52,5 +53,6 @@ inline double computePressureFromEos(double density, double targetDensity, doubl
 }
 
 } // namespace vox
+} // namespace geometry
 
 #endif // SRC_JET_PHYSICS_HELPERS_H_

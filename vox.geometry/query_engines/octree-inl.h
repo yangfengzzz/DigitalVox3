@@ -14,6 +14,7 @@
 #include <stack>
 
 namespace vox {
+namespace geometry {
 
 template <typename T> bool Octree<T>::Node::isLeaf() const { return firstChild == kMaxSize; }
 
@@ -343,6 +344,7 @@ Octree<T>::closestIntersection(const Ray3D &ray, const GetRayIntersectionFunc3<T
   return best;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_OCTREE_INL_H_

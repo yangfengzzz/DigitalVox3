@@ -15,6 +15,7 @@
 #include <algorithm>
 
 namespace vox {
+namespace geometry {
 
 ParticleSystemSolver3::ParticleSystemSolver3() : ParticleSystemSolver3(1e-3, 1e-3) {}
 
@@ -210,3 +211,4 @@ ParticleSystemSolver3Ptr ParticleSystemSolver3::Builder::makeShared() const {
 }
 
 } // namespace vox
+} // namespace geometry

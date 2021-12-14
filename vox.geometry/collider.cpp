@@ -11,6 +11,7 @@
 #include <algorithm>
 
 namespace vox {
+namespace geometry {
 template <size_t N>
 void Collider<N>::resolveCollision(double radius, double restitutionCoefficient, Vector<double, N> *newPosition,
                                    Vector<double, N> *newVelocity) {
@@ -118,3 +119,4 @@ template class Collider<2>;
 template class Collider<3>;
 
 } // namespace vox
+} // namespace geometry

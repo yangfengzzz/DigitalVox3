@@ -28,6 +28,7 @@
 #endif
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -429,6 +430,7 @@ template <typename RandomIterator> void parallelSort(RandomIterator begin, Rando
   parallelSort(begin, end, std::less<typename std::iterator_traits<RandomIterator>::value_type>(), policy);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_PARALLEL_INL_H_

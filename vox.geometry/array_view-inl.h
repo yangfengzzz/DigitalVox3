@@ -11,6 +11,7 @@
 #include "array_view.h"
 
 namespace vox {
+namespace geometry {
 
 // MARK: ArrayView
 
@@ -110,7 +111,8 @@ ArrayView<const T, N> &ArrayView<const T, N>::operator=(ArrayView<const T, N> &&
   return *this;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "array_view-inl.h"
 

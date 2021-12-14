@@ -12,6 +12,7 @@
 #include "../nearest_neighbor_query_engine.h"
 
 namespace vox {
+namespace geometry {
 
 //! Ad-hoc list-based N-D intersection/nearest-neighbor query engine.
 template <typename T, size_t N>
@@ -56,7 +57,8 @@ template <typename T> using ListQueryEngine2 = ListQueryEngine<T, 2>;
 //! 3-D ListQueryEngine type.
 template <typename T> using ListQueryEngine3 = ListQueryEngine<T, 3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "list_query_engine-inl.h"
 

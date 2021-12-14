@@ -10,6 +10,7 @@
 #include "../fdm_linear_system_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 //! \brief 2-D finite difference-type linear system solver using Gauss-Seidel
 //!        method.
@@ -75,6 +76,7 @@ private:
 //! Shared pointer type for the FdmGaussSeidelSolver2.
 using FdmGaussSeidelSolver2Ptr = std::shared_ptr<FdmGaussSeidelSolver2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_GAUSS_SEIDEL_SOLVER2_H_

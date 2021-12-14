@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(FdmGaussSeidelSolver2, SolveLowRes) {
   FdmLinearSystem2 system;

@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(MathUtils, GetBaryCentric2) {
   double x = 3.2;

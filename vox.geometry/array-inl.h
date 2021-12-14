@@ -12,6 +12,7 @@
 #include "iteration_utils.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N> class Array;
 
@@ -424,6 +425,7 @@ template <typename T, size_t N> Array<T, N> &Array<T, N>::operator=(Array &&othe
   return *this;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_ARRAY_INL_H_

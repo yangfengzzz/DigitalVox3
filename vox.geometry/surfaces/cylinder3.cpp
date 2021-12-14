@@ -11,6 +11,7 @@
 #include "plane.h"
 
 using namespace vox;
+using namespace geometry;
 
 Cylinder3::Cylinder3(const Transform3 &transform, bool isNormalFlipped) : Surface3(transform, isNormalFlipped) {}
 

@@ -17,6 +17,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 void serialize(const Serializable *serializable, std::vector<uint8_t> *buffer) { serializable->serialize(buffer); }
 
@@ -43,3 +44,4 @@ void deserialize(const std::vector<uint8_t> &buffer, std::vector<uint8_t> *data)
 }
 
 } // namespace vox
+} // namespace geometry

@@ -11,6 +11,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Representation of an animation frame.
@@ -99,6 +100,7 @@ protected:
 
 //! Shared pointer for the Animation type.
 using AnimationPtr = std::shared_ptr<Animation>;
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ANIMATION_H_

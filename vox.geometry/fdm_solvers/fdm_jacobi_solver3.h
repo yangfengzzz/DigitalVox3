@@ -10,6 +10,7 @@
 #include "../fdm_linear_system_solver3.h"
 
 namespace vox {
+namespace geometry {
 
 //! \brief 3-D finite difference-type linear system solver using Jacobi method.
 class FdmJacobiSolver3 final : public FdmLinearSystemSolver3 {
@@ -63,6 +64,7 @@ private:
 //! Shared pointer type for the FdmJacobiSolver3.
 using FdmJacobiSolver3Ptr = std::shared_ptr<FdmJacobiSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_JACOBI_SOLVER3_H_

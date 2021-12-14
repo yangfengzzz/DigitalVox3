@@ -10,6 +10,7 @@
 #include "../matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Hash grid common utilities for N-D point searchers.
@@ -53,6 +54,7 @@ using PointHashGridUtils2 = PointHashGridUtils<2>;
 
 using PointHashGridUtils3 = PointHashGridUtils<3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_HASH_GRID_UTILS_H_

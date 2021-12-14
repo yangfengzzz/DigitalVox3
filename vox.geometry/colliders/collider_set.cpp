@@ -9,6 +9,7 @@
 #include "collider_set.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> ColliderSet<N>::ColliderSet() : ColliderSet(Array1<std::shared_ptr<Collider<N>>>()) {}
 
@@ -66,3 +67,4 @@ template class ColliderSet<2>;
 template class ColliderSet<3>;
 
 } // namespace vox
+} // namespace geometry

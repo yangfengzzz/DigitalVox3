@@ -10,6 +10,7 @@
 #include "scalar_field.h"
 
 namespace vox {
+namespace geometry {
 
 //! N-D scalar field with custom field function.
 template <size_t N> class CustomScalarField final : public ScalarField<N> {
@@ -108,6 +109,7 @@ private:
   std::function<double(const Vector<double, N> &)> _customLaplacianFunction;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CUSTOM_SCALAR_FIELD_H_

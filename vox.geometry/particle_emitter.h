@@ -11,6 +11,7 @@
 #include "particle_system_data.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for N-D particle emitter.
@@ -99,6 +100,7 @@ using ParticleEmitter2Ptr = ParticleEmitterPtr<2>;
 //! Shared pointer type of ParticleEmitter3.
 using ParticleEmitter3Ptr = ParticleEmitterPtr<3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PARTICLE_EMITTER_H_

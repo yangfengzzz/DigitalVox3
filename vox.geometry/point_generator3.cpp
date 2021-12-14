@@ -8,6 +8,7 @@
 #include "common.h"
 
 namespace vox {
+namespace geometry {
 
 void PointGenerator3::generate(const BoundingBox3D &boundingBox, double spacing, Array1<Vector3D> *points) const {
   forEachPoint(boundingBox, spacing, [&points](const Vector3D &point) {
@@ -17,3 +18,4 @@ void PointGenerator3::generate(const BoundingBox3D &boundingBox, double spacing,
 }
 
 } // namespace vox
+} // namespace geometry

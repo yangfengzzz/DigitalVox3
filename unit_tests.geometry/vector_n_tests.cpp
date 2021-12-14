@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(VectorN, Constructors) {
   VectorND empty;

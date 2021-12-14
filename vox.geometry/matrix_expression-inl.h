@@ -11,6 +11,7 @@
 #include "matrix_expression.h"
 
 namespace vox {
+namespace geometry {
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: MatrixExpression
@@ -103,11 +104,11 @@ template <typename T, size_t Rows, size_t Cols, typename D> T MatrixExpression<T
 template <typename T, size_t Rows, size_t Cols, typename D> T MatrixExpression<T, Rows, Cols, D>::absmin() const {
   T s = eval(0, 0);
   for (size_t j = 1; j < cols(); ++j) {
-    s = vox::absmin(s, eval(0, j));
+    s = vox::geometry::absmin(s, eval(0, j));
   }
   for (size_t i = 1; i < rows(); ++i) {
     for (size_t j = 0; j < cols(); ++j) {
-      s = vox::absmin(s, eval(i, j));
+      s = vox::geometry::absmin(s, eval(i, j));
     }
   }
   return s;
@@ -116,11 +117,11 @@ template <typename T, size_t Rows, size_t Cols, typename D> T MatrixExpression<T
 template <typename T, size_t Rows, size_t Cols, typename D> T MatrixExpression<T, Rows, Cols, D>::absmax() const {
   T s = eval(0, 0);
   for (size_t j = 1; j < cols(); ++j) {
-    s = vox::absmax(s, eval(0, j));
+    s = vox::geometry::absmax(s, eval(0, j));
   }
   for (size_t i = 1; i < rows(); ++i) {
     for (size_t j = 0; j < cols(); ++j) {
-      s = vox::absmax(s, eval(i, j));
+      s = vox::geometry::absmax(s, eval(i, j));
     }
   }
   return s;
@@ -953,6 +954,7 @@ auto operator*(const MatrixExpression<T, R1, C1, M1> &a, const MatrixExpression<
   return MatrixMul<T, R1, C2, const M1 &, const M2 &>{a.derived(), b.derived()};
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_MATRIX_EXPRESSION_INL_H_

@@ -11,6 +11,7 @@
 #include <algorithm>
 
 using namespace vox;
+using namespace geometry;
 
 UpwindLevelSetSolver3::UpwindLevelSetSolver3() { setMaxCfl(0.5); }
 

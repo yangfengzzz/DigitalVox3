@@ -10,6 +10,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N, typename Derived> class ArrayBase;
 
@@ -105,7 +106,8 @@ template <class T> using ConstArrayView3 = ArrayView<const T, 3>;
 
 template <class T> using ConstArrayView4 = ArrayView<const T, 4>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "array_view-inl.h"
 

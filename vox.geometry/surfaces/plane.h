@@ -10,6 +10,7 @@
 #include "../surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D plane geometry.
@@ -99,6 +100,7 @@ private:
   Vector<double, N> _point;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PLANE_H_

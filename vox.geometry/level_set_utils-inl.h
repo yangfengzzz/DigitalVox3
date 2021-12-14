@@ -19,6 +19,7 @@
 #include <cmath>
 
 namespace vox {
+namespace geometry {
 
 template <typename T> bool isInsideSdf(T phi) { return phi < 0; }
 
@@ -145,6 +146,7 @@ template <typename T> T distanceToZeroLevelSet(T phi0, T phi1) {
   }
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_LEVEL_SET_UTILS_INL_H_

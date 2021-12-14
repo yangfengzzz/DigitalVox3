@@ -12,6 +12,7 @@
 #include <tuple>
 
 namespace vox {
+namespace geometry {
 
 static constexpr size_t kMatrixSizeDynamic = 0;
 
@@ -595,7 +596,8 @@ private:
 template <typename T, size_t R1, size_t C1, size_t R2, size_t C2, typename M1, typename M2>
 auto operator*(const MatrixExpression<T, R1, C1, M1> &a, const MatrixExpression<T, R2, C2, M2> &b);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "matrix_expression-inl.h"
 

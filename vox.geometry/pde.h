@@ -10,6 +10,7 @@
 #include <array>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 1-st order upwind differencing.
@@ -96,7 +97,8 @@ template <typename T> std::array<T, 2> weno5(T *v, T h, T eps = 1.0e-8);
 //!
 template <typename T> T weno5(T *v, T h, bool is_velocity_positive, T eps = 1.0e-8);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "pde-inl.h"
 

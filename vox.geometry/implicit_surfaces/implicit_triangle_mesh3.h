@@ -13,6 +13,7 @@
 #include "custom_implicit_surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief  TriangleMesh3 to ImplicitSurface3 converter.
@@ -101,6 +102,7 @@ private:
   double _margin = 0.2;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_IMPLICIT_TRIANGLE_MESH3_H_

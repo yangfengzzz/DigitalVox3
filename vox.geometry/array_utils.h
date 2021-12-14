@@ -11,6 +11,7 @@
 #include "array_view.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N>
 void fill(ArrayView<T, N> a, const Vector<size_t, N> &begin, const Vector<size_t, N> &end, const T &val);
@@ -62,7 +63,8 @@ template <typename T, typename U>
 void extrapolateToRegion(ArrayView3<T> input, ArrayView3<char> valid, unsigned int numberOfIterations,
                          ArrayView3<U> output);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "array_utils-inl.h"
 

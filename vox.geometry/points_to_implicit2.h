@@ -12,6 +12,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for 2-D points-to-implicit converters.
 class PointsToImplicit2 {
@@ -41,6 +42,7 @@ public:
 //! Shared pointer for the PointsToImplicit2 type.
 using PointsToImplicit2Ptr = std::shared_ptr<PointsToImplicit2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINTS_TO_IMPLICIT2_H_

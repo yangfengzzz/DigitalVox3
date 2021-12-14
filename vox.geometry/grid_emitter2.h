@@ -12,6 +12,7 @@
 #include "implicit_surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for 2-D grid-based emitters.
@@ -77,6 +78,7 @@ private:
 //! Shared pointer type for the GridEmitter2.
 using GridEmitter2Ptr = std::shared_ptr<GridEmitter2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_GRID_EMITTER2_H_

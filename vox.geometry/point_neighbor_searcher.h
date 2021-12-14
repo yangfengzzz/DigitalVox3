@@ -16,6 +16,7 @@
 #include <string>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for N-D neighbor point searcher.
@@ -112,6 +113,7 @@ using PointNeighborSearcherBuilder3Ptr = std::shared_ptr<PointNeighborSearcherBu
 #define JET_NEIGHBOR_SEARCHER_TYPE_NAME(DerivedClassName, N)                                                           \
   std::string typeName() const override { return #DerivedClassName + std::to_string(N); }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_NEIGHBOR_SEARCHER_H_

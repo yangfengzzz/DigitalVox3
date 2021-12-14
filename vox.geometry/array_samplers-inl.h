@@ -10,6 +10,7 @@
 #include "array_samplers.h"
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -298,6 +299,7 @@ CubicArraySampler<T, N, CIOp>::functor() const {
   return [sampler](const VectorType &x) -> T { return sampler(x); };
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_ARRAY_SAMPLERS_INL_H_

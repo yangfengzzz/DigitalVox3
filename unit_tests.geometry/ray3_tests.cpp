@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Ray3, Constructors) {
   Ray3D ray;

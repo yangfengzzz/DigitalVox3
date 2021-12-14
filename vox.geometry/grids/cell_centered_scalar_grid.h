@@ -10,6 +10,7 @@
 #include "scalar_grid.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D Cell-centered scalar grid structure.
@@ -127,6 +128,7 @@ private:
   double _initialVal = 0.0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CELL_CENTERED_SCALAR_GRID_H_

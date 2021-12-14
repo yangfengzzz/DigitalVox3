@@ -14,6 +14,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief  Box-ray intersection result.
@@ -145,7 +146,8 @@ using BoundingBoxRayIntersectionF = BoundingBoxRayIntersection<float>;
 
 using BoundingBoxRayIntersectionD = BoundingBoxRayIntersection<double>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "bounding_box-inl.h"
 

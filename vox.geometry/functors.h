@@ -11,6 +11,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 //! No-op operator.
 template <typename T> struct NoOp { constexpr T operator()(const T &a) const; };
@@ -67,7 +68,8 @@ template <typename T> struct SimilarTo {
 //! Clamps the input value with low/high.
 template <typename T> struct Clamp { constexpr T operator()(const T &a, const T &low, const T &high) const; };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "functors-inl.h"
 

@@ -10,6 +10,7 @@
 #include "../point_generator2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Right triangle point generator.
@@ -29,6 +30,7 @@ public:
 
 using TrianglePointGeneratorPtr = std::shared_ptr<TrianglePointGenerator>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TRIANGLE_POINT_GENERATOR_H_

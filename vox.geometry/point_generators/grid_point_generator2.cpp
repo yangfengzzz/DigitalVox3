@@ -8,6 +8,7 @@
 #include "../common.h"
 
 namespace vox {
+namespace geometry {
 
 void GridPointGenerator2::forEachPoint(const BoundingBox2D &boundingBox, double spacing,
                                        const std::function<bool(const Vector2D &)> &callback) const {
@@ -30,3 +31,4 @@ void GridPointGenerator2::forEachPoint(const BoundingBox2D &boundingBox, double 
 }
 
 } // namespace vox
+} // namespace geometry

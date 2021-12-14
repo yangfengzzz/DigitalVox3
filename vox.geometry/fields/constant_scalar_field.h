@@ -10,6 +10,7 @@
 #include "scalar_field.h"
 
 namespace vox {
+namespace geometry {
 
 //! N-D constant scalar field.
 template <size_t N> class ConstantScalarField final : public ScalarField<N> {
@@ -62,6 +63,7 @@ private:
   double _value = 0.0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CONSTANT_SCALAR_FIELD_H_

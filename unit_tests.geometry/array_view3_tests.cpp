@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ArrayView3, Constructors) {
   double data[60];

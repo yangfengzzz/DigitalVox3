@@ -17,6 +17,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> class GridDataPositionFunc final {
 public:
@@ -157,6 +158,7 @@ using Grid3Ptr = std::shared_ptr<Grid3>;
 #define JET_GRID_TYPE_NAME(DerivedClassName, N)                                                                        \
   std::string typeName() const override { return #DerivedClassName + std::to_string(N); }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_GRID_H_

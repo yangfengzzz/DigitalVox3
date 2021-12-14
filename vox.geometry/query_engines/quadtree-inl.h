@@ -14,6 +14,7 @@
 #include <stack>
 
 namespace vox {
+namespace geometry {
 
 template <typename T> bool Quadtree<T>::Node::isLeaf() const { return firstChild == kMaxSize; }
 
@@ -344,6 +345,7 @@ Quadtree<T>::closestIntersection(const Ray2D &ray, const GetRayIntersectionFunc2
   return best;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_QUADTREE_INL_H_

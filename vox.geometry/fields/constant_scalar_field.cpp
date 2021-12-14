@@ -9,6 +9,7 @@
 #include "constant_scalar_field.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> ConstantScalarField<N>::ConstantScalarField(double value) : _value(value) {}
 
@@ -44,3 +45,4 @@ template class ConstantScalarField<2>;
 template class ConstantScalarField<3>;
 
 } // namespace vox
+} // namespace geometry

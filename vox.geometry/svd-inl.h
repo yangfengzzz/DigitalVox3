@@ -14,6 +14,7 @@
 #include "math_utils.h"
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -558,6 +559,7 @@ void svd(const Matrix<T, M, N> &a, Matrix<T, M, N> &u, Vector<T, N> &w, Matrix<T
   }
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_SVD_H_

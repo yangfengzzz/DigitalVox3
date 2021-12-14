@@ -9,6 +9,7 @@
 #include "../samplers.h"
 
 namespace vox {
+namespace geometry {
 
 PointParticleEmitter3::PointParticleEmitter3(const Vector3D &origin, const Vector3D &direction, double speed,
                                              double spreadAngleInDegrees, size_t maxNumOfNewParticlesPerSec,
@@ -130,3 +131,4 @@ PointParticleEmitter3Ptr PointParticleEmitter3::Builder::makeShared() const {
 }
 
 } // namespace vox
+} // namespace geometry

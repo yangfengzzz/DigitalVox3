@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(StdUtils, TakeFirstM) {
   std::array<int, 5> a{{1, 2, 3, 4, 5}};

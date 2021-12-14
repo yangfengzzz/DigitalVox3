@@ -12,6 +12,7 @@
 #include "parallel.h"
 
 using namespace vox;
+using namespace geometry;
 
 void FdmLinearSystem3::clear() {
   A.clear();

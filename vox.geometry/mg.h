@@ -13,6 +13,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //! Multigrid matrix wrapper.
 template <typename BlasType> struct MgMatrix {
@@ -93,7 +94,8 @@ struct MgResult {
 template <typename BlasType>
 MgResult mgVCycle(const MgMatrix<BlasType> &A, MgParameters<BlasType> params, MgVector<BlasType> *x,
                   MgVector<BlasType> *b, MgVector<BlasType> *buffer);
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "mg-inl.h"
 

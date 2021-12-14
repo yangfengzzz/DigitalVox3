@@ -9,6 +9,7 @@
 #include "../vox.geometry/query_engines/bvh.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Bvh3, Constructors) {
   Bvh3<Vector3D> bvh;

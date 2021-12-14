@@ -35,8 +35,10 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 namespace vox {
+namespace geometry {
 void triangleMeshToSdf(const TriangleMesh3 &mesh, ScalarGrid3 *sdf) {
   const Vector3UZ size = sdf->dataSize();
   if (size.x * size.y * size.z == 0) {
@@ -55,3 +57,4 @@ void triangleMeshToSdf(const TriangleMesh3 &mesh, ScalarGrid3 *sdf) {
 }
 
 } // namespace vox
+} // namespace geometry

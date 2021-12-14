@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(PointParticleEmitter2, Constructors) {
   PointParticleEmitter2 emitter({1.0, 2.0}, Vector2D(0.5, 1.0).normalized(), 3.0, 15.0, 4, 18);

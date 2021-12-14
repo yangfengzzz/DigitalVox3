@@ -12,6 +12,7 @@
 #include "../sph_system_data.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D SPH solver.
@@ -240,6 +241,7 @@ public:
   [[nodiscard]] SphSolver3Ptr makeShared() const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPH_SOLVER3_H_

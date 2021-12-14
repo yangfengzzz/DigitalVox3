@@ -6,6 +6,7 @@
 #include "flatbuffers/flatbuffers.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct Vector2UZ;
@@ -80,5 +81,6 @@ STRUCT_END(Vector3D, 24);
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_BASICTYPES_JET_FBS_H_

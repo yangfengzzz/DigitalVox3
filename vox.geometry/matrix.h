@@ -18,6 +18,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Matrix Class (Static)
@@ -768,7 +769,8 @@ std::enable_if_t<isMatrixSizeStatic<Rows, Cols>(), Matrix<T, Rows, Cols>>
 monotonicCatmullRom(const MatrixExpression<T, Rows, Cols, M1> &f0, const MatrixExpression<T, Rows, Cols, M2> &f1,
                     const MatrixExpression<T, Rows, Cols, M3> &f2, const MatrixExpression<T, Rows, Cols, M4> &f3, T f);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "matrix-inl.h"
 

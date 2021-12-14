@@ -14,6 +14,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //! Generic k-d tree structure.
 template <typename T, size_t K> class KdTree final {
@@ -116,7 +117,8 @@ private:
   size_t build(size_t nodeIndex, size_t *itemIndices, size_t nItems, size_t currentDepth);
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "kdtree-inl.h"
 

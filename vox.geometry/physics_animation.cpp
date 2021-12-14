@@ -13,6 +13,7 @@
 #include <limits>
 
 using namespace vox;
+using namespace geometry;
 
 PhysicsAnimation::PhysicsAnimation() { _currentFrame.index = -1; }
 

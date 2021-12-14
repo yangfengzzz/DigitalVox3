@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(SphStdKernel3, Constructors) {
   SphStdKernel3 kernel;

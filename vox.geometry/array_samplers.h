@@ -14,6 +14,7 @@
 #include <functional>
 
 namespace vox {
+namespace geometry {
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: NearestArraySampler
@@ -231,7 +232,8 @@ template <typename T> using MonotonicCatmullRomArraySampler2 = CubicArraySampler
 
 template <typename T> using MonotonicCatmullRomArraySampler3 = CubicArraySampler<T, 3, MonotonicCatmullRom<T>>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "array_samplers-inl.h"
 

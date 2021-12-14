@@ -10,6 +10,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Generic BLAS operator wrapper class
@@ -59,7 +60,8 @@ template <typename S, typename V, typename M> struct Blas {
   static ScalarType lInfNorm(const VectorType &v);
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "blas-inl.h"
 

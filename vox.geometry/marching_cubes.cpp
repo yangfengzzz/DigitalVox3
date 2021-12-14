@@ -30,6 +30,7 @@
 #include <unordered_map>
 
 namespace vox {
+namespace geometry {
 using MarchingCubeVertexHashKey = size_t;
 using MarchingCubeVertexID = size_t;
 using MarchingCubeVertexMap = std::unordered_map<MarchingCubeVertexHashKey, MarchingCubeVertexID>;
@@ -579,3 +580,4 @@ void marchingCubes(const ConstArrayView3<double> &grid, const Vector3D &gridSize
 }
 
 } // namespace vox
+} // namespace geometry

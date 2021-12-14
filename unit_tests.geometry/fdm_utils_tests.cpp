@@ -10,6 +10,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(FdmUtils, ScalarToGradient2) {
   CellCenteredScalarGrid2 grid({10, 10}, {2.0, 3.0}, {-1.0, 4.0});

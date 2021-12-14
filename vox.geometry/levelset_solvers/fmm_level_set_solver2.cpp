@@ -14,6 +14,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 static const char kUnknown = 0;
 static const char kKnown = 1;

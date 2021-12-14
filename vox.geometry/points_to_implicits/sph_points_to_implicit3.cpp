@@ -11,6 +11,7 @@
 #include "sph_points_to_implicit3.h"
 
 using namespace vox;
+using namespace geometry;
 
 SphPointsToImplicit3::SphPointsToImplicit3(double kernelRadius, double cutOffDensity, bool isOutputSdf)
     : _kernelRadius(kernelRadius), _cutOffDensity(cutOffDensity), _isOutputSdf(isOutputSdf) {}

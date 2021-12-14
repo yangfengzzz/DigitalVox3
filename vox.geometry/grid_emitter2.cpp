@@ -9,6 +9,7 @@
 #include "grid_emitter2.h"
 
 using namespace vox;
+using namespace geometry;
 
 void GridEmitter2::update(double currentTimeInSeconds, double timeIntervalInSeconds) {
   if (_onBeginUpdateCallback) {

@@ -11,6 +11,7 @@
 #include "spherical_points_to_implicit2.h"
 
 using namespace vox;
+using namespace geometry;
 
 SphericalPointsToImplicit2::SphericalPointsToImplicit2(double radius, bool isOutputSdf)
     : _radius(radius), _isOutputSdf(isOutputSdf) {}

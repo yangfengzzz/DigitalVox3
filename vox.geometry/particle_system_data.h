@@ -30,6 +30,7 @@ struct ParticleSystemData3;
 #endif // JET_DOXYGEN
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      N-D particle system data.
@@ -261,6 +262,7 @@ using ParticleSystemData2Ptr = ParticleSystemDataPtr<2>;
 //! Shared pointer type of ParticleSystemData3.
 using ParticleSystemData3Ptr = ParticleSystemDataPtr<3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PARTICLE_SYSTEM_DATA_H_

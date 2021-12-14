@@ -11,6 +11,7 @@
 #include <thread>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Timer, Basics) {
   Timer timer, timer2;

@@ -10,6 +10,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(MatrixCsr, Constructors) {
   const MatrixCsrD emptyMat;

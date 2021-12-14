@@ -9,6 +9,7 @@
 #include "surface_to_implicit.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 SurfaceToImplicit<N>::SurfaceToImplicit(const std::shared_ptr<Surface<N>> &surface, const Transform<N> &transform,
@@ -83,3 +84,4 @@ template class SurfaceToImplicit<2>;
 template class SurfaceToImplicit<3>;
 
 } // namespace vox
+} // namespace geometry

@@ -10,6 +10,7 @@
 #include "../points_to_implicit2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D points-to-implicit converter using Anisotropic kernels.
@@ -52,6 +53,7 @@ private:
 //! Shared pointer for the AnisotropicPointsToImplicit2 type.
 using AnisotropicPointsToImplicit2Ptr = std::shared_ptr<AnisotropicPointsToImplicit2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ANISOTROPIC_POINTS_TO_IMPLICIT2_H_

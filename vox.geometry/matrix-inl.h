@@ -12,6 +12,7 @@
 #include <cmath>
 
 namespace vox {
+namespace geometry {
 
 // MARK: Internal Helpers
 
@@ -972,6 +973,7 @@ monotonicCatmullRom(const MatrixExpression<T, Rows, Cols, M1> &f0, const MatrixE
   return result;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_STATIC_MATRIX_INL_H_

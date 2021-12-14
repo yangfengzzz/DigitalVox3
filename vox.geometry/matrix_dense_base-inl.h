@@ -10,6 +10,7 @@
 #include "matrix_dense_base.h"
 
 namespace vox {
+namespace geometry {
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Simple Setters/Modifiers
@@ -266,5 +267,6 @@ const D &MatrixDenseBase<T, Rows, Cols, D>::derived() const {
   return static_cast<const D &>(*this);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 #endif // INCLUDE_JET_DETAIL_MATRIX_DENSE_BASE_INL_H_

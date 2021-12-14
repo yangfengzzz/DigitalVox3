@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(FdmMgUtils2, ResizeArrayWithFinest) {
   std::vector<Array2<double>> levels;

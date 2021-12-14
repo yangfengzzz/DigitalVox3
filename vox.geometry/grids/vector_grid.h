@@ -13,6 +13,7 @@
 #include "../parallel.h"
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for N-D vector grid structure.
 template <size_t N> class VectorGrid : public VectorField<N>, public Grid<N> {
@@ -117,6 +118,7 @@ using VectorGridBuilder2Ptr = std::shared_ptr<VectorGridBuilder2>;
 //! Shared pointer for the VectorGridBuilder3 type.
 using VectorGridBuilder3Ptr = std::shared_ptr<VectorGridBuilder3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_VECTOR_GRID_H_

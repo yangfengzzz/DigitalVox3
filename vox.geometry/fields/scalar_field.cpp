@@ -9,6 +9,7 @@
 #include "scalar_field.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> Vector<double, N> ScalarField<N>::gradient(const Vector<double, N> &) const {
   return Vector<double, N>();
@@ -26,3 +27,4 @@ template class ScalarField<2>;
 template class ScalarField<3>;
 
 } // namespace vox
+} // namespace geometry

@@ -22,6 +22,7 @@
 #include <unordered_map>
 
 using namespace vox;
+using namespace geometry;
 
 namespace {
 

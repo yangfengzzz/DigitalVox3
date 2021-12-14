@@ -11,6 +11,7 @@
 #include "../vox.geometry/surfaces/surface_set.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(SurfaceSet3, Constructors) {
   SurfaceSet3 sset1;

@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Vector4, BasicGetterMethods) {
   Vector4F vec(3.f, 7.f, -1.f, 11.f), vec2(-3.f, -7.f, 1.f, 4.f);

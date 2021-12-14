@@ -13,6 +13,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(VolumeParticleEmitter3, Constructors) {
   auto sphere = std::make_shared<SurfaceToImplicit3>(std::make_shared<Sphere3>(Vector3D(1.0, 2.0, 4.0), 3.0));

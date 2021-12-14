@@ -11,6 +11,7 @@
 #include "../implicit_surface.h"
 
 namespace vox {
+namespace geometry {
 
 //! Custom N-D implicit surface using arbitrary function.
 template <size_t N> class CustomImplicitSurface final : public ImplicitSurface<N> {
@@ -116,6 +117,7 @@ private:
   unsigned int _maxNumOfIterations = 5;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CUSTOM_IMPLICIT_SURFACE_H_

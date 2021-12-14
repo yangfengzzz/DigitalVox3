@@ -21,6 +21,7 @@
 #include "../flatbuffers/flatbuffers.h"
 
 namespace vox {
+namespace geometry {
 
 // MARK: Serialization helpers
 
@@ -28,26 +29,26 @@ template <size_t N> struct GetFlatbuffersScalarGrid {};
 
 template <> struct GetFlatbuffersScalarGrid<2> {
   static flatbuffers::Offset<fbs::ScalarGrid2> createScalarGrid(flatbuffers::FlatBufferBuilder &_fbb,
-                                                                const vox::fbs::Vector2UZ *resolution,
-                                                                const vox::fbs::Vector2D *gridSpacing,
-                                                                const vox::fbs::Vector2D *origin,
+                                                                const vox::geometry::fbs::Vector2UZ *resolution,
+                                                                const vox::geometry::fbs::Vector2D *gridSpacing,
+                                                                const vox::geometry::fbs::Vector2D *origin,
                                                                 flatbuffers::Offset<flatbuffers::Vector<double>> data) {
     return fbs::CreateScalarGrid2(_fbb, resolution, gridSpacing, origin, data);
   }
 
-  static const vox::fbs::ScalarGrid2 *getScalarGrid(const void *buf) { return fbs::GetScalarGrid2(buf); }
+  static const vox::geometry::fbs::ScalarGrid2 *getScalarGrid(const void *buf) { return fbs::GetScalarGrid2(buf); }
 };
 
 template <> struct GetFlatbuffersScalarGrid<3> {
   static flatbuffers::Offset<fbs::ScalarGrid3> createScalarGrid(flatbuffers::FlatBufferBuilder &_fbb,
-                                                                const vox::fbs::Vector3UZ *resolution,
-                                                                const vox::fbs::Vector3D *gridSpacing,
-                                                                const vox::fbs::Vector3D *origin,
+                                                                const vox::geometry::fbs::Vector3UZ *resolution,
+                                                                const vox::geometry::fbs::Vector3D *gridSpacing,
+                                                                const vox::geometry::fbs::Vector3D *origin,
                                                                 flatbuffers::Offset<flatbuffers::Vector<double>> data) {
     return fbs::CreateScalarGrid3(_fbb, resolution, gridSpacing, origin, data);
   }
 
-  static const vox::fbs::ScalarGrid3 *getScalarGrid(const void *buf) { return fbs::GetScalarGrid3(buf); }
+  static const vox::geometry::fbs::ScalarGrid3 *getScalarGrid(const void *buf) { return fbs::GetScalarGrid3(buf); }
 };
 
 // MARK: ScalarGrid implementations
@@ -230,3 +231,4 @@ template class ScalarGridBuilder<2>;
 template class ScalarGridBuilder<3>;
 
 } // namespace vox
+} // namespace geometry

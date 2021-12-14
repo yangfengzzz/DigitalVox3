@@ -13,6 +13,7 @@
 #include "vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D face-centered (a.k.a MAC or staggered) grid.
@@ -392,6 +393,7 @@ private:
   Vector<double, N> _initialVal;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FACE_CENTERED_GRID_H_

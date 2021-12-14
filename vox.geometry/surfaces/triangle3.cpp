@@ -11,6 +11,7 @@
 #include <utility>
 
 using namespace vox;
+using namespace geometry;
 
 inline Vector3D closestPointOnLine(const Vector3D &v0, const Vector3D &v1, const Vector3D &pt) {
   const double lenSquared = (v1 - v0).lengthSquared();

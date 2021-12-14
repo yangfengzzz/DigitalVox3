@@ -12,6 +12,7 @@
 #include "../surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D surface set.
@@ -116,6 +117,7 @@ private:
   Array1<std::shared_ptr<Surface<N>>> _surfaces;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SURFACE_SET_H_

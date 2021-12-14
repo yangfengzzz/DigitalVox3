@@ -10,6 +10,7 @@
 #include "../constants.h"
 
 using namespace vox;
+using namespace geometry;
 
 FdmCgSolver3::FdmCgSolver3(unsigned int maxNumberOfIterations, double tolerance)
     : _maxNumberOfIterations(maxNumberOfIterations), _lastNumberOfIterations(0), _tolerance(tolerance),

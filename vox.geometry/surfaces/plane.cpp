@@ -9,6 +9,7 @@
 #include "plane.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 Plane<N>::Plane(const Transform<N> &transform_, bool isNormalFlipped_) : Surface<N>(transform_, isNormalFlipped_) {}
@@ -97,3 +98,4 @@ template class Plane<2>;
 template class Plane<3>;
 
 } // namespace vox
+} // namespace geometry

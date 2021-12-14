@@ -12,6 +12,7 @@
 #include "type_helpers.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N>
 void fill(ArrayView<T, N> a, const Vector<size_t, N> &begin, const Vector<size_t, N> &end, const T &val) {
@@ -159,6 +160,7 @@ void extrapolateToRegion(ArrayView3<T> input, ArrayView3<char> valid, unsigned i
   }
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_ARRAY_UTILS_INL_H_

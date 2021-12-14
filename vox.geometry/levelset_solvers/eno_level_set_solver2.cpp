@@ -10,6 +10,7 @@
 #include <algorithm>
 
 using namespace vox;
+using namespace geometry;
 
 EnoLevelSetSolver2::EnoLevelSetSolver2() { setMaxCfl(0.25); }
 

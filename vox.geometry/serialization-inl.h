@@ -13,6 +13,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 template <typename T> void serialize(const ConstArrayView1<T> &array, std::vector<uint8_t> *buffer) {
   size_t size = sizeof(T) * array.length();
@@ -26,6 +27,7 @@ template <typename T> void deserialize(const std::vector<uint8_t> &buffer, Array
   memcpy(reinterpret_cast<uint8_t *>(array->data()), data.data(), data.size());
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_SERIALIZATION_INL_H_

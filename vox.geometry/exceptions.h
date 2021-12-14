@@ -11,6 +11,7 @@
 #include <string>
 
 namespace vox {
+namespace geometry {
 
 class NotImplementedException : public std::exception {
 public:
@@ -26,6 +27,7 @@ private:
   std::string _message;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_EXCEPTIONS_H_

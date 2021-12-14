@@ -12,6 +12,7 @@
 #include "../point_neighbor_searcher.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Hash grid-based N-D point searcher.
@@ -187,6 +188,7 @@ private:
   double _gridSpacing = 1.0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_HASH_GRID_SEARCHER_H_

@@ -12,6 +12,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D particle-based emitter set.
@@ -76,6 +77,7 @@ private:
   std::vector<ParticleEmitter2Ptr> _emitters;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PARTICLE_EMITTER_SET2_H_

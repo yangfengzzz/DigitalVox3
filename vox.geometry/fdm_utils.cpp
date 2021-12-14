@@ -9,6 +9,7 @@
 #include "fdm_utils.h"
 
 namespace vox {
+namespace geometry {
 
 Vector2D gradient2(const ConstArrayView2<double> &data, const Vector2D &gridSpacing, size_t i, size_t j) {
   const Vector2UZ &ds = data.size();
@@ -288,3 +289,4 @@ Vector3D curl3(const ConstArrayView3<Vector3D> &data, const Vector3D &gridSpacin
 }
 
 } // namespace vox
+} // namespace geometry

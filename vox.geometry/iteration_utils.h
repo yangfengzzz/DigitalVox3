@@ -11,6 +11,7 @@
 #include "parallel.h"
 
 namespace vox {
+namespace geometry {
 
 // MARK: Serial Iteration
 
@@ -115,7 +116,8 @@ template <> struct GetUnroll<void, 3> {
   }
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "iteration_utils-inl.h"
 

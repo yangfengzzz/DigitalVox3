@@ -13,6 +13,7 @@
 #include <functional>
 
 namespace vox {
+namespace geometry {
 
 //! N-D closest intersection query result.
 template <typename T, size_t N> struct ClosestIntersectionQueryResult {
@@ -97,6 +98,7 @@ template <typename T> using IntersectionQueryEngine2 = IntersectionQueryEngine<T
 //! Abstract base class for 3-D intersection test query engine.
 template <typename T> using IntersectionQueryEngine3 = IntersectionQueryEngine<T, 3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_INTERSECTION_QUERY_ENGINE_H_

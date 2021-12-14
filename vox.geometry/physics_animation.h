@@ -10,6 +10,7 @@
 #include "animation.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Abstract base class for physics-based animation.
@@ -157,6 +158,7 @@ private:
 };
 
 using PhysicsAnimationPtr = std::shared_ptr<PhysicsAnimation>;
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PHYSICS_ANIMATION_H_

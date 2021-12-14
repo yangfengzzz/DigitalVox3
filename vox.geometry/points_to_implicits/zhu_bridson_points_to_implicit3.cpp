@@ -11,6 +11,7 @@
 #include "zhu_bridson_points_to_implicit3.h"
 
 using namespace vox;
+using namespace geometry;
 
 inline double k(double s) { return std::max(0.0, cubic(1.0 - s * s)); }
 

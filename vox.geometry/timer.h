@@ -10,6 +10,7 @@
 #include <chrono>
 
 namespace vox {
+namespace geometry {
 
 //! Simple timer class.
 class Timer {
@@ -27,6 +28,7 @@ private:
   std::chrono::high_resolution_clock::time_point _startingPoint;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TIMER_H_

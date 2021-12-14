@@ -9,6 +9,7 @@
 #include "point_hash_grid_utils.h"
 
 namespace vox {
+namespace geometry {
 template <size_t N>
 template <size_t M>
 std::enable_if_t<M == 2, size_t> PointHashGridUtils<N>::hashKey(const Vector<ssize_t, 2> &index,
@@ -84,3 +85,4 @@ template class PointHashGridUtils<2>;
 template class PointHashGridUtils<3>;
 
 } // namespace vox
+} // namespace geometry

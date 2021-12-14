@@ -10,10 +10,12 @@
 #include <algorithm>
 
 namespace vox {
+namespace geometry {
 
 template <class ForwardIt, class T, class Compare = std::less<T>>
 ForwardIt binaryFind(ForwardIt first, ForwardIt last, const T &value, Compare comp = {});
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "cpp_utils-inl.h"
 

@@ -10,6 +10,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Singular value decomposition (SVD).
@@ -40,7 +41,8 @@ template <typename T> void svd(const MatrixMxN<T> &a, MatrixMxN<T> &u, VectorN<T
 template <typename T, size_t M, size_t N>
 void svd(const Matrix<T, M, N> &a, Matrix<T, M, N> &u, Vector<T, N> &w, Matrix<T, N, N> &v);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "svd-inl.h"
 

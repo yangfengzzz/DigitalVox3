@@ -9,6 +9,7 @@
 #include <limits>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(BoundingBox, Constructors) {
   {

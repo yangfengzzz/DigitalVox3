@@ -9,6 +9,7 @@
 #include "sphere.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 Sphere<N>::Sphere(const Transform<N> &transform_, bool isNormalFlipped_) : Surface<N>(transform_, isNormalFlipped_) {}
@@ -122,3 +123,4 @@ template class Sphere<2>;
 template class Sphere<3>;
 
 } // namespace vox
+} // namespace geometry

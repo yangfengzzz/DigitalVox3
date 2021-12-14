@@ -16,6 +16,7 @@
 #include <utility>
 
 using namespace vox;
+using namespace geometry;
 
 static const size_t kDefaultHashGridResolution = 64;
 

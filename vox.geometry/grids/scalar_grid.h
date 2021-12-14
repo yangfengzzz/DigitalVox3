@@ -15,6 +15,7 @@
 #include "../parallel.h"
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for N-D scalar grid structure.
 template <size_t N> class ScalarGrid : public ScalarField<N>, public Grid<N> {
@@ -250,6 +251,7 @@ using ScalarGridBuilder2Ptr = std::shared_ptr<ScalarGridBuilder2>;
 //! Shared pointer for the ScalarGridBuilder3 type.
 using ScalarGridBuilder3Ptr = std::shared_ptr<ScalarGridBuilder3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SCALAR_GRID_H_

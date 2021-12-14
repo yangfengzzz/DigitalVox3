@@ -11,6 +11,7 @@
 #include "parallel.h"
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -107,6 +108,7 @@ void parallelForEachIndex(IndexType size, Func func, ExecutionPolicy policy) {
   parallelForEachIndex(IndexType{}, size, func, policy);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_ITERATION_UTILS_INL_H_

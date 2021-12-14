@@ -10,6 +10,7 @@
 #include "../point_generator3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Face-centered lattice points generator.
@@ -33,6 +34,7 @@ public:
 //! Shared pointer type for the FccLatticePointGenerator.
 using FccLatticePointGeneratorPtr = std::shared_ptr<FccLatticePointGenerator>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FCC_LATTICE_POINT_GENERATOR_H_

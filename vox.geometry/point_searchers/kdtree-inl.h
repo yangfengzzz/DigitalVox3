@@ -12,6 +12,7 @@
 #include <numeric>
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t K> void KdTree<T, K>::Node::initLeaf(size_t it, const Point &pt) {
   flags = K;
@@ -265,6 +266,7 @@ size_t KdTree<T, K>::build(size_t nodeIndex, size_t *itemIndices, size_t nItems,
   return std::max(d0, d1);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_KDTREE_INL_H_

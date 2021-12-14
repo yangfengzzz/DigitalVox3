@@ -10,6 +10,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 // Constructors
 template <typename T> inline Quaternion<T>::Quaternion() { setIdentity(); }
@@ -363,6 +364,7 @@ template <typename T> inline Quaternion<T> operator*(const Quaternion<T> &a, con
   return a.mul(b);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_QUATERNION_INL_H_

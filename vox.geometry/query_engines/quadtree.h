@@ -12,6 +12,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Generic quadtree data structure.
@@ -156,7 +157,8 @@ private:
                                                          ClosestIntersectionQueryResult2<T> best) const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "quadtree-inl.h"
 

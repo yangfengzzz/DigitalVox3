@@ -8,6 +8,7 @@
 #include "../basic_types_generated.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct PointParallelHashGridSearcher2;
@@ -23,9 +24,9 @@ struct PointParallelHashGridSearcher2 FLATBUFFERS_FINAL_CLASS : private flatbuff
     VT_SORTEDINDICES = 16
   };
   double gridSpacing() const { return GetField<double>(VT_GRIDSPACING, 0.0); }
-  const vox::fbs::Vector2UZ *resolution() const { return GetStruct<const vox::fbs::Vector2UZ *>(VT_RESOLUTION); }
-  const flatbuffers::Vector<const vox::fbs::Vector2D *> *points() const {
-    return GetPointer<const flatbuffers::Vector<const vox::fbs::Vector2D *> *>(VT_POINTS);
+  const vox::geometry::fbs::Vector2UZ *resolution() const { return GetStruct<const vox::geometry::fbs::Vector2UZ *>(VT_RESOLUTION); }
+  const flatbuffers::Vector<const vox::geometry::fbs::Vector2D *> *points() const {
+    return GetPointer<const flatbuffers::Vector<const vox::geometry::fbs::Vector2D *> *>(VT_POINTS);
   }
   const flatbuffers::Vector<uint64_t> *keys() const {
     return GetPointer<const flatbuffers::Vector<uint64_t> *>(VT_KEYS);
@@ -41,7 +42,7 @@ struct PointParallelHashGridSearcher2 FLATBUFFERS_FINAL_CLASS : private flatbuff
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) && VerifyField<double>(verifier, VT_GRIDSPACING) &&
-           VerifyField<vox::fbs::Vector2UZ>(verifier, VT_RESOLUTION) && VerifyOffset(verifier, VT_POINTS) &&
+           VerifyField<vox::geometry::fbs::Vector2UZ>(verifier, VT_RESOLUTION) && VerifyOffset(verifier, VT_POINTS) &&
            verifier.Verify(points()) && VerifyOffset(verifier, VT_KEYS) && verifier.Verify(keys()) &&
            VerifyOffset(verifier, VT_STARTINDEXTABLE) && verifier.Verify(startIndexTable()) &&
            VerifyOffset(verifier, VT_ENDINDEXTABLE) && verifier.Verify(endIndexTable()) &&
@@ -55,10 +56,10 @@ struct PointParallelHashGridSearcher2Builder {
   void add_gridSpacing(double gridSpacing) {
     fbb_.AddElement<double>(PointParallelHashGridSearcher2::VT_GRIDSPACING, gridSpacing, 0.0);
   }
-  void add_resolution(const vox::fbs::Vector2UZ *resolution) {
+  void add_resolution(const vox::geometry::fbs::Vector2UZ *resolution) {
     fbb_.AddStruct(PointParallelHashGridSearcher2::VT_RESOLUTION, resolution);
   }
-  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector2D *>> points) {
+  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector2D *>> points) {
     fbb_.AddOffset(PointParallelHashGridSearcher2::VT_POINTS, points);
   }
   void add_keys(flatbuffers::Offset<flatbuffers::Vector<uint64_t>> keys) {
@@ -86,8 +87,8 @@ struct PointParallelHashGridSearcher2Builder {
 
 inline flatbuffers::Offset<PointParallelHashGridSearcher2>
 CreatePointParallelHashGridSearcher2(flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0,
-                                     const vox::fbs::Vector2UZ *resolution = 0,
-                                     flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector2D *>> points = 0,
+                                     const vox::geometry::fbs::Vector2UZ *resolution = 0,
+                                     flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector2D *>> points = 0,
                                      flatbuffers::Offset<flatbuffers::Vector<uint64_t>> keys = 0,
                                      flatbuffers::Offset<flatbuffers::Vector<uint64_t>> startIndexTable = 0,
                                      flatbuffers::Offset<flatbuffers::Vector<uint64_t>> endIndexTable = 0,
@@ -104,33 +105,34 @@ CreatePointParallelHashGridSearcher2(flatbuffers::FlatBufferBuilder &_fbb, doubl
 }
 
 inline flatbuffers::Offset<PointParallelHashGridSearcher2> CreatePointParallelHashGridSearcher2Direct(
-    flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0, const vox::fbs::Vector2UZ *resolution = 0,
-    const std::vector<const vox::fbs::Vector2D *> *points = nullptr, const std::vector<uint64_t> *keys = nullptr,
+    flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0, const vox::geometry::fbs::Vector2UZ *resolution = 0,
+    const std::vector<const vox::geometry::fbs::Vector2D *> *points = nullptr, const std::vector<uint64_t> *keys = nullptr,
     const std::vector<uint64_t> *startIndexTable = nullptr, const std::vector<uint64_t> *endIndexTable = nullptr,
     const std::vector<uint64_t> *sortedIndices = nullptr) {
-  return vox::fbs::CreatePointParallelHashGridSearcher2(
-      _fbb, gridSpacing, resolution, points ? _fbb.CreateVector<const vox::fbs::Vector2D *>(*points) : 0,
+  return vox::geometry::fbs::CreatePointParallelHashGridSearcher2(
+      _fbb, gridSpacing, resolution, points ? _fbb.CreateVector<const vox::geometry::fbs::Vector2D *>(*points) : 0,
       keys ? _fbb.CreateVector<uint64_t>(*keys) : 0,
       startIndexTable ? _fbb.CreateVector<uint64_t>(*startIndexTable) : 0,
       endIndexTable ? _fbb.CreateVector<uint64_t>(*endIndexTable) : 0,
       sortedIndices ? _fbb.CreateVector<uint64_t>(*sortedIndices) : 0);
 }
 
-inline const vox::fbs::PointParallelHashGridSearcher2 *GetPointParallelHashGridSearcher2(const void *buf) {
-  return flatbuffers::GetRoot<vox::fbs::PointParallelHashGridSearcher2>(buf);
+inline const vox::geometry::fbs::PointParallelHashGridSearcher2 *GetPointParallelHashGridSearcher2(const void *buf) {
+  return flatbuffers::GetRoot<vox::geometry::fbs::PointParallelHashGridSearcher2>(buf);
 }
 
 inline bool VerifyPointParallelHashGridSearcher2Buffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::PointParallelHashGridSearcher2>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::PointParallelHashGridSearcher2>(nullptr);
 }
 
 inline void
 FinishPointParallelHashGridSearcher2Buffer(flatbuffers::FlatBufferBuilder &fbb,
-                                           flatbuffers::Offset<vox::fbs::PointParallelHashGridSearcher2> root) {
+                                           flatbuffers::Offset<vox::geometry::fbs::PointParallelHashGridSearcher2> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_POINTPARALLELHASHGRIDSEARCHER2_JET_FBS_H_

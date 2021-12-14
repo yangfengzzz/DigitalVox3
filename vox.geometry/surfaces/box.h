@@ -11,6 +11,7 @@
 #include "../surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D box geometry.
@@ -103,6 +104,7 @@ private:
   Vector<double, N> _upperCorner = (Vector<double, N>::makeConstant(1.0));
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_BOX_H_

@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Transform2, Constructors) {
   Transform2 t1;

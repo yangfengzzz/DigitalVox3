@@ -13,6 +13,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 inline fbs::Vector2UZ jetToFbs(const Vector2UZ &vec) { return fbs::Vector2UZ(vec.x, vec.y); }
 
@@ -58,5 +59,6 @@ void deserializeGrid(FbsGridList *fbsGridList, FactoryFunc factoryFunc, std::vec
 }
 
 } // namespace vox
+} // namespace geometry
 
 #endif // SRC_JET_FBS_HELPERS_H_

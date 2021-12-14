@@ -15,6 +15,7 @@
 #include "physics_animation.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Basic 3-D particle system solver.
@@ -216,6 +217,7 @@ public:
   [[nodiscard]] ParticleSystemSolver3Ptr makeShared() const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PARTICLE_SYSTEM_SOLVER3_H_

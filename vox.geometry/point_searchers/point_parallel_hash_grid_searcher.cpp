@@ -20,6 +20,7 @@
 #include "point_parallel_hash_grid_searcher.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 PointParallelHashGridSearcher<N>::PointParallelHashGridSearcher(const Vector<size_t, N> &resolution, double gridSpacing)
@@ -434,3 +435,4 @@ template class PointParallelHashGridSearcher<2>;
 template class PointParallelHashGridSearcher<3>;
 
 } // namespace vox
+} // namespace geometry

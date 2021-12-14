@@ -21,6 +21,7 @@
 #include "timer.h"
 
 namespace vox {
+namespace geometry {
 
 static const size_t kDefaultHashGridResolution = 64;
 
@@ -485,3 +486,4 @@ template class ParticleSystemData<2>;
 template class ParticleSystemData<3>;
 
 } // namespace vox
+} // namespace geometry

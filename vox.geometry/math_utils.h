@@ -12,6 +12,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Returns true if \p x and \p y are similar.
@@ -269,7 +270,8 @@ template <typename T>
 std::enable_if_t<std::is_arithmetic<T>::value, T> //
 monotonicCatmullRom(const T &f0, const T &f1, const T &f2, const T &f3, T t);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "math_utils-inl.h"
 

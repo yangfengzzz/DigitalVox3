@@ -16,6 +16,7 @@
 #include <fstream>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ImplicitTriangleMesh3, SignedDistance) {
   auto box = Box3::builder().withLowerCorner({0, 0, 0}).withUpperCorner({1, 1, 1}).makeShared();

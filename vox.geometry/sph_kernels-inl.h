@@ -16,6 +16,7 @@
 #include "sph_kernels.h"
 
 namespace vox {
+namespace geometry {
 
 // MARK: SphStdKernel2 implementations
 
@@ -208,6 +209,7 @@ inline double SphSpikyKernel3::secondDerivative(double distance) const {
   }
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_SPH_KERNELS_INL_H_

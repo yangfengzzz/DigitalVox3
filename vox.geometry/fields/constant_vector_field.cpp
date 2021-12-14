@@ -9,6 +9,7 @@
 #include "constant_vector_field.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> ConstantVectorField<N>::ConstantVectorField(const Vector<double, N> &value) : _value(value) {}
 
@@ -45,3 +46,4 @@ template class ConstantVectorField<2>;
 template class ConstantVectorField<3>;
 
 } // namespace vox
+} // namespace geometry

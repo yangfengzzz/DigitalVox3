@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(SphSolver2, UpdateEmpty) {
   // Empty solver test

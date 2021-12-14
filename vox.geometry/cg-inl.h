@@ -11,6 +11,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 template <typename BlasType, typename PrecondType>
 void pcg(const typename BlasType::MatrixType &A, const typename BlasType::VectorType &b,
@@ -93,6 +94,7 @@ void cg(const typename BlasType::MatrixType &A, const typename BlasType::VectorT
                              lastResidualNorm);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_CG_INL_H_

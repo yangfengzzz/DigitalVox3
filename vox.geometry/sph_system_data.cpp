@@ -22,6 +22,7 @@
 #include "sph_system_data.h"
 
 namespace vox {
+namespace geometry {
 
 // MARK: Serialization helpers
 
@@ -29,7 +30,7 @@ template <size_t N> struct GetFlatbuffersSphSystemData {};
 
 template <> struct GetFlatbuffersSphSystemData<2> {
   using Offset = flatbuffers::Offset<fbs::SphSystemData2>;
-  using BaseOffset = flatbuffers::Offset<vox::fbs::ParticleSystemData2>;
+  using BaseOffset = flatbuffers::Offset<vox::geometry::fbs::ParticleSystemData2>;
 
   static const fbs::SphSystemData2 *getSphSystemData(const uint8_t *data) { return fbs::GetSphSystemData2(data); }
 
@@ -43,7 +44,7 @@ template <> struct GetFlatbuffersSphSystemData<2> {
 
 template <> struct GetFlatbuffersSphSystemData<3> {
   using Offset = flatbuffers::Offset<fbs::SphSystemData3>;
-  using BaseOffset = flatbuffers::Offset<vox::fbs::ParticleSystemData3>;
+  using BaseOffset = flatbuffers::Offset<vox::geometry::fbs::ParticleSystemData3>;
 
   static const fbs::SphSystemData3 *getSphSystemData(const uint8_t *data) { return fbs::GetSphSystemData3(data); }
 
@@ -339,3 +340,4 @@ template class SphSystemData<2>;
 template class SphSystemData<3>;
 
 } // namespace vox
+} // namespace geometry

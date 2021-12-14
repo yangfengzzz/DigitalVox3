@@ -8,6 +8,7 @@
 #define INCLUDE_JET_DETAIL_RAY_INL_H_
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N> Ray<T, N>::Ray() {
   origin = VectorType{};
@@ -32,6 +33,7 @@ template <typename T, size_t N> typename Ray<T, N>::VectorType Ray<T, N>::pointA
   return origin + t * direction;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_RAY_INL_H_

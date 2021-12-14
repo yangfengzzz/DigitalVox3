@@ -15,6 +15,7 @@
 #include <utility> // just make cpplint happy..
 
 using namespace vox;
+using namespace geometry;
 
 void IterativeLevelSetSolver3::reinitialize(const ScalarGrid3 &inputSdf, double maxDistance, ScalarGrid3 *outputSdf) {
   const Vector3UZ size = inputSdf.dataSize();

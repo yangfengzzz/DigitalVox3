@@ -20,6 +20,7 @@
 #include <numeric>
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> PointKdTreeSearcher<N>::PointKdTreeSearcher(const PointKdTreeSearcher &other) { set(other); }
 
@@ -207,3 +208,4 @@ template class PointKdTreeSearcher<2>;
 template class PointKdTreeSearcher<3>;
 
 } // namespace vox
+} // namespace geometry

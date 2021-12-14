@@ -12,6 +12,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 static constexpr double kEps = 1e-10;
 

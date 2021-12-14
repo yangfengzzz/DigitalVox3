@@ -8,6 +8,7 @@
 #include "../basic_types_generated.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct PointKdTreeSearcherNode3;
@@ -34,8 +35,8 @@ STRUCT_END(PointKdTreeSearcherNode3, 24);
 
 struct PointKdTreeSearcher3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum { VT_POINTS = 4, VT_NODES = 6 };
-  const flatbuffers::Vector<const vox::fbs::Vector3D *> *points() const {
-    return GetPointer<const flatbuffers::Vector<const vox::fbs::Vector3D *> *>(VT_POINTS);
+  const flatbuffers::Vector<const vox::geometry::fbs::Vector3D *> *points() const {
+    return GetPointer<const flatbuffers::Vector<const vox::geometry::fbs::Vector3D *> *>(VT_POINTS);
   }
   const flatbuffers::Vector<const PointKdTreeSearcherNode3 *> *nodes() const {
     return GetPointer<const flatbuffers::Vector<const PointKdTreeSearcherNode3 *> *>(VT_NODES);
@@ -49,7 +50,7 @@ struct PointKdTreeSearcher3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table
 struct PointKdTreeSearcher3Builder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector3D *>> points) {
+  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector3D *>> points) {
     fbb_.AddOffset(PointKdTreeSearcher3::VT_POINTS, points);
   }
   void add_nodes(flatbuffers::Offset<flatbuffers::Vector<const PointKdTreeSearcherNode3 *>> nodes) {
@@ -66,7 +67,7 @@ struct PointKdTreeSearcher3Builder {
 
 inline flatbuffers::Offset<PointKdTreeSearcher3>
 CreatePointKdTreeSearcher3(flatbuffers::FlatBufferBuilder &_fbb,
-                           flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector3D *>> points = 0,
+                           flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector3D *>> points = 0,
                            flatbuffers::Offset<flatbuffers::Vector<const PointKdTreeSearcherNode3 *>> nodes = 0) {
   PointKdTreeSearcher3Builder builder_(_fbb);
   builder_.add_nodes(nodes);
@@ -76,26 +77,27 @@ CreatePointKdTreeSearcher3(flatbuffers::FlatBufferBuilder &_fbb,
 
 inline flatbuffers::Offset<PointKdTreeSearcher3>
 CreatePointKdTreeSearcher3Direct(flatbuffers::FlatBufferBuilder &_fbb,
-                                 const std::vector<const vox::fbs::Vector3D *> *points = nullptr,
+                                 const std::vector<const vox::geometry::fbs::Vector3D *> *points = nullptr,
                                  const std::vector<const PointKdTreeSearcherNode3 *> *nodes = nullptr) {
-  return vox::fbs::CreatePointKdTreeSearcher3(_fbb, points ? _fbb.CreateVector<const vox::fbs::Vector3D *>(*points) : 0,
+  return vox::geometry::fbs::CreatePointKdTreeSearcher3(_fbb, points ? _fbb.CreateVector<const vox::geometry::fbs::Vector3D *>(*points) : 0,
                                               nodes ? _fbb.CreateVector<const PointKdTreeSearcherNode3 *>(*nodes) : 0);
 }
 
-inline const vox::fbs::PointKdTreeSearcher3 *GetPointKdTreeSearcher3(const void *buf) {
-  return flatbuffers::GetRoot<vox::fbs::PointKdTreeSearcher3>(buf);
+inline const vox::geometry::fbs::PointKdTreeSearcher3 *GetPointKdTreeSearcher3(const void *buf) {
+  return flatbuffers::GetRoot<vox::geometry::fbs::PointKdTreeSearcher3>(buf);
 }
 
 inline bool VerifyPointKdTreeSearcher3Buffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::PointKdTreeSearcher3>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::PointKdTreeSearcher3>(nullptr);
 }
 
 inline void FinishPointKdTreeSearcher3Buffer(flatbuffers::FlatBufferBuilder &fbb,
-                                             flatbuffers::Offset<vox::fbs::PointKdTreeSearcher3> root) {
+                                             flatbuffers::Offset<vox::geometry::fbs::PointKdTreeSearcher3> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_POINTKDTREESEARCHER3_JET_FBS_H_

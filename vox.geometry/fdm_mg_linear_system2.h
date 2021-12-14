@@ -12,6 +12,7 @@
 #include "mg.h"
 
 namespace vox {
+namespace geometry {
 
 //! Multigrid-style 2-D FDM matrix.
 using FdmMgMatrix2 = MgMatrix<FdmBlas2>;
@@ -81,7 +82,8 @@ public:
                                     std::vector<Array2<T>> *levels);
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "fdm_mg_linear_system2-inl.h"
 

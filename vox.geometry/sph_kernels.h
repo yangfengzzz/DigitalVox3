@@ -16,6 +16,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Standard N-D SPH kernel function object.
@@ -203,7 +204,8 @@ using SphSpikyKernel2 = SphSpikyKernel<2>;
 
 using SphSpikyKernel3 = SphSpikyKernel<3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "sph_kernels-inl.h"
 

@@ -14,6 +14,7 @@
 #include "anisotropic_points_to_implicit2.h"
 
 using namespace vox;
+using namespace geometry;
 
 inline double p(double distance) {
   const double distanceSquared = distance * distance;

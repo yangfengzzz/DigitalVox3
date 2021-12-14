@@ -11,6 +11,7 @@
 #include "math_utils.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T> constexpr T NoOp<T>::operator()(const T &a) const { return a; }
 
@@ -50,6 +51,7 @@ template <typename T> constexpr T Clamp<T>::operator()(const T &a, const T &low,
   return clamp(a, low, high);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_FUNCTORS_INL_H_

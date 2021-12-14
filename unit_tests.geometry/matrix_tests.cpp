@@ -11,8 +11,10 @@
 #include <iostream>
 
 using namespace vox;
+using namespace geometry;
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t M, size_t N> std::ostream &operator<<(std::ostream &os, const Matrix<T, M, N> &mat) {
   for (size_t i = 0; i < mat.rows(); ++i) {
@@ -26,6 +28,7 @@ template <typename T, size_t M, size_t N> std::ostream &operator<<(std::ostream 
   }
   return os;
 }
+} // namespace geometry
 } // namespace vox
 
 TEST(Matrix, Constructors) {

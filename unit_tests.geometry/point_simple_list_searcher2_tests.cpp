@@ -10,6 +10,7 @@
 #include "../vox.geometry/point_searchers/point_simple_list_searcher.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(PointSimpleListSearcher2, ForEachNearbyPoint) {
   Array1<Vector2D> points = {Vector2D(1, 3), Vector2D(2, 5), Vector2D(-1, 3)};

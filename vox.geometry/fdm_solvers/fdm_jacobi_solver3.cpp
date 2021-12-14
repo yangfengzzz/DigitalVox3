@@ -10,6 +10,7 @@
 #include "fdm_jacobi_solver3.h"
 
 using namespace vox;
+using namespace geometry;
 
 FdmJacobiSolver3::FdmJacobiSolver3(unsigned int maxNumberOfIterations, unsigned int residualCheckInterval,
                                    double tolerance)

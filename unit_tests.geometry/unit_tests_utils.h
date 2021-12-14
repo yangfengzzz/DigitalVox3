@@ -58,6 +58,7 @@
   EXPECT_VECTOR3_NEAR((expected).upperCorner, (actual).upperCorner, eps);
 
 namespace vox {
+namespace geometry {
 
 const Vector2D *getSamplePoints2();
 
@@ -79,6 +80,7 @@ const char *getCubeTriMesh3x3x3Obj();
 
 const char *getSphereTriMesh5x5Obj();
 
+} // namespace geometry
 } // namespace vox
 
 #endif // SRC_TESTS_UNIT_TESTS_UNIT_TESTS_UTILS_H_

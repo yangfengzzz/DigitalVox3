@@ -9,6 +9,7 @@
 #include "../vox.geometry/surfaces/triangle3.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Triangle3, Constructors) {
   Triangle3 tri1;

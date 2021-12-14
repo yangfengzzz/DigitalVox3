@@ -15,6 +15,7 @@
 #include <numeric>
 
 namespace vox {
+namespace geometry {
 
 template <typename T, typename ME>
 MatrixCsrMatrixMul<T, ME>::MatrixCsrMatrixMul(const MatrixCsr<T> &m1, const ME &m2)
@@ -454,11 +455,11 @@ template <typename T> T MatrixCsr<T>::absmin() const {
       [&](size_t start, size_t end, T init) {
         T result = init;
         for (size_t i = start; i < end; ++i) {
-          result = vox::absmin(result, _nonZeros[i]);
+          result = vox::geometry::absmin(result, _nonZeros[i]);
         }
         return result;
       },
-      vox::absmin<T>);
+      vox::geometry::absmin<T>);
 }
 
 template <typename T> T MatrixCsr<T>::absmax() const {
@@ -467,11 +468,11 @@ template <typename T> T MatrixCsr<T>::absmax() const {
       [&](size_t start, size_t end, T init) {
         T result = init;
         for (size_t i = start; i < end; ++i) {
-          result = vox::absmax(result, _nonZeros[i]);
+          result = vox::geometry::absmax(result, _nonZeros[i]);
         }
         return result;
       },
-      vox::absmax<T>);
+      vox::geometry::absmax<T>);
 }
 
 template <typename T> T MatrixCsr<T>::trace() const {
@@ -677,6 +678,7 @@ template <typename T> MatrixCsr<T> operator/(const MatrixCsr<T> &a, T b) { retur
 
 template <typename T> MatrixCsr<T> operator/(T a, const MatrixCsr<T> &b) { return b.rdiv(a); }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_MATRIX_CSR_INL_H_

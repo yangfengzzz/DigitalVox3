@@ -22,6 +22,7 @@
 #define SRC_JET_MARCHING_CUBES_TABLE_H_
 
 namespace vox {
+namespace geometry {
 // vertexOffset lists the positions, relative to vertex0, of each of the 8
 // vertices of a cube
 static const float vertexOffset[8][3] = {{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 1.0f},
@@ -469,5 +470,6 @@ static const int triangleConnectionTable3D[256][16] = {
 };
 
 } // namespace vox
+} // namespace geometry
 
 #endif // SRC_JET_MARCHING_CUBES_TABLE_H_

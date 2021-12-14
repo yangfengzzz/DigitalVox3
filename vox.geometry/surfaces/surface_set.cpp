@@ -9,6 +9,7 @@
 #include "surface_set.h"
 
 namespace vox {
+namespace geometry {
 template <size_t N>
 SurfaceSet<N>::SurfaceSet(const ConstArrayView1<std::shared_ptr<Surface<N>>> &others, const Transform<N> &transform,
                           bool isNormalFlipped)
@@ -242,3 +243,4 @@ template class SurfaceSet<2>;
 template class SurfaceSet<3>;
 
 } // namespace vox
+} // namespace geometry

@@ -19,6 +19,7 @@
 #include "point_hash_grid_utils.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 PointHashGridSearcher<N>::PointHashGridSearcher(const Vector<size_t, N> &resolution, double gridSpacing) {
@@ -317,3 +318,4 @@ template class PointHashGridSearcher<2>;
 template class PointHashGridSearcher<3>;
 
 } // namespace vox
+} // namespace geometry

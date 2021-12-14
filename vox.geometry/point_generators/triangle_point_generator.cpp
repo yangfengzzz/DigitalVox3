@@ -8,6 +8,7 @@
 #include "../common.h"
 
 using namespace vox;
+using namespace geometry;
 
 void TrianglePointGenerator::forEachPoint(const BoundingBox2D &boundingBox, double spacing,
                                           const std::function<bool(const Vector2D &)> &callback) const {

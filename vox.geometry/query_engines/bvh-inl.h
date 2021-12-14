@@ -14,6 +14,7 @@
 #include <numeric>
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N> Bvh<T, N>::Node::Node() : flags(0) { child = kMaxSize; }
 
@@ -525,6 +526,7 @@ size_t Bvh<T, N>::qsplit(size_t *itemIndices, size_t numItems, double pivot, uin
   return ret;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_BVH_INL_H_

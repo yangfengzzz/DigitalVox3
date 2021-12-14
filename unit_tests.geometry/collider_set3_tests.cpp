@@ -11,6 +11,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ColliderSet3, Constructors) {
   auto box1 = Box3::builder().withLowerCorner({0, 1, 2}).withUpperCorner({1, 2, 3}).makeShared();

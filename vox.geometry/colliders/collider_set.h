@@ -12,6 +12,7 @@
 #include "../surfaces/surface_set.h"
 
 namespace vox {
+namespace geometry {
 
 //! Collection of N-D colliders
 template <size_t N> class ColliderSet final : public Collider<N> {
@@ -76,6 +77,7 @@ private:
   Array1<std::shared_ptr<Collider<N>>> _colliders;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_COLLIDER_SET_H_

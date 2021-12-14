@@ -10,6 +10,7 @@
 #include "../surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D triangle geometry.
@@ -108,6 +109,7 @@ private:
   std::array<Vector2D, 3> _uvs;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TRIANGLE3_H_

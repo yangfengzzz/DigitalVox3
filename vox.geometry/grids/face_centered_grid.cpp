@@ -11,6 +11,7 @@
 #include "face_centered_grid.h"
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -522,3 +523,4 @@ template class FaceCenteredGrid<2>;
 template class FaceCenteredGrid<3>;
 
 } // namespace vox
+} // namespace geometry

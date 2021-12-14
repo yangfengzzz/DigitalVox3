@@ -12,6 +12,7 @@
 #include "mg.h"
 
 namespace vox {
+namespace geometry {
 
 //! Multigrid-style 3-D FDM matrix.
 using FdmMgMatrix3 = MgMatrix<FdmBlas3>;
@@ -81,7 +82,8 @@ public:
                                     std::vector<Array3<T>> *levels);
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "fdm_mg_linear_system3-inl.h"
 

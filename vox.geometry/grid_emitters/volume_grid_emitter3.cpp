@@ -16,6 +16,7 @@
 #include <utility>
 
 using namespace vox;
+using namespace geometry;
 
 VolumeGridEmitter3::VolumeGridEmitter3(ImplicitSurface3Ptr sourceRegion, bool isOneShot)
     : _sourceRegion(std::move(sourceRegion)), _isOneShot(isOneShot) {}

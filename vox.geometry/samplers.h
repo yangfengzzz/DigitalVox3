@@ -10,6 +10,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Returns randomly sampled direction within a cone.
@@ -92,7 +93,8 @@ template <typename T> inline Vector3<T> uniformSampleSphere(T u1, T u2);
 //!
 template <typename T> inline Vector2<T> uniformSampleDisk(T u1, T u2);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "samplers-inl.h"
 

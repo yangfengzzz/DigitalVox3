@@ -8,6 +8,7 @@
 #include "../basic_types_generated.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct PointHashGridSearcherBucket2;
@@ -51,22 +52,22 @@ CreatePointHashGridSearcherBucket2(flatbuffers::FlatBufferBuilder &_fbb,
 inline flatbuffers::Offset<PointHashGridSearcherBucket2>
 CreatePointHashGridSearcherBucket2Direct(flatbuffers::FlatBufferBuilder &_fbb,
                                          const std::vector<uint64_t> *data = nullptr) {
-  return vox::fbs::CreatePointHashGridSearcherBucket2(_fbb, data ? _fbb.CreateVector<uint64_t>(*data) : 0);
+  return vox::geometry::fbs::CreatePointHashGridSearcherBucket2(_fbb, data ? _fbb.CreateVector<uint64_t>(*data) : 0);
 }
 
 struct PointHashGridSearcher2 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum { VT_GRIDSPACING = 4, VT_RESOLUTION = 6, VT_POINTS = 8, VT_BUCKETS = 10 };
   double gridSpacing() const { return GetField<double>(VT_GRIDSPACING, 0.0); }
-  const vox::fbs::Vector2UZ *resolution() const { return GetStruct<const vox::fbs::Vector2UZ *>(VT_RESOLUTION); }
-  const flatbuffers::Vector<const vox::fbs::Vector2D *> *points() const {
-    return GetPointer<const flatbuffers::Vector<const vox::fbs::Vector2D *> *>(VT_POINTS);
+  const vox::geometry::fbs::Vector2UZ *resolution() const { return GetStruct<const vox::geometry::fbs::Vector2UZ *>(VT_RESOLUTION); }
+  const flatbuffers::Vector<const vox::geometry::fbs::Vector2D *> *points() const {
+    return GetPointer<const flatbuffers::Vector<const vox::geometry::fbs::Vector2D *> *>(VT_POINTS);
   }
   const flatbuffers::Vector<flatbuffers::Offset<PointHashGridSearcherBucket2>> *buckets() const {
     return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<PointHashGridSearcherBucket2>> *>(VT_BUCKETS);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) && VerifyField<double>(verifier, VT_GRIDSPACING) &&
-           VerifyField<vox::fbs::Vector2UZ>(verifier, VT_RESOLUTION) && VerifyOffset(verifier, VT_POINTS) &&
+           VerifyField<vox::geometry::fbs::Vector2UZ>(verifier, VT_RESOLUTION) && VerifyOffset(verifier, VT_POINTS) &&
            verifier.Verify(points()) && VerifyOffset(verifier, VT_BUCKETS) && verifier.Verify(buckets()) &&
            verifier.VerifyVectorOfTables(buckets()) && verifier.EndTable();
   }
@@ -78,10 +79,10 @@ struct PointHashGridSearcher2Builder {
   void add_gridSpacing(double gridSpacing) {
     fbb_.AddElement<double>(PointHashGridSearcher2::VT_GRIDSPACING, gridSpacing, 0.0);
   }
-  void add_resolution(const vox::fbs::Vector2UZ *resolution) {
+  void add_resolution(const vox::geometry::fbs::Vector2UZ *resolution) {
     fbb_.AddStruct(PointHashGridSearcher2::VT_RESOLUTION, resolution);
   }
-  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector2D *>> points) {
+  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector2D *>> points) {
     fbb_.AddOffset(PointHashGridSearcher2::VT_POINTS, points);
   }
   void
@@ -98,8 +99,8 @@ struct PointHashGridSearcher2Builder {
 };
 
 inline flatbuffers::Offset<PointHashGridSearcher2> CreatePointHashGridSearcher2(
-    flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0, const vox::fbs::Vector2UZ *resolution = 0,
-    flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector2D *>> points = 0,
+    flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0, const vox::geometry::fbs::Vector2UZ *resolution = 0,
+    flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector2D *>> points = 0,
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<PointHashGridSearcherBucket2>>> buckets = 0) {
   PointHashGridSearcher2Builder builder_(_fbb);
   builder_.add_gridSpacing(gridSpacing);
@@ -110,28 +111,29 @@ inline flatbuffers::Offset<PointHashGridSearcher2> CreatePointHashGridSearcher2(
 }
 
 inline flatbuffers::Offset<PointHashGridSearcher2> CreatePointHashGridSearcher2Direct(
-    flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0, const vox::fbs::Vector2UZ *resolution = 0,
-    const std::vector<const vox::fbs::Vector2D *> *points = nullptr,
+    flatbuffers::FlatBufferBuilder &_fbb, double gridSpacing = 0.0, const vox::geometry::fbs::Vector2UZ *resolution = 0,
+    const std::vector<const vox::geometry::fbs::Vector2D *> *points = nullptr,
     const std::vector<flatbuffers::Offset<PointHashGridSearcherBucket2>> *buckets = nullptr) {
-  return vox::fbs::CreatePointHashGridSearcher2(
-      _fbb, gridSpacing, resolution, points ? _fbb.CreateVector<const vox::fbs::Vector2D *>(*points) : 0,
+  return vox::geometry::fbs::CreatePointHashGridSearcher2(
+      _fbb, gridSpacing, resolution, points ? _fbb.CreateVector<const vox::geometry::fbs::Vector2D *>(*points) : 0,
       buckets ? _fbb.CreateVector<flatbuffers::Offset<PointHashGridSearcherBucket2>>(*buckets) : 0);
 }
 
-inline const vox::fbs::PointHashGridSearcher2 *GetPointHashGridSearcher2(const void *buf) {
-  return flatbuffers::GetRoot<vox::fbs::PointHashGridSearcher2>(buf);
+inline const vox::geometry::fbs::PointHashGridSearcher2 *GetPointHashGridSearcher2(const void *buf) {
+  return flatbuffers::GetRoot<vox::geometry::fbs::PointHashGridSearcher2>(buf);
 }
 
 inline bool VerifyPointHashGridSearcher2Buffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::PointHashGridSearcher2>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::PointHashGridSearcher2>(nullptr);
 }
 
 inline void FinishPointHashGridSearcher2Buffer(flatbuffers::FlatBufferBuilder &fbb,
-                                               flatbuffers::Offset<vox::fbs::PointHashGridSearcher2> root) {
+                                               flatbuffers::Offset<vox::geometry::fbs::PointHashGridSearcher2> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_POINTHASHGRIDSEARCHER2_JET_FBS_H_

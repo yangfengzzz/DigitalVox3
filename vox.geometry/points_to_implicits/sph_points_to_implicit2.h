@@ -10,6 +10,7 @@
 #include "../points_to_implicit2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D points-to-implicit converter based on standard SPH kernel.
@@ -36,6 +37,7 @@ private:
 //! Shared pointer type for SphPointsToImplicit2 class.
 using SphPointsToImplicit2Ptr = std::shared_ptr<SphPointsToImplicit2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPH_POINTS_TO_IMPLICIT2_H_

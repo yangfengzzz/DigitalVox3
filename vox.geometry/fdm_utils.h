@@ -13,6 +13,7 @@
 #include <iostream>
 
 namespace vox {
+namespace geometry {
 
 //! \brief Returns 2-D gradient vector from given 2-D scalar grid-like array
 //!        \p data, \p gridSpacing, and array index (\p i, \p j).
@@ -102,6 +103,7 @@ template <> struct GetFdmUtils<3> {
   }
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_UTILS_H_

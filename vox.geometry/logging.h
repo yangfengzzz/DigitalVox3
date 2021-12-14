@@ -12,6 +12,7 @@
 #include <string>
 
 namespace vox {
+namespace geometry {
 
 //! Level of the logging.
 //! All < Debug < Info < Warn < Error < Off.
@@ -110,6 +111,7 @@ extern Logger debugLogger;
   (Logger(LoggingLevel::Debug) << Logging::getHeader(LoggingLevel::Debug) << "[" << __FILE__ << ":" << __LINE__        \
                                << " (" << __func__ << ")] ")
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_LOGGING_H_

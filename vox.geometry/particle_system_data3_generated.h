@@ -8,6 +8,7 @@
 #include "basic_types_generated.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct ScalarParticleData3;
@@ -54,13 +55,13 @@ CreateScalarParticleData3(flatbuffers::FlatBufferBuilder &_fbb,
 
 inline flatbuffers::Offset<ScalarParticleData3>
 CreateScalarParticleData3Direct(flatbuffers::FlatBufferBuilder &_fbb, const std::vector<double> *data = nullptr) {
-  return vox::fbs::CreateScalarParticleData3(_fbb, data ? _fbb.CreateVector<double>(*data) : 0);
+  return vox::geometry::fbs::CreateScalarParticleData3(_fbb, data ? _fbb.CreateVector<double>(*data) : 0);
 }
 
 struct VectorParticleData3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum { VT_DATA = 4 };
-  const flatbuffers::Vector<const vox::fbs::Vector3D *> *data() const {
-    return GetPointer<const flatbuffers::Vector<const vox::fbs::Vector3D *> *>(VT_DATA);
+  const flatbuffers::Vector<const vox::geometry::fbs::Vector3D *> *data() const {
+    return GetPointer<const flatbuffers::Vector<const vox::geometry::fbs::Vector3D *> *>(VT_DATA);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) && VerifyOffset(verifier, VT_DATA) && verifier.Verify(data()) &&
@@ -71,7 +72,7 @@ struct VectorParticleData3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table 
 struct VectorParticleData3Builder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_data(flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector3D *>> data) {
+  void add_data(flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector3D *>> data) {
     fbb_.AddOffset(VectorParticleData3::VT_DATA, data);
   }
   VectorParticleData3Builder(flatbuffers::FlatBufferBuilder &_fbb) : fbb_(_fbb) { start_ = fbb_.StartTable(); }
@@ -85,7 +86,7 @@ struct VectorParticleData3Builder {
 
 inline flatbuffers::Offset<VectorParticleData3>
 CreateVectorParticleData3(flatbuffers::FlatBufferBuilder &_fbb,
-                          flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector3D *>> data = 0) {
+                          flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector3D *>> data = 0) {
   VectorParticleData3Builder builder_(_fbb);
   builder_.add_data(data);
   return builder_.Finish();
@@ -93,8 +94,8 @@ CreateVectorParticleData3(flatbuffers::FlatBufferBuilder &_fbb,
 
 inline flatbuffers::Offset<VectorParticleData3>
 CreateVectorParticleData3Direct(flatbuffers::FlatBufferBuilder &_fbb,
-                                const std::vector<const vox::fbs::Vector3D *> *data = nullptr) {
-  return vox::fbs::CreateVectorParticleData3(_fbb, data ? _fbb.CreateVector<const vox::fbs::Vector3D *>(*data) : 0);
+                                const std::vector<const vox::geometry::fbs::Vector3D *> *data = nullptr) {
+  return vox::geometry::fbs::CreateVectorParticleData3(_fbb, data ? _fbb.CreateVector<const vox::geometry::fbs::Vector3D *>(*data) : 0);
 }
 
 struct PointNeighborSearcherSerialized3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -140,7 +141,7 @@ CreatePointNeighborSearcherSerialized3(flatbuffers::FlatBufferBuilder &_fbb,
 inline flatbuffers::Offset<PointNeighborSearcherSerialized3>
 CreatePointNeighborSearcherSerialized3Direct(flatbuffers::FlatBufferBuilder &_fbb, const char *type = nullptr,
                                              const std::vector<uint8_t> *data = nullptr) {
-  return vox::fbs::CreatePointNeighborSearcherSerialized3(_fbb, type ? _fbb.CreateString(type) : 0,
+  return vox::geometry::fbs::CreatePointNeighborSearcherSerialized3(_fbb, type ? _fbb.CreateString(type) : 0,
                                                           data ? _fbb.CreateVector<uint8_t>(*data) : 0);
 }
 
@@ -180,7 +181,7 @@ CreateParticleNeighborList3(flatbuffers::FlatBufferBuilder &_fbb,
 
 inline flatbuffers::Offset<ParticleNeighborList3>
 CreateParticleNeighborList3Direct(flatbuffers::FlatBufferBuilder &_fbb, const std::vector<uint64_t> *data = nullptr) {
-  return vox::fbs::CreateParticleNeighborList3(_fbb, data ? _fbb.CreateVector<uint64_t>(*data) : 0);
+  return vox::geometry::fbs::CreateParticleNeighborList3(_fbb, data ? _fbb.CreateVector<uint64_t>(*data) : 0);
 }
 
 struct ParticleSystemData3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
@@ -288,7 +289,7 @@ inline flatbuffers::Offset<ParticleSystemData3> CreateParticleSystemData3Direct(
     const std::vector<flatbuffers::Offset<VectorParticleData3>> *vectorDataList = nullptr,
     flatbuffers::Offset<PointNeighborSearcherSerialized3> neighborSearcher = 0,
     const std::vector<flatbuffers::Offset<ParticleNeighborList3>> *neighborLists = nullptr) {
-  return vox::fbs::CreateParticleSystemData3(
+  return vox::geometry::fbs::CreateParticleSystemData3(
       _fbb, radius, mass, positionIdx, velocityIdx, forceIdx,
       scalarDataList ? _fbb.CreateVector<flatbuffers::Offset<ScalarParticleData3>>(*scalarDataList) : 0,
       vectorDataList ? _fbb.CreateVector<flatbuffers::Offset<VectorParticleData3>>(*vectorDataList) : 0,
@@ -296,20 +297,21 @@ inline flatbuffers::Offset<ParticleSystemData3> CreateParticleSystemData3Direct(
       neighborLists ? _fbb.CreateVector<flatbuffers::Offset<ParticleNeighborList3>>(*neighborLists) : 0);
 }
 
-inline const vox::fbs::ParticleSystemData3 *GetParticleSystemData3(const void *buf) {
-  return flatbuffers::GetRoot<vox::fbs::ParticleSystemData3>(buf);
+inline const vox::geometry::fbs::ParticleSystemData3 *GetParticleSystemData3(const void *buf) {
+  return flatbuffers::GetRoot<vox::geometry::fbs::ParticleSystemData3>(buf);
 }
 
 inline bool VerifyParticleSystemData3Buffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::ParticleSystemData3>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::ParticleSystemData3>(nullptr);
 }
 
 inline void FinishParticleSystemData3Buffer(flatbuffers::FlatBufferBuilder &fbb,
-                                            flatbuffers::Offset<vox::fbs::ParticleSystemData3> root) {
+                                            flatbuffers::Offset<vox::geometry::fbs::ParticleSystemData3> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_PARTICLESYSTEMDATA3_JET_FBS_H_

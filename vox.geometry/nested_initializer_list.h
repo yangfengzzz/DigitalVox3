@@ -35,6 +35,7 @@
 #include <initializer_list>
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N> struct NestedInitializerLists {
   using type = std::initializer_list<typename NestedInitializerLists<T, N - 1>::type>;
@@ -46,6 +47,7 @@ template <typename T> struct NestedInitializerLists<T, 0> { using type = T; };
 
 template <typename T, size_t N> using NestedInitializerListsT = typename NestedInitializerLists<T, N>::type;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_NESTED_INITIALIZER_LIST_H_

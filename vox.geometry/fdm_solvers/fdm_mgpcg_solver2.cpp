@@ -13,6 +13,7 @@
 #include <utility>
 
 using namespace vox;
+using namespace geometry;
 
 void FdmMgpcgSolver2::Preconditioner::build(FdmMgLinearSystem2 *system_, MgParameters<FdmBlas2> mgParams_) {
   system = system_;

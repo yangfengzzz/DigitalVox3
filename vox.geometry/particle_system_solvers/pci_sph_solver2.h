@@ -10,6 +10,7 @@
 #include "sph_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D PCISPH solver.
@@ -106,6 +107,7 @@ public:
   [[nodiscard]] PciSphSolver2Ptr makeShared() const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_PCI_SPH_SOLVER2_H_

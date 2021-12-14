@@ -11,6 +11,7 @@
 #include <algorithm>
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 Surface<N>::Surface(const Transform<N> &transform_, bool isNormalFlipped_)
@@ -92,3 +93,4 @@ template class Surface<2>;
 template class Surface<3>;
 
 } // namespace vox
+} // namespace geometry

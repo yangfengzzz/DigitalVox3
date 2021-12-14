@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Pde, Upwind1) {
   double values[3] = {0.0, 1.0, -1.0};

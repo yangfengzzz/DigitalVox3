@@ -11,6 +11,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ParticleSystemData3, Constructors) {
   ParticleSystemData3 particleSystem;

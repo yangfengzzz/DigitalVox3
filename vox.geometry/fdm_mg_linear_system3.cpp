@@ -9,6 +9,7 @@
 #include "fdm_mg_linear_system3.h"
 
 using namespace vox;
+using namespace geometry;
 
 //
 

@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Plane2, Builder) {
   Plane2 plane = Plane2::builder().withNormal({1, 0}).withPoint({2, 3}).build();

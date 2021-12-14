@@ -10,6 +10,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 ParticleEmitterSet2::ParticleEmitterSet2(std::vector<ParticleEmitter2Ptr> emitters) : _emitters(std::move(emitters)) {}
 

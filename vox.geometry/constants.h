@@ -12,6 +12,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 // MARK: Zero
 
@@ -324,6 +325,7 @@ constexpr int kDirectionFront = 1 << 5;
 constexpr int kDirectionAll =
     kDirectionLeft | kDirectionRight | kDirectionDown | kDirectionUp | kDirectionBack | kDirectionFront;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CONSTANTS_H_

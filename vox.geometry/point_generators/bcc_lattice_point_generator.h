@@ -10,6 +10,7 @@
 #include "../point_generator3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Body-centered lattice points generator.
@@ -33,6 +34,7 @@ public:
 //! Shared pointer type for the BccLatticePointGenerator.
 using BccLatticePointGeneratorPtr = std::shared_ptr<BccLatticePointGenerator>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_BCC_LATTICE_POINT_GENERATOR_H_

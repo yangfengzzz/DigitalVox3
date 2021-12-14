@@ -6,6 +6,7 @@
 #include "../vox.geometry/marching_cubes.h"
 #include <gtest/gtest.h>
 using namespace vox;
+using namespace geometry;
 
 TEST(MarchingCubes, Connectivity) {
   TriangleMesh3 triMesh;

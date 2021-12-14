@@ -9,6 +9,7 @@
 #include "implicit_surface.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 ImplicitSurface<N>::ImplicitSurface(const Transform<N> &transform, bool isNormalFlipped)
@@ -30,3 +31,4 @@ template class ImplicitSurface<2>;
 template class ImplicitSurface<3>;
 
 } // namespace vox
+} // namespace geometry

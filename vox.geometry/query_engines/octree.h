@@ -12,6 +12,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Generic octree data structure.
@@ -156,7 +157,8 @@ private:
                                                          ClosestIntersectionQueryResult3<T> best) const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "octree-inl.h"
 

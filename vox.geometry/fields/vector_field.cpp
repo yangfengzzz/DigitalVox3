@@ -9,6 +9,7 @@
 #include "vector_field.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> double VectorField<N>::divergence(const Vector<double, N> &) const { return 0.0; }
 
@@ -26,3 +27,4 @@ template class VectorField<2>;
 template class VectorField<3>;
 
 } // namespace vox
+} // namespace geometry

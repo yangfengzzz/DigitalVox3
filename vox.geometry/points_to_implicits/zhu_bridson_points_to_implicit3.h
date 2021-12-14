@@ -10,6 +10,7 @@
 #include "../points_to_implicit3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D points-to-implicit converter based on Zhu and Bridson's method.
@@ -35,6 +36,7 @@ private:
 //! Shared pointer type for ZhuBridsonPointsToImplicit3 class
 using ZhuBridsonPointsToImplicit3Ptr = std::shared_ptr<ZhuBridsonPointsToImplicit3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ZHU_BRIDSON_POINTS_TO_IMPLICIT3_H_

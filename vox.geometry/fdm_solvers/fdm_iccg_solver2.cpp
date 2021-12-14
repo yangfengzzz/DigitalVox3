@@ -10,6 +10,7 @@
 #include "fdm_iccg_solver2.h"
 
 using namespace vox;
+using namespace geometry;
 
 void FdmIccgSolver2::Preconditioner::build(const FdmMatrix2 &matrix) {
   Vector2UZ size = matrix.size();

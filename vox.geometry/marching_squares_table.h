@@ -8,6 +8,7 @@
 #define SRC_JET_MARCHING_SQUARES_TABLE_H_
 
 namespace vox {
+namespace geometry {
 
 // VertexOffset lists the positions, relative to vertex0, of each of the 4
 // vertices of a Rect
@@ -72,5 +73,6 @@ static const int triangleConnectionTable2D[16][13] = {
 };
 
 } // namespace vox
+} // namespace geometry
 
 #endif // SRC_JET_MARCHING_SQUARES_TABLE_H_

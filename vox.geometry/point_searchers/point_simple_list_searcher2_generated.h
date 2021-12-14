@@ -8,14 +8,15 @@
 #include "../basic_types_generated.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct PointSimpleListSearcher2;
 
 struct PointSimpleListSearcher2 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum { VT_POINTS = 4 };
-  const flatbuffers::Vector<const vox::fbs::Vector2D *> *points() const {
-    return GetPointer<const flatbuffers::Vector<const vox::fbs::Vector2D *> *>(VT_POINTS);
+  const flatbuffers::Vector<const vox::geometry::fbs::Vector2D *> *points() const {
+    return GetPointer<const flatbuffers::Vector<const vox::geometry::fbs::Vector2D *> *>(VT_POINTS);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) && VerifyOffset(verifier, VT_POINTS) && verifier.Verify(points()) &&
@@ -26,7 +27,7 @@ struct PointSimpleListSearcher2 FLATBUFFERS_FINAL_CLASS : private flatbuffers::T
 struct PointSimpleListSearcher2Builder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector2D *>> points) {
+  void add_points(flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector2D *>> points) {
     fbb_.AddOffset(PointSimpleListSearcher2::VT_POINTS, points);
   }
   PointSimpleListSearcher2Builder(flatbuffers::FlatBufferBuilder &_fbb) : fbb_(_fbb) { start_ = fbb_.StartTable(); }
@@ -40,7 +41,7 @@ struct PointSimpleListSearcher2Builder {
 
 inline flatbuffers::Offset<PointSimpleListSearcher2>
 CreatePointSimpleListSearcher2(flatbuffers::FlatBufferBuilder &_fbb,
-                               flatbuffers::Offset<flatbuffers::Vector<const vox::fbs::Vector2D *>> points = 0) {
+                               flatbuffers::Offset<flatbuffers::Vector<const vox::geometry::fbs::Vector2D *>> points = 0) {
   PointSimpleListSearcher2Builder builder_(_fbb);
   builder_.add_points(points);
   return builder_.Finish();
@@ -48,25 +49,26 @@ CreatePointSimpleListSearcher2(flatbuffers::FlatBufferBuilder &_fbb,
 
 inline flatbuffers::Offset<PointSimpleListSearcher2>
 CreatePointSimpleListSearcher2Direct(flatbuffers::FlatBufferBuilder &_fbb,
-                                     const std::vector<const vox::fbs::Vector2D *> *points = nullptr) {
-  return vox::fbs::CreatePointSimpleListSearcher2(_fbb,
-                                                  points ? _fbb.CreateVector<const vox::fbs::Vector2D *>(*points) : 0);
+                                     const std::vector<const vox::geometry::fbs::Vector2D *> *points = nullptr) {
+  return vox::geometry::fbs::CreatePointSimpleListSearcher2(_fbb,
+                                                  points ? _fbb.CreateVector<const vox::geometry::fbs::Vector2D *>(*points) : 0);
 }
 
-inline const vox::fbs::PointSimpleListSearcher2 *GetPointSimpleListSearcher2(const void *buf) {
-  return flatbuffers::GetRoot<vox::fbs::PointSimpleListSearcher2>(buf);
+inline const vox::geometry::fbs::PointSimpleListSearcher2 *GetPointSimpleListSearcher2(const void *buf) {
+  return flatbuffers::GetRoot<vox::geometry::fbs::PointSimpleListSearcher2>(buf);
 }
 
 inline bool VerifyPointSimpleListSearcher2Buffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::PointSimpleListSearcher2>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::PointSimpleListSearcher2>(nullptr);
 }
 
 inline void FinishPointSimpleListSearcher2Buffer(flatbuffers::FlatBufferBuilder &fbb,
-                                                 flatbuffers::Offset<vox::fbs::PointSimpleListSearcher2> root) {
+                                                 flatbuffers::Offset<vox::geometry::fbs::PointSimpleListSearcher2> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_POINTSIMPLELISTSEARCHER2_JET_FBS_H_

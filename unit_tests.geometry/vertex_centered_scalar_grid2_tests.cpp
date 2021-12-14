@@ -9,6 +9,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(VertexCenteredScalarGrid2, Constructors) {
   // Default constructors

@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(FdmMgpcgSolver2, Solve) {
   size_t levels = 6;

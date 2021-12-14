@@ -11,6 +11,7 @@
 #include "vertex_centered_vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 VertexCenteredVectorGrid<N>::VertexCenteredVectorGrid(const Vector<size_t, N> &resolution,
@@ -131,3 +132,4 @@ template class VertexCenteredVectorGrid<2>;
 template class VertexCenteredVectorGrid<3>;
 
 } // namespace vox
+} // namespace geometry

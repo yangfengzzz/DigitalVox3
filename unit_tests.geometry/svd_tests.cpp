@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Svd, Float) {
   MatrixMxNF a{{0, 1}, {1, 1}, {1, 0}};

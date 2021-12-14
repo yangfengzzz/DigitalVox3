@@ -11,6 +11,7 @@
 #include "../point_neighbor_searcher.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Simple ad-hoc N-D point searcher.
@@ -138,6 +139,7 @@ public:
   std::shared_ptr<PointNeighborSearcher<N>> buildPointNeighborSearcher() const override;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_SIMPLE_LIST_SEARCHER_H_

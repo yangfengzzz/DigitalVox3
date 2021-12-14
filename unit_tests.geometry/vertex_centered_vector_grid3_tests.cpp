@@ -9,6 +9,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(VertexCenteredVectorGrid3, Constructors) {
   // Default constructors

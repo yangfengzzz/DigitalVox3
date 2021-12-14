@@ -9,6 +9,7 @@
 #include "timer.h"
 
 using namespace vox;
+using namespace geometry;
 
 Timer::Timer() { _startingPoint = std::chrono::high_resolution_clock::now(); }
 

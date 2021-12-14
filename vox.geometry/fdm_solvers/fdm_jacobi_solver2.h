@@ -10,6 +10,7 @@
 #include "../fdm_linear_system_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 //! \brief 2-D finite difference-type linear system solver using Jacobi method.
 class FdmJacobiSolver2 final : public FdmLinearSystemSolver2 {
@@ -63,6 +64,7 @@ private:
 //! Shared pointer type for the FdmJacobiSolver2.
 using FdmJacobiSolver2Ptr = std::shared_ptr<FdmJacobiSolver2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_JACOBI_SOLVER2_H_

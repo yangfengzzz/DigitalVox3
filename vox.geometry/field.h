@@ -10,6 +10,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for N-D fields.
 template <size_t N> class Field {
@@ -31,6 +32,7 @@ using Field2Ptr = std::shared_ptr<Field2>;
 //! Shared pointer type for Field3.
 using Field3Ptr = std::shared_ptr<Field3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FIELD_H_

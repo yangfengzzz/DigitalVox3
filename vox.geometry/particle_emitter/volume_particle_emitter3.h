@@ -17,6 +17,7 @@
 #include <random>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D volumetric particle emitter.
@@ -238,6 +239,7 @@ private:
   uint32_t _seed = 0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_VOLUME_PARTICLE_EMITTER3_H_

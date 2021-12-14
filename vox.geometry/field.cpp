@@ -9,9 +9,11 @@
 #include "field.h"
 
 namespace vox {
+namespace geometry {
 
 template class Field<2>;
 
 template class Field<3>;
 
 } // namespace vox
+} // namespace geometry

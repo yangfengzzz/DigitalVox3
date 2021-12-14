@@ -10,6 +10,7 @@
 #include "surface.h"
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for N-D implicit surface.
 template <size_t N> class ImplicitSurface : public Surface<N> {
@@ -50,6 +51,7 @@ using ImplicitSurface2Ptr = std::shared_ptr<ImplicitSurface2>;
 //! Shared pointer type for the ImplicitSurface3.
 using ImplicitSurface3Ptr = std::shared_ptr<ImplicitSurface3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_IMPLICIT_SURFACE_H_

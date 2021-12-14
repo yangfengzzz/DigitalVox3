@@ -12,6 +12,7 @@
 #include "../vox.geometry/surfaces/sphere.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(CustomImplicitSurface3, SignedDistance) {
   CustomImplicitSurface3 cis([](const Vector3D &pt) { return (pt - Vector3D(0.5, 0.5, 0.5)).length() - 0.25; },

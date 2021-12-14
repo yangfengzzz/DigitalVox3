@@ -9,6 +9,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(SphSystemData2, Parameters) {
   SphSystemData2 data;

@@ -12,6 +12,7 @@
 #include "grids/scalar_grid.h"
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for 3-D level set solver.
 class LevelSetSolver3 {
@@ -82,6 +83,7 @@ public:
 //! Shared pointer type for the LevelSetSolver3.
 using LevelSetSolver3Ptr = std::shared_ptr<LevelSetSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_LEVEL_SET_SOLVER3_H_

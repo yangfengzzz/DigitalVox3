@@ -10,6 +10,7 @@
 #include "fdm_mg_linear_system3.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T>
 void FdmMgUtils3::resizeArrayWithCoarsest(const Vector3UZ &coarsestResolution, size_t numberOfLevels,
@@ -47,6 +48,7 @@ void FdmMgUtils3::resizeArrayWithFinest(const Vector3UZ &finestResolution, size_
   resizeArrayWithCoarsest(res, i, levels);
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_MG_LINEAR_SYSTEM3_INL_H_

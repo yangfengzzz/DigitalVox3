@@ -35,6 +35,7 @@
 #include <algorithm>
 
 namespace vox {
+namespace geometry {
 
 template <typename T> inline Vector3<T> uniformSampleCone(T u1, T u2, const Vector3<T> &axis, T angle) {
   T cosAngle_2 = std::cos(angle / 2);
@@ -84,6 +85,7 @@ template <typename T> inline Vector2<T> uniformSampleDisk(T u1, T u2) {
   return Vector2<T>(r * std::cos(theta), r * std::sin(theta));
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_SAMPLERS_INL_H_

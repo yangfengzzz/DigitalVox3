@@ -10,6 +10,7 @@
 #include "../fdm_linear_system_solver3.h"
 
 namespace vox {
+namespace geometry {
 
 //! \brief 3-D finite difference-type linear system solver using conjugate
 //!        gradient.
@@ -61,6 +62,7 @@ private:
 //! Shared pointer type for the FdmCgSolver3.
 using FdmCgSolver3Ptr = std::shared_ptr<FdmCgSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_CG_SOLVER3_H_

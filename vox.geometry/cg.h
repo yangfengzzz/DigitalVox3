@@ -10,6 +10,7 @@
 #include "blas.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief No-op preconditioner for conjugate gradient.
@@ -41,7 +42,8 @@ void pcg(const typename BlasType::MatrixType &A, const typename BlasType::Vector
          typename BlasType::VectorType *r, typename BlasType::VectorType *d, typename BlasType::VectorType *q,
          typename BlasType::VectorType *s, unsigned int *lastNumberOfIterations, double *lastResidualNorm);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "cg-inl.h"
 

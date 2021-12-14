@@ -8,10 +8,12 @@
 #define INCLUDE_JET_TYPE_HELPERS_H_
 
 namespace vox {
+namespace geometry {
 
 //! Returns the type of the value itself.
 template <typename T> struct GetScalarType { using value = T; };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TYPE_HELPERS_H_

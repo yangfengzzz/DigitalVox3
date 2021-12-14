@@ -9,6 +9,7 @@
 #define STR(s) #s
 
 namespace vox {
+namespace geometry {
 
 const Vector2D kSamplePoints2[] = {
     {0.345361, 0.379616},
@@ -989,4 +990,5 @@ const char* getSphereTriMesh5x5Obj() {
     return kSphereTriMesh5x5Obj;
 }
 
+}  // namespace geometry
 }  // namespace vox

@@ -14,6 +14,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(PointKdTreeSearcher3, ForEachNearbyPoint) {
   Array1<Vector3D> points = {Vector3D(0, 1, 3), Vector3D(2, 5, 4), Vector3D(-1, 3, 0)};

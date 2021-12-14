@@ -14,6 +14,7 @@
 #include <algorithm>
 
 using namespace vox;
+using namespace geometry;
 
 static double kTimeStepLimitBySpeedFactor = 0.4;
 static double kTimeStepLimitByForceFactor = 0.25;

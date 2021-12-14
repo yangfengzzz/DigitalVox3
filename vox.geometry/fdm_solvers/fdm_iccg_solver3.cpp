@@ -10,6 +10,7 @@
 #include "../constants.h"
 
 using namespace vox;
+using namespace geometry;
 
 void FdmIccgSolver3::Preconditioner::build(const FdmMatrix3 &matrix) {
   Vector3UZ size = matrix.size();

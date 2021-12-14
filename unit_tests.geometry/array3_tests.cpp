@@ -12,6 +12,7 @@
 #include <sstream>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Array3, Constructors) {
   {

@@ -16,6 +16,7 @@
 #include <iostream>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D triangle mesh geometry.
@@ -283,6 +284,7 @@ private:
   IndexArray _uvIndices;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TRIANGLE_MESH3_H_

@@ -11,6 +11,7 @@
 #include "private_helpers.h"
 
 using namespace vox;
+using namespace geometry;
 
 Frame::Frame(int newIndex, double newTimeIntervalInSeconds)
     : index(newIndex), timeIntervalInSeconds(newTimeIntervalInSeconds) {}

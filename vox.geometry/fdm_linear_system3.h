@@ -12,6 +12,7 @@
 #include "matrix_csr.h"
 
 namespace vox {
+namespace geometry {
 
 //! The row of FdmMatrix3 where row corresponds to (i, j, k) grid point.
 struct FdmMatrixRow3 {
@@ -143,6 +144,7 @@ struct FdmCompressedBlas3 {
   static ScalarType lInfNorm(const VectorType &v);
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_LINEAR_SYSTEM3_H_

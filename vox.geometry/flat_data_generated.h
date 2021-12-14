@@ -6,6 +6,7 @@
 #include "flatbuffers/flatbuffers.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct FlatData;
@@ -41,20 +42,21 @@ inline flatbuffers::Offset<FlatData> CreateFlatData(flatbuffers::FlatBufferBuild
 
 inline flatbuffers::Offset<FlatData> CreateFlatDataDirect(flatbuffers::FlatBufferBuilder &_fbb,
                                                           const std::vector<uint8_t> *data = nullptr) {
-  return vox::fbs::CreateFlatData(_fbb, data ? _fbb.CreateVector<uint8_t>(*data) : 0);
+  return vox::geometry::fbs::CreateFlatData(_fbb, data ? _fbb.CreateVector<uint8_t>(*data) : 0);
 }
 
-inline const vox::fbs::FlatData *GetFlatData(const void *buf) { return flatbuffers::GetRoot<vox::fbs::FlatData>(buf); }
+inline const vox::geometry::fbs::FlatData *GetFlatData(const void *buf) { return flatbuffers::GetRoot<vox::geometry::fbs::FlatData>(buf); }
 
 inline bool VerifyFlatDataBuffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::FlatData>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::FlatData>(nullptr);
 }
 
-inline void FinishFlatDataBuffer(flatbuffers::FlatBufferBuilder &fbb, flatbuffers::Offset<vox::fbs::FlatData> root) {
+inline void FinishFlatDataBuffer(flatbuffers::FlatBufferBuilder &fbb, flatbuffers::Offset<vox::geometry::fbs::FlatData> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_FLATDATA_JET_FBS_H_

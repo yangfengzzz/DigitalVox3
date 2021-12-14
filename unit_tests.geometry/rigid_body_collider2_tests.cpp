@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(RigidBodyCollider2, ResolveCollision) {
   // 1. No penetration

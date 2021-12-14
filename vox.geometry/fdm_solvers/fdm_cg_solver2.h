@@ -10,6 +10,7 @@
 #include "../fdm_linear_system_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 //! \brief 2-D finite difference-type linear system solver using conjugate
 //!        gradient.
@@ -61,6 +62,7 @@ private:
 //! Shared pointer type for the FdmCgSolver2.
 using FdmCgSolver2Ptr = std::shared_ptr<FdmCgSolver2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_CG_SOLVER2_H_

@@ -10,6 +10,7 @@
 #include "../points_to_implicit2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D points-to-implicit converter based on Zhu and Bridson's method.
@@ -35,6 +36,7 @@ private:
 //! Shared pointer type for ZhuBridsonPointsToImplicit2 class
 using ZhuBridsonPointsToImplicit2Ptr = std::shared_ptr<ZhuBridsonPointsToImplicit2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ZHU_BRIDSON_POINTS_TO_IMPLICIT2_H_

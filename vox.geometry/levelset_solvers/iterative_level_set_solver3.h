@@ -10,6 +10,7 @@
 #include "../level_set_solver3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for 3-D PDE-based iterative level set solver.
@@ -117,6 +118,7 @@ private:
 
 using IterativeLevelSetSolver3Ptr = std::shared_ptr<IterativeLevelSetSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ITERATIVE_LEVEL_SET_SOLVER3_H_

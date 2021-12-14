@@ -13,6 +13,7 @@
 #include <string>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ArrayUtils, Fill) {
   Array1<double> array0(5);

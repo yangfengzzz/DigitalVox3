@@ -13,6 +13,7 @@
 #include "ray.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> class Orientation {};
 
@@ -114,6 +115,7 @@ private:
 using Transform2 = Transform<2>;
 using Transform3 = Transform<3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TRANSFORM_H_

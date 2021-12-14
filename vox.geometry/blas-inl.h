@@ -8,6 +8,7 @@
 #define INCLUDE_JET_DETAIL_BLAS_INL_H_
 
 namespace vox {
+namespace geometry {
 
 template <typename ScalarType, typename VectorType, typename MatrixType>
 void Blas<ScalarType, VectorType, MatrixType>::set(ScalarType s, VectorType *result) {
@@ -61,6 +62,7 @@ ScalarType Blas<ScalarType, VectorType, MatrixType>::lInfNorm(const VectorType &
   return std::fabs(v.absmax());
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_BLAS_INL_H_

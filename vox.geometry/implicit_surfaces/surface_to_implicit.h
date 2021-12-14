@@ -10,6 +10,7 @@
 #include "../implicit_surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D implicit surface wrapper for generic Surface instance.
@@ -103,6 +104,7 @@ private:
   std::shared_ptr<Surface<N>> _surface;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SURFACE_TO_IMPLICIT_H_

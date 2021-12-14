@@ -12,6 +12,7 @@
 #include "collocated_vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 CollocatedVectorGrid<N>::CollocatedVectorGrid()
@@ -159,3 +160,4 @@ template class CollocatedVectorGrid<2>;
 template class CollocatedVectorGrid<3>;
 
 } // namespace vox
+} // namespace geometry

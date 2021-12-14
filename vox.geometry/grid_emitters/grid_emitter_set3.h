@@ -12,6 +12,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D grid-based emitter set.
@@ -74,6 +75,7 @@ private:
   std::vector<GridEmitter3Ptr> _emitters;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_GRID_EMITTER_SET3_H_

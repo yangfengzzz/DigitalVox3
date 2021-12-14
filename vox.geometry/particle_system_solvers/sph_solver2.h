@@ -12,6 +12,7 @@
 #include "../sph_system_data.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D SPH solver.
@@ -240,6 +241,7 @@ public:
   [[nodiscard]] SphSolver2Ptr makeShared() const;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPH_SOLVER2_H_

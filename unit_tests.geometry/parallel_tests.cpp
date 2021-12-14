@@ -14,6 +14,7 @@
 #include <thread>
 
 using namespace vox;
+using namespace geometry;
 
 static unsigned int sNumCores = std::thread::hardware_concurrency();
 

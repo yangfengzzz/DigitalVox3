@@ -10,6 +10,7 @@
 #include "iterative_level_set_solver3.h"
 
 namespace vox {
+namespace geometry {
 
 //! Three-dimensional first-order upwind-based iterative level set solver.
 class UpwindLevelSetSolver3 final : public IterativeLevelSetSolver3 {
@@ -25,6 +26,7 @@ protected:
 
 using UpwindLevelSetSolver3Ptr = std::shared_ptr<UpwindLevelSetSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_UPWIND_LEVEL_SET_SOLVER3_H_

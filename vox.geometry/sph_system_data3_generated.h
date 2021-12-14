@@ -9,6 +9,7 @@
 #include "particle_system_data3_generated.h"
 
 namespace vox {
+namespace geometry {
 namespace fbs {
 
 struct SphSystemData3;
@@ -23,8 +24,8 @@ struct SphSystemData3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_PRESSUREIDX = 14,
     VT_DENSITYIDX = 16
   };
-  const vox::fbs::ParticleSystemData3 *base() const {
-    return GetPointer<const vox::fbs::ParticleSystemData3 *>(VT_BASE);
+  const vox::geometry::fbs::ParticleSystemData3 *base() const {
+    return GetPointer<const vox::geometry::fbs::ParticleSystemData3 *>(VT_BASE);
   }
   double targetDensity() const { return GetField<double>(VT_TARGETDENSITY, 0.0); }
   double targetSpacing() const { return GetField<double>(VT_TARGETSPACING, 0.0); }
@@ -44,7 +45,7 @@ struct SphSystemData3 FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct SphSystemData3Builder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_base(flatbuffers::Offset<vox::fbs::ParticleSystemData3> base) {
+  void add_base(flatbuffers::Offset<vox::geometry::fbs::ParticleSystemData3> base) {
     fbb_.AddOffset(SphSystemData3::VT_BASE, base);
   }
   void add_targetDensity(double targetDensity) {
@@ -73,7 +74,7 @@ struct SphSystemData3Builder {
 };
 
 inline flatbuffers::Offset<SphSystemData3>
-CreateSphSystemData3(flatbuffers::FlatBufferBuilder &_fbb, flatbuffers::Offset<vox::fbs::ParticleSystemData3> base = 0,
+CreateSphSystemData3(flatbuffers::FlatBufferBuilder &_fbb, flatbuffers::Offset<vox::geometry::fbs::ParticleSystemData3> base = 0,
                      double targetDensity = 0.0, double targetSpacing = 0.0, double kernelRadiusOverTargetSpacing = 0.0,
                      double kernelRadius = 0.0, uint64_t pressureIdx = 0, uint64_t densityIdx = 0) {
   SphSystemData3Builder builder_(_fbb);
@@ -87,20 +88,21 @@ CreateSphSystemData3(flatbuffers::FlatBufferBuilder &_fbb, flatbuffers::Offset<v
   return builder_.Finish();
 }
 
-inline const vox::fbs::SphSystemData3 *GetSphSystemData3(const void *buf) {
-  return flatbuffers::GetRoot<vox::fbs::SphSystemData3>(buf);
+inline const vox::geometry::fbs::SphSystemData3 *GetSphSystemData3(const void *buf) {
+  return flatbuffers::GetRoot<vox::geometry::fbs::SphSystemData3>(buf);
 }
 
 inline bool VerifySphSystemData3Buffer(flatbuffers::Verifier &verifier) {
-  return verifier.VerifyBuffer<vox::fbs::SphSystemData3>(nullptr);
+  return verifier.VerifyBuffer<vox::geometry::fbs::SphSystemData3>(nullptr);
 }
 
 inline void FinishSphSystemData3Buffer(flatbuffers::FlatBufferBuilder &fbb,
-                                       flatbuffers::Offset<vox::fbs::SphSystemData3> root) {
+                                       flatbuffers::Offset<vox::geometry::fbs::SphSystemData3> root) {
   fbb.Finish(root);
 }
 
 } // namespace fbs
 } // namespace vox
+} // namespace geometry
 
 #endif // FLATBUFFERS_GENERATED_SPHSYSTEMDATA3_JET_FBS_H_

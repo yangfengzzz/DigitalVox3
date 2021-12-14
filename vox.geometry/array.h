@@ -15,6 +15,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 // MARK: ArrayBase
 
@@ -268,7 +269,8 @@ template <class T> using Array3 = Array<T, 3>;
 
 template <class T> using Array4 = Array<T, 4>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "array-inl.h"
 

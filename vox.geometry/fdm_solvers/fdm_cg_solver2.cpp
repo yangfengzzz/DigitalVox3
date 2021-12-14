@@ -11,6 +11,7 @@
 #include "fdm_cg_solver2.h"
 
 using namespace vox;
+using namespace geometry;
 
 FdmCgSolver2::FdmCgSolver2(unsigned int maxNumberOfIterations, double tolerance)
     : _maxNumberOfIterations(maxNumberOfIterations), _lastNumberOfIterations(0), _tolerance(tolerance),

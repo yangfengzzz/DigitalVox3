@@ -10,6 +10,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Quaternion class defined as q = w + xi + yj + zk.
@@ -194,7 +195,8 @@ using QuaternionF = Quaternion<float>;
 //! Double-type quaternion.
 using QuaternionD = Quaternion<double>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "quaternion-inl.h"
 

@@ -13,6 +13,7 @@
 #include <functional>
 
 namespace vox {
+namespace geometry {
 
 //! N-D nearest neighbor query result.
 template <typename T, size_t N> struct NearestNeighborQueryResult {
@@ -53,6 +54,7 @@ template <typename T> using NearestNeighborQueryEngine2 = NearestNeighborQueryEn
 //! Abstract base class for 3-D nearest neighbor query engine.
 template <typename T> using NearestNeighborQueryEngine3 = NearestNeighborQueryEngine<T, 3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_NEAREST_NEIGHBOR_QUERY_ENGINE_H_

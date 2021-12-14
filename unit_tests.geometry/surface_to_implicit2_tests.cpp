@@ -12,6 +12,7 @@
 #include <gmock/gmock.h>
 
 using namespace vox;
+using namespace geometry;
 
 namespace {
 class MockSurface2 final : public Surface2 {

@@ -10,6 +10,7 @@
 #include "fdm_cg_solver3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D finite difference-type linear system solver using incomplete
@@ -85,6 +86,7 @@ private:
 //! Shared pointer type for the FdmIccgSolver3.
 using FdmIccgSolver3Ptr = std::shared_ptr<FdmIccgSolver3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FDM_ICCG_SOLVER3_H_

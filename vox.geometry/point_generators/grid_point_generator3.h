@@ -10,6 +10,7 @@
 #include "../point_generator3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D regular-grid point generator.
@@ -30,6 +31,7 @@ public:
 //! Shared pointer type for the GridPointGenerator3.
 using GridPointGenerator3Ptr = std::shared_ptr<GridPointGenerator3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_GRID_POINT_GENERATOR3_H_

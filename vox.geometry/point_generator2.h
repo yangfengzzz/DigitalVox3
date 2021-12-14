@@ -14,6 +14,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for 2-D point generator.
@@ -64,6 +65,7 @@ public:
 //! Shared pointer for the PointGenerator2 type.
 using PointGenerator2Ptr = std::shared_ptr<PointGenerator2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_GENERATOR2_H_

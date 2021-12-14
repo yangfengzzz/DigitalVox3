@@ -12,6 +12,7 @@
 #include "../grids/vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D grid-based volumetric emitter.
@@ -137,6 +138,7 @@ private:
   bool _isOneShot = true;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_VOLUME_GRID_EMITTER2_H_

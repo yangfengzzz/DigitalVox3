@@ -7,6 +7,7 @@
 #include "../vox.geometry/fdm_linear_system_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 class FdmLinearSystemSolverTestHelper2 {
 public:
@@ -91,4 +92,5 @@ public:
   }
 };
 
+} // namespace geometry
 } // namespace vox

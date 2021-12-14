@@ -15,6 +15,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //! Struct that represents ray-surface intersection point.
 template <size_t N> struct SurfaceRayIntersection {
@@ -171,6 +172,7 @@ template <typename T> using SurfaceBuilderBase2 = SurfaceBuilderBase<2, T>;
 
 template <typename T> using SurfaceBuilderBase3 = SurfaceBuilderBase<3, T>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SURFACE_H_

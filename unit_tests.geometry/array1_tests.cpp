@@ -13,6 +13,7 @@
 #include <vector>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Array1, Constructors) {
   {

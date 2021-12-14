@@ -12,6 +12,7 @@
 #include "surfaces/triangle_mesh3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      Computes marching cubes and extract triangle mesh from grid.
@@ -35,6 +36,7 @@ void marchingCubes(const ConstArrayView3<double> &grid, const Vector3D &gridSize
                    TriangleMesh3 *mesh, double isoValue = 0, int bndClose = kDirectionAll,
                    int bndConnectivity = kDirectionNone);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_MARCHING_CUBES_H_

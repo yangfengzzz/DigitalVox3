@@ -13,6 +13,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ImplicitSurfaceSet2, Constructor) {
   ImplicitSurfaceSet2 sset;

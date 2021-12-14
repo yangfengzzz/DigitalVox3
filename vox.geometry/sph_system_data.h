@@ -11,6 +11,7 @@
 #include "particle_system_data.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief      3-D SPH particle system data.
@@ -237,6 +238,7 @@ using SphSystemData2Ptr = std::shared_ptr<SphSystemData2>;
 //! Shared pointer for the SphSystemData3 type.
 using SphSystemData3Ptr = std::shared_ptr<SphSystemData3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPH_SYSTEM_DATA_H_

@@ -11,6 +11,7 @@
 #include "ray.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Class for N-D ray.
@@ -59,7 +60,8 @@ using Ray3F = Ray3<float>;
 
 using Ray3D = Ray3<double>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "ray-inl.h"
 

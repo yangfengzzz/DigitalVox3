@@ -10,6 +10,7 @@
 #include "iterative_level_set_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 //! Two-dimensional third-order ENO-based iterative level set solver.
 class EnoLevelSetSolver2 final : public IterativeLevelSetSolver2 {
@@ -25,6 +26,7 @@ protected:
 
 using EnoLevelSetSolver2Ptr = std::shared_ptr<EnoLevelSetSolver2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ENO_LEVEL_SET_SOLVER2_H_

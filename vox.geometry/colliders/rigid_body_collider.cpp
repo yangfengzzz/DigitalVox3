@@ -9,6 +9,7 @@
 #include "rigid_body_collider.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> RigidBodyCollider<N>::RigidBodyCollider(const std::shared_ptr<Surface<N>> &surface) {
   setSurface(surface);
@@ -64,3 +65,4 @@ template class RigidBodyCollider<2>;
 template class RigidBodyCollider<3>;
 
 } // namespace vox
+} // namespace geometry

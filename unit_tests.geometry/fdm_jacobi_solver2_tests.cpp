@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(FdmJacobiSolver2, Solve) {
   FdmLinearSystem2 system;

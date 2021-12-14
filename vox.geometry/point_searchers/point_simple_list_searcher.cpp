@@ -13,6 +13,7 @@
 #include "point_simple_list_searcher.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> PointSimpleListSearcher<N>::PointSimpleListSearcher(const PointSimpleListSearcher &other) {
   set(other);
@@ -178,3 +179,4 @@ template class PointSimpleListSearcher<2>;
 template class PointSimpleListSearcher<3>;
 
 } // namespace vox
+} // namespace geometry

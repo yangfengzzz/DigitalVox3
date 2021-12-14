@@ -10,6 +10,7 @@
 #include <array>
 
 namespace vox {
+namespace geometry {
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: std::array Helpers
@@ -20,7 +21,8 @@ template <typename T, size_t N, size_t M> constexpr std::array<T, M> takeFirstM(
 //! \brief Returns the last M elements from given \p src array.
 template <typename T, size_t N, size_t M> constexpr std::array<T, M> takeLastM(std::array<T, N> src);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "std_utils-inl.h"
 

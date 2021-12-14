@@ -9,6 +9,7 @@
 #include "../vox.geometry/query_engines/octree.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Octree, Constructors) {
   Octree<Vector3D> octree;

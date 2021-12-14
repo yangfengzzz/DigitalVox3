@@ -13,6 +13,7 @@
 #include <algorithm>
 
 using namespace vox;
+using namespace geometry;
 
 // Heuristically chosen
 const double kDefaultTimeStepLimitScale = 5.0;

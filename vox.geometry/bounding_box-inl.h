@@ -11,6 +11,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N> BoundingBox<T, N>::BoundingBox() { reset(); }
 
@@ -165,7 +166,7 @@ template <typename T, size_t N> typename BoundingBox<T, N>::VectorType BoundingB
 
 template <typename T, size_t N>
 typename BoundingBox<T, N>::VectorType BoundingBox<T, N>::clamp(const VectorType &pt) const {
-  return ::vox::clamp(pt, lowerCorner, upperCorner);
+  return ::vox::geometry::clamp(pt, lowerCorner, upperCorner);
 }
 
 template <typename T, size_t N> bool BoundingBox<T, N>::isEmpty() const {
@@ -181,6 +182,7 @@ template <typename T, size_t N> template <typename U> BoundingBox<U, N> Bounding
   return BoundingBox<U, N>{lowerCorner.template castTo<U>(), upperCorner.template castTo<U>()};
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_BOUNDING_BOX_INL_H_

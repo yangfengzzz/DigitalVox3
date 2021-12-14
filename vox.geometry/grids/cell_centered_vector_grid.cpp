@@ -10,6 +10,7 @@
 #include "cell_centered_vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 CellCenteredVectorGrid<N>::CellCenteredVectorGrid(const Vector<size_t, N> &resolution,
@@ -124,3 +125,4 @@ template class CellCenteredVectorGrid<2>;
 template class CellCenteredVectorGrid<3>;
 
 } // namespace vox
+} // namespace geometry

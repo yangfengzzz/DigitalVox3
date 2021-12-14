@@ -10,6 +10,7 @@
 #include "fdm_mg_solver2.h"
 
 using namespace vox;
+using namespace geometry;
 
 FdmMgSolver2::FdmMgSolver2(size_t maxNumberOfLevels, unsigned int numberOfRestrictionIter,
                            unsigned int numberOfCorrectionIter, unsigned int numberOfCoarsestIter,

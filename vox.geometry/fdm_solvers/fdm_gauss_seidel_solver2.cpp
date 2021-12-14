@@ -10,6 +10,7 @@
 #include "fdm_gauss_seidel_solver2.h"
 
 using namespace vox;
+using namespace geometry;
 
 FdmGaussSeidelSolver2::FdmGaussSeidelSolver2(unsigned int maxNumberOfIterations, unsigned int residualCheckInterval,
                                              double tolerance, double sorFactor, bool useRedBlackOrdering)

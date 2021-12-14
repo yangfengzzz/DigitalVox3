@@ -10,6 +10,7 @@
 #include "../level_set_solver2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for 2-D PDE-based iterative level set solver.
@@ -116,6 +117,7 @@ private:
 
 using IterativeLevelSetSolver2Ptr = std::shared_ptr<IterativeLevelSetSolver2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_ITERATIVE_LEVEL_SET_SOLVER2_H_

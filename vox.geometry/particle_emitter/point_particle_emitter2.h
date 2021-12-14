@@ -12,6 +12,7 @@
 #include <random>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D point particle emitter.
@@ -128,6 +129,7 @@ private:
   uint32_t _seed = 0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_PARTICLE_EMITTER2_H_

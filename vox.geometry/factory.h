@@ -14,6 +14,7 @@
 #include <string>
 
 namespace vox {
+namespace geometry {
 
 class Factory {
 public:
@@ -31,5 +32,6 @@ public:
 };
 
 } // namespace vox
+} // namespace geometry
 
 #endif // SRC_JET_FACTORY_H_

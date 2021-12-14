@@ -17,6 +17,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(UpwindLevelSetSolver2, Reinitialize) {
   CellCenteredScalarGrid2 sdf({40, 30}), temp({40, 30});

@@ -12,6 +12,7 @@
 #include <utility>
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -39,6 +40,7 @@ template <typename T, size_t N, size_t M> constexpr std::array<T, M> takeLastM(s
   return internal::takeLastM(src, internal::StdUtilsSizeHint<M>{}, std::make_index_sequence<M>{});
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_STD_UTILS_INL_H_

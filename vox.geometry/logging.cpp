@@ -18,6 +18,7 @@
 #include <string>
 
 namespace vox {
+namespace geometry {
 
 static std::mutex critical;
 
@@ -133,3 +134,4 @@ void Logging::mute() { setLevel(LoggingLevel::Off); }
 void Logging::unmute() { setLevel(LoggingLevel::All); }
 
 } // namespace vox
+} // namespace geometry

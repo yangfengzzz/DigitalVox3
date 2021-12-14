@@ -12,6 +12,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for any serializable class.
 class Serializable {
@@ -59,7 +60,8 @@ void deserialize(const std::vector<uint8_t> &buffer, std::vector<uint8_t> *data)
 //! Deserializes buffer to data chunk using common schema.
 template <typename T> void deserialize(const std::vector<uint8_t> &buffer, Array1<T> *array);
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "serialization-inl.h"
 

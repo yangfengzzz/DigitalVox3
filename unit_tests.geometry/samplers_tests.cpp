@@ -10,6 +10,7 @@
 #include <random>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Samplers, UniformSampleCone) {
   std::mt19937 mtRand(0);

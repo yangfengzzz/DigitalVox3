@@ -7,6 +7,7 @@
 #include "transform.h"
 
 namespace vox {
+namespace geometry {
 
 // MARK: Orientation2
 
@@ -119,3 +120,4 @@ template class Transform<2>;
 template class Transform<3>;
 
 } // namespace vox
+} // namespace geometry

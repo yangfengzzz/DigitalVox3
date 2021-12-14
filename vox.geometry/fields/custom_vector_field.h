@@ -10,6 +10,7 @@
 #include "vector_field.h"
 
 namespace vox {
+namespace geometry {
 
 //! N-D vector field with custom field function.
 template <size_t N> class CustomVectorField final : public VectorField<N> {
@@ -108,6 +109,7 @@ private:
   std::function<typename GetCurl<N>::type(const Vector<double, N> &)> _customCurlFunction;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CUSTOM_VECTOR_FIELD_H_

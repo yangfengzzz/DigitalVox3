@@ -12,6 +12,7 @@
 #include "../query_engines/bvh.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D implicit surface set.
@@ -134,6 +135,7 @@ private:
   Array1<std::shared_ptr<ImplicitSurface<N>>> _surfaces;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_IMPLICIT_SURFACE_SET_H_

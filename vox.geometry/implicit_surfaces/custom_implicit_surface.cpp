@@ -11,6 +11,7 @@
 #include "custom_implicit_surface.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 CustomImplicitSurface<N>::CustomImplicitSurface(const std::function<double(const Vector<double, N> &)> &func,
@@ -204,3 +205,4 @@ template class CustomImplicitSurface<2>;
 template class CustomImplicitSurface<3>;
 
 } // namespace vox
+} // namespace geometry

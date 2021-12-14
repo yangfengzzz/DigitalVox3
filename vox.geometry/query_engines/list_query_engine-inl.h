@@ -10,6 +10,7 @@
 #include "list_query_engine.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T, size_t N> void ListQueryEngine<T, N>::add(const T &item) { _items.append(item); }
 
@@ -94,6 +95,7 @@ ListQueryEngine<T, N>::nearest(const Vector<double, N> &pt,
   return best;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_LIST_QUERY_ENGINE_INL_H_

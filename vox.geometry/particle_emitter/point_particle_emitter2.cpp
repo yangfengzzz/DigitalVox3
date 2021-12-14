@@ -11,6 +11,7 @@
 #include "point_particle_emitter2.h"
 
 namespace vox {
+namespace geometry {
 
 PointParticleEmitter2::PointParticleEmitter2(const Vector2D &origin, const Vector2D &direction, double speed,
                                              double spreadAngleInDegrees, size_t maxNumOfNewParticlesPerSec,
@@ -133,3 +134,4 @@ PointParticleEmitter2Ptr PointParticleEmitter2::Builder::makeShared() const {
 }
 
 } // namespace vox
+} // namespace geometry

@@ -13,6 +13,7 @@
 #include "../nearest_neighbor_query_engine.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Bounding Volume Hierarchy (BVH) in N-D
@@ -131,7 +132,8 @@ template <typename T> using Bvh2 = Bvh<T, 2>;
 //! 3-D BVH type.
 template <typename T> using Bvh3 = Bvh<T, 3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "bvh-inl.h"
 

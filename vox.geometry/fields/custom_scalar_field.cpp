@@ -9,6 +9,7 @@
 #include "custom_scalar_field.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 CustomScalarField<N>::CustomScalarField(const std::function<double(const Vector<double, N> &)> &customFunction,
@@ -128,3 +129,4 @@ template class CustomScalarField<2>;
 template class CustomScalarField<3>;
 
 } // namespace vox
+} // namespace geometry

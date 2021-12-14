@@ -12,6 +12,7 @@
 #include <functional>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Abstract base class for generic collider object.
@@ -121,6 +122,7 @@ using Collider2Ptr = ColliderPtr<2>;
 //! Shared pointer type for the Collider3.
 using Collider3Ptr = ColliderPtr<3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_COLLIDER_H_

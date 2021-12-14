@@ -11,6 +11,7 @@
 #include <algorithm>
 
 using namespace vox;
+using namespace geometry;
 
 namespace {
 

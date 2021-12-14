@@ -14,6 +14,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for N-D scalar field.
 template <size_t N> class ScalarField : public Field<N> {
@@ -52,6 +53,7 @@ using ScalarField2Ptr = std::shared_ptr<ScalarField2>;
 //! Shared pointer for the ScalarField3 type.
 using ScalarField3Ptr = std::shared_ptr<ScalarField3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SCALAR_FIELD_H_

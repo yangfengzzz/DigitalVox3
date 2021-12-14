@@ -14,6 +14,7 @@
 #include <iostream>
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> const Vector<size_t, N> &Grid<N>::resolution() const { return _resolution; }
 
@@ -77,3 +78,4 @@ template class Grid<2>;
 template class Grid<3>;
 
 } // namespace vox
+} // namespace geometry

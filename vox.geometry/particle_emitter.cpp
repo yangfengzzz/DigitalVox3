@@ -9,6 +9,7 @@
 #include "particle_emitter.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> const ParticleSystemDataPtr<N> &ParticleEmitter<N>::target() const { return _particles; }
 
@@ -43,3 +44,4 @@ template class ParticleEmitter<2>;
 template class ParticleEmitter<3>;
 
 } // namespace vox
+} // namespace geometry

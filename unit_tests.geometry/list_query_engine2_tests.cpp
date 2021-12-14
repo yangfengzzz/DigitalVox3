@@ -9,6 +9,7 @@
 #include "../vox.geometry/query_engines/list_query_engine.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(ListQueryEngine2, BoxIntersection) {
   size_t numSamples = getNumberOfSamplePoints2();

@@ -10,6 +10,7 @@
 #include "vector_field.h"
 
 namespace vox {
+namespace geometry {
 
 //! N-D constant vector field.
 template <size_t N> class ConstantVectorField final : public VectorField<N> {
@@ -65,6 +66,7 @@ private:
   Vector<double, N> _value;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CONSTANT_VECTOR_FIELD_H_

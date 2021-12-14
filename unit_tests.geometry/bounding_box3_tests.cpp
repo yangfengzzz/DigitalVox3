@@ -9,6 +9,7 @@
 #include "../vox.geometry/bounding_box.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(BoundingBox3, Constructors) {
   {

@@ -14,6 +14,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> struct GetCurl {};
 
@@ -58,6 +59,7 @@ using VectorField2Ptr = std::shared_ptr<VectorField2>;
 //! Shared pointer for the VectorField3 type.
 using VectorField3Ptr = std::shared_ptr<VectorField3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_VECTOR_FIELD_H_

@@ -10,6 +10,7 @@
 #include "triangle_mesh_to_sdf.h"
 
 using namespace vox;
+using namespace geometry;
 
 ImplicitTriangleMesh3::ImplicitTriangleMesh3(const TriangleMesh3Ptr &mesh, size_t resolutionX, double margin,
                                              const Transform3 &transform, bool isNormalFlipped)

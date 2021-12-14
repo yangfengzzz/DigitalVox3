@@ -11,6 +11,7 @@
 #include "fdm_solvers/fdm_jacobi_solver2.h"
 
 using namespace vox;
+using namespace geometry;
 
 //
 

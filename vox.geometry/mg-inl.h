@@ -10,6 +10,7 @@
 #include "mg.h"
 
 namespace vox {
+namespace geometry {
 
 namespace internal {
 
@@ -94,6 +95,7 @@ MgResult mgVCycle(const MgMatrix<BlasType> &A, MgParameters<BlasType> params, Mg
                   MgVector<BlasType> *b, MgVector<BlasType> *buffer) {
   return internal::mgVCycle<BlasType>(A, params, 0u, x, b, buffer);
 }
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_MG_INL_H_

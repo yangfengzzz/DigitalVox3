@@ -13,6 +13,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 template <typename T> class MatrixCsr;
 
@@ -441,7 +442,8 @@ using MatrixCsrF = MatrixCsr<float>;
 //! Double-type CSR matrix.
 using MatrixCsrD = MatrixCsr<double>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "matrix_csr-inl.h"
 

@@ -9,6 +9,7 @@
 #include "cell_centered_scalar_grid.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 CellCenteredScalarGrid<N>::CellCenteredScalarGrid(const Vector<size_t, N> &resolution,
@@ -104,3 +105,4 @@ template class CellCenteredScalarGrid<2>;
 template class CellCenteredScalarGrid<3>;
 
 } // namespace vox
+} // namespace geometry

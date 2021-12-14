@@ -9,6 +9,7 @@
 #include "vertex_centered_scalar_grid.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 VertexCenteredScalarGrid<N>::VertexCenteredScalarGrid(const Vector<size_t, N> &resolution,
@@ -109,3 +110,4 @@ template class VertexCenteredScalarGrid<2>;
 template class VertexCenteredScalarGrid<3>;
 
 } // namespace vox
+} // namespace geometry

@@ -10,6 +10,7 @@
 #include "plane.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N>
 Box<N>::Box(const Transform<N> &transform, bool isNormalFlipped) : Surface<N>(transform, isNormalFlipped) {}
@@ -146,3 +147,4 @@ template class Box<2>;
 template class Box<3>;
 
 } // namespace vox
+} // namespace geometry

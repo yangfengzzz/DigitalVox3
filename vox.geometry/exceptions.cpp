@@ -9,6 +9,7 @@
 #include <utility>
 
 namespace vox {
+namespace geometry {
 
 NotImplementedException::NotImplementedException(std::string message) : _message(std::move(message)) {}
 
@@ -20,3 +21,4 @@ NotImplementedException::~NotImplementedException() = default;
 const char *NotImplementedException::what() const noexcept { return _message.c_str(); }
 
 } // namespace vox
+} // namespace geometry

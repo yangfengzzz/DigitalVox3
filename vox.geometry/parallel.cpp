@@ -19,6 +19,7 @@
 static unsigned int sMaxNumberOfThreads = std::thread::hardware_concurrency();
 
 namespace vox {
+namespace geometry {
 
 void setMaxNumberOfThreads(unsigned int numThreads) {
 #if defined(JET_TASKING_TBB)
@@ -38,3 +39,4 @@ void setMaxNumberOfThreads(unsigned int numThreads) {
 unsigned int maxNumberOfThreads() { return sMaxNumberOfThreads; }
 
 } // namespace vox
+} // namespace geometry

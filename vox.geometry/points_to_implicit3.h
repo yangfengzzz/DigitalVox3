@@ -12,6 +12,7 @@
 #include "matrix.h"
 
 namespace vox {
+namespace geometry {
 
 //! Abstract base class for 3-D points-to-implicit converters.
 class PointsToImplicit3 {
@@ -41,6 +42,7 @@ public:
 //! Shared pointer for the PointsToImplicit3 type.
 using PointsToImplicit3Ptr = std::shared_ptr<PointsToImplicit3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINTS_TO_IMPLICIT3_H_

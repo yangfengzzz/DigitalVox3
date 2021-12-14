@@ -34,6 +34,7 @@
 #include "../surfaces/triangle_mesh3.h"
 
 namespace vox {
+namespace geometry {
 //! \brief Generates signed-distance field out of given triangle mesh.
 //! This function generates signed-distance field from a triangle mesh. The sign
 //! is determined by TriangleMesh3::IsInside (negative means inside).
@@ -42,6 +43,7 @@ namespace vox {
 //! \param[in,out]  sdf     The output signed-distance field.
 //!
 void triangleMeshToSdf(const TriangleMesh3 &mesh, ScalarGrid3 *sdf);
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_TRIANGLE_MESH_TO_SDF_H_

@@ -9,6 +9,7 @@
 #include "../vox.geometry/query_engines/quadtree.h"
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Quadtree, Constructors) {
   Quadtree<Vector2D> quadtree;

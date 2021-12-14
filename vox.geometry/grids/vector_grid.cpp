@@ -20,31 +20,32 @@
 #include "../flatbuffers/flatbuffers.h"
 
 namespace vox {
+namespace geometry {
 
 template <size_t N> struct GetFlatbuffersVectorGrid {};
 
 template <> struct GetFlatbuffersVectorGrid<2> {
   static flatbuffers::Offset<fbs::VectorGrid2> createVectorGrid(flatbuffers::FlatBufferBuilder &_fbb,
-                                                                const vox::fbs::Vector2UZ *resolution,
-                                                                const vox::fbs::Vector2D *gridSpacing,
-                                                                const vox::fbs::Vector2D *origin,
+                                                                const vox::geometry::fbs::Vector2UZ *resolution,
+                                                                const vox::geometry::fbs::Vector2D *gridSpacing,
+                                                                const vox::geometry::fbs::Vector2D *origin,
                                                                 flatbuffers::Offset<flatbuffers::Vector<double>> data) {
     return fbs::CreateVectorGrid2(_fbb, resolution, gridSpacing, origin, data);
   }
 
-  static const vox::fbs::VectorGrid2 *getVectorGrid(const void *buf) { return fbs::GetVectorGrid2(buf); }
+  static const vox::geometry::fbs::VectorGrid2 *getVectorGrid(const void *buf) { return fbs::GetVectorGrid2(buf); }
 };
 
 template <> struct GetFlatbuffersVectorGrid<3> {
   static flatbuffers::Offset<fbs::VectorGrid3> createVectorGrid(flatbuffers::FlatBufferBuilder &_fbb,
-                                                                const vox::fbs::Vector3UZ *resolution,
-                                                                const vox::fbs::Vector3D *gridSpacing,
-                                                                const vox::fbs::Vector3D *origin,
+                                                                const vox::geometry::fbs::Vector3UZ *resolution,
+                                                                const vox::geometry::fbs::Vector3D *gridSpacing,
+                                                                const vox::geometry::fbs::Vector3D *origin,
                                                                 flatbuffers::Offset<flatbuffers::Vector<double>> data) {
     return fbs::CreateVectorGrid3(_fbb, resolution, gridSpacing, origin, data);
   }
 
-  static const vox::fbs::VectorGrid3 *getVectorGrid(const void *buf) { return fbs::GetVectorGrid3(buf); }
+  static const vox::geometry::fbs::VectorGrid3 *getVectorGrid(const void *buf) { return fbs::GetVectorGrid3(buf); }
 };
 
 template <size_t N> void VectorGrid<N>::clear() {
@@ -107,3 +108,4 @@ template class VectorGridBuilder<2>;
 template class VectorGridBuilder<3>;
 
 } // namespace vox
+} // namespace geometry

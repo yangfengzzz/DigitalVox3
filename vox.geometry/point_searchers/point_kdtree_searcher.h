@@ -14,6 +14,7 @@
 #include <vector>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief KdTree-based N-D point searcher.
@@ -130,6 +131,7 @@ public:
   std::shared_ptr<PointNeighborSearcher<N>> buildPointNeighborSearcher() const override;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_POINT_KDTREE_SEARCHER_H

@@ -12,6 +12,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(PointParallelHashGridSearcher2, ForEachNearbyPoint) {
   Array1<Vector2D> points = {Vector2D(1, 3), Vector2D(2, 5), Vector2D(-1, 3)};

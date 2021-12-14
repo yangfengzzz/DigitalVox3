@@ -10,6 +10,7 @@
 #include "../points_to_implicit2.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 2-D points-to-implicit converter based on simple sphere model.
@@ -30,6 +31,7 @@ private:
 //! Shared pointer type for SphericalPointsToImplicit2.
 using SphericalPointsToImplicit2Ptr = std::shared_ptr<SphericalPointsToImplicit2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPHERICAL_POINTS_TO_IMPLICIT2_H_

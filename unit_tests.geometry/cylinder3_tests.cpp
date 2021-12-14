@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Cylinder3, Constructors) {
   Cylinder3 cyl1;

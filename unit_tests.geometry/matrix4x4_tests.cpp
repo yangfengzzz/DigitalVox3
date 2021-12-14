@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 using namespace vox;
+using namespace geometry;
 
 TEST(Matrix4x4, Constructors) {
   Matrix4x4D mat;

@@ -10,6 +10,7 @@
 #include "../surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D cylinder geometry.
@@ -100,6 +101,7 @@ private:
   double _height = 1.0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CYLINDER3_H_

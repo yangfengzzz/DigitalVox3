@@ -10,6 +10,7 @@
 #include "math_utils.h"
 
 namespace vox {
+namespace geometry {
 
 template <typename T> std::array<T, 2> upwind1(T *D0, T dx) {
   T invdx = 1 / dx;
@@ -205,6 +206,7 @@ template <typename T> T weno5(T *v, T h, bool isDirectionPositive, T eps) {
   return (alpha1 * phix1 + alpha2 * phix2 + alpha3 * phix3) / sum;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_PDE_INL_H_

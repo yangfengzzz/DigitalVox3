@@ -10,6 +10,7 @@
 #include "../points_to_implicit3.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief 3-D points-to-implicit converter based on standard SPH kernel.
@@ -36,6 +37,7 @@ private:
 //! Shared pointer type for SphPointsToImplicit3 class.
 using SphPointsToImplicit3Ptr = std::shared_ptr<SphPointsToImplicit3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPH_POINTS_TO_IMPLICIT3_H_

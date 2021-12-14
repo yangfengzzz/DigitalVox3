@@ -13,6 +13,7 @@
 #include <limits>
 
 namespace vox {
+namespace geometry {
 
 template <typename T>
 std::enable_if_t<std::is_arithmetic<T>::value, bool> //
@@ -261,6 +262,7 @@ monotonicCatmullRom(const T &f0, const T &f1, const T &f2, const T &f3, T f) {
   return a3 * cubic(f) + a2 * square(f) + a1 * f + a0;
 }
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_DETAIL_MATH_UTILS_INL_H_

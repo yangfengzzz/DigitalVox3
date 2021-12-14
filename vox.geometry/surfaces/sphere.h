@@ -11,6 +11,7 @@
 #include "../surface.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D sphere geometry.
@@ -93,6 +94,7 @@ private:
   double _radius = 0.0;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_SPHERE_H_

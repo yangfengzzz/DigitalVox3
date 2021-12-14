@@ -12,6 +12,7 @@
 #include "vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 //! \brief Abstract base class for N-D collocated vector grid structure.
 template <size_t N> class CollocatedVectorGrid : public VectorGrid<N> {
@@ -177,6 +178,7 @@ using CollocatedVectorGrid2Ptr = std::shared_ptr<CollocatedVectorGrid2>;
 //! Shared pointer for the CollocatedVectorGrid3 type.
 using CollocatedVectorGrid3Ptr = std::shared_ptr<CollocatedVectorGrid3>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_COLLOCATED_VECTOR_GRID_H_

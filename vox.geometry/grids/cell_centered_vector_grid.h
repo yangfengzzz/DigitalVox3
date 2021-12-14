@@ -11,6 +11,7 @@
 #include "collocated_vector_grid.h"
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief N-D Cell-centered vector grid structure.
@@ -139,6 +140,7 @@ private:
   Vector<double, N> _initialVal;
 };
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_CELL_CENTERED_VECTOR_GRID_H_

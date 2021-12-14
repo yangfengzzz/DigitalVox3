@@ -8,6 +8,7 @@
 #define INCLUDE_JET_PARALLEL_H_
 
 namespace vox {
+namespace geometry {
 
 //! Execution policy tag.
 enum class ExecutionPolicy { kSerial, kParallel };
@@ -227,7 +228,8 @@ void setMaxNumberOfThreads(unsigned int numThreads);
 //! Returns maximum number of threads to use.
 unsigned int maxNumberOfThreads();
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #include "parallel-inl.h"
 

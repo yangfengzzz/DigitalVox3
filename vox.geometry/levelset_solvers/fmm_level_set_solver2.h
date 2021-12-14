@@ -11,6 +11,7 @@
 #include <memory>
 
 namespace vox {
+namespace geometry {
 
 //!
 //! \brief Two-dimensional fast marching method (FMM) implementation.
@@ -80,6 +81,7 @@ private:
 //! Shared pointer type for the FmmLevelSetSolver2.
 using FmmLevelSetSolver2Ptr = std::shared_ptr<FmmLevelSetSolver2>;
 
-} // namespace  vox
+} // namespace vox
+} // namespace geometry
 
 #endif // INCLUDE_JET_FMM_LEVEL_SET_SOLVER2_H_
