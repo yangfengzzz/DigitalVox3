@@ -76,7 +76,7 @@ public:
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
 
-    std::vector<Skin*> skins;
+    std::vector<std::unique_ptr<Skin>> skins;
     std::vector<Animation> animations;
 
     bool metallicRoughnessWorkflow = true;
@@ -109,7 +109,7 @@ private:
     Entity* nodeFromIndex(uint32_t index);
     
 private:
-    MetalRenderer* renderer;
+    Engine* engine;
     
     id<MTLTexture> getTexture(uint32_t index);
     id<MTLTexture> emptyTexture;

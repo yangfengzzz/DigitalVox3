@@ -9,6 +9,8 @@
 #include "../runtime/engine.h"
 #include "../runtime/rhi-metal/metal_renderer.h"
 #include "../runtime/mesh/buffer_mesh.h"
+#include "../runtime/material/pbr_material.h"
+
 #include <iostream>
 
 namespace vox {
@@ -23,7 +25,7 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
     
     std::string error, warning;
     
-    this->renderer = &engine->_hardwareRenderer;
+    this->engine = engine;
     
     bool fileLoaded = gltfContext.LoadASCIIFromFile(&gltfModel, &error, &warning, filename);
     
@@ -31,7 +33,7 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
     std::vector<Vertex> vertexBuffer;
     
     if (fileLoaded) {
-        loadImages(gltfModel, renderer);
+        loadImages(gltfModel, &engine->_hardwareRenderer);
         loadMaterials(gltfModel);
         
         const tinygltf::Scene &scene = gltfModel.scenes[gltfModel.defaultScene > -1 ? gltfModel.defaultScene : 0];
@@ -72,8 +74,8 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
     size_t vertexBufferSize = vertexBuffer.size() * sizeof(Vertex);
     size_t indexBufferSize = indexBuffer.size() * sizeof(uint32_t);
     
-    auto vBuffer = [renderer->device newBufferWithBytes:vertexBuffer.data() length:vertexBufferSize options:NULL];
-    auto iBuffer = [renderer->device newBufferWithBytes:indexBuffer.data() length:indexBufferSize options:NULL];
+    auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data() length:vertexBufferSize options:NULL];
+    auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:indexBuffer.data() length:indexBufferSize options:NULL];
     
     auto bufferMesh = std::make_shared<BufferMesh>(engine);
     bufferMesh->setVertexBufferBinding(vBuffer, 0, 0);
@@ -92,16 +94,93 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
     
 }
 
-void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
-    
-}
-
 void GLTFLoader::loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer) {
-    
+    for (tinygltf::Image &image : gltfModel.images) {
+        textures.push_back(renderer->loadTexture(image.uri));
+    }
+    // Create an empty texture to be used for empty material images
+    createEmptyTexture();
 }
 
 void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
-    
+    for (tinygltf::Material &mat : gltfModel.materials) {
+        auto material = std::make_shared<PBRMaterial>(engine);
+        if (mat.values.find("baseColorTexture") != mat.values.end()) {
+            material->setBaseTexture(getTexture(gltfModel.textures[mat.values["baseColorTexture"].TextureIndex()].source));
+        }
+        // Metallic roughness workflow
+        if (mat.values.find("metallicRoughnessTexture") != mat.values.end()) {
+            material->setMetallicRoughnessTexture(getTexture(gltfModel.textures[mat.values["metallicRoughnessTexture"].TextureIndex()].source));
+        }
+        if (mat.values.find("roughnessFactor") != mat.values.end()) {
+            material->setRoughness(static_cast<float>(mat.values["roughnessFactor"].Factor()));
+        }
+        if (mat.values.find("metallicFactor") != mat.values.end()) {
+            material->setMetallic(static_cast<float>(mat.values["metallicFactor"].Factor()));
+        }
+        if (mat.values.find("baseColorFactor") != mat.values.end()) {
+            auto color = mat.values["baseColorFactor"].ColorFactor();
+            material->setBaseColor(Color(color[0], color[1], color[2], color[3]));
+        }
+        if (mat.additionalValues.find("normalTexture") != mat.additionalValues.end()) {
+            material->setNormalTexture(getTexture(gltfModel.textures[mat.additionalValues["normalTexture"].TextureIndex()].source));
+        } else {
+            material->setNormalTexture(emptyTexture);
+        }
+        if (mat.additionalValues.find("emissiveTexture") != mat.additionalValues.end()) {
+            material->setEmissiveTexture(getTexture(gltfModel.textures[mat.additionalValues["emissiveTexture"].TextureIndex()].source));
+        }
+        if (mat.additionalValues.find("occlusionTexture") != mat.additionalValues.end()) {
+            material->setOcclusionTexture(getTexture(gltfModel.textures[mat.additionalValues["occlusionTexture"].TextureIndex()].source));
+        }
+        if (mat.additionalValues.find("alphaMode") != mat.additionalValues.end()) {
+            tinygltf::Parameter param = mat.additionalValues["alphaMode"];
+            if (param.string_value == "BLEND") {
+                material->setBlendMode(BlendMode::Enum::Normal);
+            }
+            if (param.string_value == "MASK") {
+                material->setBlendMode(BlendMode::Enum::Additive);
+            }
+        }
+        if (mat.additionalValues.find("alphaCutoff") != mat.additionalValues.end()) {
+            material->setAlphaCutoff(static_cast<float>(mat.additionalValues["alphaCutoff"].Factor()));
+        }
+
+        materials.push_back(material);
+    }
+    // Push a default material at the end of the list for meshes with no material assigned
+    materials.push_back(std::make_shared<PBRMaterial>(engine));
+}
+
+void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
+    for (tinygltf::Skin &source : gltfModel.skins) {
+        std::unique_ptr<Skin> newSkin = std::make_unique<Skin>();
+        newSkin->name = source.name;
+        
+        // Find skeleton root node
+        if (source.skeleton > -1) {
+            newSkin->skeletonRoot = nodeFromIndex(source.skeleton);
+        }
+        
+        // Find joint nodes
+        for (int jointIndex : source.joints) {
+            Entity* node = nodeFromIndex(jointIndex);
+            if (node) {
+                newSkin->joints.push_back(nodeFromIndex(jointIndex));
+            }
+        }
+        
+        // Get inverse bind matrices from buffer
+        if (source.inverseBindMatrices > -1) {
+            const tinygltf::Accessor &accessor = gltfModel.accessors[source.inverseBindMatrices];
+            const tinygltf::BufferView &bufferView = gltfModel.bufferViews[accessor.bufferView];
+            const tinygltf::Buffer &buffer = gltfModel.buffers[bufferView.buffer];
+            newSkin->inverseBindMatrices.resize(accessor.count);
+            memcpy(newSkin->inverseBindMatrices.data(), &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(Matrix));
+        }
+        
+        skins.push_back(std::move(newSkin));
+    }
 }
 
 void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {

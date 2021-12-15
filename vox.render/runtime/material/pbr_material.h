@@ -23,12 +23,8 @@ public:
     void setRoughness(float newValue);
     
     /// Roughness metallic texture.
-    id<MTLTexture> roughnessTexture();
-    void setRoughnessTexture(id<MTLTexture> newValue);
-    
-    /// Roughness metallic texture.
-    id<MTLTexture> metallicTexture();
-    void setMetallicTexture(id<MTLTexture> newValue);
+    id<MTLTexture> metallicRoughnessTexture();
+    void setMetallicRoughnessTexture(id<MTLTexture> newValue);
     
     /// Create a pbr metallic-roughness workflow material instance.
     /// - Parameter engine: Engine to which the material belongs
@@ -37,8 +33,7 @@ public:
 private:
     static ShaderProperty _metallicProp;
     static ShaderProperty _roughnessProp;
-    static ShaderProperty _metallicTextureProp;
-    static ShaderProperty _roughnessTextureProp;
+    static ShaderProperty _metallicRoughnessTextureProp;
 };
 
 }

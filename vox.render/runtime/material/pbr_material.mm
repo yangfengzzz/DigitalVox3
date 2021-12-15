@@ -10,8 +10,7 @@
 namespace vox {
 ShaderProperty PBRMaterial::_metallicProp = Shader::createProperty("u_metal", ShaderDataGroup::Material);
 ShaderProperty PBRMaterial::_roughnessProp = Shader::createProperty("u_roughness", ShaderDataGroup::Material);
-ShaderProperty PBRMaterial::_metallicTextureProp = Shader::createProperty("u_metallicTexture", ShaderDataGroup::Material);
-ShaderProperty PBRMaterial::_roughnessTextureProp = Shader::createProperty("u_roughnessTexture", ShaderDataGroup::Material);
+ShaderProperty PBRMaterial::_metallicRoughnessTextureProp = Shader::createProperty("u_metallicRoughnessTexture", ShaderDataGroup::Material);
 
 float PBRMaterial::metallic(){
     return std::any_cast<float>(shaderData.getData(PBRMaterial::_metallicProp));
@@ -29,20 +28,12 @@ void PBRMaterial::setRoughness(float newValue){
     shaderData.setData(PBRMaterial::_roughnessProp, newValue);
 }
 
-id<MTLTexture> PBRMaterial::roughnessTexture(){
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRMaterial::_roughnessTextureProp));
+id<MTLTexture> PBRMaterial::metallicRoughnessTexture(){
+    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRMaterial::_metallicRoughnessTextureProp));
 }
 
-void PBRMaterial::setRoughnessTexture(id<MTLTexture> newValue){
-    shaderData.setData(PBRMaterial::_roughnessTextureProp, newValue);
-}
-
-id<MTLTexture> PBRMaterial::metallicTexture(){
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRMaterial::_roughnessTextureProp));
-}
-
-void PBRMaterial::setMetallicTexture(id<MTLTexture> newValue){
-    shaderData.setData(PBRMaterial::_roughnessTextureProp, newValue);
+void PBRMaterial::setMetallicRoughnessTexture(id<MTLTexture> newValue){
+    shaderData.setData(PBRMaterial::_metallicRoughnessTextureProp, newValue);
 }
 
 PBRMaterial::PBRMaterial(Engine* engine):
