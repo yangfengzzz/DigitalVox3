@@ -91,7 +91,41 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
 
 void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex, const tinygltf::Model& model,
                           std::vector<uint32_t>& indexBuffer, std::vector<Vertex>& vertexBuffer, float globalscale) {
+    EntityPtr newNode = nullptr;
+    if (parent) {
+        newNode = parent->createChild();
+    } else {
+        newNode = engine->sceneManager().activeScene()->createRootEntity();
+    }
     
+    // Generate local node matrix
+    if (node.translation.size() == 3) {
+        auto translation = node.translation;
+        newNode->transform->setPosition(Float3(translation[0], translation[1], translation[2]));
+    }
+    if (node.rotation.size() == 4) {
+        auto rotation = node.rotation;
+        newNode->transform->setRotationQuaternion(Quaternion(rotation[0], rotation[1], rotation[2], rotation[3]));
+    }
+    if (node.scale.size() == 3) {
+        auto scale = node.scale;
+        newNode->transform->setScale(Float3(scale[0], scale[1], scale[2]));
+    }
+    if (node.matrix.size() == 16) {
+        auto m = Matrix();
+        std::copy(node.matrix.begin(), node.matrix.end(), m.elements.data());
+        newNode->transform->setLocalMatrix(m);
+    }
+    
+    // Node with children
+    if (node.children.size() > 0) {
+        for (auto i = 0; i < node.children.size(); i++) {
+            loadNode(newNode.get(), model.nodes[node.children[i]],
+                     node.children[i], model, indexBuffer, vertexBuffer, globalscale);
+        }
+    }
+    
+    linearNodes.push_back(newNode.get());
 }
 
 void GLTFLoader::loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer) {
