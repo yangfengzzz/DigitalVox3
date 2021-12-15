@@ -174,8 +174,12 @@ id<MTLTexture> MetalRenderer::buildTexture(int width, int height, MTLPixelFormat
 }
 
 id<MTLTexture> MetalRenderer::loadTexture(const std::string& imageName) {
-    NSString* fileName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
-    NSURL* url = [[NSBundle mainBundle] URLForResource:fileName withExtension:nil];
+    auto index = imageName.find_last_of("/");
+    auto path = std::string(imageName.begin(), imageName.begin() + index);
+    auto texName = std::string(imageName.begin() + index + 1, imageName.end());
+    NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
+    NSString* textureName = [[NSString alloc]initWithUTF8String:texName.c_str()];
+    NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
     
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
         MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,
@@ -184,15 +188,8 @@ id<MTLTexture> MetalRenderer::loadTexture(const std::string& imageName) {
     };
     
     NSError *error = nil;
-    id<MTLTexture> texture = nil;
-    if (url == nil) {
-        texture = [textureLoader newTextureWithName:fileName
-                                        scaleFactor:1.0 bundle:[NSBundle mainBundle]
-                                            options:options error:&error];
-    } else {
-        texture = [textureLoader newTextureWithContentsOfURL:url
-                                                     options:options error:&error];
-    }
+    id<MTLTexture> texture = [textureLoader newTextureWithContentsOfURL:url
+                                                                options:options error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create MTLTexture: %@", error);

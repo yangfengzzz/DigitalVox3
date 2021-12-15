@@ -95,6 +95,8 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
+    
+    auto texture = engine._hardwareRenderer.loadTexture("../models/particle_smoke.ktx");
 
     engine.run();
 }
