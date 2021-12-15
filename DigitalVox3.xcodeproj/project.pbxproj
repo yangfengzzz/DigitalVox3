@@ -441,7 +441,6 @@
 		04315889276830DA0070FBEC /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE368B274D089700204B8E /* imgui_demo.cpp */; };
 		0431588C276867BD0070FBEC /* particle_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431588A276867BD0070FBEC /* particle_renderer.mm */; };
 		0431588D276867BD0070FBEC /* particle_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431588B276867BD0070FBEC /* particle_renderer.h */; };
-		0431588F27688D7A0070FBEC /* particle_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431588E27688D7A0070FBEC /* particle_view.mm */; };
 		0431589127688F9D0070FBEC /* particle.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0431589027688F9D0070FBEC /* particle.metal */; };
 		043158942768910F0070FBEC /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
 		0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */; };
@@ -609,6 +608,11 @@
 		04C698A12768C43F00C4248F /* imgui_node_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989C2768C43F00C4248F /* imgui_node_editor.cpp */; };
 		04C698A22768C43F00C4248F /* imgui_node_editor_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989D2768C43F00C4248F /* imgui_node_editor_api.cpp */; };
 		04C698A52768C50200C4248F /* crude_json.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C698A32768C50200C4248F /* crude_json.cpp */; };
+		04C698A8276A1B6700C4248F /* json.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 04C698A6276A1B6600C4248F /* json.hpp */; };
+		04C698A9276A1B6700C4248F /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 04C698A7276A1B6600C4248F /* tiny_gltf.h */; };
+		04C698AC276A1B7F00C4248F /* gltf_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C698AA276A1B7F00C4248F /* gltf_loader.mm */; };
+		04C698AD276A1B7F00C4248F /* gltf_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04C698AB276A1B7F00C4248F /* gltf_loader.h */; };
+		04C698AE276A1EC000C4248F /* blend_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431559D2766D47F0070FBEC /* blend_view.mm */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -1558,6 +1562,10 @@
 		04C6989F2768C43F00C4248F /* imgui_node_editor_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_node_editor_internal.h; sourceTree = "<group>"; };
 		04C698A32768C50200C4248F /* crude_json.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = crude_json.cpp; sourceTree = "<group>"; };
 		04C698A42768C50200C4248F /* crude_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crude_json.h; sourceTree = "<group>"; };
+		04C698A6276A1B6600C4248F /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
+		04C698A7276A1B6600C4248F /* tiny_gltf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_gltf.h; sourceTree = "<group>"; };
+		04C698AA276A1B7F00C4248F /* gltf_loader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gltf_loader.mm; sourceTree = "<group>"; };
+		04C698AB276A1B7F00C4248F /* gltf_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gltf_loader.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -3064,6 +3072,10 @@
 				0416102027578322006CD384 /* anim_loader.h */,
 				0416101F27578322006CD384 /* anim_loader.cpp */,
 				04160FE627509026006CD384 /* animation */,
+				04C698A6276A1B6600C4248F /* json.hpp */,
+				04C698A7276A1B6600C4248F /* tiny_gltf.h */,
+				04C698AB276A1B7F00C4248F /* gltf_loader.h */,
+				04C698AA276A1B7F00C4248F /* gltf_loader.mm */,
 			);
 			path = offline;
 			sourceTree = "<group>";
@@ -3785,6 +3797,7 @@
 				0416102627584D8F006CD384 /* skinning_job.h in Headers */,
 				04CE39472751D82F00204B8E /* shader_uniform.h in Headers */,
 				04CE3969275268BB00204B8E /* render_pass.h in Headers */,
+				04C698AD276A1B7F00C4248F /* gltf_loader.h in Headers */,
 				041610072750A577006CD384 /* script.h in Headers */,
 				04CE397D2753491200204B8E /* buffer_mesh.h in Headers */,
 				04CE394B2751E3E600204B8E /* shader.h in Headers */,
@@ -3799,6 +3812,7 @@
 				04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */,
 				041610032750973C006CD384 /* updateFlag_manager.h in Headers */,
 				0416105D275A0CF4006CD384 /* spherical_joint.h in Headers */,
+				04C698A8276A1B6700C4248F /* json.hpp in Headers */,
 				0431559327608E300070FBEC /* color_render_pass.h in Headers */,
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
@@ -3853,6 +3867,7 @@
 				041610552759FCF1006CD384 /* joint.h in Headers */,
 				04160FEA275091FA006CD384 /* engine.h in Headers */,
 				04CE396D27526AEE00204B8E /* basic_render_pipeline.h in Headers */,
+				04C698A9276A1B6700C4248F /* tiny_gltf.h in Headers */,
 				0434A2932757B385009AD4EA /* animator.h in Headers */,
 				04CE38E9275103BC00204B8E /* scene_manager.h in Headers */,
 			);
@@ -4389,7 +4404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0431588F27688D7A0070FBEC /* particle_view.mm in Sources */,
+				04C698AE276A1EC000C4248F /* blend_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4549,6 +4564,7 @@
 				04CE38CE274E689400204B8E /* matrix3x3.cpp in Sources */,
 				04A79ACA275DED9B00182CCB /* direct_light.mm in Sources */,
 				0416104F2759F60D006CD384 /* plane_collider_shape.cpp in Sources */,
+				04C698AC276A1B7F00C4248F /* gltf_loader.mm in Sources */,
 				04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */,
 				04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */,
 				04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */,
