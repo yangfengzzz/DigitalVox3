@@ -81,10 +81,11 @@ public:
     std::vector<Entity*> nodes;
     std::vector<Entity*> linearNodes;
 
-    std::vector<Skin*> skins;
-
+    MeshPtr mesh;
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
+
+    std::vector<Skin*> skins;
     std::vector<Animation> animations;
 
     bool metallicRoughnessWorkflow = true;
@@ -92,14 +93,14 @@ public:
     std::string path;
     
 private:
-    void loadFromFile(std::string filename, uint32_t fileLoadingFlags = FileLoadingFlags::None, float scale = 1.0f);
+    void loadFromFile(std::string filename, MetalRenderer* renderer, uint32_t fileLoadingFlags = FileLoadingFlags::None, float scale = 1.0f);
 
     void loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex, const tinygltf::Model& model,
                   std::vector<uint32_t>& indexBuffer, std::vector<Vertex>& vertexBuffer, float globalscale);
 
     void loadSkins(tinygltf::Model& gltfModel);
 
-    void loadImages(tinygltf::Model& gltfModel);
+    void loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer);
 
     void loadMaterials(tinygltf::Model& gltfModel);
 
@@ -117,6 +118,8 @@ private:
     Entity* nodeFromIndex(uint32_t index);
     
 private:
+    MetalRenderer* renderer;
+    
     id<MTLTexture> getTexture(uint32_t index);
     id<MTLTexture> emptyTexture;
     void createEmptyTexture();
