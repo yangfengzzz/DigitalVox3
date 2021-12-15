@@ -6,50 +6,24 @@
 //
 
 #include "gltf_loader.h"
+#include "../runtime/engine.h"
+#include "../runtime/rhi-metal/metal_renderer.h"
+#include "../runtime/mesh/buffer_mesh.h"
 #include <iostream>
 
 namespace vox {
 namespace offline {
-namespace {
-/*
- We use a custom image loading function with tinyglTF, so we can do custom stuff loading ktx textures
- */
-bool loadImageDataFunc(tinygltf::Image* image, const int imageIndex,
-                       std::string* error, std::string* warning,
-                       int req_width, int req_height, const unsigned char* bytes, int size, void* userData) {
-    // KTX files will be handled by our own code
-    if (image->uri.find_last_of(".") != std::string::npos) {
-        if (image->uri.substr(image->uri.find_last_of(".") + 1) == "ktx") {
-            return true;
-        }
-    }
-    
-    return tinygltf::LoadImageData(image, imageIndex, error, warning, req_width, req_height, bytes, size, userData);
-}
-
-bool loadImageDataFuncEmpty(tinygltf::Image* image, const int imageIndex,
-                            std::string* error, std::string* warning,
-                            int req_width, int req_height, const unsigned char* bytes, int size, void* userData) {
-    // This function will be used for samples that don't require images to be loaded
-    return true;
-}
-}
-
-void GLTFLoader::loadFromFile(std::string filename, MetalRenderer* renderer, uint32_t fileLoadingFlags, float scale) {
+void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale) {
     tinygltf::Model gltfModel;
     tinygltf::TinyGLTF gltfContext;
-    if (fileLoadingFlags & FileLoadingFlags::DontLoadImages) {
-        gltfContext.SetImageLoader(loadImageDataFuncEmpty, nullptr);
-    } else {
-        gltfContext.SetImageLoader(loadImageDataFunc, nullptr);
-    }
+    gltfContext.SetImageLoader(tinygltf::LoadImageData, nullptr);
     
     size_t pos = filename.find_last_of('/');
     path = filename.substr(0, pos);
     
     std::string error, warning;
     
-    this->renderer = renderer;
+    this->renderer = &engine->_hardwareRenderer;
     
     bool fileLoaded = gltfContext.LoadASCIIFromFile(&gltfModel, &error, &warning, filename);
     
@@ -57,36 +31,60 @@ void GLTFLoader::loadFromFile(std::string filename, MetalRenderer* renderer, uin
     std::vector<Vertex> vertexBuffer;
     
     if (fileLoaded) {
-        if (!(fileLoadingFlags & FileLoadingFlags::DontLoadImages)) {
-            loadImages(gltfModel, renderer);
-        }
+        loadImages(gltfModel, renderer);
         loadMaterials(gltfModel);
+        
         const tinygltf::Scene &scene = gltfModel.scenes[gltfModel.defaultScene > -1 ? gltfModel.defaultScene : 0];
         for (size_t i = 0; i < scene.nodes.size(); i++) {
             const tinygltf::Node node = gltfModel.nodes[scene.nodes[i]];
             loadNode(nullptr, node, scene.nodes[i], gltfModel, indexBuffer, vertexBuffer, scale);
         }
+        
         if (gltfModel.animations.size() > 0) {
             loadAnimations(gltfModel);
         }
         loadSkins(gltfModel);
         
-        for (auto node : linearNodes) {
-            // Assign skins
-            // if (node->skinIndex > -1) {
-            //     node->skin = skins[node->skinIndex];
-            // }
-            // Initial pose
-            // if (node->mesh) {
-            //     node->update();
-            // }
-        }
+        // for (auto node : linearNodes) {
+        // Assign skins
+        // if (node->skinIndex > -1) {
+        //     node->skin = skins[node->skinIndex];
+        // }
+        // Initial pose
+        // if (node->mesh) {
+        //     node->update();
+        // }
+        // }
     }
     else {
         // TODO: throw
         std::cerr << "Could not load glTF file \"" + filename + "\": " + error << std::endl;
         return;
     }
+    
+    for (auto extension : gltfModel.extensionsUsed) {
+        if (extension == "KHR_materials_pbrSpecularGlossiness") {
+            std::cout << "Required extension: " << extension;
+            metallicRoughnessWorkflow = false;
+        }
+    }
+    
+    size_t vertexBufferSize = vertexBuffer.size() * sizeof(Vertex);
+    size_t indexBufferSize = indexBuffer.size() * sizeof(uint32_t);
+    
+    auto vBuffer = [renderer->device newBufferWithBytes:vertexBuffer.data() length:vertexBufferSize options:NULL];
+    auto iBuffer = [renderer->device newBufferWithBytes:indexBuffer.data() length:indexBufferSize options:NULL];
+    
+    auto bufferMesh = std::make_shared<BufferMesh>(engine);
+    bufferMesh->setVertexBufferBinding(vBuffer, 0, 0);
+    
+    bufferMesh->addSubMesh(MeshBuffer(iBuffer,
+                                      indexBuffer.size() * sizeof(uint32_t),
+                                      MDLMeshBufferTypeIndex),
+                           MTLIndexTypeUInt32, indexBuffer.size(), MTLPrimitiveTypeTriangle);
+    mesh = bufferMesh;
+    
+    getSceneDimensions();
 }
 
 void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex, const tinygltf::Model& model,
