@@ -28,7 +28,12 @@ class ParticleMaterial: public BaseMaterial {
 public:
     ParticleMaterial(Engine* engine):BaseMaterial(engine, Shader::find("particle-shader")) {
         setIsTransparent(true);
+        auto texture = engine->_hardwareRenderer.loadTexture("../models/particle_smoke.ktx");
+        shaderData.setData(ParticleMaterial::_baseTextureProp, texture);
     }
+    
+private:
+    ShaderProperty _baseTextureProp = Shader::createProperty("u_particleTexture", ShaderDataGroup::Material);
 };
 
 class ParticleScript: public Script {
@@ -95,8 +100,6 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
-    
-    auto texture = engine._hardwareRenderer.loadTexture("../models/particle_smoke.ktx");
 
     engine.run();
 }
