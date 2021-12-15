@@ -13,6 +13,8 @@
 #include "../canvas.h"
 #include "resource_cache_state.h"
 #import <Metal/Metal.h>
+#import <MetalKit/MetalKit.h>
+#import <ModelIO/ModelIO.h>
 #import <QuartzCore/QuartzCore.h>
 
 namespace vox {
@@ -69,13 +71,24 @@ public:
     void bindTexture(id <MTLTexture> texture, int location);
     
     void drawPrimitive(SubMesh *subPrimitive);
+
+public:
+    id<MTLTexture> buildTexture(int width, int height, MTLPixelFormat pixelFormat,
+                                MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget);
     
-    id<MTLTexture> buildTexture(MTLPixelFormat pixelFormat, int width, int height);
+    id<MTLTexture> loadTexture(const std::string& imageName);
+    
+    id<MTLTexture> loadTexture(MDLTexture* texture);
+    
+    id<MTLTexture> loadCubeTexture(const std::string& imageName);
+    
+    id<MTLTexture> loadTextureArray(const std::vector<std::string>& textureNames);
     
 private:
     CAMetalLayer *layer;
     id <CAMetalDrawable> drawable;
     
+    MTKTextureLoader* textureLoader;
     id<MTLTexture> depthTexture;
 };
 

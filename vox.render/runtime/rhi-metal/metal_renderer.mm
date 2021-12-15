@@ -26,7 +26,7 @@ resouceCache(this) {
     samplerState = buildSamplerState();
     
     ImGui_ImplMetal_Init(device);
-
+    
     NSWindow *nswin = glfwGetCocoaWindow(canvas->handle());
     layer = [CAMetalLayer layer];
     layer.device = device;
@@ -34,10 +34,11 @@ resouceCache(this) {
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
     
+    textureLoader = [[MTKTextureLoader alloc] initWithDevice:device];
     auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
-        depthTexture = buildTexture(MTLPixelFormatDepth32Float, buffer_width, buffer_height);
+        depthTexture = buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float);
         layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
     };
     createFrameBuffer(canvas->handle(), 0, 0);
@@ -162,13 +163,120 @@ void MetalRenderer::drawPrimitive(SubMesh *subPrimitive) {
                        indexBufferOffset:subPrimitive->indexBuffer.offset()];
 }
 
-id<MTLTexture> MetalRenderer::buildTexture(MTLPixelFormat pixelFormat, int width, int height) {
+//MARK: - Texture
+id<MTLTexture> MetalRenderer::buildTexture(int width, int height, MTLPixelFormat pixelFormat, MTLTextureUsage usage) {
     MTLTextureDescriptor* descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pixelFormat
                                                                                           width:width height:height
                                                                                       mipmapped:false];
-    descriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
+    descriptor.usage = usage;
     descriptor.storageMode = MTLStorageModePrivate;
     return [device newTextureWithDescriptor:descriptor];
+}
+
+id<MTLTexture> MetalRenderer::loadTexture(const std::string& imageName) {
+    NSString* fileName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
+    NSURL* url = [[NSBundle mainBundle] URLForResource:fileName withExtension:nil];
+    
+    NSDictionary<MTKTextureLoaderOption, id> * options = @{
+        MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,
+        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
+        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:TRUE]
+    };
+    
+    NSError *error = nil;
+    id<MTLTexture> texture = nil;
+    if (url == nil) {
+        texture = [textureLoader newTextureWithName:fileName
+                                        scaleFactor:1.0 bundle:[NSBundle mainBundle]
+                                            options:options error:&error];
+    } else {
+        texture = [textureLoader newTextureWithContentsOfURL:url
+                                                     options:options error:&error];
+    }
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create MTLTexture: %@", error);
+    }
+    return texture;
+}
+
+id<MTLTexture> MetalRenderer::loadTexture(MDLTexture* texture) {
+    NSDictionary<MTKTextureLoaderOption, id> * options = @{
+        MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,
+        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
+        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
+    };
+    
+    NSError *error = nil;
+    id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:texture options:options error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create MTLTexture: %@", error);
+    }
+    return mtlTexture;
+}
+
+id<MTLTexture> MetalRenderer::loadCubeTexture(const std::string& imageName) {
+    NSDictionary<MTKTextureLoaderOption, id> * options = @{
+        MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginTopLeft,
+        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
+        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
+    };
+    NSError *error = nil;
+    
+    NSMutableArray<NSString *> *imageNames = [[NSMutableArray alloc]init];
+    [imageNames addObject:[[NSString alloc]initWithUTF8String:imageName.c_str()]];
+    MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames];
+    if (mdlTexture != nil) {
+        id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:mdlTexture options:options error:&error];
+        if (error != nil)
+        {
+            NSLog(@"Error: failed to create MTLTexture: %@", error);
+        }
+        return mtlTexture;
+    }
+    
+    id<MTLTexture> mtlTexture = [textureLoader newTextureWithName:imageNames[0]
+                                                      scaleFactor:1.0 bundle:[NSBundle mainBundle]
+                                                          options:options error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create MTLTexture: %@", error);
+    }
+    return mtlTexture;
+}
+
+id<MTLTexture> MetalRenderer::loadTextureArray(const std::vector<std::string>& textureNames) {
+    NSMutableArray<id<MTLTexture>> *textures = [[NSMutableArray alloc]init];
+    for (const auto& name : textureNames) {
+        auto texture = loadTexture(name);
+        if (texture != nil) {
+            [textures addObject:loadTexture(name)];
+        }
+    }
+    
+    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+    descriptor.textureType = MTLTextureType2DArray;
+    descriptor.pixelFormat = textures[0].pixelFormat;
+    descriptor.width = textures[0].width;
+    descriptor.height = textures[0].height;
+    descriptor.arrayLength = textures.count;
+    
+    auto arrayTexture = [device newTextureWithDescriptor:descriptor];
+    auto commandBuffer = [commandQueue commandBuffer];
+    auto blitEncoder = [commandBuffer blitCommandEncoder];
+    MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
+    MTLSize size = MTLSize{.width =  arrayTexture.width,
+        .height =  arrayTexture.height, .depth = 1};
+    for (size_t index = 0; index < textures.count; index++) {
+        [blitEncoder copyFromTexture:textures[index] sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
+                           toTexture:arrayTexture destinationSlice:index destinationLevel:0 destinationOrigin:origin];
+    }
+    [blitEncoder endEncoding];
+    [commandBuffer commit];
+    [commandBuffer waitUntilCompleted];
+    
+    return arrayTexture;
 }
 
 }
