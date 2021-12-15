@@ -22,13 +22,6 @@ public:
     MTLFunctionType type;
 };
 
-/// Shader uniform block.
-class ShaderUniformBlock {
-public:
-    std::vector<ShaderUniform> constUniforms;
-    std::vector<ShaderUniform> textureUniforms;
-};
-
 }
 
 #endif /* shader_uniform_hpp */

@@ -766,7 +766,6 @@
 		04CE393F2751D2ED00204B8E /* shader_macro_collection.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE393D2751D2ED00204B8E /* shader_macro_collection.h */; };
 		04CE39422751D7BF00204B8E /* shader_data.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39402751D7BF00204B8E /* shader_data.mm */; };
 		04CE39432751D7BF00204B8E /* shader_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39412751D7BF00204B8E /* shader_data.h */; };
-		04CE39462751D82F00204B8E /* shader_uniform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39442751D82F00204B8E /* shader_uniform.mm */; };
 		04CE39472751D82F00204B8E /* shader_uniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39452751D82F00204B8E /* shader_uniform.h */; };
 		04CE394A2751E3E600204B8E /* shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39482751E3E600204B8E /* shader.mm */; };
 		04CE394B2751E3E600204B8E /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39492751E3E600204B8E /* shader.h */; };
@@ -1810,7 +1809,6 @@
 		04CE393D2751D2ED00204B8E /* shader_macro_collection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_macro_collection.h; sourceTree = "<group>"; };
 		04CE39402751D7BF00204B8E /* shader_data.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_data.mm; sourceTree = "<group>"; };
 		04CE39412751D7BF00204B8E /* shader_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_data.h; sourceTree = "<group>"; };
-		04CE39442751D82F00204B8E /* shader_uniform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader_uniform.mm; sourceTree = "<group>"; };
 		04CE39452751D82F00204B8E /* shader_uniform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_uniform.h; sourceTree = "<group>"; };
 		04CE39482751E3E600204B8E /* shader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shader.mm; sourceTree = "<group>"; };
 		04CE39492751E3E600204B8E /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
@@ -3401,7 +3399,6 @@
 				04CE39412751D7BF00204B8E /* shader_data.h */,
 				04CE39402751D7BF00204B8E /* shader_data.mm */,
 				04CE39452751D82F00204B8E /* shader_uniform.h */,
-				04CE39442751D82F00204B8E /* shader_uniform.mm */,
 			);
 			path = shader;
 			sourceTree = "<group>";
@@ -4504,7 +4501,6 @@
 				041610192755DB7C006CD384 /* spherical.cpp in Sources */,
 				04CE397827527B4700204B8E /* primitive_mesh.mm in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
-				04CE39462751D82F00204B8E /* shader_uniform.mm in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
 				04160FF12750944F006CD384 /* entity.mm in Sources */,
 				04CE37ED274D167F00204B8E /* additive_animation_builder.cc in Sources */,

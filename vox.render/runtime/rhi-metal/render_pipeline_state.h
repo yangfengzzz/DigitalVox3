@@ -23,11 +23,11 @@ class MetalRenderer;
 
 class RenderPipelineState {
 public:
-    ShaderUniformBlock sceneUniformBlock = ShaderUniformBlock();
-    ShaderUniformBlock cameraUniformBlock = ShaderUniformBlock();
-    ShaderUniformBlock rendererUniformBlock = ShaderUniformBlock();
-    ShaderUniformBlock materialUniformBlock = ShaderUniformBlock();
-    ShaderUniformBlock otherUniformBlock = ShaderUniformBlock();
+    std::vector<ShaderUniform> sceneUniformBlock{};
+    std::vector<ShaderUniform> cameraUniformBlock{};
+    std::vector<ShaderUniform> rendererUniformBlock{};
+    std::vector<ShaderUniform> materialUniformBlock{};
+    std::vector<ShaderUniform> otherUniformBlock{};
     
     RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor);
     
@@ -43,19 +43,13 @@ public:
     /// - Parameters:
     ///   - uniformBlock: shader Uniform block
     ///   - shaderData: shader data
-    void uploadAll(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData);
+    void uploadAll(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData);
     
     /// Upload constant shader data in shader uniform block.
     /// - Parameters:
     ///   - uniformBlock: shader Uniform block
     ///   - shaderData: shader data
-    void uploadUniforms(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData);
-    
-    /// Upload texture shader data in shader uniform block.
-    /// - Parameters:
-    ///   - uniformBlock: shader Uniform block
-    ///   - shaderData: shader data
-    void uploadTextures(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData);
+    void uploadUniforms(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData);
     
     template<class T, class F>
     static inline void register_vertex_uploader(F const& f) {
@@ -102,9 +96,9 @@ private:
     void _recordVertexLocation(MTLRenderPipelineReflection* reflection);
     
     void _groupingUniform(const ShaderUniform& uniform,
-                          const std::optional<ShaderDataGroup::Enum>& group, bool isTexture);
+                          const std::optional<ShaderDataGroup::Enum>& group);
     
-    void _groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms, bool isTexture);
+    void _groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms);
     
     MetalRenderer *_render;
     id <MTLRenderPipelineState> _handle;

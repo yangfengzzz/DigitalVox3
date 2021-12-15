@@ -28,12 +28,8 @@ _render(_render) {
 }
 
 void RenderPipelineState::groupingOtherUniformBlock() {
-    if (otherUniformBlock.constUniforms.size() > 0) {
-        _groupingSubOtherUniforms(otherUniformBlock.constUniforms, false);
-    }
-    
-    if (otherUniformBlock.textureUniforms.size() > 0) {
-        _groupingSubOtherUniforms(otherUniformBlock.textureUniforms, true);
+    if (otherUniformBlock.size() > 0) {
+        _groupingSubOtherUniforms(otherUniformBlock);
     }
 }
 
@@ -113,14 +109,13 @@ void RenderPipelineState::process(const ShaderUniform& uniform, const std::any& 
     }
 }
 
-void RenderPipelineState::uploadAll(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
+void RenderPipelineState::uploadAll(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData) {
     uploadUniforms(uniformBlock, shaderData);
-    uploadTextures(uniformBlock, shaderData);
 }
 
-void RenderPipelineState::uploadUniforms(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
+void RenderPipelineState::uploadUniforms(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData) {
     const auto& properties = shaderData._properties;
-    const auto& constUniforms = uniformBlock.constUniforms;
+    const auto& constUniforms = uniformBlock;
     
     for (size_t i = 0; i < constUniforms.size(); i++) {
         const auto& uniform = constUniforms[i];
@@ -131,31 +126,11 @@ void RenderPipelineState::uploadUniforms(const ShaderUniformBlock& uniformBlock,
     }
 }
 
-void RenderPipelineState::uploadTextures(const ShaderUniformBlock& uniformBlock, const ShaderData& shaderData) {
-    const auto& properties = shaderData._properties;
-    const auto& textureUniforms = uniformBlock.textureUniforms;
-    
-    if (!textureUniforms.empty()) {
-        for (size_t i = 0; i < textureUniforms.size(); i++) {
-            const auto& uniform = textureUniforms[i];
-            auto iter = properties.find(uniform.propertyId);
-            if (iter != properties.end()) {
-                process(uniform, iter->second, _render->renderEncoder);
-            }
-        }
-    }
-}
-
 void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* reflection) {
     auto count = [[reflection vertexArguments] count];
     if (count != 0) {
         for (size_t i = 0; i < count; i++) {
             const auto& aug = [reflection vertexArguments][i];
-            const auto type = aug.bufferDataType;
-            if (type == MTLDataTypeStruct) {
-                continue;
-            }
-            
             const auto name = [aug.name cStringUsingEncoding:NSUTF8StringEncoding];
             const auto location = aug.index;
             const auto group = Shader::_getShaderPropertyGroup(name);
@@ -165,21 +140,7 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
             shaderUniform.propertyId = Shader::getPropertyByName(name)->_uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeVertex;
-            
-            switch (type) {
-                case MTLDataTypeFloat:
-                case MTLDataTypeFloat2:
-                case MTLDataTypeFloat3:
-                case MTLDataTypeFloat4:
-                case MTLDataTypeInt:
-                case MTLDataTypeFloat4x4 :
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
-            _groupingUniform(shaderUniform, group, false);
+            _groupingUniform(shaderUniform, group);
         }
     }
     
@@ -187,8 +148,6 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
     if (count != 0) {
         for (size_t i = 0; i < count; i++) {
             const auto& aug = [reflection fragmentArguments][i];
-            const auto type = aug.type;
-            
             const auto name = [aug.name cStringUsingEncoding:NSUTF8StringEncoding];
             const auto location = aug.index;
             const auto group = Shader::_getShaderPropertyGroup(name);
@@ -198,73 +157,34 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
             shaderUniform.propertyId = Shader::getPropertyByName(name)->_uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeFragment;
-            
-            if (type == MTLArgumentTypeBuffer) {
-                switch (aug.bufferDataType) {
-                    case MTLDataTypeFloat:
-                    case MTLDataTypeFloat2:
-                    case MTLDataTypeFloat3:
-                    case MTLDataTypeFloat4:
-                    case MTLDataTypeInt:
-                    case MTLDataTypeFloat4x4 :
-                    case MTLDataTypeStruct :
-                        break;
-                    default:
-                        break;
-                }
-            } else if (type == MTLArgumentTypeSampler) {
-                
-            } else if (type == MTLArgumentTypeTexture) {
-            }
-            
-            _groupingUniform(shaderUniform, group, false);
+            _groupingUniform(shaderUniform, group);
         }
     }
 }
 
 void RenderPipelineState::_groupingUniform(const ShaderUniform& uniform,
-                                           const std::optional<ShaderDataGroup::Enum>& group, bool isTexture) {
+                                           const std::optional<ShaderDataGroup::Enum>& group) {
     if (group != std::nullopt) {
         switch (group.value()) {
             case ShaderDataGroup::Scene:
-                if (isTexture) {
-                    sceneUniformBlock.textureUniforms.push_back(uniform);
-                } else {
-                    sceneUniformBlock.constUniforms.push_back(uniform);
-                }
+                sceneUniformBlock.push_back(uniform);
                 break;
             case ShaderDataGroup::Camera:
-                if (isTexture) {
-                    cameraUniformBlock.textureUniforms.push_back(uniform);
-                } else {
-                    cameraUniformBlock.constUniforms.push_back(uniform);
-                }
+                cameraUniformBlock.push_back(uniform);
                 break;
             case ShaderDataGroup::Renderer:
-                if (isTexture) {
-                    rendererUniformBlock.textureUniforms.push_back(uniform);
-                } else {
-                    rendererUniformBlock.constUniforms.push_back(uniform);
-                }
+                rendererUniformBlock.push_back(uniform);
                 break;
             case ShaderDataGroup::Material:
-                if (isTexture) {
-                    materialUniformBlock.textureUniforms.push_back(uniform);
-                } else {
-                    materialUniformBlock.constUniforms.push_back(uniform);
-                }
+                materialUniformBlock.push_back(uniform);
                 break;
         }
     } else {
-        if (isTexture) {
-            otherUniformBlock.textureUniforms.push_back(uniform);
-        } else {
-            otherUniformBlock.constUniforms.push_back(uniform);
-        }
+        otherUniformBlock.push_back(uniform);
     }
 }
 
-void RenderPipelineState::_groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms, bool isTexture) {
+void RenderPipelineState::_groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms) {
     for (size_t i = 0; i < uniforms.size(); i++) {
         const auto& uniform = uniforms[i];
         const auto group = Shader::_getShaderPropertyGroup(uniform.name);
@@ -277,7 +197,7 @@ void RenderPipelineState::_groupingSubOtherUniforms(std::vector<ShaderUniform>& 
             if (iter != uniforms.end()) {
                 uniforms.erase(iter);
             }
-            _groupingUniform(uniform, group, isTexture);
+            _groupingUniform(uniform, group);
         }
     }
 }
