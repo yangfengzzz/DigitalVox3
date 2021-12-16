@@ -61,17 +61,12 @@ struct Vertex {
 class GLTFLoader {
 public:
     std::vector<Entity*> nodes;
-    std::vector<Entity*> linearNodes;
 
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
 
     std::vector<GPUSkinnedMeshRenderer::SkinPtr> skins;
     std::vector<Animation> animations;
-
-    bool metallicRoughnessWorkflow = true;
-    bool buffersBound = false;
-    std::string path;
     
 private:
     void loadFromFile(std::string filename, Engine* engine, float scale = 1.0f);
@@ -87,23 +82,17 @@ private:
 
     void loadAnimations(tinygltf::Model& gltfModel);
 
-    void getNodeDimensions(Entity* node, Float3& min, Float3& max);
-
-    void getSceneDimensions();
-
 private:
     void updateAnimation(uint32_t index, float time);
-
-    Entity* findNode(Entity* parent, uint32_t index);
-
-    Entity* nodeFromIndex(uint32_t index);
     
 private:
     Engine* engine;
+    std::map<uint32_t, std::pair<Entity*, int32_t>> linearNodes{};
+    bool metallicRoughnessWorkflow = true;
+    bool buffersBound = false;
+    std::string path;
     
     id<MTLTexture> getTexture(uint32_t index);
-    id<MTLTexture> emptyTexture;
-    void createEmptyTexture();
 };
 
 

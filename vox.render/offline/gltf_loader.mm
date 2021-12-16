@@ -29,10 +29,6 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
     this->engine = engine;
     
     bool fileLoaded = gltfContext.LoadASCIIFromFile(&gltfModel, &error, &warning, filename);
-    
-    std::vector<uint32_t> indexBuffer;
-    std::vector<Vertex> vertexBuffer;
-    
     if (fileLoaded) {
         loadImages(gltfModel, &engine->_hardwareRenderer);
         loadMaterials(gltfModel);
@@ -48,16 +44,14 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
         }
         loadSkins(gltfModel);
         
-        // for (auto node : linearNodes) {
-        // Assign skins
-        // if (node->skinIndex > -1) {
-        //     node->skin = skins[node->skinIndex];
-        // }
-        // Initial pose
-        // if (node->mesh) {
-        //     node->update();
-        // }
-        // }
+        for (auto node : linearNodes) {
+            // Assign skins
+            if (node.second.second > -1) {
+                node.second.first->getComponent<GPUSkinnedMeshRenderer>()->setSkin(skins[node.second.second]);
+            }
+            // Initial pose
+            node.second.first->getComponent<GPUSkinnedMeshRenderer>()->update(0);
+        }
     }
     else {
         // TODO: throw
@@ -71,7 +65,6 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
             metallicRoughnessWorkflow = false;
         }
     }
-    getSceneDimensions();
 }
 
 void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex,
@@ -82,6 +75,7 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
     } else {
         newNode = engine->sceneManager().activeScene()->createRootEntity(node.name);
     }
+    linearNodes[nodeIndex] = std::make_pair(newNode.get(), node.skin);
     
     // Generate local node matrix
     if (node.translation.size() == 3) {
@@ -121,7 +115,7 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
             if (primitive.indices < 0) {
                 continue;
             }
-
+            
             // Vertices
             {
                 const float *bufferPos = nullptr;
@@ -277,16 +271,12 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
         }
         renderer->setMesh(newMesh);
     }
-    
-    linearNodes.push_back(newNode.get());
 }
 
 void GLTFLoader::loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer) {
     for (tinygltf::Image &image : gltfModel.images) {
         textures.push_back(renderer->loadTexture(image.uri));
     }
-    // Create an empty texture to be used for empty material images
-    createEmptyTexture();
 }
 
 void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
@@ -311,8 +301,6 @@ void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
         }
         if (mat.additionalValues.find("normalTexture") != mat.additionalValues.end()) {
             material->setNormalTexture(getTexture(gltfModel.textures[mat.additionalValues["normalTexture"].TextureIndex()].source));
-        } else {
-            material->setNormalTexture(emptyTexture);
         }
         if (mat.additionalValues.find("emissiveTexture") != mat.additionalValues.end()) {
             material->setEmissiveTexture(getTexture(gltfModel.textures[mat.additionalValues["emissiveTexture"].TextureIndex()].source));
@@ -346,9 +334,9 @@ void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
         
         // Find joint nodes
         for (int jointIndex : source.joints) {
-            Entity* node = nodeFromIndex(jointIndex);
+            Entity* node = linearNodes[jointIndex].first;
             if (node) {
-                newSkin->joints.push_back(nodeFromIndex(jointIndex));
+                newSkin->joints.push_back(node);
             }
         }
         
@@ -464,7 +452,7 @@ void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
                 continue;
             }
             channel.samplerIndex = source.sampler;
-            channel.node = nodeFromIndex(source.target_node);
+            channel.node = linearNodes[source.target_node].first;
             if (!channel.node) {
                 continue;
             }
@@ -476,14 +464,12 @@ void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
     }
 }
 
-void GLTFLoader::getNodeDimensions(Entity* node, Float3& min, Float3& max) {
-    
+id<MTLTexture> GLTFLoader::getTexture(uint32_t index) {
+    if (index < textures.size()) {
+        return textures[index];
+    }
+    return nullptr;
 }
-
-void GLTFLoader::getSceneDimensions() {
-    
-}
-
 
 }
 }
