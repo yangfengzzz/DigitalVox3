@@ -173,14 +173,13 @@ fragment float4 fragment_simple(VertexOut in [[stage_in]],
                                 texture2d<float> u_baseColorTexture [[texture(1), function_constant(hasBaseColorMap)]],
                                 texture2d<float> u_normalTexture [[texture(2), function_constant(hasNormalTexture)]],
                                 texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveMap)]],
-                                texture2d<float> u_metallicTexture [[texture(4), function_constant(hasMetalMap)]],
-                                texture2d<float> u_roughnessTexture [[texture(5), function_constant(hasRoughnessMap)]],
-                                texture2d<float> u_specularTexture [[texture(6), function_constant(hasSpecularMap)]],
-                                texture2d<float> u_glossinessTexture [[texture(7), function_constant(hasGlossinessMap)]],
-                                texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
-                                texturecube<float> u_skybox [[texture(9)]],
-                                texturecube<float> u_skyboxDiffuse [[texture(10)]],
-                                texture2d<float> u_brdfLut [[texture(11)]]) {
+                                texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalMap)]],
+                                texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularMap)]],
+                                texture2d<float> u_glossinessTexture [[texture(6), function_constant(hasGlossinessMap)]],
+                                texture2d<float> u_occlusionTexture [[texture(7), function_constant(hasOcclusionMap)]],
+                                texturecube<float> u_skybox [[texture(8)]],
+                                texturecube<float> u_skyboxDiffuse [[texture(9)]],
+                                texture2d<float> u_brdfLut [[texture(10)]]) {
     // extract color
     float3 baseColor;
     if (hasBaseColorMap) {
@@ -191,14 +190,14 @@ fragment float4 fragment_simple(VertexOut in [[stage_in]],
     // extract metallic
     float metallic;
     if (hasMetalMap) {
-        metallic = u_metallicTexture.sample(textureSampler, in.uv).r;
+        metallic = u_metallicRoughnessTexture.sample(textureSampler, in.uv).r;
     } else {
         metallic = u_metal;
     }
     // extract roughness
     float roughness;
     if (hasRoughnessMap) {
-        roughness = u_roughnessTexture.sample(textureSampler, in.uv).r;
+        roughness = u_metallicRoughnessTexture.sample(textureSampler, in.uv).g;
     } else {
         roughness = u_roughness;
     }

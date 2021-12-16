@@ -2817,6 +2817,13 @@
 			name = particle;
 			sourceTree = "<group>";
 		};
+		04860853276B17F100C05BDA /* core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -3529,19 +3536,20 @@
 			children = (
 				04CE393B2751D2C900204B8E /* macro_name.h */,
 				04CE39892753A43800204B8E /* shader_common.h */,
-				04CE398B2753A83B00204B8E /* function-common.metal */,
 				04CE39902753A83B00204B8E /* function-constant.metal */,
-				04CE398C2753A83B00204B8E /* background-texture.metal */,
+				04CE39922753A83C00204B8E /* unlit.metal */,
 				04CE398A2753A83B00204B8E /* blinn-phong.metal */,
+				0431589027688F9D0070FBEC /* particle.metal */,
+				04860853276B17F100C05BDA /* core */,
+				04CE398B2753A83B00204B8E /* function-common.metal */,
+				04CE398C2753A83B00204B8E /* background-texture.metal */,
 				04CE398D2753A83B00204B8E /* BRDF.metal */,
 				04CE39932753A83C00204B8E /* fix_particle.metal */,
 				04CE398E2753A83B00204B8E /* pbr.metal */,
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04CE398F2753A83B00204B8E /* skybox.metal */,
-				04CE39922753A83C00204B8E /* unlit.metal */,
 				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
 				04CE39912753A83C00204B8E /* SkinningShader.metal */,
-				0431589027688F9D0070FBEC /* particle.metal */,
 				0434AC882766133E009AD4EA /* editor */,
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 			);

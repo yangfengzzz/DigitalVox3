@@ -274,6 +274,9 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                         return;
                 }
             }
+            
+            auto mat = primitive.material > -1 ? materials[primitive.material] : materials.back();
+            renderer->setMaterial(j, mat);
         }
         renderer->setMesh(newMesh);
     }
