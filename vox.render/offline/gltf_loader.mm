@@ -6,8 +6,8 @@
 //
 
 #define TINYGLTF_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
 #define TINYGLTF_NO_STB_IMAGE_WRITE
+#define TINYGLTF_NO_STB_IMAGE
 
 #include "gltf_loader.h"
 #include "../runtime/engine.h"
@@ -20,6 +20,15 @@
 
 namespace vox {
 namespace offline {
+namespace {
+bool loadImageDataFuncEmpty(tinygltf::Image* image, const int imageIndex,
+                            std::string* error, std::string* warning, int req_width, int req_height,
+                            const unsigned char* bytes, int size, void* userData) {
+    // This function will be used for samples that don't require images to be loaded
+    return true;
+}
+}
+
 GLTFLoader::GLTFLoader(Engine* engine):
 engine(engine){
 }
@@ -30,7 +39,7 @@ void GLTFLoader::loadFromFile(std::string filename, float scale) {
     
     tinygltf::Model gltfModel;
     tinygltf::TinyGLTF gltfContext;
-    gltfContext.SetImageLoader(tinygltf::LoadImageData, nullptr);
+    gltfContext.SetImageLoader(loadImageDataFuncEmpty, nullptr);
         
     std::string error, warning;
     

@@ -38,7 +38,8 @@ int main(int, char**) {
     light->addComponent<PointLight>();
     
     auto loader = offline::GLTFLoader(&engine);
-    loader.loadFromFile("../models/FlightHelmet/glTF/FlightHelmet.gltf");
-    
+//    loader.loadFromFile("../models/FlightHelmet/glTF/FlightHelmet.gltf");
+    loader.loadFromFile("/Users/yangfeng/Desktop/Vulkan/data/models/sponza/sponza.gltf");
+
     engine.run();
 }

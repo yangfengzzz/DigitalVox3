@@ -591,8 +591,8 @@
 		0486084D276B0C9300C05BDA /* gpu_animation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084B276B0C9300C05BDA /* gpu_animation.mm */; };
 		0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* gpu_animation.h */; };
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
-		04860858276B2DED00C05BDA /* gltfloading.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04860857276B2DED00C05BDA /* gltfloading.metal */; };
 		0486085B276B364900C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
+		0486085E276B454600C05BDA /* gltfloading.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04860857276B2DED00C05BDA /* gltfloading.metal */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -1543,6 +1543,7 @@
 		0486084F276B0ED700C05BDA /* gltf_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gltf_view.mm; sourceTree = "<group>"; };
 		04860851276B113900C05BDA /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		04860857276B2DED00C05BDA /* gltfloading.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfloading.metal; sourceTree = "<group>"; };
+		0486085C276B40F500C05BDA /* gltfscene.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfscene.metal; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -3553,6 +3554,7 @@
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 				0434AC882766133E009AD4EA /* editor */,
 				04860857276B2DED00C05BDA /* gltfloading.metal */,
+				0486085C276B40F500C05BDA /* gltfscene.metal */,
 				04860859276B2DFA00C05BDA /* experimental */,
 				04CE398B2753A83B00204B8E /* function-common.metal */,
 				04CE398C2753A83B00204B8E /* background-texture.metal */,
@@ -4490,7 +4492,7 @@
 				04CE39AC2755003B00204B8E /* blinn_phong_material.mm in Sources */,
 				04A79AD6275E0F8D00182CCB /* pointer_manager.mm in Sources */,
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
-				04860858276B2DED00C05BDA /* gltfloading.metal in Sources */,
+				0486085E276B454600C05BDA /* gltfloading.metal in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
 				0431588C276867BD0070FBEC /* particle_renderer.mm in Sources */,
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
