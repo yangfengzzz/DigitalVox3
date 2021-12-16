@@ -34,6 +34,11 @@ id<MTLTexture> PBRMaterial::metallicRoughnessTexture(){
 
 void PBRMaterial::setMetallicRoughnessTexture(id<MTLTexture> newValue){
     shaderData.setData(PBRMaterial::_metallicRoughnessTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_METALROUGHNESSMAP);
+    } else {
+        shaderData.disableMacro(HAS_METALROUGHNESSMAP);
+    }
 }
 
 PBRMaterial::PBRMaterial(Engine* engine):

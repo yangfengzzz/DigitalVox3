@@ -34,6 +34,11 @@ id<MTLTexture> PBRBaseMaterial::baseTexture() {
 
 void PBRBaseMaterial::setBaseTexture(id<MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_baseTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_BASE_COLORMAP);
+    } else {
+        shaderData.disableMacro(HAS_BASE_COLORMAP);
+    }
 }
 
 id<MTLTexture> PBRBaseMaterial::normalTexture() {
@@ -42,6 +47,11 @@ id<MTLTexture> PBRBaseMaterial::normalTexture() {
 
 void PBRBaseMaterial::setNormalTexture(id<MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_normalTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_NORMAL_TEXTURE);
+    } else {
+        shaderData.disableMacro(HAS_NORMAL_TEXTURE);
+    }
 }
 
 float PBRBaseMaterial::normalTextureIntensity() {
@@ -66,6 +76,11 @@ id<MTLTexture> PBRBaseMaterial::emissiveTexture() {
 
 void PBRBaseMaterial::setEmissiveTexture(id<MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_emissiveTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_EMISSIVEMAP);
+    } else {
+        shaderData.disableMacro(HAS_EMISSIVEMAP);
+    }
 }
 
 id<MTLTexture> PBRBaseMaterial::occlusionTexture() {
@@ -74,6 +89,11 @@ id<MTLTexture> PBRBaseMaterial::occlusionTexture() {
 
 void PBRBaseMaterial::setOcclusionTexture(id<MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_occlusionTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_OCCLUSIONMAP);
+    } else {
+        shaderData.disableMacro(HAS_OCCLUSIONMAP);
+    }
 }
 
 float PBRBaseMaterial::occlusionTextureIntensity() {

@@ -26,6 +26,12 @@ id<MTLTexture> UnlitMaterial::baseTexture() {
 
 void UnlitMaterial::setBaseTexture(id<MTLTexture> newValue) {
     shaderData.setData(UnlitMaterial::_baseTextureProp, newValue);
+
+    if (newValue) {
+        shaderData.enableMacro(HAS_BASE_TEXTURE);
+    } else {
+        shaderData.disableMacro(HAS_BASE_TEXTURE);
+    }
 }
 
 math::Float4 UnlitMaterial::tilingOffset() {

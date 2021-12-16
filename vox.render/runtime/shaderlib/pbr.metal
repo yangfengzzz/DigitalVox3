@@ -370,8 +370,7 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
                              texture2d<float> u_baseColorTexture [[texture(1), function_constant(hasBaseColorMap)]],
                              texture2d<float> u_normalTexture [[texture(2), function_constant(hasNormalTexture)]],
                              texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveMap)]],
-                             texture2d<float> u_metallicTexture [[texture(4), function_constant(hasMetalMap)]],
-                             texture2d<float> u_roughnessTexture [[texture(5), function_constant(hasRoughnessMap)]],
+                             texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalRoughnessMap)]],
                              texture2d<float> u_specularTexture [[texture(6), function_constant(hasSpecularMap)]],
                              texture2d<float> u_glossinessTexture [[texture(7), function_constant(hasGlossinessMap)]],
                              texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
@@ -406,13 +405,13 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
         }
     }
     
-    if (hasRoughnessMap) {
-        float4 roughMapColor = u_roughnessTexture.sample(textureSampler, in.v_uv);
+    if (hasMetalRoughnessMap) {
+        float4 roughMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv).r;
         roughnessFactor *= roughMapColor.r;
     }
     
-    if (hasMetalMap) {
-        float4 metalMapColor = u_metallicTexture.sample(textureSampler, in.v_uv);
+    if (hasMetalRoughnessMap) {
+        float4 metalMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv).g;
         metalnessFactor *= metalMapColor.r;
     }
     

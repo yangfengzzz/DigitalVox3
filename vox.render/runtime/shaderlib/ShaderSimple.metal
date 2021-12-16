@@ -172,7 +172,7 @@ fragment float4 fragment_simple(VertexOut in [[stage_in]],
                                 texture2d<float> u_baseColorTexture [[texture(1), function_constant(hasBaseColorMap)]],
                                 texture2d<float> u_normalTexture [[texture(2), function_constant(hasNormalTexture)]],
                                 texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveMap)]],
-                                texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalMap)]],
+                                texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalRoughnessMap)]],
                                 texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularMap)]],
                                 texture2d<float> u_glossinessTexture [[texture(6), function_constant(hasGlossinessMap)]],
                                 texture2d<float> u_occlusionTexture [[texture(7), function_constant(hasOcclusionMap)]],
@@ -188,14 +188,14 @@ fragment float4 fragment_simple(VertexOut in [[stage_in]],
     }
     // extract metallic
     float metallic;
-    if (hasMetalMap) {
+    if (hasMetalRoughnessMap) {
         metallic = u_metallicRoughnessTexture.sample(textureSampler, in.uv).r;
     } else {
         metallic = u_metal;
     }
     // extract roughness
     float roughness;
-    if (hasRoughnessMap) {
+    if (hasMetalRoughnessMap) {
         roughness = u_metallicRoughnessTexture.sample(textureSampler, in.uv).g;
     } else {
         roughness = u_roughness;

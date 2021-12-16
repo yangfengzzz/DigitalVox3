@@ -35,6 +35,11 @@ id<MTLTexture> PBRSpecularMaterial::glossinessTexture() {
 
 void PBRSpecularMaterial::setGlossinessTexture(id<MTLTexture> newValue) {
     shaderData.setData(PBRSpecularMaterial::_glossinessTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_GLOSSINESSMAP);
+    } else {
+        shaderData.disableMacro(HAS_GLOSSINESSMAP);
+    }
 }
 
 id<MTLTexture> PBRSpecularMaterial::specularTexture() {
@@ -43,6 +48,11 @@ id<MTLTexture> PBRSpecularMaterial::specularTexture() {
 
 void PBRSpecularMaterial::setSpecularTexture(id<MTLTexture> newValue) {
     shaderData.setData(PBRSpecularMaterial::_specularTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_SPECULARMAP);
+    } else {
+        shaderData.disableMacro(HAS_SPECULARMAP);
+    }
 }
 
 PBRSpecularMaterial::PBRSpecularMaterial(Engine* engine):

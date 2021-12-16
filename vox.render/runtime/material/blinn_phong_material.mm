@@ -34,6 +34,11 @@ id<MTLTexture> BlinnPhongMaterial::baseTexture() {
 
 void BlinnPhongMaterial::setBaseTexture(id<MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_baseTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_DIFFUSE_TEXTURE);
+    } else {
+        shaderData.disableMacro(HAS_DIFFUSE_TEXTURE);
+    }
 }
 
 math::Color BlinnPhongMaterial::specularColor() {
@@ -50,6 +55,11 @@ id<MTLTexture> BlinnPhongMaterial::specularTexture() {
 
 void BlinnPhongMaterial::setSpecularTexture(id<MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_specularTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_SPECULAR_TEXTURE);
+    } else {
+        shaderData.disableMacro(HAS_SPECULAR_TEXTURE);
+    }
 }
 
 math::Color BlinnPhongMaterial::emissiveColor() {
@@ -66,6 +76,11 @@ id<MTLTexture> BlinnPhongMaterial::emissiveTexture() {
 
 void BlinnPhongMaterial::BlinnPhongMaterial::setEmissiveTexture(id<MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_emissiveTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_EMISSIVE_TEXTURE);
+    } else {
+        shaderData.disableMacro(HAS_EMISSIVE_TEXTURE);
+    }
 }
 
 id<MTLTexture> BlinnPhongMaterial::normalTexture() {
@@ -74,6 +89,11 @@ id<MTLTexture> BlinnPhongMaterial::normalTexture() {
 
 void BlinnPhongMaterial::setNormalTexture(id<MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_normalTextureProp, newValue);
+    if (newValue) {
+        shaderData.enableMacro(HAS_NORMAL_TEXTURE);
+    } else {
+        shaderData.disableMacro(HAS_NORMAL_TEXTURE);
+    }
 }
 
 float BlinnPhongMaterial::normalIntensity() {

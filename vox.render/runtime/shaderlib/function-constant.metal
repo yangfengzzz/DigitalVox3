@@ -46,8 +46,7 @@ constant bool hasEmissiveMap [[function_constant(HAS_EMISSIVEMAP)]];
 constant bool hasOcclusionMap [[function_constant(HAS_OCCLUSIONMAP)]];
 constant bool hasSpecularMap [[function_constant(HAS_SPECULARMAP)]];
 constant bool hasGlossinessMap [[function_constant(HAS_GLOSSINESSMAP)]];
-constant bool hasMetalMap [[function_constant(HAS_METALMAP)]];
-constant bool hasRoughnessMap [[function_constant(HAS_ROUGHNESSMAP)]];
+constant bool hasMetalRoughnessMap [[function_constant(HAS_METALROUGHNESSMAP)]];
 constant bool isMetallicWorkFlow [[function_constant(IS_METALLIC_WORKFLOW)]];
 
 constant int directLightCount [[function_constant(DIRECT_LIGHT_COUNT)]];
