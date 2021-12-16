@@ -48,15 +48,6 @@ struct Animation {
     float end = std::numeric_limits<float>::min();
 };
 
-struct Vertex {
-    Float3 pos;
-    Float3 normal;
-    Float2 uv;
-    Float4 color;
-    Float4 joint0;
-    Float4 weight0;
-    Float4 tangent;
-};
 
 class GLTFLoader {
 public:
@@ -64,35 +55,29 @@ public:
 
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
-
     std::vector<GPUSkinnedMeshRenderer::SkinPtr> skins;
     std::vector<Animation> animations;
     
-private:
-    void loadFromFile(std::string filename, Engine* engine, float scale = 1.0f);
+    GLTFLoader(Engine* engine);
+    
+    void loadFromFile(std::string filename, float scale = 1.0f);
 
+private:
     void loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex,
                   const tinygltf::Model& model, float globalscale);
-
-    void loadSkins(tinygltf::Model& gltfModel);
 
     void loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer);
 
     void loadMaterials(tinygltf::Model& gltfModel);
 
-    void loadAnimations(tinygltf::Model& gltfModel);
+    void loadSkins(tinygltf::Model& gltfModel);
 
-private:
-    void updateAnimation(uint32_t index, float time);
+    void loadAnimations(tinygltf::Model& gltfModel);
     
 private:
     Engine* engine;
     std::map<uint32_t, std::pair<Entity*, int32_t>> linearNodes{};
     bool metallicRoughnessWorkflow = true;
-    bool buffersBound = false;
-    std::string path;
-    
-    id<MTLTexture> getTexture(uint32_t index);
 };
 
 

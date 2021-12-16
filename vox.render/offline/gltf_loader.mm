@@ -16,17 +16,16 @@
 
 namespace vox {
 namespace offline {
-void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale) {
+GLTFLoader::GLTFLoader(Engine* engine):
+engine(engine){
+}
+
+void GLTFLoader::loadFromFile(std::string filename, float scale) {
     tinygltf::Model gltfModel;
     tinygltf::TinyGLTF gltfContext;
     gltfContext.SetImageLoader(tinygltf::LoadImageData, nullptr);
-    
-    size_t pos = filename.find_last_of('/');
-    path = filename.substr(0, pos);
-    
+        
     std::string error, warning;
-    
-    this->engine = engine;
     
     bool fileLoaded = gltfContext.LoadASCIIFromFile(&gltfModel, &error, &warning, filename);
     if (fileLoaded) {
@@ -283,11 +282,11 @@ void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
     for (tinygltf::Material &mat : gltfModel.materials) {
         auto material = std::make_shared<PBRMaterial>(engine);
         if (mat.values.find("baseColorTexture") != mat.values.end()) {
-            material->setBaseTexture(getTexture(gltfModel.textures[mat.values["baseColorTexture"].TextureIndex()].source));
+            material->setBaseTexture(textures[gltfModel.textures[mat.values["baseColorTexture"].TextureIndex()].source]);
         }
         // Metallic roughness workflow
         if (mat.values.find("metallicRoughnessTexture") != mat.values.end()) {
-            material->setMetallicRoughnessTexture(getTexture(gltfModel.textures[mat.values["metallicRoughnessTexture"].TextureIndex()].source));
+            material->setMetallicRoughnessTexture(textures[gltfModel.textures[mat.values["metallicRoughnessTexture"].TextureIndex()].source]);
         }
         if (mat.values.find("roughnessFactor") != mat.values.end()) {
             material->setRoughness(static_cast<float>(mat.values["roughnessFactor"].Factor()));
@@ -300,13 +299,13 @@ void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
             material->setBaseColor(Color(color[0], color[1], color[2], color[3]));
         }
         if (mat.additionalValues.find("normalTexture") != mat.additionalValues.end()) {
-            material->setNormalTexture(getTexture(gltfModel.textures[mat.additionalValues["normalTexture"].TextureIndex()].source));
+            material->setNormalTexture(textures[gltfModel.textures[mat.additionalValues["normalTexture"].TextureIndex()].source]);
         }
         if (mat.additionalValues.find("emissiveTexture") != mat.additionalValues.end()) {
-            material->setEmissiveTexture(getTexture(gltfModel.textures[mat.additionalValues["emissiveTexture"].TextureIndex()].source));
+            material->setEmissiveTexture(textures[gltfModel.textures[mat.additionalValues["emissiveTexture"].TextureIndex()].source]);
         }
         if (mat.additionalValues.find("occlusionTexture") != mat.additionalValues.end()) {
-            material->setOcclusionTexture(getTexture(gltfModel.textures[mat.additionalValues["occlusionTexture"].TextureIndex()].source));
+            material->setOcclusionTexture(textures[gltfModel.textures[mat.additionalValues["occlusionTexture"].TextureIndex()].source]);
         }
         if (mat.additionalValues.find("alphaMode") != mat.additionalValues.end()) {
             tinygltf::Parameter param = mat.additionalValues["alphaMode"];
@@ -462,13 +461,6 @@ void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
         
         animations.push_back(animation);
     }
-}
-
-id<MTLTexture> GLTFLoader::getTexture(uint32_t index) {
-    if (index < textures.size()) {
-        return textures[index];
-    }
-    return nullptr;
 }
 
 }
