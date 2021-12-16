@@ -121,6 +121,12 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
     
     // Node contains mesh data
     if (node.mesh > -1) {
+        size_t vertexStart = 0;
+        size_t currentNum = 0;
+        std::vector<float> vertexBuffer{};
+        auto descriptor = [[MDLVertexDescriptor alloc]init];
+        auto bound = BoundingBox();
+        
         const tinygltf::Mesh mesh = model.meshes[node.mesh];
         auto renderer = newNode->addComponent<GPUSkinnedMeshRenderer>();
         auto newMesh = std::make_shared<BufferMesh>(engine);
@@ -150,7 +156,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                 bufferPos = reinterpret_cast<const float *>(&(model.buffers[posView.buffer].data[posAccessor.byteOffset + posView.byteOffset]));
                 Float3 posMin = Float3(posAccessor.minValues[0], posAccessor.minValues[1], posAccessor.minValues[2]);
                 Float3 posMax = Float3(posAccessor.maxValues[0], posAccessor.maxValues[1], posAccessor.maxValues[2]);
-                newMesh->bounds = BoundingBox(posMin, posMax);
+                bound = Merge(bound, BoundingBox(posMin, posMax));
                 
                 if (primitive.attributes.find("NORMAL") != primitive.attributes.end()) {
                     const tinygltf::Accessor &normAccessor = model.accessors[primitive.attributes.find("NORMAL")->second];
@@ -193,7 +199,6 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                     bufferWeights = reinterpret_cast<const float *>(&(model.buffers[uvView.buffer].data[uvAccessor.byteOffset + uvView.byteOffset]));
                 }
                 
-                auto descriptor = [[MDLVertexDescriptor alloc]init];
                 descriptor.attributes[Attributes::Position] =
                 [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
                                                  format:MDLVertexFormatFloat3
@@ -255,10 +260,9 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                 }
                 
                 descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:offset];
-                newMesh->setVertexDescriptor(descriptor);
 
-                std::vector<float> vertexBuffer;
-                vertexBuffer.reserve(static_cast<uint32_t>(posAccessor.count) * elementCount);
+                currentNum = posAccessor.count;
+                vertexBuffer.reserve(vertexBuffer.size() + posAccessor.count * elementCount);
                 for (size_t v = 0; v < posAccessor.count; v++) {
                     vertexBuffer.insert(vertexBuffer.end(), &bufferPos[v * 3], &bufferPos[v * 3 + 3]);
                     if (bufferNormals) {
@@ -288,63 +292,61 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                         vertexBuffer.insert(vertexBuffer.end(), &bufferWeights[v * 4], &bufferWeights[v * 4 + 4]);
                     }
                 }
-                auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data()
-                                                                             length:vertexBuffer.size() * sizeof(float) options:NULL];
-                newMesh->setVertexBufferBinding(vBuffer, 0, 0);
             }
             // Indices
             {
                 const tinygltf::Accessor &accessor = model.accessors[primitive.indices];
                 const tinygltf::BufferView &bufferView = model.bufferViews[accessor.bufferView];
                 const tinygltf::Buffer &buffer = model.buffers[bufferView.buffer];
+                
+                std::vector<uint32_t> buf;
+                buf.reserve(accessor.count);
                 switch (accessor.componentType) {
                     case TINYGLTF_PARAMETER_TYPE_UNSIGNED_INT: {
-                        std::vector<uint32_t> buf(accessor.count);
-                        memcpy(buf.data(), &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint32_t));
-                        auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
-                                                                                     length:buf.size() * sizeof(uint32_t) options:NULL];
-                        newMesh->addSubMesh(MeshBuffer(iBuffer,
-                                                       buf.size() * sizeof(uint32_t),
-                                                       MDLMeshBufferTypeIndex),
-                                            MTLIndexTypeUInt32, buf.size(), MTLPrimitiveTypeTriangle);
+                        uint32_t *buf32 = new uint32_t[accessor.count];
+                        memcpy(buf32, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint32_t));
+                        for (size_t index = 0; index < accessor.count; index++) {
+                            buf.push_back(buf32[index] + static_cast<uint32_t>(vertexStart));
+                        }
                         break;
                     }
                     case TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT: {
-                        std::vector<uint16_t> buf(accessor.count);
-                        memcpy(buf.data(), &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint16_t));
-                        auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
-                                                                                     length:buf.size() * sizeof(uint16_t) options:NULL];
-                        newMesh->addSubMesh(MeshBuffer(iBuffer,
-                                                       buf.size() * sizeof(uint16_t),
-                                                       MDLMeshBufferTypeIndex),
-                                            MTLIndexTypeUInt16, buf.size(), MTLPrimitiveTypeTriangle);
+                        uint16_t *buf16 = new uint16_t[accessor.count];
+                        memcpy(buf16, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint16_t));
+                        for (size_t index = 0; index < accessor.count; index++) {
+                            buf.push_back(buf16[index] + static_cast<uint32_t>(vertexStart));
+                        }
                         break;
                     }
                     case TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE: {
-                        std::vector<uint16_t> buf;
-                        buf.reserve(accessor.count);
                         uint8_t *buf8 = new uint8_t[accessor.count];
                         memcpy(buf8, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint8_t));
                         for (size_t index = 0; index < accessor.count; index++) {
-                            buf.push_back(buf8[index]);
+                            buf.push_back(buf8[index] + static_cast<uint32_t>(vertexStart));
                         }
-                        auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
-                                                                                     length:buf.size() * sizeof(uint16_t) options:NULL];
-                        newMesh->addSubMesh(MeshBuffer(iBuffer,
-                                                       buf.size() * sizeof(uint16_t),
-                                                       MDLMeshBufferTypeIndex),
-                                            MTLIndexTypeUInt16, buf.size(), MTLPrimitiveTypeTriangle);
                         break;
                     }
                     default:
                         std::cerr << "Index component type " << accessor.componentType << " not supported!" << std::endl;
                         return;
                 }
+                auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
+                                                                             length:buf.size() * sizeof(uint32_t) options:NULL];
+                newMesh->addSubMesh(MeshBuffer(iBuffer,
+                                               buf.size() * sizeof(uint32_t),
+                                               MDLMeshBufferTypeIndex),
+                                    MTLIndexTypeUInt32, buf.size(), MTLPrimitiveTypeTriangle);
             }
             
+            vertexStart += currentNum;
             auto mat = primitive.material > -1 ? materials[primitive.material] : materials.back();
             renderer->setMaterial(j, mat);
         }
+        auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data()
+                                                                     length:vertexBuffer.size() * sizeof(float) options:NULL];
+        newMesh->setVertexBufferBinding(vBuffer, 0, 0);
+        newMesh->setVertexDescriptor(descriptor);
+        newMesh->bounds = bound;
         renderer->setMesh(newMesh);
     }
 }

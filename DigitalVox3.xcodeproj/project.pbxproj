@@ -592,7 +592,6 @@
 		0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* gpu_animation.h */; };
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
 		0486085B276B364900C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
-		0486085E276B454600C05BDA /* gltfloading.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04860857276B2DED00C05BDA /* gltfloading.metal */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -834,6 +833,7 @@
 		04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39BF2757A0D200204B8E /* fbx_loader.h */; };
 		04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39C22757A18C00204B8E /* fbx_mesh.cpp */; };
 		04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39C32757A18C00204B8E /* fbx_mesh.h */; };
+		04D47E3A276B76010038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4462,6 +4462,7 @@
 				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
 				041610432759CC06006CD384 /* dynamic_collider.cpp in Sources */,
 				0416102127578322006CD384 /* anim_loader.cpp in Sources */,
+				04D47E3A276B76010038F34A /* gltfscene.metal in Sources */,
 				04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */,
 				04161079275A5DB1006CD384 /* capsule_character_controller.mm in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
@@ -4492,7 +4493,6 @@
 				04CE39AC2755003B00204B8E /* blinn_phong_material.mm in Sources */,
 				04A79AD6275E0F8D00182CCB /* pointer_manager.mm in Sources */,
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
-				0486085E276B454600C05BDA /* gltfloading.metal in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
 				0431588C276867BD0070FBEC /* particle_renderer.mm in Sources */,
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
