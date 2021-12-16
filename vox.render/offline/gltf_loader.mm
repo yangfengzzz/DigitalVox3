@@ -191,11 +191,6 @@ void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
         std::unique_ptr<Skin> newSkin = std::make_unique<Skin>();
         newSkin->name = source.name;
         
-        // Find skeleton root node
-        if (source.skeleton > -1) {
-            newSkin->skeletonRoot = nodeFromIndex(source.skeleton);
-        }
-        
         // Find joint nodes
         for (int jointIndex : source.joints) {
             Entity* node = nodeFromIndex(jointIndex);

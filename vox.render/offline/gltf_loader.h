@@ -8,6 +8,7 @@
 #ifndef gltf_loader_hpp
 #define gltf_loader_hpp
 
+#include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
 #include "../runtime/entity.h"
 #include <Metal/Metal.h>
 
@@ -16,16 +17,6 @@
 
 namespace vox {
 namespace offline {
-/*
-    glTF skin
-*/
-struct Skin {
-    std::string name;
-    Entity* skeletonRoot = nullptr;
-    std::vector<Float4> inverseBindMatrices;
-    std::vector<Entity*> joints;
-};
-
 /*
     glTF animation channel
 */

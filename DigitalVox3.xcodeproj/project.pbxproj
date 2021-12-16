@@ -613,6 +613,8 @@
 		04C698AC276A1B7F00C4248F /* gltf_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C698AA276A1B7F00C4248F /* gltf_loader.mm */; };
 		04C698AD276A1B7F00C4248F /* gltf_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04C698AB276A1B7F00C4248F /* gltf_loader.h */; };
 		04C698AE276A1EC000C4248F /* blend_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431559D2766D47F0070FBEC /* blend_view.mm */; };
+		04C698B2276AC86A00C4248F /* gpu_skinned_mesh_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C698B0276AC86A00C4248F /* gpu_skinned_mesh_renderer.mm */; };
+		04C698B3276AC86A00C4248F /* gpu_skinned_mesh_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04C698B1276AC86A00C4248F /* gpu_skinned_mesh_renderer.h */; };
 		04CE36A0274D096600204B8E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE369F274D096600204B8E /* Metal.framework */; };
 		04CE36A2274D096A00204B8E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36A1274D096A00204B8E /* MetalKit.framework */; };
 		04CE36B8274D0AAB00204B8E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CE36B7274D0AAB00204B8E /* QuartzCore.framework */; };
@@ -1566,6 +1568,8 @@
 		04C698A7276A1B6600C4248F /* tiny_gltf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_gltf.h; sourceTree = "<group>"; };
 		04C698AA276A1B7F00C4248F /* gltf_loader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gltf_loader.mm; sourceTree = "<group>"; };
 		04C698AB276A1B7F00C4248F /* gltf_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gltf_loader.h; sourceTree = "<group>"; };
+		04C698B0276AC86A00C4248F /* gpu_skinned_mesh_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gpu_skinned_mesh_renderer.mm; sourceTree = "<group>"; };
+		04C698B1276AC86A00C4248F /* gpu_skinned_mesh_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu_skinned_mesh_renderer.h; sourceTree = "<group>"; };
 		04CE367C274D077100204B8E /* apps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = apps; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE3686274D086900204B8E /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		04CE3688274D089700204B8E /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -3428,6 +3432,8 @@
 				04CE397A2753491200204B8E /* buffer_mesh.mm */,
 				0434A28D2757B0B1009AD4EA /* skinned_mesh_renderer.h */,
 				0434A28C2757B0B1009AD4EA /* skinned_mesh_renderer.mm */,
+				04C698B1276AC86A00C4248F /* gpu_skinned_mesh_renderer.h */,
+				04C698B0276AC86A00C4248F /* gpu_skinned_mesh_renderer.mm */,
 			);
 			path = mesh;
 			sourceTree = "<group>";
@@ -3807,6 +3813,7 @@
 				041610442759CC06006CD384 /* dynamic_collider.h in Headers */,
 				0416107A275A5DB1006CD384 /* capsule_character_controller.h in Headers */,
 				041610402759B4B2006CD384 /* hit_result.h in Headers */,
+				04C698B3276AC86A00C4248F /* gpu_skinned_mesh_renderer.h in Headers */,
 				041610332758ED2C006CD384 /* collider_shape.h in Headers */,
 				04161072275A2069006CD384 /* character_controller.h in Headers */,
 				04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */,
@@ -4515,6 +4522,7 @@
 				041610062750A577006CD384 /* script.mm in Sources */,
 				041610192755DB7C006CD384 /* spherical.cpp in Sources */,
 				04CE397827527B4700204B8E /* primitive_mesh.mm in Sources */,
+				04C698B2276AC86A00C4248F /* gpu_skinned_mesh_renderer.mm in Sources */,
 				041610022750973C006CD384 /* updateFlag_manager.cpp in Sources */,
 				04CE37EB274D167F00204B8E /* animation_builder.cc in Sources */,
 				04160FF12750944F006CD384 /* entity.mm in Sources */,
