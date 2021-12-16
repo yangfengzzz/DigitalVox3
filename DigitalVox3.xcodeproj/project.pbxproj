@@ -3548,8 +3548,8 @@
 				04CE398E2753A83B00204B8E /* pbr.metal */,
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04CE398F2753A83B00204B8E /* skybox.metal */,
-				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
 				04CE39912753A83C00204B8E /* SkinningShader.metal */,
+				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
 				0434AC882766133E009AD4EA /* editor */,
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 			);

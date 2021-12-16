@@ -14,8 +14,7 @@ struct VertexIn {
     float3 normal [[attribute(Normal)]];
     float2 uv [[attribute(UV_0)]];
     float3 tangent [[attribute(Tangent)]];
-    float3 bitangent [[attribute(Bitangent)]];
-    ushort4 joints [[attribute(Joints_0)]];
+    float4 joints [[attribute(Joints_0)]];
     float4 weights [[attribute(Weights_0)]];
 };
 
@@ -42,31 +41,31 @@ vertex VertexOut vertex_simple(const VertexIn vertexIn [[stage_in]],
     float4 position = float4(vertexIn.position, 1.0);
     float4 normal = float4(vertexIn.normal, 0);
     float4 tangent = float4(vertexIn.tangent, 0);
-    float4 bitangent = float4(vertexIn.bitangent, 0);
+    float4 bitangent = float4(cross(vertexIn.normal, vertexIn.tangent), 0);
     
     if (hasSkinNotHasJointTexture) {
         float4 weights = vertexIn.weights;
-        ushort4 joints = vertexIn.joints;
+        float4 joints = vertexIn.joints;
         position =
-        weights.x * (u_jointMatrix[joints.x] * position) +
-        weights.y * (u_jointMatrix[joints.y] * position) +
-        weights.z * (u_jointMatrix[joints.z] * position) +
-        weights.w * (u_jointMatrix[joints.w] * position);
+        weights.x * (u_jointMatrix[int(joints.x)] * position) +
+        weights.y * (u_jointMatrix[int(joints.y)] * position) +
+        weights.z * (u_jointMatrix[int(joints.z)] * position) +
+        weights.w * (u_jointMatrix[int(joints.w)] * position);
         normal =
-        weights.x * (u_jointMatrix[joints.x] * normal) +
-        weights.y * (u_jointMatrix[joints.y] * normal) +
-        weights.z * (u_jointMatrix[joints.z] * normal) +
-        weights.w * (u_jointMatrix[joints.w] * normal);
+        weights.x * (u_jointMatrix[int(joints.x)] * normal) +
+        weights.y * (u_jointMatrix[int(joints.y)] * normal) +
+        weights.z * (u_jointMatrix[int(joints.z)] * normal) +
+        weights.w * (u_jointMatrix[int(joints.w)] * normal);
         tangent =
-        weights.x * (u_jointMatrix[joints.x] * tangent) +
-        weights.y * (u_jointMatrix[joints.y] * tangent) +
-        weights.z * (u_jointMatrix[joints.z] * tangent) +
-        weights.w * (u_jointMatrix[joints.w] * tangent);
+        weights.x * (u_jointMatrix[int(joints.x)] * tangent) +
+        weights.y * (u_jointMatrix[int(joints.y)] * tangent) +
+        weights.z * (u_jointMatrix[int(joints.z)] * tangent) +
+        weights.w * (u_jointMatrix[int(joints.w)] * tangent);
         bitangent =
-        weights.x * (u_jointMatrix[joints.x] * bitangent) +
-        weights.y * (u_jointMatrix[joints.y] * bitangent) +
-        weights.z * (u_jointMatrix[joints.z] * bitangent) +
-        weights.w * (u_jointMatrix[joints.w] * bitangent);
+        weights.x * (u_jointMatrix[int(joints.x)] * bitangent) +
+        weights.y * (u_jointMatrix[int(joints.y)] * bitangent) +
+        weights.z * (u_jointMatrix[int(joints.z)] * bitangent) +
+        weights.w * (u_jointMatrix[int(joints.w)] * bitangent);
     }
     
     VertexOut out {

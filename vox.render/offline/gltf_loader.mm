@@ -229,7 +229,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                 if (bufferJoints) {
                     descriptor.attributes[Attributes::Joints_0] =
                     [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointIndices
-                                                     format:MDLVertexFormatShort4
+                                                     format:MDLVertexFormatFloat4
                                                      offset:offset bufferIndex:BufferIndexVertices];
                     offset += sizeof(float) * 4;
                     elementCount += 4;
