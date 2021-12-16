@@ -12,7 +12,7 @@ namespace vox {
 GPUSkinnedMeshRenderer::GPUSkinnedMeshRenderer(Entity* entity):
 MeshRenderer(entity) {}
 
-SkinPtr GPUSkinnedMeshRenderer::skin() {
+GPUSkinnedMeshRenderer::SkinPtr GPUSkinnedMeshRenderer::skin() {
     return _skin;
 }
 

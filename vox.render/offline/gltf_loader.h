@@ -63,11 +63,10 @@ public:
     std::vector<Entity*> nodes;
     std::vector<Entity*> linearNodes;
 
-    MeshPtr mesh;
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
 
-    std::vector<std::unique_ptr<Skin>> skins;
+    std::vector<GPUSkinnedMeshRenderer::SkinPtr> skins;
     std::vector<Animation> animations;
 
     bool metallicRoughnessWorkflow = true;
@@ -77,8 +76,8 @@ public:
 private:
     void loadFromFile(std::string filename, Engine* engine, float scale = 1.0f);
 
-    void loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex, const tinygltf::Model& model,
-                  std::vector<uint32_t>& indexBuffer, std::vector<Vertex>& vertexBuffer, float globalscale);
+    void loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex,
+                  const tinygltf::Model& model, float globalscale);
 
     void loadSkins(tinygltf::Model& gltfModel);
 

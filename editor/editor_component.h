@@ -14,6 +14,8 @@ namespace vox {
 namespace editor {
 class EditorComponent {
 public:
+    virtual ~EditorComponent() {}
+    
     virtual void onUpdate() = 0;
 };
 

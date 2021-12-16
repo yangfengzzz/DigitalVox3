@@ -9,6 +9,7 @@
 #include "../runtime/engine.h"
 #include "../runtime/rhi-metal/metal_renderer.h"
 #include "../runtime/mesh/buffer_mesh.h"
+#include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
 #include "../runtime/material/pbr_material.h"
 
 #include <iostream>
@@ -39,7 +40,7 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
         const tinygltf::Scene &scene = gltfModel.scenes[gltfModel.defaultScene > -1 ? gltfModel.defaultScene : 0];
         for (size_t i = 0; i < scene.nodes.size(); i++) {
             const tinygltf::Node node = gltfModel.nodes[scene.nodes[i]];
-            loadNode(nullptr, node, scene.nodes[i], gltfModel, indexBuffer, vertexBuffer, scale);
+            loadNode(nullptr, node, scene.nodes[i], gltfModel, scale);
         }
         
         if (gltfModel.animations.size() > 0) {
@@ -70,32 +71,16 @@ void GLTFLoader::loadFromFile(std::string filename, Engine* engine, float scale)
             metallicRoughnessWorkflow = false;
         }
     }
-    
-    size_t vertexBufferSize = vertexBuffer.size() * sizeof(Vertex);
-    size_t indexBufferSize = indexBuffer.size() * sizeof(uint32_t);
-    
-    auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data() length:vertexBufferSize options:NULL];
-    auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:indexBuffer.data() length:indexBufferSize options:NULL];
-    
-    auto bufferMesh = std::make_shared<BufferMesh>(engine);
-    bufferMesh->setVertexBufferBinding(vBuffer, 0, 0);
-    
-    bufferMesh->addSubMesh(MeshBuffer(iBuffer,
-                                      indexBuffer.size() * sizeof(uint32_t),
-                                      MDLMeshBufferTypeIndex),
-                           MTLIndexTypeUInt32, indexBuffer.size(), MTLPrimitiveTypeTriangle);
-    mesh = bufferMesh;
-    
     getSceneDimensions();
 }
 
-void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex, const tinygltf::Model& model,
-                          std::vector<uint32_t>& indexBuffer, std::vector<Vertex>& vertexBuffer, float globalscale) {
+void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex,
+                          const tinygltf::Model& model, float globalscale) {
     EntityPtr newNode = nullptr;
     if (parent) {
-        newNode = parent->createChild();
+        newNode = parent->createChild(node.name);
     } else {
-        newNode = engine->sceneManager().activeScene()->createRootEntity();
+        newNode = engine->sceneManager().activeScene()->createRootEntity(node.name);
     }
     
     // Generate local node matrix
@@ -121,8 +106,176 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
     if (node.children.size() > 0) {
         for (auto i = 0; i < node.children.size(); i++) {
             loadNode(newNode.get(), model.nodes[node.children[i]],
-                     node.children[i], model, indexBuffer, vertexBuffer, globalscale);
+                     node.children[i], model, globalscale);
         }
+    }
+    
+    // Node contains mesh data
+    if (node.mesh > -1) {
+        const tinygltf::Mesh mesh = model.meshes[node.mesh];
+        auto renderer = newNode->addComponent<GPUSkinnedMeshRenderer>();
+        auto newMesh = std::make_shared<BufferMesh>(engine);
+        newMesh->name = mesh.name;
+        for (size_t j = 0; j < mesh.primitives.size(); j++) {
+            const tinygltf::Primitive &primitive = mesh.primitives[j];
+            if (primitive.indices < 0) {
+                continue;
+            }
+
+            // Vertices
+            {
+                const float *bufferPos = nullptr;
+                const float *bufferNormals = nullptr;
+                const float *bufferTexCoords = nullptr;
+                const float* bufferColors = nullptr;
+                const float *bufferTangents = nullptr;
+                uint32_t numColorComponents = 0;
+                const uint16_t *bufferJoints = nullptr;
+                const float *bufferWeights = nullptr;
+                
+                // Position attribute is required
+                assert(primitive.attributes.find("POSITION") != primitive.attributes.end());
+                
+                const tinygltf::Accessor &posAccessor = model.accessors[primitive.attributes.find("POSITION")->second];
+                const tinygltf::BufferView &posView = model.bufferViews[posAccessor.bufferView];
+                bufferPos = reinterpret_cast<const float *>(&(model.buffers[posView.buffer].data[posAccessor.byteOffset + posView.byteOffset]));
+                Float3 posMin = Float3(posAccessor.minValues[0], posAccessor.minValues[1], posAccessor.minValues[2]);
+                Float3 posMax = Float3(posAccessor.maxValues[0], posAccessor.maxValues[1], posAccessor.maxValues[2]);
+                newMesh->bounds = BoundingBox(posMin, posMax);
+                
+                if (primitive.attributes.find("NORMAL") != primitive.attributes.end()) {
+                    const tinygltf::Accessor &normAccessor = model.accessors[primitive.attributes.find("NORMAL")->second];
+                    const tinygltf::BufferView &normView = model.bufferViews[normAccessor.bufferView];
+                    bufferNormals = reinterpret_cast<const float *>(&(model.buffers[normView.buffer].data[normAccessor.byteOffset + normView.byteOffset]));
+                }
+                
+                if (primitive.attributes.find("TEXCOORD_0") != primitive.attributes.end()) {
+                    const tinygltf::Accessor &uvAccessor = model.accessors[primitive.attributes.find("TEXCOORD_0")->second];
+                    const tinygltf::BufferView &uvView = model.bufferViews[uvAccessor.bufferView];
+                    bufferTexCoords = reinterpret_cast<const float *>(&(model.buffers[uvView.buffer].data[uvAccessor.byteOffset + uvView.byteOffset]));
+                }
+                
+                if (primitive.attributes.find("COLOR_0") != primitive.attributes.end()) {
+                    const tinygltf::Accessor& colorAccessor = model.accessors[primitive.attributes.find("COLOR_0")->second];
+                    const tinygltf::BufferView& colorView = model.bufferViews[colorAccessor.bufferView];
+                    // Color buffer are either of type vec3 or vec4
+                    numColorComponents = colorAccessor.type == TINYGLTF_PARAMETER_TYPE_FLOAT_VEC3 ? 3 : 4;
+                    bufferColors = reinterpret_cast<const float*>(&(model.buffers[colorView.buffer].data[colorAccessor.byteOffset + colorView.byteOffset]));
+                }
+                
+                if (primitive.attributes.find("TANGENT") != primitive.attributes.end()) {
+                    const tinygltf::Accessor &tangentAccessor = model.accessors[primitive.attributes.find("TANGENT")->second];
+                    const tinygltf::BufferView &tangentView = model.bufferViews[tangentAccessor.bufferView];
+                    bufferTangents = reinterpret_cast<const float *>(&(model.buffers[tangentView.buffer].data[tangentAccessor.byteOffset + tangentView.byteOffset]));
+                }
+                
+                // Skinning
+                // Joints
+                if (primitive.attributes.find("JOINTS_0") != primitive.attributes.end()) {
+                    const tinygltf::Accessor &jointAccessor = model.accessors[primitive.attributes.find("JOINTS_0")->second];
+                    const tinygltf::BufferView &jointView = model.bufferViews[jointAccessor.bufferView];
+                    bufferJoints = reinterpret_cast<const uint16_t *>(&(model.buffers[jointView.buffer].data[jointAccessor.byteOffset + jointView.byteOffset]));
+                }
+                
+                if (primitive.attributes.find("WEIGHTS_0") != primitive.attributes.end()) {
+                    const tinygltf::Accessor &uvAccessor = model.accessors[primitive.attributes.find("WEIGHTS_0")->second];
+                    const tinygltf::BufferView &uvView = model.bufferViews[uvAccessor.bufferView];
+                    bufferWeights = reinterpret_cast<const float *>(&(model.buffers[uvView.buffer].data[uvAccessor.byteOffset + uvView.byteOffset]));
+                }
+                
+                size_t stride = 4;
+                stride += bufferNormals? 3: 0;
+                stride += bufferTexCoords? 2: 0;
+                stride += bufferColors? 4: 0;
+                stride += bufferTangents? 4: 0;
+                stride += bufferJoints? 4: 0;
+                stride += bufferWeights? 4: 0;
+                std::vector<float> vertexBuffer(static_cast<uint32_t>(posAccessor.count) * stride);
+                
+                for (size_t v = 0; v < posAccessor.count; v++) {
+                    vertexBuffer.insert(vertexBuffer.end(), &bufferPos[v * 3], &bufferPos[v * 3 + 2]);
+                    vertexBuffer.push_back(1.0);
+                    if (bufferNormals) {
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferNormals[v * 3], &bufferNormals[v * 3 + 2]);
+                    }
+                    if (bufferTexCoords) {
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferTexCoords[v * 2], &bufferTexCoords[v * 2 + 1]);
+                    }
+                    if (bufferColors) {
+                        switch (numColorComponents) {
+                            case 3:
+                                vertexBuffer.insert(vertexBuffer.end(), &bufferColors[v * 3], &bufferColors[v * 3 + 2]);
+                                vertexBuffer.push_back(1.0);
+                            case 4:
+                                vertexBuffer.insert(vertexBuffer.end(), &bufferColors[v * 4], &bufferColors[v * 4 + 3]);
+                            default:
+                                std::cerr << "numColorComponents has problem" <<std::endl;
+                        }
+                    }
+                    if (bufferTangents) {
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferTangents[v * 4], &bufferTangents[v * 4 + 3]);
+                    }
+                    if (bufferJoints) {
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferJoints[v * 4], &bufferJoints[v * 4 + 3]);
+                    }
+                    if (bufferWeights) {
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferWeights[v * 4], &bufferWeights[v * 4 + 3]);
+                    }
+                }
+                auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data()
+                                                                             length:vertexBuffer.size() * sizeof(float) options:NULL];
+                newMesh->setVertexBufferBinding(vBuffer, 0, 0);
+            }
+            // Indices
+            {
+                const tinygltf::Accessor &accessor = model.accessors[primitive.indices];
+                const tinygltf::BufferView &bufferView = model.bufferViews[accessor.bufferView];
+                const tinygltf::Buffer &buffer = model.buffers[bufferView.buffer];
+                switch (accessor.componentType) {
+                    case TINYGLTF_PARAMETER_TYPE_UNSIGNED_INT: {
+                        std::vector<uint32_t> buf(accessor.count);
+                        memcpy(buf.data(), &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint32_t));
+                        auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
+                                                                                     length:buf.size() * sizeof(uint32_t) options:NULL];
+                        newMesh->addSubMesh(MeshBuffer(iBuffer,
+                                                       buf.size() * sizeof(uint32_t),
+                                                       MDLMeshBufferTypeIndex),
+                                            MTLIndexTypeUInt32, buf.size(), MTLPrimitiveTypeTriangle);
+                        break;
+                    }
+                    case TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT: {
+                        std::vector<uint16_t> buf(accessor.count);
+                        memcpy(buf.data(), &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint16_t));
+                        auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
+                                                                                     length:buf.size() * sizeof(uint16_t) options:NULL];
+                        newMesh->addSubMesh(MeshBuffer(iBuffer,
+                                                       buf.size() * sizeof(uint16_t),
+                                                       MDLMeshBufferTypeIndex),
+                                            MTLIndexTypeUInt16, buf.size(), MTLPrimitiveTypeTriangle);
+                        break;
+                    }
+                    case TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE: {
+                        std::vector<uint16_t> buf(accessor.count);
+                        uint8_t *buf8 = new uint8_t[accessor.count];
+                        memcpy(buf8, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint8_t));
+                        for (size_t index = 0; index < accessor.count; index++) {
+                            buf.push_back(buf8[index]);
+                        }
+                        auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
+                                                                                     length:buf.size() * sizeof(uint16_t) options:NULL];
+                        newMesh->addSubMesh(MeshBuffer(iBuffer,
+                                                       buf.size() * sizeof(uint16_t),
+                                                       MDLMeshBufferTypeIndex),
+                                            MTLIndexTypeUInt16, buf.size(), MTLPrimitiveTypeTriangle);
+                        break;
+                    }
+                    default:
+                        std::cerr << "Index component type " << accessor.componentType << " not supported!" << std::endl;
+                        return;
+                }
+            }
+        }
+        renderer->setMesh(newMesh);
     }
     
     linearNodes.push_back(newNode.get());
@@ -179,7 +332,7 @@ void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
         if (mat.additionalValues.find("alphaCutoff") != mat.additionalValues.end()) {
             material->setAlphaCutoff(static_cast<float>(mat.additionalValues["alphaCutoff"].Factor()));
         }
-
+        
         materials.push_back(material);
     }
     // Push a default material at the end of the list for meshes with no material assigned
@@ -188,7 +341,7 @@ void GLTFLoader::loadMaterials(tinygltf::Model& gltfModel) {
 
 void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
     for (tinygltf::Skin &source : gltfModel.skins) {
-        std::unique_ptr<Skin> newSkin = std::make_unique<Skin>();
+        GPUSkinnedMeshRenderer::SkinPtr newSkin = std::make_shared<GPUSkinnedMeshRenderer::Skin>();
         newSkin->name = source.name;
         
         // Find joint nodes

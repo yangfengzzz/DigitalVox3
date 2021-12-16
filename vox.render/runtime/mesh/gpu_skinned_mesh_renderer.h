@@ -11,17 +11,16 @@
 #include "mesh_renderer.h"
 
 namespace vox {
-/*
- glTF skin
- */
-struct Skin {
-    std::string name;
-    std::vector<Matrix> inverseBindMatrices;
-    std::vector<Entity*> joints;
-};
-using SkinPtr = std::shared_ptr<Skin>;
 
 class GPUSkinnedMeshRenderer:public MeshRenderer {
+public:
+    struct Skin {
+        std::string name;
+        std::vector<Matrix> inverseBindMatrices;
+        std::vector<Entity*> joints;
+    };
+    using SkinPtr = std::shared_ptr<Skin>;
+    
 public:
     GPUSkinnedMeshRenderer(Entity* entity);
     
