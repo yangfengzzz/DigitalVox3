@@ -17,37 +17,6 @@
 
 namespace vox {
 namespace offline {
-/*
-    glTF animation channel
-*/
-struct AnimationChannel {
-    enum PathType { TRANSLATION, ROTATION, SCALE };
-    PathType path;
-    Entity* node;
-    uint32_t samplerIndex;
-};
-
-/*
-    glTF animation sampler
-*/
-struct AnimationSampler {
-    enum InterpolationType { LINEAR, STEP, CUBICSPLINE };
-    InterpolationType interpolation;
-    std::vector<float> inputs;
-    std::vector<Float4> outputsVec4;
-};
-
-/*
-    glTF animation
-*/
-struct Animation {
-    std::string name;
-    std::vector<AnimationSampler> samplers;
-    std::vector<AnimationChannel> channels;
-    float start = std::numeric_limits<float>::max();
-    float end = std::numeric_limits<float>::min();
-};
-
 
 class GLTFLoader {
 public:
@@ -56,7 +25,6 @@ public:
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
     std::vector<GPUSkinnedMeshRenderer::SkinPtr> skins;
-    std::vector<Animation> animations;
     
     GLTFLoader(Engine* engine);
     
@@ -71,8 +39,6 @@ private:
     void loadMaterials(tinygltf::Model& gltfModel);
 
     void loadSkins(tinygltf::Model& gltfModel);
-
-    void loadAnimations(tinygltf::Model& gltfModel);
     
 private:
     Engine* engine;
