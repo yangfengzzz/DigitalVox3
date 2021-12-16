@@ -53,3 +53,36 @@ vertex VertexOut vertex_experimental(const VertexIn vertexIn [[stage_in]],
     
     return out;
 }
+
+fragment float4 fragment_experimental(VertexOut in [[stage_in]],
+                                      sampler textureSampler [[sampler(0)]],
+                                      //pbr base frag define
+                                      constant float &u_alphaCutoff [[buffer(21)]],
+                                      constant float4 &u_baseColor [[buffer(22)]],
+                                      constant float &u_metal [[buffer(23)]],
+                                      constant float &u_roughness [[buffer(24)]],
+                                      constant float3 &u_specularColor [[buffer(25)]],
+                                      constant float &u_glossinessFactor [[buffer(26)]],
+                                      constant float3 &u_emissiveColor [[buffer(27)]],
+                                      constant float &u_normalIntensity [[buffer(28)]],
+                                      constant float &u_occlusionStrength [[buffer(29)]],
+                                      // pbr_texture_frag_define
+                                      texture2d<float> u_baseColorTexture [[texture(1), function_constant(hasBaseColorMap)]],
+                                      texture2d<float> u_normalTexture [[texture(2), function_constant(hasNormalTexture)]],
+                                      texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveMap)]],
+                                      texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalRoughnessMap)]],
+                                      texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularMap)]],
+                                      texture2d<float> u_glossinessTexture [[texture(6), function_constant(hasGlossinessMap)]],
+                                      texture2d<float> u_occlusionTexture [[texture(7), function_constant(hasOcclusionMap)]]) {
+    float4 color = u_baseColorTexture.sample(textureSampler, in.outUV) * in.outColor;
+
+    float3 N = normalize(in.outNormal);
+    float3 L = normalize(in.outLightVec);
+    float3 V = normalize(in.outViewVec);
+    float3 R = reflect(-L, N);
+    float4 diffuse = max(dot(N, L), 0.15) * in.outColor;
+    float4 specular = pow(max(dot(R, V), 0.0), 16.0) * float4(0.75);
+    
+    float4 final = diffuse * color + specular;
+    return float4(final.rgb, 1.0);
+}

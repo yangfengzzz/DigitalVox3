@@ -113,7 +113,7 @@ void PBRBaseMaterial::setTilingOffset(const math::Float4& newValue) {
 }
 
 PBRBaseMaterial::PBRBaseMaterial(Engine* engine):
-BaseMaterial(engine, Shader::find("simple")){
+BaseMaterial(engine, Shader::find("experimental")){
     shaderData.enableMacro(NEED_WORLDPOS);
     shaderData.enableMacro(NEED_TILINGOFFSET);
 
