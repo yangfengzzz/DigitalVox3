@@ -7,7 +7,7 @@
 
 #include <metal_stdlib>
 using namespace metal;
-#include "../shaderlib/function-constant.metal"
+#include "../shaderlib/function-constant.h"
 
 typedef struct {
     float3 position [[attribute(Position)]];

@@ -592,6 +592,7 @@
 		0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* gpu_animation.h */; };
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
 		04860855276B29ED00C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
+		04860858276B2DED00C05BDA /* gltfloading.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04860857276B2DED00C05BDA /* gltfloading.metal */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -810,7 +811,7 @@
 		04CE39992753A83C00204B8E /* BRDF.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* BRDF.metal */; };
 		04CE399A2753A83C00204B8E /* pbr.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398E2753A83B00204B8E /* pbr.metal */; };
 		04CE399B2753A83C00204B8E /* skybox.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398F2753A83B00204B8E /* skybox.metal */; };
-		04CE399C2753A83C00204B8E /* function-constant.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39902753A83B00204B8E /* function-constant.metal */; };
+		04CE399C2753A83C00204B8E /* function-constant.h in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39902753A83B00204B8E /* function-constant.h */; };
 		04CE399D2753A83C00204B8E /* SkinningShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39912753A83C00204B8E /* SkinningShader.metal */; };
 		04CE399E2753A83C00204B8E /* unlit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39922753A83C00204B8E /* unlit.metal */; };
 		04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
@@ -1541,6 +1542,7 @@
 		0486084C276B0C9300C05BDA /* gpu_animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu_animation.h; sourceTree = "<group>"; };
 		0486084F276B0ED700C05BDA /* gltf_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gltf_view.mm; sourceTree = "<group>"; };
 		04860851276B113900C05BDA /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		04860857276B2DED00C05BDA /* gltfloading.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfloading.metal; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -1868,7 +1870,7 @@
 		04CE398D2753A83B00204B8E /* BRDF.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BRDF.metal; sourceTree = "<group>"; };
 		04CE398E2753A83B00204B8E /* pbr.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = pbr.metal; sourceTree = "<group>"; };
 		04CE398F2753A83B00204B8E /* skybox.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = skybox.metal; sourceTree = "<group>"; };
-		04CE39902753A83B00204B8E /* function-constant.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "function-constant.metal"; sourceTree = "<group>"; };
+		04CE39902753A83B00204B8E /* function-constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "function-constant.h"; sourceTree = "<group>"; };
 		04CE39912753A83C00204B8E /* SkinningShader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = SkinningShader.metal; sourceTree = "<group>"; };
 		04CE39922753A83C00204B8E /* unlit.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = unlit.metal; sourceTree = "<group>"; };
 		04CE39932753A83C00204B8E /* fix_particle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = fix_particle.metal; sourceTree = "<group>"; };
@@ -2824,6 +2826,13 @@
 			name = core;
 			sourceTree = "<group>";
 		};
+		04860859276B2DFA00C05BDA /* experimental */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = experimental;
+			sourceTree = "<group>";
+		};
 		04A79AB7275DE08800182CCB /* lighting */ = {
 			isa = PBXGroup;
 			children = (
@@ -3536,11 +3545,15 @@
 			children = (
 				04CE393B2751D2C900204B8E /* macro_name.h */,
 				04CE39892753A43800204B8E /* shader_common.h */,
-				04CE39902753A83B00204B8E /* function-constant.metal */,
+				04CE39902753A83B00204B8E /* function-constant.h */,
 				04CE39922753A83C00204B8E /* unlit.metal */,
 				04CE398A2753A83B00204B8E /* blinn-phong.metal */,
 				0431589027688F9D0070FBEC /* particle.metal */,
 				04860853276B17F100C05BDA /* core */,
+				0434AC84276611C5009AD4EA /* editor-grid.metal */,
+				0434AC882766133E009AD4EA /* editor */,
+				04860857276B2DED00C05BDA /* gltfloading.metal */,
+				04860859276B2DFA00C05BDA /* experimental */,
 				04CE398B2753A83B00204B8E /* function-common.metal */,
 				04CE398C2753A83B00204B8E /* background-texture.metal */,
 				04CE398D2753A83B00204B8E /* BRDF.metal */,
@@ -3550,8 +3563,6 @@
 				04CE398F2753A83B00204B8E /* skybox.metal */,
 				04CE39912753A83C00204B8E /* SkinningShader.metal */,
 				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
-				0434AC882766133E009AD4EA /* editor */,
-				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 			);
 			path = shaderlib;
 			sourceTree = "<group>";
@@ -4479,6 +4490,7 @@
 				04CE39AC2755003B00204B8E /* blinn_phong_material.mm in Sources */,
 				04A79AD6275E0F8D00182CCB /* pointer_manager.mm in Sources */,
 				04CE37C7274D167E00204B8E /* skeleton.cc in Sources */,
+				04860858276B2DED00C05BDA /* gltfloading.metal in Sources */,
 				04CE37C9274D167E00204B8E /* skeleton_utils.cc in Sources */,
 				0431588C276867BD0070FBEC /* particle_renderer.mm in Sources */,
 				04CE37CC274D167E00204B8E /* animation.cc in Sources */,
@@ -4506,7 +4518,7 @@
 				04CE397427526F6E00204B8E /* model_mesh.mm in Sources */,
 				04CE396C27526AEE00204B8E /* basic_render_pipeline.mm in Sources */,
 				04CE39392751CF3B00204B8E /* stencil_state.mm in Sources */,
-				04CE399C2753A83C00204B8E /* function-constant.metal in Sources */,
+				04CE399C2753A83C00204B8E /* function-constant.h in Sources */,
 				04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */,
 				04CE37DA274D167F00204B8E /* track.cc in Sources */,
 				0434A2962757B45B009AD4EA /* animator_controller.cpp in Sources */,
