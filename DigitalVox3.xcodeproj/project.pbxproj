@@ -590,8 +590,8 @@
 		0434AD8D27677954009AD4EA /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
 		0486084D276B0C9300C05BDA /* gpu_animation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084B276B0C9300C05BDA /* gpu_animation.mm */; };
 		0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* gpu_animation.h */; };
-		04860850276B0ED700C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
+		04860855276B29ED00C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -4432,7 +4432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04860850276B0ED700C05BDA /* gltf_view.mm in Sources */,
+				04860855276B29ED00C05BDA /* gltf_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

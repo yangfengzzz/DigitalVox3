@@ -76,7 +76,7 @@ public:
     id<MTLTexture> buildTexture(int width, int height, MTLPixelFormat pixelFormat,
                                 MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget);
     
-    id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName);
+    id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft = true);
     
     id<MTLTexture> loadTexture(MDLTexture* texture);
     

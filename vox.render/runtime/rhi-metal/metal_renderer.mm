@@ -173,13 +173,18 @@ id<MTLTexture> MetalRenderer::buildTexture(int width, int height, MTLPixelFormat
     return [device newTextureWithDescriptor:descriptor];
 }
 
-id<MTLTexture> MetalRenderer::loadTexture(const std::string& path, const std::string& imageName) {
+id<MTLTexture> MetalRenderer::loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
     NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
     NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
     
+    MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
+    if (!isTopLeft) {
+        origin = MTKTextureLoaderOriginBottomLeft;
+    }
+    
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
-        MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,
+        MTKTextureLoaderOptionOrigin: origin,
         MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:TRUE]
     };
