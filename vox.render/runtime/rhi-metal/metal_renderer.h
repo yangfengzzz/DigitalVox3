@@ -76,13 +76,13 @@ public:
     id<MTLTexture> buildTexture(int width, int height, MTLPixelFormat pixelFormat,
                                 MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget);
     
-    id<MTLTexture> loadTexture(const std::string& imageName);
+    id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName);
     
     id<MTLTexture> loadTexture(MDLTexture* texture);
     
     id<MTLTexture> loadCubeTexture(const std::string& imageName);
     
-    id<MTLTexture> loadTextureArray(const std::vector<std::string>& textureNames);
+    id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
     
 private:
     CAMetalLayer *layer;

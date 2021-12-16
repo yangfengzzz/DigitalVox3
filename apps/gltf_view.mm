@@ -32,6 +32,7 @@ int main(int, char**) {
     cameraEntity->addComponent<control::OrbitControl>();
     
     auto loader = offline::GLTFLoader(&engine);
+    loader.loadFromFile("../models/FlightHelmet/glTF/FlightHelmet.gltf");
     
     engine.run();
 }

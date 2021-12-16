@@ -25,6 +25,9 @@ engine(engine){
 }
 
 void GLTFLoader::loadFromFile(std::string filename, float scale) {
+    size_t pos = filename.find_last_of('/');
+    path = filename.substr(0, pos);
+    
     tinygltf::Model gltfModel;
     tinygltf::TinyGLTF gltfContext;
     gltfContext.SetImageLoader(tinygltf::LoadImageData, nullptr);
@@ -274,7 +277,7 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
 
 void GLTFLoader::loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer) {
     for (tinygltf::Image &image : gltfModel.images) {
-        textures.push_back(renderer->loadTexture(image.uri));
+        textures.push_back(renderer->loadTexture(path, image.uri));
     }
 }
 

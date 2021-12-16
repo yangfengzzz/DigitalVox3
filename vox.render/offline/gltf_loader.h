@@ -44,6 +44,7 @@ private:
     Engine* engine;
     std::map<uint32_t, std::pair<Entity*, int32_t>> linearNodes{};
     bool metallicRoughnessWorkflow = true;
+    std::string path;
 };
 
 

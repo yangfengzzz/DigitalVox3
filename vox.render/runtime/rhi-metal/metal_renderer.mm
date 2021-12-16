@@ -173,12 +173,9 @@ id<MTLTexture> MetalRenderer::buildTexture(int width, int height, MTLPixelFormat
     return [device newTextureWithDescriptor:descriptor];
 }
 
-id<MTLTexture> MetalRenderer::loadTexture(const std::string& imageName) {
-    auto index = imageName.find_last_of("/");
-    auto path = std::string(imageName.begin(), imageName.begin() + index);
-    auto texName = std::string(imageName.begin() + index + 1, imageName.end());
+id<MTLTexture> MetalRenderer::loadTexture(const std::string& path, const std::string& imageName) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
-    NSString* textureName = [[NSString alloc]initWithUTF8String:texName.c_str()];
+    NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
     NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
     
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
@@ -243,12 +240,12 @@ id<MTLTexture> MetalRenderer::loadCubeTexture(const std::string& imageName) {
     return mtlTexture;
 }
 
-id<MTLTexture> MetalRenderer::loadTextureArray(const std::vector<std::string>& textureNames) {
+id<MTLTexture> MetalRenderer::loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames) {
     NSMutableArray<id<MTLTexture>> *textures = [[NSMutableArray alloc]init];
     for (const auto& name : textureNames) {
-        auto texture = loadTexture(name);
+        auto texture = loadTexture(path, name);
         if (texture != nil) {
-            [textures addObject:loadTexture(name)];
+            [textures addObject:texture];
         }
     }
     
