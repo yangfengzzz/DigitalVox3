@@ -183,15 +183,71 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                     bufferWeights = reinterpret_cast<const float *>(&(model.buffers[uvView.buffer].data[uvAccessor.byteOffset + uvView.byteOffset]));
                 }
                 
-                size_t stride = 4;
-                stride += bufferNormals? 3: 0;
-                stride += bufferTexCoords? 2: 0;
-                stride += bufferColors? 4: 0;
-                stride += bufferTangents? 4: 0;
-                stride += bufferJoints? 4: 0;
-                stride += bufferWeights? 4: 0;
-                std::vector<float> vertexBuffer(static_cast<uint32_t>(posAccessor.count) * stride);
+                auto descriptor = [[MDLVertexDescriptor alloc]init];
+                descriptor.attributes[Attributes::Position] =
+                [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
+                                                 format:MDLVertexFormatFloat3
+                                                 offset:0 bufferIndex:0];
+                size_t offset = 12;
+                size_t elementCount = 3;
+                if (bufferNormals) {
+                    descriptor.attributes[Attributes::Normal] =
+                    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeNormal
+                                                     format:MDLVertexFormatFloat3
+                                                     offset:offset bufferIndex:BufferIndexVertices];
+                    offset += sizeof(float) * 3;
+                    elementCount += 3;
+                }
                 
+                if (bufferTexCoords) {
+                    descriptor.attributes[Attributes::UV_0] =
+                    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
+                                                     format:MDLVertexFormatFloat2
+                                                     offset:offset bufferIndex:BufferIndexVertices];
+                    offset += sizeof(float) * 2;
+                    elementCount += 2;
+                }
+                
+                if (bufferColors) {
+                    descriptor.attributes[Attributes::Color_0] =
+                    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeColor
+                                                     format:MDLVertexFormatFloat4
+                                                     offset:offset bufferIndex:BufferIndexVertices];
+                    offset += sizeof(float) * 4;
+                    elementCount += 4;
+                }
+                
+                if (bufferTangents) {
+                    descriptor.attributes[Attributes::Tangent] =
+                    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTangent
+                                                     format:MDLVertexFormatFloat4
+                                                     offset:offset bufferIndex:BufferIndexVertices];
+                    offset += sizeof(float) * 4;
+                    elementCount += 4;
+                }
+                
+                if (bufferJoints) {
+                    descriptor.attributes[Attributes::Joints_0] =
+                    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointIndices
+                                                     format:MDLVertexFormatShort4
+                                                     offset:offset bufferIndex:BufferIndexVertices];
+                    offset += sizeof(float) * 4;
+                    elementCount += 4;
+                }
+                
+                if (bufferWeights) {
+                    descriptor.attributes[Attributes::Weights_0] =
+                    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointWeights
+                                                     format:MDLVertexFormatFloat4
+                                                     offset:offset bufferIndex:BufferIndexVertices];
+                    offset += sizeof(float) * 4;
+                    elementCount += 4;
+                }
+                
+                descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:offset];
+                newMesh->setVertexDescriptor(descriptor);
+
+                std::vector<float> vertexBuffer(static_cast<uint32_t>(posAccessor.count) * elementCount);
                 for (size_t v = 0; v < posAccessor.count; v++) {
                     vertexBuffer.insert(vertexBuffer.end(), &bufferPos[v * 3], &bufferPos[v * 3 + 2]);
                     vertexBuffer.push_back(1.0);
