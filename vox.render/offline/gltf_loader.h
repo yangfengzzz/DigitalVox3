@@ -20,7 +20,7 @@ namespace offline {
 
 class GLTFLoader {
 public:
-    std::vector<Entity*> nodes;
+    std::vector<EntityPtr> nodes;
 
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
@@ -31,7 +31,7 @@ public:
     void loadFromFile(std::string filename, float scale = 1.0f);
 
 private:
-    void loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex,
+    void loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t nodeIndex,
                   const tinygltf::Model& model, float globalscale);
 
     void loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer);
@@ -42,7 +42,7 @@ private:
     
 private:
     Engine* engine;
-    std::map<uint32_t, std::pair<Entity*, int32_t>> linearNodes{};
+    std::map<uint32_t, std::pair<EntityPtr, int32_t>> linearNodes{};
     bool metallicRoughnessWorkflow = true;
     std::string path;
 };

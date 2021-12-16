@@ -52,7 +52,10 @@ void GLTFLoader::loadFromFile(std::string filename, float scale) {
                 node.second.first->getComponent<GPUSkinnedMeshRenderer>()->setSkin(skins[node.second.second]);
             }
             // Initial pose
-            node.second.first->getComponent<GPUSkinnedMeshRenderer>()->update(0);
+            auto mesh = node.second.first->getComponent<GPUSkinnedMeshRenderer>();
+            if (mesh) {
+                mesh->update(0);
+            }
         }
     }
     else {
@@ -69,15 +72,16 @@ void GLTFLoader::loadFromFile(std::string filename, float scale) {
     }
 }
 
-void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t nodeIndex,
+void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t nodeIndex,
                           const tinygltf::Model& model, float globalscale) {
     EntityPtr newNode = nullptr;
     if (parent) {
         newNode = parent->createChild(node.name);
     } else {
         newNode = engine->sceneManager().activeScene()->createRootEntity(node.name);
+        nodes.push_back(newNode);
     }
-    linearNodes[nodeIndex] = std::make_pair(newNode.get(), node.skin);
+    linearNodes[nodeIndex] = std::make_pair(newNode, node.skin);
     
     // Generate local node matrix
     if (node.translation.size() == 3) {
@@ -101,7 +105,7 @@ void GLTFLoader::loadNode(Entity* parent, const tinygltf::Node& node, uint32_t n
     // Node with children
     if (node.children.size() > 0) {
         for (auto i = 0; i < node.children.size(); i++) {
-            loadNode(newNode.get(), model.nodes[node.children[i]],
+            loadNode(newNode, model.nodes[node.children[i]],
                      node.children[i], model, globalscale);
         }
     }
@@ -336,9 +340,9 @@ void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
         
         // Find joint nodes
         for (int jointIndex : source.joints) {
-            Entity* node = linearNodes[jointIndex].first;
+            EntityPtr node = linearNodes[jointIndex].first;
             if (node) {
-                newSkin->joints.push_back(node);
+                newSkin->joints.push_back(node.get());
             }
         }
         
