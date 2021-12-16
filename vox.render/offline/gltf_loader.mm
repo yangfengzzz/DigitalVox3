@@ -172,6 +172,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                 // Skinning
                 // Joints
                 if (primitive.attributes.find("JOINTS_0") != primitive.attributes.end()) {
+                    // TODO data type have problem
                     const tinygltf::Accessor &jointAccessor = model.accessors[primitive.attributes.find("JOINTS_0")->second];
                     const tinygltf::BufferView &jointView = model.bufferViews[jointAccessor.bufferView];
                     bufferJoints = reinterpret_cast<const uint16_t *>(&(model.buffers[jointView.buffer].data[jointAccessor.byteOffset + jointView.byteOffset]));
@@ -247,35 +248,35 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                 descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:offset];
                 newMesh->setVertexDescriptor(descriptor);
 
-                std::vector<float> vertexBuffer(static_cast<uint32_t>(posAccessor.count) * elementCount);
+                std::vector<float> vertexBuffer;
+                vertexBuffer.reserve(static_cast<uint32_t>(posAccessor.count) * elementCount);
                 for (size_t v = 0; v < posAccessor.count; v++) {
-                    vertexBuffer.insert(vertexBuffer.end(), &bufferPos[v * 3], &bufferPos[v * 3 + 2]);
-                    vertexBuffer.push_back(1.0);
+                    vertexBuffer.insert(vertexBuffer.end(), &bufferPos[v * 3], &bufferPos[v * 3 + 3]);
                     if (bufferNormals) {
-                        vertexBuffer.insert(vertexBuffer.end(), &bufferNormals[v * 3], &bufferNormals[v * 3 + 2]);
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferNormals[v * 3], &bufferNormals[v * 3 + 3]);
                     }
                     if (bufferTexCoords) {
-                        vertexBuffer.insert(vertexBuffer.end(), &bufferTexCoords[v * 2], &bufferTexCoords[v * 2 + 1]);
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferTexCoords[v * 2], &bufferTexCoords[v * 2 + 2]);
                     }
                     if (bufferColors) {
                         switch (numColorComponents) {
                             case 3:
-                                vertexBuffer.insert(vertexBuffer.end(), &bufferColors[v * 3], &bufferColors[v * 3 + 2]);
+                                vertexBuffer.insert(vertexBuffer.end(), &bufferColors[v * 3], &bufferColors[v * 3 + 3]);
                                 vertexBuffer.push_back(1.0);
                             case 4:
-                                vertexBuffer.insert(vertexBuffer.end(), &bufferColors[v * 4], &bufferColors[v * 4 + 3]);
+                                vertexBuffer.insert(vertexBuffer.end(), &bufferColors[v * 4], &bufferColors[v * 4 + 4]);
                             default:
                                 std::cerr << "numColorComponents has problem" <<std::endl;
                         }
                     }
                     if (bufferTangents) {
-                        vertexBuffer.insert(vertexBuffer.end(), &bufferTangents[v * 4], &bufferTangents[v * 4 + 3]);
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferTangents[v * 4], &bufferTangents[v * 4 + 4]);
                     }
                     if (bufferJoints) {
-                        vertexBuffer.insert(vertexBuffer.end(), &bufferJoints[v * 4], &bufferJoints[v * 4 + 3]);
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferJoints[v * 4], &bufferJoints[v * 4 + 4]);
                     }
                     if (bufferWeights) {
-                        vertexBuffer.insert(vertexBuffer.end(), &bufferWeights[v * 4], &bufferWeights[v * 4 + 3]);
+                        vertexBuffer.insert(vertexBuffer.end(), &bufferWeights[v * 4], &bufferWeights[v * 4 + 4]);
                     }
                 }
                 auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data()
@@ -311,7 +312,8 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                         break;
                     }
                     case TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE: {
-                        std::vector<uint16_t> buf(accessor.count);
+                        std::vector<uint16_t> buf;
+                        buf.reserve(accessor.count);
                         uint8_t *buf8 = new uint8_t[accessor.count];
                         memcpy(buf8, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(uint8_t));
                         for (size_t index = 0; index < accessor.count; index++) {
