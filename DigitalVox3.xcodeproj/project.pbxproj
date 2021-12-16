@@ -591,6 +591,7 @@
 		0486084D276B0C9300C05BDA /* gpu_animation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084B276B0C9300C05BDA /* gpu_animation.mm */; };
 		0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* gpu_animation.h */; };
 		04860850276B0ED700C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
+		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -1539,6 +1540,7 @@
 		0486084B276B0C9300C05BDA /* gpu_animation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gpu_animation.mm; sourceTree = "<group>"; };
 		0486084C276B0C9300C05BDA /* gpu_animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu_animation.h; sourceTree = "<group>"; };
 		0486084F276B0ED700C05BDA /* gltf_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gltf_view.mm; sourceTree = "<group>"; };
+		04860851276B113900C05BDA /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -3084,6 +3086,7 @@
 				04160FE627509026006CD384 /* animation */,
 				04C698A6276A1B6600C4248F /* json.hpp */,
 				04C698A7276A1B6600C4248F /* tiny_gltf.h */,
+				04860851276B113900C05BDA /* stb_image.h */,
 				04C698AB276A1B7F00C4248F /* gltf_loader.h */,
 				04C698AA276A1B7F00C4248F /* gltf_loader.mm */,
 			);
@@ -3833,6 +3836,7 @@
 				04CE38D2274E79E600204B8E /* bounding_sphere.h in Headers */,
 				04CE38ED27510A8000204B8E /* camera.h in Headers */,
 				04A79AC7275DEA4E00182CCB /* spot_light.h in Headers */,
+				04860852276B113A00C05BDA /* stb_image.h in Headers */,
 				0434A2A8275E438C009AD4EA /* ambient_light.h in Headers */,
 				0431588D276867BD0070FBEC /* particle_renderer.h in Headers */,
 				04CE397927527B4700204B8E /* primitive_mesh.h in Headers */,

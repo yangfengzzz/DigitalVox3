@@ -14,6 +14,7 @@
 #include "../vox.render/runtime/animator.h"
 #include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
+#include "../vox.render/offline/gltf_loader.h"
 
 using namespace vox;
 
@@ -29,6 +30,8 @@ int main(int, char**) {
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
+    
+    auto loader = offline::GLTFLoader(&engine);
     
     engine.run();
 }

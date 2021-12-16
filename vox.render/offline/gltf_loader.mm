@@ -5,6 +5,10 @@
 //  Created by 杨丰 on 2021/12/15.
 //
 
+#define TINYGLTF_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#define TINYGLTF_NO_STB_IMAGE_WRITE
+
 #include "gltf_loader.h"
 #include "../runtime/engine.h"
 #include "../runtime/rhi-metal/metal_renderer.h"
