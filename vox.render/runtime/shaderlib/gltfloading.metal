@@ -13,13 +13,11 @@ struct VertexIn {
     float3 position [[attribute(0)]];
     float3 normal [[attribute(1)]];
     float2 uv [[attribute(2)]];
-    float4 color [[attribute(3)]];
 };
 
 struct VertexOut {
     float4 position [[position]];
     float3 outNormal;
-    float4 outColor;
     float2 outUV;
     float3 outViewVec;
     float3 outLightVec;
@@ -40,7 +38,6 @@ vertex VertexOut vertex_experimental(const VertexIn vertexIn [[stage_in]],
                                      constant float *u_pointLightDistance [[buffer(14), function_constant(hasPointLight)]]) {
     VertexOut out;
     out.outNormal = vertexIn.normal;
-    out.outColor = vertexIn.color;
     out.outUV = vertexIn.uv;
     out.position = u_MVPMat * float4(vertexIn.position, 1.0);
     
@@ -74,13 +71,13 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularMap)]],
                                       texture2d<float> u_glossinessTexture [[texture(6), function_constant(hasGlossinessMap)]],
                                       texture2d<float> u_occlusionTexture [[texture(7), function_constant(hasOcclusionMap)]]) {
-    float4 color = u_baseColorTexture.sample(textureSampler, in.outUV) * in.outColor;
+    float4 color = u_baseColorTexture.sample(textureSampler, in.outUV);
 
     float3 N = normalize(in.outNormal);
     float3 L = normalize(in.outLightVec);
     float3 V = normalize(in.outViewVec);
     float3 R = reflect(-L, N);
-    float4 diffuse = max(dot(N, L), 0.15) * in.outColor;
+    float4 diffuse = max(dot(N, L), 0.15) * float4(1.0);
     float4 specular = pow(max(dot(R, V), 0.0), 16.0) * float4(0.75);
     
     float4 final = diffuse * color + specular;

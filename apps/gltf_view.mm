@@ -27,16 +27,15 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(10, 10, 10);
+    cameraEntity->transform->setPosition(1, 1, 1);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
     
     // init point light
     auto light = rootEntity->createChild("light");
-    light->transform->setPosition(0, 3, 0);
-    auto pointLight = light->addComponent<PointLight>();
-    pointLight->intensity = 0.3;
+    light->transform->setPosition(5.0f, 5.0f, -5.0f);
+    light->addComponent<PointLight>();
     
     auto loader = offline::GLTFLoader(&engine);
     loader.loadFromFile("../models/FlightHelmet/glTF/FlightHelmet.gltf");
