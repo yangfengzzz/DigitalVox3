@@ -838,6 +838,7 @@
 		04D47E46276C4EB70038F34A /* free_control.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E44276C4EB70038F34A /* free_control.mm */; };
 		04D47E47276C4EB70038F34A /* free_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E45276C4EB70038F34A /* free_control.h */; };
 		04D47E48276C59730038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
+		04D47E4E276C65A90038F34A /* sky.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E4D276C65A90038F34A /* sky.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1794,7 +1795,6 @@
 		04CE38E7275103BC00204B8E /* scene_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_manager.h; sourceTree = "<group>"; };
 		04CE38EA27510A8000204B8E /* camera.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = camera.mm; sourceTree = "<group>"; };
 		04CE38EB27510A8000204B8E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
-		04CE38EF27510AD700204B8E /* background_mode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = background_mode.h; sourceTree = "<group>"; };
 		04CE38F027510AF200204B8E /* camera_clear_flags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera_clear_flags.h; sourceTree = "<group>"; };
 		04CE38F127510B0700204B8E /* color_space.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_space.h; sourceTree = "<group>"; };
 		04CE38F227510EAE00204B8E /* textureCube_face.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textureCube_face.h; sourceTree = "<group>"; };
@@ -1904,6 +1904,7 @@
 		04D47E40276C33DE0038F34A /* gltfskinning.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfskinning.metal; sourceTree = "<group>"; };
 		04D47E44276C4EB70038F34A /* free_control.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = free_control.mm; sourceTree = "<group>"; };
 		04D47E45276C4EB70038F34A /* free_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = free_control.h; sourceTree = "<group>"; };
+		04D47E4D276C65A90038F34A /* sky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sky.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3137,6 +3138,7 @@
 				04CE39052751AAC200204B8E /* graphics */,
 				04CE390E2751AE4A00204B8E /* shader */,
 				04CE39882753A41E00204B8E /* shaderlib */,
+				04D47E4B276C65790038F34A /* sky */,
 				04CE39132751AF0800204B8E /* mesh */,
 				04CE394C2752581000204B8E /* material */,
 				04A79AB7275DE08800182CCB /* lighting */,
@@ -3401,7 +3403,6 @@
 		04CE38EE27510AC600204B8E /* enums */ = {
 			isa = PBXGroup;
 			children = (
-				04CE38EF27510AD700204B8E /* background_mode.h */,
 				04CE38F027510AF200204B8E /* camera_clear_flags.h */,
 				04CE38F127510B0700204B8E /* color_space.h */,
 				04CE38F227510EAE00204B8E /* textureCube_face.h */,
@@ -3589,6 +3590,14 @@
 				04D47E3C276C21550038F34A /* scene_animation_clip.mm */,
 			);
 			path = scene_animation;
+			sourceTree = "<group>";
+		};
+		04D47E4B276C65790038F34A /* sky */ = {
+			isa = PBXGroup;
+			children = (
+				04D47E4D276C65A90038F34A /* sky.h */,
+			);
+			path = sky;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3912,6 +3921,7 @@
 				0416103827599B05006CD384 /* physics_manager.h in Headers */,
 				0416101A2755DB7C006CD384 /* spherical.h in Headers */,
 				04D47E47276C4EB70038F34A /* free_control.h in Headers */,
+				04D47E4E276C65A90038F34A /* sky.h in Headers */,
 				04CE39AD2755003B00204B8E /* blinn_phong_material.h in Headers */,
 				0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
