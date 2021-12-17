@@ -31,6 +31,7 @@ bool loadImageDataFuncEmpty(tinygltf::Image* image, const int imageIndex,
 
 GLTFLoader::GLTFLoader(Engine* engine):
 engine(engine){
+    defaultSceneRoot = std::make_shared<Entity>(engine);
 }
 
 void GLTFLoader::loadFromFile(std::string filename, float scale) {
@@ -87,8 +88,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
     if (parent) {
         newNode = parent->createChild(node.name);
     } else {
-        newNode = engine->sceneManager().activeScene()->createRootEntity(node.name);
-        nodes.push_back(newNode);
+        newNode = defaultSceneRoot->createChild(node.name);
     }
     linearNodes[nodeIndex] = std::make_pair(newNode, node.skin);
     

@@ -20,7 +20,7 @@ namespace offline {
 
 class GLTFLoader {
 public:
-    std::vector<EntityPtr> nodes;
+    EntityPtr defaultSceneRoot;
 
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;

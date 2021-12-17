@@ -40,6 +40,7 @@ int main(int, char**) {
     auto loader = offline::GLTFLoader(&engine);
 //    loader.loadFromFile("../models/FlightHelmet/glTF/FlightHelmet.gltf");
     loader.loadFromFile("/Users/yangfeng/Desktop/Vulkan/data/models/sponza/sponza.gltf");
-
+    rootEntity->addChild(loader.defaultSceneRoot);
+    
     engine.run();
 }
