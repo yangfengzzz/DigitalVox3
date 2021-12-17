@@ -46,7 +46,7 @@ public:
     /**
      * Mouse movement event.
      */
-    void onMouseMove(GLFWwindow *window);
+    void onMouseMove(GLFWwindow *window, double xpos, double ypos);
     
     /**
      * The angle of rotation around the y axis and the x axis respectively.
@@ -119,6 +119,13 @@ private:
     math::Float3 _v3Cache;
     Spherical _spherical;
     std::array<double, 2> _rotateOri{};
+    
+    ssize_t cursorCallbackIndex = -1;
+    Canvas::CursorPosFunc cursorPosCallback;
+    ssize_t keyCallbackIndex = -1;
+    Canvas::KeyFunc keyCallback;
+    ssize_t mouseCallbackIndex = -1;
+    Canvas::MouseButtonFunc mouseButtonCallback;
 };
 
 }

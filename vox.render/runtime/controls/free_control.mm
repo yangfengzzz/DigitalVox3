@@ -13,6 +13,26 @@ namespace vox {
 namespace control {
 FreeControl::FreeControl(Entity* entity):
 Script(entity) {
+    cursorPosCallback = [&](GLFWwindow* window, double xpos, double ypos) {
+        onMouseMove(window, xpos, ypos);
+    };
+    
+    keyCallback = [&](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        if (action == GLFW_PRESS) {
+            onKeyDown(key);
+        } else if (action == GLFW_RELEASE) {
+            onKeyUp(key);
+        }
+    };
+    
+    mouseButtonCallback = [&](GLFWwindow* window, int button, int action, int mods){
+        if (action == GLFW_PRESS) {
+            onMouseDown(window);
+        } else if (action == GLFW_RELEASE) {
+            onMouseUp();
+        }
+    };
+    
     initEvents();
     
     // init spherical
@@ -74,12 +94,10 @@ void FreeControl::onMouseUp() {
     press = false;
 }
 
-void FreeControl::onMouseMove(GLFWwindow *window) {
+void FreeControl::onMouseMove(GLFWwindow *window, double clientX, double clientY) {
     if (press == false) return;
     if (enabled() == false) return;
     
-    double clientX, clientY;
-    glfwGetCursorPos(window, &clientX, &clientY);
     int width, height;
     glfwGetWindowSize(window, &width, &height);
     
@@ -135,11 +153,21 @@ void FreeControl::onUpdate(float delta) {
 }
 
 void FreeControl::initEvents() {
-    
+    Canvas::mouse_button_callbacks.push_back(mouseButtonCallback);
+    mouseCallbackIndex = Canvas::mouse_button_callbacks.size() - 1;
+    Canvas::key_callbacks.push_back(keyCallback);
+    keyCallbackIndex = Canvas::key_callbacks.size() - 1;
+    Canvas::cursor_callbacks.push_back(cursorPosCallback);
+    cursorCallbackIndex = Canvas::cursor_callbacks.size() - 1;
 }
 
 void FreeControl::onDestroy() {
-    
+    Canvas::mouse_button_callbacks.erase(Canvas::mouse_button_callbacks.begin() + mouseCallbackIndex);
+    mouseCallbackIndex = -1;
+    Canvas::key_callbacks.erase(Canvas::key_callbacks.begin() + keyCallbackIndex);
+    keyCallbackIndex = -1;
+    Canvas::cursor_callbacks.erase(Canvas::cursor_callbacks.begin() + cursorCallbackIndex);
+    cursorCallbackIndex = -1;
 }
 
 void FreeControl::updateSpherical() {
