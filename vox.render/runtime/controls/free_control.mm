@@ -127,7 +127,7 @@ void FreeControl::rotate(float alpha, float beta) {
 void FreeControl::onUpdate(float delta) {
     if (enabled() == false) return;
     
-    const auto actualMoveSpeed = (delta / 1000) * movementSpeed;
+    const auto actualMoveSpeed = delta * movementSpeed;
     _forward = entity()->transform->worldForward();
     _right = entity()->transform->worldRight();
     

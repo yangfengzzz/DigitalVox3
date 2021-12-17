@@ -89,7 +89,7 @@ private:
     /**
      * Simulate a ground.
      */
-    bool floorMock = true;
+    bool floorMock = false;
     
     /**
      * Simulated ground height.

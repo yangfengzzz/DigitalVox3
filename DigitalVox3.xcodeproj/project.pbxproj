@@ -834,10 +834,10 @@
 		04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39C32757A18C00204B8E /* fbx_mesh.h */; };
 		04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E3C276C21550038F34A /* scene_animation_clip.mm */; };
 		04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E3D276C21550038F34A /* scene_animation_clip.h */; };
-		04D47E41276C33DE0038F34A /* gltfskinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E40276C33DE0038F34A /* gltfskinning.metal */; };
 		04D47E43276C3FEA0038F34A /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
 		04D47E46276C4EB70038F34A /* free_control.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E44276C4EB70038F34A /* free_control.mm */; };
 		04D47E47276C4EB70038F34A /* free_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E45276C4EB70038F34A /* free_control.h */; };
+		04D47E48276C59730038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4478,6 +4478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0434A2922757B385009AD4EA /* animator.mm in Sources */,
+				04D47E48276C59730038F34A /* gltfscene.metal in Sources */,
 				04CE3790274D167E00204B8E /* platform.cc in Sources */,
 				04A79ABE275DE28100182CCB /* light.mm in Sources */,
 				04160FF62750955C006CD384 /* component.mm in Sources */,
@@ -4493,7 +4494,6 @@
 				04CE39822753678E00204B8E /* background.mm in Sources */,
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */,
-				04D47E41276C33DE0038F34A /* gltfskinning.metal in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
 				04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */,
