@@ -56,6 +56,9 @@ void GLTFLoader::loadFromFile(std::string filename, float scale) {
             loadNode(nullptr, node, scene.nodes[i], gltfModel, scale);
         }
         
+        if (gltfModel.animations.size() > 0) {
+            loadAnimations(gltfModel);
+        }
         loadSkins(gltfModel);
         for (auto node : linearNodes) {
             // Assign skins
@@ -433,27 +436,23 @@ void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
 }
 
 void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
+    auto animator = defaultSceneRoot->addComponent<SceneAnimator>();
     for (size_t i = 0; i < gltfModel.animations.size(); i++) {
         const auto& anim = gltfModel.animations[i];
-        
-        auto animation = defaultSceneRoot->addComponent<SceneAnimator>();
-        animation->name = anim.name;
-        if (anim.name.empty()) {
-            animation->name = std::to_string(i);
-        }
+        auto animation = std::make_unique<SceneAnimationClip>(anim.name.empty()? std::to_string(i):anim.name);
         
         // Samplers
         for (auto &samp : anim.samplers) {
-            SceneAnimator::AnimationSampler sampler{};
+            SceneAnimationClip::AnimationSampler sampler{};
             
             if (samp.interpolation == "LINEAR") {
-                sampler.interpolation = SceneAnimator::AnimationSampler::InterpolationType::LINEAR;
+                sampler.interpolation = SceneAnimationClip::AnimationSampler::InterpolationType::LINEAR;
             }
             if (samp.interpolation == "STEP") {
-                sampler.interpolation = SceneAnimator::AnimationSampler::InterpolationType::STEP;
+                sampler.interpolation = SceneAnimationClip::AnimationSampler::InterpolationType::STEP;
             }
             if (samp.interpolation == "CUBICSPLINE") {
-                sampler.interpolation = SceneAnimator::AnimationSampler::InterpolationType::CUBICSPLINE;
+                sampler.interpolation = SceneAnimationClip::AnimationSampler::InterpolationType::CUBICSPLINE;
             }
             
             // Read sampler input time values
@@ -517,16 +516,16 @@ void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
         
         // Channels
         for (auto &source: anim.channels) {
-            SceneAnimator::AnimationChannel channel{};
+            SceneAnimationClip::AnimationChannel channel{};
             
             if (source.target_path == "rotation") {
-                channel.path = SceneAnimator::AnimationChannel::PathType::ROTATION;
+                channel.path = SceneAnimationClip::AnimationChannel::PathType::ROTATION;
             }
             if (source.target_path == "translation") {
-                channel.path = SceneAnimator::AnimationChannel::PathType::TRANSLATION;
+                channel.path = SceneAnimationClip::AnimationChannel::PathType::TRANSLATION;
             }
             if (source.target_path == "scale") {
-                channel.path = SceneAnimator::AnimationChannel::PathType::SCALE;
+                channel.path = SceneAnimationClip::AnimationChannel::PathType::SCALE;
             }
             if (source.target_path == "weights") {
                 std::cout << "weights not yet supported, skipping channel" << std::endl;
@@ -540,6 +539,7 @@ void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
             
             animation->addChannel(channel);
         }
+        animator->addAnimationClip(std::move(animation));
     }
 }
 

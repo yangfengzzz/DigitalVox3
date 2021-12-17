@@ -834,6 +834,8 @@
 		04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39C22757A18C00204B8E /* fbx_mesh.cpp */; };
 		04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39C32757A18C00204B8E /* fbx_mesh.h */; };
 		04D47E3A276B76010038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
+		04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E3C276C21550038F34A /* scene_animation_clip.mm */; };
+		04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E3D276C21550038F34A /* scene_animation_clip.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1895,6 +1897,8 @@
 		04CE39BF2757A0D200204B8E /* fbx_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fbx_loader.h; sourceTree = "<group>"; };
 		04CE39C22757A18C00204B8E /* fbx_mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fbx_mesh.cpp; sourceTree = "<group>"; };
 		04CE39C32757A18C00204B8E /* fbx_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fbx_mesh.h; sourceTree = "<group>"; };
+		04D47E3C276C21550038F34A /* scene_animation_clip.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = scene_animation_clip.mm; sourceTree = "<group>"; };
+		04D47E3D276C21550038F34A /* scene_animation_clip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_animation_clip.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3115,6 +3119,7 @@
 			children = (
 				04CE38EE27510AC600204B8E /* enums */,
 				04CE38FC27519FA200204B8E /* rhi-metal */,
+				04D47E3B276C212C0038F34A /* scene_animation */,
 				0486084C276B0C9300C05BDA /* scene_animator.h */,
 				0486084B276B0C9300C05BDA /* scene_animator.mm */,
 				04CE3702274D0DEC00204B8E /* animation */,
@@ -3569,6 +3574,15 @@
 			path = shaderlib;
 			sourceTree = "<group>";
 		};
+		04D47E3B276C212C0038F34A /* scene_animation */ = {
+			isa = PBXGroup;
+			children = (
+				04D47E3D276C21550038F34A /* scene_animation_clip.h */,
+				04D47E3C276C21550038F34A /* scene_animation_clip.mm */,
+			);
+			path = scene_animation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3825,6 +3839,7 @@
 				0486084E276B0C9300C05BDA /* scene_animator.h in Headers */,
 				04A79ACB275DED9B00182CCB /* direct_light.h in Headers */,
 				04A79AD7275E0F8D00182CCB /* pointer_manager.h in Headers */,
+				04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */,
 				0416101E2755DD48006CD384 /* orbit_control.h in Headers */,
 				04CE39A52753AC6D00204B8E /* compute_pipeline_state.h in Headers */,
 				04CE39432751D7BF00204B8E /* shader_data.h in Headers */,
@@ -4472,6 +4487,7 @@
 				04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
+				04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
