@@ -54,6 +54,8 @@ private:
     std::vector<AnimationChannel> _channels;
     float _start = std::numeric_limits<float>::max();
     float _end = std::numeric_limits<float>::min();
+    
+    float _currentTime = 0.0f;
 };
 
 }

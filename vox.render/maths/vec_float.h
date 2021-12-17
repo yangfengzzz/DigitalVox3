@@ -148,6 +148,10 @@ struct Float4 {
     : x(_v.x), y(_v.y), z(_z), w(_w) {
     }
     
+    VOX_INLINE Float3 xyz() {
+        return Float3(x, y, z);
+    }
+    
     // Returns a vector with all components set to 0.
     static VOX_INLINE Float4 zero() {
         return Float4(0.f);
