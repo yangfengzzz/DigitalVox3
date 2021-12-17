@@ -228,13 +228,13 @@ Float3 Transform::worldForward() {
     return Normalize(forward);
 }
 
-Float3 Transform::getWorldRight() {
+Float3 Transform::worldRight() {
     const auto &e = worldMatrix().elements;
     auto right = Float3(e[0], e[1], e[2]);
     return Normalize(right);
 }
 
-Float3 Transform::getWorldUp() {
+Float3 Transform::worldUp() {
     const auto &e = worldMatrix().elements;
     auto up = Float3(e[4], e[5], e[6]);
     return Normalize(up);

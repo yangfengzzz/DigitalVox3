@@ -8,10 +8,11 @@
 #ifndef free_control_hpp
 #define free_control_hpp
 
+#include "../canvas.h"
 #include "../script.h"
 #include "spherical.h"
 #include "maths/vec_float.h"
-#include <vector>
+#include <array>
 
 namespace vox {
 namespace control {
@@ -25,17 +26,17 @@ public:
     /**
      * Keyboard press event.
      */
-    void onKeyDown();
+    void onKeyDown(int key);
     
     /**
      * Keyboard up event.
      */
-    void onKeyUp();
+    void onKeyUp(int key);
     
     /**
      * Mouse press event.
      */
-    void onMouseDown();
+    void onMouseDown(GLFWwindow *window);
     
     /**
      * Mouse up event.
@@ -45,7 +46,7 @@ public:
     /**
      * Mouse movement event.
      */
-    void onMouseMove();
+    void onMouseMove(GLFWwindow *window);
     
     /**
      * The angle of rotation around the y axis and the x axis respectively.
@@ -78,46 +79,46 @@ private:
     /**
      * Movement distance per second, the unit is the unit before MVP conversion.
      */
-    float movementSpeed;
+    float movementSpeed = 1.0;
     
     /**
      * Rotate speed.
      */
-    float rotateSpeed;
+    float rotateSpeed = 1.0;
     
     /**
      * Simulate a ground.
      */
-    bool floorMock;
+    bool floorMock = true;
     
     /**
      * Simulated ground height.
      */
-    float floorY;
+    float floorY = 0;
     
     /**
      * Only rotate when press=true
      */
-    bool press;
+    bool press = false;
     
     /**
      * Radian of spherical.theta.
      */
-    float _theta;
+    float _theta = 0;
     
     /**
      * Radian of spherical.phi.
      */
-    float _phi;
+    float _phi = 0;
     
-    bool _moveForward;
-    bool _moveBackward;
-    bool _moveLeft;
-    bool _moveRight;
+    bool _moveForward = false;
+    bool _moveBackward = false;
+    bool _moveLeft = false;
+    bool _moveRight = false;
     
     math::Float3 _v3Cache;
     Spherical _spherical;
-    std::vector<float> _rotateOri{};
+    std::array<double, 2> _rotateOri{};
 };
 
 }

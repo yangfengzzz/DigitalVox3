@@ -27,6 +27,8 @@ public:
 
 private:
     friend class OrbitControl;
+    friend class FreeControl;
+    
     float radius;
     float phi;
     float theta;

@@ -200,13 +200,13 @@ public:
      * Get the right direction in world space.
      * @returns Right vector
      */
-    Float3 getWorldRight();
+    Float3 worldRight();
     
     /**
      * Get the up direction in world space.
      * @returns Up vector
      */
-    Float3 getWorldUp();
+    Float3 worldUp();
     
     /**
      * Translate along the passed Vector3.
