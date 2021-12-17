@@ -9,6 +9,7 @@
 
 namespace vox {
 ShaderProperty SkyBoxMaterial::_skyboxTextureProp = Shader::createProperty("u_cube", ShaderDataGroup::Enum::Material);
+ShaderProperty SkyBoxMaterial::_mvpNoscaleProp = Shader::createProperty("u_mvpNoscale", ShaderDataGroup::Enum::Material);
 
 bool SkyBoxMaterial::textureDecodeRGBM() {
     return _decodeParam.x;

@@ -834,13 +834,13 @@
 		04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39C32757A18C00204B8E /* fbx_mesh.h */; };
 		04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E3C276C21550038F34A /* scene_animation_clip.mm */; };
 		04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E3D276C21550038F34A /* scene_animation_clip.h */; };
-		04D47E43276C3FEA0038F34A /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
 		04D47E46276C4EB70038F34A /* free_control.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E44276C4EB70038F34A /* free_control.mm */; };
 		04D47E47276C4EB70038F34A /* free_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E45276C4EB70038F34A /* free_control.h */; };
 		04D47E48276C59730038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
 		04D47E4E276C65A90038F34A /* sky.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E4D276C65A90038F34A /* sky.h */; };
 		04D47E51276C67C70038F34A /* skybox_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E4F276C67C70038F34A /* skybox_material.mm */; };
 		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
+		04D47E54276C85880038F34A /* skybox_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E53276C85880038F34A /* skybox_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1909,6 +1909,7 @@
 		04D47E4D276C65A90038F34A /* sky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sky.h; sourceTree = "<group>"; };
 		04D47E4F276C67C70038F34A /* skybox_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skybox_material.mm; sourceTree = "<group>"; };
 		04D47E50276C67C70038F34A /* skybox_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skybox_material.h; sourceTree = "<group>"; };
+		04D47E53276C85880038F34A /* skybox_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skybox_view.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2945,6 +2946,7 @@
 				0431559F2766F80C0070FBEC /* fix_particle_view.mm */,
 				0431588E27688D7A0070FBEC /* particle_view.mm */,
 				0486084F276B0ED700C05BDA /* gltf_view.mm */,
+				04D47E53276C85880038F34A /* skybox_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";
@@ -4486,7 +4488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D47E43276C3FEA0038F34A /* gltf_view.mm in Sources */,
+				04D47E54276C85880038F34A /* skybox_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

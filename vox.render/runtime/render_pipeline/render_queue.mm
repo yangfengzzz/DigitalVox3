@@ -112,8 +112,6 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     
     auto& rhi = engine->_hardwareRenderer;
     auto& shaderData = material->shaderData;
-    const auto& shader = material->shader;
-    const auto& renderState = material->renderState;
     
     auto compileMacros = ShaderMacroCollection();
     ShaderMacroCollection::unionCollection(camera->_globalShaderMacro, shaderData._macroCollection, compileMacros);
@@ -149,7 +147,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     rhi.setDepthStencilState(depthStencilState);
 
     pipelineState->groupingOtherUniformBlock();
-    pipelineState->uploadAll(pipelineState->sceneUniformBlock, shaderData);
+    pipelineState->uploadAll(pipelineState->materialUniformBlock, shaderData);
 
     auto& buffers = mesh->_vertexBuffer;
     for (size_t index = 0; index < buffers.size(); index++) {

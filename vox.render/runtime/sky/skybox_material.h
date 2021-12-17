@@ -42,6 +42,7 @@ public:
     
 private:
     static ShaderProperty _skyboxTextureProp;
+    static ShaderProperty _mvpNoscaleProp;
 
     math::Float2 _decodeParam = math::Float2(0, 5);
 };
