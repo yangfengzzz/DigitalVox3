@@ -50,7 +50,7 @@ vertex VertexOut vertex_experimental(const VertexIn vertexIn [[stage_in]],
     vertexIn.jointWeights.z * u_jointMatrix[int(vertexIn.jointIndices.z)] +
     vertexIn.jointWeights.w * u_jointMatrix[int(vertexIn.jointIndices.w)];
     
-    out.position = u_MVPMat * float4(vertexIn.position, 1.0);
+    out.position = u_MVPMat * skinMat * float4(vertexIn.position, 1.0);
     
     out.normal = float4( skinMat * float4( vertexIn.normal, 0.0 ) ).xyz;
 
