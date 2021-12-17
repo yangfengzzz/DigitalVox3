@@ -31,7 +31,7 @@ int main(int, char**) {
     
     auto skyMaterial = std::make_shared<SkyBoxMaterial>(&engine);
     skyMaterial->setTextureCubeMap(engine._hardwareRenderer.loadTexture("/Users/yangfeng/Desktop/Vulkan/data/textures",
-                                                                        "cubemap_vulkan.ktx", false));
+                                                                        "cubemap_yokohama_rgba.ktx"));
     scene->background.sky.material = skyMaterial;
     scene->background.sky.mesh = PrimitiveMesh::createCuboid(&engine, 1, 1, 1);
     

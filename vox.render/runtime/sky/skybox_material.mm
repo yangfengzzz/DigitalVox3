@@ -8,7 +8,7 @@
 #include "skybox_material.h"
 
 namespace vox {
-ShaderProperty SkyBoxMaterial::_skyboxTextureProp = Shader::createProperty("u_cube", ShaderDataGroup::Enum::Material);
+ShaderProperty SkyBoxMaterial::_skyboxTextureProp = Shader::createProperty("u_skybox", ShaderDataGroup::Enum::Material);
 ShaderProperty SkyBoxMaterial::_mvpNoscaleProp = Shader::createProperty("u_mvpNoscale", ShaderDataGroup::Enum::Material);
 
 bool SkyBoxMaterial::textureDecodeRGBM() {
@@ -37,7 +37,7 @@ void SkyBoxMaterial::setTextureCubeMap(id<MTLTexture> v) {
 
 SkyBoxMaterial::SkyBoxMaterial(Engine* engine):
 Material(engine, Shader::find("skybox")) {
-    renderState.rasterState.cullMode = MTLCullModeNone;
+    renderState.rasterState.cullMode = MTLCullModeBack;
     renderState.depthState.compareFunction = MTLCompareFunctionLessEqual;
 }
 

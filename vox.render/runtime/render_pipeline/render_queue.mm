@@ -121,6 +121,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     _matrix.elements[12] = 0;
     _matrix.elements[13] = 0;
     _matrix.elements[14] = 0;
+    _matrix.elements[15] = 1;
     _matrix = projectionMatrix * _matrix;
     shaderData.setData("u_mvpNoscale", _matrix);
     
