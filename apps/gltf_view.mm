@@ -12,6 +12,7 @@
 #include "../vox.render/runtime/mesh/skinned_mesh_renderer.h"
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
 #include "../vox.render/runtime/animator.h"
+#include "../vox.render/runtime/scene_animator.h"
 #include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/point_light.h"
@@ -39,8 +40,10 @@ int main(int, char**) {
     
     auto loader = offline::GLTFLoader(&engine);
 //    loader.loadFromFile("../models/FlightHelmet/glTF/FlightHelmet.gltf");
-    loader.loadFromFile("/Users/yangfeng/Desktop/Vulkan/data/models/sponza/sponza.gltf");
+    loader.loadFromFile("/Users/yangfeng/Desktop/Vulkan/data/models/CesiumMan/glTF/CesiumMan.gltf");
     rootEntity->addChild(loader.defaultSceneRoot);
     
+    auto animator = loader.defaultSceneRoot->getComponent<SceneAnimator>();
+    animator->play("0");
     engine.run();
 }

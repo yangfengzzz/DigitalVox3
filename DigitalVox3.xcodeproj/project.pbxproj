@@ -833,9 +833,9 @@
 		04CE39C12757A0D200204B8E /* fbx_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39BF2757A0D200204B8E /* fbx_loader.h */; };
 		04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39C22757A18C00204B8E /* fbx_mesh.cpp */; };
 		04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 04CE39C32757A18C00204B8E /* fbx_mesh.h */; };
-		04D47E3A276B76010038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
 		04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E3C276C21550038F34A /* scene_animation_clip.mm */; };
 		04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E3D276C21550038F34A /* scene_animation_clip.h */; };
+		04D47E41276C33DE0038F34A /* gltfskinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E40276C33DE0038F34A /* gltfskinning.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1899,6 +1899,7 @@
 		04CE39C32757A18C00204B8E /* fbx_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fbx_mesh.h; sourceTree = "<group>"; };
 		04D47E3C276C21550038F34A /* scene_animation_clip.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = scene_animation_clip.mm; sourceTree = "<group>"; };
 		04D47E3D276C21550038F34A /* scene_animation_clip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_animation_clip.h; sourceTree = "<group>"; };
+		04D47E40276C33DE0038F34A /* gltfskinning.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfskinning.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3560,6 +3561,7 @@
 				0434AC882766133E009AD4EA /* editor */,
 				04860857276B2DED00C05BDA /* gltfloading.metal */,
 				0486085C276B40F500C05BDA /* gltfscene.metal */,
+				04D47E40276C33DE0038F34A /* gltfskinning.metal */,
 				04860859276B2DFA00C05BDA /* experimental */,
 				04CE398B2753A83B00204B8E /* function-common.metal */,
 				04CE398C2753A83B00204B8E /* background-texture.metal */,
@@ -4477,7 +4479,6 @@
 				04CE38F62751131C00204B8E /* canvas.cpp in Sources */,
 				041610432759CC06006CD384 /* dynamic_collider.cpp in Sources */,
 				0416102127578322006CD384 /* anim_loader.cpp in Sources */,
-				04D47E3A276B76010038F34A /* gltfscene.metal in Sources */,
 				04CE39862753710E00204B8E /* resource_cache_state.mm in Sources */,
 				04161079275A5DB1006CD384 /* capsule_character_controller.mm in Sources */,
 				04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */,
@@ -4485,6 +4486,7 @@
 				04CE39822753678E00204B8E /* background.mm in Sources */,
 				04CE3797274D167E00204B8E /* archive.cc in Sources */,
 				04CE39962753A83C00204B8E /* blinn-phong.metal in Sources */,
+				04D47E41276C33DE0038F34A /* gltfskinning.metal in Sources */,
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
 				04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */,
