@@ -10,6 +10,7 @@
 
 #include "../vox_type.h"
 #include "../layer.h"
+#include "../sky/sky.h"
 #include "render_element.h"
 #include <vector>
 
@@ -23,6 +24,8 @@ public:
     void pushPrimitive(RenderElement element);
 
     void render(Camera* camera, RenderPass* pass);
+    
+    void drawSky(Engine* engine, Camera* camera, const Sky& sky);
     
     /// Clear collection.
     void clear();

@@ -98,6 +98,66 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
     }
 }
 
+void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
+    const auto& material = sky.material;
+    const auto& mesh = sky.mesh;
+    if (!material) {
+        std::cerr << "The material of sky is not defined." << std::endl;
+        return;
+    }
+    if (!mesh) {
+        std::cerr << "The mesh of sky is not defined." << std::endl;
+        return;
+    }
+    
+    auto& rhi = engine->_hardwareRenderer;
+    auto& shaderData = material->shaderData;
+    const auto& shader = material->shader;
+    const auto& renderState = material->renderState;
+    
+    auto compileMacros = ShaderMacroCollection();
+    ShaderMacroCollection::unionCollection(camera->_globalShaderMacro, shaderData._macroCollection, compileMacros);
+
+    const auto projectionMatrix = camera->projectionMatrix();
+    auto _matrix = camera->viewMatrix();
+    _matrix.elements[12] = 0;
+    _matrix.elements[13] = 0;
+    _matrix.elements[14] = 0;
+    _matrix = projectionMatrix * _matrix;
+    shaderData.setData("u_mvpNoscale", _matrix);
+    
+    auto program = material->shader->_getShaderProgram(engine, compileMacros);
+    if (!program->isValid()) {
+        return;
+    }
+
+    auto descriptor = [[MTLRenderPipelineDescriptor alloc]init];
+    descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh->_vertexDescriptor);
+    descriptor.vertexFunction = program->vertexShader();
+    descriptor.fragmentFunction = program->fragmentShader();
+
+    descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat;
+    descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+
+    auto depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+    material->renderState._apply(engine, descriptor, depthStencilDescriptor);
+
+    auto pipelineState = rhi.resouceCache.request_graphics_pipeline(descriptor);
+    rhi.setRenderPipelineState(pipelineState);
+
+    auto depthStencilState = [engine->_hardwareRenderer.device newDepthStencilStateWithDescriptor:depthStencilDescriptor];
+    rhi.setDepthStencilState(depthStencilState);
+
+    pipelineState->groupingOtherUniformBlock();
+    pipelineState->uploadAll(pipelineState->sceneUniformBlock, shaderData);
+
+    auto& buffers = mesh->_vertexBuffer;
+    for (size_t index = 0; index < buffers.size(); index++) {
+        [rhi.renderEncoder setVertexBuffer:buffers[index]->buffer() offset:0 atIndex:index];
+    }
+    rhi.drawPrimitive(mesh->subMesh(0));
+}
+
 void RenderQueue::clear() {
     items.clear();
 }

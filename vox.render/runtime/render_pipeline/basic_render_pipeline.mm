@@ -77,7 +77,7 @@ void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
             _opaqueQueue.render(camera, pass);
             _alphaTestQueue.render(camera, pass);
             if (background.mode == BackgroundMode::Sky) {
-                // _drawSky(engine, camera, background!.sky);
+                _alphaTestQueue.drawSky(engine, camera, background.sky);
             }
             _transparentQueue.render(camera, pass);
         }

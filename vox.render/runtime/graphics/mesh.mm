@@ -11,6 +11,10 @@ namespace vox {
 Mesh::Mesh(Engine* engine, const std::string&  name):EngineObject(engine), name(name) {
 }
 
+SubMesh* Mesh::subMesh(size_t index) {
+    return &_subMeshes[index];
+}
+
 void Mesh::addSubMesh(SubMesh subMesh) {
     _subMeshes.push_back(subMesh);
 }
