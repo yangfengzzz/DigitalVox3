@@ -835,7 +835,9 @@
 		04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E3C276C21550038F34A /* scene_animation_clip.mm */; };
 		04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E3D276C21550038F34A /* scene_animation_clip.h */; };
 		04D47E41276C33DE0038F34A /* gltfskinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E40276C33DE0038F34A /* gltfskinning.metal */; };
-		04D47E42276C38740038F34A /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
+		04D47E43276C3FEA0038F34A /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
+		04D47E46276C4EB70038F34A /* free_control.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E44276C4EB70038F34A /* free_control.mm */; };
+		04D47E47276C4EB70038F34A /* free_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E45276C4EB70038F34A /* free_control.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1900,6 +1902,8 @@
 		04D47E3C276C21550038F34A /* scene_animation_clip.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = scene_animation_clip.mm; sourceTree = "<group>"; };
 		04D47E3D276C21550038F34A /* scene_animation_clip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_animation_clip.h; sourceTree = "<group>"; };
 		04D47E40276C33DE0038F34A /* gltfskinning.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfskinning.metal; sourceTree = "<group>"; };
+		04D47E44276C4EB70038F34A /* free_control.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = free_control.mm; sourceTree = "<group>"; };
+		04D47E45276C4EB70038F34A /* free_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = free_control.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2034,6 +2038,8 @@
 				041610172755DB7C006CD384 /* spherical.cpp */,
 				0416101C2755DD48006CD384 /* orbit_control.h */,
 				0416101B2755DD48006CD384 /* orbit_control.mm */,
+				04D47E45276C4EB70038F34A /* free_control.h */,
+				04D47E44276C4EB70038F34A /* free_control.mm */,
 			);
 			path = controls;
 			sourceTree = "<group>";
@@ -3905,6 +3911,7 @@
 				0416106D275A18E5006CD384 /* configurable_joint.h in Headers */,
 				0416103827599B05006CD384 /* physics_manager.h in Headers */,
 				0416101A2755DB7C006CD384 /* spherical.h in Headers */,
+				04D47E47276C4EB70038F34A /* free_control.h in Headers */,
 				04CE39AD2755003B00204B8E /* blinn_phong_material.h in Headers */,
 				0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
@@ -4462,7 +4469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D47E42276C38740038F34A /* windows_view.mm in Sources */,
+				04D47E43276C3FEA0038F34A /* gltf_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4629,6 +4636,7 @@
 				04C698AC276A1B7F00C4248F /* gltf_loader.mm in Sources */,
 				04CE381F274D168000204B8E /* imgui_impl_glfw.cpp in Sources */,
 				04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */,
+				04D47E46276C4EB70038F34A /* free_control.mm in Sources */,
 				04CE38D1274E79E600204B8E /* bounding_sphere.cpp in Sources */,
 				04CE39BC275511CE00204B8E /* pbr_material.mm in Sources */,
 				04CE3821274D168000204B8E /* imgui_impl_metal.mm in Sources */,
