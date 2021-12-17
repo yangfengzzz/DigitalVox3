@@ -29,6 +29,7 @@ class Renderer;
 class MeshRenderer;
 class Script;
 class Animator;
+class SceneAnimator;
 class Light;
 
 class ShaderProgram;

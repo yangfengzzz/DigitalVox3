@@ -110,6 +110,7 @@ void Engine::update() {
         
         _componentsManager.callScriptOnUpdate(deltaTime);
         _componentsManager.callAnimatorUpdate(deltaTime);
+        _componentsManager.callSceneAnimatorUpdate(deltaTime);
         _componentsManager.callScriptOnLateUpdate(deltaTime);
         
         _hardwareRenderer.begin();

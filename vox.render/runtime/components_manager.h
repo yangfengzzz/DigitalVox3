@@ -50,6 +50,10 @@ public:
     
     void removeOnUpdateAnimators(Animator* animator);
     
+    void addOnUpdateSceneAnimators(SceneAnimator* animator);
+    
+    void removeOnUpdateSceneAnimators(SceneAnimator* animator);
+    
 public:
     void callScriptOnStart();
     
@@ -64,6 +68,8 @@ public:
     void callRender(const RenderContext& context);
     
     void callAnimatorUpdate(float deltaTime);
+    
+    void callSceneAnimatorUpdate(float deltaTime);
     
     void callComponentDestroy();
     
@@ -86,7 +92,8 @@ private:
     
     // Animatior
     std::vector<Animator*> _onUpdateAnimators;
-    
+    std::vector<SceneAnimator*> _onUpdateSceneAnimators;
+
     // Render
     std::vector<Renderer*> _renderers;
     std::vector<Renderer*> _onUpdateRenderers;

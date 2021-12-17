@@ -7,6 +7,7 @@
 
 #include "scene_animator.h"
 #include "entity.h"
+#include "engine.h"
 #include <iostream>
 
 namespace vox {
@@ -32,6 +33,14 @@ void SceneAnimator::play(const std::string& name) {
     } else {
         _activeAnimation = -1;
     }
+}
+
+void SceneAnimator::_onEnable() {
+    engine()->_componentsManager.addOnUpdateSceneAnimators(this);
+}
+
+void SceneAnimator::_onDisable() {
+    engine()->_componentsManager.removeOnUpdateSceneAnimators(this);
 }
 
 }
