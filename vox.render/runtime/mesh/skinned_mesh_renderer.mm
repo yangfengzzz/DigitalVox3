@@ -136,6 +136,26 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
         
         // Renders skin.
         auto render_mesh = drawSkinnedMesh(index, mesh, make_span(skinning_matrices_), vox::math::Float4x4::identity());
+        const auto& vertexDescriptor = render_mesh->_vertexDescriptor;
+        
+        shaderData.disableMacro(HAS_UV);
+        shaderData.disableMacro(HAS_NORMAL);
+        shaderData.disableMacro(HAS_TANGENT);
+        shaderData.disableMacro(HAS_VERTEXCOLOR);
+        
+        if ([vertexDescriptor attributeNamed:MDLVertexAttributeTextureCoordinate] != nullptr) {
+            shaderData.enableMacro(HAS_UV);
+        }
+        if ([vertexDescriptor attributeNamed:MDLVertexAttributeNormal] != nullptr) {
+            shaderData.enableMacro(HAS_NORMAL);
+        }
+        if ([vertexDescriptor attributeNamed:MDLVertexAttributeTangent] != nullptr) {
+            shaderData.enableMacro(HAS_TANGENT);
+        }
+        if ([vertexDescriptor attributeNamed:MDLVertexAttributeColor] != nullptr) {
+            shaderData.enableMacro(HAS_VERTEXCOLOR);
+        }
+        
         auto& subMeshes = render_mesh->_subMeshes;
         auto& renderPipeline = camera->_renderPipeline;
         for (size_t i = 0; i < subMeshes.size(); i++) {
@@ -214,12 +234,12 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
     const int32_t tangents_stride = positions_stride;
     const int32_t skinned_data_size = vertex_count * positions_stride;
     void *vbo_map = vbo_buffer_.Resize(skinned_data_size);
-    vertexDescriptor.attributes[0] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributePosition
-                                                                       format:MDLVertexFormatFloat3 offset:positions_offset bufferIndex:0];
-    vertexDescriptor.attributes[1] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeNormal
-                                                                       format:MDLVertexFormatFloat3 offset:normals_offset bufferIndex:0];
-    vertexDescriptor.attributes[2] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTangent
-                                                                       format:MDLVertexFormatFloat3 offset:tangents_offset bufferIndex:0];
+    vertexDescriptor.attributes[Position] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributePosition
+                                                                              format:MDLVertexFormatFloat3 offset:positions_offset bufferIndex:0];
+    vertexDescriptor.attributes[Normal] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeNormal
+                                                                            format:MDLVertexFormatFloat3 offset:normals_offset bufferIndex:0];
+    vertexDescriptor.attributes[Tangent] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTangent
+                                                                             format:MDLVertexFormatFloat3 offset:tangents_offset bufferIndex:0];
     
     // Colors and uvs are contiguous. They aren't transformed, so they can be
     // directly copied from source mesh which is non-interleaved as-well.
@@ -229,8 +249,8 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
     const int32_t uvs_stride = sizeof(float) * 2;
     const int32_t uvs_size = vertex_count * uvs_stride;
     void *uv_map = uv_buffer_.Resize(uvs_size);
-    vertexDescriptor.attributes[3] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
-                                                                       format:MDLVertexFormatFloat2 offset:uvs_offset bufferIndex:1];
+    vertexDescriptor.attributes[UV_0] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                                                          format:MDLVertexFormatFloat2 offset:uvs_offset bufferIndex:1];
     vertexDescriptor.layouts[0] = [[MDLVertexBufferLayout alloc] initWithStride:positions_stride];
     vertexDescriptor.layouts[1] = [[MDLVertexBufferLayout alloc] initWithStride:uvs_stride];
     

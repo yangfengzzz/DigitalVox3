@@ -25,21 +25,21 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(10, 10, 10);
+    cameraEntity->transform->setPosition(1, 1, 1);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
     
     auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
-    boxMtl->setBaseColor(math::Color(0.6, 0.3, 0.4, 1));
+    boxMtl->setBaseTexture(engine._hardwareRenderer.loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
     
     auto characterEntity = rootEntity->createChild("characterEntity");
     auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();
-    characterRenderer->addSkinnedMesh("models/Doggy/Doggy.fbx",
-                                      "models/Doggy/doggy_skeleton.ozz");
+    characterRenderer->addSkinnedMesh("../models/Doggy/Doggy.fbx",
+                                      "../models/Doggy/doggy_skeleton.ozz");
     characterRenderer->setMaterial(boxMtl);
     auto characterAnim = characterEntity->addComponent<Animator>();
-    characterAnim->addAnimationClip("models/Doggy/Run.ozz");
+    characterAnim->addAnimationClip("../models/Doggy/Run.ozz");
     
     engine.run();
 }

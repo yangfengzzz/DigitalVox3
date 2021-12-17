@@ -591,7 +591,6 @@
 		0486084D276B0C9300C05BDA /* scene_animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084B276B0C9300C05BDA /* scene_animator.mm */; };
 		0486084E276B0C9300C05BDA /* scene_animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* scene_animator.h */; };
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
-		0486085B276B364900C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -836,6 +835,7 @@
 		04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E3C276C21550038F34A /* scene_animation_clip.mm */; };
 		04D47E3F276C21550038F34A /* scene_animation_clip.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E3D276C21550038F34A /* scene_animation_clip.h */; };
 		04D47E41276C33DE0038F34A /* gltfskinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E40276C33DE0038F34A /* gltfskinning.metal */; };
+		04D47E42276C38740038F34A /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4462,7 +4462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0486085B276B364900C05BDA /* gltf_view.mm in Sources */,
+				04D47E42276C38740038F34A /* windows_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
