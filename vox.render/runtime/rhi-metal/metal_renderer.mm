@@ -215,9 +215,18 @@ id<MTLTexture> MetalRenderer::loadTexture(MDLTexture* texture) {
     return mtlTexture;
 }
 
-id<MTLTexture> MetalRenderer::loadCubeTexture(const std::string& imageName) {
+id<MTLTexture> MetalRenderer::loadCubeTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
+    NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
+    NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
+    NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
+    
+    MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
+    if (!isTopLeft) {
+        origin = MTKTextureLoaderOriginBottomLeft;
+    }
+    
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
-        MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginTopLeft,
+        MTKTextureLoaderOptionOrigin: origin,
         MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
     };
@@ -235,9 +244,8 @@ id<MTLTexture> MetalRenderer::loadCubeTexture(const std::string& imageName) {
         return mtlTexture;
     }
     
-    id<MTLTexture> mtlTexture = [textureLoader newTextureWithName:imageNames[0]
-                                                      scaleFactor:1.0 bundle:[NSBundle mainBundle]
-                                                          options:options error:&error];
+    id<MTLTexture> mtlTexture = [textureLoader newTextureWithContentsOfURL:url
+                                                                options:options error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create MTLTexture: %@", error);

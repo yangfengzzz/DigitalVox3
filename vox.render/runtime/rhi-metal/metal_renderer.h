@@ -80,7 +80,7 @@ public:
     
     id<MTLTexture> loadTexture(MDLTexture* texture);
     
-    id<MTLTexture> loadCubeTexture(const std::string& imageName);
+    id<MTLTexture> loadCubeTexture(const std::string& path, const std::string& imageName, bool isTopLeft);
     
     id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
     
