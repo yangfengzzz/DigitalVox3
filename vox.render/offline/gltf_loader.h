@@ -40,9 +40,11 @@ private:
 
     void loadSkins(tinygltf::Model& gltfModel);
     
+    void loadAnimations(tinygltf::Model& gltfModel);
+    
 private:
     Engine* engine;
-    std::map<uint32_t, std::pair<EntityPtr, int32_t>> linearNodes{};
+    std::map<uint32_t, std::pair<EntityPtr, int32_t>> linearNodes{};//index, (entity, skinIndex)
     bool metallicRoughnessWorkflow = true;
     std::string path;
 };

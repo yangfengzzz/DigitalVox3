@@ -1,12 +1,12 @@
 //
-//  gpu_animation.hpp
+//  scene_animator.hpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/12/16.
 //
 
-#ifndef gpu_animation_hpp
-#define gpu_animation_hpp
+#ifndef scene_animator_hpp
+#define scene_animator_hpp
 
 #include "component.h"
 #include "../maths/vec_float.h"
@@ -14,12 +14,12 @@
 #include <string>
 
 namespace vox {
-class GPUAnimation: public Component {
+class SceneAnimator: public Component {
 public:
     struct AnimationChannel {
         enum PathType { TRANSLATION, ROTATION, SCALE };
         PathType path;
-        Entity* node;
+        EntityPtr node;
         uint32_t samplerIndex;
     };
 
@@ -33,17 +33,29 @@ public:
 public:
     std::string name;
     
-    GPUAnimation(Entity* entity);
+    SceneAnimator(Entity* entity);
     
     void update(float deltaTime);
     
+    float start();
+    
+    void setStart(float time);
+    
+    float end();
+    
+    void setEnd(float time);
+    
+    void addSampler(const AnimationSampler& sampler);
+    
+    void addChannel(const AnimationChannel& channel);
+    
 private:
-    std::vector<AnimationSampler> samplers;
-    std::vector<AnimationChannel> channels;
-    float start = std::numeric_limits<float>::max();
-    float end = std::numeric_limits<float>::min();
+    std::vector<AnimationSampler> _samplers;
+    std::vector<AnimationChannel> _channels;
+    float _start = std::numeric_limits<float>::max();
+    float _end = std::numeric_limits<float>::min();
 };
 
 }
 
-#endif /* gpu_animation_hpp */
+#endif /* scene_animator_hpp */

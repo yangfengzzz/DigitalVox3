@@ -14,6 +14,7 @@
 #include "../runtime/rhi-metal/metal_renderer.h"
 #include "../runtime/mesh/buffer_mesh.h"
 #include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
+#include "../runtime/scene_animator.h"
 #include "../runtime/material/pbr_material.h"
 
 #include <iostream>
@@ -41,7 +42,7 @@ void GLTFLoader::loadFromFile(std::string filename, float scale) {
     tinygltf::Model gltfModel;
     tinygltf::TinyGLTF gltfContext;
     gltfContext.SetImageLoader(loadImageDataFuncEmpty, nullptr);
-        
+    
     std::string error, warning;
     
     bool fileLoaded = gltfContext.LoadASCIIFromFile(&gltfModel, &error, &warning, filename);
@@ -260,7 +261,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                 }
                 
                 descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:offset];
-
+                
                 currentNum = posAccessor.count;
                 vertexBuffer.reserve(vertexBuffer.size() + posAccessor.count * elementCount);
                 for (size_t v = 0; v < posAccessor.count; v++) {
@@ -428,6 +429,117 @@ void GLTFLoader::loadSkins(tinygltf::Model& gltfModel) {
         }
         
         skins.push_back(std::move(newSkin));
+    }
+}
+
+void GLTFLoader::loadAnimations(tinygltf::Model& gltfModel) {
+    for (size_t i = 0; i < gltfModel.animations.size(); i++) {
+        const auto& anim = gltfModel.animations[i];
+        
+        auto animation = defaultSceneRoot->addComponent<SceneAnimator>();
+        animation->name = anim.name;
+        if (anim.name.empty()) {
+            animation->name = std::to_string(i);
+        }
+        
+        // Samplers
+        for (auto &samp : anim.samplers) {
+            SceneAnimator::AnimationSampler sampler{};
+            
+            if (samp.interpolation == "LINEAR") {
+                sampler.interpolation = SceneAnimator::AnimationSampler::InterpolationType::LINEAR;
+            }
+            if (samp.interpolation == "STEP") {
+                sampler.interpolation = SceneAnimator::AnimationSampler::InterpolationType::STEP;
+            }
+            if (samp.interpolation == "CUBICSPLINE") {
+                sampler.interpolation = SceneAnimator::AnimationSampler::InterpolationType::CUBICSPLINE;
+            }
+            
+            // Read sampler input time values
+            {
+                const tinygltf::Accessor &accessor = gltfModel.accessors[samp.input];
+                const tinygltf::BufferView &bufferView = gltfModel.bufferViews[accessor.bufferView];
+                const tinygltf::Buffer &buffer = gltfModel.buffers[bufferView.buffer];
+                
+                assert(accessor.componentType == TINYGLTF_COMPONENT_TYPE_FLOAT);
+                
+                float *buf = new float[accessor.count];
+                memcpy(buf, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(float));
+                for (size_t index = 0; index < accessor.count; index++) {
+                    sampler.inputs.push_back(buf[index]);
+                }
+                
+                for (auto input : sampler.inputs) {
+                    if (input < animation->start()) {
+                        animation->setStart(input);
+                    };
+                    if (input > animation->end()) {
+                        animation->setEnd(input);
+                    }
+                }
+            }
+            
+            // Read sampler output T/R/S values
+            {
+                const tinygltf::Accessor &accessor = gltfModel.accessors[samp.output];
+                const tinygltf::BufferView &bufferView = gltfModel.bufferViews[accessor.bufferView];
+                const tinygltf::Buffer &buffer = gltfModel.buffers[bufferView.buffer];
+                
+                assert(accessor.componentType == TINYGLTF_COMPONENT_TYPE_FLOAT);
+                
+                switch (accessor.type) {
+                    case TINYGLTF_TYPE_VEC3: {
+                        Float3 *buf = new Float3[accessor.count];
+                        memcpy(buf, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(Float3));
+                        for (size_t index = 0; index < accessor.count; index++) {
+                            sampler.outputsVec4.push_back(Float4(buf[index], 0.0f));
+                        }
+                        break;
+                    }
+                    case TINYGLTF_TYPE_VEC4: {
+                        Float4 *buf = new Float4[accessor.count];
+                        memcpy(buf, &buffer.data[accessor.byteOffset + bufferView.byteOffset], accessor.count * sizeof(Float4));
+                        for (size_t index = 0; index < accessor.count; index++) {
+                            sampler.outputsVec4.push_back(buf[index]);
+                        }
+                        break;
+                    }
+                    default: {
+                        std::cout << "unknown type" << std::endl;
+                        break;
+                    }
+                }
+            }
+            
+            animation->addSampler(sampler);
+        }
+        
+        // Channels
+        for (auto &source: anim.channels) {
+            SceneAnimator::AnimationChannel channel{};
+            
+            if (source.target_path == "rotation") {
+                channel.path = SceneAnimator::AnimationChannel::PathType::ROTATION;
+            }
+            if (source.target_path == "translation") {
+                channel.path = SceneAnimator::AnimationChannel::PathType::TRANSLATION;
+            }
+            if (source.target_path == "scale") {
+                channel.path = SceneAnimator::AnimationChannel::PathType::SCALE;
+            }
+            if (source.target_path == "weights") {
+                std::cout << "weights not yet supported, skipping channel" << std::endl;
+                continue;
+            }
+            channel.samplerIndex = source.sampler;
+            channel.node = linearNodes[source.target_node].first;
+            if (!channel.node) {
+                continue;
+            }
+            
+            animation->addChannel(channel);
+        }
     }
 }
 

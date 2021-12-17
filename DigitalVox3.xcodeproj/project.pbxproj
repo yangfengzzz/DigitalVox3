@@ -588,8 +588,8 @@
 		0434AD892767790B009AD4EA /* triangle_mesh3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD112767790A009AD4EA /* triangle_mesh3_tests.cpp */; };
 		0434AD8A2767790B009AD4EA /* fdm_mg_solver3_tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0434AD122767790A009AD4EA /* fdm_mg_solver3_tests.cpp */; };
 		0434AD8D27677954009AD4EA /* libvox.geometry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043155A62767475D0070FBEC /* libvox.geometry.a */; };
-		0486084D276B0C9300C05BDA /* gpu_animation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084B276B0C9300C05BDA /* gpu_animation.mm */; };
-		0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* gpu_animation.h */; };
+		0486084D276B0C9300C05BDA /* scene_animator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084B276B0C9300C05BDA /* scene_animator.mm */; };
+		0486084E276B0C9300C05BDA /* scene_animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0486084C276B0C9300C05BDA /* scene_animator.h */; };
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
 		0486085B276B364900C05BDA /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
@@ -1538,8 +1538,8 @@
 		0434AD112767790A009AD4EA /* triangle_mesh3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangle_mesh3_tests.cpp; sourceTree = "<group>"; };
 		0434AD122767790A009AD4EA /* fdm_mg_solver3_tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdm_mg_solver3_tests.cpp; sourceTree = "<group>"; };
 		0434AD9327677DEC009AD4EA /* unit_tests.geometry.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unit_tests.geometry.entitlements; sourceTree = "<group>"; };
-		0486084B276B0C9300C05BDA /* gpu_animation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gpu_animation.mm; sourceTree = "<group>"; };
-		0486084C276B0C9300C05BDA /* gpu_animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu_animation.h; sourceTree = "<group>"; };
+		0486084B276B0C9300C05BDA /* scene_animator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = scene_animator.mm; sourceTree = "<group>"; };
+		0486084C276B0C9300C05BDA /* scene_animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_animator.h; sourceTree = "<group>"; };
 		0486084F276B0ED700C05BDA /* gltf_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gltf_view.mm; sourceTree = "<group>"; };
 		04860851276B113900C05BDA /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		04860857276B2DED00C05BDA /* gltfloading.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = gltfloading.metal; sourceTree = "<group>"; };
@@ -3115,8 +3115,8 @@
 			children = (
 				04CE38EE27510AC600204B8E /* enums */,
 				04CE38FC27519FA200204B8E /* rhi-metal */,
-				0486084C276B0C9300C05BDA /* gpu_animation.h */,
-				0486084B276B0C9300C05BDA /* gpu_animation.mm */,
+				0486084C276B0C9300C05BDA /* scene_animator.h */,
+				0486084B276B0C9300C05BDA /* scene_animator.mm */,
 				04CE3702274D0DEC00204B8E /* animation */,
 				0434A2912757B385009AD4EA /* animator.h */,
 				0434A2902757B385009AD4EA /* animator.mm */,
@@ -3822,7 +3822,7 @@
 				04160FD2274F7079006CD384 /* ray.h in Headers */,
 				0416103C2759A4C7006CD384 /* static_collider.h in Headers */,
 				04160FFB2750963B006CD384 /* transform.h in Headers */,
-				0486084E276B0C9300C05BDA /* gpu_animation.h in Headers */,
+				0486084E276B0C9300C05BDA /* scene_animator.h in Headers */,
 				04A79ACB275DED9B00182CCB /* direct_light.h in Headers */,
 				04A79AD7275E0F8D00182CCB /* pointer_manager.h in Headers */,
 				0416101E2755DD48006CD384 /* orbit_control.h in Headers */,
@@ -4524,7 +4524,7 @@
 				04CE39A02753A83C00204B8E /* shadow-map.metal in Sources */,
 				04CE37DA274D167F00204B8E /* track.cc in Sources */,
 				0434A2962757B45B009AD4EA /* animator_controller.cpp in Sources */,
-				0486084D276B0C9300C05BDA /* gpu_animation.mm in Sources */,
+				0486084D276B0C9300C05BDA /* scene_animator.mm in Sources */,
 				0416103B2759A4C7006CD384 /* static_collider.mm in Sources */,
 				04CE37DC274D167F00204B8E /* track_sampling_job.cc in Sources */,
 				04CE37DE274D167F00204B8E /* track_triggering_job.cc in Sources */,
