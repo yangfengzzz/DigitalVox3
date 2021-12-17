@@ -34,11 +34,14 @@ public:
     void update(float deltaTime) override;
     
 private:
-    void _initJoints();
-    
     SkinPtr _skin;
-    std::vector<Matrix> jointMatrix{};
+
+    void _initJoints();
     bool _hasInitJoints = false;
+    
+    id<MTLBuffer> matrixPalette;
+    std::vector<float> jointMatrix{};
+    static ShaderProperty _jointMatrixProperty;
 };
 
 }
