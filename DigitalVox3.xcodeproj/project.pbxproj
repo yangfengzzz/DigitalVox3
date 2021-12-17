@@ -839,6 +839,8 @@
 		04D47E47276C4EB70038F34A /* free_control.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E45276C4EB70038F34A /* free_control.h */; };
 		04D47E48276C59730038F34A /* gltfscene.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0486085C276B40F500C05BDA /* gltfscene.metal */; };
 		04D47E4E276C65A90038F34A /* sky.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E4D276C65A90038F34A /* sky.h */; };
+		04D47E51276C67C70038F34A /* skybox_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E4F276C67C70038F34A /* skybox_material.mm */; };
+		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1905,6 +1907,8 @@
 		04D47E44276C4EB70038F34A /* free_control.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = free_control.mm; sourceTree = "<group>"; };
 		04D47E45276C4EB70038F34A /* free_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = free_control.h; sourceTree = "<group>"; };
 		04D47E4D276C65A90038F34A /* sky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sky.h; sourceTree = "<group>"; };
+		04D47E4F276C67C70038F34A /* skybox_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skybox_material.mm; sourceTree = "<group>"; };
+		04D47E50276C67C70038F34A /* skybox_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skybox_material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3596,6 +3600,8 @@
 			isa = PBXGroup;
 			children = (
 				04D47E4D276C65A90038F34A /* sky.h */,
+				04D47E50276C67C70038F34A /* skybox_material.h */,
+				04D47E4F276C67C70038F34A /* skybox_material.mm */,
 			);
 			path = sky;
 			sourceTree = "<group>";
@@ -3905,6 +3911,7 @@
 				04CE39B5275508D900204B8E /* pbr_base_material.h in Headers */,
 				04CE39B12755052E00204B8E /* unlit_material.h in Headers */,
 				04CE395D27525E2500204B8E /* render_context.h in Headers */,
+				04D47E52276C67C70038F34A /* skybox_material.h in Headers */,
 				0434A2A4275E3F91009AD4EA /* spherical_harmonics3.h in Headers */,
 				04CE38D8274E847100204B8E /* color.h in Headers */,
 				04160FCB274F6374006CD384 /* collision_util.h in Headers */,
@@ -4632,6 +4639,7 @@
 				0434A29E27590D71009AD4EA /* collider.mm in Sources */,
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04161058275A07CE006CD384 /* fixed_joint.cpp in Sources */,
+				04D47E51276C67C70038F34A /* skybox_material.mm in Sources */,
 				04CE39082751AAD000204B8E /* submesh.mm in Sources */,
 				04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */,
 				04CE396027525EC700204B8E /* render_element.mm in Sources */,
