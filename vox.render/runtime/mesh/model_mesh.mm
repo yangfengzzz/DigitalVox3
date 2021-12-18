@@ -19,8 +19,8 @@ size_t ModelMesh::vertexCount() {
 }
 
 ModelMesh::ModelMesh(Engine* engine, const std::string& name):
-Mesh(engine, name){
-    
+Mesh(engine, name),
+resourceLoader(engine->resourceLoader()){
 }
 
 void ModelMesh::setPositions(const std::vector<Float3>& positions) {
@@ -179,6 +179,17 @@ const std::vector<Float2>& ModelMesh::uvs(int channelIndex) {
     }
 }
 
+void ModelMesh::setIndices(const std::vector<uint32_t>& indices) {
+    if (!_accessible) {
+        assert(false && "Not allowed to access data while accessible is false.");
+    }
+    _indices = indices;
+}
+
+const std::vector<uint32_t> ModelMesh::indices() {
+    return _indices;
+}
+
 void ModelMesh::uploadData(bool noLongerAccessible) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
@@ -186,16 +197,22 @@ void ModelMesh::uploadData(bool noLongerAccessible) {
     
     _vertexDescriptor = _updateVertexDescriptor();
     _vertexChangeFlag = ValueChanged::All;
-    _vertexSlotChanged = false;
     
     auto vertexFloatCount = _elementCount * _vertexCount;
     auto vertices = std::vector<float>(vertexFloatCount);
     _updateVertices(vertices);
     
-    auto newVertexBuffer = [engine()->_hardwareRenderer.device newBufferWithBytes:vertices.data()
-                                                                           length:vertexFloatCount * sizeof(float)
-                                                                          options:NULL];
+    auto newVertexBuffer = resourceLoader.buildBuffer(vertices.data(), vertexFloatCount * sizeof(float), NULL);
     _setVertexBuffer(0, MeshBuffer(newVertexBuffer, vertexFloatCount * sizeof(float), MDLMeshBufferTypeVertex));
+    
+    const auto indexBuffer = resourceLoader.buildBuffer(_indices.data(), _indices.size() * sizeof(uint32_t), MTLResourceStorageModeShared);
+    addSubMesh(MeshBuffer(indexBuffer, _indices.size() * sizeof(uint32_t), MDLMeshBufferTypeIndex),
+               MTLIndexTypeUInt32, _indices.size(), MTLPrimitiveTypeTriangle);
+    
+    if (noLongerAccessible) {
+        _accessible = false;
+        _releaseCache();
+    }
 }
 
 MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
@@ -463,8 +480,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
 }
 
 void ModelMesh::_releaseCache() {
-    _verticesUint8.clear();
-    _verticesFloat32.clear();
+    _vertices.clear();
     _positions.clear();
     _tangents.clear();
     _normals.clear();

@@ -48,13 +48,8 @@ ModelMeshPtr Grid::createPlane(Engine* engine) {
     indices[5] = 2;
     
     mesh->setPositions(positions);
+    mesh->setIndices(indices);
     mesh->uploadData(true);
-    const auto indexBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:indices.data()
-                                                                           length:indices.size() * sizeof(uint32_t)
-                                                                          options:MTLResourceStorageModeShared];
-    
-    mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size() * sizeof(uint32_t), MDLMeshBufferTypeIndex),
-                     MTLIndexTypeUInt32, indices.size(), MTLPrimitiveTypeTriangle);
     
     return mesh;
 }

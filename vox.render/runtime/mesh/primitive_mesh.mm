@@ -794,14 +794,8 @@ void PrimitiveMesh::_initialize(Engine* engine,
     mesh->setPositions(positions);
     mesh->setNormals(normals);
     mesh->setUVs(uvs);
-    
+    mesh->setIndices(indices);
     mesh->uploadData(noLongerAccessible);
-    const auto indexBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:indices.data()
-                                                                           length:indices.size() * sizeof(uint32_t)
-                                                                          options:MTLResourceStorageModeShared];
-    
-    mesh->addSubMesh(MeshBuffer(indexBuffer, indices.size() * sizeof(uint32_t), MDLMeshBufferTypeIndex),
-                     MTLIndexTypeUInt32, indices.size(), MTLPrimitiveTypeTriangle);
 }
 
 }

@@ -11,7 +11,7 @@
 #include "../graphics/mesh.h"
 #include "maths/vec_float.h"
 #include "maths/color.h"
-#include <Metal/Metal.h>
+#include "../rhi-metal/metal_loader.h"
 
 namespace vox {
 using namespace math;
@@ -95,11 +95,23 @@ public:
     /// - Remark: Please call the setUV() method after modification to ensure that the modification takes effect.
     const std::vector<Float2>& uvs(int channelIndex = 0);
     
+    /**
+     * Set indices for the mesh.
+     * @param indices - The indices for the mesh.
+     */
+    void setIndices(const std::vector<uint32_t>& indices);
+
+    /**
+     * Get indices for the mesh.
+     */
+    const std::vector<uint32_t> indices();
+    
     /// Upload Mesh Data to the graphics API.
     /// - Parameter noLongerAccessible: Whether to access data later. If true, you'll never access data anymore (free memory cache)
     void uploadData(bool noLongerAccessible);
     
 private:
+    MetalLoader resourceLoader;
     MDLVertexDescriptor* _updateVertexDescriptor();
     
     void _updateVertices(std::vector<float>& vertices);
@@ -112,11 +124,10 @@ private:
     id<MTLTexture> _blendShapeTexture;
     
     bool _accessible = true;
-    std::vector<float> _verticesFloat32;
-    std::vector<uint8_t> _verticesUint8;
-    bool _vertexSlotChanged = true;
     int _vertexChangeFlag;
     size_t _elementCount;
+    std::vector<float> _vertices{};
+    std::vector<uint32_t> _indices{};
     
     std::vector<Float3> _positions;
     std::vector<Float3> _normals;
