@@ -73,11 +73,13 @@ public:
     void drawPrimitive(SubMesh *subPrimitive);
     
 public:
-    MetalLoader createResourceLoader();
+    MetalLoaderPtr createResourceLoader();
     
 private:
     CAMetalLayer *layer;
     id <CAMetalDrawable> drawable;
+    
+    MetalLoaderPtr metalResourceLoader;
     
     id<MTLTexture> depthTexture;
 };

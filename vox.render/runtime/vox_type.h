@@ -39,7 +39,8 @@ class RenderPass;
 class RenderElement;
 class RenderQueue;
 class MetalRenderer;
-
+class MetalLoader;
+using MetalLoaderPtr = std::shared_ptr<MetalLoader>;
 }
 
 #endif /* vox_type_h */

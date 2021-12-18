@@ -42,7 +42,7 @@ public:
     /**
      * Get the resource manager.
      */
-    MetalLoader resourceLoader();
+    MetalLoaderPtr resourceLoader();
     
     /**
      * Get the scene manager.

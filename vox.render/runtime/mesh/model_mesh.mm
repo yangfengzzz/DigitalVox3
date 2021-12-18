@@ -8,6 +8,7 @@
 #include "model_mesh.h"
 #include "../engine.h"
 #include "../shaderlib/shader_common.h"
+#include "../rhi-metal/metal_loader.h"
 
 namespace vox {
 bool ModelMesh::accessible() {
@@ -202,10 +203,10 @@ void ModelMesh::uploadData(bool noLongerAccessible) {
     auto vertices = std::vector<float>(vertexFloatCount);
     _updateVertices(vertices);
     
-    auto newVertexBuffer = resourceLoader.buildBuffer(vertices.data(), vertexFloatCount * sizeof(float), NULL);
+    auto newVertexBuffer = resourceLoader->buildBuffer(vertices.data(), vertexFloatCount * sizeof(float), NULL);
     _setVertexBuffer(0, MeshBuffer(newVertexBuffer, vertexFloatCount * sizeof(float), MDLMeshBufferTypeVertex));
     
-    const auto indexBuffer = resourceLoader.buildBuffer(_indices.data(), _indices.size() * sizeof(uint32_t), MTLResourceStorageModeShared);
+    const auto indexBuffer = resourceLoader->buildBuffer(_indices.data(), _indices.size() * sizeof(uint32_t), MTLResourceStorageModeShared);
     addSubMesh(MeshBuffer(indexBuffer, _indices.size() * sizeof(uint32_t), MDLMeshBufferTypeIndex),
                MTLIndexTypeUInt32, _indices.size(), MTLPrimitiveTypeTriangle);
     

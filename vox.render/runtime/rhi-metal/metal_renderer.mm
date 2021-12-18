@@ -18,6 +18,7 @@ canvas(canvas),
 resouceCache(this) {
     device = MTLCreateSystemDefaultDevice();
     commandQueue = [device newCommandQueue];
+    metalResourceLoader = std::make_shared<MetalLoader>(device);
     
     // self.resouceCache = ResourceCache(self);
     library = [device newDefaultLibrary];
@@ -40,13 +41,7 @@ resouceCache(this) {
         layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
         
         // depth texture
-        MTLTextureDescriptor* descriptor =
-        [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatDepth32Float
-                                                           width:buffer_width height:buffer_height
-                                                       mipmapped:false];
-        descriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
-        descriptor.storageMode = MTLStorageModePrivate;
-        depthTexture = [device newTextureWithDescriptor:descriptor];
+        depthTexture = metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float);
     };
     createFrameBuffer(canvas->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
@@ -176,8 +171,8 @@ void MetalRenderer::drawPrimitive(SubMesh *subPrimitive) {
 }
 
 //MARK: - Prox Type creation
-MetalLoader MetalRenderer::createResourceLoader() {
-    return MetalLoader(device);
+MetalLoaderPtr MetalRenderer::createResourceLoader() {
+    return metalResourceLoader;
 }
 
 }

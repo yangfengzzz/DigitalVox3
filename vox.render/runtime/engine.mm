@@ -31,7 +31,7 @@ SceneManager Engine::sceneManager() {
     return _sceneManager;
 }
 
-MetalLoader Engine::resourceLoader() {
+MetalLoaderPtr Engine::resourceLoader() {
     return _hardwareRenderer.createResourceLoader();
 }
 

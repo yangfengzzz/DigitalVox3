@@ -48,6 +48,7 @@ public:
     void onDestroy() override;
     
 private:
+    MetalLoaderPtr metalResourceLoader;
     MTLRenderPassDescriptor* colorRenderTarget;
     ColorRenderPass* colorRenderPass;
     

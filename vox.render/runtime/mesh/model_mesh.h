@@ -11,7 +11,6 @@
 #include "../graphics/mesh.h"
 #include "maths/vec_float.h"
 #include "maths/color.h"
-#include "../rhi-metal/metal_loader.h"
 
 namespace vox {
 using namespace math;
@@ -111,7 +110,7 @@ public:
     void uploadData(bool noLongerAccessible);
     
 private:
-    MetalLoader resourceLoader;
+    MetalLoaderPtr resourceLoader;
     MDLVertexDescriptor* _updateVertexDescriptor();
     
     void _updateVertices(std::vector<float>& vertices);

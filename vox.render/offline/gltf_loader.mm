@@ -16,6 +16,7 @@
 #include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
 #include "../runtime/scene_animator.h"
 #include "../runtime/material/pbr_material.h"
+#include "../runtime/rhi-metal/metal_loader.h"
 
 #include <iostream>
 
@@ -335,7 +336,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                         std::cerr << "Index component type " << accessor.componentType << " not supported!" << std::endl;
                         return;
                 }
-                auto iBuffer = metalResourceLoader.buildBuffer(buf.data(), buf.size() * sizeof(uint32_t), NULL);
+                auto iBuffer = metalResourceLoader->buildBuffer(buf.data(), buf.size() * sizeof(uint32_t), NULL);
                 newMesh->addSubMesh(MeshBuffer(iBuffer,
                                                buf.size() * sizeof(uint32_t),
                                                MDLMeshBufferTypeIndex),
@@ -346,7 +347,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
             auto mat = primitive.material > -1 ? materials[primitive.material] : materials.back();
             renderer->setMaterial(j, mat);
         }
-        auto vBuffer = metalResourceLoader.buildBuffer(vertexBuffer.data(), vertexBuffer.size() * sizeof(float), NULL);
+        auto vBuffer = metalResourceLoader->buildBuffer(vertexBuffer.data(), vertexBuffer.size() * sizeof(float), NULL);
         newMesh->setVertexBufferBinding(vBuffer, 0, 0);
         newMesh->setVertexDescriptor(descriptor);
         newMesh->bounds = bound;
@@ -356,7 +357,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
 
 void GLTFLoader::loadImages(tinygltf::Model& gltfModel) {
     for (tinygltf::Image &image : gltfModel.images) {
-        textures.push_back(metalResourceLoader.loadTexture(path, image.uri));
+        textures.push_back(metalResourceLoader->loadTexture(path, image.uri));
     }
 }
 
