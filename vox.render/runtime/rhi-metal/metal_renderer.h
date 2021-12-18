@@ -56,6 +56,8 @@ public:
 public:
     void setRenderPipelineState(RenderPipelineState *state);
     
+    void setDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor);
+    
     void setDepthStencilState(id <MTLDepthStencilState> depthStencilState);
     
     void setDepthBias(float depthBias, float slopeScale, float clamp);
@@ -69,7 +71,7 @@ public:
     void bindTexture(id <MTLTexture> texture, int location);
     
     void drawPrimitive(SubMesh *subPrimitive);
-
+    
 public:
     MetalLoader createResourceLoader();
     

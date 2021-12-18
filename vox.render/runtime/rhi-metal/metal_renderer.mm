@@ -46,7 +46,7 @@ resouceCache(this) {
                                                        mipmapped:false];
         descriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
         descriptor.storageMode = MTLStorageModePrivate;
-        depthTexture = [device newTextureWithDescriptor:descriptor];        
+        depthTexture = [device newTextureWithDescriptor:descriptor];
     };
     createFrameBuffer(canvas->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
@@ -136,6 +136,11 @@ void MetalRenderer::endRenderPass() {
 
 void MetalRenderer::setRenderPipelineState(RenderPipelineState *state) {
     [renderEncoder setRenderPipelineState:state->handle()];
+}
+
+void MetalRenderer::setDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor) {
+    auto depthStencilState = [device newDepthStencilStateWithDescriptor:depthStencilDescriptor];
+    [renderEncoder setDepthStencilState:depthStencilState];
 }
 
 void MetalRenderer::setDepthStencilState(id <MTLDepthStencilState> depthStencilState) {
