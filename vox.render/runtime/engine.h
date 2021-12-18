@@ -26,60 +26,54 @@ public:
     MetalRenderer _hardwareRenderer;
     RenderContext _renderContext = RenderContext();
     
+    /**
+     * Create engine.
+     * @param canvas - The canvas to use for rendering
+     */
     Engine(Canvas* canvas);
+    
+    ~Engine();
     
     /**
      * The canvas to use for rendering.
      */
-    Canvas* canvas() {
-        return _canvas;
-    }
+    Canvas* canvas();
+    
+    /**
+     * Get the resource manager.
+     */
+    MetalLoader resourceLoader();
     
     /**
      * Get the scene manager.
      */
-    SceneManager sceneManager() {
-        return _sceneManager;
-    }
-    
-    MetalLoader resourceLoader() {
-        return _hardwareRenderer.createResourceLoader();
-    }
+    SceneManager sceneManager();
     
     /**
      * Get the Time class.
      */
-    Timer timer() {
-        return _timer;
-    }
+    Timer timer();
     
-    /// Whether the engine is paused.
-    bool isPaused() {
-        return _isPaused;
-    }
+    /**
+     * Whether the engine is paused.
+     */
+    bool isPaused();
     
-    /// The number of vertical synchronization means the number of vertical blanking for one frame.
-    /// - Remark: 0 means that the vertical synchronization is turned off.
-    int vSyncCount() {
-        return _vSyncCount;
-    }
+    /**
+     * The number of vertical synchronization means the number of vertical blanking for one frame.
+     * @remarks 0 means that the vertical synchronization is turned off.
+     */
+    int vSyncCount();
+    void setVSyncCount(int newValue);
     
-    void setVSyncCount(int newValue) {
-        _vSyncCount = std::max(0, newValue);
-    }
-    
-    /// Set the target frame rate you want to achieve.
-    /// - Remark: It only takes effect when vSyncCount = 0 (ie, vertical synchronization is turned off).
-    /// The larger the value, the higher the target frame rate, Number.POSITIVE_INFINITY represents the infinite target frame rate.
-    float targetFrameRate() {
-        return _targetFrameRate;
-    }
-    
-    void setTargetFrameRate(float newValue) {
-        newValue = std::max(0.000001f, newValue);
-        _targetFrameRate = newValue;
-        _targetFrameInterval = 1000 / newValue;
-    }
+    /**
+     * Set the target frame rate you want to achieve.
+     * @remarks
+     * It only takes effect when vSyncCount = 0 (ie, vertical synchronization is turned off).
+     * The larger the value, the higher the target frame rate, Number.POSITIVE_INFINITY represents the infinite target frame rate.
+     */
+    float targetFrameRate();
+    void setTargetFrameRate(float newValue);
     
 public:
     /**
@@ -110,9 +104,6 @@ protected:
 private:
     friend class Scene;
     
-    id<MTLTexture> _whiteTexture2D;
-    id<MTLTexture> _whiteTextureCube;
-    MaterialPtr _backgroundTextureMaterial;
     ShaderMacroCollection _macroCollection = ShaderMacroCollection();
     
     SceneManager _sceneManager = SceneManager(this);

@@ -15,59 +15,50 @@
 namespace vox {
 Engine::Engine(Canvas* canvas):_canvas(canvas), _hardwareRenderer(canvas) {
     ShaderPool::initialization();
-    
     _sceneManager.setActiveScene(std::make_shared<Scene>(this, "DefaultScene"));
-    const uint8_t whitePixel[] = {255, 255, 255, 255};
-    
-    MTLTextureDescriptor* whiteTextureDescriptor = [[MTLTextureDescriptor alloc]init];
-    whiteTextureDescriptor.width = 1;
-    whiteTextureDescriptor.height = 1;
-    whiteTextureDescriptor.pixelFormat = MTLPixelFormatRGBA8Uint;
-    whiteTextureDescriptor.textureType = MTLTextureType2D;
-    _whiteTexture2D = [_hardwareRenderer.device newTextureWithDescriptor:whiteTextureDescriptor];
-    [_whiteTexture2D replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                       mipmapLevel:0 withBytes:&whitePixel
-                       bytesPerRow: 4 * sizeof(uint8_t)];
-    
-    MTLTextureDescriptor* whiteTextureCubeDescriptor =[[MTLTextureDescriptor alloc]init];
-    whiteTextureCubeDescriptor.width = 1;
-    whiteTextureCubeDescriptor.height = 1;
-    whiteTextureCubeDescriptor.pixelFormat = MTLPixelFormatRGBA8Uint;
-    whiteTextureCubeDescriptor.textureType = MTLTextureTypeCube;
-    _whiteTextureCube = [_hardwareRenderer.device newTextureWithDescriptor:whiteTextureCubeDescriptor];
-    [_whiteTextureCube replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                         mipmapLevel:0 slice:0
-                           withBytes:&whitePixel
-                         bytesPerRow:4 * sizeof(uint8_t)
-                       bytesPerImage:4 * sizeof(uint8_t)];
-    [_whiteTextureCube replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                         mipmapLevel:0 slice:1
-                           withBytes:&whitePixel
-                         bytesPerRow:4 * sizeof(uint8_t)
-                       bytesPerImage:4 * sizeof(uint8_t)];
-    [_whiteTextureCube replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                         mipmapLevel:0 slice:2
-                           withBytes:&whitePixel
-                         bytesPerRow:4 * sizeof(uint8_t)
-                       bytesPerImage:4 * sizeof(uint8_t)];
-    [_whiteTextureCube replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                         mipmapLevel:0 slice:3
-                           withBytes:&whitePixel
-                         bytesPerRow:4 * sizeof(uint8_t)
-                       bytesPerImage:4 * sizeof(uint8_t)];
-    [_whiteTextureCube replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                         mipmapLevel:0 slice:4
-                           withBytes:&whitePixel
-                         bytesPerRow:4 * sizeof(uint8_t)
-                       bytesPerImage:4 * sizeof(uint8_t)];
-    [_whiteTextureCube replaceRegion:MTLRegionMake2D(0, 0, 1, 1)
-                         mipmapLevel:0 slice:5
-                           withBytes:&whitePixel
-                         bytesPerRow:4 * sizeof(uint8_t)
-                       bytesPerImage:4 * sizeof(uint8_t)];
-    
-    _backgroundTextureMaterial = std::make_shared<Material>(this, Shader::find("background-texture"));
-    _backgroundTextureMaterial->renderState.depthState.compareFunction = MTLCompareFunctionLessEqual;
+}
+
+Engine::~Engine() {
+    // -- cancel animation
+    pause();
+}
+
+Canvas* Engine::canvas() {
+    return _canvas;
+}
+
+SceneManager Engine::sceneManager() {
+    return _sceneManager;
+}
+
+MetalLoader Engine::resourceLoader() {
+    return _hardwareRenderer.createResourceLoader();
+}
+
+Timer Engine::timer() {
+    return _timer;
+}
+
+bool Engine::isPaused() {
+    return _isPaused;
+}
+
+int Engine::vSyncCount() {
+    return _vSyncCount;
+}
+
+void Engine::setVSyncCount(int newValue) {
+    _vSyncCount = std::max(0, newValue);
+}
+
+float Engine::targetFrameRate() {
+    return _targetFrameRate;
+}
+
+void Engine::setTargetFrameRate(float newValue) {
+    newValue = std::max(0.000001f, newValue);
+    _targetFrameRate = newValue;
+    _targetFrameInterval = 1000 / newValue;
 }
 
 void Engine::run() {
