@@ -10,9 +10,10 @@
 
 namespace vox {
 MetalLoader::MetalLoader(id <MTLDevice> device):
-device(device){
-    commandQueue = [device newCommandQueue];
-    textureLoader = [[MTKTextureLoader alloc] initWithDevice:device];
+_device(device){
+    _commandQueue = [_device newCommandQueue];
+    _library = [_device newDefaultLibrary];
+    _textureLoader = [[MTKTextureLoader alloc] initWithDevice:_device];
 }
 
 id<MTLTexture> MetalLoader::buildTexture(int width, int height, MTLPixelFormat pixelFormat,
@@ -22,7 +23,7 @@ id<MTLTexture> MetalLoader::buildTexture(int width, int height, MTLPixelFormat p
                                                                                       mipmapped:false];
     descriptor.usage = usage;
     descriptor.storageMode = storageMode;
-    return [device newTextureWithDescriptor:descriptor];
+    return [_device newTextureWithDescriptor:descriptor];
 }
 
 id<MTLTexture> MetalLoader::loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
@@ -42,8 +43,8 @@ id<MTLTexture> MetalLoader::loadTexture(const std::string& path, const std::stri
     };
     
     NSError *error = nil;
-    id<MTLTexture> texture = [textureLoader newTextureWithContentsOfURL:url
-                                                                options:options error:&error];
+    id<MTLTexture> texture = [_textureLoader newTextureWithContentsOfURL:url
+                                                                 options:options error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create MTLTexture: %@", error);
@@ -59,7 +60,7 @@ id<MTLTexture> MetalLoader::loadTexture(MDLTexture* texture) {
     };
     
     NSError *error = nil;
-    id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:texture options:options error:&error];
+    id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:texture options:options error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create MTLTexture: %@", error);
@@ -88,7 +89,7 @@ id<MTLTexture> MetalLoader::loadCubeTexture(const std::string& path, const std::
     [imageNames addObject:[[NSString alloc]initWithUTF8String:imageName.c_str()]];
     MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames];
     if (mdlTexture != nil) {
-        id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:mdlTexture options:options error:&error];
+        id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:mdlTexture options:options error:&error];
         if (error != nil)
         {
             NSLog(@"Error: failed to create MTLTexture: %@", error);
@@ -96,8 +97,8 @@ id<MTLTexture> MetalLoader::loadCubeTexture(const std::string& path, const std::
         return mtlTexture;
     }
     
-    id<MTLTexture> mtlTexture = [textureLoader newTextureWithContentsOfURL:url
-                                                                options:options error:&error];
+    id<MTLTexture> mtlTexture = [_textureLoader newTextureWithContentsOfURL:url
+                                                                    options:options error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create MTLTexture: %@", error);
@@ -121,8 +122,8 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
     descriptor.height = textures[0].height;
     descriptor.arrayLength = textures.count;
     
-    auto arrayTexture = [device newTextureWithDescriptor:descriptor];
-    auto commandBuffer = [commandQueue commandBuffer];
+    auto arrayTexture = [_device newTextureWithDescriptor:descriptor];
+    auto commandBuffer = [_commandQueue commandBuffer];
     auto blitEncoder = [commandBuffer blitCommandEncoder];
     MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
     MTLSize size = MTLSize{.width =  arrayTexture.width,
@@ -172,7 +173,7 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
     };
     NSError *error = nil;
-    id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:irradianceTexture options:options error:&error];
+    id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:irradianceTexture options:options error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create MTLTexture: %@", error);
@@ -212,13 +213,17 @@ std::array<float, 27> MetalLoader::createSphericalHarmonicsCoefficients(const st
     return result;
 }
 
+id<MTLTexture> MetalLoader::createBRDFLookupTable() {
+    return nullptr;
+}
+
 //MARK: - MTLBuffer
 id<MTLBuffer> MetalLoader::buildBuffer(const void * pointer, size_t length, MTLResourceOptions options) {
-    return [device newBufferWithBytes:pointer length:NSUInteger(length) options:options];
+    return [_device newBufferWithBytes:pointer length:NSUInteger(length) options:options];
 }
 
 id<MTLBuffer> MetalLoader::buildBuffer(size_t length, MTLResourceOptions options) {
-    return [device newBufferWithLength:NSUInteger(length) options:options];
+    return [_device newBufferWithLength:NSUInteger(length) options:options];
 }
 
 }

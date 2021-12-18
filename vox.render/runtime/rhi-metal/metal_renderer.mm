@@ -18,11 +18,9 @@ _canvas(canvas),
 resouceCache(this) {
     _device = MTLCreateSystemDefaultDevice();
     _commandQueue = [_device newCommandQueue];
-    _metalResourceLoader = std::make_shared<MetalLoader>(_device);
-    
-    // self.resouceCache = ResourceCache(self);
     _library = [_device newDefaultLibrary];
-    
+    _metalResourceLoader = std::make_shared<MetalLoader>(_device);
+
     _colorPixelFormat = MTLPixelFormatBGRA8Unorm;
     _samplerState = buildSamplerState();
     

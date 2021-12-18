@@ -34,8 +34,11 @@ public:
     id<MTLTexture> createIrradianceTexture(const std::string& path,
                                            const std::array<std::string, 6>& imageName, bool isTopLeft = true);
 
+    // red 9; green 9; blue 9;
     std::array<float, 27> createSphericalHarmonicsCoefficients(const std::string& path,
                                                                const std::array<std::string, 6>& imageName);
+    
+    id<MTLTexture> createBRDFLookupTable();
     
 public:
     id<MTLBuffer> buildBuffer(const void * pointer, size_t length, MTLResourceOptions options);
@@ -43,9 +46,10 @@ public:
     id<MTLBuffer> buildBuffer(size_t length, MTLResourceOptions options);
     
 private:
-    id <MTLDevice> device;
-    id <MTLCommandQueue> commandQueue;
-    MTKTextureLoader* textureLoader;
+    id <MTLDevice> _device;
+    id <MTLCommandQueue> _commandQueue;
+    id <MTLLibrary> _library;
+    MTKTextureLoader* _textureLoader;
 };
 
 }
