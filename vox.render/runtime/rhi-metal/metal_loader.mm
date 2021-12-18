@@ -178,8 +178,38 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
         NSLog(@"Error: failed to create MTLTexture: %@", error);
     }
     return mtlTexture;
+}
+
+std::array<float, 27> MetalLoader::createSphericalHarmonicsCoefficients(const std::string& path,
+                                                                        const std::array<std::string, 6>& imageName) {
+    NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
+    NSString* textureName1 = [[NSString alloc]initWithUTF8String:imageName[0].c_str()];
+    NSString* textureName2 = [[NSString alloc]initWithUTF8String:imageName[1].c_str()];
+    NSString* textureName3 = [[NSString alloc]initWithUTF8String:imageName[2].c_str()];
+    NSString* textureName4 = [[NSString alloc]initWithUTF8String:imageName[3].c_str()];
+    NSString* textureName5 = [[NSString alloc]initWithUTF8String:imageName[4].c_str()];
+    NSString* textureName6 = [[NSString alloc]initWithUTF8String:imageName[5].c_str()];
     
-    return nullptr;
+    NSMutableArray<NSString *> *imageNames = [[NSMutableArray alloc]init];
+    [imageNames addObject:textureName1];
+    [imageNames addObject:textureName2];
+    [imageNames addObject:textureName3];
+    [imageNames addObject:textureName4];
+    [imageNames addObject:textureName5];
+    [imageNames addObject:textureName6];
+    
+    MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
+    
+    auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
+                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:0];
+    
+    MDLLightProbe* lightProbe = [[MDLLightProbe alloc]initWithReflectiveTexture:mdlTexture irradianceTexture:irradianceTexture];
+    [lightProbe generateSphericalHarmonicsFromIrradiance:2];
+    float *coeffs = (float *)lightProbe.sphericalHarmonicsCoefficients.bytes;
+    
+    std::array<float, 27> result;
+    std::copy(coeffs, coeffs + 27, result.data());
+    return result;
 }
 
 //MARK: - MTLBuffer

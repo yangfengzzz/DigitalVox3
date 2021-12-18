@@ -33,6 +33,9 @@ public:
     
     id<MTLTexture> createIrradianceTexture(const std::string& path,
                                            const std::array<std::string, 6>& imageName, bool isTopLeft = true);
+
+    std::array<float, 27> createSphericalHarmonicsCoefficients(const std::string& path,
+                                                               const std::array<std::string, 6>& imageName);
     
 public:
     id<MTLBuffer> buildBuffer(const void * pointer, size_t length, MTLResourceOptions options);
