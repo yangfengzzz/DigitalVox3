@@ -214,7 +214,31 @@ std::array<float, 27> MetalLoader::createSphericalHarmonicsCoefficients(const st
 }
 
 id<MTLTexture> MetalLoader::createBRDFLookupTable() {
-    return nullptr;
+    auto brdfFunction = [_library newFunctionWithName:@"integrateBRDF"];
+    NSError *error = nil;
+    auto brdfPipelineState = [_device newComputePipelineStateWithFunction:brdfFunction error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create Metal pipeline state: %@", error);
+    }
+    auto commandBuffer = [_commandQueue commandBuffer];
+    auto commandEncoder = [commandBuffer computeCommandEncoder];
+    
+    const uint32_t size = 256;
+    auto descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRG16Float
+                                                                         width:size height:size mipmapped:false];
+    descriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageShaderWrite;
+    auto lut = [_device newTextureWithDescriptor:descriptor];
+    
+    [commandEncoder setComputePipelineState:brdfPipelineState];
+    [commandEncoder setTexture:lut atIndex:0];
+    auto threadsPerThreadgroup = MTLSizeMake(16, 16, 1);
+    auto threadgroups = MTLSizeMake(size / threadsPerThreadgroup.width,
+                                    size / threadsPerThreadgroup.height, 1);
+    [commandEncoder dispatchThreadgroups:threadgroups threadsPerThreadgroup:threadsPerThreadgroup];
+    [commandEncoder endEncoding];
+    [commandBuffer commit];
+    return lut;
 }
 
 //MARK: - MTLBuffer
