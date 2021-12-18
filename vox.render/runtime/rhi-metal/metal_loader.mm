@@ -16,12 +16,12 @@ device(device){
 }
 
 id<MTLTexture> MetalLoader::buildTexture(int width, int height, MTLPixelFormat pixelFormat,
-                                         MTLTextureUsage usage) {
+                                         MTLTextureUsage usage, MTLStorageMode storageMode) {
     MTLTextureDescriptor* descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pixelFormat
                                                                                           width:width height:height
                                                                                       mipmapped:false];
     descriptor.usage = usage;
-    descriptor.storageMode = MTLStorageModePrivate;
+    descriptor.storageMode = storageMode;
     return [device newTextureWithDescriptor:descriptor];
 }
 
@@ -140,6 +140,10 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
 
 id<MTLBuffer> MetalLoader::buildBuffer(const void * pointer, size_t length, MTLResourceOptions options) {
     return [device newBufferWithBytes:pointer length:NSUInteger(length) options:options];
+}
+
+id<MTLBuffer> MetalLoader::buildBuffer(size_t length, MTLResourceOptions options) {
+    return [device newBufferWithLength:NSUInteger(length) options:options];
 }
 
 }

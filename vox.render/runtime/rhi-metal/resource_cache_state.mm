@@ -24,7 +24,7 @@ ShaderProgram* ResourceCache::request_shader_module(const std::string& vertexSou
     auto iter = state.shader_modules.find(hash);
 
     if (iter == state.shader_modules.end()) {
-        state.shader_modules[hash] = std::make_unique<ShaderProgram>(render->library, vertexSource, fragmentSource, macroInfo);
+        state.shader_modules[hash] = std::make_unique<ShaderProgram>(render->library(), vertexSource, fragmentSource, macroInfo);
         return state.shader_modules[hash].get();
     } else {
         return iter->second.get();
@@ -47,7 +47,7 @@ ComputePipelineState* ResourceCache::request_compute_pipeline(MTLComputePipeline
     const auto hash = pipelineDescriptor.hash;
     auto iter = state.compute_pipelines.find(hash);
     if (iter == state.compute_pipelines.end()) {
-        auto pipelineState = std::make_unique<ComputePipelineState>(render->device, pipelineDescriptor);
+        auto pipelineState = std::make_unique<ComputePipelineState>(render, pipelineDescriptor);
         state.compute_pipelines[hash] = std::move(pipelineState);
         return state.compute_pipelines[hash].get();
     } else {

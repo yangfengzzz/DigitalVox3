@@ -19,26 +19,16 @@ namespace vox {
 /// Metal renderer.
 class MetalRenderer {
 public:
-    const int maxAnisotropy = 8;
-    
-    Canvas* canvas;
     ResourceCache resouceCache;
-    id <MTLDevice> device;
-    id <MTLCommandQueue> commandQueue;
-    id <MTLLibrary> library;
-    
-    id <MTLCommandBuffer> commandBuffer;
-    id <MTLRenderCommandEncoder> renderEncoder;
-    MTLRenderPassDescriptor *renderPassDescriptor;
-    
-    // todo delete
-    MTLPixelFormat colorPixelFormat;
-    id <MTLSamplerState> samplerState;
-    
+
     explicit MetalRenderer(Canvas* canvas);
     
-    id <MTLSamplerState> buildSamplerState();
+    id <MTLLibrary> library();
     
+    MTLPixelFormat colorPixelFormat();
+    
+    MetalLoaderPtr resourceLoader();
+
 public:
     void begin();
     
@@ -54,6 +44,11 @@ public:
     void endRenderPass();
     
 public:
+    void synchronizeResource(id<MTLResource> resource);
+    
+public:
+    void setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index);
+    
     void setRenderPipelineState(RenderPipelineState *state);
     
     void setDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor);
@@ -71,17 +66,33 @@ public:
     void bindTexture(id <MTLTexture> texture, int location);
     
     void drawPrimitive(SubMesh *subPrimitive);
-    
-public:
-    MetalLoaderPtr createResourceLoader();
+
+private:
+    id <MTLSamplerState> buildSamplerState();
     
 private:
-    CAMetalLayer *layer;
-    id <CAMetalDrawable> drawable;
+    friend class RenderPipelineState;
+    friend class ComputePipelineState;
     
-    MetalLoaderPtr metalResourceLoader;
+    const int maxAnisotropy = 8;
     
-    id<MTLTexture> depthTexture;
+    Canvas* _canvas;
+    id <MTLDevice> _device;
+    id <MTLCommandQueue> _commandQueue;
+    id <MTLLibrary> _library;
+    CAMetalLayer *_layer;
+    id <CAMetalDrawable> _drawable;
+    MetalLoaderPtr _metalResourceLoader;
+    
+    id <MTLCommandBuffer> _commandBuffer;
+    id <MTLRenderCommandEncoder> _renderEncoder;
+    MTLRenderPassDescriptor *_renderPassDescriptor;
+
+    // todo delete
+    MTLPixelFormat _colorPixelFormat;
+    id <MTLSamplerState> _samplerState;
+    
+    id<MTLTexture> _depthTexture;
 };
 
 }

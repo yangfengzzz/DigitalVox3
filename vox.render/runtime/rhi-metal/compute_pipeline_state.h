@@ -9,18 +9,17 @@
 #define compute_pipeline_state_hpp
 
 #import <Metal/Metal.h>
+#include "../vox_type.h"
 
 namespace vox {
 class ComputePipelineState {
 public:
-    ComputePipelineState(id<MTLDevice> device, MTLComputePipelineDescriptor* descriptor);
+    ComputePipelineState(MetalRenderer* _render, MTLComputePipelineDescriptor* descriptor);
 
     id<MTLComputePipelineState> handle();
-    
-    MTLAutoreleasedComputePipelineReflection* reflection();
-    
+        
 private:
-    MTLAutoreleasedComputePipelineReflection* _reflection;
+    MetalRenderer *_render;
     id<MTLComputePipelineState> _handle;
 };
 

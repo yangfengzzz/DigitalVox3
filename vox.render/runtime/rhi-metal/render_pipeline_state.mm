@@ -16,9 +16,9 @@ RenderPipelineState::RenderPipelineState(MetalRenderer* _render, MTLRenderPipeli
 _render(_render) {
     MTLRenderPipelineReflection *_reflection;
     NSError *error = nil;
-    _handle = [_render->device newRenderPipelineStateWithDescriptor:descriptor
-                                                            options:MTLPipelineOptionArgumentInfo
-                                                         reflection:&_reflection error:&error];
+    _handle = [_render->_device newRenderPipelineStateWithDescriptor:descriptor
+                                                             options:MTLPipelineOptionArgumentInfo
+                                                          reflection:&_reflection error:&error];
     if (error != nil)
     {
         NSLog(@"Error: failed to create Metal pipeline state: %@", error);
@@ -121,7 +121,7 @@ void RenderPipelineState::uploadUniforms(const std::vector<ShaderUniform>& unifo
         const auto& uniform = constUniforms[i];
         auto iter = properties.find(uniform.propertyId);
         if (iter != properties.end()) {
-            process(uniform, iter->second, _render->renderEncoder);
+            process(uniform, iter->second, _render->_renderEncoder);
         }
     }
 }

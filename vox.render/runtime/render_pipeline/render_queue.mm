@@ -71,7 +71,7 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
         descriptor.vertexFunction = program->vertexShader();
         descriptor.fragmentFunction = program->fragmentShader();
         
-        descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat;
+        descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
         descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
         
         MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
@@ -89,8 +89,8 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
         pipelineState->uploadAll(pipelineState->materialUniformBlock, materialData);
         
         auto& buffers = element.mesh->_vertexBuffer;
-        for (size_t index = 0; index < buffers.size(); index++) {
-            [rhi.renderEncoder setVertexBuffer:buffers[index]->buffer() offset:0 atIndex:index];
+        for (uint32_t index = 0; index < buffers.size(); index++) {
+            rhi.setVertexBuffer(buffers[index]->buffer(), 0, index);
         }
         rhi.drawPrimitive(element.subMesh);
     }
@@ -133,7 +133,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     descriptor.vertexFunction = program->vertexShader();
     descriptor.fragmentFunction = program->fragmentShader();
     
-    descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat;
+    descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
     descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
     
     auto depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
@@ -147,8 +147,8 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     pipelineState->uploadAll(pipelineState->materialUniformBlock, shaderData);
     
     auto& buffers = mesh->_vertexBuffer;
-    for (size_t index = 0; index < buffers.size(); index++) {
-        [rhi.renderEncoder setVertexBuffer:buffers[index]->buffer() offset:0 atIndex:index];
+    for (uint32_t index = 0; index < buffers.size(); index++) {
+        rhi.setVertexBuffer(buffers[index]->buffer(), 0, index);
     }
     rhi.drawPrimitive(mesh->subMesh(0));
 }

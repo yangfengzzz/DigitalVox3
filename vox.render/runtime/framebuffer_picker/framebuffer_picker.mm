@@ -26,24 +26,16 @@ void FramebufferPicker::setCamera(Camera* value) {
 
 FramebufferPicker::FramebufferPicker(Entity* entity):
 Script(entity) {
+    metalResourceLoader = entity->engine()->resourceLoader();
     auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
 
-        MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
-        descriptor.width = buffer_width;
-        descriptor.height = buffer_height;
-        descriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;
-        descriptor.usage = MTLTextureUsageRenderTarget;
-        colorRenderTarget.colorAttachments[0].texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:descriptor];
-        
-        MTLTextureDescriptor* depthDescriptor = [[MTLTextureDescriptor alloc]init];
-        depthDescriptor.width = buffer_width;
-        depthDescriptor.height = buffer_height;
-        depthDescriptor.pixelFormat = MTLPixelFormatDepth32Float;
-        depthDescriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
-        depthDescriptor.storageMode = MTLStorageModePrivate;
-        colorRenderTarget.depthAttachment.texture = [engine()->_hardwareRenderer.device newTextureWithDescriptor:depthDescriptor];
+        colorRenderTarget.colorAttachments[0].texture =
+        metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatBGRA8Unorm,
+                                          MTLTextureUsageRenderTarget, MTLStorageModeManaged);
+        colorRenderTarget.depthAttachment.texture =
+        metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float);
     };
     
     colorRenderTarget = [[MTLRenderPassDescriptor alloc] init];

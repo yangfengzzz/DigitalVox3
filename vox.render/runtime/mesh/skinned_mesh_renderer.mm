@@ -135,7 +135,8 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
         }
         
         // Renders skin.
-        auto render_mesh = drawSkinnedMesh(index, mesh, make_span(skinning_matrices_), vox::math::Float4x4::identity());
+        auto render_mesh = drawSkinnedMesh(index, mesh, make_span(skinning_matrices_),
+                                           vox::math::Float4x4::identity());
         const auto& vertexDescriptor = render_mesh->_vertexDescriptor;
         
         shaderData.disableMacro(HAS_UV);
@@ -235,11 +236,14 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
     const int32_t skinned_data_size = vertex_count * positions_stride;
     void *vbo_map = vbo_buffer_.Resize(skinned_data_size);
     vertexDescriptor.attributes[Position] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributePosition
-                                                                              format:MDLVertexFormatFloat3 offset:positions_offset bufferIndex:0];
+                                                                              format:MDLVertexFormatFloat3 offset:positions_offset
+                                                                         bufferIndex:0];
     vertexDescriptor.attributes[Normal] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeNormal
-                                                                            format:MDLVertexFormatFloat3 offset:normals_offset bufferIndex:0];
+                                                                            format:MDLVertexFormatFloat3 offset:normals_offset
+                                                                       bufferIndex:0];
     vertexDescriptor.attributes[Tangent] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTangent
-                                                                             format:MDLVertexFormatFloat3 offset:tangents_offset bufferIndex:0];
+                                                                             format:MDLVertexFormatFloat3 offset:tangents_offset
+                                                                        bufferIndex:0];
     
     // Colors and uvs are contiguous. They aren't transformed, so they can be
     // directly copied from source mesh which is non-interleaved as-well.
@@ -250,7 +254,8 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
     const int32_t uvs_size = vertex_count * uvs_stride;
     void *uv_map = uv_buffer_.Resize(uvs_size);
     vertexDescriptor.attributes[UV_0] = [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
-                                                                          format:MDLVertexFormatFloat2 offset:uvs_offset bufferIndex:1];
+                                                                          format:MDLVertexFormatFloat2 offset:uvs_offset
+                                                                     bufferIndex:1];
     vertexDescriptor.layouts[0] = [[MDLVertexBufferLayout alloc] initWithStride:positions_stride];
     vertexDescriptor.layouts[1] = [[MDLVertexBufferLayout alloc] initWithStride:uvs_stride];
     
@@ -385,24 +390,23 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
         processed_vertex_count += part_vertex_count;
     }
     
-    const auto& device = engine()->_hardwareRenderer.device;
+    const auto& resourceLoader = engine()->resourceLoader();
     if (vertexBuffers[index] == nullptr) {
-        vertexBuffers[index] = [device newBufferWithBytes:vbo_map length:skinned_data_size options:NULL];
+        vertexBuffers[index] = resourceLoader->buildBuffer(vbo_map, skinned_data_size, NULL);
     } else {
         memcpy([vertexBuffers[index] contents], vbo_map, skinned_data_size);
     }
     
     if (uvBuffers[index] == nullptr) {
-        uvBuffers[index] = [device newBufferWithBytes:uv_map length:uvs_size options:NULL];
+        uvBuffers[index] = resourceLoader->buildBuffer(uv_map, uvs_size, NULL);
     } else {
         memcpy([uvBuffers[index] contents], uv_map, uvs_size);
     }
     
     size_t indexCount = _mesh.triangle_indices.size();
     if (indexBuffers[index] == nullptr) {
-        indexBuffers[index] = [device newBufferWithBytes: _mesh.triangle_indices.data()
-                                                  length: indexCount * sizeof(vox::offline::loader::Mesh::TriangleIndices::value_type)
-                                                 options: NULL];
+        indexBuffers[index] = resourceLoader->buildBuffer(_mesh.triangle_indices.data(),
+                                                          indexCount * sizeof(vox::offline::loader::Mesh::TriangleIndices::value_type), NULL);
     }
     
     auto mesh = std::make_shared<BufferMesh>(_engine);

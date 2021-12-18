@@ -593,6 +593,7 @@
 		04860852276B113A00C05BDA /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = 04860851276B113900C05BDA /* stb_image.h */; };
 		049E3EC6276D595C003FEE00 /* metal_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049E3EC4276D595C003FEE00 /* metal_loader.mm */; };
 		049E3EC7276D595C003FEE00 /* metal_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 049E3EC5276D595C003FEE00 /* metal_loader.h */; };
+		049E3ECA276DA6D8003FEE00 /* skybox_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E53276C85880038F34A /* skybox_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -842,7 +843,6 @@
 		04D47E4E276C65A90038F34A /* sky.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E4D276C65A90038F34A /* sky.h */; };
 		04D47E51276C67C70038F34A /* skybox_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E4F276C67C70038F34A /* skybox_material.mm */; };
 		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
-		04D47E54276C85880038F34A /* skybox_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E53276C85880038F34A /* skybox_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4495,7 +4495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D47E54276C85880038F34A /* skybox_view.mm in Sources */,
+				049E3ECA276DA6D8003FEE00 /* skybox_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

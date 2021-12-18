@@ -19,7 +19,8 @@ public:
     MetalLoader(id <MTLDevice> device);
     
     id<MTLTexture> buildTexture(int width, int height, MTLPixelFormat pixelFormat,
-                                MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget);
+                                MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget,
+                                MTLStorageMode storageMode = MTLStorageModePrivate);
     
     id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft = true);
     
@@ -31,6 +32,8 @@ public:
     
 public:
     id<MTLBuffer> buildBuffer(const void * pointer, size_t length, MTLResourceOptions options);
+
+    id<MTLBuffer> buildBuffer(size_t length, MTLResourceOptions options);
     
 private:
     id <MTLDevice> device;

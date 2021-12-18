@@ -46,6 +46,8 @@ private:
     geometry::ParticleSystemData3Ptr _particleSystemData;
     geometry::ParticleSystemSolver3Ptr _particleSolver;
     
+    MetalLoaderPtr metalResourceLoader;
+    
     size_t _numberOfVertex = 0;
     id<MTLBuffer> _vertexBuffers;
     id<MTLBuffer> _indexBuffers;

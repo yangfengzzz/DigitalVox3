@@ -45,7 +45,7 @@ void GPUSkinnedMeshRenderer::update(float deltaTime) {
 
 void GPUSkinnedMeshRenderer::_initJoints() {
     jointMatrix.resize(_skin->joints.size() * 16);
-    matrixPalette = [engine()->_hardwareRenderer.device newBufferWithLength:jointMatrix.size() * sizeof(float) options:NULL];
+    matrixPalette = engine()->resourceLoader()->buildBuffer(jointMatrix.size() * sizeof(float), NULL);
 }
 
 

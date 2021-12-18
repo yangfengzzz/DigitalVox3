@@ -15,6 +15,8 @@
 namespace vox {
 ParticleRenderer::ParticleRenderer(Entity* entity):
 Renderer(entity) {
+    metalResourceLoader = entity->engine()->resourceLoader();
+    
     _particleSystemData = std::make_shared<geometry::ParticleSystemData3>();
     _particleSystemData->setRadius(1.0e-3);
     _particleSystemData->setMass(1.0e-3);
@@ -77,8 +79,6 @@ void ParticleRenderer::_updateBounds(BoundingBox& worldBounds) {
 }
 
 MeshPtr ParticleRenderer::_createMesh() {
-    auto device = engine()->_hardwareRenderer.device;
-    
     auto position = _particleSystemData->positions();
     const auto n_position = position.length();
     bool shouldResize = _numberOfVertex != n_position;
@@ -91,9 +91,8 @@ MeshPtr ParticleRenderer::_createMesh() {
     }
     
     if (_vertexBuffers == nullptr || shouldResize) {
-        _vertexBuffers = [device newBufferWithBytes:flatData.data()
-                                             length:n_position * sizeof(float) * 3
-                                            options:NULL];
+        _vertexBuffers = metalResourceLoader->buildBuffer(flatData.data(),
+                                                          n_position * sizeof(float) * 3, NULL);
         _numberOfVertex = n_position;
     } else {
         memcpy([_vertexBuffers contents], flatData.data(), n_position * sizeof(float) * 3);
@@ -103,15 +102,13 @@ MeshPtr ParticleRenderer::_createMesh() {
         geometry::Array1<uint32_t> itemIndices(n_position);
         std::iota(std::begin(itemIndices), std::end(itemIndices), 0);
         
-        _indexBuffers = [device newBufferWithBytes:itemIndices.data()
-                                            length:n_position * sizeof(uint32_t)
-                                           options:NULL];
+        _indexBuffers = metalResourceLoader->buildBuffer(itemIndices.data(),
+                                                         n_position * sizeof(uint32_t), NULL);
     }
     
     if (_renderBuffers == nullptr || shouldResize) {
-        _renderBuffers = [device newBufferWithBytes:_renderRelatedInfo.data()
-                                             length:_renderRelatedInfo.size() * sizeof(float)
-                                            options:NULL];
+        _renderBuffers = metalResourceLoader->buildBuffer(_renderRelatedInfo.data(),
+                                                          _renderRelatedInfo.size() * sizeof(float), NULL);
     } else {
         memcpy([_renderBuffers contents], _renderRelatedInfo.data(), _renderRelatedInfo.size() * sizeof(float));
     }

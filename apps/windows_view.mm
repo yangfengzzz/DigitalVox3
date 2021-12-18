@@ -20,6 +20,7 @@ using namespace vox;
 int main(int, char**) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
+    auto resourceLoader = engine.resourceLoader();
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
     
@@ -31,7 +32,7 @@ int main(int, char**) {
     cameraEntity->addComponent<control::OrbitControl>();
     
     auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
-    boxMtl->setBaseTexture(engine._hardwareRenderer.loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
+    boxMtl->setBaseTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
     
     auto characterEntity = rootEntity->createChild("characterEntity");
     auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();

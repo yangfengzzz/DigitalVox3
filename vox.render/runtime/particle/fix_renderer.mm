@@ -484,12 +484,11 @@ MeshPtr ParticleRenderer::_createMesh() {
                                      format:MDLVertexFormatFloat2
                                      offset:88 bufferIndex:0];
     descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:vertexStride];
-
-    auto vertexBuffer = [_engine->_hardwareRenderer.device newBufferWithLength:vertexFloatCount * 4
-                                                                       options:MTLResourceStorageModeShared];
-    auto indexBuffer = [_engine->_hardwareRenderer.device newBufferWithBytes:indices.data()
-                                                                      length:indices.size() * sizeof(uint32_t)
-                                                                     options:MTLResourceStorageModeShared];
+    
+    auto vertexBuffer = engine()->resourceLoader()->buildBuffer(vertexFloatCount * sizeof(float),
+                                                                MTLResourceStorageModeShared);
+    auto indexBuffer = engine()->resourceLoader()->buildBuffer(indices.data(), indices.size() * sizeof(uint32_t),
+                                                               MTLResourceStorageModeShared);
     
     mesh->setVertexDescriptor(descriptor);
     mesh->setVertexBufferBinding(vertexBuffer, vertexStride);

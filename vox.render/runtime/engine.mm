@@ -32,7 +32,7 @@ SceneManager Engine::sceneManager() {
 }
 
 MetalLoaderPtr Engine::resourceLoader() {
-    return _hardwareRenderer.createResourceLoader();
+    return _hardwareRenderer.resourceLoader();
 }
 
 Timer Engine::timer() {
