@@ -595,7 +595,6 @@
 		049E3EC7276D595C003FEE00 /* metal_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 049E3EC5276D595C003FEE00 /* metal_loader.h */; };
 		049E3ECC276DA75A003FEE00 /* pbrbasic.metal in Sources */ = {isa = PBXBuildFile; fileRef = 049E3ECB276DA75A003FEE00 /* pbrbasic.metal */; };
 		049E3ECE276DC26E003FEE00 /* function-common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398B2753A83B00204B8E /* function-common.metal */; };
-		049E3ED0276DC40A003FEE00 /* pbr_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049E3ECF276DC40A003FEE00 /* pbr_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -612,6 +611,7 @@
 		04A79AD7275E0F8D00182CCB /* pointer_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD5275E0F8D00182CCB /* pointer_manager.h */; };
 		04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AD8275E2C4F00182CCB /* InputManager.mm */; };
 		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
+		04C2EA42276E1B3700091FB3 /* Irradiance_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */; };
 		04C698A02768C43F00C4248F /* imgui_canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C698982768C43E00C4248F /* imgui_canvas.cpp */; };
 		04C698A12768C43F00C4248F /* imgui_node_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989C2768C43F00C4248F /* imgui_node_editor.cpp */; };
 		04C698A22768C43F00C4248F /* imgui_node_editor_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989D2768C43F00C4248F /* imgui_node_editor_api.cpp */; };
@@ -1570,6 +1570,7 @@
 		04A79AD8275E2C4F00182CCB /* InputManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = InputManager.mm; sourceTree = "<group>"; };
 		04A79AD9275E2C4F00182CCB /* InputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
+		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
 		04C698952768C43E00C4248F /* imgui_bezier_math.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui_bezier_math.inl; sourceTree = "<group>"; };
 		04C698962768C43E00C4248F /* imgui_node_editor_internal.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui_node_editor_internal.inl; sourceTree = "<group>"; };
 		04C698972768C43E00C4248F /* imgui_bezier_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_bezier_math.h; sourceTree = "<group>"; };
@@ -2950,6 +2951,7 @@
 				0486084F276B0ED700C05BDA /* gltf_view.mm */,
 				04D47E53276C85880038F34A /* skybox_view.mm */,
 				049E3ECF276DC40A003FEE00 /* pbr_view.mm */,
+				04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";
@@ -4496,7 +4498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049E3ED0276DC40A003FEE00 /* pbr_view.mm in Sources */,
+				04C2EA42276E1B3700091FB3 /* Irradiance_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

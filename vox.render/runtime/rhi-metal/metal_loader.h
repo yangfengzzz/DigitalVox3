@@ -12,6 +12,7 @@
 #include <MetalKit/MetalKit.h>
 #include <ModelIO/ModelIO.h>
 #include <string>
+#include <array>
 
 namespace vox {
 class MetalLoader {
@@ -30,7 +31,8 @@ public:
     
     id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
     
-    id<MTLTexture> createIrradianceTexture(const std::string& path, const std::string& imageName, bool isTopLeft);
+    id<MTLTexture> createIrradianceTexture(const std::string& path,
+                                           const std::array<std::string, 6>& imageName, bool isTopLeft = true);
     
 public:
     id<MTLBuffer> buildBuffer(const void * pointer, size_t length, MTLResourceOptions options);

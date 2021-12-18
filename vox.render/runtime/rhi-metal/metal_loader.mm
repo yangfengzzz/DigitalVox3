@@ -138,12 +138,24 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
     return arrayTexture;
 }
 
-id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
+id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
+                                                    const std::array<std::string, 6>& imageName, bool isTopLeft) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
-    NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
+    NSString* textureName1 = [[NSString alloc]initWithUTF8String:imageName[0].c_str()];
+    NSString* textureName2 = [[NSString alloc]initWithUTF8String:imageName[1].c_str()];
+    NSString* textureName3 = [[NSString alloc]initWithUTF8String:imageName[2].c_str()];
+    NSString* textureName4 = [[NSString alloc]initWithUTF8String:imageName[3].c_str()];
+    NSString* textureName5 = [[NSString alloc]initWithUTF8String:imageName[4].c_str()];
+    NSString* textureName6 = [[NSString alloc]initWithUTF8String:imageName[5].c_str()];
     
     NSMutableArray<NSString *> *imageNames = [[NSMutableArray alloc]init];
-    [imageNames addObject:textureName];
+    [imageNames addObject:textureName1];
+    [imageNames addObject:textureName2];
+    [imageNames addObject:textureName3];
+    [imageNames addObject:textureName4];
+    [imageNames addObject:textureName5];
+    [imageNames addObject:textureName6];
+    
     MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
     
     auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
