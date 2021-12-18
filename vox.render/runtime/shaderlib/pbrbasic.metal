@@ -98,10 +98,9 @@ float3 BRDF(float3 L, float3 V, float3 N, float metallic, float roughness, float
 fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       sampler textureSampler [[sampler(0)]],
                                       constant float3 &u_cameraPos [[buffer(7)]],
-                                      // point_light_frag
-                                      constant float3 *u_pointLightColor [[buffer(12), function_constant(hasPointLight)]],
-                                      constant float3 *u_pointLightPosition [[buffer(13), function_constant(hasPointLight)]],
-                                      constant float *u_pointLightDistance [[buffer(14), function_constant(hasPointLight)]],
+                                      // direction_light_frag
+                                      constant float3 *u_directLightColor [[buffer(10), function_constant(hasDirectLight)]],
+                                      constant float3 *u_directLightDirection [[buffer(11), function_constant(hasDirectLight)]],
                                       //pbr base frag define
                                       constant float &u_alphaCutoff [[buffer(21)]],
                                       constant float3 &u_baseColor [[buffer(22)]],
@@ -125,8 +124,8 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
 
     // Specular contribution
     float3 Lo = float3(0.0);
-    for (int i = 0; i < pointLightCount; i++) {
-        float3 L = normalize(u_pointLightPosition[i].xyz - in.worldPos);
+    for (int i = 0; i < directLightCount; i++) {
+        float3 L = normalize(u_directLightDirection[i].xyz);
         Lo += BRDF(L, V, N, u_metal, u_roughness, u_baseColor);
     };
     
