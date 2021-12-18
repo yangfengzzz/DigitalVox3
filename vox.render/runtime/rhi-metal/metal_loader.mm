@@ -138,6 +138,39 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
     return arrayTexture;
 }
 
+id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
+    NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
+    NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
+    
+    NSMutableArray<NSString *> *imageNames = [[NSMutableArray alloc]init];
+    [imageNames addObject:textureName];
+    MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
+    
+    auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
+                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:0];
+    
+    MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
+    if (!isTopLeft) {
+        origin = MTKTextureLoaderOriginBottomLeft;
+    }
+    
+    NSDictionary<MTKTextureLoaderOption, id> * options = @{
+        MTKTextureLoaderOptionOrigin: origin,
+        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
+        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
+    };
+    NSError *error = nil;
+    id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:irradianceTexture options:options error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create MTLTexture: %@", error);
+    }
+    return mtlTexture;
+    
+    return nullptr;
+}
+
+//MARK: - MTLBuffer
 id<MTLBuffer> MetalLoader::buildBuffer(const void * pointer, size_t length, MTLResourceOptions options) {
     return [device newBufferWithBytes:pointer length:NSUInteger(length) options:options];
 }
