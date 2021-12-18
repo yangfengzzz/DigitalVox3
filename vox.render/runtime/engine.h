@@ -42,6 +42,10 @@ public:
         return _sceneManager;
     }
     
+    MetalLoader resourceLoader() {
+        return _hardwareRenderer.createResourceLoader();
+    }
+    
     /**
      * Get the Time class.
      */

@@ -31,7 +31,8 @@ bool loadImageDataFuncEmpty(tinygltf::Image* image, const int imageIndex,
 }
 
 GLTFLoader::GLTFLoader(Engine* engine):
-engine(engine){
+engine(engine),
+metalResourceLoader(engine->resourceLoader()) {
     defaultSceneRoot = std::make_shared<Entity>(engine);
 }
 
@@ -47,7 +48,7 @@ void GLTFLoader::loadFromFile(std::string filename, float scale) {
     
     bool fileLoaded = gltfContext.LoadASCIIFromFile(&gltfModel, &error, &warning, filename);
     if (fileLoaded) {
-        loadImages(gltfModel, &engine->_hardwareRenderer);
+        loadImages(gltfModel);
         loadMaterials(gltfModel);
         
         const tinygltf::Scene &scene = gltfModel.scenes[gltfModel.defaultScene > -1 ? gltfModel.defaultScene : 0];
@@ -334,8 +335,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
                         std::cerr << "Index component type " << accessor.componentType << " not supported!" << std::endl;
                         return;
                 }
-                auto iBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:buf.data()
-                                                                             length:buf.size() * sizeof(uint32_t) options:NULL];
+                auto iBuffer = metalResourceLoader.buildBuffer(buf.data(), buf.size() * sizeof(uint32_t), NULL);
                 newMesh->addSubMesh(MeshBuffer(iBuffer,
                                                buf.size() * sizeof(uint32_t),
                                                MDLMeshBufferTypeIndex),
@@ -346,8 +346,7 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
             auto mat = primitive.material > -1 ? materials[primitive.material] : materials.back();
             renderer->setMaterial(j, mat);
         }
-        auto vBuffer = [engine->_hardwareRenderer.device newBufferWithBytes:vertexBuffer.data()
-                                                                     length:vertexBuffer.size() * sizeof(float) options:NULL];
+        auto vBuffer = metalResourceLoader.buildBuffer(vertexBuffer.data(), vertexBuffer.size() * sizeof(float), NULL);
         newMesh->setVertexBufferBinding(vBuffer, 0, 0);
         newMesh->setVertexDescriptor(descriptor);
         newMesh->bounds = bound;
@@ -355,9 +354,9 @@ void GLTFLoader::loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t
     }
 }
 
-void GLTFLoader::loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer) {
+void GLTFLoader::loadImages(tinygltf::Model& gltfModel) {
     for (tinygltf::Image &image : gltfModel.images) {
-        textures.push_back(renderer->loadTexture(path, image.uri));
+        textures.push_back(metalResourceLoader.loadTexture(path, image.uri));
     }
 }
 

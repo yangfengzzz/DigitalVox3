@@ -34,12 +34,19 @@ resouceCache(this) {
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
     
-    textureLoader = [[MTKTextureLoader alloc] initWithDevice:device];
     auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
-        depthTexture = buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float);
         layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
+        
+        // depth texture
+        MTLTextureDescriptor* descriptor =
+        [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatDepth32Float
+                                                           width:buffer_width height:buffer_height
+                                                       mipmapped:false];
+        descriptor.usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget;
+        descriptor.storageMode = MTLStorageModePrivate;
+        depthTexture = [device newTextureWithDescriptor:descriptor];        
     };
     createFrameBuffer(canvas->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
@@ -163,127 +170,9 @@ void MetalRenderer::drawPrimitive(SubMesh *subPrimitive) {
                        indexBufferOffset:subPrimitive->indexBuffer.offset()];
 }
 
-//MARK: - Texture
-id<MTLTexture> MetalRenderer::buildTexture(int width, int height, MTLPixelFormat pixelFormat, MTLTextureUsage usage) {
-    MTLTextureDescriptor* descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pixelFormat
-                                                                                          width:width height:height
-                                                                                      mipmapped:false];
-    descriptor.usage = usage;
-    descriptor.storageMode = MTLStorageModePrivate;
-    return [device newTextureWithDescriptor:descriptor];
-}
-
-id<MTLTexture> MetalRenderer::loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
-    NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
-    NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
-    NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
-    
-    MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
-    if (!isTopLeft) {
-        origin = MTKTextureLoaderOriginBottomLeft;
-    }
-    
-    NSDictionary<MTKTextureLoaderOption, id> * options = @{
-        MTKTextureLoaderOptionOrigin: origin,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
-        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:TRUE]
-    };
-    
-    NSError *error = nil;
-    id<MTLTexture> texture = [textureLoader newTextureWithContentsOfURL:url
-                                                                options:options error:&error];
-    if (error != nil)
-    {
-        NSLog(@"Error: failed to create MTLTexture: %@", error);
-    }
-    return texture;
-}
-
-id<MTLTexture> MetalRenderer::loadTexture(MDLTexture* texture) {
-    NSDictionary<MTKTextureLoaderOption, id> * options = @{
-        MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
-        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
-    };
-    
-    NSError *error = nil;
-    id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:texture options:options error:&error];
-    if (error != nil)
-    {
-        NSLog(@"Error: failed to create MTLTexture: %@", error);
-    }
-    return mtlTexture;
-}
-
-id<MTLTexture> MetalRenderer::loadCubeTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
-    NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
-    NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
-    NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
-    
-    MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
-    if (!isTopLeft) {
-        origin = MTKTextureLoaderOriginBottomLeft;
-    }
-    
-    NSDictionary<MTKTextureLoaderOption, id> * options = @{
-        MTKTextureLoaderOptionOrigin: origin,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
-        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
-    };
-    NSError *error = nil;
-    
-    NSMutableArray<NSString *> *imageNames = [[NSMutableArray alloc]init];
-    [imageNames addObject:[[NSString alloc]initWithUTF8String:imageName.c_str()]];
-    MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames];
-    if (mdlTexture != nil) {
-        id<MTLTexture> mtlTexture = [textureLoader newTextureWithMDLTexture:mdlTexture options:options error:&error];
-        if (error != nil)
-        {
-            NSLog(@"Error: failed to create MTLTexture: %@", error);
-        }
-        return mtlTexture;
-    }
-    
-    id<MTLTexture> mtlTexture = [textureLoader newTextureWithContentsOfURL:url
-                                                                options:options error:&error];
-    if (error != nil)
-    {
-        NSLog(@"Error: failed to create MTLTexture: %@", error);
-    }
-    return mtlTexture;
-}
-
-id<MTLTexture> MetalRenderer::loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames) {
-    NSMutableArray<id<MTLTexture>> *textures = [[NSMutableArray alloc]init];
-    for (const auto& name : textureNames) {
-        auto texture = loadTexture(path, name);
-        if (texture != nil) {
-            [textures addObject:texture];
-        }
-    }
-    
-    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
-    descriptor.textureType = MTLTextureType2DArray;
-    descriptor.pixelFormat = textures[0].pixelFormat;
-    descriptor.width = textures[0].width;
-    descriptor.height = textures[0].height;
-    descriptor.arrayLength = textures.count;
-    
-    auto arrayTexture = [device newTextureWithDescriptor:descriptor];
-    auto commandBuffer = [commandQueue commandBuffer];
-    auto blitEncoder = [commandBuffer blitCommandEncoder];
-    MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
-    MTLSize size = MTLSize{.width =  arrayTexture.width,
-        .height =  arrayTexture.height, .depth = 1};
-    for (size_t index = 0; index < textures.count; index++) {
-        [blitEncoder copyFromTexture:textures[index] sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
-                           toTexture:arrayTexture destinationSlice:index destinationLevel:0 destinationOrigin:origin];
-    }
-    [blitEncoder endEncoding];
-    [commandBuffer commit];
-    [commandBuffer waitUntilCompleted];
-    
-    return arrayTexture;
+//MARK: - Prox Type creation
+MetalLoader MetalRenderer::createResourceLoader() {
+    return MetalLoader(device);
 }
 
 }

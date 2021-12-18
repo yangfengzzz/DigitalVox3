@@ -10,7 +10,7 @@
 
 #include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
 #include "../runtime/entity.h"
-#include <Metal/Metal.h>
+#include "../runtime/rhi-metal/metal_loader.h"
 
 #define TINYGLTF_NO_STB_IMAGE_WRITE
 #include "tiny_gltf.h"
@@ -34,7 +34,7 @@ private:
     void loadNode(EntityPtr parent, const tinygltf::Node& node, uint32_t nodeIndex,
                   const tinygltf::Model& model, float globalscale);
 
-    void loadImages(tinygltf::Model& gltfModel, MetalRenderer* renderer);
+    void loadImages(tinygltf::Model& gltfModel);
 
     void loadMaterials(tinygltf::Model& gltfModel);
 
@@ -44,6 +44,7 @@ private:
     
 private:
     Engine* engine;
+    MetalLoader metalResourceLoader;
     std::map<uint32_t, std::pair<EntityPtr, int32_t>> linearNodes{};//index, (entity, skinIndex)
     bool metallicRoughnessWorkflow = true;
     std::string path;

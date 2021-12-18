@@ -12,9 +12,7 @@
 #include "../enums/camera_clear_flags.h"
 #include "../canvas.h"
 #include "resource_cache_state.h"
-#import <Metal/Metal.h>
-#import <MetalKit/MetalKit.h>
-#import <ModelIO/ModelIO.h>
+#include "metal_loader.h"
 #import <QuartzCore/QuartzCore.h>
 
 namespace vox {
@@ -73,22 +71,12 @@ public:
     void drawPrimitive(SubMesh *subPrimitive);
 
 public:
-    id<MTLTexture> buildTexture(int width, int height, MTLPixelFormat pixelFormat,
-                                MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget);
-    
-    id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft = true);
-    
-    id<MTLTexture> loadTexture(MDLTexture* texture);
-    
-    id<MTLTexture> loadCubeTexture(const std::string& path, const std::string& imageName, bool isTopLeft);
-    
-    id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
+    MetalLoader createResourceLoader();
     
 private:
     CAMetalLayer *layer;
     id <CAMetalDrawable> drawable;
     
-    MTKTextureLoader* textureLoader;
     id<MTLTexture> depthTexture;
 };
 

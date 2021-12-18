@@ -39,9 +39,7 @@ public:
     /// Push a render element to the render queue.
     /// - Parameter element: Render element
     void pushPrimitive(const RenderElement& element);
-    
-    // void _drawSky(Engine* engine, Camera* camera, Sky sky);
-    
+        
 public:
     /// Default render pass.
     RenderPass* defaultRenderPass();

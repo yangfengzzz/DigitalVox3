@@ -26,12 +26,13 @@ using namespace vox;
 int main(int, char**) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
+    auto resourceLoader = engine.resourceLoader();
     auto scene = engine.sceneManager().activeScene();
     scene->background.mode = BackgroundMode::Enum::Sky;
     
     auto skyMaterial = std::make_shared<SkyBoxMaterial>(&engine);
-    skyMaterial->setTextureCubeMap(engine._hardwareRenderer.loadTexture("/Users/yangfeng/Desktop/Vulkan/data/textures",
-                                                                        "cubemap_yokohama_rgba.ktx"));
+    skyMaterial->setTextureCubeMap(resourceLoader.loadTexture("/Users/yangfeng/Desktop/Vulkan/data/textures",
+                                                              "cubemap_yokohama_rgba.ktx"));
     scene->background.sky.material = skyMaterial;
     scene->background.sky.mesh = PrimitiveMesh::createCuboid(&engine, 1, 1, 1);
     
@@ -49,6 +50,6 @@ int main(int, char**) {
     auto loader = offline::GLTFLoader(&engine);
     loader.loadFromFile("/Users/yangfeng/Desktop/Vulkan/data/models/sponza/sponza.gltf");
     rootEntity->addChild(loader.defaultSceneRoot);
-
+    
     engine.run();
 }
