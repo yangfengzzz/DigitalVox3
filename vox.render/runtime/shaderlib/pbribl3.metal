@@ -168,7 +168,7 @@ vertex VertexOut vertex_experimental(const VertexIn in [[stage_in]],
 }
 
 // MARK: - Fragment
-
+// MARK: - Common
 #define RECIPROCAL_PI 0.31830988618
 #define EPSILON 1e-6
 #define LOG2 1.442695
@@ -246,6 +246,7 @@ PhysicalMaterial getPhysicalMaterial(float4 diffuseColor,
                                      float2 v_uv,
                                      texture2d<float> u_baseColorTexture,
                                      texture2d<float> u_metallicRoughnessTexture,
+                                     texture2d<float> u_specularGlossinessTexture,
                                      sampler textureSampler){
     PhysicalMaterial material;
     if (hasBaseColorMap) {
@@ -269,12 +270,11 @@ PhysicalMaterial getPhysicalMaterial(float4 diffuseColor,
         metal *= metalRoughMapColor.b;
     }
     
-    //    if (hasMetalRoughnessMap) {
-    //        float4 specularGlossinessColor = texture2D(u_specularGlossinessSampler, v_uv );
-    //        specularColor *= specularGlossinessColor.rgb;
-    //        glossiness *= specularGlossinessColor.a;
-    //    }
-    
+    if (hasSpecularGlossinessMap) {
+        float4 specularGlossinessColor = u_specularGlossinessTexture.sample(textureSampler, v_uv);
+        specularColor *= specularGlossinessColor.rgb;
+        glossiness *= specularGlossinessColor.a;
+    }
     
     if (isMetallicWorkFlow) {
         material.diffuseColor = diffuseColor.rgb * ( 1.0 - metal );
@@ -603,9 +603,8 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
                                       texture2d<float> u_emissiveTexture [[texture(5), function_constant(hasEmissiveMap)]],
                                       texture2d<float> u_metallicRoughnessTexture [[texture(6), function_constant(hasMetalRoughnessMap)]],
-                                      texture2d<float> u_specularTexture [[texture(7), function_constant(hasSpecularMap)]],
-                                      texture2d<float> u_glossinessTexture [[texture(8), function_constant(hasGlossinessMap)]],
-                                      texture2d<float> u_occlusionTexture [[texture(9), function_constant(hasOcclusionMap)]],
+                                      texture2d<float> u_specularGlossinessTexture [[texture(7), function_constant(hasSpecularGlossinessMap)]],
+                                      texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
                                       bool is_front_face [[front_facing]]) {
     GeometricContext geometry;
     geometry.position = in.v_pos;
@@ -614,7 +613,7 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
     
     PhysicalMaterial material = getPhysicalMaterial(u_baseColor, u_metal, u_roughness, u_specularColor, u_glossiness, u_alphaCutoff,
                                                     in.v_color, in.v_uv,
-                                                    u_baseColorTexture, u_metallicRoughnessTexture, textureSampler);
+                                                    u_baseColorTexture, u_metallicRoughnessTexture, u_specularGlossinessTexture, textureSampler);
     ReflectedLight reflectedLight = ReflectedLight{ float3( 0 ), float3( 0 ), float3( 0 ), float3( 0 ) };
     float dotNV = saturate( dot( geometry.normal, geometry.viewDir ) );
     

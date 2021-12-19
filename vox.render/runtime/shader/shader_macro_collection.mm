@@ -38,8 +38,7 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     {HAS_BASE_COLORMAP, {0, MTLDataTypeBool}},
     {HAS_EMISSIVEMAP, {0, MTLDataTypeBool}},
     {HAS_OCCLUSIONMAP, {0, MTLDataTypeBool}},
-    {HAS_SPECULARMAP, {0, MTLDataTypeBool}},
-    {HAS_GLOSSINESSMAP, {0, MTLDataTypeBool}},
+    {HAS_SPECULARGLOSSINESSMAP, {0, MTLDataTypeBool}},
     {HAS_METALROUGHNESSMAP, {0, MTLDataTypeBool}},
     {IS_METALLIC_WORKFLOW, {0, MTLDataTypeBool}},
     

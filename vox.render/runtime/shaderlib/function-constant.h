@@ -44,8 +44,7 @@ constant bool hasBaseTexture [[function_constant(HAS_BASE_TEXTURE)]];
 constant bool hasBaseColorMap [[function_constant(HAS_BASE_COLORMAP)]];
 constant bool hasEmissiveMap [[function_constant(HAS_EMISSIVEMAP)]];
 constant bool hasOcclusionMap [[function_constant(HAS_OCCLUSIONMAP)]];
-constant bool hasSpecularMap [[function_constant(HAS_SPECULARMAP)]];
-constant bool hasGlossinessMap [[function_constant(HAS_GLOSSINESSMAP)]];
+constant bool hasSpecularGlossinessMap [[function_constant(HAS_SPECULARGLOSSINESSMAP)]];
 constant bool hasMetalRoughnessMap [[function_constant(HAS_METALROUGHNESSMAP)]];
 constant bool isMetallicWorkFlow [[function_constant(IS_METALLIC_WORKFLOW)]];
 

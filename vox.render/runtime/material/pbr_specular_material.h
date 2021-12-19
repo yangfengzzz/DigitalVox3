@@ -23,12 +23,8 @@ public:
     void setGlossiness(float newValue);
     
     /// Specular glossiness texture.
-    id<MTLTexture> glossinessTexture();
-    void setGlossinessTexture(id<MTLTexture> newValue);
-    
-    /// Specular glossiness texture.
-    id<MTLTexture> specularTexture();
-    void setSpecularTexture(id<MTLTexture> newValue);
+    id<MTLTexture> specularGlossinessTexture();
+    void setSpecularGlossinessTexture(id<MTLTexture> newValue);
     
     /// Create a pbr specular-glossiness workflow material instance.
     /// - Parameter engine: Engine to which the material belongs
@@ -37,8 +33,7 @@ public:
 private:
     static ShaderProperty _glossinessProp;
     static ShaderProperty _specularColorProp;
-    static ShaderProperty _glossinessTextureProp;
-    static ShaderProperty _specularTextureProp;
+    static ShaderProperty _specularGlossinessTextureProp;
 };
 
 }
