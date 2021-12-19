@@ -612,6 +612,7 @@
 		04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AD8275E2C4F00182CCB /* InputManager.mm */; };
 		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
 		04C2EA44276EADB200091FB3 /* Irradiance_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */; };
+		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C698A02768C43F00C4248F /* imgui_canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C698982768C43E00C4248F /* imgui_canvas.cpp */; };
 		04C698A12768C43F00C4248F /* imgui_node_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989C2768C43F00C4248F /* imgui_node_editor.cpp */; };
 		04C698A22768C43F00C4248F /* imgui_node_editor_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989D2768C43F00C4248F /* imgui_node_editor_api.cpp */; };
@@ -1571,6 +1572,7 @@
 		04A79AD9275E2C4F00182CCB /* InputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
 		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
+		04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = cubemap_debugger.metal; sourceTree = "<group>"; };
 		04C698952768C43E00C4248F /* imgui_bezier_math.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui_bezier_math.inl; sourceTree = "<group>"; };
 		04C698962768C43E00C4248F /* imgui_node_editor_internal.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui_node_editor_internal.inl; sourceTree = "<group>"; };
 		04C698972768C43E00C4248F /* imgui_bezier_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_bezier_math.h; sourceTree = "<group>"; };
@@ -2903,6 +2905,13 @@
 			path = pointer;
 			sourceTree = "<group>";
 		};
+		04C2EA45276EB93800091FB3 /* debug */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = debug;
+			sourceTree = "<group>";
+		};
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
@@ -3589,6 +3598,8 @@
 				049E3ECB276DA75A003FEE00 /* pbrbasic.metal */,
 				04C2EA3E276DEE2900091FB3 /* pbribl.metal */,
 				04860859276B2DFA00C05BDA /* experimental */,
+				04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */,
+				04C2EA45276EB93800091FB3 /* debug */,
 				04CE398B2753A83B00204B8E /* function-common.metal */,
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04CE398E2753A83B00204B8E /* pbr.metal */,
@@ -4554,6 +4565,7 @@
 				04A79AD1275E0DC500182CCB /* pointer.cpp in Sources */,
 				04CE3957275259FA00204B8E /* renderer.mm in Sources */,
 				04CE3968275268BB00204B8E /* render_pass.mm in Sources */,
+				04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */,
 				049E3ECE276DC26E003FEE00 /* function-common.metal in Sources */,
 				04CE37CE274D167E00204B8E /* animation_utils.cc in Sources */,
 				04CE37D0274D167E00204B8E /* local_to_model_job.cc in Sources */,

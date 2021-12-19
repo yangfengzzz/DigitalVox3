@@ -23,12 +23,40 @@
 
 using namespace vox;
 
+class BakerMaterial :public BaseMaterial {
+public:
+    BakerMaterial(Engine* engine):BaseMaterial(engine, Shader::find("cubemapDebugger")){}
+    
+    /// Base texture.
+    id<MTLTexture> baseTexture() {
+        return std::any_cast<id<MTLTexture>>(shaderData.getData(_baseTextureProp));
+    }
+    
+    void setBaseTexture(id<MTLTexture> newValue) {
+        shaderData.setData(_baseTextureProp, newValue);
+    }
+    
+    /// Tiling and offset of main textures.
+    int faceIndex() {
+        return std::any_cast<uint>(shaderData.getData(_faceIndexProp));
+    }
+    void setFaceInex(int newValue) {
+        shaderData.setData(_faceIndexProp, newValue);
+    }
+    
+private:
+    ShaderProperty _baseTextureProp = Shader::createProperty("u_baseTexture", ShaderDataGroup::Material);
+    ShaderProperty _faceIndexProp = Shader::createProperty("u_faceIndex", ShaderDataGroup::Material);
+};
+
 int main(int, char**) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto resourceLoader = engine.resourceLoader();
     auto scene = engine.sceneManager().activeScene();
     auto rootEntity = scene->createRootEntity();
+    
+    Shader::create("cubemapDebugger", "vertex_cubemap", "fragment_cubemap");
     
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(0, 10, 0);
@@ -47,12 +75,11 @@ int main(int, char**) {
     
     // Create planes
     std::array<EntityPtr, 6> planes{};
-    std::array<MaterialPtr, 6> planeMaterials{};
+    std::array<std::shared_ptr<BakerMaterial>, 6> planeMaterials{};
     
     for (int i = 0; i < 6; i++) {
         auto bakerEntity = rootEntity->createChild("IBL Baker Entity");
-        auto bakerMaterial = std::make_shared<UnlitMaterial>(&engine);
-        bakerMaterial->renderState.rasterState.cullMode = MTLCullModeNone;
+        auto bakerMaterial = std::make_shared<BakerMaterial>(&engine);
         auto bakerRenderer = bakerEntity->addComponent<MeshRenderer>();
         bakerRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 2, 2));
         bakerRenderer->setMaterial(bakerMaterial);
@@ -62,16 +89,30 @@ int main(int, char**) {
     
     planes[0]->transform->setPosition(1, 0, 0); // PX
     planes[1]->transform->setPosition(-3, 0, 0); // NX
-    planes[2]->transform->setPosition(1, 0, 2); // PY
-    planes[3]->transform->setPosition(1, 0, -2); // NY
+    planes[2]->transform->setPosition(1, 0, -2); // PY
+    planes[3]->transform->setPosition(1, 0, 2); // NY
     planes[4]->transform->setPosition(-1, 0, 0); // PZ
     planes[5]->transform->setPosition(3, 0, 0); // NZ
     
     
     auto textures = resourceLoader->createIrradianceTexture
                                    ("/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images",
-                                    {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"});
+                                    {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"}, true);
 
+    auto changeMip = [&](int mipLevel) {
+        auto mipSize = textures.width >> mipLevel;
+        for (int i = 0; i < 6; i++) {
+            auto material = planeMaterials[i];
+            std::vector<uint8_t> data(mipSize * mipSize * 4);
+            auto planeTexture = [textures newTextureViewWithPixelFormat:MTLPixelFormatBGRA8Unorm
+                                                            textureType:MTLTextureType2D
+                                                                 levels:NSMakeRange(mipLevel, 1)
+                                                                 slices:NSMakeRange(i, 1)];
+            material->setBaseTexture(planeTexture);
+            material->setFaceInex(i);
+        }
+    };
+    changeMip(0);
     
     engine.run();
 }

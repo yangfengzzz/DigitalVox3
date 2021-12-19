@@ -140,7 +140,8 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
 }
 
 id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
-                                                    const std::array<std::string, 6>& imageName, bool isTopLeft) {
+                                                    const std::array<std::string, 6>& imageName,
+                                                    bool isDebugger, bool isTopLeft) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
     NSString* textureName1 = [[NSString alloc]initWithUTF8String:imageName[0].c_str()];
     NSString* textureName2 = [[NSString alloc]initWithUTF8String:imageName[1].c_str()];
@@ -167,10 +168,16 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
         origin = MTKTextureLoaderOriginBottomLeft;
     }
     
+    MTLTextureUsage usage = MTLTextureUsageShaderRead;
+    if (isDebugger) {
+        usage |= MTLTextureUsagePixelFormatView;
+    }
+    
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
         MTKTextureLoaderOptionOrigin: origin,
         MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
-        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
+        MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE],
+        MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedInt:usage]
     };
     NSError *error = nil;
     id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:irradianceTexture options:options error:&error];

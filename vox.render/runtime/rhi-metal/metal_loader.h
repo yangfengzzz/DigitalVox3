@@ -32,7 +32,8 @@ public:
     id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
     
     id<MTLTexture> createIrradianceTexture(const std::string& path,
-                                           const std::array<std::string, 6>& imageName, bool isTopLeft = true);
+                                           const std::array<std::string, 6>& imageName,
+                                           bool isDebugger = false, bool isTopLeft = true);
 
     // red 9; green 9; blue 9;
     std::array<float, 27> createSphericalHarmonicsCoefficients(const std::string& path,

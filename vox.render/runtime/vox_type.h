@@ -24,6 +24,8 @@ class ModelMesh;
 using ModelMeshPtr = std::shared_ptr<ModelMesh>;
 class Material;
 using MaterialPtr = std::shared_ptr<Material>;
+class UnlitMaterial;
+using UnlitMaterialPtr = std::shared_ptr<UnlitMaterial>;
 class Camera;
 class Renderer;
 class MeshRenderer;
