@@ -36,14 +36,14 @@ int main(int, char**) {
     cameraEntity->addComponent<control::OrbitControl>();
     
     // Create Sphere
-//    auto sphereEntity = rootEntity->createChild("box");
-//    sphereEntity->transform->setPosition(-1, 2, 0);
-//    auto sphereMaterial = std::make_shared<PBRMaterial>(&engine);
-//    sphereMaterial->setRoughness(0);
-//    sphereMaterial->setMetallic(1);
-//    auto renderer = sphereEntity->addComponent<MeshRenderer>();
-//    renderer->setMesh(PrimitiveMesh::createSphere(&engine, 1, 64));
-//    renderer->setMaterial(sphereMaterial);
+    auto sphereEntity = rootEntity->createChild("box");
+    sphereEntity->transform->setPosition(-1, 0, -2);
+    auto sphereMaterial = std::make_shared<PBRMaterial>(&engine);
+    sphereMaterial->setRoughness(0);
+    sphereMaterial->setMetallic(1);
+    auto renderer = sphereEntity->addComponent<MeshRenderer>();
+    renderer->setMesh(PrimitiveMesh::createSphere(&engine, 1, 64));
+    renderer->setMaterial(sphereMaterial);
     
     // Create planes
     std::array<EntityPtr, 6> planes{};

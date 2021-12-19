@@ -54,9 +54,14 @@ std::optional<ShaderProperty> Shader::getPropertyByName(const std::string& name)
 }
 
 ShaderProperty Shader::createProperty(const std::string& name, ShaderDataGroup::Enum group) {
-    auto property = ShaderProperty(name, group);
-    Shader::_propertyNameMap.insert(std::make_pair(name, property));
-    return property;
+    auto iter = Shader::_propertyNameMap.find(name);
+    if (iter != Shader::_propertyNameMap.end()) {
+        return iter->second;
+    } else {
+        auto property = ShaderProperty(name, group);
+        Shader::_propertyNameMap.insert(std::make_pair(name, property));
+        return property;
+    }
 }
 
 std::optional<ShaderDataGroup::Enum> Shader::_getShaderPropertyGroup(const std::string& propertyName) {
