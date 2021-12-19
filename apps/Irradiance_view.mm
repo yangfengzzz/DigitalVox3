@@ -95,7 +95,7 @@ int main(int, char**) {
     planes[5]->transform->setPosition(3, 0, 0); // NZ
     
     
-    auto textures = resourceLoader->createIrradianceTexture
+    auto textures = resourceLoader->createSpecularTexture
                                    ("/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images",
                                     {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"}, true);
 

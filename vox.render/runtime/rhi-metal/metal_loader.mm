@@ -275,16 +275,11 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
         origin = MTKTextureLoaderOriginBottomLeft;
     }
     
-    MTLTextureUsage usage = MTLTextureUsageShaderRead;
-    if (isDebugger) {
-        usage |= MTLTextureUsagePixelFormatView;
-    }
-    
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
         MTKTextureLoaderOptionOrigin: origin,
         MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE],
-        MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedLong:usage]
+        MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedLong:MTLTextureUsageShaderRead]
     };
     NSError *error = nil;
     id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:mdlTexture options:options error:&error];
@@ -293,12 +288,18 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
     }
     
     // final texture
+    MTLTextureUsage usage = MTLTextureUsageShaderRead;
+    if (isDebugger) {
+        usage |= MTLTextureUsagePixelFormatView;
+    }
+    
     MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
-    descriptor.textureType = MTLTextureType2DArray;
+    descriptor.textureType = MTLTextureTypeCube;
     descriptor.pixelFormat = mtlTexture.pixelFormat;
     descriptor.width = mtlTexture.width;
     descriptor.height = mtlTexture.height;
     descriptor.mipmapLevelCount = 9;
+    descriptor.usage = usage;
     auto specularTexture = [_device newTextureWithDescriptor:descriptor];
     
     // merge
@@ -311,17 +312,17 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
     
     auto blitEncoder = [commandBuffer blitCommandEncoder];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:0 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:0 destinationLevel:0 sliceCount:6 levelCount:1];
+                       toTexture:specularTexture destinationSlice:0 destinationLevel:0 sliceCount:1 levelCount:1];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:1 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:1 destinationLevel:0 sliceCount:6 levelCount:1];
+                       toTexture:specularTexture destinationSlice:1 destinationLevel:0 sliceCount:1 levelCount:1];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:2 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:2 destinationLevel:0 sliceCount:6 levelCount:1];
+                       toTexture:specularTexture destinationSlice:2 destinationLevel:0 sliceCount:1 levelCount:1];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:3 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:3 destinationLevel:0 sliceCount:6 levelCount:1];
+                       toTexture:specularTexture destinationSlice:3 destinationLevel:0 sliceCount:1 levelCount:1];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:4 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:4 destinationLevel:0 sliceCount:6 levelCount:1];
+                       toTexture:specularTexture destinationSlice:4 destinationLevel:0 sliceCount:1 levelCount:1];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:5 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:5 destinationLevel:0 sliceCount:6 levelCount:1];
+                       toTexture:specularTexture destinationSlice:5 destinationLevel:0 sliceCount:1 levelCount:1];
     [blitEncoder endEncoding];
     
     // generate Mipmap
@@ -349,18 +350,18 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
         
         // merge together
         auto blitEncoder = [commandBuffer blitCommandEncoder];
-        [blitEncoder copyFromTexture:mtlTexture sourceSlice:0 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:0 destinationLevel:level sliceCount:6 levelCount:1];
-        [blitEncoder copyFromTexture:mtlTexture sourceSlice:1 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:1 destinationLevel:level sliceCount:6 levelCount:1];
-        [blitEncoder copyFromTexture:mtlTexture sourceSlice:2 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:2 destinationLevel:level sliceCount:6 levelCount:1];
-        [blitEncoder copyFromTexture:mtlTexture sourceSlice:3 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:3 destinationLevel:level sliceCount:6 levelCount:1];
-        [blitEncoder copyFromTexture:mtlTexture sourceSlice:4 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:4 destinationLevel:level sliceCount:6 levelCount:1];
-        [blitEncoder copyFromTexture:mtlTexture sourceSlice:5 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:5 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder copyFromTexture:outputTexture sourceSlice:0 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:0 destinationLevel:level sliceCount:1 levelCount:1];
+        [blitEncoder copyFromTexture:outputTexture sourceSlice:1 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:1 destinationLevel:level sliceCount:1 levelCount:1];
+        [blitEncoder copyFromTexture:outputTexture sourceSlice:2 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:2 destinationLevel:level sliceCount:1 levelCount:1];
+        [blitEncoder copyFromTexture:outputTexture sourceSlice:3 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:3 destinationLevel:level sliceCount:1 levelCount:1];
+        [blitEncoder copyFromTexture:outputTexture sourceSlice:4 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:4 destinationLevel:level sliceCount:1 levelCount:1];
+        [blitEncoder copyFromTexture:outputTexture sourceSlice:5 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:5 destinationLevel:level sliceCount:1 levelCount:1];
         [blitEncoder endEncoding];
     }
     [commandBuffer commit];
