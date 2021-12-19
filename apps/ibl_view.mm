@@ -62,12 +62,10 @@ int main(int, char**) {
     scene->background.sky.material = skyMaterial;
     scene->background.sky.mesh = PrimitiveMesh::createCuboid(&engine, 1, 1, 1);
     
-    auto specularTexture
-    = resourceLoader->createSpecularTexture(path, images);
+    auto specularTexture = resourceLoader->createSpecularTexture(path, images);
     scene->ambientLight().setSpecularTexture(specularTexture);
     
-    auto diffuseTexture
-    = resourceLoader->createIrradianceTexture(path, images);
+    auto diffuseTexture = resourceLoader->createIrradianceTexture(path, images);
     scene->ambientLight().setDiffuseTexture(diffuseTexture);
     
     auto rootEntity = scene->createRootEntity();

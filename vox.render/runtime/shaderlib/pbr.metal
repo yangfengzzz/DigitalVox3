@@ -42,23 +42,23 @@ typedef struct {
     float3 v_normal [[function_constant(hasNormalNotHasTangentOrHasNormalTexture)]];
 } VertexOut;
 
-vertex VertexOut vertex_experimental(const VertexIn in [[stage_in]],
-                                     constant matrix_float4x4 &u_localMat [[buffer(0)]],
-                                     constant matrix_float4x4 &u_modelMat [[buffer(1)]],
-                                     constant matrix_float4x4 &u_viewMat [[buffer(2)]],
-                                     constant matrix_float4x4 &u_projMat [[buffer(3)]],
-                                     constant matrix_float4x4 &u_MVMat [[buffer(4)]],
-                                     constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
-                                     constant matrix_float4x4 &u_normalMat [[buffer(6)]],
-                                     constant float3 &u_cameraPos [[buffer(7)]],
-                                     constant float4 &u_tilingOffset [[buffer(8)]],
-                                     constant matrix_float4x4 &u_viewMatFromLight [[buffer(9)]],
-                                     constant matrix_float4x4 &u_projMatFromLight [[buffer(10)]],
-                                     sampler u_jointSampler [[sampler(0), function_constant(hasSkinAndHasJointTexture)]],
-                                     texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],
-                                     constant int &u_jointCount [[buffer(11), function_constant(hasSkinAndHasJointTexture)]],
-                                     constant matrix_float4x4 *u_jointMatrix [[buffer(12), function_constant(hasSkinNotHasJointTexture)]],
-                                     constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]]) {
+vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
+                            constant matrix_float4x4 &u_localMat [[buffer(0)]],
+                            constant matrix_float4x4 &u_modelMat [[buffer(1)]],
+                            constant matrix_float4x4 &u_viewMat [[buffer(2)]],
+                            constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                            constant matrix_float4x4 &u_MVMat [[buffer(4)]],
+                            constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
+                            constant matrix_float4x4 &u_normalMat [[buffer(6)]],
+                            constant float3 &u_cameraPos [[buffer(7)]],
+                            constant float4 &u_tilingOffset [[buffer(8)]],
+                            constant matrix_float4x4 &u_viewMatFromLight [[buffer(9)]],
+                            constant matrix_float4x4 &u_projMatFromLight [[buffer(10)]],
+                            sampler u_jointSampler [[sampler(0), function_constant(hasSkinAndHasJointTexture)]],
+                            texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],
+                            constant int &u_jointCount [[buffer(11), function_constant(hasSkinAndHasJointTexture)]],
+                            constant matrix_float4x4 *u_jointMatrix [[buffer(12), function_constant(hasSkinNotHasJointTexture)]],
+                            constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]]) {
     VertexOut out;
     
     // begin position
@@ -557,55 +557,55 @@ float3 getPbrNormal(VertexOut in, float u_normalIntensity,
     return n;
 }
 
-fragment float4 fragment_experimental(VertexOut in [[stage_in]],
-                                      sampler textureSampler [[sampler(0)]],
-                                      // common_frag
-                                      constant matrix_float4x4 &u_localMat [[buffer(0)]],
-                                      constant matrix_float4x4 &u_modelMat [[buffer(1)]],
-                                      constant matrix_float4x4 &u_viewMat [[buffer(2)]],
-                                      constant matrix_float4x4 &u_projMat [[buffer(3)]],
-                                      constant matrix_float4x4 &u_MVMat [[buffer(4)]],
-                                      constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
-                                      constant matrix_float4x4 &u_normalMat [[buffer(6)]],
-                                      constant float3 &u_cameraPos [[buffer(7)]],
-                                      // direct_light_frag
-                                      constant float3 *u_directLightColor [[buffer(8), function_constant(hasDirectLight)]],
-                                      constant float3 *u_directLightDirection [[buffer(9), function_constant(hasDirectLight)]],
-                                      // point_light_frag
-                                      constant float3 *u_pointLightColor [[buffer(10), function_constant(hasPointLight)]],
-                                      constant float3 *u_pointLightPosition [[buffer(11), function_constant(hasPointLight)]],
-                                      constant float *u_pointLightDistance [[buffer(12), function_constant(hasPointLight)]],
-                                      // spot_light_frag
-                                      constant float3 *u_spotLightColor [[buffer(13), function_constant(hasSpotLight)]],
-                                      constant float3 *u_spotLightPosition [[buffer(14), function_constant(hasSpotLight)]],
-                                      constant float3 *u_spotLightDirection [[buffer(15), function_constant(hasSpotLight)]],
-                                      constant float *u_spotLightDistance [[buffer(16), function_constant(hasSpotLight)]],
-                                      constant float *u_spotLightAngleCos [[buffer(17), function_constant(hasSpotLight)]],
-                                      constant float *u_spotLightPenumbraCos [[buffer(18), function_constant(hasSpotLight)]],
-                                      // pbr_envmap_light_frag_define
-                                      constant EnvMapLight &u_envMapLight [[buffer(19)]],
-                                      constant float3 *u_env_sh [[buffer(20), function_constant(hasSH)]],
-                                      texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
-                                      texturecube<float> u_env_diffuseTexture [[texture(1), function_constant(hasDiffuseEnv)]],
-                                      texture2d<float> samplerBRDFLUT [[texture(2)]],
-                                      //pbr base frag define
-                                      constant float &u_alphaCutoff [[buffer(21)]],
-                                      constant float4 &u_baseColor [[buffer(22)]],
-                                      constant float &u_metal [[buffer(23)]],
-                                      constant float &u_roughness [[buffer(24)]],
-                                      constant float3 &u_specularColor [[buffer(25)]],
-                                      constant float &u_glossiness [[buffer(26)]],
-                                      constant float3 &u_emissiveColor [[buffer(27)]],
-                                      constant float &u_normalIntensity [[buffer(28)]],
-                                      constant float &u_occlusionStrength [[buffer(29)]],
-                                      // pbr_texture_frag_define
-                                      texture2d<float> u_baseColorTexture [[texture(3), function_constant(hasBaseColorMap)]],
-                                      texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
-                                      texture2d<float> u_emissiveTexture [[texture(5), function_constant(hasEmissiveMap)]],
-                                      texture2d<float> u_metallicRoughnessTexture [[texture(6), function_constant(hasMetalRoughnessMap)]],
-                                      texture2d<float> u_specularGlossinessTexture [[texture(7), function_constant(hasSpecularGlossinessMap)]],
-                                      texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
-                                      bool is_front_face [[front_facing]]) {
+fragment float4 fragment_pbr(VertexOut in [[stage_in]],
+                             sampler textureSampler [[sampler(0)]],
+                             // common_frag
+                             constant matrix_float4x4 &u_localMat [[buffer(0)]],
+                             constant matrix_float4x4 &u_modelMat [[buffer(1)]],
+                             constant matrix_float4x4 &u_viewMat [[buffer(2)]],
+                             constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                             constant matrix_float4x4 &u_MVMat [[buffer(4)]],
+                             constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
+                             constant matrix_float4x4 &u_normalMat [[buffer(6)]],
+                             constant float3 &u_cameraPos [[buffer(7)]],
+                             // direct_light_frag
+                             constant float3 *u_directLightColor [[buffer(8), function_constant(hasDirectLight)]],
+                             constant float3 *u_directLightDirection [[buffer(9), function_constant(hasDirectLight)]],
+                             // point_light_frag
+                             constant float3 *u_pointLightColor [[buffer(10), function_constant(hasPointLight)]],
+                             constant float3 *u_pointLightPosition [[buffer(11), function_constant(hasPointLight)]],
+                             constant float *u_pointLightDistance [[buffer(12), function_constant(hasPointLight)]],
+                             // spot_light_frag
+                             constant float3 *u_spotLightColor [[buffer(13), function_constant(hasSpotLight)]],
+                             constant float3 *u_spotLightPosition [[buffer(14), function_constant(hasSpotLight)]],
+                             constant float3 *u_spotLightDirection [[buffer(15), function_constant(hasSpotLight)]],
+                             constant float *u_spotLightDistance [[buffer(16), function_constant(hasSpotLight)]],
+                             constant float *u_spotLightAngleCos [[buffer(17), function_constant(hasSpotLight)]],
+                             constant float *u_spotLightPenumbraCos [[buffer(18), function_constant(hasSpotLight)]],
+                             // pbr_envmap_light_frag_define
+                             constant EnvMapLight &u_envMapLight [[buffer(19)]],
+                             constant float3 *u_env_sh [[buffer(20), function_constant(hasSH)]],
+                             texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
+                             texturecube<float> u_env_diffuseTexture [[texture(1), function_constant(hasDiffuseEnv)]],
+                             texture2d<float> samplerBRDFLUT [[texture(2)]],
+                             //pbr base frag define
+                             constant float &u_alphaCutoff [[buffer(21)]],
+                             constant float4 &u_baseColor [[buffer(22)]],
+                             constant float &u_metal [[buffer(23)]],
+                             constant float &u_roughness [[buffer(24)]],
+                             constant float3 &u_specularColor [[buffer(25)]],
+                             constant float &u_glossiness [[buffer(26)]],
+                             constant float3 &u_emissiveColor [[buffer(27)]],
+                             constant float &u_normalIntensity [[buffer(28)]],
+                             constant float &u_occlusionStrength [[buffer(29)]],
+                             // pbr_texture_frag_define
+                             texture2d<float> u_baseColorTexture [[texture(3), function_constant(hasBaseColorMap)]],
+                             texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
+                             texture2d<float> u_emissiveTexture [[texture(5), function_constant(hasEmissiveMap)]],
+                             texture2d<float> u_metallicRoughnessTexture [[texture(6), function_constant(hasMetalRoughnessMap)]],
+                             texture2d<float> u_specularGlossinessTexture [[texture(7), function_constant(hasSpecularGlossinessMap)]],
+                             texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
+                             bool is_front_face [[front_facing]]) {
     GeometricContext geometry;
     geometry.position = in.v_pos;
     geometry.normal = getPbrNormal(in, u_normalIntensity, textureSampler, u_normalTexture, is_front_face);
