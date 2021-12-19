@@ -177,7 +177,7 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
         MTKTextureLoaderOptionOrigin: origin,
         MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE],
-        MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedInt:usage]
+        MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedLong:usage]
     };
     NSError *error = nil;
     id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:irradianceTexture options:options error:&error];
@@ -246,6 +246,11 @@ id<MTLTexture> MetalLoader::createBRDFLookupTable() {
     [commandEncoder endEncoding];
     [commandBuffer commit];
     return lut;
+}
+
+id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
+                                                  const std::array<std::string, 6>& imageName) {
+    return nullptr;
 }
 
 //MARK: - MTLBuffer

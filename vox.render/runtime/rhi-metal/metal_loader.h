@@ -34,16 +34,19 @@ public:
     id<MTLTexture> createIrradianceTexture(const std::string& path,
                                            const std::array<std::string, 6>& imageName,
                                            bool isDebugger = false, bool isTopLeft = true);
-
+    
     // red 9; green 9; blue 9;
     std::array<float, 27> createSphericalHarmonicsCoefficients(const std::string& path,
                                                                const std::array<std::string, 6>& imageName);
+    
+    id<MTLTexture> createSpecularTexture(const std::string& path,
+                                         const std::array<std::string, 6>& imageName);
     
     id<MTLTexture> createBRDFLookupTable();
     
 public:
     id<MTLBuffer> buildBuffer(const void * pointer, size_t length, MTLResourceOptions options);
-
+    
     id<MTLBuffer> buildBuffer(size_t length, MTLResourceOptions options);
     
 private:
