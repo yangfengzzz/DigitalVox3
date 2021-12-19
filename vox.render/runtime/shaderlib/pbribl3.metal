@@ -457,8 +457,6 @@ float getSpecularMIPLevel(const float blinnShininessExponent, const int maxMIPLe
 float3 getLightProbeIndirectRadiance(const GeometricContext geometry, const float blinnShininessExponent, const int maxMIPLevel,
                                      texturecube<float> u_env_specularTexture, sampler textureSampler, EnvMapLight u_envMapLight ) {
     if (hasSpecularEnv) {
-        return float3(0.0);
-    } else {
         float3 reflectVec = reflect( -geometry.viewDir, geometry.normal );
         
         float specularMIPLevel = getSpecularMIPLevel( blinnShininessExponent, maxMIPLevel );
@@ -467,6 +465,8 @@ float3 getLightProbeIndirectRadiance(const GeometricContext geometry, const floa
         envMapColor.rgb = SRGBtoLINEAR( envMapColor * u_envMapLight.specularIntensity).rgb;
         
         return envMapColor.rgb;
+    } else {
+        return float3(0.0);
     }
 }
 
@@ -557,13 +557,13 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
     }
     
     if (hasMetalRoughnessMap) {
-        float4 roughMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv).r;
+        float4 roughMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv);
         roughnessFactor *= roughMapColor.r;
     }
     
     if (hasMetalRoughnessMap) {
-        float4 metalMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv).g;
-        metalnessFactor *= metalMapColor.r;
+        float4 metalMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv);
+        metalnessFactor *= metalMapColor.g;
     }
     
     if (hasGlossinessMap) {
@@ -637,6 +637,8 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
     float3 irradiance;
     if (hasSH) {
         irradiance = getLightProbeIrradiance(u_env_sh, normal) * u_envMapLight.diffuseIntensity;
+    } else if (hasDiffuseEnv) {
+        irradiance = u_env_diffuseTexture.sample(textureSampler, normal).rgb * u_envMapLight.diffuseIntensity;
     } else {
         irradiance = u_envMapLight.diffuse * u_envMapLight.diffuseIntensity;
     }

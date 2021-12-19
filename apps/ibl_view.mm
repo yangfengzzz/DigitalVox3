@@ -75,24 +75,20 @@ int main(int, char**) {
     
     // init point light
     auto light = rootEntity->createChild("light");
-    light->transform->setPosition(-3, -3, -3);
+    light->transform->setPosition(-3, 3, -3);
     light->transform->lookAt(Float3(0, 0, 0));
     auto directionLight = light->addComponent<DirectLight>();
     directionLight->intensity = 0.3;
     
-    Shader::createProperty("exposure", ShaderDataGroup::Enum::Material);
-    Shader::createProperty("gamma", ShaderDataGroup::Enum::Material);
-    auto sphere = PrimitiveMesh::createSphere(&engine, 0.5, 30);
+    auto sphere = PrimitiveMesh::createSphere(&engine, 0.5, 64);
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 7; j++) {
             auto sphereEntity = rootEntity->createChild("SphereEntity" + std::to_string(i) + std::to_string(j));
             sphereEntity->transform->setPosition(math::Float3(i-3, j-3, 0));
             auto sphereMtl = std::make_shared<PBRMaterial>(&engine);
             sphereMtl->setBaseColor(mat.baseColor);
-            sphereMtl->setMetallic(Clamp(float(i)/float(7-1), 0.1f, 1.0f));
-            sphereMtl->setRoughness(Clamp(float(j)/float(7-1), 0.05f, 1.0f));
-            sphereMtl->shaderData.setData("exposure", 4.5f);
-            sphereMtl->shaderData.setData("gamma", 2.2f);
+            sphereMtl->setMetallic(Clamp(float(7-i)/float(7-1), 0.1f, 1.0f));
+            sphereMtl->setRoughness(Clamp(float(7-j)/float(7-1), 0.05f, 1.0f));
             
             auto sphereRenderer = sphereEntity->addComponent<MeshRenderer>();
             sphereRenderer->setMesh(sphere);
