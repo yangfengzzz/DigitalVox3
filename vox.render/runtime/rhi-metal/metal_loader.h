@@ -40,7 +40,8 @@ public:
                                                                const std::array<std::string, 6>& imageName);
     
     id<MTLTexture> createSpecularTexture(const std::string& path,
-                                         const std::array<std::string, 6>& imageName);
+                                         const std::array<std::string, 6>& imageName,
+                                         bool isDebugger = false, bool isTopLeft = true);
     
     id<MTLTexture> createBRDFLookupTable();
     
