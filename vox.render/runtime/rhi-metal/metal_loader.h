@@ -27,7 +27,7 @@ public:
     
     id<MTLTexture> loadTexture(MDLTexture* texture);
     
-    id<MTLTexture> loadCubeTexture(const std::string& path, const std::string& imageName, bool isTopLeft);
+    id<MTLTexture> loadCubeTexture(const std::string& path, const std::array<std::string, 6>& imageName, bool isTopLeft = true);
     
     id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
     

@@ -13,6 +13,7 @@
 #include "../vox.render/runtime/material/pbr_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/direct_light.h"
+#include "../vox.render/runtime/sky/skybox_material.h"
 #include <random>
 
 using namespace vox;
@@ -47,23 +48,26 @@ int main(int, char**) {
     const int materialIndex = 7;
     Material mat = materials[materialIndex];
     
+    const std::string path = "/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images";
+    const std::array<std::string, 6> images = {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"};
+    
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto resourceLoader = engine.resourceLoader();
     auto scene = engine.sceneManager().activeScene();
-    scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseMode(DiffuseMode::Enum::Texture);
+    scene->background.mode = BackgroundMode::Enum::Sky;
+    
+    auto skyMaterial = std::make_shared<SkyBoxMaterial>(&engine);
+    skyMaterial->setTextureCubeMap(resourceLoader->loadCubeTexture(path, images));
+    scene->background.sky.material = skyMaterial;
+    scene->background.sky.mesh = PrimitiveMesh::createCuboid(&engine, 1, 1, 1);
     
     auto specularTexture
-    = resourceLoader->createSpecularTexture
-    ("/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images",
-     {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"});
+    = resourceLoader->createSpecularTexture(path, images);
     scene->ambientLight().setSpecularTexture(specularTexture);
     
     auto diffuseTexture
-    = resourceLoader->createIrradianceTexture
-    ("/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images",
-     {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"});
+    = resourceLoader->createIrradianceTexture(path, images);
     scene->ambientLight().setDiffuseTexture(diffuseTexture);
     
     auto rootEntity = scene->createRootEntity();
