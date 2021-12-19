@@ -8,7 +8,7 @@
 #include "pbr_specular_material.h"
 
 namespace vox {
-ShaderProperty PBRSpecularMaterial::_glossinessProp = Shader::createProperty("u_glossinessFactor", ShaderDataGroup::Material);
+ShaderProperty PBRSpecularMaterial::_glossinessProp = Shader::createProperty("u_glossiness", ShaderDataGroup::Material);
 ShaderProperty PBRSpecularMaterial::_specularColorProp = Shader::createProperty("u_specularColor", ShaderDataGroup::Material);
 ShaderProperty PBRSpecularMaterial::_glossinessTextureProp = Shader::createProperty("u_glossinessTexture", ShaderDataGroup::Material);
 ShaderProperty PBRSpecularMaterial::_specularTextureProp = Shader::createProperty("u_specularTexture", ShaderDataGroup::Material);

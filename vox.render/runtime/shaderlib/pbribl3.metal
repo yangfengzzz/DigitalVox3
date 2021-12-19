@@ -169,39 +169,19 @@ vertex VertexOut vertex_experimental(const VertexIn in [[stage_in]],
 
 // MARK: - Fragment
 
-#define EPSILON 1e-6
 #define RECIPROCAL_PI 0.31830988618
-#define MAXIMUM_SPECULAR_COEFFICIENT 0.16
-#define DEFAULT_SPECULAR_COEFFICIENT 0.04
-
-#define RE_Direct            RE_Direct_Physical
-#define RE_IndirectDiffuse   RE_IndirectDiffuse_Physical
-#define RE_IndirectSpecular  RE_IndirectSpecular_Physical
-#define Material_BlinnShininessExponent( material )   GGXRoughnessToBlinnExponent( material.specularRoughness )
-
-float4 SRGBtoLINEAR(float4 srgbIn) {
-    return srgbIn;
+#define EPSILON 1e-6
+#define LOG2 1.442695
+float4 RGBMToLinear(float4 value, float maxRange ) {
+    return float4( value.rgb * value.a * maxRange, 1.0 );
 }
 
-float pow2( const float x ) {
-    return x * x;
+float4 gammaToLinear(float4 srgbIn){
+    return float4( pow(srgbIn.rgb, float3(2.2)), srgbIn.a);
 }
 
-float3 inverseTransformDirection( float3 dir, matrix_float4x4 matrix ) {
-    return normalize( ( float4( dir, 0.0 ) * matrix ).xyz );
-}
-
-float3 BRDF_Diffuse_Lambert( const float3 diffuseColor ) {
-    return RECIPROCAL_PI * diffuseColor;
-}
-
-// source: http://simonstechblog.blogspot.ca/2011/12/microfacet-brdf.html
-float GGXRoughnessToBlinnExponent( const float ggxRoughness ) {
-    return ( 2.0 / pow2( ggxRoughness + 0.0001 ) - 2.0 );
-}
-
-float computeSpecularOcclusion( const float dotNV, const float ambientOcclusion, const float roughness ) {
-    return saturate( pow( dotNV + ambientOcclusion, exp2( - 16.0 * roughness - 1.0 ) ) - 1.0 + ambientOcclusion );
+float4 linearToGamma(float4 linearIn){
+    return float4( pow(linearIn.rgb, float3(1.0 / 2.2)), linearIn.a);
 }
 
 typedef struct {
@@ -225,11 +205,6 @@ typedef struct {
 } SpotLight;
 
 typedef struct {
-    float3 color;
-    float3 direction;
-} IncidentLight;
-
-typedef struct {
     float3 directDiffuse;
     float3 directSpecular;
     float3 indirectDiffuse;
@@ -244,48 +219,76 @@ typedef struct {
 
 typedef struct {
     float3    diffuseColor;
-    float     specularRoughness;
+    float     roughness;
     float3    specularColor;
+    float opacity;
 } PhysicalMaterial;
 
-float3 getPbrNormal(VertexOut in, float u_normalIntensity,
-                    sampler smp, texture2d<float> u_normalTexture,
-                    bool is_front_face) {
-    float3 n;
-    if (hasNormalTexture) {
-        matrix_float3x3 tbn;
-        if (!hasTangent) {
-            float3 pos_dx = dfdx(in.v_pos);
-            float3 pos_dy = dfdy(in.v_pos);
-            float3 tex_dx = dfdx(float3(in.v_uv, 0.0));
-            float3 tex_dy = dfdy(float3(in.v_uv, 0.0));
-            float3 t = (tex_dy.y * pos_dx - tex_dx.x * pos_dy) / (tex_dx.x * tex_dy.y - tex_dy.x * tex_dx.y);//fix
-            float3 ng;
-            if (hasNormal) {
-                ng = normalize(in.v_normal);
-            } else {
-                ng = normalize( cross(pos_dx, pos_dy) );
-            }
-            t = normalize(t - ng * dot(ng, t));
-            float3 b = normalize(cross(ng, t));
-            tbn = matrix_float3x3(t, b, ng);
-        } else {
-            tbn = matrix_float3x3(in.normalW, in.tangentW, in.bitangentW);
-        }
-        n = u_normalTexture.sample(smp, in.v_uv).rgb;
-        n = normalize(tbn * ((2.0 * n - 1.0) * float3(u_normalIntensity, u_normalIntensity, 1.0)));
-    } else {
-        if (hasNormal) {
-            n = normalize(in.v_normal);
-        } else {
-            float3 pos_dx = dfdx(in.v_pos);
-            float3 pos_dy = dfdy(in.v_pos);
-            n = normalize( cross(pos_dx, pos_dy) );
+float pow2( const float x ) {
+    return x * x;
+}
+
+float3 BRDF_Diffuse_Lambert( const float3 diffuseColor ) {
+    return RECIPROCAL_PI * diffuseColor;
+}
+
+float computeSpecularOcclusion( const float dotNV, const float ambientOcclusion, const float roughness ) {
+    return saturate( pow( dotNV + ambientOcclusion, exp2( - 16.0 * roughness - 1.0 ) ) - 1.0 + ambientOcclusion );
+}
+
+PhysicalMaterial getPhysicalMaterial(float4 diffuseColor,
+                                     float metal,
+                                     float roughness,
+                                     float3 specularColor,
+                                     float glossiness,
+                                     float alphaCutoff,
+                                     float4 v_color,
+                                     float2 v_uv,
+                                     texture2d<float> u_baseColorTexture,
+                                     texture2d<float> u_metallicRoughnessTexture,
+                                     sampler textureSampler){
+    PhysicalMaterial material;
+    if (hasBaseColorMap) {
+        float4 baseColor = u_baseColorTexture.sample(textureSampler, v_uv);
+        diffuseColor *= baseColor;
+    }
+    
+    if (hasVertexColor) {
+        diffuseColor *= v_color;
+    }
+    
+    if (needAlphaCutoff) {
+        if( diffuseColor.a < alphaCutoff ) {
+            discard_fragment();
         }
     }
     
-    n *= float( !is_front_face ) * 2.0 - 1.0;
-    return n;
+    if (hasMetalRoughnessMap) {
+        float4 metalRoughMapColor = u_metallicRoughnessTexture.sample(textureSampler, v_uv );
+        roughness *= metalRoughMapColor.g;
+        metal *= metalRoughMapColor.b;
+    }
+    
+    //    if (hasMetalRoughnessMap) {
+    //        float4 specularGlossinessColor = texture2D(u_specularGlossinessSampler, v_uv );
+    //        specularColor *= specularGlossinessColor.rgb;
+    //        glossiness *= specularGlossinessColor.a;
+    //    }
+    
+    
+    if (isMetallicWorkFlow) {
+        material.diffuseColor = diffuseColor.rgb * ( 1.0 - metal );
+        material.specularColor = mix( float3( 0.04), diffuseColor.rgb, metal );
+        material.roughness = clamp( roughness, 0.04, 1.0 );
+    } else {
+        float specularStrength = max( max( specularColor.r, specularColor.g ), specularColor.b );
+        material.diffuseColor = diffuseColor.rgb * ( 1.0 - specularStrength );
+        material.specularColor = specularColor;
+        material.roughness = clamp( 1.0 - glossiness, 0.04, 1.0 );
+    }
+    
+    material.opacity = diffuseColor.a;
+    return material;
 }
 
 //MARK: - pbr_brdf_cook_torrance_frag_define
@@ -328,17 +331,17 @@ float D_GGX( const float alpha, const float dotNH ) {
 }
 
 // GGX Distribution, Schlick Fresnel, GGX-Smith Visibility
-float3 BRDF_Specular_GGX( const IncidentLight incidentLight, const GeometricContext geometry,
+float3 BRDF_Specular_GGX(float3 incidentDirection, const GeometricContext geometry,
                          const float3 specularColor, const float roughness ) {
     
     float alpha = pow2( roughness ); // UE4's roughness
     
-    float3 halfDir = normalize( incidentLight.direction + geometry.viewDir );
+    float3 halfDir = normalize( incidentDirection + geometry.viewDir );
     
-    float dotNL = saturate( dot( geometry.normal, incidentLight.direction ) );
+    float dotNL = saturate( dot( geometry.normal, incidentDirection ) );
     float dotNV = saturate( dot( geometry.normal, geometry.viewDir ) );
     float dotNH = saturate( dot( geometry.normal, halfDir ) );
-    float dotLH = saturate( dot( incidentLight.direction, halfDir ) );
+    float dotLH = saturate( dot( incidentDirection, halfDir ) );
     
     float3 F = F_Schlick( specularColor, dotLH );
     
@@ -350,62 +353,116 @@ float3 BRDF_Specular_GGX( const IncidentLight incidentLight, const GeometricCont
     
 } // validated
 
-//MARK: - pbr_direct_irradiance_frag_define
-void RE_Direct_Physical(const IncidentLight directLight, const GeometricContext geometry,
-                        const PhysicalMaterial material, thread ReflectedLight &reflectedLight ) {
+void addDirectRadiance(float3 incidentDirection, float3 color,
+                       GeometricContext geometry, PhysicalMaterial material,
+                       thread ReflectedLight& reflectedLight) {
+    float dotNL = saturate( dot( geometry.normal, incidentDirection ) );
     
-    float dotNL = saturate( dot( geometry.normal, directLight.direction ) );
+    float3 irradiance = dotNL * color;
+    irradiance *= M_PI_F;
     
-    float3 irradiance = dotNL * directLight.color;
-    
-#ifndef PHYSICALLY_CORRECT_LIGHTS
-    irradiance *= M_PI_F; // punctual light
-#endif
-    
-    reflectedLight.directSpecular += irradiance * BRDF_Specular_GGX(directLight, geometry,
-                                                                    material.specularColor, material.specularRoughness );
+    reflectedLight.directSpecular += irradiance * BRDF_Specular_GGX( incidentDirection, geometry,
+                                                                    material.specularColor, material.roughness);
     
     reflectedLight.directDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );
 }
 
-void getDirectionalDirectLightIrradiance(const DirectLight directionalLight, const GeometricContext geometry,
-                                         thread IncidentLight &directLight ) {
-    directLight.color = directionalLight.color;
-    directLight.direction = -directionalLight.direction;
+void addDirectionalDirectLightRadiance(DirectLight directionalLight, GeometricContext geometry,
+                                       PhysicalMaterial material, thread ReflectedLight& reflectedLight) {
+    float3 color = directionalLight.color;
+    float3 direction = -directionalLight.direction;
+    
+    addDirectRadiance( direction, color, geometry, material, reflectedLight );
 }
 
-// directLight is an out parameter as having it as a return value caused compiler errors on some devices
-void getPointDirectLightIrradiance(const PointLight pointLight, const GeometricContext geometry,
-                                   thread IncidentLight &directLight ) {
+void addPointDirectLightRadiance(PointLight pointLight, GeometricContext geometry,
+                                 PhysicalMaterial material, thread ReflectedLight& reflectedLight) {
+    
     float3 lVector = pointLight.position - geometry.position;
-    directLight.direction = normalize( lVector );
+    float3 direction = normalize( lVector );
     
     float lightDistance = length( lVector );
     
-    directLight.color = pointLight.color;
-    directLight.color *= clamp(1.0 - pow(lightDistance/pointLight.distance, 4.0), 0.0, 1.0);
+    float3 color = pointLight.color;
+    color *= clamp(1.0 - pow(lightDistance/pointLight.distance, 4.0), 0.0, 1.0);
+    
+    addDirectRadiance( direction, color, geometry, material, reflectedLight );
 }
 
-// directLight is an out parameter as having it as a return value caused compiler errors on some devices
-void getSpotDirectLightIrradiance(const SpotLight spotLight, const GeometricContext geometry,
-                                  thread IncidentLight &directLight  ) {
+void addSpotDirectLightRadiance(SpotLight spotLight, GeometricContext geometry,
+                                PhysicalMaterial material, thread ReflectedLight& reflectedLight) {
+    
     float3 lVector = spotLight.position - geometry.position;
-    directLight.direction = normalize( lVector );
+    float3 direction = normalize( lVector );
     
     float lightDistance = length( lVector );
-    float angleCos = dot( directLight.direction, -spotLight.direction );
+    float angleCos = dot( direction, -spotLight.direction );
     
     float spotEffect = smoothstep( spotLight.penumbraCos, spotLight.angleCos, angleCos );
     float decayEffect = clamp(1.0 - pow(lightDistance/spotLight.distance, 4.0), 0.0, 1.0);
     
-    directLight.color = spotLight.color;
-    directLight.color *= spotEffect * decayEffect;
+    float3 color = spotLight.color;
+    color *= spotEffect * decayEffect;
+    
+    addDirectRadiance( direction, color, geometry, material, reflectedLight );
 }
 
-//MARK: - pbr_ibl_diffuse_frag_define
-void RE_IndirectDiffuse_Physical(const float3 irradiance, const GeometricContext geometry, const PhysicalMaterial material,
-                                 thread ReflectedLight &reflectedLight ) {
-    reflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );
+void addTotalDirectRadiance(GeometricContext geometry, PhysicalMaterial material,
+                            thread ReflectedLight& reflectedLight,
+                            // direct_light_frag
+                            constant float3 *u_directLightColor [[buffer(8), function_constant(hasDirectLight)]],
+                            constant float3 *u_directLightDirection [[buffer(9), function_constant(hasDirectLight)]],
+                            // point_light_frag
+                            constant float3 *u_pointLightColor [[buffer(10), function_constant(hasPointLight)]],
+                            constant float3 *u_pointLightPosition [[buffer(11), function_constant(hasPointLight)]],
+                            constant float *u_pointLightDistance [[buffer(12), function_constant(hasPointLight)]],
+                            // spot_light_frag
+                            constant float3 *u_spotLightColor [[buffer(13), function_constant(hasSpotLight)]],
+                            constant float3 *u_spotLightPosition [[buffer(14), function_constant(hasSpotLight)]],
+                            constant float3 *u_spotLightDirection [[buffer(15), function_constant(hasSpotLight)]],
+                            constant float *u_spotLightDistance [[buffer(16), function_constant(hasSpotLight)]],
+                            constant float *u_spotLightAngleCos [[buffer(17), function_constant(hasSpotLight)]],
+                            constant float *u_spotLightPenumbraCos [[buffer(18), function_constant(hasSpotLight)]]){
+    if (directLightCount) {
+        DirectLight directionalLight;
+        
+        for ( int i = 0; i < directLightCount; i ++ ) {
+            
+            directionalLight.color = u_directLightColor[i];
+            directionalLight.direction = u_directLightDirection[i];
+            
+            addDirectionalDirectLightRadiance( directionalLight, geometry, material, reflectedLight );
+        }
+    }
+    
+    if (pointLightCount) {
+        PointLight pointLight;
+        
+        for ( int i = 0; i < pointLightCount; i ++ ) {
+            
+            pointLight.color = u_pointLightColor[i];
+            pointLight.position = u_pointLightPosition[i];
+            pointLight.distance = u_pointLightDistance[i];
+            
+            addPointDirectLightRadiance( pointLight, geometry, material, reflectedLight );
+        }
+    }
+    
+    if (spotLightCount) {
+        SpotLight spotLight;
+        
+        for ( int i = 0; i < spotLightCount; i ++ ) {
+            
+            spotLight.color = u_spotLightColor[i];
+            spotLight.position = u_spotLightPosition[i];
+            spotLight.direction = u_spotLightDirection[i];
+            spotLight.distance = u_spotLightDistance[i];
+            spotLight.angleCos = u_spotLightAngleCos[i];
+            spotLight.penumbraCos = u_spotLightPenumbraCos[i];
+            
+            addSpotDirectLightRadiance( spotLight, geometry, material, reflectedLight );
+        }
+    }
 }
 
 // sh need be pre-scaled in CPU.
@@ -424,11 +481,10 @@ float3 getLightProbeIrradiance(constant float3 *sh, float3 normal){
     return max(result, float3(0.0));
 }
 
-//MARK: - pbr_ibl_specular_frag_define
+// ------------------------Specular------------------------
+
 // ref: https://www.unrealengine.com/blog/physically-based-shading-on-mobile - environmentBRDF for GGX on mobile
-float3 BRDF_Specular_GGX_Environment(const GeometricContext geometry, const float3 specularColor, const float roughness ) {
-    float dotNV = saturate( dot( geometry.normal, geometry.viewDir ) );
-    
+float3 envBRDFApprox(float3 specularColor,float roughness, float dotNV ) {
     const float4 c0 = float4( - 1, - 0.0275, - 0.572, 0.022 );
     
     const float4 c1 = float4( 1, 0.0425, 1.04, - 0.04 );
@@ -440,40 +496,65 @@ float3 BRDF_Specular_GGX_Environment(const GeometricContext geometry, const floa
     float2 AB = float2( -1.04, 1.04 ) * a004 + r.zw;
     
     return specularColor * AB.x + AB.y;
-} // validated
-
-// taken from here: http://casual-effects.blogspot.ca/2011/08/plausible-environment-lighting-in-two.html
-float getSpecularMIPLevel(const float blinnShininessExponent, const int maxMIPLevel ) {
-    //float envMapWidth = pow( 2.0, maxMIPLevelScalar );
-    //float desiredMIPLevel = log2( envMapWidth * sqrt( 3.0 ) ) - 0.5 * log2( pow2( blinnShininessExponent ) + 1.0 );
-    
-    float maxMIPLevelScalar = float( maxMIPLevel );
-    float desiredMIPLevel = maxMIPLevelScalar + 0.79248 - 0.5 * log2( pow2( blinnShininessExponent ) + 1.0 );
-    
-    // clamp to allowable LOD ranges.
-    return clamp( desiredMIPLevel, 0.0, maxMIPLevelScalar );
 }
 
-float3 getLightProbeIndirectRadiance(const GeometricContext geometry, const float blinnShininessExponent, const int maxMIPLevel,
-                                     texturecube<float> u_env_specularTexture, sampler textureSampler, EnvMapLight u_envMapLight ) {
+
+float getSpecularMIPLevel(float roughness, int maxMIPLevel ) {
+    return roughness * float(maxMIPLevel);
+}
+
+float3 getLightProbeRadiance(const GeometricContext geometry, float roughness, int maxMIPLevel, float specularIntensity,
+                             texturecube<float> u_env_specularTexture, sampler textureSampler ) {
     if (hasSpecularEnv) {
         float3 reflectVec = reflect( -geometry.viewDir, geometry.normal );
+        float specularMIPLevel = getSpecularMIPLevel(roughness, maxMIPLevel );
         
-        float specularMIPLevel = getSpecularMIPLevel( blinnShininessExponent, maxMIPLevel );
         float4 envMapColor = u_env_specularTexture.sample(textureSampler, reflectVec, level(specularMIPLevel));
         
-        envMapColor.rgb = SRGBtoLINEAR( envMapColor * u_envMapLight.specularIntensity).rgb;
-        
-        return envMapColor.rgb;
+        return envMapColor.rgb * specularIntensity;
     } else {
         return float3(0.0);
     }
 }
 
-void RE_IndirectSpecular_Physical(const float3 radiance, const GeometricContext geometry, const PhysicalMaterial material,
-                                  thread ReflectedLight &reflectedLight ) {
-    reflectedLight.indirectSpecular += radiance * BRDF_Specular_GGX_Environment(geometry, material.specularColor,
-                                                                                material.specularRoughness );
+float3 getPbrNormal(VertexOut in, float u_normalIntensity,
+                    sampler smp, texture2d<float> u_normalTexture,
+                    bool is_front_face) {
+    float3 n;
+    if (hasNormalTexture) {
+        matrix_float3x3 tbn;
+        if (!hasTangent) {
+            float3 pos_dx = dfdx(in.v_pos);
+            float3 pos_dy = dfdy(in.v_pos);
+            float3 tex_dx = dfdx(float3(in.v_uv, 0.0));
+            float3 tex_dy = dfdy(float3(in.v_uv, 0.0));
+            float3 t = (tex_dy.y * pos_dx - tex_dx.x * pos_dy) / (tex_dx.x * tex_dy.y - tex_dy.x * tex_dx.y);//fix
+            float3 ng;
+            if (hasNormal) {
+                ng = normalize(in.v_normal);
+            } else {
+                ng = normalize( cross(pos_dx, pos_dy) );
+            }
+            t = normalize(t - ng * dot(ng, t));
+            float3 b = normalize(cross(ng, t));
+            tbn = matrix_float3x3(t, b, ng);
+        } else {
+            tbn = matrix_float3x3(in.normalW, in.tangentW, in.bitangentW);
+        }
+        n = u_normalTexture.sample(smp, in.v_uv).rgb;
+        n = normalize(tbn * ((2.0 * n - 1.0) * float3(u_normalIntensity, u_normalIntensity, 1.0)));
+    } else {
+        if (hasNormal) {
+            n = normalize(in.v_normal);
+        } else {
+            float3 pos_dx = dfdx(in.v_pos);
+            float3 pos_dy = dfdy(in.v_pos);
+            n = normalize( cross(pos_dx, pos_dy) );
+        }
+    }
+    
+    n *= float( !is_front_face ) * 2.0 - 1.0;
+    return n;
 }
 
 fragment float4 fragment_experimental(VertexOut in [[stage_in]],
@@ -513,7 +594,7 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       constant float &u_metal [[buffer(23)]],
                                       constant float &u_roughness [[buffer(24)]],
                                       constant float3 &u_specularColor [[buffer(25)]],
-                                      constant float &u_glossinessFactor [[buffer(26)]],
+                                      constant float &u_glossiness [[buffer(26)]],
                                       constant float3 &u_emissiveColor [[buffer(27)]],
                                       constant float &u_normalIntensity [[buffer(28)]],
                                       constant float &u_occlusionStrength [[buffer(29)]],
@@ -526,155 +607,70 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       texture2d<float> u_glossinessTexture [[texture(8), function_constant(hasGlossinessMap)]],
                                       texture2d<float> u_occlusionTexture [[texture(9), function_constant(hasOcclusionMap)]],
                                       bool is_front_face [[front_facing]]) {
-    //MARK: - pbr_begin_frag
-    float3 normal = getPbrNormal(in, u_normalIntensity, textureSampler, u_normalTexture, is_front_face);
-    float4 diffuseColor = u_baseColor;
-    float3 totalEmissiveRadiance = u_emissiveColor;
-    float metalnessFactor = u_metal;
-    float roughnessFactor = u_roughness;
-    float3 specularFactor = u_specularColor;
-    float glossinessFactor = u_glossinessFactor;
-    
-    ReflectedLight reflectedLight = ReflectedLight{ float3( 0.0 ), float3( 0.0 ), float3( 0.0 ), float3( 0.0 ) };
-    PhysicalMaterial material;
     GeometricContext geometry;
-    IncidentLight directLight;
-    
-    if (hasBaseColorMap) {
-        float4 baseMapColor = u_baseColorTexture.sample(textureSampler, in.v_uv );
-        baseMapColor = SRGBtoLINEAR( baseMapColor );
-        diffuseColor *= baseMapColor;
-    }
-    
-    if (hasVertexColor) {
-        diffuseColor *= in.v_color;
-    }
-    
-    if (needAlphaCutoff) {
-        if( diffuseColor.a < u_alphaCutoff ) {
-            discard_fragment();
-        }
-    }
-    
-    if (hasMetalRoughnessMap) {
-        float4 roughMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv);
-        roughnessFactor *= roughMapColor.r;
-    }
-    
-    if (hasMetalRoughnessMap) {
-        float4 metalMapColor = u_metallicRoughnessTexture.sample(textureSampler, in.v_uv);
-        metalnessFactor *= metalMapColor.g;
-    }
-    
-    if (hasGlossinessMap) {
-        float4 glossinessColor = u_glossinessTexture.sample(textureSampler, in.v_uv );
-        glossinessFactor *= glossinessColor.a;
-    }
-    
-    if (hasSpecularMap) {
-        float4 specularColor = u_specularTexture.sample(textureSampler, in.v_uv );
-        specularFactor *= specularColor.rgb;
-    }
-    
-    if (isMetallicWorkFlow) {
-        material.diffuseColor = diffuseColor.rgb * ( 1.0 - metalnessFactor );
-        material.specularRoughness = clamp( roughnessFactor, 0.04, 1.0 );
-        material.specularColor = mix( float3( MAXIMUM_SPECULAR_COEFFICIENT), diffuseColor.rgb, metalnessFactor );
-    } else {
-        float specularStrength = max( max( specularFactor.r, specularFactor.g ), specularFactor.b );
-        material.diffuseColor = diffuseColor.rgb * ( 1.0 - specularStrength );
-        material.specularRoughness = clamp( 1.0 - glossinessFactor, 0.04, 1.0 );
-        material.specularColor = specularFactor;
-    }
-    
     geometry.position = in.v_pos;
-    geometry.normal = normal;
+    geometry.normal = getPbrNormal(in, u_normalIntensity, textureSampler, u_normalTexture, is_front_face);
     geometry.viewDir = normalize(u_cameraPos - in.v_pos);
     
-    //MARK: - pbr_direct_irradiance_frag
-    if (directLightCount > 0) {
-        DirectLight directionalLight;
-        for ( int i = 0; i < directLightCount; i ++ ) {
-            directionalLight.color = u_directLightColor[i];
-            directionalLight.direction = u_directLightDirection[i];
-            
-            getDirectionalDirectLightIrradiance( directionalLight, geometry, directLight );
-            
-            RE_Direct( directLight, geometry, material, reflectedLight );
-        }
-    }
+    PhysicalMaterial material = getPhysicalMaterial(u_baseColor, u_metal, u_roughness, u_specularColor, u_glossiness, u_alphaCutoff,
+                                                    in.v_color, in.v_uv,
+                                                    u_baseColorTexture, u_metallicRoughnessTexture, textureSampler);
+    ReflectedLight reflectedLight = ReflectedLight{ float3( 0 ), float3( 0 ), float3( 0 ), float3( 0 ) };
+    float dotNV = saturate( dot( geometry.normal, geometry.viewDir ) );
     
-    if (pointLightCount > 0) {
-        PointLight pointLight;
-        for ( int i = 0; i < pointLightCount; i ++ ) {
-            pointLight.color = u_pointLightColor[i];
-            pointLight.position = u_pointLightPosition[i];
-            pointLight.distance = u_pointLightDistance[i];
-            
-            getPointDirectLightIrradiance( pointLight, geometry, directLight );
-            
-            RE_Direct( directLight, geometry, material, reflectedLight );
-        }
-    }
-    
-    if (spotLightCount > 0) {
-        SpotLight spotLight;
-        for ( int i = 0; i < spotLightCount; i ++ ) {
-            spotLight.color = u_spotLightColor[i];
-            spotLight.position = u_spotLightPosition[i];
-            spotLight.direction = u_spotLightDirection[i];
-            spotLight.distance = u_spotLightDistance[i];
-            spotLight.angleCos = u_spotLightAngleCos[i];
-            spotLight.penumbraCos = u_spotLightPenumbraCos[i];
-            
-            getSpotDirectLightIrradiance( spotLight, geometry, directLight );
-            
-            RE_Direct( directLight, geometry, material, reflectedLight );
-        }
-    }
-    
-    //MARK: - pbr_ibl_diffuse_frag
+    // Direct Light
+    addTotalDirectRadiance(geometry, material, reflectedLight,
+                           u_directLightColor,
+                           u_directLightDirection,
+                           u_pointLightColor,
+                           u_pointLightPosition,
+                           u_pointLightDistance,
+                           u_spotLightColor,
+                           u_spotLightPosition,
+                           u_spotLightDirection,
+                           u_spotLightDistance,
+                           u_spotLightAngleCos,
+                           u_spotLightPenumbraCos);
+    // IBL diffuse
     float3 irradiance;
     if (hasSH) {
-        irradiance = getLightProbeIrradiance(u_env_sh, normal) * u_envMapLight.diffuseIntensity;
+        irradiance = getLightProbeIrradiance(u_env_sh, geometry.normal) * u_envMapLight.diffuseIntensity;
     } else if (hasDiffuseEnv) {
-        irradiance = u_env_diffuseTexture.sample(textureSampler, normal).rgb * u_envMapLight.diffuseIntensity;
+        irradiance = u_env_diffuseTexture.sample(textureSampler, geometry.normal).rgb * u_envMapLight.diffuseIntensity;
     } else {
-        irradiance = u_envMapLight.diffuse * u_envMapLight.diffuseIntensity;
+        irradiance = u_envMapLight.diffuse * M_PI_F * u_envMapLight.diffuseIntensity;
     }
-#ifndef PHYSICALLY_CORRECT_LIGHTS
-    irradiance *= M_PI_F;
-#endif
+    reflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );
     
-    RE_IndirectDiffuse_Physical( irradiance, geometry, material, reflectedLight );
+    // IBL specular
+    float3 radiance = getLightProbeRadiance( geometry, material.roughness, int(u_envMapLight.mipMapLevel), u_envMapLight.specularIntensity,
+                                            u_env_specularTexture, textureSampler);
+    reflectedLight.indirectSpecular += radiance * envBRDFApprox(material.specularColor, material.roughness, dotNV );
     
-    //MARK: - pbr_ibl_specular_frag
-    float3 radiance = float3( 0.0 );
-    radiance += getLightProbeIndirectRadiance(geometry, Material_BlinnShininessExponent( material ), int(u_envMapLight.mipMapLevel),
-                                              u_env_specularTexture, textureSampler, u_envMapLight);
-    RE_IndirectSpecular( radiance, geometry, material, reflectedLight );
-    
-    //MARK: - pbr_end_frag
+    // Occlusion
     if (hasOcclusionMap) {
         float ambientOcclusion = (u_occlusionTexture.sample(textureSampler, in.v_uv).r - 1.0) * u_occlusionStrength + 1.0;
         reflectedLight.indirectDiffuse *= ambientOcclusion;
         
         if (hasSpecularEnv) {
-            float dotNV = saturate(dot(geometry.normal, geometry.viewDir));
-            reflectedLight.indirectSpecular *= computeSpecularOcclusion(dotNV, ambientOcclusion, material.specularRoughness);
+            reflectedLight.indirectSpecular *= computeSpecularOcclusion(ambientOcclusion, material.roughness, dotNV);
         }
     }
     
+    // Emissive
+    float3 emissiveRadiance = u_emissiveColor;
     if (hasEmissiveMap) {
         float4 emissiveMapColor = u_emissiveTexture.sample(textureSampler, in.v_uv);
-        emissiveMapColor = SRGBtoLINEAR(emissiveMapColor);
-        totalEmissiveRadiance = emissiveMapColor.rgb;
+        emissiveRadiance = emissiveMapColor.rgb;
     }
     
-    float3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse
-    + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;
+    float3 totalRadiance = reflectedLight.directDiffuse +
+    reflectedLight.indirectDiffuse +
+    reflectedLight.directSpecular +
+    reflectedLight.indirectSpecular +
+    emissiveRadiance;
     
-    float4 finalColor = float4(outgoingLight, diffuseColor.a);
+    float4 targetColor =float4(totalRadiance, material.opacity);
     
     //MARK: - gamma_frag
 #ifdef GAMMA
@@ -682,5 +678,5 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
     finalColor.rgb = pow(gl_FragColor.rgb, float3(1.0 / gamma));
 #endif
     
-    return finalColor;
+    return targetColor;
 }
