@@ -615,7 +615,7 @@
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
 		04C2EA4F276EE4C400091FB3 /* pbr_common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA4E276EE4C400091FB3 /* pbr_common.metal */; };
 		04C2EA51276EF58B00091FB3 /* ibl_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA50276EF58B00091FB3 /* ibl_view.mm */; };
-		04C2EA52276EF65500091FB3 /* pbribl.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA3E276DEE2900091FB3 /* pbribl.metal */; };
+		04C2EA54276EFA6E00091FB3 /* pbribl3.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398E2753A83B00204B8E /* pbribl3.metal */; };
 		04C698A02768C43F00C4248F /* imgui_canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C698982768C43E00C4248F /* imgui_canvas.cpp */; };
 		04C698A12768C43F00C4248F /* imgui_node_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989C2768C43F00C4248F /* imgui_node_editor.cpp */; };
 		04C698A22768C43F00C4248F /* imgui_node_editor_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989D2768C43F00C4248F /* imgui_node_editor_api.cpp */; };
@@ -1887,14 +1887,14 @@
 		04CE398B2753A83B00204B8E /* function-common.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "function-common.metal"; sourceTree = "<group>"; };
 		04CE398C2753A83B00204B8E /* background-texture.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "background-texture.metal"; sourceTree = "<group>"; };
 		04CE398D2753A83B00204B8E /* brdf_lut.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = brdf_lut.metal; sourceTree = "<group>"; };
-		04CE398E2753A83B00204B8E /* pbr.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = pbr.metal; sourceTree = "<group>"; };
+		04CE398E2753A83B00204B8E /* pbribl3.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = pbribl3.metal; sourceTree = "<group>"; };
 		04CE398F2753A83B00204B8E /* skybox.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = skybox.metal; sourceTree = "<group>"; };
 		04CE39902753A83B00204B8E /* function-constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "function-constant.h"; sourceTree = "<group>"; };
 		04CE39912753A83C00204B8E /* SkinningShader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = SkinningShader.metal; sourceTree = "<group>"; };
 		04CE39922753A83C00204B8E /* unlit.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = unlit.metal; sourceTree = "<group>"; };
 		04CE39932753A83C00204B8E /* fix_particle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = fix_particle.metal; sourceTree = "<group>"; };
 		04CE39942753A83C00204B8E /* shadow-map.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = "shadow-map.metal"; sourceTree = "<group>"; };
-		04CE39952753A83C00204B8E /* ShaderSimple.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = ShaderSimple.metal; sourceTree = "<group>"; };
+		04CE39952753A83C00204B8E /* pbribl2.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = pbribl2.metal; sourceTree = "<group>"; };
 		04CE39A22753AC6D00204B8E /* compute_pipeline_state.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = compute_pipeline_state.mm; sourceTree = "<group>"; };
 		04CE39A32753AC6D00204B8E /* compute_pipeline_state.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = compute_pipeline_state.h; sourceTree = "<group>"; };
 		04CE39A62754F5DA00204B8E /* base_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = base_material.mm; sourceTree = "<group>"; };
@@ -3608,14 +3608,14 @@
 				04D47E40276C33DE0038F34A /* gltfskinning.metal */,
 				049E3ECB276DA75A003FEE00 /* pbrbasic.metal */,
 				04C2EA3E276DEE2900091FB3 /* pbribl.metal */,
+				04CE39952753A83C00204B8E /* pbribl2.metal */,
+				04CE398E2753A83B00204B8E /* pbribl3.metal */,
 				04860859276B2DFA00C05BDA /* experimental */,
 				04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */,
 				04C2EA45276EB93800091FB3 /* debug */,
 				04CE398B2753A83B00204B8E /* function-common.metal */,
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
-				04CE398E2753A83B00204B8E /* pbr.metal */,
 				04CE39912753A83C00204B8E /* SkinningShader.metal */,
-				04CE39952753A83C00204B8E /* ShaderSimple.metal */,
 			);
 			path = shaderlib;
 			sourceTree = "<group>";
@@ -4560,7 +4560,6 @@
 				04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */,
 				04CE39032751A84000204B8E /* render_pipeline_state.mm in Sources */,
 				04CE37B3274D167E00204B8E /* math_archive.cc in Sources */,
-				04C2EA52276EF65500091FB3 /* pbribl.metal in Sources */,
 				04CE37B8274D167E00204B8E /* simd_math.cc in Sources */,
 				04CE37BA274D167E00204B8E /* simd_math_archive.cc in Sources */,
 				04CE37C1274D167E00204B8E /* soa_math_archive.cc in Sources */,
@@ -4644,6 +4643,7 @@
 				04CE39112751AE5B00204B8E /* shader_program.mm in Sources */,
 				04CE38FA2751992C00204B8E /* timer.cpp in Sources */,
 				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
+				04C2EA54276EFA6E00091FB3 /* pbribl3.metal in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,
 				04CE39A82754F5DA00204B8E /* base_material.mm in Sources */,
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,

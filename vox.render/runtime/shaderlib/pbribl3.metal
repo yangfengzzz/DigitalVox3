@@ -10,6 +10,28 @@ using namespace metal;
 #include "function-constant.h"
 
 typedef struct {
+    float3 position [[attribute(Position)]];
+    float3 NORMAL [[attribute(Normal), function_constant(notOmitNormalAndHasNormal)]];
+    float4 COLOR_0 [[attribute(Color_0), function_constant(hasVertexColor)]];
+    float4 WEIGHTS_0 [[attribute(Weights_0), function_constant(hasSkin)]];
+    float4 JOINTS_0 [[attribute(Joints_0), function_constant(hasSkin)]];
+    float4 TANGENT [[attribute(Tangent), function_constant(notOmitNormalAndHasTangent)]];
+    float2 TEXCOORD_0 [[attribute(UV_0), function_constant(hasUV)]];
+    float3 POSITION_BS0 [[attribute(10), function_constant(hasBlendShape)]];
+    float3 POSITION_BS1 [[attribute(11), function_constant(hasBlendShape)]];
+    float3 POSITION_BS2 [[attribute(12), function_constant(hasBlendShape)]];
+    float3 POSITION_BS3 [[attribute(13), function_constant(hasBlendShape)]];
+    float3 NORMAL_BS0 [[attribute(16), function_constant(hasBlendShapeAndHasBlendShapeNormal)]];
+    float3 NORMAL_BS1 [[attribute(17), function_constant(hasBlendShapeAndHasBlendShapeNormal)]];
+    float3 NORMAL_BS2 [[attribute(18), function_constant(hasBlendShapeAndHasBlendShapeNormal)]];
+    float3 NORMAL_BS3 [[attribute(19), function_constant(hasBlendShapeAndHasBlendShapeNormal)]];
+    float3 TANGENT_BS0 [[attribute(20), function_constant(hasBlendShapeAndhasBlendShapeTangent)]];
+    float3 TANGENT_BS1 [[attribute(21), function_constant(hasBlendShapeAndhasBlendShapeTangent)]];
+    float3 TANGENT_BS2 [[attribute(22), function_constant(hasBlendShapeAndhasBlendShapeTangent)]];
+    float3 TANGENT_BS3 [[attribute(23), function_constant(hasBlendShapeAndhasBlendShapeTangent)]];
+} VertexIn;
+
+typedef struct {
     float4 position [[position]];
     float3 v_pos [[function_constant(needWorldPos)]];
     float2 v_uv;
@@ -19,6 +41,133 @@ typedef struct {
     float3 bitangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 v_normal [[function_constant(hasNormalNotHasTangentOrHasNormalTexture)]];
 } VertexOut;
+
+vertex VertexOut vertex_experimental(const VertexIn in [[stage_in]],
+                                     constant matrix_float4x4 &u_localMat [[buffer(0)]],
+                                     constant matrix_float4x4 &u_modelMat [[buffer(1)]],
+                                     constant matrix_float4x4 &u_viewMat [[buffer(2)]],
+                                     constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                                     constant matrix_float4x4 &u_MVMat [[buffer(4)]],
+                                     constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
+                                     constant matrix_float4x4 &u_normalMat [[buffer(6)]],
+                                     constant float3 &u_cameraPos [[buffer(7)]],
+                                     constant float4 &u_tilingOffset [[buffer(8)]],
+                                     constant matrix_float4x4 &u_viewMatFromLight [[buffer(9)]],
+                                     constant matrix_float4x4 &u_projMatFromLight [[buffer(10)]],
+                                     sampler u_jointSampler [[sampler(0), function_constant(hasSkinAndHasJointTexture)]],
+                                     texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],
+                                     constant int &u_jointCount [[buffer(11), function_constant(hasSkinAndHasJointTexture)]],
+                                     constant matrix_float4x4 *u_jointMatrix [[buffer(12), function_constant(hasSkinNotHasJointTexture)]],
+                                     constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]]) {
+    VertexOut out;
+    
+    // begin position
+    float4 position = float4( in.position, 1.0);
+    
+    //begin normal
+    float3 normal;
+    float4 tangent;
+    if (hasNormal) {
+        normal = in.NORMAL;
+        if (hasTangent && hasNormalTexture) {
+            tangent = in.TANGENT;
+        }
+    }
+    
+    //blendshape
+    if (hasBlendShape) {
+        position.xyz += in.POSITION_BS0 * u_blendShapeWeights[0];
+        position.xyz += in.POSITION_BS1 * u_blendShapeWeights[1];
+        position.xyz += in.POSITION_BS2 * u_blendShapeWeights[2];
+        position.xyz += in.POSITION_BS3 * u_blendShapeWeights[3];
+        if (hasNormal && hasBlendShapeNormal) {
+            normal.xyz += in.NORMAL_BS0 * u_blendShapeWeights[0];
+            normal.xyz += in.NORMAL_BS1 * u_blendShapeWeights[1];
+            normal.xyz += in.NORMAL_BS2 * u_blendShapeWeights[2];
+            normal.xyz += in.NORMAL_BS3 * u_blendShapeWeights[3];
+        }
+        if (hasTangent && hasNormalTexture && hasBlendShapeTangent) {
+            tangent.xyz += in.TANGENT_BS0 * u_blendShapeWeights[0];
+            tangent.xyz += in.TANGENT_BS1 * u_blendShapeWeights[1];
+            tangent.xyz += in.TANGENT_BS2 * u_blendShapeWeights[2];
+            tangent.xyz += in.TANGENT_BS3 * u_blendShapeWeights[3];
+        }
+    }
+    
+    //skinning
+    if (hasSkin) {
+        matrix_float4x4 skinMatrix;
+        if (hasJointTexture) {
+            skinMatrix =
+            in.WEIGHTS_0.x * getJointMatrix(u_jointSampler, u_jointTexture, in.JOINTS_0.x, u_jointCount) +
+            in.WEIGHTS_0.y * getJointMatrix(u_jointSampler, u_jointTexture, in.JOINTS_0.y, u_jointCount) +
+            in.WEIGHTS_0.z * getJointMatrix(u_jointSampler, u_jointTexture, in.JOINTS_0.z, u_jointCount) +
+            in.WEIGHTS_0.w * getJointMatrix(u_jointSampler, u_jointTexture, in.JOINTS_0.w, u_jointCount);
+        } else {
+            skinMatrix =
+            in.WEIGHTS_0.x * u_jointMatrix[int(in.JOINTS_0.x)] +
+            in.WEIGHTS_0.y * u_jointMatrix[int(in.JOINTS_0.y)] +
+            in.WEIGHTS_0.z * u_jointMatrix[int(in.JOINTS_0.z)] +
+            in.WEIGHTS_0.w * u_jointMatrix[int(in.JOINTS_0.w)];
+        }
+        position = skinMatrix * position;
+        if (hasNormal && !omitNormal) {
+            normal = float4( skinMatrix * float4( normal, 0.0 ) ).xyz;
+            if (hasTangent && hasNormalTexture) {
+                tangent.xyz = float4( skinMatrix * float4( tangent.xyz, 0.0 ) ).xyz;
+            }
+        }
+    }
+    
+    // uv
+    if (hasUV) {
+        out.v_uv = in.TEXCOORD_0;
+    } else {
+        out.v_uv = float2(0.0, 0.0);
+    }
+    if (needTilingOffset) {
+        out.v_uv = out.v_uv * u_tilingOffset.xy + u_tilingOffset.zw;
+    }
+    
+    // color
+    if (hasVertexColor) {
+        out.v_color = in.COLOR_0;
+    }
+    
+    // normal
+    if (hasNormal) {
+        if (hasTangent && hasNormalTexture) {
+            out.normalW = normalize( float3x3(u_MVMat.columns[0].xyz,
+                                              u_MVMat.columns[1].xyz,
+                                              u_MVMat.columns[2].xyz) * normal.xyz);
+            out.tangentW = normalize( float3x3(u_normalMat.columns[0].xyz,
+                                               u_normalMat.columns[1].xyz,
+                                               u_normalMat.columns[2].xyz) * tangent.xyz);
+            out.bitangentW = cross( out.normalW, out.tangentW ) * tangent.w;
+        } else {
+            out.v_normal = normalize( float3x3(u_normalMat.columns[0].xyz,
+                                               u_normalMat.columns[1].xyz,
+                                               u_normalMat.columns[2].xyz) * normal);
+        }
+    }
+    
+    // world pos
+    if (needWorldPos) {
+        float4 temp_pos = u_modelMat * position;
+        out.v_pos = temp_pos.xyz / temp_pos.w;
+    }
+    
+    // shadow && position
+    if (needGenerateShadowMap) {
+        out.position = u_projMatFromLight * u_viewMatFromLight * u_modelMat * position;
+    } else {
+        out.position = u_MVPMat * position;
+    }
+    
+    return out;
+}
+
+// MARK: - Fragment
 
 #define EPSILON 1e-6
 #define RECIPROCAL_PI 0.31830988618
@@ -327,54 +476,56 @@ void RE_IndirectSpecular_Physical(const float3 radiance, const GeometricContext 
                                                                                 material.specularRoughness );
 }
 
-fragment float4 fragment_pbr(VertexOut in [[stage_in]],
-                             sampler textureSampler [[sampler(0)]],
-                             // common_frag
-                             constant matrix_float4x4 &u_localMat [[buffer(0)]],
-                             constant matrix_float4x4 &u_modelMat [[buffer(1)]],
-                             constant matrix_float4x4 &u_viewMat [[buffer(2)]],
-                             constant matrix_float4x4 &u_projMat [[buffer(3)]],
-                             constant matrix_float4x4 &u_MVMat [[buffer(4)]],
-                             constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
-                             constant matrix_float4x4 &u_normalMat [[buffer(6)]],
-                             constant float3 &u_cameraPos [[buffer(7)]],
-                             // direct_light_frag
-                             constant float3 *u_directLightColor [[buffer(10), function_constant(hasDirectLight)]],
-                             constant float3 *u_directLightDirection [[buffer(11), function_constant(hasDirectLight)]],
-                             // point_light_frag
-                             constant float3 *u_pointLightColor [[buffer(12), function_constant(hasPointLight)]],
-                             constant float3 *u_pointLightPosition [[buffer(13), function_constant(hasPointLight)]],
-                             constant float *u_pointLightDistance [[buffer(14), function_constant(hasPointLight)]],
-                             // spot_light_frag
-                             constant float3 *u_spotLightColor [[buffer(15), function_constant(hasSpotLight)]],
-                             constant float3 *u_spotLightPosition [[buffer(16), function_constant(hasSpotLight)]],
-                             constant float3 *u_spotLightDirection [[buffer(17), function_constant(hasSpotLight)]],
-                             constant float *u_spotLightDistance [[buffer(18), function_constant(hasSpotLight)]],
-                             constant float *u_spotLightAngleCos [[buffer(19), function_constant(hasSpotLight)]],
-                             constant float *u_spotLightPenumbraCos [[buffer(20), function_constant(hasSpotLight)]],
-                             // pbr_envmap_light_frag_define
-                             constant EnvMapLight &u_envMapLight [[buffer(8)]],
-                             constant float3 *u_env_sh [[buffer(9), function_constant(hasSH)]],
-                             texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
-                             //pbr base frag define
-                             constant float &u_alphaCutoff [[buffer(21)]],
-                             constant float4 &u_baseColor [[buffer(22)]],
-                             constant float &u_metal [[buffer(23)]],
-                             constant float &u_roughness [[buffer(24)]],
-                             constant float3 &u_specularColor [[buffer(25)]],
-                             constant float &u_glossinessFactor [[buffer(26)]],
-                             constant float3 &u_emissiveColor [[buffer(27)]],
-                             constant float &u_normalIntensity [[buffer(28)]],
-                             constant float &u_occlusionStrength [[buffer(29)]],
-                             // pbr_texture_frag_define
-                             texture2d<float> u_baseColorTexture [[texture(1), function_constant(hasBaseColorMap)]],
-                             texture2d<float> u_normalTexture [[texture(2), function_constant(hasNormalTexture)]],
-                             texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveMap)]],
-                             texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalRoughnessMap)]],
-                             texture2d<float> u_specularTexture [[texture(6), function_constant(hasSpecularMap)]],
-                             texture2d<float> u_glossinessTexture [[texture(7), function_constant(hasGlossinessMap)]],
-                             texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
-                             bool is_front_face [[front_facing]]) {
+fragment float4 fragment_experimental(VertexOut in [[stage_in]],
+                                      sampler textureSampler [[sampler(0)]],
+                                      // common_frag
+                                      constant matrix_float4x4 &u_localMat [[buffer(0)]],
+                                      constant matrix_float4x4 &u_modelMat [[buffer(1)]],
+                                      constant matrix_float4x4 &u_viewMat [[buffer(2)]],
+                                      constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                                      constant matrix_float4x4 &u_MVMat [[buffer(4)]],
+                                      constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
+                                      constant matrix_float4x4 &u_normalMat [[buffer(6)]],
+                                      constant float3 &u_cameraPos [[buffer(7)]],
+                                      // direct_light_frag
+                                      constant float3 *u_directLightColor [[buffer(8), function_constant(hasDirectLight)]],
+                                      constant float3 *u_directLightDirection [[buffer(9), function_constant(hasDirectLight)]],
+                                      // point_light_frag
+                                      constant float3 *u_pointLightColor [[buffer(10), function_constant(hasPointLight)]],
+                                      constant float3 *u_pointLightPosition [[buffer(11), function_constant(hasPointLight)]],
+                                      constant float *u_pointLightDistance [[buffer(12), function_constant(hasPointLight)]],
+                                      // spot_light_frag
+                                      constant float3 *u_spotLightColor [[buffer(13), function_constant(hasSpotLight)]],
+                                      constant float3 *u_spotLightPosition [[buffer(14), function_constant(hasSpotLight)]],
+                                      constant float3 *u_spotLightDirection [[buffer(15), function_constant(hasSpotLight)]],
+                                      constant float *u_spotLightDistance [[buffer(16), function_constant(hasSpotLight)]],
+                                      constant float *u_spotLightAngleCos [[buffer(17), function_constant(hasSpotLight)]],
+                                      constant float *u_spotLightPenumbraCos [[buffer(18), function_constant(hasSpotLight)]],
+                                      // pbr_envmap_light_frag_define
+                                      constant EnvMapLight &u_envMapLight [[buffer(19)]],
+                                      constant float3 *u_env_sh [[buffer(20), function_constant(hasSH)]],
+                                      texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
+                                      texturecube<float> u_env_diffuseTexture [[texture(1), function_constant(hasDiffuseEnv)]],
+                                      texture2d<float> samplerBRDFLUT [[texture(2)]],
+                                      //pbr base frag define
+                                      constant float &u_alphaCutoff [[buffer(21)]],
+                                      constant float4 &u_baseColor [[buffer(22)]],
+                                      constant float &u_metal [[buffer(23)]],
+                                      constant float &u_roughness [[buffer(24)]],
+                                      constant float3 &u_specularColor [[buffer(25)]],
+                                      constant float &u_glossinessFactor [[buffer(26)]],
+                                      constant float3 &u_emissiveColor [[buffer(27)]],
+                                      constant float &u_normalIntensity [[buffer(28)]],
+                                      constant float &u_occlusionStrength [[buffer(29)]],
+                                      // pbr_texture_frag_define
+                                      texture2d<float> u_baseColorTexture [[texture(3), function_constant(hasBaseColorMap)]],
+                                      texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
+                                      texture2d<float> u_emissiveTexture [[texture(5), function_constant(hasEmissiveMap)]],
+                                      texture2d<float> u_metallicRoughnessTexture [[texture(6), function_constant(hasMetalRoughnessMap)]],
+                                      texture2d<float> u_specularTexture [[texture(7), function_constant(hasSpecularMap)]],
+                                      texture2d<float> u_glossinessTexture [[texture(8), function_constant(hasGlossinessMap)]],
+                                      texture2d<float> u_occlusionTexture [[texture(9), function_constant(hasOcclusionMap)]],
+                                      bool is_front_face [[front_facing]]) {
     //MARK: - pbr_begin_frag
     float3 normal = getPbrNormal(in, u_normalIntensity, textureSampler, u_normalTexture, is_front_face);
     float4 diffuseColor = u_baseColor;

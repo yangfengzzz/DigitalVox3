@@ -44,7 +44,7 @@ int main(int, char**) {
     materials[9] = Material("Blue", math::Color(0.0f, 0.0f, 1.0f, 1.0), 0.1f, 1.0f);
     materials[10] = Material("Black", math::Color(0.0f, 1.0, 1.0, 1.0), 0.1f, 1.0f);
     
-    const int materialIndex = 0;
+    const int materialIndex = 7;
     Material mat = materials[materialIndex];
     
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
