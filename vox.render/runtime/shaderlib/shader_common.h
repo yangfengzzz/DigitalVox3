@@ -85,9 +85,9 @@ typedef struct {
 
 typedef struct {
     vector_float3 diffuse;
-    int mipMapLevel;
     float diffuseIntensity;
     float specularIntensity;
+    int mipMapLevel;
     matrix_float4x4 transformMatrix;
 } EnvMapLight;
 

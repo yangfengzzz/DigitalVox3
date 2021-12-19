@@ -8,12 +8,15 @@
 #include "ambient_light.h"
 #include "../shader/shader.h"
 #include "../scene.h"
+#include "../engine.h"
 #include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
 ShaderProperty AmbientLight::_envMapProperty = Shader::createProperty("u_envMapLight", ShaderDataGroup::Enum::Scene);
 ShaderProperty AmbientLight::_diffuseSHProperty = Shader::createProperty("u_env_sh", ShaderDataGroup::Enum::Scene);
-ShaderProperty AmbientLight::_specularTextureProperty  = Shader::createProperty("u_env_specularTexture", ShaderDataGroup::Enum::Scene);
+ShaderProperty AmbientLight::_diffuseTextureProperty = Shader::createProperty("u_env_diffuseTexture", ShaderDataGroup::Enum::Scene);
+ShaderProperty AmbientLight::_specularTextureProperty = Shader::createProperty("u_env_specularTexture", ShaderDataGroup::Enum::Scene);
+ShaderProperty AmbientLight::_brdfTextureProperty = Shader::createProperty("u_env_brdfTexture", ShaderDataGroup::Enum::Scene);
 
 AmbientLight::AmbientLight(Scene* value) {
     _scene = value;
@@ -23,6 +26,8 @@ AmbientLight::AmbientLight(Scene* value) {
     _envMapLight.diffuseIntensity = 1.0;
     _envMapLight.specularIntensity = 1.0;
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+    _scene->shaderData.setData(AmbientLight::_brdfTextureProperty,
+                               value->engine()->resourceLoader()->createBRDFLookupTable());
     
     RenderPipelineState::register_fragment_uploader<EnvMapLight>([](const EnvMapLight& x, size_t location,
                                                                     id <MTLRenderCommandEncoder> encoder){
@@ -35,14 +40,6 @@ AmbientLight::AmbientLight(Scene* value) {
     });
 }
 
-bool AmbientLight::specularTextureDecodeRGBM() {
-    return _specularTextureDecodeRGBM;
-}
-
-void AmbientLight::setSpecularTextureDecodeRGBM(bool value) {
-    
-}
-
 DiffuseMode::Enum AmbientLight::diffuseMode() {
     return _diffuseMode;
 }
@@ -51,10 +48,19 @@ void AmbientLight::setDiffuseMode(DiffuseMode::Enum value) {
     _diffuseMode = value;
     if (!_scene) return;
     
-    if (value == DiffuseMode::Enum::SphericalHarmonics) {
-        _scene->shaderData.enableMacro(HAS_SH);
-    } else {
-        _scene->shaderData.disableMacro(HAS_SH);
+    switch (value) {
+        case DiffuseMode::Enum::SphericalHarmonics:
+            _scene->shaderData.disableMacro(HAS_DIFFUSE_ENV);
+            _scene->shaderData.enableMacro(HAS_SH);
+            break;
+            
+        case DiffuseMode::Enum::Texture:
+            _scene->shaderData.disableMacro(HAS_SH);
+            _scene->shaderData.enableMacro(HAS_DIFFUSE_ENV);
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -78,6 +84,24 @@ void AmbientLight::setDiffuseSphericalHarmonics(const math::SphericalHarmonics3&
     _scene->shaderData.setData(AmbientLight::_diffuseSHProperty, _preComputeSH(value));
 }
 
+id<MTLTexture> AmbientLight::diffuseTexture() {
+    return _diffuseTexture;
+}
+
+void AmbientLight::setDiffuseTexture(id<MTLTexture> value) {
+    _diffuseTexture = value;
+    if (!_scene) return;
+    
+    auto& shaderData = _scene->shaderData;
+    
+    if (value) {
+        shaderData.setData(AmbientLight::_diffuseTextureProperty, _diffuseTexture);
+        shaderData.enableMacro(HAS_DIFFUSE_ENV);
+    } else {
+        shaderData.disableMacro(HAS_DIFFUSE_ENV);
+    }
+}
+
 float AmbientLight::diffuseIntensity() {
     return _envMapLight.diffuseIntensity;
 }
@@ -87,6 +111,15 @@ void AmbientLight::setDiffuseIntensity(float value) {
     if (!_scene) return;
     
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+}
+
+//MARK: - Specular
+bool AmbientLight::specularTextureDecodeRGBM() {
+    return _specularTextureDecodeRGBM;
+}
+
+void AmbientLight::setSpecularTextureDecodeRGBM(bool value) {
+    
 }
 
 id<MTLTexture> AmbientLight::specularTexture() {
@@ -100,7 +133,9 @@ void AmbientLight::setSpecularTexture(id<MTLTexture> value) {
     auto& shaderData = _scene->shaderData;
     
     if (value) {
-        shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+        shaderData.setData(AmbientLight::_specularTextureProperty, _specularReflection);
+        _envMapLight.mipMapLevel = static_cast<int>(value.mipmapLevelCount - 1);
+        _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
         shaderData.enableMacro(HAS_SPECULAR_ENV);
     } else {
         shaderData.disableMacro(HAS_SPECULAR_ENV);
@@ -116,6 +151,15 @@ void AmbientLight::setSpecularIntensity(float value) {
     if (!_scene) return;
     
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
+}
+
+//MARK: - BRDF Texture
+id<MTLTexture> AmbientLight::brdfTexture() {
+    return _brdfLutTexture;
+}
+
+void AmbientLight::setBRDFTexture(id<MTLTexture> value) {
+    
 }
 
 std::array<float, 27> AmbientLight::_preComputeSH(const math::SphericalHarmonics3& sh) {

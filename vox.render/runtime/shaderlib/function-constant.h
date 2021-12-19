@@ -58,6 +58,7 @@ constant bool hasSpotLight = spotLightCount > 0;
 
 constant bool hasSH [[function_constant(HAS_SH)]];
 constant bool hasSpecularEnv [[function_constant(HAS_SPECULAR_ENV)]];
+constant bool hasDiffuseEnv [[function_constant(HAS_DIFFUSE_ENV)]];
 
 constant bool hasParticleTexture [[function_constant(HAS_PARTICLE_TEXTURE)]];
 constant bool needRotateToVelocity [[function_constant(NEED_ROTATE_TO_VELOCITY)]];

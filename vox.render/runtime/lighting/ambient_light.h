@@ -23,6 +23,9 @@ struct DiffuseMode {
         /** Solid color mode. */
         SolidColor,
         
+        /** Texture mode. */
+        Texture,
+        
         /**
          * SH mode
          * @remarks
@@ -38,13 +41,6 @@ struct DiffuseMode {
 class AmbientLight {
 public:
     AmbientLight(Scene* value);
-    
-    /**
-     * Whether to decode from specularTexture with RGBM format.
-     */
-    bool specularTextureDecodeRGBM();
-
-    void setSpecularTextureDecodeRGBM(bool value);
     
     /**
      * Diffuse mode of ambient light.
@@ -70,15 +66,31 @@ public:
     void setDiffuseSphericalHarmonics(const math::SphericalHarmonics3& value);
     
     /**
+     * Diffuse reflection texture.
+     * @remarks This texture must be baked from MetalLoader::createIrradianceTexture
+     */
+    id<MTLTexture> diffuseTexture();
+
+    void setDiffuseTexture(id<MTLTexture> value);
+    
+    /**
      * Diffuse reflection intensity.
      */
     float diffuseIntensity();
 
     void setDiffuseIntensity(float value);
     
+public:
+    /**
+     * Whether to decode from specularTexture with RGBM format.
+     */
+    bool specularTextureDecodeRGBM();
+
+    void setSpecularTextureDecodeRGBM(bool value);
+    
     /**
      * Specular reflection texture.
-     * @remarks This texture must be baked from @oasis-engine/baker
+     * @remarks This texture must be baked from MetalLoader::createSpecularTexture
      */
     id<MTLTexture> specularTexture();
 
@@ -91,20 +103,36 @@ public:
 
     void setSpecularIntensity(float value);
     
+public:
+    /**
+     * brdf loopup texture.
+     * @remarks This texture must be baked from MetalLoader::createBRDFLookupTable
+     */
+    id<MTLTexture> brdfTexture();
+
+    void setBRDFTexture(id<MTLTexture> value);
+    
 private:    
     std::array<float, 27> _preComputeSH(const math::SphericalHarmonics3& sh);
     
     static ShaderProperty _envMapProperty;
     static ShaderProperty _diffuseSHProperty;
+    static ShaderProperty _diffuseTextureProperty;
     static ShaderProperty _specularTextureProperty;
+    static ShaderProperty _brdfTextureProperty;
     
     Scene* _scene;
-    bool _specularTextureDecodeRGBM = false;
+    EnvMapLight _envMapLight;
+
     DiffuseMode::Enum _diffuseMode = DiffuseMode::Enum::SolidColor;
     math::SphericalHarmonics3 _diffuseSphericalHarmonics;
     std::array<float, 27> _shArray;
-    id<MTLTexture> _specularReflection;
-    EnvMapLight _envMapLight;
+    id<MTLTexture> _diffuseTexture = nullptr;
+
+    bool _specularTextureDecodeRGBM = false;
+    id<MTLTexture> _specularReflection = nullptr;
+    
+    id<MTLTexture> _brdfLutTexture = nullptr;
 };
 
 }

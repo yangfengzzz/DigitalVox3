@@ -51,7 +51,8 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     // Enviroment
     {HAS_SH, {0, MTLDataTypeBool}},
     {HAS_SPECULAR_ENV, {0, MTLDataTypeBool}},
-    
+    {HAS_DIFFUSE_ENV, {0, MTLDataTypeBool}},
+
     // Particle Render
     {HAS_PARTICLE_TEXTURE, {0, MTLDataTypeBool}},
     {NEED_ROTATE_TO_VELOCITY, {0, MTLDataTypeBool}},

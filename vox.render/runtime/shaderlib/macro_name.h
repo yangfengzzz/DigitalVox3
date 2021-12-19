@@ -56,21 +56,22 @@ enum MacroName {
     // Enviroment
     HAS_SH = 30,
     HAS_SPECULAR_ENV = 31,
+    HAS_DIFFUSE_ENV = 32,
     
     // Particle Render
-    HAS_PARTICLE_TEXTURE = 32,
-    NEED_ROTATE_TO_VELOCITY = 33,
-    NEED_USE_ORIGIN_COLOR = 34,
-    NEED_SCALE_BY_LIFE_TIME = 35,
-    NEED_FADE_IN = 36,
-    NEED_FADE_OUT = 37,
-    IS_2D = 38,
+    HAS_PARTICLE_TEXTURE = 33,
+    NEED_ROTATE_TO_VELOCITY = 34,
+    NEED_USE_ORIGIN_COLOR = 35,
+    NEED_SCALE_BY_LIFE_TIME = 36,
+    NEED_FADE_IN = 37,
+    NEED_FADE_OUT = 38,
+    IS_2D = 39,
     
     // Shadow
-    NEED_GENERATE_SHADOW_MAP = 39,
-    SHADOW_MAP_COUNT = 40,
+    NEED_GENERATE_SHADOW_MAP = 40,
+    SHADOW_MAP_COUNT = 41,
     
-    TOTAL_COUNT = 41,
+    TOTAL_COUNT = 42,
 };
 
 #endif /* macro_name_h */
