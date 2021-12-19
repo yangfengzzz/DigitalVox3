@@ -32,7 +32,7 @@ public:
     id<MTLTexture> loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames);
     
     id<MTLTexture> createIrradianceTexture(const std::string& path,
-                                           const std::array<std::string, 6>& imageName,
+                                           const std::array<std::string, 6>& imageName, float roughness = 0.6,
                                            bool isDebugger = false, bool isTopLeft = true);
     
     // red 9; green 9; blue 9;

@@ -143,7 +143,7 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
 //MARK: - PBR Utility
 id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
                                                     const std::array<std::string, 6>& imageName,
-                                                    bool isDebugger, bool isTopLeft) {
+                                                    float roughness, bool isDebugger, bool isTopLeft) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
     NSString* textureName1 = [[NSString alloc]initWithUTF8String:imageName[0].c_str()];
     NSString* textureName2 = [[NSString alloc]initWithUTF8String:imageName[1].c_str()];
@@ -163,7 +163,7 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
     MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
     
     auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
-                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:0];
+                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:roughness];
     
     MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
     if (!isTopLeft) {
