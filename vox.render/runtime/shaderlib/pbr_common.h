@@ -110,7 +110,7 @@ float3 PrefilterEnvMap(float Roughness, float3 R,
 
 float3 convertUVToDirection(uint face, float2 uv) {
     float u = 2.0 * uv.x - 1.0;
-    float v = 2.0 * uv.y - 1.0;
+    float v = -2.0 * uv.y + 1.0;
     
     float3 direction;
     switch(face) {

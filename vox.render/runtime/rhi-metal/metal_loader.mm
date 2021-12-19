@@ -312,17 +312,7 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
     
     auto blitEncoder = [commandBuffer blitCommandEncoder];
     [blitEncoder copyFromTexture:mtlTexture sourceSlice:0 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:0 destinationLevel:0 sliceCount:1 levelCount:1];
-    [blitEncoder copyFromTexture:mtlTexture sourceSlice:1 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:1 destinationLevel:0 sliceCount:1 levelCount:1];
-    [blitEncoder copyFromTexture:mtlTexture sourceSlice:2 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:2 destinationLevel:0 sliceCount:1 levelCount:1];
-    [blitEncoder copyFromTexture:mtlTexture sourceSlice:3 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:3 destinationLevel:0 sliceCount:1 levelCount:1];
-    [blitEncoder copyFromTexture:mtlTexture sourceSlice:4 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:4 destinationLevel:0 sliceCount:1 levelCount:1];
-    [blitEncoder copyFromTexture:mtlTexture sourceSlice:5 sourceLevel:0
-                       toTexture:specularTexture destinationSlice:5 destinationLevel:0 sliceCount:1 levelCount:1];
+                       toTexture:specularTexture destinationSlice:0 destinationLevel:0 sliceCount:6 levelCount:1];
     [blitEncoder endEncoding];
     
     // generate Mipmap
@@ -351,17 +341,7 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
         // merge together
         auto blitEncoder = [commandBuffer blitCommandEncoder];
         [blitEncoder copyFromTexture:outputTexture sourceSlice:0 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:0 destinationLevel:level sliceCount:1 levelCount:1];
-        [blitEncoder copyFromTexture:outputTexture sourceSlice:1 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:1 destinationLevel:level sliceCount:1 levelCount:1];
-        [blitEncoder copyFromTexture:outputTexture sourceSlice:2 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:2 destinationLevel:level sliceCount:1 levelCount:1];
-        [blitEncoder copyFromTexture:outputTexture sourceSlice:3 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:3 destinationLevel:level sliceCount:1 levelCount:1];
-        [blitEncoder copyFromTexture:outputTexture sourceSlice:4 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:4 destinationLevel:level sliceCount:1 levelCount:1];
-        [blitEncoder copyFromTexture:outputTexture sourceSlice:5 sourceLevel:0
-                           toTexture:specularTexture destinationSlice:5 destinationLevel:level sliceCount:1 levelCount:1];
+                           toTexture:specularTexture destinationSlice:0 destinationLevel:level sliceCount:6 levelCount:1];
         [blitEncoder endEncoding];
     }
     [commandBuffer commit];
