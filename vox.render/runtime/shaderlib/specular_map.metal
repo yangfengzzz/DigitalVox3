@@ -10,7 +10,7 @@ using namespace metal;
 #include "pbr_common.h"
 
 kernel void build_specular(texturecube<float, access::sample> input [[ texture(0) ]],
-                           texture2d<float, access::write> output [[ texture(1) ]],
+                           texturecube<float, access::write> output [[ texture(1) ]],
                            constant float &roughness [[ buffer(0) ]],
                            uint3 tpig [[ thread_position_in_grid ]]) {
     float inputWidth = input.get_width();
@@ -24,6 +24,6 @@ kernel void build_specular(texturecube<float, access::sample> input [[ texture(0
     float3 result = PrefilterEnvMap(roughness, direction, input);
     float4 color = input.sample(s, direction, level(roughness*10));
     color = float4(result, 1);
-    uint2 outputuv = uint2(tpig.x/scale, (tpig.y/scale) + width * face);
-    output.write(color, outputuv);
+    uint2 outputuv = uint2(tpig.x/scale, tpig.y/scale);
+    output.write(color, outputuv, face);
 }

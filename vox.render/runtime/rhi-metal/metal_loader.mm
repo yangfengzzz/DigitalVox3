@@ -270,10 +270,6 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
     [imageNames addObject:textureName6];
     
     MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
-    
-    auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
-                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:0];
-    
     MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
     if (!isTopLeft) {
         origin = MTKTextureLoaderOriginBottomLeft;
@@ -291,26 +287,51 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
         MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedLong:usage]
     };
     NSError *error = nil;
-    id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:irradianceTexture options:options error:&error];
+    id<MTLTexture> mtlTexture = [_textureLoader newTextureWithMDLTexture:mdlTexture options:options error:&error];
     if (error != nil) {
         NSLog(@"Error: failed to create MTLTexture: %@", error);
     }
     
+    // final texture
+    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+    descriptor.textureType = MTLTextureType2DArray;
+    descriptor.pixelFormat = mtlTexture.pixelFormat;
+    descriptor.width = mtlTexture.width;
+    descriptor.height = mtlTexture.height;
+    descriptor.mipmapLevelCount = 9;
+    auto specularTexture = [_device newTextureWithDescriptor:descriptor];
+    
+    // merge
     auto function = [_library newFunctionWithName: @"build_specular"];
     auto pipelineState = [_device newComputePipelineStateWithFunction:function error:&error];
     if (error != nil) {
         NSLog(@"Error: failed to create Metal pipeline state: %@", error);
     }
     auto commandBuffer = [_commandQueue commandBuffer];
+    
+    auto blitEncoder = [commandBuffer blitCommandEncoder];
+    [blitEncoder copyFromTexture:mtlTexture sourceSlice:0 sourceLevel:0
+                       toTexture:specularTexture destinationSlice:0 destinationLevel:0 sliceCount:6 levelCount:1];
+    [blitEncoder copyFromTexture:mtlTexture sourceSlice:1 sourceLevel:0
+                       toTexture:specularTexture destinationSlice:1 destinationLevel:0 sliceCount:6 levelCount:1];
+    [blitEncoder copyFromTexture:mtlTexture sourceSlice:2 sourceLevel:0
+                       toTexture:specularTexture destinationSlice:2 destinationLevel:0 sliceCount:6 levelCount:1];
+    [blitEncoder copyFromTexture:mtlTexture sourceSlice:3 sourceLevel:0
+                       toTexture:specularTexture destinationSlice:3 destinationLevel:0 sliceCount:6 levelCount:1];
+    [blitEncoder copyFromTexture:mtlTexture sourceSlice:4 sourceLevel:0
+                       toTexture:specularTexture destinationSlice:4 destinationLevel:0 sliceCount:6 levelCount:1];
+    [blitEncoder copyFromTexture:mtlTexture sourceSlice:5 sourceLevel:0
+                       toTexture:specularTexture destinationSlice:5 destinationLevel:0 sliceCount:6 levelCount:1];
+    [blitEncoder endEncoding];
+    
     // generate Mipmap
     for (int level = 1; level < 9; level++) {
         std::cout<<"Processing level: "<<level<<std::endl;
         auto commandEncoder = [commandBuffer computeCommandEncoder];
         
         auto size = mtlTexture.width / int(pow(2, float(level)));
-        auto descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
-                                                                             width:size height:size * 6
-                                                                         mipmapped:false];
+        auto descriptor = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
+                                                                                size:size mipmapped:false];
         descriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageShaderWrite;
         auto outputTexture = [_device newTextureWithDescriptor:descriptor];
         
@@ -325,11 +346,27 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
                                         mtlTexture.width / threadsPerThreadgroup.height, 6);
         [commandEncoder dispatchThreadgroups:threadgroups threadsPerThreadgroup:threadsPerThreadgroup];
         [commandEncoder endEncoding];
+        
+        // merge together
+        auto blitEncoder = [commandBuffer blitCommandEncoder];
+        [blitEncoder copyFromTexture:mtlTexture sourceSlice:0 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:0 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder copyFromTexture:mtlTexture sourceSlice:1 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:1 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder copyFromTexture:mtlTexture sourceSlice:2 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:2 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder copyFromTexture:mtlTexture sourceSlice:3 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:3 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder copyFromTexture:mtlTexture sourceSlice:4 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:4 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder copyFromTexture:mtlTexture sourceSlice:5 sourceLevel:0
+                           toTexture:specularTexture destinationSlice:5 destinationLevel:level sliceCount:6 levelCount:1];
+        [blitEncoder endEncoding];
     }
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
     
-    return nullptr;
+    return specularTexture;
 }
 
 //MARK: - MTLBuffer
