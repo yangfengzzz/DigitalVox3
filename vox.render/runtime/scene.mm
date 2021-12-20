@@ -147,9 +147,7 @@ void Scene::_processActive(bool active) {
 
 void Scene::_updateShaderData() {
     // union scene and camera macro.
-    ShaderMacroCollection::unionCollection(engine()->_macroCollection,
-                                           shaderData._macroCollection,
-                                           _globalShaderMacro);
+    shaderData.mergeMacro(engine()->_macroCollection, _globalShaderMacro);
     light_manager._updateShaderData(shaderData);
 }
 

@@ -184,9 +184,7 @@ void ComponentsManager::callRender(const RenderContext& context) {
         element->_render(camera);
         
         // union camera global macro and renderer macro.
-        ShaderMacroCollection::unionCollection(camera->_globalShaderMacro,
-                                               element->shaderData._macroCollection,
-                                               element->_globalShaderMacro);
+        element->shaderData.mergeMacro(camera->_globalShaderMacro, element->_globalShaderMacro);
     }
 }
 

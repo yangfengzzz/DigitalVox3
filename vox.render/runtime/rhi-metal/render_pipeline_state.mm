@@ -114,7 +114,7 @@ void RenderPipelineState::uploadAll(const std::vector<ShaderUniform>& uniformBlo
 }
 
 void RenderPipelineState::uploadUniforms(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData) {
-    const auto& properties = shaderData._properties;
+    const auto& properties = shaderData.properties();
     const auto& constUniforms = uniformBlock;
     
     for (size_t i = 0; i < constUniforms.size(); i++) {

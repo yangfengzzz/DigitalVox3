@@ -255,11 +255,7 @@ void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     _updateShaderData(context);
     
     // union scene and camera macro.
-    ShaderMacroCollection::unionCollection(
-                                           scene()->_globalShaderMacro,
-                                           shaderData._macroCollection,
-                                           _globalShaderMacro
-                                           );
+    shaderData.mergeMacro(scene()->_globalShaderMacro, _globalShaderMacro);
     
     _renderPipeline.render(context, cubeFace, mipLevel);
 }

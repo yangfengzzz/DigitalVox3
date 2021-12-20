@@ -40,6 +40,11 @@ void ShaderData::setData(ShaderProperty property, std::any value) {
     _properties[property.uniqueId] = value;
 }
 
+const std::unordered_map<int, std::any>& ShaderData::properties() const {
+    return _properties;
+}
+
+//MARK: - Macro
 void ShaderData::enableMacro(MacroName macroName) {
     _macroCollection._value.insert(std::make_pair(macroName, std::make_pair(1, MTLDataTypeBool)));
 }
@@ -53,6 +58,11 @@ void ShaderData::disableMacro(MacroName macroName) {
     if (iter != _macroCollection._value.end()) {
         _macroCollection._value.erase(iter);
     }
+}
+
+void ShaderData::mergeMacro(const ShaderMacroCollection& macros,
+                            ShaderMacroCollection& result) const {
+    ShaderMacroCollection::unionCollection(macros, _macroCollection, result);
 }
 
 }

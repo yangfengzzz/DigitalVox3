@@ -55,10 +55,7 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
         const auto& materialData = material->shaderData;
         
         // union render global macro and material self macro.
-        ShaderMacroCollection::unionCollection(
-                                               renderer->_globalShaderMacro,
-                                               materialData._macroCollection,
-                                               compileMacros);
+        materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
         
         //MARK:- Set Pipeline State
         ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros);
@@ -112,7 +109,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     auto& shaderData = material->shaderData;
     
     auto compileMacros = ShaderMacroCollection();
-    ShaderMacroCollection::unionCollection(camera->_globalShaderMacro, shaderData._macroCollection, compileMacros);
+    shaderData.mergeMacro(camera->_globalShaderMacro, compileMacros);
     
     const auto projectionMatrix = camera->projectionMatrix();
     auto _matrix = camera->viewMatrix();
