@@ -11,24 +11,26 @@
 #include "mesh_buffer.h"
 
 namespace vox {
-/// Sub-mesh, mainly contains drawing information.
+/**
+ * Sub-mesh, mainly contains drawing information.
+ */
 struct SubMesh {
-    /// Drawing topology.
-    MTLPrimitiveType topology;
-    /// Type of index buffer
-    MTLIndexType indexType;
-    /// IndexBuffer
-    MeshBuffer indexBuffer;
-    /// Drawing count.
-    size_t indexCount;
+    /** Index buffer. */
+    const MeshBuffer indexBuffer;
+    /** Type of index buffer. */
+    const MTLIndexType indexType;
+    /** Drawing count. */
+    const size_t indexCount;
+    /** Drawing topology. */
+    const MTLPrimitiveType topology;
     
-    
-    /// Create a sub-mesh.
-    /// - Parameters:
-    ///   - indexBuffer: Index Buffer
-    ///   - indexType: Index Type
-    ///   - indexCount: Drawing count
-    ///   - topology: Drawing topology
+    /**
+     * Create a sub-mesh.
+     * @param indexBuffer - Index Buffer
+     * @param indexType - Index Type
+     * @param indexCount - Drawing count
+     * @param topology - Drawing topology
+     */
     SubMesh(MeshBuffer indexBuffer, MTLIndexType indexType,
             size_t indexCount = 0, MTLPrimitiveType topology = MTLPrimitiveTypeTriangle);
 };

@@ -80,14 +80,14 @@ public:
 protected:
     friend class RenderQueue;
     
+    MDLVertexDescriptor* _vertexDescriptor = nullptr;
     std::vector<std::optional<MeshBuffer>> _vertexBuffer;
     std::vector<SubMesh> _subMeshes;
     UpdateFlagManager _updateFlagManager = UpdateFlagManager();
-    
+
     //MARK: - useless
     size_t _instanceCount;
     size_t _vertexCount = 0;
-    MDLVertexDescriptor* _vertexDescriptor = nullptr;
 };
 
 }
