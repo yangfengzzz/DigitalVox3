@@ -57,7 +57,7 @@ void ParticleRenderer::update(float deltaTime) {
 
 void ParticleRenderer::_render(Camera* camera) {
     auto render_mesh = _createMesh();
-    auto& subMeshes = render_mesh->_subMeshes;
+    auto& subMeshes = render_mesh->subMeshes();
     auto& renderPipeline = camera->_renderPipeline;
     for (size_t i = 0; i < subMeshes.size(); i++) {
         MaterialPtr material;

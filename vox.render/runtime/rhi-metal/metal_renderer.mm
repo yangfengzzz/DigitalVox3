@@ -182,7 +182,7 @@ void MetalRenderer::bindTexture(id <MTLTexture> texture, int location) {
     [_renderEncoder setFragmentTexture:texture atIndex:location];
 }
 
-void MetalRenderer::drawPrimitive(SubMesh *subPrimitive) {
+void MetalRenderer::drawPrimitive(const SubMesh *subPrimitive) const {
     [_renderEncoder drawIndexedPrimitives:subPrimitive->topology
                                indexCount:subPrimitive->indexCount
                                 indexType:subPrimitive->indexType

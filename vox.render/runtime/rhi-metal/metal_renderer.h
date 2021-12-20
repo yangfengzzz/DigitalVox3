@@ -65,7 +65,7 @@ public:
     
     void bindTexture(id <MTLTexture> texture, int location);
     
-    void drawPrimitive(SubMesh *subPrimitive);
+    void drawPrimitive(const SubMesh *subPrimitive) const;
 
 private:
     id <MTLSamplerState> buildSamplerState();

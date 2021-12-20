@@ -67,7 +67,7 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
         }
         
         MTLRenderPipelineDescriptor* descriptor = [[MTLRenderPipelineDescriptor alloc]init];
-        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->_vertexDescriptor);
+        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
         descriptor.vertexFunction = program->vertexShader();
         descriptor.fragmentFunction = program->fragmentShader();
         
@@ -129,7 +129,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     }
     
     auto descriptor = [[MTLRenderPipelineDescriptor alloc]init];
-    descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh->_vertexDescriptor);
+    descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh->vertexDescriptor());
     descriptor.vertexFunction = program->vertexShader();
     descriptor.fragmentFunction = program->fragmentShader();
     

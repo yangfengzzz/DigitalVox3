@@ -36,7 +36,7 @@ MeshPtr MeshRenderer::mesh() {
 void MeshRenderer::_render(Camera* camera) {
     if (_mesh != nullptr) {
         if (_meshUpdateFlag->flag) {
-            const auto& vertexDescriptor = _mesh->_vertexDescriptor;
+            const auto& vertexDescriptor = _mesh->vertexDescriptor();
 
             shaderData.disableMacro(HAS_UV);
             shaderData.disableMacro(HAS_NORMAL);
@@ -58,7 +58,7 @@ void MeshRenderer::_render(Camera* camera) {
             _meshUpdateFlag->flag = false;
         }
 
-        auto& subMeshes = _mesh->_subMeshes;
+        auto& subMeshes = _mesh->subMeshes();
         auto& renderPipeline = camera->_renderPipeline;
         for (size_t i = 0; i < subMeshes.size(); i++) {
             MaterialPtr material;

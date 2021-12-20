@@ -13,13 +13,13 @@
 
 namespace vox {
 struct MeshBuffer {
-    size_t length();
+    size_t length() const;
     
-    id <MTLBuffer> buffer();
+    id <MTLBuffer> buffer() const;
     
-    size_t offset();
+    size_t offset() const;
     
-    MDLMeshBufferType type();
+    MDLMeshBufferType type() const;
     
     /// Create vertex buffer.
     /// - Parameters:

@@ -11,18 +11,20 @@
 #include "../vox_type.h"
 
 namespace vox {
-/// Render element.
+/**
+ * Render element.
+ */
 struct RenderElement {
-    /// Render component.
+    /** Render component. */
     Renderer* component;
-    /// Mesh.
+    /** Mesh. */
     MeshPtr mesh;
-    /// Sub mesh.
-    SubMesh* subMesh;
-    /// Material.
+    /** Sub mesh. */
+    const SubMesh* subMesh;
+    /** Material. */
     MaterialPtr material;
 
-    RenderElement(Renderer* component, MeshPtr mesh, SubMesh* subMesh, MaterialPtr material);
+    RenderElement(Renderer* component, MeshPtr mesh, const SubMesh* subMesh, MaterialPtr material);
 };
 
 }

@@ -137,7 +137,7 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
         // Renders skin.
         auto render_mesh = drawSkinnedMesh(index, mesh, make_span(skinning_matrices_),
                                            vox::math::Float4x4::identity());
-        const auto& vertexDescriptor = render_mesh->_vertexDescriptor;
+        const auto& vertexDescriptor = render_mesh->vertexDescriptor();
         
         shaderData.disableMacro(HAS_UV);
         shaderData.disableMacro(HAS_NORMAL);
@@ -157,7 +157,7 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
             shaderData.enableMacro(HAS_VERTEXCOLOR);
         }
         
-        auto& subMeshes = render_mesh->_subMeshes;
+        auto& subMeshes = render_mesh->subMeshes();
         auto& renderPipeline = camera->_renderPipeline;
         for (size_t i = 0; i < subMeshes.size(); i++) {
             MaterialPtr material;

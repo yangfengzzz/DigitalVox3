@@ -15,19 +15,19 @@ _type(type),
 _offset(offset) {
 }
 
-size_t MeshBuffer::length() {
+size_t MeshBuffer::length() const {
     return _length;
 }
 
-id <MTLBuffer> MeshBuffer::buffer() {
+id <MTLBuffer> MeshBuffer::buffer() const {
     return _buffer;
 }
 
-size_t MeshBuffer::offset() {
+size_t MeshBuffer::offset() const {
     return _offset;
 }
 
-MDLMeshBufferType MeshBuffer::type() {
+MDLMeshBufferType MeshBuffer::type() const {
     return _type;
 }
 

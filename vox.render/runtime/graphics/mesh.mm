@@ -41,4 +41,8 @@ void Mesh::_setVertexBuffer(size_t index, MeshBuffer buffer) {
     _vertexBuffer.insert(_vertexBuffer.begin() + index, buffer);
 }
 
+MDLVertexDescriptor* Mesh::vertexDescriptor() {
+    return _vertexDescriptor;
+}
+
 }
