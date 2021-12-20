@@ -12,8 +12,9 @@
 #include "light_shadow.h"
 
 namespace vox {
-ShadowPass::ShadowPass(const std::string& name, int priority, MaterialPtr replaceMaterial,
-                       MTLRenderPassDescriptor* renderTarget, Layer mask):
+ShadowPass::ShadowPass(const std::string& name, int priority,
+                       MTLRenderPassDescriptor* renderTarget,
+                       MaterialPtr replaceMaterial, Layer mask):
 RenderPass(name, priority, renderTarget, mask),
 replaceMaterial(replaceMaterial) {
     clearFlags = CameraClearFlags::None;

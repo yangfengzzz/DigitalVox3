@@ -255,7 +255,8 @@ private:
     friend class SkinnedMeshRenderer;
     friend class ParticleRenderer;
     friend class RenderQueue;
-
+    friend class ShadowManager;
+    
     void _projMatChange();
     
     Float3 _innerViewportToWorldPoint(const Float3& point, const Matrix& invViewProjMat);

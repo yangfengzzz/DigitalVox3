@@ -25,7 +25,7 @@ public:
     ShadowMapPass(const std::string& name, int priority,
                   MTLRenderPassDescriptor* renderTarget,
                   MaterialPtr replaceMaterial,
-                  Layer mask,  Light* light);
+                  Layer mask, Light* light);
     
     void preRender(Camera* camera, const RenderQueue& opaqueQueue,
                    const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;

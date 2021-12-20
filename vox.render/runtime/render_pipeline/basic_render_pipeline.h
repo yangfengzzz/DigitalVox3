@@ -79,6 +79,7 @@ private:
                          int mipLevel = 0);
     
 private:
+    friend class ShadowManager;
     RenderQueue _opaqueQueue;
     RenderQueue _transparentQueue;
     RenderQueue _alphaTestQueue;

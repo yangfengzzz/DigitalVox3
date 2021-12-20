@@ -33,6 +33,7 @@ class Script;
 class Animator;
 class SceneAnimator;
 class Light;
+class ShadowMapPass;
 
 class ShaderProgram;
 class RenderPipelineState;

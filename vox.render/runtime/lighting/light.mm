@@ -22,6 +22,10 @@ math::Matrix Light::shadowProjectionMatrix() {
     return shadow.projectionMatrix;
 }
 
+MTLRenderPassDescriptor* Light::shadowRenderTarget() {
+    return shadow.renderTarget();
+}
+
 math::Matrix Light::viewMatrix() {
     return math::invert(entity()->transform->worldMatrix());
 }

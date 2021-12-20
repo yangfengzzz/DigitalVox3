@@ -38,6 +38,7 @@ public:
     
 private:
     friend class BasicRenderPipeline;
+    friend class ShadowManager;
     
     std::vector<RenderElement> items;
 

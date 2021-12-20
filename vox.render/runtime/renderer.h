@@ -29,6 +29,11 @@ public:
     /// Whether it is clipped by the frustum, needs to be turned on camera.enableFrustumCulling.
     bool isCulled = false;
     
+    /// Set whether the renderer to receive shadows.
+    bool receiveShadow = false;
+    /// Set whether the renderer to cast shadows.
+    bool castShadow = false;
+    
     /// Material count.
     size_t materialCount();
     
@@ -128,11 +133,6 @@ protected:
     Matrix _normalMatrix = Matrix();
     // @ignoreClone
     std::vector<bool> _materialsInstanced;
-    
-    /// Set whether the renderer to receive shadows.
-    bool receiveShadow = false;
-    /// Set whether the renderer to cast shadows.
-    bool castShadow = false;
 };
 
 }

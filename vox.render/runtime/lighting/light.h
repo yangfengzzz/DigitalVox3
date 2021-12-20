@@ -48,6 +48,10 @@ public:
     
     math::Matrix shadowProjectionMatrix();
     
+    MTLRenderPassDescriptor* shadowRenderTarget();
+    
+    ShadowMapPass* shadowMapPass;
+    
 protected:
     /**
      * Each type of light source is at most 10, beyond which it will not take effect.
