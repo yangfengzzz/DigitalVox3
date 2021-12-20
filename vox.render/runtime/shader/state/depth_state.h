@@ -12,18 +12,23 @@
 
 namespace vox {
 class MetalRenderer;
-/// Depth state.
+/**
+ * Depth state.
+ */
 struct DepthState {
-    /// Whether to enable the depth test.
+    /** Whether to enable the depth test. */
     bool enabled = true;
-    /// Whether the depth value can be written.
+    /** Whether the depth value can be written.*/
     bool writeEnabled = true;
-    /// Depth comparison function.
+    /** Depth comparison function. */
     MTLCompareFunction compareFunction = MTLCompareFunctionLess;
 
 private:
     friend class RenderState;
-
+    
+    /**
+     * Apply the current depth state by comparing with the last depth state.
+     */
     void _apply(MTLRenderPipelineDescriptor* pipelineDescriptor,
                 MTLDepthStencilDescriptor* depthStencilDescriptor,
                 MetalRenderer* hardwareRenderer) {

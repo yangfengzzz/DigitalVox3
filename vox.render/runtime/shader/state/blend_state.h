@@ -14,18 +14,23 @@
 namespace vox {
 class MetalRenderer;
 
-/// Blend state.
+/**
+ * Blend state.
+ */
 struct BlendState {
-    /// The blend state of the render target.
+    /** The blend state of the render target. */
     RenderTargetBlendState targetBlendState = RenderTargetBlendState();
-    /// Constant blend color.
+    /** Constant blend color. */
     math::Color blendColor = math::Color(0, 0, 0, 0);
-    /// Whether to use (Alpha-to-Coverage) technology.
+    /** Whether to use (Alpha-to-Coverage) technology. */
     bool alphaToCoverage = false;
     
 private:
     friend class RenderState;
     
+    /**
+     * Apply the current blend state by comparing with the last blend state.
+     */
     void _apply(MTLRenderPipelineDescriptor* pipelineDescriptor,
                 MTLDepthStencilDescriptor* depthStencilDescriptor,
                 MetalRenderer* hardwareRenderer) {

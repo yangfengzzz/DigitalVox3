@@ -15,15 +15,17 @@
 #include "stencil_state.h"
 
 namespace vox {
-/// Render state.
+/**
+ * Render state.
+ */
 struct RenderState {
-    /// Blend state.
+    /** Blend state. */
     BlendState blendState = BlendState();
-    /// Depth state.
+    /** Depth state. */
     DepthState depthState = DepthState();
-    /// Stencil state.
+    /** Stencil state. */
     StencilState stencilState = StencilState();
-    /// Raster state.
+    /** Raster state. */
     RasterState rasterState = RasterState();
 
 private:

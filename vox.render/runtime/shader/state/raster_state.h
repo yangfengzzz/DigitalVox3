@@ -13,13 +13,15 @@
 namespace vox {
 class MetalRenderer;
 
-/// Raster state.
+/**
+ * Raster state.
+ */
 struct RasterState {
-    /// Specifies whether or not front- and/or back-facing polygons can be culled. */
+    /** Specifies whether or not front- and/or back-facing polygons can be culled. */
     MTLCullMode cullMode = MTLCullModeFront;
-    /// The multiplier by which an implementation-specific value is multiplied with to create a constant depth offset. */
+    /** The multiplier by which an implementation-specific value is multiplied with to create a constant depth offset. */
     float depthBias = 0;
-    /// The scale factor for the variable depth offset for each polygon. */
+    /** The scale factor for the variable depth offset for each polygon. */
     float slopeScaledDepthBias = 0;
     
 private:
