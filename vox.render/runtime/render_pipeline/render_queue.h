@@ -15,25 +15,35 @@
 #include <vector>
 
 namespace vox {
-/// Render queue.
+/**
+ * Render queue.
+ */
 class RenderQueue {
 public:
     RenderQueue(Engine* engine);
     
-    /// Push a render element.
+    /**
+     * Push a render element.
+     */
     void pushPrimitive(RenderElement element);
 
     void render(Camera* camera, RenderPass* pass);
     
     void drawSky(Engine* engine, Camera* camera, const Sky& sky);
     
-    /// Clear collection.
+    /**
+     * Clear collection.
+     */
     void clear();
 
-    /// Destroy internal resources.
+    /**
+     * Destroy internal resources.
+     */
     void destroy();
 
-    /// Sort the elements.
+    /**
+     * Sort the elements.
+     */
     void sort(std::function<bool(const RenderElement&, const RenderElement&)> compareFunc);
     
 private:
