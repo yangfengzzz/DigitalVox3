@@ -65,7 +65,7 @@ public:
     
     void callRendererOnUpdate(float deltaTime);
     
-    void callRender(const RenderContext& context);
+    void callRender(RenderContext& context);
     
     void callAnimatorUpdate(float deltaTime);
     

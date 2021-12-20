@@ -36,7 +36,7 @@ bool Component::destroyed() {
     return _destroyed;
 }
 
-Entity *Component::entity() {
+Entity *Component::entity() const {
     return _entity;
 }
 

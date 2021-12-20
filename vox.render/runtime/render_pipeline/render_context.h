@@ -16,11 +16,21 @@ using namespace math;
 /**
  * Rendering context.
  */
-struct RenderContext {
-    Camera* _camera;
-    Matrix _viewProjectMatrix = Matrix();
-
-    void _setContext(Camera* camera);
+class RenderContext {
+public:
+    Camera* camera();
+    
+    const Camera* camera() const;
+    
+    const Scene* scene() const;
+    const Matrix viewProjectMatrix() const;
+    
+    void resetContext(Scene* scene, Camera* camera);
+    
+private:
+    Camera* _camera{nullptr};
+    Scene* _scene{nullptr};
+    Matrix _viewProjectMatrix;
 };
 
 }

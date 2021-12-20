@@ -149,8 +149,8 @@ void ComponentsManager::callRendererOnUpdate(float deltaTime) {
     }
 }
 
-void ComponentsManager::callRender(const RenderContext& context) {
-    const auto& camera = context._camera;
+void ComponentsManager::callRender(RenderContext& context) {
+    const auto& camera = context.camera();
     const auto& elements = _renderers;
     for (size_t i = 0; i < _renderers.size(); i++) {
         const auto& element = elements[i];
