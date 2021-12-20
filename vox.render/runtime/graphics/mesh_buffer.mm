@@ -9,26 +9,22 @@
 
 namespace vox {
 MeshBuffer::MeshBuffer(id <MTLBuffer> buffer, size_t length, MDLMeshBufferType type, size_t offset) :
-_buffer(buffer),
-_length(length),
-_type(type),
-_offset(offset) {
+buffer(buffer),
+length(length),
+type(type),
+offset(offset) {
 }
 
-size_t MeshBuffer::length() const {
-    return _length;
+MeshBuffer::MeshBuffer(const MeshBuffer& buffer) :
+buffer(buffer.buffer),
+length(buffer.length),
+type(buffer.type),
+offset(buffer.offset) {
 }
 
-id <MTLBuffer> MeshBuffer::buffer() const {
-    return _buffer;
-}
-
-size_t MeshBuffer::offset() const {
-    return _offset;
-}
-
-MDLMeshBufferType MeshBuffer::type() const {
-    return _type;
+MeshBuffer
+MeshBuffer::operator=(const MeshBuffer& buffer) {
+    return MeshBuffer(buffer.buffer, buffer.length, buffer.type, buffer.offset);
 }
 
 }

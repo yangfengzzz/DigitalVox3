@@ -90,7 +90,7 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
         
         auto& buffers = element.mesh->_vertexBuffer;
         for (uint32_t index = 0; index < buffers.size(); index++) {
-            rhi.setVertexBuffer(buffers[index]->buffer(), 0, index);
+            rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
         }
         rhi.drawPrimitive(element.subMesh);
     }
@@ -148,7 +148,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     
     auto& buffers = mesh->_vertexBuffer;
     for (uint32_t index = 0; index < buffers.size(); index++) {
-        rhi.setVertexBuffer(buffers[index]->buffer(), 0, index);
+        rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
     }
     rhi.drawPrimitive(mesh->subMesh(0));
 }

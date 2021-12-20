@@ -13,26 +13,22 @@
 
 namespace vox {
 struct MeshBuffer {
-    size_t length() const;
+    const size_t length;
+    const id <MTLBuffer> buffer;
+    const size_t offset;
+    const MDLMeshBufferType type;
     
-    id <MTLBuffer> buffer() const;
-    
-    size_t offset() const;
-    
-    MDLMeshBufferType type() const;
-    
-    /// Create vertex buffer.
-    /// - Parameters:
-    ///   - buffer: Vertex buffer
-    ///   - length: Vertex buffer length
-    ///   - offset: Vertex buffer offset
+    /**
+     * Create mesh buffer.
+     * @param buffer - Vertex buffer
+     * @param length - Vertex buffer length
+     * @param offset - Vertex buffer offset
+     */
     MeshBuffer(id <MTLBuffer> buffer, size_t length, MDLMeshBufferType type, size_t offset = 0);
     
-private:
-    size_t _length;
-    id <MTLBuffer> _buffer;
-    size_t _offset;
-    MDLMeshBufferType _type;
+    MeshBuffer(const MeshBuffer& buffer);
+    
+    MeshBuffer operator=(const MeshBuffer& buffer);
 };
 
 }

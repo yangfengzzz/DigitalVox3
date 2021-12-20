@@ -186,8 +186,8 @@ void MetalRenderer::drawPrimitive(const SubMesh *subPrimitive) const {
     [_renderEncoder drawIndexedPrimitives:subPrimitive->topology
                                indexCount:subPrimitive->indexCount
                                 indexType:subPrimitive->indexType
-                              indexBuffer:subPrimitive->indexBuffer.buffer()
-                        indexBufferOffset:subPrimitive->indexBuffer.offset()];
+                              indexBuffer:subPrimitive->indexBuffer.buffer
+                        indexBufferOffset:subPrimitive->indexBuffer.offset];
 }
 
 }
