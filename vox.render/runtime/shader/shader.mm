@@ -21,6 +21,10 @@ _vertexSource(vertexSource),
 _fragmentSource(fragmentSource){
 }
 
+ShaderProgram* Shader::findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection) {
+    return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _fragmentSource, macroCollection);
+}
+
 Shader* Shader::create(const std::string& name,
                       const std::string& vertexSource,
                       const std::string& fragmentSource) {
@@ -44,6 +48,7 @@ Shader* Shader::find(const std::string& name) {
     }
 }
 
+//MARK: - Property
 std::optional<ShaderProperty> Shader::getPropertyByName(const std::string& name) {
     auto iter = Shader::_propertyNameMap.find(name);
     if (iter != Shader::_propertyNameMap.end()) {
@@ -64,17 +69,13 @@ ShaderProperty Shader::createProperty(const std::string& name, ShaderDataGroup::
     }
 }
 
-std::optional<ShaderDataGroup::Enum> Shader::_getShaderPropertyGroup(const std::string& propertyName) {
+std::optional<ShaderDataGroup::Enum> Shader::getShaderPropertyGroup(const std::string& propertyName) {
     auto iter = Shader::_propertyNameMap.find(propertyName);
     if (iter != Shader::_propertyNameMap.end()) {
-        return iter->second._group;
+        return iter->second.group;
     } else {
         return std::nullopt;
     }
-}
-
-ShaderProgram* Shader::_getShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection) {
-    return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _fragmentSource, macroCollection);
 }
 
 }

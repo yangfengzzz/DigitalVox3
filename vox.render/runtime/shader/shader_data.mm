@@ -19,7 +19,7 @@ std::any ShaderData::getData(const std::string& property_name) {
 }
 
 std::any ShaderData::getData(const ShaderProperty& property) {
-    auto iter = _properties.find(property._uniqueId);
+    auto iter = _properties.find(property.uniqueId);
     if (iter != _properties.end()) {
         return iter->second;
     } else {
@@ -37,7 +37,7 @@ void ShaderData::setData(const std::string& property_name, std::any value) {
 }
 
 void ShaderData::setData(ShaderProperty property, std::any value) {
-    _properties[property._uniqueId] = value;
+    _properties[property.uniqueId] = value;
 }
 
 void ShaderData::enableMacro(MacroName macroName) {

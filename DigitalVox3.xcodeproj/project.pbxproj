@@ -3506,11 +3506,11 @@
 				04CE390F2751AE5B00204B8E /* shader_program.mm */,
 				04CE391F2751B2C500204B8E /* shader_property.h */,
 				04CE391E2751B2C500204B8E /* shader_property.cpp */,
-				04CE393D2751D2ED00204B8E /* shader_macro_collection.h */,
-				04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */,
+				04CE39452751D82F00204B8E /* shader_uniform.h */,
 				04CE39412751D7BF00204B8E /* shader_data.h */,
 				04CE39402751D7BF00204B8E /* shader_data.mm */,
-				04CE39452751D82F00204B8E /* shader_uniform.h */,
+				04CE393D2751D2ED00204B8E /* shader_macro_collection.h */,
+				04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */,
 			);
 			path = shader;
 			sourceTree = "<group>";

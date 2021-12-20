@@ -133,11 +133,11 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
             const auto& aug = [reflection vertexArguments][i];
             const auto name = [aug.name cStringUsingEncoding:NSUTF8StringEncoding];
             const auto location = aug.index;
-            const auto group = Shader::_getShaderPropertyGroup(name);
+            const auto group = Shader::getShaderPropertyGroup(name);
             
             ShaderUniform shaderUniform;
             shaderUniform.name = name;
-            shaderUniform.propertyId = Shader::getPropertyByName(name)->_uniqueId;
+            shaderUniform.propertyId = Shader::getPropertyByName(name)->uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeVertex;
             _groupingUniform(shaderUniform, group);
@@ -150,11 +150,11 @@ void RenderPipelineState::_recordVertexLocation(MTLRenderPipelineReflection* ref
             const auto& aug = [reflection fragmentArguments][i];
             const auto name = [aug.name cStringUsingEncoding:NSUTF8StringEncoding];
             const auto location = aug.index;
-            const auto group = Shader::_getShaderPropertyGroup(name);
+            const auto group = Shader::getShaderPropertyGroup(name);
             
             ShaderUniform shaderUniform;
             shaderUniform.name = name;
-            shaderUniform.propertyId = Shader::getPropertyByName(name)->_uniqueId;
+            shaderUniform.propertyId = Shader::getPropertyByName(name)->uniqueId;
             shaderUniform.location = location;
             shaderUniform.type = MTLFunctionTypeFragment;
             _groupingUniform(shaderUniform, group);
@@ -187,7 +187,7 @@ void RenderPipelineState::_groupingUniform(const ShaderUniform& uniform,
 void RenderPipelineState::_groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms) {
     for (size_t i = 0; i < uniforms.size(); i++) {
         const auto& uniform = uniforms[i];
-        const auto group = Shader::_getShaderPropertyGroup(uniform.name);
+        const auto group = Shader::getShaderPropertyGroup(uniform.name);
         if (group != std::nullopt) {
             auto iter = std::find_if(uniforms.begin(), uniforms.end(),
                                      [&](const auto& u){

@@ -27,6 +27,8 @@ public:
     
     Shader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
     
+    ShaderProgram* findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection);
+    
     /**
      * Create a shader.
      * @param name - Name of the shader
@@ -41,6 +43,7 @@ public:
      */
     static Shader* find(const std::string& name);
     
+public:
     /**
      * Get shader property by name.
      * @param name - Name of the shader property
@@ -48,25 +51,22 @@ public:
      */
     static std::optional<ShaderProperty> getPropertyByName(const std::string& name);
     
+    static std::optional<ShaderDataGroup::Enum> getShaderPropertyGroup(const std::string& propertyName);
+
     /**
      * Create shader property by name.
      * @param name - Name of the shader property
      * @param group - Group of shader data
      * @returns Shader property
      */
-    static ShaderProperty createProperty(const std::string& name, ShaderDataGroup::Enum group);
+    static ShaderProperty createProperty(const std::string& name, ShaderDataGroup::Enum group);    
     
 private:
-    friend class RenderPipelineState;
-    friend class RenderQueue;
-    
+    // common shader map
     static std::unordered_map<std::string, std::unique_ptr<Shader>> _shaderMap;
     static std::unordered_map<std::string, ShaderProperty> _propertyNameMap;
-    
-    static std::optional<ShaderDataGroup::Enum> _getShaderPropertyGroup(const std::string& propertyName);
-    
-    ShaderProgram* _getShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection);
 
+    // object shader data
     int _shaderId = 0;
     std::string _vertexSource;
     std::string _fragmentSource;

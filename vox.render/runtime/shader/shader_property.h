@@ -17,18 +17,16 @@ namespace vox {
  */
 struct ShaderProperty {
     /** Shader property name. */
-    std::string name;
+    const std::string name;
     
-private:
-    friend class ShaderData;
-    friend class Shader;
-    friend class RenderPipelineState;
-
-    static int _propertyNameCounter;
-    int _uniqueId;
-    ShaderDataGroup::Enum _group;
-
+    const ShaderDataGroup::Enum group;
+    
+    const int uniqueId;
+    
     ShaderProperty(const std::string& name, ShaderDataGroup::Enum group);
+
+private:
+    static int _propertyNameCounter;
 };
 
 }

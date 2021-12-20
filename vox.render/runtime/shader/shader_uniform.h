@@ -16,8 +16,7 @@ namespace vox {
 /**
  * Shader uniform。
  */
-class ShaderUniform {
-public:
+struct ShaderUniform {
     std::string name;
     int propertyId;
     size_t location;

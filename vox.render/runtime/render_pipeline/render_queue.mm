@@ -61,7 +61,7 @@ void RenderQueue::render(Camera* camera, RenderPass* pass) {
                                                compileMacros);
         
         //MARK:- Set Pipeline State
-        ShaderProgram* program = material->shader->_getShaderProgram(engine, compileMacros);
+        ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros);
         if (!program->isValid()) {
             continue;
         }
@@ -123,7 +123,7 @@ void RenderQueue::drawSky(Engine* engine, Camera* camera, const Sky& sky) {
     _matrix = projectionMatrix * _matrix;
     shaderData.setData("u_mvpNoscale", _matrix);
     
-    auto program = material->shader->_getShaderProgram(engine, compileMacros);
+    auto program = material->shader->findShaderProgram(engine, compileMacros);
     if (!program->isValid()) {
         return;
     }
