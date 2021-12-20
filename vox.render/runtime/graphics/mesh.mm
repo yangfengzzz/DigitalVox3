@@ -15,6 +15,10 @@ SubMesh* Mesh::subMesh(size_t index) {
     return &_subMeshes[index];
 }
 
+const std::vector<SubMesh>& Mesh::subMeshes() const {
+    return _subMeshes;
+}
+
 void Mesh::addSubMesh(SubMesh subMesh) {
     _subMeshes.push_back(subMesh);
 }

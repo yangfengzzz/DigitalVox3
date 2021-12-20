@@ -30,7 +30,7 @@ using namespace math;
  */
 class Camera : public Component {
 public:
-    /// Shader data.
+    /** Shader data. */
     ShaderData shaderData = ShaderData();
     
     /** Rendering priority - A Camera with higher priority will be rendered on top of a camera with lower priority. */
@@ -217,29 +217,34 @@ public:
     void render(std::optional<TextureCubeFace> cubeFace = std::nullopt, int mipLevel = 0);
     
 public:
-    /// Add render pass.
-    /// - Parameters:
-    ///   - pass: RenderPass object.
+    /**
+     * Add render pass.
+     * @param pass - The name of this Pass.
+     */
     void addRenderPass(std::unique_ptr<RenderPass>&& pass);
     
-    /// Add render pass.
-    /// - Parameters:
-    ///   - name: The name of this Pass.
-    ///   - priority: Priority, less than 0 before the default pass, greater than 0 after the default pass
-    ///   - renderTarget: The specified Render Target
-    ///   - replaceMaterial: Replaced material
-    ///   - mask: Perform bit and operations with Entity.Layer to filter the objects that this Pass needs to render
+    /**
+     * Add render pass.
+     * @param name - The name of this Pass or RenderPass object. When it is a name, the following parameters need to be provided
+     * @param priority - Priority, less than 0 before the default pass, greater than 0 after the default pass
+     * @param renderTarget - The specified Render Target
+     * @param mask - Perform bit and operations with Entity.Layer to filter the objects that this Pass needs to render
+     */
     void addRenderPass(const std::string& name,
                        int priority = 0,
                        MTLRenderPassDescriptor* renderTarget = nullptr,
                        Layer mask = Layer::Everything);
     
-    /// Remove render pass by name or render pass object.
-    /// - Parameter name: Render pass name
+    /**
+     * Remove render pass by name or render pass object.
+     * @param name - Render pass name
+     */
     void removeRenderPass(const std::string& name);
     
-    /// Remove render pass by name or render pass object.
-    /// - Parameter pass: render pass object
+    /**
+     * Remove render pass by name or render pass object.
+     * @param pass - Render pass object
+     */
     void removeRenderPass(const RenderPass* pass);
     
 public:

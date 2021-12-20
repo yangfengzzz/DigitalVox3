@@ -19,43 +19,58 @@
 
 namespace vox {
 using namespace math;
-
+/**
+ * Mesh.
+ */
 class Mesh : public EngineObject {
 public:
-    /// Name.
+    /** Name. */
     std::string name;
-    
-    /// The bounding volume of the mesh.
+    /** The bounding volume of the mesh. */
     BoundingBox bounds = BoundingBox();
     
-    /// Create mesh.
-    /// - Parameters:
-    ///   - engine: Engine
-    ///   - name: Mesh name
+    /**
+     * Create mesh.
+     * @param engine - Engine
+     * @param name - Mesh name
+     */
     Mesh(Engine* engine, const std::string& name = "");
     
-    /// First sub-mesh. Rendered using the first material.
+    /**
+     * First sub-mesh. Rendered using the first material.
+     */
     SubMesh* subMesh(size_t index);
     
-    /// Add sub-mesh, each sub-mesh can correspond to an independent material.
-    /// - Parameter subMesh: Start drawing offset, if the index buffer is set, it means the offset in the index buffer, if not set, it means the offset in the vertex buffer
-    /// - Returns: Sub-mesh
+    /**
+     * A collection of sub-mesh, each sub-mesh can be rendered with an independent material.
+     */
+    const std::vector<SubMesh>& subMeshes() const;
+    
+    /**
+     * Add sub-mesh, each sub-mesh can correspond to an independent material.
+     * @param subMesh - Start drawing offset, if the index buffer is set, it means the offset in the index buffer, if not set, it means the offset in the vertex buffer
+     */
     void addSubMesh(SubMesh subMesh);
     
-    /// Add sub-mesh, each sub-mesh can correspond to an independent material.
-    /// - Parameters:
-    ///   - start: Start drawing offset, if the index buffer is set, it means the offset in the index buffer, if not set, it means the offset in the vertex buffer
-    ///   - count: Drawing count, if the index buffer is set, it means the count in the index buffer, if not set, it means the count in the vertex buffer
-    ///   - topology: Drawing topology, default is MeshTopology.Triangles
-    /// - Returns: Sub-mesh
+    /**
+     * Add sub-mesh, each sub-mesh can correspond to an independent material.
+     * @param indexBuffer - Index Buffer
+     * @param indexType -MTLIndexType
+     * @param indexCount - Drawing count, if the index buffer is set, it means the count in the index buffer, if not set, it means the count in the vertex buffer
+     * @param topology - Drawing topology, default is MeshTopology.Triangles
+     */
     void addSubMesh(MeshBuffer indexBuffer, MTLIndexType indexType,
                     size_t indexCount = 0, MTLPrimitiveType topology = MTLPrimitiveTypeTriangle);
     
-    /// Clear all sub-mesh.
+    /**
+     * Clear all sub-mesh.
+     */
     void clearSubMesh();
     
-    /// Register update flag, update flag will be true if the vertex element changes.
-    /// - Returns: Update flag
+    /**
+     * Register update flag, update flag will be true if the vertex element changes.
+     * @returns Update flag
+     */
     std::unique_ptr<UpdateFlag> registerUpdateFlag();
     
     void _setVertexBuffer(size_t index, MeshBuffer buffer);
@@ -68,12 +83,13 @@ protected:
     friend class RenderQueue;
     
     std::vector<std::optional<MeshBuffer>> _vertexBuffer;
+    std::vector<SubMesh> _subMeshes;
+    UpdateFlagManager _updateFlagManager = UpdateFlagManager();
+    
+    //MARK: - useless
+    size_t _instanceCount;
     size_t _vertexCount = 0;
     MDLVertexDescriptor* _vertexDescriptor = nullptr;
-    std::vector<SubMesh> _subMeshes;
-
-    size_t _instanceCount;
-    UpdateFlagManager _updateFlagManager = UpdateFlagManager();
 };
 
 }
