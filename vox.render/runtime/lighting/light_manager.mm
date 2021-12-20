@@ -13,19 +13,23 @@
 
 namespace vox {
 void LightManager::attachRenderLight(Light* light) {
-    auto iter = std::find(visibleLights.begin(), visibleLights.end(), light);
-    if (iter == visibleLights.end()) {
-        visibleLights.push_back(light);
+    auto iter = std::find(_visibleLights.begin(), _visibleLights.end(), light);
+    if (iter == _visibleLights.end()) {
+        _visibleLights.push_back(light);
     } else {
         log::Err() << "Light already attached." << std::endl;;
     }
 }
 
 void LightManager::detachRenderLight(Light* light) {
-    auto iter = std::find(visibleLights.begin(), visibleLights.end(), light);
-    if (iter != visibleLights.end()) {
-        visibleLights.erase(iter);
+    auto iter = std::find(_visibleLights.begin(), _visibleLights.end(), light);
+    if (iter != _visibleLights.end()) {
+        _visibleLights.erase(iter);
     }
+}
+
+const std::vector<Light*>& LightManager::visibleLights() const {
+    return _visibleLights;
 }
 
 void LightManager::_updateShaderData(ShaderData& shaderData) {
@@ -36,8 +40,8 @@ void LightManager::_updateShaderData(ShaderData& shaderData) {
     size_t pointLightCount = 0;
     size_t spotLightCount = 0;
     
-    for (size_t i = 0; i < visibleLights.size(); i++) {
-        const auto& light = visibleLights[i];
+    for (size_t i = 0; i < _visibleLights.size(); i++) {
+        const auto& light = _visibleLights[i];
         if (dynamic_cast<DirectLight*>(light) != nullptr) {
             light->_appendData(directLightCount++);
         } else if (dynamic_cast<PointLight*>(light) != nullptr) {

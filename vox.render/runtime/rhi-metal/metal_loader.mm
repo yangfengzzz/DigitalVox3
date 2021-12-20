@@ -162,7 +162,7 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
     MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
     
     auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
-                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:roughness];
+                                                                     name:NULL dimensions:simd_make_int2(32, 32) roughness:roughness];
     
     MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
     if (!isTopLeft) {

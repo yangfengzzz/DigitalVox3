@@ -9,6 +9,7 @@
 #include "../camera.h"
 #include "../material/material.h"
 #include "../engine.h"
+#include "../lighting/light.h"
 
 namespace vox {
 BasicRenderPipeline::BasicRenderPipeline(Camera* camera):
@@ -36,6 +37,13 @@ void BasicRenderPipeline::clearRenderQueue() {
 
 void BasicRenderPipeline::render(const RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+    const auto& lights = context.scene()->light_manager.visibleLights();
+    for (const auto& light : lights) {
+        if (light->enableShadow()) {
+            
+        }
+    }
+    
     _opaqueQueue.sort(RenderQueue::_compareFromNearToFar);
     _alphaTestQueue.sort(RenderQueue::_compareFromNearToFar);
     _transparentQueue.sort(RenderQueue::_compareFromFarToNear);
