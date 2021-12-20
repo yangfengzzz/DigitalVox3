@@ -257,6 +257,9 @@ void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // union scene and camera macro.
     shaderData.mergeMacro(scene()->_globalShaderMacro, _globalShaderMacro);
     
+    // frustum culling into render queue.
+    _renderPipeline.clearRenderQueue();
+    engine()->_componentsManager.callRender(context);
     _renderPipeline.render(context, cubeFace, mipLevel);
 }
 

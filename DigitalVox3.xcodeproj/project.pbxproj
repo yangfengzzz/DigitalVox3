@@ -3496,19 +3496,19 @@
 		04CE390E2751AE4A00204B8E /* shader */ = {
 			isa = PBXGroup;
 			children = (
+				04CE39492751E3E600204B8E /* shader.h */,
+				04CE39482751E3E600204B8E /* shader.mm */,
+				04CE39412751D7BF00204B8E /* shader_data.h */,
+				04CE39402751D7BF00204B8E /* shader_data.mm */,
 				04CE39222751B39300204B8E /* state */,
 				04CE391C2751B28F00204B8E /* enums */,
 				04CE39192751B23400204B8E /* shader_pool.h */,
 				04CE39182751B23400204B8E /* shader_pool.mm */,
-				04CE39492751E3E600204B8E /* shader.h */,
-				04CE39482751E3E600204B8E /* shader.mm */,
 				04CE39102751AE5B00204B8E /* shader_program.h */,
 				04CE390F2751AE5B00204B8E /* shader_program.mm */,
 				04CE391F2751B2C500204B8E /* shader_property.h */,
 				04CE391E2751B2C500204B8E /* shader_property.cpp */,
 				04CE39452751D82F00204B8E /* shader_uniform.h */,
-				04CE39412751D7BF00204B8E /* shader_data.h */,
-				04CE39402751D7BF00204B8E /* shader_data.mm */,
 				04CE393D2751D2ED00204B8E /* shader_macro_collection.h */,
 				04CE393C2751D2ED00204B8E /* shader_macro_collection.mm */,
 			);

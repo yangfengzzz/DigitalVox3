@@ -49,6 +49,8 @@ public:
      * @param element - Render element
      */
     void pushPrimitive(const RenderElement& element);
+    
+    void clearRenderQueue();
         
 public:
     /**

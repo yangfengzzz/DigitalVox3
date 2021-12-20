@@ -28,17 +28,17 @@ void BasicRenderPipeline::destroy() {
     _renderPassArray.clear();
 }
 
-void BasicRenderPipeline::render(const RenderContext& context,
-                                 std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+void BasicRenderPipeline::clearRenderQueue() {
     _opaqueQueue.clear();
     _alphaTestQueue.clear();
     _transparentQueue.clear();
-    
-    _camera->engine()->_componentsManager.callRender(context);
+}
+
+void BasicRenderPipeline::render(const RenderContext& context,
+                                 std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     _opaqueQueue.sort(RenderQueue::_compareFromNearToFar);
     _alphaTestQueue.sort(RenderQueue::_compareFromNearToFar);
     _transparentQueue.sort(RenderQueue::_compareFromFarToNear);
-    
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         _drawRenderPass(_renderPassArray[i].get(), _camera, cubeFace, mipLevel);
     }
