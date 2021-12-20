@@ -850,6 +850,8 @@
 		04D47E61276FFF2A0038F34A /* shadow_map_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */; };
 		04D47E64277001B30038F34A /* shadow_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E62277001B30038F34A /* shadow_pass.mm */; };
 		04D47E65277001B30038F34A /* shadow_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E63277001B30038F34A /* shadow_pass.h */; };
+		04D47E68277002A40038F34A /* light_shadow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E66277002A40038F34A /* light_shadow.mm */; };
+		04D47E69277002A40038F34A /* light_shadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E67277002A40038F34A /* light_shadow.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1938,6 +1940,8 @@
 		04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_map_pass.h; sourceTree = "<group>"; };
 		04D47E62277001B30038F34A /* shadow_pass.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shadow_pass.mm; sourceTree = "<group>"; };
 		04D47E63277001B30038F34A /* shadow_pass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_pass.h; sourceTree = "<group>"; };
+		04D47E66277002A40038F34A /* light_shadow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_shadow.mm; sourceTree = "<group>"; };
+		04D47E67277002A40038F34A /* light_shadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_shadow.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3659,14 +3663,16 @@
 		04D47E55276FFD5E0038F34A /* shadow */ = {
 			isa = PBXGroup;
 			children = (
-				04D47E57276FFD7C0038F34A /* shadow_map_material.h */,
-				04D47E56276FFD7C0038F34A /* shadow_map_material.mm */,
-				04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */,
-				04D47E5E276FFF2A0038F34A /* shadow_map_pass.mm */,
-				04D47E5B276FFE1D0038F34A /* shadow_material.h */,
-				04D47E5A276FFE1D0038F34A /* shadow_material.mm */,
 				04D47E63277001B30038F34A /* shadow_pass.h */,
 				04D47E62277001B30038F34A /* shadow_pass.mm */,
+				04D47E5B276FFE1D0038F34A /* shadow_material.h */,
+				04D47E5A276FFE1D0038F34A /* shadow_material.mm */,
+				04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */,
+				04D47E5E276FFF2A0038F34A /* shadow_map_pass.mm */,
+				04D47E57276FFD7C0038F34A /* shadow_map_material.h */,
+				04D47E56276FFD7C0038F34A /* shadow_map_material.mm */,
+				04D47E67277002A40038F34A /* light_shadow.h */,
+				04D47E66277002A40038F34A /* light_shadow.mm */,
 			);
 			path = shadow;
 			sourceTree = "<group>";
@@ -4002,6 +4008,7 @@
 				04CE39AD2755003B00204B8E /* blinn_phong_material.h in Headers */,
 				0434A29B27590B86009AD4EA /* box_collider_shape.h in Headers */,
 				04CE38C6274D25BB00204B8E /* matrix.h in Headers */,
+				04D47E69277002A40038F34A /* light_shadow.h in Headers */,
 				04CE39092751AAD000204B8E /* submesh.h in Headers */,
 				0431558F276088920070FBEC /* color_material.h in Headers */,
 				04CE391B2751B23400204B8E /* shader_pool.h in Headers */,
@@ -4708,6 +4715,7 @@
 				04A79AC2275DE5D200182CCB /* point_light.mm in Sources */,
 				04A79AC6275DEA4E00182CCB /* spot_light.mm in Sources */,
 				04CE399E2753A83C00204B8E /* unlit.metal in Sources */,
+				04D47E68277002A40038F34A /* light_shadow.mm in Sources */,
 				0434A29E27590D71009AD4EA /* collider.mm in Sources */,
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04161058275A07CE006CD384 /* fixed_joint.cpp in Sources */,
