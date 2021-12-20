@@ -64,4 +64,8 @@ void PointLight::_updateShaderData(ShaderData& shaderData) {
     shaderData.setData(PointLight::_distanceProperty, _combinedDistance);
 }
 
+math::Matrix PointLight::shadowProjectionMatrix() {
+    return math::Matrix::perspective(math::degreeToRadian(50), 1, 0.5, 50);
+}
+
 }

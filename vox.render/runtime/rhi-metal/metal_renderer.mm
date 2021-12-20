@@ -145,6 +145,16 @@ void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
     [blit endEncoding];
 }
 
+void MetalRenderer::setRenderPipelineState(MTLRenderPipelineDescriptor *descriptor) {
+    NSError *error = nil;
+    auto state = [_device newRenderPipelineStateWithDescriptor:descriptor error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: failed to create Metal pipeline state: %@", error);
+    }
+    [_renderEncoder setRenderPipelineState:state];
+}
+
 void MetalRenderer::setRenderPipelineState(RenderPipelineState *state) {
     [_renderEncoder setRenderPipelineState:state->handle()];
 }

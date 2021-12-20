@@ -9,7 +9,24 @@
 #include "../camera.h"
 
 namespace vox {
-void RenderContext::_setContext(Camera* camera) {
+Camera* RenderContext::camera() {
+    return _camera;
+}
+
+const Camera* RenderContext::camera() const {
+    return _camera;
+}
+
+const Scene* RenderContext::scene() const {
+    return _scene;
+}
+
+const Matrix RenderContext::viewProjectMatrix() const {
+    return _viewProjectMatrix;
+}
+
+void RenderContext::resetContext(Scene* scene, Camera* camera) {
+    _scene = scene;
     _camera = camera;
     _viewProjectMatrix = camera->projectionMatrix() * camera->viewMatrix();
 }

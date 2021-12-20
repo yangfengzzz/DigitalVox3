@@ -113,7 +113,7 @@ protected:
     friend class RenderQueue;
     friend class ComponentsManager;
     
-    void _updateShaderData(const RenderContext& context);
+    void _updateShaderData(RenderContext& context);
     
     MaterialPtr _createInstanceMaterial(const MaterialPtr& material, size_t index);
     

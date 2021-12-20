@@ -29,15 +29,15 @@ public:
      * @param light render light
      */
     void detachRenderLight(Light* light);
+    
+    const std::vector<Light*>& visibleLights() const;
         
 private:
     friend class Scene;
-    friend class ShadowPass;
-    friend class ShadowManager;
     
     void _updateShaderData(ShaderData& shaderData);
 
-    std::vector<Light*> visibleLights;
+    std::vector<Light*> _visibleLights;
 };
 
 }

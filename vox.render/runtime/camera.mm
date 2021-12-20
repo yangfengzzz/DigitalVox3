@@ -28,7 +28,7 @@ _renderPipeline(BasicRenderPipeline(this))
     _frustumViewChangeFlag = transform->registerWorldChangeFlag();
 }
 
-float Camera::nearClipPlane() {
+float Camera::nearClipPlane() const {
     return _nearClipPlane;
 }
 
@@ -37,7 +37,7 @@ void Camera::setNearClipPlane(float value) {
     _projMatChange();
 }
 
-float Camera::farClipPlane() {
+float Camera::farClipPlane() const {
     return _farClipPlane;
 }
 
@@ -46,7 +46,7 @@ void Camera::setFarClipPlane(float value) {
     _projMatChange();
 }
 
-float Camera::fieldOfView() {
+float Camera::fieldOfView() const {
     return _fieldOfView;
 }
 
@@ -55,7 +55,7 @@ void Camera::setFieldOfView(float value) {
     _projMatChange();
 }
 
-float Camera::aspectRatio() {
+float Camera::aspectRatio() const {
     const auto& canvas = _entity->engine()->canvas();
     if (_customAspectRatio == std::nullopt) {
         return (canvas->width() * _viewport.z) / (canvas->height() * _viewport.w);
@@ -78,7 +78,7 @@ void Camera::setViewport(const Float4& value) {
     _projMatChange();
 }
 
-bool Camera::isOrthographic() {
+bool Camera::isOrthographic() const {
     return _isOrthographic;
 }
 
@@ -87,7 +87,7 @@ void Camera::setIsOrthographic(bool value) {
     _projMatChange();
 }
 
-float Camera::orthographicSize() {
+float Camera::orthographicSize() const {
     return _orthographicSize;
 }
 
@@ -245,9 +245,9 @@ Ray Camera::screenPointToRay(const Float2& point) {
 void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // compute cull frustum.
     auto& context = engine()->_renderContext;
-    context._setContext(this);
+    context.resetContext(scene(), this);
     if (enableFrustumCulling && (_frustumViewChangeFlag->flag || _isFrustumProjectDirty)) {
-        _frustum.calculateFromMatrix(context._viewProjectMatrix);
+        _frustum.calculateFromMatrix(context.viewProjectMatrix());
         _frustumViewChangeFlag->flag = false;
         _isFrustumProjectDirty = false;
     }
@@ -298,7 +298,7 @@ Float3 Camera::_innerViewportToWorldPoint(const Float3& point, const Matrix& inv
 void Camera::_updateShaderData(const RenderContext& context) {
     shaderData.setData(Camera::_viewMatrixProperty, viewMatrix());
     shaderData.setData(Camera::_projectionMatrixProperty, projectionMatrix());
-    shaderData.setData(Camera::_vpMatrixProperty, context._viewProjectMatrix);
+    shaderData.setData(Camera::_vpMatrixProperty, context.viewProjectMatrix());
     shaderData.setData(Camera::_inverseViewMatrixProperty, _transform->worldMatrix());
     shaderData.setData(Camera::_inverseProjectionMatrixProperty, inverseProjectionMatrix());
     shaderData.setData(Camera::_cameraPositionProperty, _transform->worldPosition());

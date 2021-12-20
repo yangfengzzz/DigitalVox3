@@ -28,6 +28,9 @@ public:
     
     PointLight(Entity* entity);
     
+public:
+    math::Matrix shadowProjectionMatrix() override;
+    
 private:
     friend class LightManager;
     

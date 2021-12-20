@@ -107,20 +107,23 @@ id<MTLTexture> MetalLoader::loadCubeTexture(const std::string& path, const std::
 }
 
 id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std::vector<std::string>& textureNames) {
-    NSMutableArray<id<MTLTexture>> *textures = [[NSMutableArray alloc]init];
+    std::vector<id<MTLTexture>> textures;
     for (const auto& name : textureNames) {
         auto texture = loadTexture(path, name);
         if (texture != nil) {
-            [textures addObject:texture];
+            textures.push_back(texture);
         }
-    }
-    
+    }    
+    return createTextureArray(textures);
+}
+
+id<MTLTexture> MetalLoader::createTextureArray(const std::vector<id<MTLTexture>>& textures) {
     MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
     descriptor.textureType = MTLTextureType2DArray;
     descriptor.pixelFormat = textures[0].pixelFormat;
     descriptor.width = textures[0].width;
     descriptor.height = textures[0].height;
-    descriptor.arrayLength = textures.count;
+    descriptor.arrayLength = textures.size();
     
     auto arrayTexture = [_device newTextureWithDescriptor:descriptor];
     auto commandBuffer = [_commandQueue commandBuffer];
@@ -128,7 +131,7 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
     MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
     MTLSize size = MTLSize{.width =  arrayTexture.width,
         .height =  arrayTexture.height, .depth = 1};
-    for (size_t index = 0; index < textures.count; index++) {
+    for (size_t index = 0; index < textures.size(); index++) {
         [blitEncoder copyFromTexture:textures[index] sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
                            toTexture:arrayTexture destinationSlice:index destinationLevel:0 destinationOrigin:origin];
     }
@@ -162,7 +165,7 @@ id<MTLTexture> MetalLoader::createIrradianceTexture(const std::string& path,
     MDLTexture* mdlTexture = [MDLTexture textureCubeWithImagesNamed:imageNames bundle:[NSBundle bundleWithPath:pathName]];
     
     auto irradianceTexture = [MDLTexture irradianceTextureCubeWithTexture:mdlTexture
-                                                                     name:NULL dimensions:simd_make_int2(64, 64) roughness:roughness];
+                                                                     name:NULL dimensions:simd_make_int2(32, 32) roughness:roughness];
     
     MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
     if (!isTopLeft) {

@@ -33,7 +33,7 @@ public:
     /**
      * The entity which the component belongs to.
      */
-    Entity *entity();
+    Entity *entity() const;
     
     /**
      * The scene which the component's entity belongs to.

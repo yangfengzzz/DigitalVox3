@@ -150,10 +150,10 @@ void Renderer::setMaterials(const std::vector<MaterialPtr>& materials) {
     }
 }
 
-void Renderer::_updateShaderData(const RenderContext& context) {
+void Renderer::_updateShaderData(RenderContext& context) {
     Matrix worldMatrix = entity()->transform->worldMatrix();
-    _mvMatrix = context._camera->viewMatrix() * worldMatrix;
-    _mvpMatrix = context._viewProjectMatrix * worldMatrix;
+    _mvMatrix = context.camera()->viewMatrix() * worldMatrix;
+    _mvpMatrix = context.viewProjectMatrix() * worldMatrix;
     _mvInvMatrix = invert(_mvMatrix);
     _normalMatrix = invert(_normalMatrix);
     _normalMatrix = transpose(_normalMatrix);

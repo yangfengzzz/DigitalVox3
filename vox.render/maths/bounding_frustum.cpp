@@ -111,11 +111,11 @@ void BoundingFrustum::calculateFromMatrix(const Matrix &matrix) {
     bottom.normalize();
 }
 
-bool BoundingFrustum::intersectsBox(const BoundingBox &box) {
+bool BoundingFrustum::intersectsBox(const BoundingBox &box) const {
     return collision_util::intersectsFrustumAndBox(*this, box);
 }
 
-bool BoundingFrustum::intersectsSphere(const BoundingSphere &sphere) {
+bool BoundingFrustum::intersectsSphere(const BoundingSphere &sphere) const {
     return collision_util::frustumContainsSphere(*this, sphere) != ContainmentType::Disjoint;
 }
 

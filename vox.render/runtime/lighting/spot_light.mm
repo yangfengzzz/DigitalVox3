@@ -61,4 +61,9 @@ void SpotLight::_updateShaderData(ShaderData& shaderData) {
     shaderData.setData(SpotLight::_penumbraCosProperty, _combinedPenumbraCos);
 }
 
+math::Matrix SpotLight::shadowProjectionMatrix() {
+    const auto fov = std::min(M_PI / 2, angle * 2 * std::sqrt(2));
+    return math::Matrix::perspective(fov, 1, 0.1, distance + 5);
+}
+
 }

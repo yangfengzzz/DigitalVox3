@@ -9,6 +9,7 @@
 #include "../camera.h"
 #include "../material/material.h"
 #include "../engine.h"
+#include "../lighting/light.h"
 
 namespace vox {
 BasicRenderPipeline::BasicRenderPipeline(Camera* camera):
@@ -37,8 +38,51 @@ void BasicRenderPipeline::clearRenderQueue() {
 void BasicRenderPipeline::render(const RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
     
-    // render from camera
+    std::vector<id<MTLTexture>> shadowMaps;
+    const auto& lights = context.scene()->light_manager.visibleLights();
+    for (const auto& light : lights) {
+        if (light->enableShadow()) {
+            auto texture = rhi.resourceLoader()->buildTexture(light->shadow.mapSizeX,
+                                                              light->shadow.mapSizeY,
+                                                              MTLPixelFormatDepth32Float);
+            MTLRenderPassDescriptor* shadowRenderPassDescriptor = [[MTLRenderPassDescriptor alloc]init];
+            shadowRenderPassDescriptor.depthAttachment.texture = texture;
+            shadowRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
+            shadowRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
+            shadowRenderPassDescriptor.depthAttachment.clearDepth = 1;
+            rhi.beginRenderPass(shadowRenderPassDescriptor, _camera, mipLevel);
+            
+            MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+            depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
+            depthStencilDescriptor.depthWriteEnabled = true;
+            rhi.setDepthStencilState(depthStencilDescriptor);
+            rhi.setCullMode(MTLCullModeNone);
+            rhi.setDepthBias(0.01, 1.0, 0.01);
+            
+            MDLVertexDescriptor* vertexDescriptor = [[MDLVertexDescriptor alloc]init];
+            vertexDescriptor.attributes[0] = [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
+                                                                              format:MDLVertexFormatFloat3
+                                                                              offset:0 bufferIndex:0];
+            vertexDescriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:12];
+            MTLRenderPipelineDescriptor* pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc]init];
+            pipelineDescriptor.vertexFunction = [rhi.library() newFunctionWithName:@"vertex_depth"];
+            pipelineDescriptor.fragmentFunction = NULL;
+            pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
+            pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(vertexDescriptor);
+            pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+            rhi.setRenderPipelineState(pipelineDescriptor);
+            // render loop
+            rhi.endRenderPass();
+            shadowMaps.push_back(texture);
+        }
+    }
+    if (!shadowMaps.empty()) {
+        rhi.resourceLoader()->createTextureArray(shadowMaps);
+    }
+
     _opaqueQueue.sort(RenderQueue::_compareFromNearToFar);
     _alphaTestQueue.sort(RenderQueue::_compareFromNearToFar);
     _transparentQueue.sort(RenderQueue::_compareFromFarToNear);

@@ -60,21 +60,21 @@ public:
     /**
      * Near clip plane - the closest point to the camera when rendering occurs.
      */
-    float nearClipPlane();
+    float nearClipPlane() const;
     
     void setNearClipPlane(float value);
     
     /**
      * Far clip plane - the furthest point to the camera when rendering occurs.
      */
-    float farClipPlane();
+    float farClipPlane() const;
     
     void setFarClipPlane(float value);
     
     /**
      * The camera's view angle. activating when camera use perspective projection.
      */
-    float fieldOfView();
+    float fieldOfView() const;
     
     void setFieldOfView(float value);
     
@@ -82,7 +82,7 @@ public:
      * Aspect ratio. The default is automatically calculated by the viewport's aspect ratio. If it is manually set,
      * the manual value will be kept. Call resetAspectRatio() to restore it.
      */
-    float aspectRatio();
+    float aspectRatio() const;
     
     void setAspectRatio(float value);
     
@@ -97,14 +97,14 @@ public:
     /**
      * Whether it is orthogonal, the default is false. True will use orthographic projection, false will use perspective projection.
      */
-    bool isOrthographic();
+    bool isOrthographic() const;
     
     void setIsOrthographic(bool value);
     
     /**
      * Half the size of the camera in orthographic mode.
      */
-    float orthographicSize();
+    float orthographicSize() const;
     
     void setOrthographicSize(float value);
     
