@@ -63,7 +63,7 @@ class MatrixScalarElemWiseBinaryOp;
 //! pattern.
 //!
 //! \tparam T  Real number type.
-//! \tparam E  Subclass type.
+//! \tparam Derived  Subclass type.
 //!
 template <typename T, size_t Rows, size_t Cols, typename Derived> class MatrixExpression {
 public:
