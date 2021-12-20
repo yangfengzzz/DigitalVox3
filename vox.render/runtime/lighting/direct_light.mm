@@ -40,4 +40,8 @@ void DirectLight::_updateShaderData(ShaderData& shaderData) {
     shaderData.setData(DirectLight::_directionProperty, _combinedDirection);
 }
 
+math::Matrix DirectLight::shadowProjectionMatrix() {
+    return math::Matrix::ortho(-5, 5, -5, 5, 0.1, 50);
+}
+
 }

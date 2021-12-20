@@ -25,6 +25,9 @@ public:
     float intensity = 1.0;
     
     DirectLight(Entity* entity);
+    
+public:
+    math::Matrix shadowProjectionMatrix() override;
 
 private:
     friend class LightManager;

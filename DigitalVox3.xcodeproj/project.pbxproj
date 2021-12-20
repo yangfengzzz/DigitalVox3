@@ -842,17 +842,11 @@
 		04D47E4E276C65A90038F34A /* sky.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E4D276C65A90038F34A /* sky.h */; };
 		04D47E51276C67C70038F34A /* skybox_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E4F276C67C70038F34A /* skybox_material.mm */; };
 		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
-		04D47E58276FFD7C0038F34A /* shadow_map_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E56276FFD7C0038F34A /* shadow_map_material.mm */; };
 		04D47E59276FFD7C0038F34A /* shadow_map_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E57276FFD7C0038F34A /* shadow_map_material.h */; };
-		04D47E5C276FFE1D0038F34A /* shadow_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E5A276FFE1D0038F34A /* shadow_material.mm */; };
 		04D47E5D276FFE1D0038F34A /* shadow_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E5B276FFE1D0038F34A /* shadow_material.h */; };
-		04D47E60276FFF2A0038F34A /* shadow_map_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E5E276FFF2A0038F34A /* shadow_map_pass.mm */; };
 		04D47E61276FFF2A0038F34A /* shadow_map_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */; };
-		04D47E64277001B30038F34A /* shadow_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E62277001B30038F34A /* shadow_pass.mm */; };
 		04D47E65277001B30038F34A /* shadow_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E63277001B30038F34A /* shadow_pass.h */; };
-		04D47E68277002A40038F34A /* light_shadow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E66277002A40038F34A /* light_shadow.mm */; };
 		04D47E69277002A40038F34A /* light_shadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E67277002A40038F34A /* light_shadow.h */; };
-		04D47E6C27700EB20038F34A /* shadow_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6A27700EB20038F34A /* shadow_manager.mm */; };
 		04D47E6D27700EB20038F34A /* shadow_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E6B27700EB20038F34A /* shadow_manager.h */; };
 /* End PBXBuildFile section */
 
@@ -4581,7 +4575,6 @@
 				0434A2922757B385009AD4EA /* animator.mm in Sources */,
 				04CE3790274D167E00204B8E /* platform.cc in Sources */,
 				04A79ABE275DE28100182CCB /* light.mm in Sources */,
-				04D47E5C276FFE1D0038F34A /* shadow_material.mm in Sources */,
 				04160FF62750955C006CD384 /* component.mm in Sources */,
 				04CE3793274D167E00204B8E /* log.cc in Sources */,
 				04315596276090790070FBEC /* framebuffer_picker.mm in Sources */,
@@ -4662,9 +4655,7 @@
 				0416103727599B05006CD384 /* physics_manager.mm in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
-				04D47E64277001B30038F34A /* shadow_pass.mm in Sources */,
 				04161068275A1506006CD384 /* translational_joint.cpp in Sources */,
-				04D47E6C27700EB20038F34A /* shadow_manager.mm in Sources */,
 				04161064275A1336006CD384 /* spring_joint.cpp in Sources */,
 				04160FFE275096FD006CD384 /* updateFlag.cpp in Sources */,
 				0416105C275A0CF4006CD384 /* spherical_joint.cpp in Sources */,
@@ -4697,7 +4688,6 @@
 				04CE38FA2751992C00204B8E /* timer.cpp in Sources */,
 				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
 				04C2EA54276EFA6E00091FB3 /* pbr.metal in Sources */,
-				04D47E60276FFF2A0038F34A /* shadow_map_pass.mm in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,
 				04CE39A82754F5DA00204B8E /* base_material.mm in Sources */,
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,
@@ -4717,13 +4707,11 @@
 				04CE39B02755052E00204B8E /* unlit_material.mm in Sources */,
 				0431558B276087A60070FBEC /* framebuffer-picker-color.metal in Sources */,
 				0416100A2750A720006CD384 /* scene.mm in Sources */,
-				04D47E58276FFD7C0038F34A /* shadow_map_material.mm in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
 				04A79AC2275DE5D200182CCB /* point_light.mm in Sources */,
 				04A79AC6275DEA4E00182CCB /* spot_light.mm in Sources */,
 				04CE399E2753A83C00204B8E /* unlit.metal in Sources */,
-				04D47E68277002A40038F34A /* light_shadow.mm in Sources */,
 				0434A29E27590D71009AD4EA /* collider.mm in Sources */,
 				04CE39532752589700204B8E /* material.mm in Sources */,
 				04161058275A07CE006CD384 /* fixed_joint.cpp in Sources */,

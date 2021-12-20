@@ -39,18 +39,32 @@ public:
     
     void setEnableShadow(bool enabled) {
         _enableShadow = enabled;
-        if (_enableShadow) {
-            shadow.initShadowProjectionMatrix(this);
-        }
     }
     
-    void appendShadow(int lightIndex);
+    struct {
+        /**
+         * Shadow bias.
+         */
+        float bias = 0.005;
+        /**
+         * Shadow intensity, the larger the value, the clearer and darker the shadow.
+         */
+        float intensity = 0.2;
+        /**
+         * Pixel range used for shadow PCF interpolation.
+         */
+        float radius = 1;
+        /**
+         * Shadow map size.
+         */
+        float mapSizeX = 500;
+        /**
+         * Shadow map size.
+         */
+        float mapSizeY = 500;
+    } shadow;
     
-    math::Matrix shadowProjectionMatrix();
-    
-    MTLRenderPassDescriptor* shadowRenderTarget();
-    
-    ShadowMapPass* shadowMapPass;
+    virtual math::Matrix shadowProjectionMatrix() = 0;
     
 protected:
     /**
@@ -69,9 +83,7 @@ private:
      */
     void _onDisable() override;
     
-private:
-    LightShadow shadow;
-    
+private:    
     bool _enableShadow = false;
 };
 
