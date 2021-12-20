@@ -12,13 +12,17 @@
 #include "shader_macro_collection.h"
 
 namespace vox {
-/// Shader program, corresponding to the GPU shader program.
+/**
+ * Shader program, corresponding to the GPU shader program.
+ */
 class ShaderProgram {
 public:
     id<MTLFunction> vertexShader();
     id<MTLFunction> fragmentShader();
 
-    /// Whether this shader program is valid.
+    /**
+     * Whether this shader program is valid.
+     */
     bool isValid();
     
     ShaderProgram(id<MTLLibrary> library, const std::string& vertexSource, const std::string& fragmentSource,
@@ -28,10 +32,9 @@ public:
 private:
     MTLFunctionConstantValues* makeFunctionConstants(const ShaderMacroCollection& macroInfo);
 
-    /// init and link program with shader.
-    /// - Parameters:
-    ///   - vertexSource: vertex name
-    ///   - fragmentSource: fragment name
+    /**
+     * init and link program with shader.
+     */
     void _createProgram(const std::string& vertexSource, const std::string& fragmentSource,
                         const ShaderMacroCollection& macroInfo);
     

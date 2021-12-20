@@ -148,12 +148,10 @@ fragment float4 fragment_shadow_map(VertexOut in [[stage_in]]) {
 //MARK: - fragment_shadow
 constant float4 bitShift = float4(1.0, 1.0/256.0, 1.0/(256.0*256.0), 1.0/(256.0*256.0*256.0));
 
-/// Unpack depth value.
 float unpack(const float4 rgbaDepth) {
     return dot(rgbaDepth, bitShift);
 }
 
-/// Degree of shadow.
 float getVisibility(float4 positionFromLight, int index,
                     const texture2d_array<float> shadowMap, sampler textureSampler, float2 mapSize,
                     float intensity, float bias, float radius) {

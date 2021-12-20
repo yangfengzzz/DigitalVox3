@@ -9,6 +9,7 @@
 #define render_pipeline_state_hpp
 
 #import <Metal/Metal.h>
+#include "../vox_type.h"
 #include "../shader/shader_uniform.h"
 #include "../shader/shader_data.h"
 #include <iomanip>
@@ -19,8 +20,9 @@
 #include <iostream>
 
 namespace vox {
-class MetalRenderer;
-
+/**
+ * Shader program, corresponding to the GPU shader program.
+ */
 class RenderPipelineState {
 public:
     std::vector<ShaderUniform> sceneUniformBlock{};
@@ -36,19 +38,23 @@ public:
     }
     
 public:
-    /// Grouping other data.
+    /**
+     * Grouping other data.
+     */
     void groupingOtherUniformBlock();
     
-    /// Upload all shader data in shader uniform block.
-    /// - Parameters:
-    ///   - uniformBlock: shader Uniform block
-    ///   - shaderData: shader data
+    /**
+     * Upload all shader data in shader uniform block.
+     * @param uniformBlock - shader Uniform block
+     * @param shaderData - shader data
+     */
     void uploadAll(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData);
     
-    /// Upload constant shader data in shader uniform block.
-    /// - Parameters:
-    ///   - uniformBlock: shader Uniform block
-    ///   - shaderData: shader data
+    /**
+     * Upload constant shader data in shader uniform block.
+     * @param uniformBlock - shader Uniform block
+     * @param shaderData - shader data
+     */
     void uploadUniforms(const std::vector<ShaderUniform>& uniformBlock, const ShaderData& shaderData);
     
     template<class T, class F>
@@ -92,7 +98,9 @@ private:
     void process(const ShaderUniform& uniform, const std::any& a, id <MTLRenderCommandEncoder> encoder);
     
 private:
-    /// record the location of uniform/attribute.
+    /**
+     * record the location of uniform/attribute.
+     */
     void _recordVertexLocation(MTLRenderPipelineReflection* reflection);
     
     void _groupingUniform(const ShaderUniform& uniform,

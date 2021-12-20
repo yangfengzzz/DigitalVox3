@@ -17,37 +17,43 @@
 #include "shader_macro_collection.h"
 
 namespace vox {
-/// Shader containing vertex and fragment source.
+/**
+ * Shader containing vertex and fragment source.
+ */
 class Shader {
 public:
-    /// The name of shader.
+    /** The name of shader. */
     std::string name;
     
     Shader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
     
-    /// Create a shader.
-    /// - Parameters:    Shader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
-
-    ///   - name: Name of the shader
-    ///   - vertexSource: Vertex source code
-    ///   - fragmentSource: Fragment source code
-    /// - Returns: Shader
+    /**
+     * Create a shader.
+     * @param name - Name of the shader
+     * @param vertexSource - Vertex source code
+     * @param fragmentSource - Fragment source code
+     */
     static Shader* create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
     
-    
-    /// Find a shader by name.
-    /// - Parameter name: Name of the shader
-    /// - Returns: Shader
+    /**
+     * Find a shader by name.
+     * @param name - Name of the shader
+     */
     static Shader* find(const std::string& name);
     
-    /// Get shader property by name.
-    /// - Parameter name: Name of the shader property
-    /// - Returns: Shader property
+    /**
+     * Get shader property by name.
+     * @param name - Name of the shader property
+     * @returns Shader property
+     */
     static std::optional<ShaderProperty> getPropertyByName(const std::string& name);
     
-    /// Get shader property by name.
-    /// - Parameter name: Name of the shader property
-    /// - Returns: Shader property
+    /**
+     * Create shader property by name.
+     * @param name - Name of the shader property
+     * @param group - Group of shader data
+     * @returns Shader property
+     */
     static ShaderProperty createProperty(const std::string& name, ShaderDataGroup::Enum group);
     
 private:

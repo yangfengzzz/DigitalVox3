@@ -12,9 +12,11 @@
 #include <string>
 
 namespace vox {
-/// Shader property.
+/**
+ * Shader property.
+ */
 struct ShaderProperty {
-    /// Shader property name.
+    /** Shader property name. */
     std::string name;
     
 private:

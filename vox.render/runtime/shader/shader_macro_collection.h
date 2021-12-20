@@ -13,17 +13,20 @@
 #include "macro_name.h"
 
 namespace vox {
-/// Shader macro collection.
+/**
+ * Shader macro collection.
+ */
 struct ShaderMacroCollection {
     static std::unordered_map<MacroName, std::pair<int, MTLDataType>> defaultValue;
     static MTLFunctionConstantValues* defaultFunctionConstant;
     static MTLFunctionConstantValues* createDefaultFunction();
     
-    /// Union of two macro collection.
-    /// - Parameters:
-    ///   - left: input macro collection
-    ///   - right: input macro collection
-    ///   - out: union output macro collection
+    /**
+     * Union of two macro collection.
+     * @param left - input macro collection
+     * @param right - input macro collection
+     * @param result - union output macro collection
+     */
     static void unionCollection(const ShaderMacroCollection& left, const ShaderMacroCollection& right,
                                 ShaderMacroCollection& result);
     

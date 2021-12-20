@@ -19,8 +19,9 @@
 #include <Metal/Metal.h>
 
 namespace vox {
-
-/// Struct to hold the internal state of the Resource Cache
+/**
+ * Struct to hold the internal state of the Resource Cache.
+ */
 struct ResourceCacheState {
     std::unordered_map<size_t, std::unique_ptr<ShaderProgram>> shader_modules;
 
@@ -31,16 +32,18 @@ struct ResourceCacheState {
     std::unordered_map<size_t, std::unique_ptr<RenderPass>> render_passes;
 };
 
-/// Cache all sorts of Metal objects specific to a Metal device.
-/// Supports serialization and deserialization of cached resources.
-/// There is only one cache for all these objects, with several unordered_map of hash indices
-/// and objects. For every object requested, there is a templated version on request_resource.
-/// Some objects may need building if they are not found in the cache.
-///
-/// The resource cache is also linked with ResourceRecord and ResourceReplay. Replay can warm-up
-/// the cache on app startup by creating all necessary objects.
-/// The cache holds pointers to objects and has a mapping from such pointers to hashes.
-/// It can only be destroyed in bulk, single elements cannot be removed.
+/**
+ * Cache all sorts of Metal objects specific to a Metal device.
+ * Supports serialization and deserialization of cached resources.
+ * There is only one cache for all these objects, with several unordered_map of hash indices
+ * and objects. For every object requested, there is a templated version on request_resource.
+ * Some objects may need building if they are not found in the cache.
+ *
+ * The resource cache is also linked with ResourceRecord and ResourceReplay. Replay can warm-up
+ * the cache on app startup by creating all necessary objects.
+ * The cache holds pointers to objects and has a mapping from such pointers to hashes.
+ * It can only be destroyed in bulk, single elements cannot be removed.
+ */
 class ResourceCache {
 public:
     MetalRenderer* render;

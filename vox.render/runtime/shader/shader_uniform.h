@@ -13,7 +13,9 @@
 #include <vector>
 
 namespace vox {
-/// Shader uniform。
+/**
+ * Shader uniform。
+ */
 class ShaderUniform {
 public:
     std::string name;

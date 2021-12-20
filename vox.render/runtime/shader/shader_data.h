@@ -15,9 +15,9 @@
 #include <unordered_map>
 
 namespace vox {
-class MetalRenderer;
-
-///  Shader data collection,Correspondence includes shader properties data and macros data.
+/**
+ * Shader data collection,Correspondence includes shader properties data and macros data.
+ */
 class ShaderData {
 public:
     std::any getData(const std::string& property_name);
@@ -28,18 +28,24 @@ public:
     
     void setData(ShaderProperty property, std::any value);
     
-    /// Enable macro.
-    /// - Parameter macroName: Macro name
+    /**
+     * Enable macro.
+     * @param macroName - Shader macro
+     */
     void enableMacro(MacroName macroName);
 
-    /// Enable macro.
-    /// - Parameters:
-    ///   - name: Macro name
-    ///   - value: Macro value
+    /**
+     * Enable macro.
+     * @remarks Name and value will combine one macro, it's equal the macro of "name value".
+     * @param macroName - Macro name
+     * @param value - Macro value
+     */
     void enableMacro(MacroName macroName, std::pair<int, MTLDataType> value);
 
-    /// Disable macro
-    /// - Parameter macroName: Macro name
+    /**
+     * Disable macro
+     * @param macroName - Macro name
+     */
     void disableMacro(MacroName macroName);
     
 private:
