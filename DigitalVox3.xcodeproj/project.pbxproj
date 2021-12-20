@@ -846,6 +846,8 @@
 		04D47E59276FFD7C0038F34A /* shadow_map_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E57276FFD7C0038F34A /* shadow_map_material.h */; };
 		04D47E5C276FFE1D0038F34A /* shadow_material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E5A276FFE1D0038F34A /* shadow_material.mm */; };
 		04D47E5D276FFE1D0038F34A /* shadow_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E5B276FFE1D0038F34A /* shadow_material.h */; };
+		04D47E60276FFF2A0038F34A /* shadow_map_pass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E5E276FFF2A0038F34A /* shadow_map_pass.mm */; };
+		04D47E61276FFF2A0038F34A /* shadow_map_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1930,6 +1932,8 @@
 		04D47E57276FFD7C0038F34A /* shadow_map_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_map_material.h; sourceTree = "<group>"; };
 		04D47E5A276FFE1D0038F34A /* shadow_material.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shadow_material.mm; sourceTree = "<group>"; };
 		04D47E5B276FFE1D0038F34A /* shadow_material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_material.h; sourceTree = "<group>"; };
+		04D47E5E276FFF2A0038F34A /* shadow_map_pass.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shadow_map_pass.mm; sourceTree = "<group>"; };
+		04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_map_pass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3653,6 +3657,8 @@
 			children = (
 				04D47E57276FFD7C0038F34A /* shadow_map_material.h */,
 				04D47E56276FFD7C0038F34A /* shadow_map_material.mm */,
+				04D47E5F276FFF2A0038F34A /* shadow_map_pass.h */,
+				04D47E5E276FFF2A0038F34A /* shadow_map_pass.mm */,
 				04D47E5B276FFE1D0038F34A /* shadow_material.h */,
 				04D47E5A276FFE1D0038F34A /* shadow_material.mm */,
 			);
@@ -3961,6 +3967,7 @@
 				04CE39BD275511CE00204B8E /* pbr_material.h in Headers */,
 				04CE397127526DCF00204B8E /* mesh_renderer.h in Headers */,
 				04CE39C52757A18C00204B8E /* fbx_mesh.h in Headers */,
+				04D47E61276FFF2A0038F34A /* shadow_map_pass.h in Headers */,
 				04CE39172751AF3800204B8E /* mesh.h in Headers */,
 				04CE38CA274DBF3C00204B8E /* matrix3x3.h in Headers */,
 				04CE39B5275508D900204B8E /* pbr_base_material.h in Headers */,
@@ -4667,6 +4674,7 @@
 				04CE38FA2751992C00204B8E /* timer.cpp in Sources */,
 				04CE38D4274E819500204B8E /* vec_float.cpp in Sources */,
 				04C2EA54276EFA6E00091FB3 /* pbr.metal in Sources */,
+				04D47E60276FFF2A0038F34A /* shadow_map_pass.mm in Sources */,
 				04CE37F2274D167F00204B8E /* raw_track.cc in Sources */,
 				04CE39A82754F5DA00204B8E /* base_material.mm in Sources */,
 				04CE37F4274D167F00204B8E /* track_builder.cc in Sources */,
