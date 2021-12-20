@@ -36,6 +36,9 @@ void BasicRenderPipeline::clearRenderQueue() {
 
 void BasicRenderPipeline::render(const RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+    // generate shadow map
+    
+    // render from camera
     _opaqueQueue.sort(RenderQueue::_compareFromNearToFar);
     _alphaTestQueue.sort(RenderQueue::_compareFromNearToFar);
     _transparentQueue.sort(RenderQueue::_compareFromFarToNear);
@@ -81,7 +84,10 @@ void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
             }
             _transparentQueue.render(camera, pass);
         }
-        rhi.endRenderPass();
+        
+        // poseprocess
+        
+        rhi.endRenderPass();// renderEncoder
     }
     
     pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
