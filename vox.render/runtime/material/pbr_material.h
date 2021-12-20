@@ -11,23 +11,34 @@
 #include "pbr_base_material.h"
 
 namespace vox {
-/// PBR (Metallic-Roughness Workflow) Material.
+/**
+ * PBR (Metallic-Roughness Workflow) Material.
+ */
 class PBRMaterial: public PBRBaseMaterial {
 public:
-    /// Metallic.
+    /**
+     * Metallic.
+     */
     float metallic();
     void setMetallic(float newValue);
     
-    /// Roughness.
+    /**
+     * Roughness.
+     */
     float roughness();
     void setRoughness(float newValue);
     
-    /// Roughness metallic texture.
+    /**
+     * Roughness metallic texture.
+     * @remarks G channel is roughness, B channel is metallic
+     */
     id<MTLTexture> metallicRoughnessTexture();
     void setMetallicRoughnessTexture(id<MTLTexture> newValue);
     
-    /// Create a pbr metallic-roughness workflow material instance.
-    /// - Parameter engine: Engine to which the material belongs
+    /**
+     * Create a pbr metallic-roughness workflow material instance.
+     * @param engine - Engine to which the material belongs
+     */
     PBRMaterial(Engine* engine);
     
 private:

@@ -12,23 +12,33 @@
 #include "maths/vec_float.h"
 
 namespace vox {
-/// Unlit Material.
+/**
+ * Unlit Material.
+ */
 class UnlitMaterial: public BaseMaterial {
 public:
-    /// Base color.
+    /**
+     * Base color.
+     */
     math::Color baseColor();
     void setBaseColor(const math::Color& newValue);
     
-    /// Base texture.
+    /**
+     * Base texture.
+     */
     id<MTLTexture> baseTexture();
     void setBaseTexture(id<MTLTexture> newValue);
     
-    /// Tiling and offset of main textures.
+    /**
+     * Tiling and offset of main textures.
+     */
     math::Float4 tilingOffset();
     void setTilingOffset(const math::Float4& newValue);
     
-    /// Create a unlit material instance.
-    /// - Parameter engine: Engine to which the material belongs
+    /**
+     * Create a unlit material instance.
+     * @param engine - Engine to which the material belongs
+     */
     UnlitMaterial(Engine* engine);
     
 private:

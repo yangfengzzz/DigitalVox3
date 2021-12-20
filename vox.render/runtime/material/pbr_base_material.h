@@ -12,47 +12,71 @@
 #include "maths/vec_float.h"
 
 namespace vox {
-/// PBR (Physically-Based Rendering) Material.
+/**
+ * PBR (Physically-Based Rendering) Material.
+ */
 class PBRBaseMaterial: public BaseMaterial {
 public:
-    /// Base color.
+    /**
+     * Base color.
+     */
     math::Color baseColor();
     void setBaseColor(const math::Color& newValue);
     
-    /// Base texture.
+    /**
+     * Base texture.
+     */
     id<MTLTexture> baseTexture();
     void setBaseTexture(id<MTLTexture> newValue);
     
-    /// Normal texture.
+    /**
+     * Normal texture.
+     */
     id<MTLTexture> normalTexture();
     void setNormalTexture(id<MTLTexture> newValue);
     
-    /// Normal texture intensity.
+    /**
+     * Normal texture intensity.
+     */
     float normalTextureIntensity();
     void setNormalTextureIntensity(float newValue);
     
-    /// Emissive color.
+    /**
+     * Emissive color.
+     */
     math::Color emissiveColor();
     void setEmissiveColor(const math::Color& newValue);
     
-    /// Emissive texture.
+    /**
+     * Emissive texture.
+     */
     id<MTLTexture> emissiveTexture();
     void setEmissiveTexture(id<MTLTexture> newValue);
     
-    /// Occlusion texture.
+    /**
+     * Occlusion texture.
+     */
     id<MTLTexture> occlusionTexture();
     void setOcclusionTexture(id<MTLTexture> newValue);
     
-    /// Occlusion texture intensity.
+    /**
+     * Occlusion texture intensity.
+     */
     float occlusionTextureIntensity();
     void setOcclusionTextureIntensity(float newValue);
     
-    /// Tiling and offset of main textures.
+    /**
+     * Tiling and offset of main textures.
+     */
     math::Float4 tilingOffset();
     void setTilingOffset(const math::Float4& newValue);
     
-    /// Create a pbr base material instance.
-    /// - Parameter engine: Engine to which the material belongs
+protected:
+    /**
+     * Create a pbr base material instance.
+     * @param engine - Engine to which the material belongs
+     * @param shader - Shader used by the material
+     */
     PBRBaseMaterial(Engine* engine);
     
 private:

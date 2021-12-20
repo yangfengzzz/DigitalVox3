@@ -15,24 +15,27 @@
 #include "enums/render_queue_type.h"
 
 namespace vox {
-/// Material.
+/**
+ * Material.
+ */
 class Material: EngineObject {
 public:
-    /// Name.
+    /** Name. */
     std::string name = "";
-    /// Shader used by the material.
+    /** Shader used by the material. */
     Shader* shader;
-    /// Render queue type.
+    /** Render queue type. */
     RenderQueueType::Enum renderQueueType = RenderQueueType::Enum::Opaque;
-    /// Shader data.
+    /** Shader data. */
     ShaderData shaderData = ShaderData();
-    /// Render state.
+    /** Render state. */
     RenderState renderState = RenderState();
     
-    /// Create a material instance.
-    /// - Parameters:
-    ///   - engine: Engine to which the material belongs
-    ///   - shader: Shader used by the material
+    /**
+     * Create a material instance.
+     * @param engine - Engine to which the material belongs
+     * @param shader - Shader used by the material
+     */
     Material(Engine* engine, Shader* shader);
 };
 

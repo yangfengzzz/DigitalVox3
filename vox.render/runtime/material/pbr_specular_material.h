@@ -11,23 +11,34 @@
 #include "pbr_base_material.h"
 
 namespace vox {
-/// PBR (Specular-Glossiness Workflow) Material.
+/**
+ * PBR (Specular-Glossiness Workflow) Material.
+ */
 class PBRSpecularMaterial: public PBRBaseMaterial {
 public:
-    /// Specular color.
+    /**
+     * Specular color.
+     */
     math::Color specularColor();
     void setSpecularColor(const math::Color& newValue);
     
-    /// Glossiness.
+    /**
+     * Glossiness.
+     */
     float glossiness();
     void setGlossiness(float newValue);
     
-    /// Specular glossiness texture.
+    /**
+     * Specular glossiness texture.
+     * @remarks RGB is specular, A is glossiness
+     */
     id<MTLTexture> specularGlossinessTexture();
     void setSpecularGlossinessTexture(id<MTLTexture> newValue);
     
-    /// Create a pbr specular-glossiness workflow material instance.
-    /// - Parameter engine: Engine to which the material belongs
+    /**
+     * Create a pbr specular-glossiness workflow material instance.
+     * @param engine - Engine to which the material belongs
+     */
     PBRSpecularMaterial(Engine* engine);
     
 private:

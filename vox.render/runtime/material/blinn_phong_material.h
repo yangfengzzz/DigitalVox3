@@ -12,46 +12,68 @@
 #include "maths/vec_float.h"
 
 namespace vox {
-/// Blinn-phong Material.
+/**
+ * Blinn-phong Material.
+ */
 class BlinnPhongMaterial: public BaseMaterial {
 public:
-    /// Base color.
+    /**
+     * Base color.
+     */
     math::Color baseColor();
     void setBaseColor(const math::Color& newValue);
     
-    /// Base texture.
+    /**
+     * Base texture.
+     */
     id<MTLTexture> baseTexture();
     void setBaseTexture(id<MTLTexture> newValue);
     
-    /// Specular color.
+    /**
+     * Specular color.
+     */
     math::Color specularColor();
     void setSpecularColor(const math::Color& newValue);
     
-    /// Specular texture.
+    /**
+     * Specular texture.
+     */
     id<MTLTexture> specularTexture();
     void setSpecularTexture(id<MTLTexture> newValue);
     
-    /// Emissive color.
+    /**
+     * Emissive color.
+     */
     math::Color emissiveColor();
     void setEmissiveColor(const math::Color& newValue);
     
-    /// Emissive texture.
+    /**
+     * Emissive texture.
+     */
     id<MTLTexture> emissiveTexture();
     void setEmissiveTexture(id<MTLTexture> newValue);
     
-    /// Normal texture.
+    /**
+     * Normal texture.
+     */
     id<MTLTexture> normalTexture();
     void setNormalTexture(id<MTLTexture> newValue);
     
-    /// Normal texture intensity.
+    /**
+     * Normal texture intensity.
+     */
     float normalIntensity();
     void setNormalIntensity(float newValue);
     
-    /// Set the specular reflection coefficient, the larger the value, the more convergent the specular reflection effect.
+    /**
+     * Set the specular reflection coefficient, the larger the value, the more convergent the specular reflection effect.
+     */
     float shininess();
     void setShininess(float newValue);
     
-    /// Tiling and offset of main textures.
+    /**
+     * Tiling and offset of main textures.
+     */
     math::Float4 tilingOffset();
     void setTilingOffset(const math::Float4& newValue);
     
