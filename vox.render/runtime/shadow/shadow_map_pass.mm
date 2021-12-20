@@ -27,7 +27,7 @@ void ShadowMapPass::preRender(Camera* camera, const RenderQueue& opaqueQueue,
     // The viewProjection matrix from the light.
     auto& shaderData = _shadowMapMaterial->shaderData;
     shaderData.setData(ShadowMapPass::_viewMatFromLightProperty, light->viewMatrix());
-    // shaderData.setData(ShadowMapPass::_projMatFromLightProperty, light->shadow->projectionMatrix());
+    shaderData.setData(ShadowMapPass::_projMatFromLightProperty, light->shadowProjectionMatrix());
 }
 
 }

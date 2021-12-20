@@ -32,6 +32,7 @@ public:
         
 private:
     friend class Scene;
+    friend class ShadowPass;
     
     void _updateShaderData(ShaderData& shaderData);
 

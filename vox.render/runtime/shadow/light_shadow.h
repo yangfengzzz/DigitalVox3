@@ -20,6 +20,17 @@ namespace vox {
  */
 class LightShadow {
 public:
+    static constexpr int maxLight = 3;
+    struct CombiendData {
+        std::array<math::Matrix, maxLight> viewMatrix;
+        std::array<math::Matrix, maxLight> projectionMatrix;
+        std::array<float, maxLight> bias;
+        std::array<float, maxLight> intensity;
+        std::array<float, maxLight> radius;
+        std::array<math::Float2, maxLight> mapSize;
+        std::array<id<MTLTexture>, maxLight> map;
+    };
+    
     /**
      * Shadow bias.
      */
@@ -71,16 +82,9 @@ public:
     void appendData(int lightIndex);
     
 private:
-    static constexpr int _maxLight = 3;
-    static struct {
-        std::array<math::Matrix, _maxLight> viewMatrix;
-        std::array<math::Matrix, _maxLight> projectionMatrix;
-        std::array<float, _maxLight> bias;
-        std::array<float, _maxLight> intensity;
-        std::array<float, _maxLight> radius;
-        std::array<math::Float2, _maxLight> mapSize;
-        std::array<id<MTLTexture>, _maxLight> map;
-    } _combinedData;
+    friend class ShadowPass;
+    
+    static CombiendData _combinedData;
     
     static ShaderProperty _viewMatFromLightProperty;
     static ShaderProperty _projMatFromLightProperty;

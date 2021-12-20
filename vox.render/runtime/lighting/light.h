@@ -10,6 +10,7 @@
 
 #include "../component.h"
 #include "maths/matrix.h"
+#include "../shadow/light_shadow.h"
 
 namespace vox {
 /**
@@ -23,13 +24,29 @@ public:
      * View matrix.
      */
     math::Matrix viewMatrix();
-
+    
     /**
      * Inverse view matrix.
      */
     math::Matrix inverseViewMatrix();
     
     virtual void _appendData(size_t lightIndex) = 0;
+    
+public:
+    bool enableShadow() {
+        return _enableShadow;
+    }
+    
+    void setEnableShadow(bool enabled) {
+        _enableShadow = enabled;
+        if (_enableShadow) {
+            shadow.initShadowProjectionMatrix(this);
+        }
+    }
+    
+    void appendShadow(int lightIndex);
+    
+    math::Matrix shadowProjectionMatrix();
     
 protected:
     /**
@@ -42,11 +59,16 @@ private:
      * Mount to the current Scene.
      */
     void _onEnable() override;
-
+    
     /**
      * Unmount from the current Scene.
      */
     void _onDisable() override;
+    
+private:
+    LightShadow shadow;
+    
+    bool _enableShadow = false;
 };
 
 }

@@ -20,8 +20,11 @@ ShaderProperty LightShadow::_shadowIntensityProperty = Shader::createProperty("u
 ShaderProperty LightShadow::_shadowRadiusProperty = Shader::createProperty("u_shadowRadius", ShaderDataGroup::Enum::Scene);
 ShaderProperty LightShadow::_shadowMapSizeProperty = Shader::createProperty("u_shadowMapSize", ShaderDataGroup::Enum::Scene);
 ShaderProperty LightShadow::_shadowMapsProperty = Shader::createProperty("u_shadowMaps", ShaderDataGroup::Enum::Scene);
+
+LightShadow::CombiendData LightShadow::_combinedData;
+
 void LightShadow::clearMap() {
-    for (int i = 0; i < _maxLight; i++) {
+    for (int i = 0; i < maxLight; i++) {
         _combinedData.map[i] = nullptr;
     }
 }

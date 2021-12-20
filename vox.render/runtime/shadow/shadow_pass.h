@@ -16,11 +16,13 @@ namespace vox {
  */
 class ShadowPass :public RenderPass {
 public:
-    ShadowPass(const std::string& name, int priority,
+    ShadowPass(const std::string& name, int priority, MaterialPtr replaceMaterial,
                MTLRenderPassDescriptor* renderTarget, Layer mask);
     
     void preRender(Camera* camera, const RenderQueue& opaqueQueue,
                    const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;
+private:
+    MaterialPtr replaceMaterial;
 };
 
 }

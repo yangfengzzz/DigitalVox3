@@ -10,7 +10,17 @@
 
 namespace vox {
 Light::Light(Entity* entity):
-Component(entity) {}
+Component(entity),
+shadow(LightShadow(this, entity->engine(), 512, 512)){
+}
+
+void Light::appendShadow(int lightIndex) {
+    shadow.appendData(lightIndex);
+}
+
+math::Matrix Light::shadowProjectionMatrix() {
+    return shadow.projectionMatrix;
+}
 
 math::Matrix Light::viewMatrix() {
     return math::invert(entity()->transform->worldMatrix());
