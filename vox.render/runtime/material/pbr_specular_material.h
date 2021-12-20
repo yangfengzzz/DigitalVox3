@@ -39,7 +39,7 @@ public:
      * Create a pbr specular-glossiness workflow material instance.
      * @param engine - Engine to which the material belongs
      */
-    PBRSpecularMaterial(Engine* engine);
+    explicit PBRSpecularMaterial(Engine* engine);
     
 private:
     static ShaderProperty _glossinessProp;

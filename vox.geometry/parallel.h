@@ -177,7 +177,7 @@ void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX, IndexType begi
 //! \param[in]  beginIndex The begin index.
 //! \param[in]  endIndex   The end index.
 //! \param[in]  identity   Identity value for the reduce operation.
-//! \param[in]  function   The function for reducing subrange.
+//! \param[in]  func   The function for reducing subrange.
 //! \param[in]  reduce     The reduce operator.
 //! \param[in]  policy     The execution policy (parallel or serial).
 //!

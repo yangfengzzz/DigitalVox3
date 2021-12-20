@@ -39,7 +39,7 @@ public:
      * Create a unlit material instance.
      * @param engine - Engine to which the material belongs
      */
-    UnlitMaterial(Engine* engine);
+    explicit UnlitMaterial(Engine* engine);
     
 private:
     static ShaderProperty _baseColorProp;

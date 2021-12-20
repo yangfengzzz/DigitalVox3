@@ -75,9 +75,8 @@ protected:
     /**
      * Create a pbr base material instance.
      * @param engine - Engine to which the material belongs
-     * @param shader - Shader used by the material
      */
-    PBRBaseMaterial(Engine* engine);
+    explicit PBRBaseMaterial(Engine* engine);
     
 private:
     static ShaderProperty _tilingOffsetProp;

@@ -39,7 +39,7 @@ public:
      * Create a pbr metallic-roughness workflow material instance.
      * @param engine - Engine to which the material belongs
      */
-    PBRMaterial(Engine* engine);
+    explicit PBRMaterial(Engine* engine);
     
 private:
     static ShaderProperty _metallicProp;

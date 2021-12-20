@@ -193,7 +193,7 @@ degreesToRadians(T angleInDegrees);
 //!
 //! \brief      Converts radians to degrees.
 //!
-//! \param[in]  angleInDegrees The angle in radians.
+//! \param[in]  angleInRadians The angle in radians.
 //!
 //! \tparam     T              Value type.
 //!
