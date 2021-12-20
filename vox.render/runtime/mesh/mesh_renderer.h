@@ -11,10 +11,16 @@
 #include "../renderer.h"
 
 namespace vox {
+/**
+ * MeshRenderer Component.
+ */
 class MeshRenderer: public Renderer {
 public:
     explicit MeshRenderer(Entity* entity);
     
+    /**
+     * Mesh assigned to the renderer.
+     */
     void setMesh(const MeshPtr& mesh);
     MeshPtr mesh();
     
