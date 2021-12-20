@@ -16,7 +16,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 namespace vox {
-/// Metal renderer.
+/**
+ * Metal renderer.
+ */
 class MetalRenderer {
 public:
     ResourceCache resouceCache;

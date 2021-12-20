@@ -9,12 +9,13 @@
 #define render_context_hpp
 
 #include "maths/matrix.h"
+#include "../vox_type.h"
 
 namespace vox {
 using namespace math;
-class Camera;
-
-/// Rendering context.
+/**
+ * Rendering context.
+ */
 struct RenderContext {
     Camera* _camera;
     Matrix _viewProjectMatrix = Matrix();

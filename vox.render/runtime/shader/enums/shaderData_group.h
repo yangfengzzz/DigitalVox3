@@ -8,16 +8,18 @@
 #ifndef shaderData_group_h
 #define shaderData_group_h
 
-/// Shader data grouping.
+/**
+ * Shader data grouping.
+ */
 struct ShaderDataGroup {
     enum Enum {
-        /// Scene group.
+        /** Scene group. */
         Scene,
-        /// Camera group.
+        /** Camera group. */
         Camera,
-        /// Renderer group.
+        /** Renderer group. */
         Renderer,
-        /// material group.
+        /** material group. */
         Material
     };
 };
