@@ -51,6 +51,8 @@ public:
 public:
     void setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index);
     
+    void setRenderPipelineState(MTLRenderPipelineDescriptor *state);
+
     void setRenderPipelineState(RenderPipelineState *state);
     
     void setDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor);
