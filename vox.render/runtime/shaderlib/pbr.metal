@@ -547,7 +547,7 @@ float3 getPbrNormal(VertexOut in, float u_normalIntensity,
         }
     }
     
-    n *= float( is_front_face ) * 2.0 - 1.0;
+    n *= float( !is_front_face ) * 2.0 - 1.0;
     return n;
 }
 
