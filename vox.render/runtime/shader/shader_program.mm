@@ -36,8 +36,8 @@ ShaderProgram::ShaderProgram(id<MTLLibrary> library,
 }
 
 MTLFunctionConstantValues* ShaderProgram::makeFunctionConstants(const ShaderMacroCollection& macroInfo) {
-    const auto& functionConstants = ShaderMacroCollection::defaultFunctionConstant;
-    std::for_each(macroInfo._value.begin(), macroInfo._value.end(), [](const std::pair<MacroName, std::pair<int, MTLDataType>>& info){
+    auto functionConstants = ShaderMacroCollection::createDefaultFunction();
+    std::for_each(macroInfo._value.begin(), macroInfo._value.end(), [&](const std::pair<MacroName, std::pair<int, MTLDataType>>& info){
         if (info.second.second == MTLDataTypeBool) {
             bool property;
             if (info.second.first == 1) {

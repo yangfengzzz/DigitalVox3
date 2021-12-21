@@ -18,7 +18,6 @@ namespace vox {
  */
 struct ShaderMacroCollection {
     static std::unordered_map<MacroName, std::pair<int, MTLDataType>> defaultValue;
-    static MTLFunctionConstantValues* defaultFunctionConstant;
     static MTLFunctionConstantValues* createDefaultFunction();
     
     /**

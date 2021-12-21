@@ -65,7 +65,6 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     {SHADOW_MAP_COUNT, {0, MTLDataTypeInt}},
 };
 
-MTLFunctionConstantValues* ShaderMacroCollection::defaultFunctionConstant = ShaderMacroCollection::createDefaultFunction();
 MTLFunctionConstantValues* ShaderMacroCollection::createDefaultFunction() {
     MTLFunctionConstantValues* functionConstants = [[MTLFunctionConstantValues alloc]init];
     for (size_t i = 0; i < TOTAL_COUNT; i++) {
