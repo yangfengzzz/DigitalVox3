@@ -93,6 +93,8 @@ private:
     
     void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
     
+    void _drawShadowMap(RenderContext& context);
+    
     void _drawSky(const Sky& sky);
     
 private:

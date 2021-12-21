@@ -198,8 +198,8 @@ void ComponentsManager::callRender(const BoundingFrustum& frustrum,
     for (size_t i = 0; i < _renderers.size(); i++) {
         const auto& renderer = _renderers[i];
         // filter by renderer castShadow and frustrum cull
-        if (renderer->castShadow && frustrum.intersectsBox(renderer->bounds())) {
-            continue;
+        if (frustrum.intersectsBox(renderer->bounds())) {
+            renderer->_render(opaqueQueue, alphaTestQueue, transparentQueue);
         }
     }
 }
