@@ -18,6 +18,8 @@ namespace vox {
  */
 class LightManager {
 public:
+    LightManager();
+    
     /**
      * Register a light object to the current scene.
      * @param light render light

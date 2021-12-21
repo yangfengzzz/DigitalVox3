@@ -21,6 +21,12 @@ math::Matrix Light::inverseViewMatrix() {
     return entity()->transform->worldMatrix();
 }
 
+void Light::updateShadowMatrix() {
+    auto viewMatrix = invert(entity()->transform->worldMatrix());
+    auto projMatrix = shadowProjectionMatrix();
+    shadow.vp = projMatrix * viewMatrix;
+}
+
 void Light::_onEnable() {
     scene()->light_manager.attachRenderLight(this);
 }

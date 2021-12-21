@@ -9,9 +9,22 @@
 #include "point_light.h"
 #include "spot_light.h"
 #include "direct_light.h"
+#include "../rhi-metal/render_pipeline_state.h"
 #include "../../log.h"
 
 namespace vox {
+LightManager::LightManager() {
+    RenderPipelineState::register_vertex_uploader<Light::ShadowData>(
+    [](const Light::ShadowData& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(Light::ShadowData) atIndex:location];
+    });
+    
+    RenderPipelineState::register_fragment_uploader<Light::ShadowData>(
+    [](const Light::ShadowData& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(Light::ShadowData) atIndex:location];
+    });
+}
+
 void LightManager::attachRenderLight(Light* light) {
     auto iter = std::find(_visibleLights.begin(), _visibleLights.end(), light);
     if (iter == _visibleLights.end()) {

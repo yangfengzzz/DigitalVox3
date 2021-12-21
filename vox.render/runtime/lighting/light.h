@@ -41,7 +41,7 @@ public:
         _enableShadow = enabled;
     }
     
-    struct {
+    struct ShadowData {
         /**
          * Shadow bias.
          */
@@ -55,14 +55,12 @@ public:
          */
         float radius = 1;
         /**
-         * Shadow map size.
+         * Light view projection matrix.
          */
-        float mapSizeX = 2560;
-        /**
-         * Shadow map size.
-         */
-        float mapSizeY = 1440;
+        math::Matrix vp;
     } shadow;
+    
+    void updateShadowMatrix();
     
     virtual math::Matrix shadowProjectionMatrix() = 0;
     

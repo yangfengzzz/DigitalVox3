@@ -228,7 +228,7 @@ void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, 
         pipelineState->uploadAll(pipelineState->rendererUniformBlock, rendererData);
         pipelineState->uploadAll(pipelineState->materialUniformBlock, materialData);
         pipelineState->uploadAll(pipelineState->internalUniformBlock, shaderData);
-
+        
         auto& buffers = element.mesh->_vertexBuffer;
         for (uint32_t index = 0; index < buffers.size(); index++) {
             rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
@@ -299,6 +299,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     auto& rhi = engine->_hardwareRenderer;
     
     size_t shadowCount = 0;
+    std::vector<Light::ShadowData> shadowDatas{};
     const auto& lights = context.scene()->light_manager.visibleLights();
     for (const auto& light : lights) {
         if (light->enableShadow()) {
@@ -306,9 +307,8 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             if (shadowCount < shadowMaps.size()) {
                 texture = shadowMaps[shadowCount];
             } else {
-                texture = rhi.resourceLoader()->buildTexture(light->shadow.mapSizeX,
-                                                                  light->shadow.mapSizeY,
-                                                                  MTLPixelFormatDepth32Float);
+                texture = rhi.resourceLoader()->buildTexture(shadowMapSize, shadowMapSize,
+                                                             MTLPixelFormatDepth32Float);
                 shadowMaps.push_back(texture);
             }
             
@@ -330,12 +330,11 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             std::vector<RenderElement> opaqueQueue{};
             std::vector<RenderElement> transparentQueue{};
             std::vector<RenderElement> alphaTestQueue{};
-            auto viewMatrix = invert(light->entity()->transform->worldMatrix());
-            auto projMatrix = light->shadowProjectionMatrix();
-            auto vp = projMatrix * viewMatrix;
+            light->updateShadowMatrix();
             BoundingFrustum frustum;
-            frustum.calculateFromMatrix(vp);
+            frustum.calculateFromMatrix(light->shadow.vp);
             engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
+            shadowDatas.push_back(light->shadow);
             
             for (const auto& element : opaqueQueue) {
                 if (element.component->castShadow) {
@@ -352,7 +351,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
                     rhi.setRenderPipelineState(pipelineState);
                     
                     auto modelMatrix = element.component->entity()->transform->worldMatrix();
-                    rhi.setVertexBytes(vp, 1);
+                    rhi.setVertexBytes(light->shadow.vp, 1);
                     rhi.setVertexBytes(modelMatrix, 2);
                     
                     auto& buffers = element.mesh->_vertexBuffer;
@@ -371,6 +370,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     if (!shadowMaps.empty()) {
         packedTexture = rhi.mergeResource(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
         shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
+        shaderData.setData(BasicRenderPipeline::_shadowDataProp, shadowDatas);
     }
 }
 
