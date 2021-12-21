@@ -198,7 +198,7 @@ void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, 
         auto& rendererData = renderer->shaderData;
         const auto& materialData = material->shaderData;
         
-        if (renderer->receiveShadow) {
+        if (renderer->receiveShadow && shadowCount != 0) {
             rendererData.enableMacro(SHADOW_MAP_COUNT, std::make_pair(shadowCount, MTLDataTypeInt));
         }
         
