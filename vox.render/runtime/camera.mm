@@ -320,6 +320,7 @@ Matrix Camera::inverseProjectionMatrix() {
     return _inverseProjectionMatrix;
 }
 
+//MARK: - Export method in render pipeline
 void Camera::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
     _renderPipeline.addRenderPass(std::move(pass));
 }
@@ -337,6 +338,10 @@ void Camera::removeRenderPass(const std::string& name) {
 
 void Camera::removeRenderPass(const RenderPass* pass) {
     _renderPipeline.removeRenderPass(pass);
+}
+
+void Camera::pushPrimitive(const RenderElement& element) {
+    _renderPipeline.pushPrimitive(element);
 }
 
 }

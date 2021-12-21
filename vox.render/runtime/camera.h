@@ -150,13 +150,15 @@ public:
     /**
      * Transform a point from world space to viewport space.
      * @param point - Point in world space
-     * @return out - A point in the viewport space, X and Y are the viewport space coordinates, Z is the viewport depth, the near clipping plane is 0, the far clipping plane is 1, and W is the world unit distance from the camera
+     * @return out - A point in the viewport space, X and Y are the viewport space coordinates,
+     * Z is the viewport depth, the near clipping plane is 0, the far clipping plane is 1, and W is the world unit distance from the camera
      */
     Float4 worldToViewportPoint(const Float3& point);
     
     /**
      * Transform a point from viewport space to world space.
-     * @param point - Point in viewport space, X and Y are the viewport space coordinates, Z is the viewport depth. The near clipping plane is 0, and the far clipping plane is 1
+     * @param point - Point in viewport space, X and Y are the viewport space coordinates,
+     * Z is the viewport depth. The near clipping plane is 0, and the far clipping plane is 1
      * @returns Point in world space
      */
     Float3 viewportToWorldPoint(const Float3& point);
@@ -247,6 +249,12 @@ public:
      */
     void removeRenderPass(const RenderPass* pass);
     
+    /**
+     * Push a render element to the render queue.
+     * @param element - Render element
+     */
+    void pushPrimitive(const RenderElement& element);
+    
 public:
     void _onActive() override;
     
@@ -256,11 +264,7 @@ public:
     
 private:
     friend class ComponentsManager;
-    friend class MeshRenderer;
-    friend class SkinnedMeshRenderer;
-    friend class ParticleRenderer;
     friend class BasicRenderPipeline;
-    friend class ShadowManager;
     
     void _projMatChange();
     

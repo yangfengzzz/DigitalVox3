@@ -58,7 +58,6 @@ void ParticleRenderer::update(float deltaTime) {
 void ParticleRenderer::_render(Camera* camera) {
     auto render_mesh = _createMesh();
     auto& subMeshes = render_mesh->subMeshes();
-    auto& renderPipeline = camera->_renderPipeline;
     for (size_t i = 0; i < subMeshes.size(); i++) {
         MaterialPtr material;
         if (i < _materials.size()) {
@@ -68,7 +67,7 @@ void ParticleRenderer::_render(Camera* camera) {
         }
         if (material != nullptr) {
             RenderElement element(this, render_mesh, &subMeshes[i], material);
-            renderPipeline.pushPrimitive(element);
+            camera->pushPrimitive(element);
         }
     }
 }

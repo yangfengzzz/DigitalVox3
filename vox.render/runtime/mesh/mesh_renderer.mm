@@ -59,7 +59,6 @@ void MeshRenderer::_render(Camera* camera) {
         }
 
         auto& subMeshes = _mesh->subMeshes();
-        auto& renderPipeline = camera->_renderPipeline;
         for (size_t i = 0; i < subMeshes.size(); i++) {
             MaterialPtr material;
             if (i < _materials.size()) {
@@ -69,7 +68,7 @@ void MeshRenderer::_render(Camera* camera) {
             }
             if (material != nullptr) {
                 RenderElement element(this, _mesh, &subMeshes[i], material);
-                renderPipeline.pushPrimitive(element);
+                camera->pushPrimitive(element);
             }
         }
     } else {
