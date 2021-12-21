@@ -113,7 +113,7 @@ id<MTLTexture> MetalLoader::loadTextureArray(const std::string& path, const std:
         if (texture != nil) {
             textures.push_back(texture);
         }
-    }    
+    }
     return createTextureArray(textures);
 }
 
@@ -320,6 +320,47 @@ id<MTLTexture> MetalLoader::createSpecularTexture(const std::string& path,
     [commandBuffer waitUntilCompleted];
     
     return specularTexture;
+}
+
+id<MTLTexture> MetalLoader::createMetallicRoughnessTexture(const std::string& path, const std::string& metallic,
+                                                           const std::string& roughness, bool isTopLeft) {
+    auto metallicTex = loadTexture(path, metallic, isTopLeft);
+    auto roughnessTex = loadTexture(path, roughness, isTopLeft);
+    
+    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+    descriptor.textureType = MTLTextureType2D;
+    descriptor.pixelFormat = metallicTex.pixelFormat;
+    descriptor.width = metallicTex.width;
+    descriptor.height = metallicTex.height;
+    descriptor.usage = metallicTex.usage | MTLTextureUsageShaderWrite;
+    auto mergedTexture = [_device newTextureWithDescriptor:descriptor];
+    
+    // merge
+    NSError *error = nil;
+    auto function = [_library newFunctionWithName: @"build_metallicRoughness"];
+    auto pipelineState = [_device newComputePipelineStateWithFunction:function error:&error];
+    if (error != nil) {
+        NSLog(@"Error: failed to create Metal pipeline state: %@", error);
+    }
+    auto commandBuffer = [_commandQueue commandBuffer];
+    auto commandEncoder = [commandBuffer computeCommandEncoder];
+        
+    [commandEncoder setComputePipelineState:pipelineState];
+    [commandEncoder setTexture:metallicTex atIndex:0];
+    [commandEncoder setTexture:roughnessTex atIndex:1];
+    [commandEncoder setTexture:mergedTexture atIndex:2];
+    
+    auto size = metallicTex.width;
+    auto threadsPerThreadgroup = MTLSizeMake(std::min<size_t>(size, 16), std::min<size_t>(size, 16), 1);
+    auto threadgroups = MTLSizeMake(metallicTex.width / threadsPerThreadgroup.width,
+                                    metallicTex.width / threadsPerThreadgroup.height, 1);
+    [commandEncoder dispatchThreadgroups:threadgroups threadsPerThreadgroup:threadsPerThreadgroup];
+    [commandEncoder endEncoding];
+
+    [commandBuffer commit];
+    [commandBuffer waitUntilCompleted];
+    
+    return mergedTexture;
 }
 
 //MARK: - MTLBuffer

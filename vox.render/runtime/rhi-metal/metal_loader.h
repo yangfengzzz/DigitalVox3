@@ -48,6 +48,9 @@ public:
     
     id<MTLTexture> createBRDFLookupTable();
     
+    id<MTLTexture> createMetallicRoughnessTexture(const std::string& path, const std::string& metallic,
+                                                  const std::string& roughness, bool isTopLeft = true);
+    
 public:
     id<MTLBuffer> buildBuffer(const void * pointer, size_t length, MTLResourceOptions options);
     

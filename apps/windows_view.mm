@@ -14,6 +14,7 @@
 #include "../vox.render/runtime/animator.h"
 #include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/material/blinn_phong_material.h"
+#include "../vox.render/runtime/material/pbr_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/direct_light.h"
 #include "../vox.render/runtime/lighting/point_light.h"
@@ -43,6 +44,14 @@ int main(int, char**) {
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
     
+    const std::string path =
+    "/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images";
+    const std::array<std::string, 6> images = {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"};
+    auto specularTexture = resourceLoader->createSpecularTexture(path, images);
+    scene->ambientLight().setSpecularTexture(specularTexture);
+    auto diffuseTexture = resourceLoader->createIrradianceTexture(path, images);
+    scene->ambientLight().setDiffuseTexture(diffuseTexture);
+    
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
@@ -59,9 +68,13 @@ int main(int, char**) {
     directionLight->intensity = 1.0;
     directionLight->setEnableShadow(true);
     
-    auto characterMtl = std::make_shared<UnlitMaterial>(&engine);
+    auto characterMtl = std::make_shared<PBRMaterial>(&engine);
     characterMtl->setBaseTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
-    
+    characterMtl->setOcclusionTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_ao.png", false));
+    characterMtl->setNormalTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_normal.png", false));
+    characterMtl->setMetallicRoughnessTexture(resourceLoader->createMetallicRoughnessTexture("../models/Doggy", "T_Doggy_metallic.png",
+                                                                                             "T_Doggy_metallic.png", false));
+
     auto characterEntity = rootEntity->createChild("characterEntity");
     characterEntity->transform->setScale(3, 3, 3);
     auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();

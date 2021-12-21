@@ -611,6 +611,7 @@
 		04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AD8275E2C4F00182CCB /* InputManager.mm */; };
 		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
 		04AD283F27722C5E00B86C7E /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
+		04AD284127729A9F00B86C7E /* texture_packer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284027729A9F00B86C7E /* texture_packer.metal */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
@@ -1579,6 +1580,7 @@
 		04A79AD5275E0F8D00182CCB /* pointer_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer_manager.h; sourceTree = "<group>"; };
 		04A79AD8275E2C4F00182CCB /* InputManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = InputManager.mm; sourceTree = "<group>"; };
 		04A79AD9275E2C4F00182CCB /* InputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
+		04AD284027729A9F00B86C7E /* texture_packer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = texture_packer.metal; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
 		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
 		04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = cubemap_debugger.metal; sourceTree = "<group>"; };
@@ -3619,6 +3621,7 @@
 				04CE398E2753A83B00204B8E /* pbr.metal */,
 				04CE398D2753A83B00204B8E /* brdf_lut.metal */,
 				04C2EA48276EC59600091FB3 /* specular_map.metal */,
+				04AD284027729A9F00B86C7E /* texture_packer.metal */,
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04860853276B17F100C05BDA /* core */,
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
@@ -4701,6 +4704,7 @@
 				04CE37F6274D167F00204B8E /* track_optimizer.cc in Sources */,
 				04160FE9275091FA006CD384 /* engine.mm in Sources */,
 				04CE393E2751D2ED00204B8E /* shader_macro_collection.mm in Sources */,
+				04AD284127729A9F00B86C7E /* texture_packer.metal in Sources */,
 				04CE3806274D167F00204B8E /* fbx.cc in Sources */,
 				04CE397027526DCF00204B8E /* mesh_renderer.mm in Sources */,
 				04161071275A2069006CD384 /* character_controller.mm in Sources */,
