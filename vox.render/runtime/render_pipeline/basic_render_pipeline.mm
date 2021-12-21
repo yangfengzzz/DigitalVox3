@@ -298,13 +298,20 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     const auto& engine = _camera->engine();
     auto& rhi = engine->_hardwareRenderer;
     
-    std::vector<id<MTLTexture>> shadowMaps;
+    size_t shadowCount = 0;
     const auto& lights = context.scene()->light_manager.visibleLights();
     for (const auto& light : lights) {
         if (light->enableShadow()) {
-            auto texture = rhi.resourceLoader()->buildTexture(light->shadow.mapSizeX,
-                                                              light->shadow.mapSizeY,
-                                                              MTLPixelFormatDepth32Float);
+            id<MTLTexture> texture = nullptr;
+            if (shadowCount < shadowMaps.size()) {
+                texture = shadowMaps[shadowCount];
+            } else {
+                texture = rhi.resourceLoader()->buildTexture(light->shadow.mapSizeX,
+                                                                  light->shadow.mapSizeY,
+                                                                  MTLPixelFormatDepth32Float);
+                shadowMaps.push_back(texture);
+            }
+            
             MTLRenderPassDescriptor* shadowRenderPassDescriptor = [[MTLRenderPassDescriptor alloc]init];
             shadowRenderPassDescriptor.depthAttachment.texture = texture;
             shadowRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
@@ -358,11 +365,11 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             
             // render loop
             rhi.endRenderPass();
-            shadowMaps.push_back(texture);
+            shadowCount++;
         }
     }
     if (!shadowMaps.empty()) {
-        auto packedTexture = rhi.mergeResource(shadowMaps);
+        packedTexture = rhi.mergeResource(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
         shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
     }
 }

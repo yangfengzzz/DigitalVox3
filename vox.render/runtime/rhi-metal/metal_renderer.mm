@@ -20,7 +20,7 @@ resouceCache(this) {
     _commandQueue = [_device newCommandQueue];
     _library = [_device newDefaultLibrary];
     _metalResourceLoader = std::make_shared<MetalLoader>(_device);
-
+    
     _colorPixelFormat = MTLPixelFormatBGRA8Unorm;
     _samplerState = buildSamplerState();
     
@@ -152,26 +152,31 @@ void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
     [blit endEncoding];
 }
 
-id<MTLTexture> MetalRenderer::mergeResource(const std::vector<id<MTLTexture>>& textures) {
-    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
-    descriptor.textureType = MTLTextureType2DArray;
-    descriptor.pixelFormat = textures[0].pixelFormat;
-    descriptor.width = textures[0].width;
-    descriptor.height = textures[0].height;
-    descriptor.arrayLength = textures.size();
-    descriptor.storageMode = MTLStorageModePrivate;
+id<MTLTexture> MetalRenderer::mergeResource(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
+                                            const std::vector<id<MTLTexture>>::iterator& texturesEnd,
+                                            id<MTLTexture> packedTextures) {
+    if (packedTextures == nullptr) {
+        MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+        descriptor.textureType = MTLTextureType2DArray;
+        descriptor.pixelFormat = (*texturesBegin).pixelFormat;
+        descriptor.width = (*texturesBegin).width;
+        descriptor.height = (*texturesBegin).height;
+        descriptor.arrayLength = texturesEnd - texturesBegin;
+        descriptor.storageMode = MTLStorageModePrivate;
+        
+        packedTextures = [_device newTextureWithDescriptor:descriptor];
+    }
     
-    auto arrayTexture = [_device newTextureWithDescriptor:descriptor];
     auto blitEncoder = [_commandBuffer blitCommandEncoder];
     MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
-    MTLSize size = MTLSize{.width =  arrayTexture.width,
-        .height =  arrayTexture.height, .depth = 1};
-    for (size_t index = 0; index < textures.size(); index++) {
-        [blitEncoder copyFromTexture:textures[index] sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
-                           toTexture:arrayTexture destinationSlice:index destinationLevel:0 destinationOrigin:origin];
+    MTLSize size = MTLSize{.width =  packedTextures.width,
+        .height =  packedTextures.height, .depth = 1};
+    for (auto iter = texturesBegin; iter < texturesEnd; iter++) {
+        [blitEncoder copyFromTexture:*iter sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
+                           toTexture:packedTextures destinationSlice:iter - texturesBegin destinationLevel:0 destinationOrigin:origin];
     }
     [blitEncoder endEncoding];
-    return arrayTexture;
+    return packedTextures;
 }
 
 id <MTLRenderPipelineState> MetalRenderer::createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor) {

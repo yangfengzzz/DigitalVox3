@@ -108,6 +108,9 @@ private:
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
     
+    std::vector<id<MTLTexture>> shadowMaps;
+    id<MTLTexture> packedTexture{nullptr};
+    
     /** Shader data. */
     ShaderData shaderData = ShaderData();
     static ShaderProperty _shadowMapProp;

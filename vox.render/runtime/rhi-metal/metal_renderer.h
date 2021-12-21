@@ -22,7 +22,7 @@ namespace vox {
 class MetalRenderer {
 public:
     ResourceCache resouceCache;
-
+    
     explicit MetalRenderer(Canvas* canvas);
     
     id <MTLLibrary> library();
@@ -30,7 +30,7 @@ public:
     MTLPixelFormat colorPixelFormat();
     
     MetalLoaderPtr resourceLoader();
-
+    
 public:
     void begin();
     
@@ -48,7 +48,9 @@ public:
 public:
     void synchronizeResource(id<MTLResource> resource);
     
-    id<MTLTexture> mergeResource(const std::vector<id<MTLTexture>>& textures);
+    id<MTLTexture> mergeResource(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
+                                 const std::vector<id<MTLTexture>>::iterator& texturesEnd,
+                                 id<MTLTexture> packedTextures);
     
 public:
     template<typename T>
@@ -59,7 +61,7 @@ public:
     void setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index);
     
     id <MTLRenderPipelineState> createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor);
-
+    
     void setRenderPipelineState(id <MTLRenderPipelineState> state);
     
     void setRenderPipelineState(RenderPipelineState *state);
@@ -79,7 +81,7 @@ public:
     void bindTexture(id <MTLTexture> texture, int location);
     
     void drawPrimitive(const SubMesh *subPrimitive) const;
-
+    
 private:
     id <MTLSamplerState> buildSamplerState();
     
@@ -100,7 +102,7 @@ private:
     id <MTLCommandBuffer> _commandBuffer;
     id <MTLRenderCommandEncoder> _renderEncoder;
     MTLRenderPassDescriptor *_renderPassDescriptor;
-
+    
     // todo delete
     MTLPixelFormat _colorPixelFormat;
     id <MTLSamplerState> _samplerState;
