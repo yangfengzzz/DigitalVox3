@@ -124,6 +124,7 @@ id<MTLTexture> MetalLoader::createTextureArray(const std::vector<id<MTLTexture>>
     descriptor.width = textures[0].width;
     descriptor.height = textures[0].height;
     descriptor.arrayLength = textures.size();
+    descriptor.storageMode = MTLStorageModePrivate;
     
     auto arrayTexture = [_device newTextureWithDescriptor:descriptor];
     auto commandBuffer = [_commandQueue commandBuffer];

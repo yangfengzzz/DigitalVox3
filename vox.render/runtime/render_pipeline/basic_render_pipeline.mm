@@ -309,6 +309,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             shadowRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
             shadowRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
             shadowRenderPassDescriptor.depthAttachment.clearDepth = 1;
+            rhi.activeRenderTarget(shadowRenderPassDescriptor);
             rhi.beginRenderPass(shadowRenderPassDescriptor, _camera, 0);
             
             MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
