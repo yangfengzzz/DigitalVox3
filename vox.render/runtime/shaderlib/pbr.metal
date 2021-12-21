@@ -137,9 +137,9 @@ vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
     // normal
     if (hasNormal) {
         if (hasTangent && hasNormalTexture) {
-            out.normalW = normalize( float3x3(u_MVMat.columns[0].xyz,
-                                              u_MVMat.columns[1].xyz,
-                                              u_MVMat.columns[2].xyz) * normal.xyz);
+            out.normalW = normalize( float3x3(u_normalMat.columns[0].xyz,
+                                              u_normalMat.columns[1].xyz,
+                                              u_normalMat.columns[2].xyz) * normal.xyz);
             out.tangentW = normalize( float3x3(u_normalMat.columns[0].xyz,
                                                u_normalMat.columns[1].xyz,
                                                u_normalMat.columns[2].xyz) * tangent.xyz);
@@ -533,7 +533,7 @@ float3 getPbrNormal(VertexOut in, float u_normalIntensity,
             float3 b = normalize(cross(ng, t));
             tbn = matrix_float3x3(t, b, ng);
         } else {
-            tbn = matrix_float3x3(in.normalW, in.tangentW, in.bitangentW);
+            tbn = matrix_float3x3(in.tangentW, in.bitangentW, in.normalW);
         }
         n = u_normalTexture.sample(smp, in.v_uv).rgb;
         n = normalize(tbn * ((2.0 * n - 1.0) * float3(u_normalIntensity, u_normalIntensity, 1.0)));
@@ -547,7 +547,7 @@ float3 getPbrNormal(VertexOut in, float u_normalIntensity,
         }
     }
     
-    n *= float( !is_front_face ) * 2.0 - 1.0;
+    n *= float( is_front_face ) * 2.0 - 1.0;
     return n;
 }
 
