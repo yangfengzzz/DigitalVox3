@@ -107,6 +107,11 @@ private:
     Camera* _camera;
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
+    
+    /** Shader data. */
+    ShaderData shaderData = ShaderData();
+    static ShaderProperty _shadowMapProp;
+    static ShaderProperty _shadowDataProp;
 };
 
 }

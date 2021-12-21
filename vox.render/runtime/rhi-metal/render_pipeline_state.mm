@@ -27,12 +27,6 @@ _render(_render) {
     _recordVertexLocation(_reflection);
 }
 
-void RenderPipelineState::groupingOtherUniformBlock() {
-    if (otherUniformBlock.size() > 0) {
-        _groupingSubOtherUniforms(otherUniformBlock);
-    }
-}
-
 std::unordered_map<
 std::type_index, std::function<void(std::any const&, size_t, id <MTLRenderCommandEncoder>)>>
 RenderPipelineState::vertex_any_uploader {
@@ -178,27 +172,12 @@ void RenderPipelineState::_groupingUniform(const ShaderUniform& uniform,
             case ShaderDataGroup::Material:
                 materialUniformBlock.push_back(uniform);
                 break;
+            case ShaderDataGroup::Internal:
+                internalUniformBlock.push_back(uniform);
+                break;
         }
     } else {
-        otherUniformBlock.push_back(uniform);
-    }
-}
-
-void RenderPipelineState::_groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms) {
-    for (size_t i = 0; i < uniforms.size(); i++) {
-        const auto& uniform = uniforms[i];
-        const auto group = Shader::getShaderPropertyGroup(uniform.name);
-        if (group != std::nullopt) {
-            auto iter = std::find_if(uniforms.begin(), uniforms.end(),
-                                     [&](const auto& u){
-                return u.name == uniform.name;
-            });
-            
-            if (iter != uniforms.end()) {
-                uniforms.erase(iter);
-            }
-            _groupingUniform(uniform, group);
-        }
+        // std::cerr << "Unknown uniform group" << std::endl;
     }
 }
 

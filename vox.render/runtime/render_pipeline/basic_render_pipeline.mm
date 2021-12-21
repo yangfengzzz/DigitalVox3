@@ -26,6 +26,8 @@ bool BasicRenderPipeline::_compareFromFarToNear(const RenderElement& a, const Re
 }
 
 //MARK: - RenderElement
+ShaderProperty BasicRenderPipeline::_shadowMapProp = Shader::createProperty("shadowMap", ShaderDataGroup::Enum::Internal);
+ShaderProperty BasicRenderPipeline::_shadowDataProp = Shader::createProperty("shadowData", ShaderDataGroup::Enum::Internal);
 BasicRenderPipeline::BasicRenderPipeline(Camera* camera):
 _camera(camera) {
     auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
@@ -221,12 +223,12 @@ void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, 
         rhi.setRenderPipelineState(pipelineState);
         
         //MARK:- Load Resouces
-        pipelineState->groupingOtherUniformBlock();
         pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
         pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
         pipelineState->uploadAll(pipelineState->rendererUniformBlock, rendererData);
         pipelineState->uploadAll(pipelineState->materialUniformBlock, materialData);
-        
+        pipelineState->uploadAll(pipelineState->internalUniformBlock, shaderData);
+
         auto& buffers = element.mesh->_vertexBuffer;
         for (uint32_t index = 0; index < buffers.size(); index++) {
             rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
@@ -283,7 +285,6 @@ void BasicRenderPipeline::_drawSky(const Sky& sky) {
     auto pipelineState = rhi.resouceCache.request_graphics_pipeline(descriptor);
     rhi.setRenderPipelineState(pipelineState);
     
-    pipelineState->groupingOtherUniformBlock();
     pipelineState->uploadAll(pipelineState->materialUniformBlock, shaderData);
     
     auto& buffers = mesh->_vertexBuffer;
@@ -361,7 +362,8 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
         }
     }
     if (!shadowMaps.empty()) {
-        rhi.mergeResource(shadowMaps);
+        auto packedTexture = rhi.mergeResource(shadowMaps);
+        shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
     }
 }
 

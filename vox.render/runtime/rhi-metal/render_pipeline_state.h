@@ -29,7 +29,7 @@ public:
     std::vector<ShaderUniform> cameraUniformBlock{};
     std::vector<ShaderUniform> rendererUniformBlock{};
     std::vector<ShaderUniform> materialUniformBlock{};
-    std::vector<ShaderUniform> otherUniformBlock{};
+    std::vector<ShaderUniform> internalUniformBlock{};
     
     RenderPipelineState(MetalRenderer* _render, MTLRenderPipelineDescriptor* descriptor);
     
@@ -37,12 +37,7 @@ public:
         return _handle;
     }
     
-public:
-    /**
-     * Grouping other data.
-     */
-    void groupingOtherUniformBlock();
-    
+public:    
     /**
      * Upload all shader data in shader uniform block.
      * @param uniformBlock - shader Uniform block
@@ -105,9 +100,7 @@ private:
     
     void _groupingUniform(const ShaderUniform& uniform,
                           const std::optional<ShaderDataGroup::Enum>& group);
-    
-    void _groupingSubOtherUniforms(std::vector<ShaderUniform>& uniforms);
-    
+        
     MetalRenderer *_render;
     id <MTLRenderPipelineState> _handle;
 };

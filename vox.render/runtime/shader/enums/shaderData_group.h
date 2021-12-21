@@ -20,7 +20,9 @@ struct ShaderDataGroup {
         /** Renderer group. */
         Renderer,
         /** material group. */
-        Material
+        Material,
+        /** internal group. */
+        Internal
     };
 };
 
