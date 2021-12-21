@@ -17,6 +17,7 @@
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/direct_light.h"
 #include "../vox.render/runtime/lighting/point_light.h"
+#include "../vox.render/runtime/lighting/spot_light.h"
 
 using namespace vox;
 
@@ -54,7 +55,7 @@ int main(int, char**) {
     light->transform->setPosition(0, 10, 0);
     light->transform->lookAt(Float3(0, 0, 0), Float3(1, 0, 0));
     light->addComponent<lightMovemenet>();
-    auto directionLight = light->addComponent<DirectLight>();
+    auto directionLight = light->addComponent<SpotLight>();
     directionLight->intensity = 1.0;
     directionLight->setEnableShadow(true);
     
@@ -79,7 +80,6 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
-    planeRenderer->castShadow = true;
     planeRenderer->receiveShadow = true;
     
     engine.run();

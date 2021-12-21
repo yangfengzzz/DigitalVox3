@@ -32,7 +32,7 @@ typedef struct {
 } VertexIn;
 
 vertex float4 vertex_depth(const VertexIn vertexIn [[ stage_in ]],
-                           constant matrix_float4x4 &vp [[buffer(1)]],
-                           constant matrix_float4x4 &modelMatrix [[buffer(2)]]) {
+                           constant matrix_float4x4 &vp [[buffer(11)]],
+                           constant matrix_float4x4 &modelMatrix [[buffer(12)]]) {
     return vp * modelMatrix * float4(vertexIn.position, 1.0);
 }

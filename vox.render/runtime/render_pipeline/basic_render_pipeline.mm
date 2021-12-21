@@ -311,7 +311,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             if (shadowCount < shadowMaps.size()) {
                 texture = shadowMaps[shadowCount];
             } else {
-                texture = rhi.resourceLoader()->buildTexture(shadowMapSize, shadowMapSize,
+                texture = rhi.resourceLoader()->buildTexture(2560, 1440,
                                                              MTLPixelFormatDepth32Float);
                 shadowMaps.push_back(texture);
             }
@@ -359,8 +359,8 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
                     rhi.setRenderPipelineState(pipelineState);
                     
                     auto modelMatrix = element.component->entity()->transform->worldMatrix();
-                    rhi.setVertexBytes(light->shadow.vp, 1);
-                    rhi.setVertexBytes(modelMatrix, 2);
+                    rhi.setVertexBytes(light->shadow.vp, 11);
+                    rhi.setVertexBytes(modelMatrix, 12);
                     
                     auto& buffers = element.mesh->_vertexBuffer;
                     for (uint32_t index = 0; index < buffers.size(); index++) {
