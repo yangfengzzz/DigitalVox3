@@ -67,7 +67,6 @@ enum MacroName {
     IS_2D = 37,
     
     // Shadow
-    NEED_GENERATE_SHADOW_MAP = 38,
     SHADOW_MAP_COUNT = 39,
     
     TOTAL_COUNT = 40,

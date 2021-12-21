@@ -157,13 +157,7 @@ vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
         out.v_pos = temp_pos.xyz / temp_pos.w;
     }
     
-    // shadow && position
-    if (needGenerateShadowMap) {
-        out.position = u_projMatFromLight * u_viewMatFromLight * u_modelMat * position;
-    } else {
-        out.position = u_MVPMat * position;
-    }
-    
+    out.position = u_MVPMat * position;
     return out;
 }
 

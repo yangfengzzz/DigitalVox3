@@ -62,7 +62,6 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     {IS_2D, {0, MTLDataTypeBool}},
     
     // Shadow
-    {NEED_GENERATE_SHADOW_MAP, {0, MTLDataTypeBool}},
     {SHADOW_MAP_COUNT, {0, MTLDataTypeInt}},
 };
 
