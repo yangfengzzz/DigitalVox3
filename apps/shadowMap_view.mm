@@ -25,12 +25,15 @@ public:
 
 class lightMovemenet: public Script {
 public:
-    const float speed = 20;
+    const float speed = 1;
+    float totalTime = 0;
     
     lightMovemenet(Entity* entity):Script(entity) {}
     
     void onUpdate(float deltaTime) override {
-        entity()->transform->setPosition(5*std::sin(speed * deltaTime), 10, 5*std::cos(speed * deltaTime));
+        totalTime += deltaTime;
+        totalTime = fmod(totalTime, 10);
+        entity()->transform->setPosition(5*std::sin(speed * totalTime), 10, 5*std::cos(speed * totalTime));
         entity()->transform->lookAt(Float3(0, 0, 0));
     }
 };
@@ -40,7 +43,6 @@ int main(int, char**) {
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
     
     Shader::create("shadowMapDebugger", "vertex_shadow_debugger", "fragment_shadow_debugger");
     
@@ -57,7 +59,7 @@ int main(int, char**) {
     light->transform->lookAt(Float3(0, 0, 0), Float3(1, 0, 0));
     light->addComponent<lightMovemenet>();
     auto directionLight = light->addComponent<DirectLight>();
-    directionLight->intensity = 0.3;
+    directionLight->intensity = 1.0;
     directionLight->setEnableShadow(true);
 
     // create box test entity
@@ -84,8 +86,7 @@ int main(int, char**) {
     
     // shadow view
     auto shadowViewEntity = rootEntity->createChild("ShadowDebugEntity");
-    shadowViewEntity->transform->setRotation(90, 0, 0);
-    shadowViewEntity->transform->setPosition(Float3(5, 0, 5));
+    shadowViewEntity->transform->setPosition(Float3(6, 0, 0));
     auto shadowMtl = std::make_shared<ShadowDebugMaterial>(&engine);
     shadowMtl->setRenderFace(RenderFace::Enum::Double);
     
