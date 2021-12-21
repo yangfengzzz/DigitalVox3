@@ -105,12 +105,19 @@ void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camer
     _renderEncoder = [_commandBuffer renderCommandEncoderWithDescriptor:_renderPassDescriptor];
     
     if (renderTarget != nullptr) {
-        
-        [_renderEncoder setViewport:MTLViewport{
-            0, 0,
-            2560,
-            1440,
-            0, 1}];
+        if (renderTarget.colorAttachments[0].texture.width != 0) {
+            [_renderEncoder setViewport:MTLViewport{
+                0, 0,
+                static_cast<double>(renderTarget.colorAttachments[0].texture.width >> mipLevel),
+                static_cast<double>(renderTarget.colorAttachments[0].texture.height >> mipLevel),
+                0, 1}];
+        } else {
+            [_renderEncoder setViewport:MTLViewport{
+                0, 0,
+                static_cast<double>(renderTarget.depthAttachment.texture.width >> mipLevel),
+                static_cast<double>(renderTarget.depthAttachment.texture.height >> mipLevel),
+                0, 1}];
+        }
     } else {
         const auto &viewport = camera->viewport();
         int width, height;
