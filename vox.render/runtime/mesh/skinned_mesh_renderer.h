@@ -56,7 +56,7 @@ private:
                                           const vox::math::Float4x4& _transform);
     
 private:    
-    Animator* animator;
+    Animator* animator = nullptr;
     
     // Runtime skeleton.
     vox::animation::Skeleton skeleton_;
