@@ -86,14 +86,14 @@ int main(int, char**) {
     planeRenderer->receiveShadow = true;
     
     // shadow view
-    auto shadowViewEntity = rootEntity->createChild("ShadowDebugEntity");
-    shadowViewEntity->transform->setPosition(Float3(6, 0, 0));
-    auto shadowMtl = std::make_shared<ShadowDebugMaterial>(&engine);
-    shadowMtl->setRenderFace(RenderFace::Enum::Double);
-    
-    auto shadowViewRenderer = shadowViewEntity->addComponent<MeshRenderer>();
-    shadowViewRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 2, 2));
-    shadowViewRenderer->setMaterial(shadowMtl);
+//    auto shadowViewEntity = rootEntity->createChild("ShadowDebugEntity");
+//    shadowViewEntity->transform->setPosition(Float3(6, 0, 0));
+//    auto shadowMtl = std::make_shared<ShadowDebugMaterial>(&engine);
+//    shadowMtl->setRenderFace(RenderFace::Enum::Double);
+//
+//    auto shadowViewRenderer = shadowViewEntity->addComponent<MeshRenderer>();
+//    shadowViewRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 2, 2));
+//    shadowViewRenderer->setMaterial(shadowMtl);
 
     engine.run();
 }

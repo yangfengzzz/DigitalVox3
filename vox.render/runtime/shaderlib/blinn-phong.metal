@@ -160,7 +160,7 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
     }
     
     if (hasShadow) {
-        out.shadowCoord = u_shadowData[0].vp * position;
+        out.shadowCoord = u_shadowData[0].vp * u_modelMat * position;
     }
     
     out.position = u_MVPMat * position;
@@ -228,17 +228,21 @@ float3 getNormal(VertexOut in, float u_normalIntensity,
 }
 
 float textureProj(float4 shadowCoord, float2 off,
-                  sampler textureSampler,
-                  texture2d_array<float> u_shadowMap,
+                  depth2d_array<float> u_shadowMap,
                   constant ShadowData* u_shadowData) {
-    float shadow = 1.0;
-    if ( shadowCoord.z > -1.0 && shadowCoord.z < 1.0 ) {
-        float dist = u_shadowMap.sample(textureSampler, shadowCoord.xy, 0).r;
-        if ( shadowCoord.w > 0.0 && dist < shadowCoord.z ) {
-            shadow = u_shadowData[0].intensity;
-        }
+    constexpr sampler s(coord::normalized, filter::linear,
+                        address::clamp_to_edge, compare_func:: less);
+    float2 xy = shadowCoord.xy;
+    xy = xy * 0.5 + 0.5;
+    xy.y = 1 - xy.y;
+    float shadow_sample = u_shadowMap.sample(s, xy, 0);
+    float current_sample = shadowCoord.z / shadowCoord.w;
+    
+    if (current_sample > shadow_sample ) {
+        return u_shadowData[0].intensity;
+    } else {
+        return 1.0;
     }
-    return shadow;
 }
 
 fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
@@ -277,7 +281,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
                                      bool is_front_face [[front_facing]],
                                      constant ShadowData* u_shadowData [[buffer(27), function_constant(hasShadow)]],
-                                     texture2d_array<float> u_shadowMap [[texture(5), function_constant(hasShadow)]]) {
+                                     depth2d_array<float> u_shadowMap [[texture(5), function_constant(hasShadow)]]) {
     float4 ambient = float4(0.0);
     float4 emission = u_emissiveColor;
     float4 diffuse = u_diffuseColor;
@@ -369,7 +373,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     
     diffuse *= float4( lightDiffuse, 1.0 );
     if (hasShadow) {
-        diffuse *= textureProj(in.shadowCoord/in.shadowCoord.w, float2(0), textureSampler, u_shadowMap, u_shadowData);
+        diffuse *= textureProj(in.shadowCoord, float2(0), u_shadowMap, u_shadowData);
     }
     
     specular *= float4( lightSpecular, 1.0 );
