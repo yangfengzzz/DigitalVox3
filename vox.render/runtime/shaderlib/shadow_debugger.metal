@@ -46,11 +46,18 @@ vertex VertexOut vertex_shadow_debugger(const VertexIn in [[stage_in]],
     return out;
 }
 
+float LinearizeDepth(float depth) {
+    float n = 1.0; // camera z near
+    float f = 128.0; // camera z far
+    float z = depth;
+    return (2.0 * n) / (f + n - z * (f - n));
+}
 
 fragment float4 fragment_shadow_debugger(VertexOut in [[stage_in]],
                                          sampler textureSampler [[sampler(0)]],
                                          texture2d_array<float> shadowMap [[texture(0)]]) {
-    return shadowMap.sample(textureSampler, in.v_uv, 0);
+    float depth = shadowMap.sample(textureSampler, in.v_uv, 0).r;
+    return float4(float3(1.0-LinearizeDepth(depth)), 1.0);
 }
 
 

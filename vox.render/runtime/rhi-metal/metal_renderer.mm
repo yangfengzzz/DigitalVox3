@@ -155,7 +155,7 @@ void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
 id<MTLTexture> MetalRenderer::mergeResource(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
                                             const std::vector<id<MTLTexture>>::iterator& texturesEnd,
                                             id<MTLTexture> packedTextures) {
-    if (packedTextures == nullptr) {
+    if (packedTextures == nullptr || packedTextures.arrayLength != texturesEnd - texturesBegin) {
         MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
         descriptor.textureType = MTLTextureType2DArray;
         descriptor.pixelFormat = (*texturesBegin).pixelFormat;
