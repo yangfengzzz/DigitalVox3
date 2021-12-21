@@ -17,6 +17,7 @@
 #include "matrix.h"
 #include "bounding_box.h"
 #include <optional>
+#include <simd/simd.h>
 
 namespace vox {
 namespace math {
@@ -58,6 +59,8 @@ struct BoundingFrustum {
      * @param matrix - The given view-projection matrix
      */
     void calculateFromMatrix(const Matrix &matrix);
+
+    void calculateFromMatrix(const simd_float4x4 &matrix);
     
     /**
      * Get whether or not a specified bounding box intersects with this frustum (Contains or Intersects).

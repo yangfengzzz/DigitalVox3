@@ -11,6 +11,7 @@
 #include "../component.h"
 #include "maths/matrix.h"
 #include "../shadow/light_shadow.h"
+#include "../shaderlib/shader_common.h"
 
 namespace vox {
 /**
@@ -41,24 +42,7 @@ public:
         _enableShadow = enabled;
     }
     
-    struct ShadowData {
-        /**
-         * Shadow bias.
-         */
-        float bias = 0.005;
-        /**
-         * Shadow intensity, the larger the value, the clearer and darker the shadow.
-         */
-        float intensity = 0.2;
-        /**
-         * Pixel range used for shadow PCF interpolation.
-         */
-        float radius = 1;
-        /**
-         * Light view projection matrix.
-         */
-        math::Matrix vp;
-    } shadow;
+    ShadowData shadow;
     
     void updateShadowMatrix();
     

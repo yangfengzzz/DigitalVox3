@@ -58,7 +58,8 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
                                     texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],
                                     constant int &u_jointCount [[buffer(11), function_constant(hasSkinAndHasJointTexture)]],
                                     constant matrix_float4x4 *u_jointMatrix [[buffer(12), function_constant(hasSkinNotHasJointTexture)]],
-                                    constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]]) {
+                                    constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]],
+                                    constant ShadowData* u_shadowData [[buffer(14), function_constant(hasShadow)]]) {
     VertexOut out;
     
     // begin position

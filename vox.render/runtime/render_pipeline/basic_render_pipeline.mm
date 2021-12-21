@@ -26,8 +26,8 @@ bool BasicRenderPipeline::_compareFromFarToNear(const RenderElement& a, const Re
 }
 
 //MARK: - RenderElement
-ShaderProperty BasicRenderPipeline::_shadowMapProp = Shader::createProperty("shadowMap", ShaderDataGroup::Enum::Internal);
-ShaderProperty BasicRenderPipeline::_shadowDataProp = Shader::createProperty("shadowData", ShaderDataGroup::Enum::Internal);
+ShaderProperty BasicRenderPipeline::_shadowMapProp = Shader::createProperty("u_shadowMap", ShaderDataGroup::Enum::Internal);
+ShaderProperty BasicRenderPipeline::_shadowDataProp = Shader::createProperty("u_shadowData", ShaderDataGroup::Enum::Internal);
 BasicRenderPipeline::BasicRenderPipeline(Camera* camera):
 _camera(camera) {
     auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
@@ -195,8 +195,12 @@ void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, 
         if (material == nullptr) {
             material = element.material;
         }
-        const auto& rendererData = renderer->shaderData;
+        auto& rendererData = renderer->shaderData;
         const auto& materialData = material->shaderData;
+        
+        if (renderer->receiveShadow) {
+            rendererData.enableMacro(SHADOW_MAP_COUNT, std::make_pair(shadowCount, MTLDataTypeInt));
+        }
         
         // union render global macro and material self macro.
         materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
@@ -298,8 +302,8 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     const auto& engine = _camera->engine();
     auto& rhi = engine->_hardwareRenderer;
     
-    size_t shadowCount = 0;
-    std::vector<Light::ShadowData> shadowDatas{};
+    shadowCount = 0;
+    std::vector<ShadowData> shadowDatas{};
     const auto& lights = context.scene()->light_manager.visibleLights();
     for (const auto& light : lights) {
         if (light->enableShadow()) {

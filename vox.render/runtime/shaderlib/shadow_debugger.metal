@@ -55,8 +55,8 @@ float LinearizeDepth(float depth) {
 
 fragment float4 fragment_shadow_debugger(VertexOut in [[stage_in]],
                                          sampler textureSampler [[sampler(0)]],
-                                         texture2d_array<float> shadowMap [[texture(0)]]) {
-    float depth = shadowMap.sample(textureSampler, in.v_uv, 0).r;
+                                         texture2d_array<float> u_shadowMap [[texture(0)]]) {
+    float depth = u_shadowMap.sample(textureSampler, in.v_uv, 0).r;
     return float4(float3(1.0-LinearizeDepth(depth)), 1.0);
 }
 

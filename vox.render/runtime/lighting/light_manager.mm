@@ -14,14 +14,14 @@
 
 namespace vox {
 LightManager::LightManager() {
-    RenderPipelineState::register_vertex_uploader<Light::ShadowData>(
-    [](const Light::ShadowData& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: &x length:sizeof(Light::ShadowData) atIndex:location];
+    RenderPipelineState::register_vertex_uploader<ShadowData>(
+    [](const ShadowData& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(ShadowData) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<Light::ShadowData>(
-    [](const Light::ShadowData& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: &x length:sizeof(Light::ShadowData) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<ShadowData>(
+    [](const ShadowData& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(ShadowData) atIndex:location];
     });
 }
 
