@@ -108,8 +108,8 @@ void MetalRenderer::beginRenderPass(MTLRenderPassDescriptor *renderTarget, Camer
         
         [_renderEncoder setViewport:MTLViewport{
             0, 0,
-            static_cast<double>(renderTarget.colorAttachments[0].texture.width >> mipLevel),
-            static_cast<double>(renderTarget.colorAttachments[0].texture.height >> mipLevel),
+            2560,
+            1440,
             0, 1}];
     } else {
         const auto &viewport = camera->viewport();
@@ -143,6 +143,28 @@ void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
     auto blit = [_commandBuffer blitCommandEncoder];
     [blit synchronizeResource:resource];
     [blit endEncoding];
+}
+
+id<MTLTexture> MetalRenderer::mergeResource(const std::vector<id<MTLTexture>>& textures) {
+    MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+    descriptor.textureType = MTLTextureType2DArray;
+    descriptor.pixelFormat = textures[0].pixelFormat;
+    descriptor.width = textures[0].width;
+    descriptor.height = textures[0].height;
+    descriptor.arrayLength = textures.size();
+    descriptor.storageMode = MTLStorageModePrivate;
+    
+    auto arrayTexture = [_device newTextureWithDescriptor:descriptor];
+    auto blitEncoder = [_commandBuffer blitCommandEncoder];
+    MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
+    MTLSize size = MTLSize{.width =  arrayTexture.width,
+        .height =  arrayTexture.height, .depth = 1};
+    for (size_t index = 0; index < textures.size(); index++) {
+        [blitEncoder copyFromTexture:textures[index] sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
+                           toTexture:arrayTexture destinationSlice:index destinationLevel:0 destinationOrigin:origin];
+    }
+    [blitEncoder endEncoding];
+    return arrayTexture;
 }
 
 id <MTLRenderPipelineState> MetalRenderer::createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor) {

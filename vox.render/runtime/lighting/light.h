@@ -57,11 +57,11 @@ public:
         /**
          * Shadow map size.
          */
-        float mapSizeX = 500;
+        float mapSizeX = 2560;
         /**
          * Shadow map size.
          */
-        float mapSizeY = 500;
+        float mapSizeY = 1440;
     } shadow;
     
     virtual math::Matrix shadowProjectionMatrix() = 0;

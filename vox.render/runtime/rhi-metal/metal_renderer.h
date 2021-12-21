@@ -48,6 +48,8 @@ public:
 public:
     void synchronizeResource(id<MTLResource> resource);
     
+    id<MTLTexture> mergeResource(const std::vector<id<MTLTexture>>& textures);
+    
 public:
     template<typename T>
     void setVertexBytes(T& data, uint32_t location) {

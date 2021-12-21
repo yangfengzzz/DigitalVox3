@@ -319,20 +319,6 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             rhi.setCullMode(MTLCullModeNone);
             rhi.setDepthBias(0.01, 1.0, 0.01);
             
-            MDLVertexDescriptor* vertexDescriptor = [[MDLVertexDescriptor alloc]init];
-            vertexDescriptor.attributes[0] = [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
-                                                                              format:MDLVertexFormatFloat3
-                                                                              offset:0 bufferIndex:0];
-            vertexDescriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:12];
-            MTLRenderPipelineDescriptor* pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc]init];
-            pipelineDescriptor.vertexFunction = [rhi.library() newFunctionWithName:@"vertex_depth"];
-            pipelineDescriptor.fragmentFunction = NULL;
-            pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
-            pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(vertexDescriptor);
-            pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
-            auto state = rhi.createRenderPipelineState(pipelineDescriptor);
-            rhi.setRenderPipelineState(state);
-            
             std::vector<RenderElement> opaqueQueue{};
             std::vector<RenderElement> transparentQueue{};
             std::vector<RenderElement> alphaTestQueue{};
@@ -342,9 +328,21 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             BoundingFrustum frustum;
             frustum.calculateFromMatrix(vp);
             engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
-
+            
             for (const auto& element : opaqueQueue) {
                 if (element.component->castShadow) {
+                    Shader shader("shadowMap", "vertex_depth", "");
+                    auto program = shader.findShaderProgram(engine, element.component->_globalShaderMacro);
+                    
+                    MTLRenderPipelineDescriptor* pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc]init];
+                    pipelineDescriptor.vertexFunction = program->vertexShader();
+                    pipelineDescriptor.fragmentFunction = NULL;
+                    pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
+                    pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
+                    pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+                    auto state = rhi.createRenderPipelineState(pipelineDescriptor);
+                    rhi.setRenderPipelineState(state);
+                    
                     auto modelMatrix = element.component->entity()->transform->worldMatrix();
                     rhi.setVertexBytes(vp, 1);
                     rhi.setVertexBytes(modelMatrix, 2);
@@ -363,7 +361,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
         }
     }
     if (!shadowMaps.empty()) {
-        rhi.resourceLoader()->createTextureArray(shadowMaps);
+        rhi.mergeResource(shadowMaps);
     }
 }
 

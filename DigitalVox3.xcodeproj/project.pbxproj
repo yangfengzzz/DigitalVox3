@@ -846,7 +846,7 @@
 		04D47E69277002A40038F34A /* light_shadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E67277002A40038F34A /* light_shadow.h */; };
 		04D47E6D27700EB20038F34A /* shadow_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E6B27700EB20038F34A /* shadow_manager.h */; };
 		04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
-		04D47E70277166550038F34A /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
+		04D47E752771A15E0038F34A /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4560,7 +4560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D47E70277166550038F34A /* shadowMap_view.mm in Sources */,
+				04D47E752771A15E0038F34A /* shadowMap_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

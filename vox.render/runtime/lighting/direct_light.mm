@@ -41,7 +41,7 @@ void DirectLight::_updateShaderData(ShaderData& shaderData) {
 }
 
 math::Matrix DirectLight::shadowProjectionMatrix() {
-    return math::Matrix::ortho(-5, 5, -5, 5, 0.1, 50);
+    return math::Matrix::ortho(-17, 17, -10, 10, 0.1, 100);
 }
 
 }

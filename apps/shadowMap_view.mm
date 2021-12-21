@@ -13,7 +13,7 @@
 #include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/material/blinn_phong_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
-#include "../vox.render/runtime/lighting/point_light.h"
+#include "../vox.render/runtime/lighting/direct_light.h"
 #include <random>
 
 using namespace vox;
@@ -34,11 +34,12 @@ int main(int, char**) {
     
     // init point light
     auto light = rootEntity->createChild("light");
-    light->transform->setPosition(0, 3, 0);
-    auto pointLight = light->addComponent<PointLight>();
-    pointLight->intensity = 0.3;
-    pointLight->setEnableShadow(true);
-    
+    light->transform->setPosition(0, 10, 0);
+    light->transform->lookAt(Float3(0, 0, 0), Float3(1, 0, 0));
+    auto directionLight = light->addComponent<DirectLight>();
+    directionLight->intensity = 0.3;
+    directionLight->setEnableShadow(true);
+
     // create box test entity
     float cubeSize = 2.0;
     auto boxEntity = rootEntity->createChild("BoxEntity");
@@ -59,6 +60,7 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
+    planeRenderer->castShadow = true;
 
     engine.run();
 }

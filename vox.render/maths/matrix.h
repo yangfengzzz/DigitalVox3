@@ -316,7 +316,7 @@ struct Matrix {
                       
                       (left + right) * lr,
                       (top + bottom) * bt,
-                      (far + near) * nf,
+                      near * nf,
                       1);
     }
 
