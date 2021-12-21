@@ -57,8 +57,8 @@ int main(int, char**) {
     directionLight->intensity = 1.0;
     directionLight->setEnableShadow(true);
     
-    auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
-    boxMtl->setBaseTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
+    auto characterMtl = std::make_shared<UnlitMaterial>(&engine);
+    characterMtl->setBaseTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
     
     auto characterEntity = rootEntity->createChild("characterEntity");
     characterEntity->transform->setScale(3, 3, 3);
@@ -66,13 +66,13 @@ int main(int, char**) {
     characterRenderer->castShadow = true;
     characterRenderer->addSkinnedMesh("../models/Doggy/Doggy.fbx",
                                       "../models/Doggy/doggy_skeleton.ozz");
-    characterRenderer->setMaterial(boxMtl);
+    characterRenderer->setMaterial(characterMtl);
     auto characterAnim = characterEntity->addComponent<Animator>();
     characterAnim->addAnimationClip("../models/Doggy/Run.ozz");
     
     auto planeEntity = rootEntity->createChild("PlaneEntity");
     auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
-    planeMtl->setBaseColor(math::Color(0.5, 0.6, 0.7, 1.0));
+    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
     planeMtl->setRenderFace(RenderFace::Enum::Double);
     
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
