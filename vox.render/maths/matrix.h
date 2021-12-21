@@ -293,6 +293,7 @@ struct Matrix {
      * @param near - The depth of the near plane
      * @param far - The depth of the far plane
      * @return out - The calculated orthographic projection matrix
+     * @remarks Metal NDC z:[0,1]
      */
     static VOX_INLINE Matrix ortho(float left, float right, float bottom, float top, float near, float far) {
         auto lr = 1 / (left - right);
@@ -311,7 +312,7 @@ struct Matrix {
                       
                       0,
                       0,
-                      2 * nf,
+                      nf,
                       0,
                       
                       (left + right) * lr,
@@ -327,6 +328,7 @@ struct Matrix {
      * @param near - The depth of the near plane
      * @param far - The depth of the far plane
      * @return out - The calculated perspective projection matrix
+     * @remarks Metal NDC z:[0,1]
      */
     static VOX_INLINE Matrix perspective(float fovy, float aspect, float near, float far) {
         auto f = 1.0 / std::tan(fovy / 2);
@@ -344,12 +346,12 @@ struct Matrix {
                       
                       0,
                       0,
-                      (far + near) * nf,
+                      far * nf,
                       -1,
                       
                       0,
                       0,
-                      2 * far * near * nf,
+                      far * near * nf,
                       0);
     }
     
