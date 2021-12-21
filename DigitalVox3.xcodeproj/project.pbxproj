@@ -610,12 +610,12 @@
 		04A79AD7275E0F8D00182CCB /* pointer_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD5275E0F8D00182CCB /* pointer_manager.h */; };
 		04A79ADA275E2C4F00182CCB /* InputManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AD8275E2C4F00182CCB /* InputManager.mm */; };
 		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
+		04AD283F27722C5E00B86C7E /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
 		04C2EA4F276EE4C400091FB3 /* pbr_common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA4E276EE4C400091FB3 /* pbr_common.metal */; };
 		04C2EA54276EFA6E00091FB3 /* pbr.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398E2753A83B00204B8E /* pbr.metal */; };
-		04C2EA57277215B100091FB3 /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
 		04C698A02768C43F00C4248F /* imgui_canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C698982768C43E00C4248F /* imgui_canvas.cpp */; };
 		04C698A12768C43F00C4248F /* imgui_node_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989C2768C43F00C4248F /* imgui_node_editor.cpp */; };
 		04C698A22768C43F00C4248F /* imgui_node_editor_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6989D2768C43F00C4248F /* imgui_node_editor_api.cpp */; };
@@ -4563,7 +4563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04C2EA57277215B100091FB3 /* windows_view.mm in Sources */,
+				04AD283F27722C5E00B86C7E /* windows_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

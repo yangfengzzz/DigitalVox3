@@ -233,6 +233,7 @@ float textureProj(float4 shadowCoord, float2 off,
     constexpr sampler s(coord::normalized, filter::linear,
                         address::clamp_to_edge, compare_func:: less);
     float2 xy = shadowCoord.xy;
+    xy /= shadowCoord.w;
     xy = xy * 0.5 + 0.5;
     xy.y = 1 - xy.y;
     float shadow_sample = u_shadowMap.sample(s, xy + off, 0);
@@ -249,6 +250,7 @@ float filterPCF(float4 shadowCoord,
                 depth2d_array<float> u_shadowMap,
                 constant ShadowData* u_shadowData) {
     float2 xy = shadowCoord.xy;
+    xy /= shadowCoord.w;
     xy = xy * 0.5 + 0.5;
     xy.y = 1 - xy.y;
     constexpr sampler s(coord::normalized, filter::linear,

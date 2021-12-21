@@ -16,6 +16,7 @@
 #include "../vox.render/runtime/material/blinn_phong_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/lighting/direct_light.h"
+#include "../vox.render/runtime/lighting/point_light.h"
 
 using namespace vox;
 
