@@ -49,6 +49,11 @@ public:
     void synchronizeResource(id<MTLResource> resource);
     
 public:
+    template<typename T>
+    void setVertexBytes(T& data, uint32_t location) {
+        [_renderEncoder setVertexBytes: &data length:sizeof(T) atIndex:location];
+    }
+    
     void setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index);
     
     id <MTLRenderPipelineState> createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor);

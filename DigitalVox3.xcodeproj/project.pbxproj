@@ -846,6 +846,7 @@
 		04D47E65277001B30038F34A /* shadow_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E63277001B30038F34A /* shadow_pass.h */; };
 		04D47E69277002A40038F34A /* light_shadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E67277002A40038F34A /* light_shadow.h */; };
 		04D47E6D27700EB20038F34A /* shadow_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E6B27700EB20038F34A /* shadow_manager.h */; };
+		04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3614,6 +3615,7 @@
 				04CE398E2753A83B00204B8E /* pbr.metal */,
 				04CE398D2753A83B00204B8E /* brdf_lut.metal */,
 				04C2EA48276EC59600091FB3 /* specular_map.metal */,
+				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04860853276B17F100C05BDA /* core */,
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 				0434AC882766133E009AD4EA /* editor */,
@@ -3627,7 +3629,6 @@
 				04CE39952753A83C00204B8E /* pbribl2.metal */,
 				04860859276B2DFA00C05BDA /* experimental */,
 				04CE398B2753A83B00204B8E /* function-common.metal */,
-				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04CE39912753A83C00204B8E /* SkinningShader.metal */,
 			);
 			path = shaderlib;
@@ -4646,6 +4647,7 @@
 				04CE399B2753A83C00204B8E /* skybox.metal in Sources */,
 				0416103727599B05006CD384 /* physics_manager.mm in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
+				04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
 				04161068275A1506006CD384 /* translational_joint.cpp in Sources */,
 				04161064275A1336006CD384 /* spring_joint.cpp in Sources */,

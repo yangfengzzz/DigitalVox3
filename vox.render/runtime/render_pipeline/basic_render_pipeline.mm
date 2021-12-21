@@ -337,12 +337,17 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             std::vector<RenderElement> alphaTestQueue{};
             auto viewMatrix = invert(light->entity()->transform->worldMatrix());
             auto projMatrix = light->shadowProjectionMatrix();
+            auto vp = projMatrix * viewMatrix;
             BoundingFrustum frustum;
-            frustum.calculateFromMatrix(projMatrix * viewMatrix);
+            frustum.calculateFromMatrix(vp);
             engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
 
             for (const auto& element : opaqueQueue) {
                 if (element.component->castShadow) {
+                    auto modelMatrix = element.component->entity()->transform->worldMatrix();
+                    rhi.setVertexBytes(vp, 1);
+                    rhi.setVertexBytes(modelMatrix, 2);
+                    
                     auto& buffers = element.mesh->_vertexBuffer;
                     for (uint32_t index = 0; index < buffers.size(); index++) {
                         rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
