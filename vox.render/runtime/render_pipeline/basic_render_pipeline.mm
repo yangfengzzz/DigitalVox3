@@ -340,8 +340,8 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
                     pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
                     pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
                     pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
-                    auto state = rhi.createRenderPipelineState(pipelineDescriptor);
-                    rhi.setRenderPipelineState(state);
+                    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(pipelineDescriptor);
+                    rhi.setRenderPipelineState(pipelineState);
                     
                     auto modelMatrix = element.component->entity()->transform->worldMatrix();
                     rhi.setVertexBytes(vp, 1);
