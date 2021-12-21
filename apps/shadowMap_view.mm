@@ -83,6 +83,7 @@ int main(int, char**) {
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
     planeRenderer->castShadow = true;
+    planeRenderer->receiveShadow = true;
     
     // shadow view
     auto shadowViewEntity = rootEntity->createChild("ShadowDebugEntity");

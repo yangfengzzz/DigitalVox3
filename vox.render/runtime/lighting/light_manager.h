@@ -18,6 +18,8 @@ namespace vox {
  */
 class LightManager {
 public:
+    static constexpr uint32_t MAX_SHADOW = 10;
+    
     LightManager();
     
     /**

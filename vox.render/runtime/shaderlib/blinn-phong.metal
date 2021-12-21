@@ -40,6 +40,7 @@ typedef struct {
     float3 tangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 bitangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 v_normal [[function_constant(hasNormalNotHasTangentOrHasNormalTexture)]];
+    float4 shadowCoord [[function_constant(hasShadow)]];
 } VertexOut;
 
 vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
@@ -158,6 +159,10 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
         out.v_pos = temp_pos.xyz / temp_pos.w;
     }
     
+    if (hasShadow) {
+        out.shadowCoord = u_shadowData[0].vp * position;
+    }
+    
     out.position = u_MVPMat * position;
     return out;
 }
@@ -222,6 +227,20 @@ float3 getNormal(VertexOut in, float u_normalIntensity,
     return n;
 }
 
+float textureProj(float4 shadowCoord, float2 off,
+                  sampler textureSampler,
+                  texture2d_array<float> u_shadowMap,
+                  constant ShadowData* u_shadowData) {
+    float shadow = 1.0;
+    if ( shadowCoord.z > -1.0 && shadowCoord.z < 1.0 ) {
+        float dist = u_shadowMap.sample(textureSampler, shadowCoord.xy, 0).r;
+        if ( shadowCoord.w > 0.0 && dist < shadowCoord.z ) {
+            shadow = u_shadowData[0].intensity;
+        }
+    }
+    return shadow;
+}
+
 fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      sampler textureSampler [[sampler(0)]],
                                      constant matrix_float4x4 &u_localMat [[buffer(0)]],
@@ -256,7 +275,9 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      texture2d<float> u_diffuseTexture [[texture(2), function_constant(hasDiffuseTexture)]],
                                      texture2d<float> u_specularTexture [[texture(3), function_constant(hasSpecularTexture)]],
                                      texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
-                                     bool is_front_face [[front_facing]]) {
+                                     bool is_front_face [[front_facing]],
+                                     constant ShadowData* u_shadowData [[buffer(27), function_constant(hasShadow)]],
+                                     texture2d_array<float> u_shadowMap [[texture(5), function_constant(hasShadow)]]) {
     float4 ambient = float4(0.0);
     float4 emission = u_emissiveColor;
     float4 diffuse = u_diffuseColor;
@@ -347,6 +368,10 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     }
     
     diffuse *= float4( lightDiffuse, 1.0 );
+    if (hasShadow) {
+        diffuse *= textureProj(in.shadowCoord/in.shadowCoord.w, float2(0), textureSampler, u_shadowMap, u_shadowData);
+    }
+    
     specular *= float4( lightSpecular, 1.0 );
     if (needAlphaCutoff) {
         if( diffuse.a < u_alphaCutoff ) {

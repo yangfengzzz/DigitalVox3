@@ -303,7 +303,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     auto& rhi = engine->_hardwareRenderer;
     
     shadowCount = 0;
-    std::vector<ShadowData> shadowDatas{};
+    std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     const auto& lights = context.scene()->light_manager.visibleLights();
     for (const auto& light : lights) {
         if (light->enableShadow()) {
@@ -338,7 +338,11 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             BoundingFrustum frustum;
             frustum.calculateFromMatrix(light->shadow.vp);
             engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
-            shadowDatas.push_back(light->shadow);
+            if (shadowCount < LightManager::MAX_SHADOW) {
+                shadowDatas[shadowCount] = light->shadow;
+            } else {
+                std::cerr << "too much shadow caster!" << std::endl;
+            }
             
             for (const auto& element : opaqueQueue) {
                 if (element.component->castShadow) {
