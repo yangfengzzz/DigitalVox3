@@ -235,7 +235,7 @@ float textureProj(float4 shadowCoord, float2 off,
     float2 xy = shadowCoord.xy;
     xy = xy * 0.5 + 0.5;
     xy.y = 1 - xy.y;
-    float shadow_sample = u_shadowMap.sample(s, xy, 0);
+    float shadow_sample = u_shadowMap.sample(s, xy + off, 0);
     float current_sample = shadowCoord.z / shadowCoord.w;
     
     if (current_sample > shadow_sample ) {
@@ -244,6 +244,35 @@ float textureProj(float4 shadowCoord, float2 off,
         return 1.0;
     }
 }
+
+float filterPCF(float4 shadowCoord,
+                depth2d_array<float> u_shadowMap,
+                constant ShadowData* u_shadowData) {
+    float2 xy = shadowCoord.xy;
+    xy = xy * 0.5 + 0.5;
+    xy.y = 1 - xy.y;
+    constexpr sampler s(coord::normalized, filter::linear,
+                        address::clamp_to_edge, compare_func:: less);
+    
+    const int neighborWidth = 3;
+    const float neighbors = (neighborWidth * 2.0 + 1.0) * (neighborWidth * 2.0 + 1.0);
+    float mapSize = 4096;
+    float texelSize = 1.0 / mapSize;
+    float total = 0.0;
+    for (int x = -neighborWidth; x <= neighborWidth; x++) {
+      for (int y = -neighborWidth; y <= neighborWidth; y++) {
+        float shadow_sample = u_shadowMap.sample(s, xy + float2(x, y) * texelSize, 0);
+        float current_sample = shadowCoord.z / shadowCoord.w;
+        if (current_sample > shadow_sample ) {
+          total += 1.0;
+        }
+      }
+    }
+    total /= neighbors;
+    float lightFactor = 1.0 - (total * shadowCoord.w);
+    return lightFactor;
+}
+
 
 fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      sampler textureSampler [[sampler(0)]],
@@ -373,7 +402,8 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     
     diffuse *= float4( lightDiffuse, 1.0 );
     if (hasShadow) {
-        diffuse *= textureProj(in.shadowCoord, float2(0), u_shadowMap, u_shadowData);
+        diffuse *= filterPCF(in.shadowCoord, u_shadowMap, u_shadowData);
+//        diffuse *= textureProj(in.shadowCoord, float2(0), u_shadowMap, u_shadowData);
     }
     
     specular *= float4( lightSpecular, 1.0 );

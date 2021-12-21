@@ -108,7 +108,7 @@ private:
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
     
-    const int shadowMapSize = 500;
+    const int shadowMapSize = 2000; // resolution
     uint32_t shadowCount = 0;
     std::vector<id<MTLTexture>> shadowMaps;
     id<MTLTexture> packedTexture{nullptr};

@@ -32,8 +32,8 @@ public:
     
     void onUpdate(float deltaTime) override {
         totalTime += deltaTime;
-        totalTime = fmod(totalTime, 10);
-        entity()->transform->setPosition(5*std::sin(speed * totalTime), 10, 5*std::cos(speed * totalTime));
+        totalTime = fmod(totalTime, 100);
+        entity()->transform->setPosition(10*std::sin(speed * totalTime), 10, 10*std::cos(speed * totalTime));
         entity()->transform->lookAt(Float3(0, 0, 0));
     }
 };
