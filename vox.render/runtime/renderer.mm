@@ -82,14 +82,14 @@ MaterialPtr Renderer::getMaterial(size_t index) {
 
 void Renderer::setMaterial(MaterialPtr material) {
     size_t index = 0;
-
+    
     if (index >= _materials.size()) {
         _materials.reserve(index + 1);
         for (size_t i = _materials.size(); i <= index; i++) {
             _materials.push_back(nullptr);
         }
     }
-
+    
     const auto& internalMaterial = _materials[index];
     if (internalMaterial != material) {
         _materials[index] = material;
@@ -106,7 +106,7 @@ void Renderer::setMaterial(size_t index, MaterialPtr material) {
             _materials.push_back(nullptr);
         }
     }
-
+    
     const auto& internalMaterial = _materials[index];
     if (internalMaterial != material) {
         _materials[index] = material;
@@ -140,13 +140,28 @@ void Renderer::setMaterials(const std::vector<MaterialPtr>& materials) {
     if (_materialsInstanced.size() != 0) {
         _materialsInstanced.clear();
     }
-
+    
     for (size_t i = 0; i < count; i++) {
         const auto& internalMaterial = _materials[i];
         const auto& material = materials[i];
         if (internalMaterial != material) {
             _materials[i] = material;
         }
+    }
+}
+
+void Renderer::pushPrimitive(const RenderElement& element,
+                             std::vector<RenderElement>& opaqueQueue,
+                             std::vector<RenderElement>& alphaTestQueue,
+                             std::vector<RenderElement>& transparentQueue) {
+    const auto renderQueueType = element.material->renderQueueType;
+    
+    if (renderQueueType > (RenderQueueType::Transparent + RenderQueueType::AlphaTest) >> 1) {
+        transparentQueue.push_back(element);
+    } else if (renderQueueType > (RenderQueueType::AlphaTest + RenderQueueType::Opaque) >> 1) {
+        alphaTestQueue.push_back(element);
+    } else {
+        opaqueQueue.push_back(element);
     }
 }
 
@@ -157,7 +172,7 @@ void Renderer::_updateShaderData(RenderContext& context) {
     _mvInvMatrix = invert(_mvMatrix);
     _normalMatrix = invert(_normalMatrix);
     _normalMatrix = transpose(_normalMatrix);
-
+    
     shaderData.setData(Renderer::_localMatrixProperty, entity()->transform->localMatrix());
     shaderData.setData(Renderer::_worldMatrixProperty, worldMatrix);
     shaderData.setData(Renderer::_mvMatrixProperty, _mvMatrix);

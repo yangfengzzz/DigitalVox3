@@ -40,25 +40,7 @@ void BasicRenderPipeline::destroy() {
     _renderPassArray.clear();
 }
 
-void BasicRenderPipeline::clearRenderQueue() {
-    _opaqueQueue.clear();
-    _alphaTestQueue.clear();
-    _transparentQueue.clear();
-}
-
-void BasicRenderPipeline::pushPrimitive(const RenderElement& element) {
-    const auto renderQueueType = element.material->renderQueueType;
-    
-    if (renderQueueType > (RenderQueueType::Transparent + RenderQueueType::AlphaTest) >> 1) {
-        _transparentQueue.push_back(element);
-    } else if (renderQueueType > (RenderQueueType::AlphaTest + RenderQueueType::Opaque) >> 1) {
-        _alphaTestQueue.push_back(element);
-    } else {
-        _opaqueQueue.push_back(element);
-    }
-}
-
-void BasicRenderPipeline::render(const RenderContext& context,
+void BasicRenderPipeline::render(RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map
     const auto& engine = _camera->engine();
@@ -96,7 +78,8 @@ void BasicRenderPipeline::render(const RenderContext& context,
             pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
             pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(vertexDescriptor);
             pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
-            rhi.setRenderPipelineState(pipelineDescriptor);
+            auto state = rhi.createRenderPipelineState(pipelineDescriptor);
+            rhi.setRenderPipelineState(state);
             // render loop
             rhi.endRenderPass();
             shadowMaps.push_back(texture);
@@ -106,6 +89,10 @@ void BasicRenderPipeline::render(const RenderContext& context,
         rhi.resourceLoader()->createTextureArray(shadowMaps);
     }
     
+    _opaqueQueue.clear();
+    _alphaTestQueue.clear();
+    _transparentQueue.clear();
+    engine->_componentsManager.callRender(context, _opaqueQueue, _alphaTestQueue, _transparentQueue);
     std::sort(_opaqueQueue.begin(), _opaqueQueue.end(), BasicRenderPipeline::_compareFromNearToFar);
     std::sort(_alphaTestQueue.begin(), _alphaTestQueue.end(), BasicRenderPipeline::_compareFromNearToFar);
     std::sort(_transparentQueue.begin(), _transparentQueue.end(), BasicRenderPipeline::_compareFromFarToNear);

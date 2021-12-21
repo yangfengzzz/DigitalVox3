@@ -55,7 +55,9 @@ void ParticleRenderer::update(float deltaTime) {
     }
 }
 
-void ParticleRenderer::_render(Camera* camera) {
+void ParticleRenderer::_render(std::vector<RenderElement>& opaqueQueue,
+                               std::vector<RenderElement>& alphaTestQueue,
+                               std::vector<RenderElement>& transparentQueue) {
     auto render_mesh = _createMesh();
     auto& subMeshes = render_mesh->subMeshes();
     for (size_t i = 0; i < subMeshes.size(); i++) {
@@ -66,8 +68,8 @@ void ParticleRenderer::_render(Camera* camera) {
             material = nullptr;
         }
         if (material != nullptr) {
-            RenderElement element(this, render_mesh, &subMeshes[i], material);
-            camera->pushPrimitive(element);
+            pushPrimitive(RenderElement(this, render_mesh, &subMeshes[i], material),
+                          opaqueQueue, alphaTestQueue, transparentQueue);
         }
     }
 }

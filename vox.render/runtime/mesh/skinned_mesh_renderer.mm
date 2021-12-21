@@ -123,7 +123,9 @@ void SkinnedMeshRenderer::update(float deltaTime) {
     }
 }
 
-void SkinnedMeshRenderer::_render(Camera* camera) {
+void SkinnedMeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
+                                  std::vector<RenderElement>& alphaTestQueue,
+                                  std::vector<RenderElement>& transparentQueue) {
     // Builds skinning matrices, based on the output of the animation stage.
     // The mesh might not use (aka be skinned by) all skeleton joints. We use
     // the joint remapping table (available from the mesh object) to reorder
@@ -167,7 +169,7 @@ void SkinnedMeshRenderer::_render(Camera* camera) {
             }
             if (material != nullptr) {
                 RenderElement element(this, render_mesh, &subMeshes[i], material);
-                camera->pushPrimitive(element);
+                pushPrimitive(element, opaqueQueue, alphaTestQueue, transparentQueue);
             }
         }
     }

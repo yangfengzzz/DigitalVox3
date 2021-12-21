@@ -42,17 +42,8 @@ public:
      * @param cubeFace - Render surface of cube texture
      * @param mipLevel - Set mip level the data want to write
      */
-    void render(const RenderContext& context, std::optional<TextureCubeFace> cubeFace = std::nullopt,
-                int mipLevel = 0);
-    
-    /**
-     * Push a render element to the render queue.
-     * @param element - Render element
-     */
-    void pushPrimitive(const RenderElement& element);
-    
-    void clearRenderQueue();
-        
+    void render(RenderContext& context, std::optional<TextureCubeFace> cubeFace = std::nullopt, int mipLevel = 0);
+            
 public:
     /**
      * Default render pass.

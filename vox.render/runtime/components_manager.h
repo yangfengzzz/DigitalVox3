@@ -11,6 +11,7 @@
 #include <vector>
 #include "component.h"
 #include "render_pipeline/render_context.h"
+#include "maths/bounding_frustum.h"
 
 namespace vox {
 /**
@@ -65,8 +66,6 @@ public:
     
     void callRendererOnUpdate(float deltaTime);
     
-    void callRender(RenderContext& context);
-    
     void callAnimatorUpdate(float deltaTime);
     
     void callSceneAnimatorUpdate(float deltaTime);
@@ -76,6 +75,17 @@ public:
     void callCameraOnBeginRender(Camera* camera);
     
     void callCameraOnEndRender(Camera* camera);
+    
+public:
+    void callRender(RenderContext& context,
+                    std::vector<RenderElement>& opaqueQueue,
+                    std::vector<RenderElement>& alphaTestQueue,
+                    std::vector<RenderElement>& transparentQueue);
+    
+    void callRender(const BoundingFrustum& frustrum,
+                    std::vector<RenderElement>& opaqueQueue,
+                    std::vector<RenderElement>& alphaTestQueue,
+                    std::vector<RenderElement>& transparentQueue);
     
 public:
     std::vector<Component *> getActiveChangedTempList();
@@ -93,7 +103,7 @@ private:
     // Animatior
     std::vector<Animator*> _onUpdateAnimators;
     std::vector<SceneAnimator*> _onUpdateSceneAnimators;
-
+    
     // Render
     std::vector<Renderer*> _renderers;
     std::vector<Renderer*> _onUpdateRenderers;

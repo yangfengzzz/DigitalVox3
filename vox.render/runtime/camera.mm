@@ -257,9 +257,6 @@ void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // union scene and camera macro.
     shaderData.mergeMacro(scene()->_globalShaderMacro, _globalShaderMacro);
     
-    // frustum culling into render queue.
-    _renderPipeline.clearRenderQueue();
-    engine()->_componentsManager.callRender(context);
     _renderPipeline.render(context, cubeFace, mipLevel);
 }
 
@@ -338,10 +335,6 @@ void Camera::removeRenderPass(const std::string& name) {
 
 void Camera::removeRenderPass(const RenderPass* pass) {
     _renderPipeline.removeRenderPass(pass);
-}
-
-void Camera::pushPrimitive(const RenderElement& element) {
-    _renderPipeline.pushPrimitive(element);
 }
 
 }

@@ -96,6 +96,11 @@ public:
      */
     void setMaterials(const std::vector<MaterialPtr>& materials);
     
+    void pushPrimitive(const RenderElement& element,
+                       std::vector<RenderElement>& opaqueQueue,
+                       std::vector<RenderElement>& alphaTestQueue,
+                       std::vector<RenderElement>& transparentQueue);
+    
 protected:
     void _onEnable() override;
     
@@ -103,7 +108,9 @@ protected:
     
     void _onDestroy() override;
     
-    virtual void _render(Camera* camera) = 0;
+    virtual void _render(std::vector<RenderElement>& opaqueQueue,
+                         std::vector<RenderElement>& alphaTestQueue,
+                         std::vector<RenderElement>& transparentQueue) = 0;
     
     virtual void _updateBounds(BoundingBox& worldBounds) {}
     

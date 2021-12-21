@@ -19,7 +19,9 @@ class SkinnedMeshRenderer : public Renderer {
 public:
     SkinnedMeshRenderer(Entity* entity);
     
-    void _render(Camera* camera) override;
+    void _render(std::vector<RenderElement>& opaqueQueue,
+                 std::vector<RenderElement>& alphaTestQueue,
+                 std::vector<RenderElement>& transparentQueue) override;
     
     void _updateBounds(BoundingBox& worldBounds) override;
     

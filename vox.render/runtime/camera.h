@@ -249,12 +249,6 @@ public:
      */
     void removeRenderPass(const RenderPass* pass);
     
-    /**
-     * Push a render element to the render queue.
-     * @param element - Render element
-     */
-    void pushPrimitive(const RenderElement& element);
-    
 public:
     void _onActive() override;
     

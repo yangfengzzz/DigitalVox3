@@ -33,7 +33,9 @@ MeshPtr MeshRenderer::mesh() {
     return _mesh;
 }
 
-void MeshRenderer::_render(Camera* camera) {
+void MeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
+                           std::vector<RenderElement>& alphaTestQueue,
+                           std::vector<RenderElement>& transparentQueue) {
     if (_mesh != nullptr) {
         if (_meshUpdateFlag->flag) {
             const auto& vertexDescriptor = _mesh->vertexDescriptor();
@@ -68,7 +70,7 @@ void MeshRenderer::_render(Camera* camera) {
             }
             if (material != nullptr) {
                 RenderElement element(this, _mesh, &subMeshes[i], material);
-                camera->pushPrimitive(element);
+                pushPrimitive(element, opaqueQueue, alphaTestQueue, transparentQueue);
             }
         }
     } else {

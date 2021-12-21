@@ -149,7 +149,10 @@ void ComponentsManager::callRendererOnUpdate(float deltaTime) {
     }
 }
 
-void ComponentsManager::callRender(RenderContext& context) {
+void ComponentsManager::callRender(RenderContext& context,
+                                   std::vector<RenderElement>& opaqueQueue,
+                                   std::vector<RenderElement>& alphaTestQueue,
+                                   std::vector<RenderElement>& transparentQueue) {
     const auto& camera = context.camera();
     const auto& elements = _renderers;
     for (size_t i = 0; i < _renderers.size(); i++) {
@@ -181,10 +184,23 @@ void ComponentsManager::callRender(RenderContext& context) {
         
         element->_updateShaderData(context);
         
-        element->_render(camera);
+        element->_render(opaqueQueue, alphaTestQueue, transparentQueue);
         
         // union camera global macro and renderer macro.
         element->shaderData.mergeMacro(camera->_globalShaderMacro, element->_globalShaderMacro);
+    }
+}
+
+void ComponentsManager::callRender(const BoundingFrustum& frustrum,
+                                   std::vector<RenderElement>& opaqueQueue,
+                                   std::vector<RenderElement>& alphaTestQueue,
+                                   std::vector<RenderElement>& transparentQueue) {
+    for (size_t i = 0; i < _renderers.size(); i++) {
+        const auto& renderer = _renderers[i];
+        // filter by renderer castShadow and frustrum cull
+        if (renderer->castShadow && frustrum.intersectsBox(renderer->bounds())) {
+            continue;
+        }
     }
 }
 
