@@ -847,6 +847,7 @@
 		04D47E6D27700EB20038F34A /* shadow_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E6B27700EB20038F34A /* shadow_manager.h */; };
 		04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
 		04D47E772771A4420038F34A /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
+		04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E782771E0670038F34A /* shadow_debugger.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1938,6 +1939,7 @@
 		04D47E6A27700EB20038F34A /* shadow_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shadow_manager.mm; sourceTree = "<group>"; };
 		04D47E6B27700EB20038F34A /* shadow_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_manager.h; sourceTree = "<group>"; };
 		04D47E6F277166550038F34A /* shadowMap_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shadowMap_view.mm; sourceTree = "<group>"; };
+		04D47E782771E0670038F34A /* shadow_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shadow_debugger.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3622,6 +3624,7 @@
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 				0434AC882766133E009AD4EA /* editor */,
 				04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */,
+				04D47E782771E0670038F34A /* shadow_debugger.metal */,
 				04C2EA45276EB93800091FB3 /* debug */,
 				04860857276B2DED00C05BDA /* gltfloading.metal */,
 				0486085C276B40F500C05BDA /* gltfscene.metal */,
@@ -4588,6 +4591,7 @@
 				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
 				04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
+				04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
 				041610542759FCF1006CD384 /* joint.cpp in Sources */,

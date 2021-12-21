@@ -18,12 +18,31 @@
 
 using namespace vox;
 
+class ShadowDebugMaterial :public BaseMaterial {
+public:
+    ShadowDebugMaterial(Engine* engine):BaseMaterial(engine, Shader::find("shadowMapDebugger")){}
+};
+
+class lightMovemenet: public Script {
+public:
+    const float speed = 20;
+    
+    lightMovemenet(Entity* entity):Script(entity) {}
+    
+    void onUpdate(float deltaTime) override {
+        entity()->transform->setPosition(5*std::sin(speed * deltaTime), 10, 5*std::cos(speed * deltaTime));
+        entity()->transform->lookAt(Float3(0, 0, 0));
+    }
+};
+
 int main(int, char**) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
     scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
+    
+    Shader::create("shadowMapDebugger", "vertex_shadow_debugger", "fragment_shadow_debugger");
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
@@ -36,6 +55,7 @@ int main(int, char**) {
     auto light = rootEntity->createChild("light");
     light->transform->setPosition(0, 10, 0);
     light->transform->lookAt(Float3(0, 0, 0), Float3(1, 0, 0));
+    light->addComponent<lightMovemenet>();
     auto directionLight = light->addComponent<DirectLight>();
     directionLight->intensity = 0.3;
     directionLight->setEnableShadow(true);
@@ -61,6 +81,17 @@ int main(int, char**) {
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
     planeRenderer->castShadow = true;
+    
+    // shadow view
+    auto shadowViewEntity = rootEntity->createChild("ShadowDebugEntity");
+    shadowViewEntity->transform->setRotation(90, 0, 0);
+    shadowViewEntity->transform->setPosition(Float3(5, 0, 5));
+    auto shadowMtl = std::make_shared<ShadowDebugMaterial>(&engine);
+    shadowMtl->setRenderFace(RenderFace::Enum::Double);
+    
+    auto shadowViewRenderer = shadowViewEntity->addComponent<MeshRenderer>();
+    shadowViewRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 2, 2));
+    shadowViewRenderer->setMaterial(shadowMtl);
 
     engine.run();
 }
