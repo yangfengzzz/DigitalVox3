@@ -10,10 +10,11 @@
 
 #include "maths/vec_float.h"
 #include "../enums/textureCube_face.h"
-#include "render_queue.h"
 #include "render_pass.h"
 #include "render_context.h"
+#include "../sky/sky.h"
 #include <optional>
+#include <vector>
 
 namespace vox {
 using namespace math;
@@ -99,16 +100,20 @@ private:
                          std::optional<TextureCubeFace> cubeFace = std::nullopt,
                          int mipLevel = 0);
     
+    void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
+    
+    void _drawSky(const Sky& sky);
+    
 private:
-    friend class ShadowManager;
-    RenderQueue _opaqueQueue;
-    RenderQueue _transparentQueue;
-    RenderQueue _alphaTestQueue;
+    static bool _compareFromNearToFar(const RenderElement& a, const RenderElement& b);
+    static bool _compareFromFarToNear(const RenderElement& a, const RenderElement& b);
+    std::vector<RenderElement> _opaqueQueue;
+    std::vector<RenderElement> _transparentQueue;
+    std::vector<RenderElement> _alphaTestQueue;
 
     Camera* _camera;
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
-    Float2 _lastCanvasSize = Float2();
 };
 
 }

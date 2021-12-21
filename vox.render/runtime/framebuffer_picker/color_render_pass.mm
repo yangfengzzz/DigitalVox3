@@ -29,8 +29,9 @@ MaterialPtr ColorRenderPass::material(const RenderElement& element) {
     return _material;
 }
 
-void ColorRenderPass::preRender(Camera* camera, const RenderQueue& opaqueQueue,
-                                const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {
+void ColorRenderPass::preRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                                const std::vector<RenderElement>& alphaTestQueue,
+                                const std::vector<RenderElement>& transparentQueue) {
     if (_needPick) {
         enabled = true;
         _material->reset();
@@ -54,8 +55,9 @@ void ColorRenderPass::pick(const math::Float2& pos) {
     _needPick = true;
 }
 
-void ColorRenderPass::postRender(Camera* camera, const RenderQueue& opaqueQueue,
-                                 const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {
+void ColorRenderPass::postRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                                 const std::vector<RenderElement>& alphaTestQueue,
+                                 const std::vector<RenderElement>& transparentQueue) {
     camera->engine()->_hardwareRenderer.synchronizeResource(renderTarget.colorAttachments[0].texture);
 }
 

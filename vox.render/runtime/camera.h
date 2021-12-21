@@ -259,7 +259,7 @@ private:
     friend class MeshRenderer;
     friend class SkinnedMeshRenderer;
     friend class ParticleRenderer;
-    friend class RenderQueue;
+    friend class BasicRenderPipeline;
     friend class ShadowManager;
     
     void _projMatChange();

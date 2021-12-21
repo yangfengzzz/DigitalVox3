@@ -6,26 +6,37 @@
 //
 
 #include "basic_render_pipeline.h"
-#include "../camera.h"
 #include "../material/material.h"
-#include "../engine.h"
 #include "../lighting/light.h"
+#include "../camera.h"
+#include "../engine.h"
+#include "../renderer.h"
 
 namespace vox {
+bool BasicRenderPipeline::_compareFromNearToFar(const RenderElement& a, const RenderElement& b) {
+    return (a.material->renderQueueType < b.material->renderQueueType) ||
+    (a.component->_distanceForSort < b.component->_distanceForSort) ||
+    (b.component->_renderSortId < a.component->_renderSortId);
+}
+
+bool BasicRenderPipeline::_compareFromFarToNear(const RenderElement& a, const RenderElement& b) {
+    return (a.material->renderQueueType < b.material->renderQueueType) ||
+    (b.component->_distanceForSort < a.component->_distanceForSort) ||
+    (b.component->_renderSortId < a.component->_renderSortId);
+}
+
+//MARK: - RenderElement
 BasicRenderPipeline::BasicRenderPipeline(Camera* camera):
-_camera(camera),
-_opaqueQueue(RenderQueue(camera->engine())),
-_alphaTestQueue(RenderQueue(camera->engine())),
-_transparentQueue(RenderQueue(camera->engine())){
+_camera(camera) {
     auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
     _defaultPass = pass.get();
     addRenderPass(std::move(pass));
 }
 
 void BasicRenderPipeline::destroy() {
-    _opaqueQueue.destroy();
-    _alphaTestQueue.destroy();
-    _transparentQueue.destroy();
+    _opaqueQueue.clear();
+    _alphaTestQueue.clear();
+    _transparentQueue.clear();
     _renderPassArray.clear();
 }
 
@@ -33,6 +44,18 @@ void BasicRenderPipeline::clearRenderQueue() {
     _opaqueQueue.clear();
     _alphaTestQueue.clear();
     _transparentQueue.clear();
+}
+
+void BasicRenderPipeline::pushPrimitive(const RenderElement& element) {
+    const auto renderQueueType = element.material->renderQueueType;
+    
+    if (renderQueueType > (RenderQueueType::Transparent + RenderQueueType::AlphaTest) >> 1) {
+        _transparentQueue.push_back(element);
+    } else if (renderQueueType > (RenderQueueType::AlphaTest + RenderQueueType::Opaque) >> 1) {
+        _alphaTestQueue.push_back(element);
+    } else {
+        _opaqueQueue.push_back(element);
+    }
 }
 
 void BasicRenderPipeline::render(const RenderContext& context,
@@ -82,73 +105,16 @@ void BasicRenderPipeline::render(const RenderContext& context,
     if (!shadowMaps.empty()) {
         rhi.resourceLoader()->createTextureArray(shadowMaps);
     }
-
-    _opaqueQueue.sort(RenderQueue::_compareFromNearToFar);
-    _alphaTestQueue.sort(RenderQueue::_compareFromNearToFar);
-    _transparentQueue.sort(RenderQueue::_compareFromFarToNear);
+    
+    std::sort(_opaqueQueue.begin(), _opaqueQueue.end(), BasicRenderPipeline::_compareFromNearToFar);
+    std::sort(_alphaTestQueue.begin(), _alphaTestQueue.end(), BasicRenderPipeline::_compareFromNearToFar);
+    std::sort(_transparentQueue.begin(), _transparentQueue.end(), BasicRenderPipeline::_compareFromFarToNear);
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         _drawRenderPass(_renderPassArray[i].get(), _camera, cubeFace, mipLevel);
     }
 }
 
-void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
-                                          std::optional<TextureCubeFace> cubeFace, int mipLevel) {
-    pass->preRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
-    
-    if (pass->enabled) {
-        const auto& engine = camera->engine();
-        const auto& scene = camera->scene();
-        const auto& background = scene->background;
-        auto& rhi = engine->_hardwareRenderer;
-        
-        // prepare to load render target
-        MTLRenderPassDescriptor* renderTarget;
-        if (camera->renderTarget() != nullptr) {
-            renderTarget = camera->renderTarget();
-        } else {
-            renderTarget = pass->renderTarget;
-        }
-        rhi.activeRenderTarget(renderTarget);
-        // set clear flag
-        const auto& clearFlags = pass->clearFlags != std::nullopt ? pass->clearFlags.value(): camera->clearFlags;
-        const auto& color = pass->clearColor != std::nullopt? pass->clearColor.value(): background.solidColor;
-        if (clearFlags != CameraClearFlags::None) {
-            rhi.clearRenderTarget(clearFlags, color);
-        }
-        
-        // command encoder
-        rhi.beginRenderPass(renderTarget, camera, mipLevel);
-        if (pass->renderOverride) {
-            pass->render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
-        } else {
-            _opaqueQueue.render(camera, pass);
-            _alphaTestQueue.render(camera, pass);
-            if (background.mode == BackgroundMode::Sky) {
-                _alphaTestQueue.drawSky(engine, camera, background.sky);
-            }
-            _transparentQueue.render(camera, pass);
-        }
-        
-        // poseprocess
-        
-        rhi.endRenderPass();// renderEncoder
-    }
-    
-    pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
-}
-
-void BasicRenderPipeline::pushPrimitive(const RenderElement& element) {
-    const auto renderQueueType = element.material->renderQueueType;
-    
-    if (renderQueueType > (RenderQueueType::Transparent + RenderQueueType::AlphaTest) >> 1) {
-        _transparentQueue.pushPrimitive(element);
-    } else if (renderQueueType > (RenderQueueType::AlphaTest + RenderQueueType::Opaque) >> 1) {
-        _alphaTestQueue.pushPrimitive(element);
-    } else {
-        _opaqueQueue.pushPrimitive(element);
-    }
-}
-
+//MARK: - RenderPass
 RenderPass* BasicRenderPipeline::defaultRenderPass() {
     return _defaultPass;
 }
@@ -204,6 +170,181 @@ RenderPass* BasicRenderPipeline::getRenderPass(const std::string& name) {
     }
     
     return nullptr;
+}
+
+//MARK: - Internal Pipeline Method
+void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
+                                          std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+    pass->preRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+    
+    if (pass->enabled) {
+        const auto& engine = camera->engine();
+        const auto& scene = camera->scene();
+        const auto& background = scene->background;
+        auto& rhi = engine->_hardwareRenderer;
+        
+        // prepare to load render target
+        MTLRenderPassDescriptor* renderTarget;
+        if (camera->renderTarget() != nullptr) {
+            renderTarget = camera->renderTarget();
+        } else {
+            renderTarget = pass->renderTarget;
+        }
+        rhi.activeRenderTarget(renderTarget);
+        // set clear flag
+        const auto& clearFlags = pass->clearFlags != std::nullopt ? pass->clearFlags.value(): camera->clearFlags;
+        const auto& color = pass->clearColor != std::nullopt? pass->clearColor.value(): background.solidColor;
+        if (clearFlags != CameraClearFlags::None) {
+            rhi.clearRenderTarget(clearFlags, color);
+        }
+        
+        // command encoder
+        rhi.beginRenderPass(renderTarget, camera, mipLevel);
+        if (pass->renderOverride) {
+            pass->render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+        } else {
+            _drawElement(_opaqueQueue, pass);
+            _drawElement(_alphaTestQueue, pass);
+            if (background.mode == BackgroundMode::Sky) {
+                _drawSky(background.sky);
+            }
+            _drawElement(_transparentQueue, pass);
+        }
+        
+        // poseprocess
+        
+        rhi.endRenderPass();// renderEncoder
+    }
+    
+    pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+}
+
+void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, RenderPass* pass) {
+    if (items.size() == 0) {
+        return;
+    }
+    
+    const auto& engine = _camera->engine();
+    const auto& scene = _camera->scene();
+    auto& rhi = engine->_hardwareRenderer;
+    const auto& sceneData = scene->shaderData;
+    const auto& cameraData = _camera->shaderData;
+    
+    //MARK:- Start Render
+    for (size_t i = 0; i < items.size(); i++) {
+        const auto& item = items[i];
+        const auto& renderPassFlag = item.component->entity()->layer;
+        
+        if ((renderPassFlag & pass->mask) == 0) {
+            continue;
+        }
+        
+        // RenderElement
+        auto compileMacros = ShaderMacroCollection();
+        const auto& element = item;
+        const auto& renderer = element.component;
+        auto material = pass->material(element);
+        if (material == nullptr) {
+            material = element.material;
+        }
+        const auto& rendererData = renderer->shaderData;
+        const auto& materialData = material->shaderData;
+        
+        // union render global macro and material self macro.
+        materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
+        
+        //MARK:- Set Pipeline State
+        ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros);
+        if (!program->isValid()) {
+            continue;
+        }
+        
+        MTLRenderPipelineDescriptor* descriptor = [[MTLRenderPipelineDescriptor alloc]init];
+        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
+        descriptor.vertexFunction = program->vertexShader();
+        descriptor.fragmentFunction = program->fragmentShader();
+        
+        descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
+        descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+        
+        MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+        material->renderState._apply(engine, descriptor, depthStencilDescriptor);
+        rhi.setDepthStencilState(depthStencilDescriptor);
+        
+        const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(descriptor);
+        rhi.setRenderPipelineState(pipelineState);
+        
+        //MARK:- Load Resouces
+        pipelineState->groupingOtherUniformBlock();
+        pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
+        pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
+        pipelineState->uploadAll(pipelineState->rendererUniformBlock, rendererData);
+        pipelineState->uploadAll(pipelineState->materialUniformBlock, materialData);
+        
+        auto& buffers = element.mesh->_vertexBuffer;
+        for (uint32_t index = 0; index < buffers.size(); index++) {
+            rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
+        }
+        rhi.drawPrimitive(element.subMesh);
+    }
+}
+
+void BasicRenderPipeline::_drawSky(const Sky& sky) {
+    const auto& material = sky.material;
+    const auto& mesh = sky.mesh;
+    if (!material) {
+        std::cerr << "The material of sky is not defined." << std::endl;
+        return;
+    }
+    if (!mesh) {
+        std::cerr << "The mesh of sky is not defined." << std::endl;
+        return;
+    }
+    
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    auto& shaderData = material->shaderData;
+    
+    auto compileMacros = ShaderMacroCollection();
+    shaderData.mergeMacro(_camera->_globalShaderMacro, compileMacros);
+    
+    const auto projectionMatrix = _camera->projectionMatrix();
+    auto _matrix = _camera->viewMatrix();
+    _matrix.elements[12] = 0;
+    _matrix.elements[13] = 0;
+    _matrix.elements[14] = 0;
+    _matrix.elements[15] = 1;
+    _matrix = projectionMatrix * _matrix;
+    shaderData.setData("u_mvpNoscale", _matrix);
+    
+    auto program = material->shader->findShaderProgram(engine, compileMacros);
+    if (!program->isValid()) {
+        return;
+    }
+    
+    auto descriptor = [[MTLRenderPipelineDescriptor alloc]init];
+    descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mesh->vertexDescriptor());
+    descriptor.vertexFunction = program->vertexShader();
+    descriptor.fragmentFunction = program->fragmentShader();
+    
+    descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
+    descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+    
+    auto depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+    material->renderState._apply(engine, descriptor, depthStencilDescriptor);
+    rhi.setDepthStencilState(depthStencilDescriptor);
+    
+    auto pipelineState = rhi.resouceCache.request_graphics_pipeline(descriptor);
+    rhi.setRenderPipelineState(pipelineState);
+    
+    pipelineState->groupingOtherUniformBlock();
+    pipelineState->uploadAll(pipelineState->materialUniformBlock, shaderData);
+    
+    auto& buffers = mesh->_vertexBuffer;
+    for (uint32_t index = 0; index < buffers.size(); index++) {
+        rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
+    }
+    rhi.drawPrimitive(mesh->subMesh(0));
 }
 
 }

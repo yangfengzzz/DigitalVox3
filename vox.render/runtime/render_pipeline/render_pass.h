@@ -54,8 +54,9 @@ public:
      * @param alphaTestQueue - Alpha test queue
      * @param transparentQueue - Transparent queue
      */
-    virtual void render(Camera* camera, const RenderQueue& opaqueQueue,
-                        const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {}
+    virtual void render(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                        const std::vector<RenderElement>& alphaTestQueue,
+                        const std::vector<RenderElement>& transparentQueue) {}
     
     /**
      * Post rendering callback.
@@ -64,8 +65,9 @@ public:
      * @param alphaTestQueue - Alpha test queue
      * @param transparentQueue - Transparent queue
      */
-    virtual void preRender(Camera* camera, const RenderQueue& opaqueQueue,
-                           const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {}
+    virtual void preRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                           const std::vector<RenderElement>& alphaTestQueue,
+                           const std::vector<RenderElement>& transparentQueue) {}
     
     /**
      * Post rendering callback.
@@ -74,8 +76,9 @@ public:
      * @param alphaTestQueue - Alpha test queue
      * @param transparentQueue - Transparent queue
      */
-    virtual void postRender(Camera* camera, const RenderQueue& opaqueQueue,
-                            const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) {}
+    virtual void postRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                            const std::vector<RenderElement>& alphaTestQueue,
+                            const std::vector<RenderElement>& transparentQueue) {}
     
 private:
     static size_t passNum;

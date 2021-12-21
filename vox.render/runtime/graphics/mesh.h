@@ -78,7 +78,7 @@ public:
     MDLVertexDescriptor* vertexDescriptor();
     
 protected:
-    friend class RenderQueue;
+    friend class BasicRenderPipeline;
     
     MDLVertexDescriptor* _vertexDescriptor = nullptr;
     std::vector<std::optional<MeshBuffer>> _vertexBuffer;

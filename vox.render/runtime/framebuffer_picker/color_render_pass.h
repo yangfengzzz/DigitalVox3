@@ -28,11 +28,13 @@ public:
     /**
      * Determine whether need to render pass, reset state.
      */
-    void preRender(Camera* camera, const RenderQueue& opaqueQueue,
-                   const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;
+    void preRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                   const std::vector<RenderElement>& alphaTestQueue,
+                   const std::vector<RenderElement>& transparentQueue) override;
     
-    void postRender(Camera* camera, const RenderQueue& opaqueQueue,
-                    const RenderQueue& alphaTestQueue, const RenderQueue& transparentQueue) override;
+    void postRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
+                    const std::vector<RenderElement>& alphaTestQueue,
+                    const std::vector<RenderElement>& transparentQueue) override;
     
     /**
      * Determine whether to pick up.
