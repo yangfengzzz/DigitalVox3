@@ -75,11 +75,14 @@ void LightManager::_updateShaderData(ShaderData& shaderData) {
     size_t pointLightCount = 0;
     size_t spotLightCount = 0;
     
+    for (size_t i = 0; i < _directLights.size(); i++) {
+        const auto& light = _directLights[i];
+        light->_appendData(directLightCount++);
+    }
+    
     for (size_t i = 0; i < _visibleLights.size(); i++) {
         const auto& light = _visibleLights[i];
-        if (dynamic_cast<DirectLight*>(light) != nullptr) {
-            light->_appendData(directLightCount++);
-        } else if (dynamic_cast<PointLight*>(light) != nullptr) {
+        if (dynamic_cast<PointLight*>(light) != nullptr) {
             light->_appendData(pointLightCount++);
         } else if (dynamic_cast<SpotLight*>(light) != nullptr) {
             light->_appendData(spotLightCount++);

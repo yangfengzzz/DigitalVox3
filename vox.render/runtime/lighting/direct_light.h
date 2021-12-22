@@ -28,6 +28,17 @@ public:
     
 public:
     math::Matrix shadowProjectionMatrix() override;
+    
+private:
+    /**
+     * Mount to the current Scene.
+     */
+    void _onEnable() override;
+    
+    /**
+     * Unmount from the current Scene.
+     */
+    void _onDisable() override;
 
 private:
     friend class LightManager;

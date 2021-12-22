@@ -46,6 +46,7 @@ void BasicRenderPipeline::render(RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map
     _drawShadowMap(context);
+    _drawCascadeShadowMap(context);
     
     // Composition
     _opaqueQueue.clear();
@@ -380,6 +381,10 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
         shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
         shaderData.setData(BasicRenderPipeline::_shadowDataProp, shadowDatas);
     }
+}
+
+void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
+    
 }
 
 }

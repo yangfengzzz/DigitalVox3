@@ -95,6 +95,8 @@ private:
     
     void _drawShadowMap(RenderContext& context);
     
+    void _drawCascadeShadowMap(RenderContext& context);
+    
     void _drawSky(const Sky& sky);
     
 private:

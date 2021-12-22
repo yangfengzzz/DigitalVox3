@@ -6,6 +6,7 @@
 //
 
 #include "direct_light.h"
+#include "../scene.h"
 #include "../shader/shader.h"
 #include "../entity.h"
 #include "../rhi-metal/render_pipeline_state.h"
@@ -42,6 +43,14 @@ void DirectLight::_updateShaderData(ShaderData& shaderData) {
 
 math::Matrix DirectLight::shadowProjectionMatrix() {
     return math::Matrix::ortho(-17, 17, -10, 10, 0.1, 100);
+}
+
+void DirectLight::_onEnable() {
+    scene()->light_manager.attachDirectLight(this);
+}
+
+void DirectLight::_onDisable() {
+    scene()->light_manager.detachDirectLight(this);
 }
 
 }
