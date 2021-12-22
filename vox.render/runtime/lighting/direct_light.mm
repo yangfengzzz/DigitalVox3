@@ -46,7 +46,7 @@ math::Float3 DirectLight::direction() {
 }
 
 math::Matrix DirectLight::shadowProjectionMatrix() {
-    return math::Matrix::ortho(-17, 17, -10, 10, 0.1, 100);
+    assert(false && "cascade shadow don't use this projection");
 }
 
 void DirectLight::_onEnable() {

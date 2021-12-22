@@ -152,9 +152,9 @@ void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
     [blit endEncoding];
 }
 
-id<MTLTexture> MetalRenderer::mergeResource(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
-                                            const std::vector<id<MTLTexture>>::iterator& texturesEnd,
-                                            id<MTLTexture> packedTextures) {
+id<MTLTexture> MetalRenderer::createTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
+                                                 const std::vector<id<MTLTexture>>::iterator& texturesEnd,
+                                                 id<MTLTexture> packedTextures) {
     if (packedTextures == nullptr || packedTextures.arrayLength != texturesEnd - texturesBegin) {
         MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
         descriptor.textureType = MTLTextureType2DArray;
@@ -175,6 +175,31 @@ id<MTLTexture> MetalRenderer::mergeResource(const std::vector<id<MTLTexture>>::i
         [blitEncoder copyFromTexture:*iter sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
                            toTexture:packedTextures destinationSlice:iter - texturesBegin destinationLevel:0 destinationOrigin:origin];
     }
+    [blitEncoder endEncoding];
+    return packedTextures;
+}
+
+id<MTLTexture> MetalRenderer::createAtlas(const std::array<id<MTLTexture>, 4>& textures,
+                                          id<MTLTexture> packedTextures) {
+    auto blitEncoder = [_commandBuffer blitCommandEncoder];
+    MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
+    MTLOrigin sourceOrigin = origin;
+    MTLSize sourceSize = MTLSize{.width =  textures[0].width,
+        .height =  textures[0].height, .depth = 1};
+    [blitEncoder copyFromTexture:textures[0] sourceSlice:0 sourceLevel:0 sourceOrigin:sourceOrigin sourceSize:sourceSize
+                       toTexture:packedTextures destinationSlice:0 destinationLevel:0 destinationOrigin:origin];
+    origin.x = textures[0].width;
+    [blitEncoder copyFromTexture:textures[1] sourceSlice:0 sourceLevel:0 sourceOrigin:sourceOrigin sourceSize:sourceSize
+                       toTexture:packedTextures destinationSlice:0 destinationLevel:0 destinationOrigin:origin];
+    origin.x = 0;
+    origin.y = textures[0].height;
+    [blitEncoder copyFromTexture:textures[2] sourceSlice:0 sourceLevel:0 sourceOrigin:sourceOrigin sourceSize:sourceSize
+                       toTexture:packedTextures destinationSlice:0 destinationLevel:0 destinationOrigin:origin];
+    origin.x = textures[0].width;
+    origin.y = textures[0].height;
+    [blitEncoder copyFromTexture:textures[3] sourceSlice:0 sourceLevel:0 sourceOrigin:sourceOrigin sourceSize:sourceSize
+                       toTexture:packedTextures destinationSlice:0 destinationLevel:0 destinationOrigin:origin];
+    
     [blitEncoder endEncoding];
     return packedTextures;
 }

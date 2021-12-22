@@ -52,7 +52,7 @@ void BasicRenderPipeline::render(RenderContext& context,
     _drawShadowMap(context);
     _drawCascadeShadowMap(context);
     if (!shadowMaps.empty()) {
-        packedTexture = rhi.mergeResource(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
+        packedTexture = rhi.createTextureArray(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
         shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
         shaderData.setData(BasicRenderPipeline::_shadowDataProp, shadowDatas);
     }
@@ -401,62 +401,72 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
                 shadowMaps.push_back(texture);
             }
             
-            MTLRenderPassDescriptor* shadowRenderPassDescriptor = [[MTLRenderPassDescriptor alloc]init];
-            shadowRenderPassDescriptor.depthAttachment.texture = texture;
-            shadowRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
-            shadowRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
-            shadowRenderPassDescriptor.depthAttachment.clearDepth = 1;
-            rhi.activeRenderTarget(shadowRenderPassDescriptor);
-            rhi.beginRenderPass(shadowRenderPassDescriptor, _camera, 0);
-            
-            MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
-            depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
-            depthStencilDescriptor.depthWriteEnabled = true;
-            rhi.setDepthStencilState(depthStencilDescriptor);
-            rhi.setCullMode(MTLCullModeNone);
-            rhi.setDepthBias(0.01, 1.0, 0.01);
-            
-            std::vector<RenderElement> opaqueQueue{};
-            std::vector<RenderElement> transparentQueue{};
-            std::vector<RenderElement> alphaTestQueue{};
-            light->updateShadowMatrix();
-            BoundingFrustum frustum;
-            frustum.calculateFromMatrix(light->shadow.vp[0]);
-            engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
-            if (shadowCount < LightManager::MAX_SHADOW) {
-                shadowDatas[shadowCount] = light->shadow;
-            } else {
-                std::cerr << "too much shadow caster!" << std::endl;
-            }
-            
-            for (const auto& element : opaqueQueue) {
-                if (element.component->castShadow) {
-                    Shader shader("shadowMap", "vertex_depth", "");
-                    auto program = shader.findShaderProgram(engine, element.component->_globalShaderMacro);
-                    
-                    MTLRenderPipelineDescriptor* pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc]init];
-                    pipelineDescriptor.vertexFunction = program->vertexShader();
-                    pipelineDescriptor.fragmentFunction = NULL;
-                    pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
-                    pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
-                    pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
-                    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(pipelineDescriptor);
-                    rhi.setRenderPipelineState(pipelineState);
-                    
-                    auto modelMatrix = element.component->entity()->transform->worldMatrix();
-                    rhi.setVertexBytes(light->shadow.vp, 11);
-                    rhi.setVertexBytes(modelMatrix, 12);
-                    
-                    auto& buffers = element.mesh->_vertexBuffer;
-                    for (uint32_t index = 0; index < buffers.size(); index++) {
-                        rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
-                    }
-                    rhi.drawPrimitive(element.subMesh);
+            _updateCascades(light);
+            for (int i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++) {
+                if (cascadeShadowMaps[i] == nullptr) {
+                    cascadeShadowMaps[i] = rhi.resourceLoader()->buildTexture(shadowMapSize/2, shadowMapSize/2,
+                                                                              MTLPixelFormatDepth32Float);
                 }
+                
+                MTLRenderPassDescriptor* shadowRenderPassDescriptor = [[MTLRenderPassDescriptor alloc]init];
+                shadowRenderPassDescriptor.depthAttachment.texture = cascadeShadowMaps[i];
+                shadowRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
+                shadowRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
+                shadowRenderPassDescriptor.depthAttachment.clearDepth = 1;
+                rhi.activeRenderTarget(shadowRenderPassDescriptor);
+                rhi.beginRenderPass(shadowRenderPassDescriptor, _camera, 0);
+                
+                MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+                depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
+                depthStencilDescriptor.depthWriteEnabled = true;
+                rhi.setDepthStencilState(depthStencilDescriptor);
+                rhi.setCullMode(MTLCullModeNone);
+                rhi.setDepthBias(0.01, 1.0, 0.01);
+                
+                std::vector<RenderElement> opaqueQueue{};
+                std::vector<RenderElement> transparentQueue{};
+                std::vector<RenderElement> alphaTestQueue{};
+                BoundingFrustum frustum;
+                frustum.calculateFromMatrix(shadowDatas[shadowCount].vp[i]);
+                engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
+                if (shadowCount < LightManager::MAX_SHADOW) {
+                    shadowDatas[shadowCount].radius = light->shadow.radius;
+                    shadowDatas[shadowCount].intensity = light->shadow.intensity;
+                    shadowDatas[shadowCount].bias = light->shadow.bias;
+                } else {
+                    std::cerr << "too much shadow caster!" << std::endl;
+                }
+                
+                for (const auto& element : opaqueQueue) {
+                    if (element.component->castShadow) {
+                        Shader shader("shadowMap", "vertex_depth", "");
+                        auto program = shader.findShaderProgram(engine, element.component->_globalShaderMacro);
+                        
+                        MTLRenderPipelineDescriptor* pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc]init];
+                        pipelineDescriptor.vertexFunction = program->vertexShader();
+                        pipelineDescriptor.fragmentFunction = NULL;
+                        pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
+                        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
+                        pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+                        const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(pipelineDescriptor);
+                        rhi.setRenderPipelineState(pipelineState);
+                        
+                        auto modelMatrix = element.component->entity()->transform->worldMatrix();
+                        rhi.setVertexBytes(shadowDatas[shadowCount].vp[i], 11);
+                        rhi.setVertexBytes(modelMatrix, 12);
+                        
+                        auto& buffers = element.mesh->_vertexBuffer;
+                        for (uint32_t index = 0; index < buffers.size(); index++) {
+                            rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
+                        }
+                        rhi.drawPrimitive(element.subMesh);
+                    }
+                }
+                
+                // render loop
+                rhi.endRenderPass();
             }
-            
-            // render loop
-            rhi.endRenderPass();
+            texture = rhi.createAtlas(cascadeShadowMaps, texture);
             shadowCount++;
         }
     }

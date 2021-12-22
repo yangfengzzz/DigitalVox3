@@ -48,9 +48,12 @@ public:
 public:
     void synchronizeResource(id<MTLResource> resource);
     
-    id<MTLTexture> mergeResource(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
-                                 const std::vector<id<MTLTexture>>::iterator& texturesEnd,
-                                 id<MTLTexture> packedTextures);
+    id<MTLTexture> createTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
+                                      const std::vector<id<MTLTexture>>::iterator& texturesEnd,
+                                      id<MTLTexture> packedTextures);
+    
+    id<MTLTexture> createAtlas(const std::array<id<MTLTexture>, 4>& textures,
+                               id<MTLTexture> packedTextures);
     
 public:
     template<typename T>

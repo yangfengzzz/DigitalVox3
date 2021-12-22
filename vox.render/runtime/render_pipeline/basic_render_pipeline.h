@@ -124,6 +124,7 @@ private:
     const int shadowMapSize = 2000; // resolution
     uint32_t shadowCount = 0;
     std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
+    std::array<id<MTLTexture>, SHADOW_MAP_CASCADE_COUNT> cascadeShadowMaps{};
     std::vector<id<MTLTexture>> shadowMaps;
     id<MTLTexture> packedTexture{nullptr};
     
