@@ -269,8 +269,7 @@ float filterPCF(float3 worldPos,
       }
     }
     total /= neighbors;
-    float lightFactor = 1.0 - (total * shadowCoord.w);
-    return lightFactor;
+    return 1.0 - total;
 }
 
 
