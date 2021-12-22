@@ -9,7 +9,7 @@
 using namespace metal;
 #include "shadow_common.h"
 
-float textureProj(float3 worldPos, float2 off,
+float textureProj(float3 worldPos, float2 off, float3 viewPos,
                   depth2d_array<float> u_shadowMap,
                   constant ShadowData* u_shadowData,
                   int index) {
@@ -34,7 +34,7 @@ float filterPCF(float3 worldPos, float3 viewPos,
                 depth2d_array<float> u_shadowMap,
                 constant ShadowData* u_shadowData,
                 int index) {
-    if (u_shadowData[index].cascadeSplits[0] < 0) {
+    if (u_shadowData[index].cascadeSplits[0] * u_shadowData[index].cascadeSplits[1] < 0) {
         float4 shadowCoord = u_shadowData[index].vp[0] * float4(worldPos, 1.0);
         float2 xy = shadowCoord.xy;
         xy /= shadowCoord.w;
@@ -64,15 +64,17 @@ float filterPCF(float3 worldPos, float3 viewPos,
         // Get cascade index for the current fragment's view position
         uint cascadeIndex = 0;
         for(uint i = 0; i < 4 - 1; ++i) {
-            if(viewPos.z < u_shadowData[0].cascadeSplits[i]) {
+            if(viewPos.z < u_shadowData[index].cascadeSplits[i]) {
                 cascadeIndex = i + 1;
             }
         }
         
-        float2 offset = float2();
+        float2 offset = float2(0);
         if (cascadeIndex == 1) {
             offset.x = 0.5;
+            offset.y = 0;
         } else if (cascadeIndex == 2) {
+            offset.x = 0;
             offset.y = 0.5;
         } else if (cascadeIndex == 3) {
             offset.x = 0.5;
@@ -84,6 +86,7 @@ float filterPCF(float3 worldPos, float3 viewPos,
         xy /= shadowCoord.w;
         xy = xy * 0.5 + 0.5;
         xy.y = 1 - xy.y;
+        xy *= 0.5;
         constexpr sampler s(coord::normalized, filter::linear,
                             address::clamp_to_edge, compare_func:: less);
         
