@@ -40,7 +40,6 @@ typedef struct {
     float3 tangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 bitangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 v_normal [[function_constant(hasNormalNotHasTangentOrHasNormalTexture)]];
-    float4 shadowCoord [[function_constant(hasShadow)]];
 } VertexOut;
 
 vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
@@ -59,8 +58,7 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
                                     texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],
                                     constant int &u_jointCount [[buffer(11), function_constant(hasSkinAndHasJointTexture)]],
                                     constant matrix_float4x4 *u_jointMatrix [[buffer(12), function_constant(hasSkinNotHasJointTexture)]],
-                                    constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]],
-                                    constant ShadowData* u_shadowData [[buffer(14), function_constant(hasShadow)]]) {
+                                    constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]]) {
     VertexOut out;
     
     // begin position
@@ -139,9 +137,9 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
     // normal
     if (hasNormal) {
         if (hasTangent && hasNormalTexture) {
-            out.normalW = normalize( float3x3(u_MVMat.columns[0].xyz,
-                                              u_MVMat.columns[1].xyz,
-                                              u_MVMat.columns[2].xyz) * normal.xyz);
+            out.normalW = normalize( float3x3(u_normalMat.columns[0].xyz,
+                                              u_normalMat.columns[1].xyz,
+                                              u_normalMat.columns[2].xyz) * normal.xyz);
             out.tangentW = normalize( float3x3(u_normalMat.columns[0].xyz,
                                                u_normalMat.columns[1].xyz,
                                                u_normalMat.columns[2].xyz) * tangent.xyz);
@@ -157,10 +155,6 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
     if (needWorldPos) {
         float4 temp_pos = u_modelMat * position;
         out.v_pos = temp_pos.xyz / temp_pos.w;
-    }
-    
-    if (hasShadow) {
-        out.shadowCoord = u_shadowData[0].vp * u_modelMat * position;
     }
     
     out.position = u_MVPMat * position;
@@ -209,7 +203,7 @@ float3 getNormal(VertexOut in, float u_normalIntensity,
             float3 b = normalize(cross(ng, t));
             tbn = matrix_float3x3(t, b, ng);
         } else {
-            tbn = matrix_float3x3(in.normalW, in.tangentW, in.bitangentW);
+            tbn = matrix_float3x3(in.tangentW, in.bitangentW, in.normalW);
         }
         n = u_normalTexture.sample(smp, in.v_uv).rgb;
         n = normalize(tbn * ((2.0 * n - 1.0) * float3(u_normalIntensity, u_normalIntensity, 1.0)));
@@ -227,28 +221,32 @@ float3 getNormal(VertexOut in, float u_normalIntensity,
     return n;
 }
 
-float textureProj(float4 shadowCoord, float2 off,
+float textureProj(float3 worldPos, float2 off,
                   depth2d_array<float> u_shadowMap,
-                  constant ShadowData* u_shadowData) {
+                  constant ShadowData* u_shadowData,
+                  int index) {
     constexpr sampler s(coord::normalized, filter::linear,
                         address::clamp_to_edge, compare_func:: less);
+    float4 shadowCoord = u_shadowData[index].vp * float4(worldPos, 1.0);
     float2 xy = shadowCoord.xy;
     xy /= shadowCoord.w;
     xy = xy * 0.5 + 0.5;
     xy.y = 1 - xy.y;
-    float shadow_sample = u_shadowMap.sample(s, xy + off, 0);
+    float shadow_sample = u_shadowMap.sample(s, xy + off, index);
     float current_sample = shadowCoord.z / shadowCoord.w;
     
     if (current_sample > shadow_sample ) {
-        return u_shadowData[0].intensity;
+        return u_shadowData[index].intensity;
     } else {
         return 1.0;
     }
 }
 
-float filterPCF(float4 shadowCoord,
+float filterPCF(float3 worldPos,
                 depth2d_array<float> u_shadowMap,
-                constant ShadowData* u_shadowData) {
+                constant ShadowData* u_shadowData,
+                int index) {
+    float4 shadowCoord = u_shadowData[index].vp * float4(worldPos, 1.0);
     float2 xy = shadowCoord.xy;
     xy /= shadowCoord.w;
     xy = xy * 0.5 + 0.5;
@@ -263,7 +261,7 @@ float filterPCF(float4 shadowCoord,
     float total = 0.0;
     for (int x = -neighborWidth; x <= neighborWidth; x++) {
       for (int y = -neighborWidth; y <= neighborWidth; y++) {
-        float shadow_sample = u_shadowMap.sample(s, xy + float2(x, y) * texelSize, 0);
+        float shadow_sample = u_shadowMap.sample(s, xy + float2(x, y) * texelSize, index);
         float current_sample = shadowCoord.z / shadowCoord.w;
         if (current_sample > shadow_sample ) {
           total += 1.0;
@@ -404,8 +402,13 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     
     diffuse *= float4( lightDiffuse, 1.0 );
     if (hasShadow) {
-        diffuse *= filterPCF(in.shadowCoord, u_shadowMap, u_shadowData);
-//        diffuse *= textureProj(in.shadowCoord, float2(0), u_shadowMap, u_shadowData);
+        float shadow = 0;
+        for( int i = 0; i < shadowMapCount; i++) {
+            shadow += filterPCF(in.v_pos, u_shadowMap, u_shadowData, i);
+//            shadow += textureProj(in.v_pos, float2(0), u_shadowMap, u_shadowData, i);
+        }
+        shadow /= shadowMapCount;
+        diffuse *= shadow;
     }
     
     specular *= float4( lightSpecular, 1.0 );
