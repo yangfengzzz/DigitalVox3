@@ -29,6 +29,7 @@ void Light::updateShadowMatrix() {
     shadow.vp[0].columns[1] = simd_make_float4(vp.elements[4], vp.elements[5], vp.elements[6], vp.elements[7]);
     shadow.vp[0].columns[2] = simd_make_float4(vp.elements[8], vp.elements[9], vp.elements[10], vp.elements[11]);
     shadow.vp[0].columns[3] = simd_make_float4(vp.elements[12], vp.elements[13], vp.elements[14], vp.elements[15]);
+    shadow.cascadeSplits[0] = -1; // mark cascade
 }
 
 void Light::_onEnable() {

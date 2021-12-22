@@ -17,7 +17,7 @@ float textureProj(float3 worldPos, float2 off,
                   constant ShadowData* u_shadowData,
                   int index);
 
-float filterPCF(float3 worldPos,
+float filterPCF(float3 worldPos, float3 viewPos,
                 depth2d_array<float> u_shadowMap,
                 constant ShadowData* u_shadowData,
                 int index);

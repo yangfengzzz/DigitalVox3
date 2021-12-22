@@ -63,8 +63,8 @@ int main(int, char**) {
     }
     
     auto planeEntity = rootEntity->createChild("PlaneEntity");
-    auto planeMtl = std::make_shared<ShadowDebugMaterial>(&engine);
-//    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
+    auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
     planeMtl->setRenderFace(RenderFace::Enum::Double);
     
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
