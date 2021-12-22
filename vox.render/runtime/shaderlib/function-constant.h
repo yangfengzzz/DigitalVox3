@@ -5,6 +5,9 @@
 //  Created by 杨丰 on 2021/10/21.
 //
 
+#ifndef function_constant_h
+#define function_constant_h
+
 #include <metal_stdlib>
 using namespace metal;
 #import "shader_common.h"
@@ -73,3 +76,5 @@ constant bool hasShadow = shadowMapCount > 0;
 //MARK: - Function Signature
 float4x4 getJointMatrix(sampler smp, texture2d<float> joint_tex,
                         float index, int u_jointCount);
+
+#endif // function_constant_h

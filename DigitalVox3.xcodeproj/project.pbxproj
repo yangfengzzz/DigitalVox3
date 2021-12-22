@@ -612,6 +612,7 @@
 		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
 		04AD284127729A9F00B86C7E /* texture_packer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284027729A9F00B86C7E /* texture_packer.metal */; };
 		04AD28442772A77800B86C7E /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
+		04AD28472772AFDB00B86C7E /* shadow_common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28462772AFDB00B86C7E /* shadow_common.metal */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
@@ -1581,6 +1582,8 @@
 		04A79AD8275E2C4F00182CCB /* InputManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = InputManager.mm; sourceTree = "<group>"; };
 		04A79AD9275E2C4F00182CCB /* InputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		04AD284027729A9F00B86C7E /* texture_packer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = texture_packer.metal; sourceTree = "<group>"; };
+		04AD28452772AFB100B86C7E /* shadow_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shadow_common.h; sourceTree = "<group>"; };
+		04AD28462772AFDB00B86C7E /* shadow_common.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shadow_common.metal; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
 		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
 		04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = cubemap_debugger.metal; sourceTree = "<group>"; };
@@ -3611,6 +3614,8 @@
 				04CE39892753A43800204B8E /* shader_common.h */,
 				04CE39902753A83B00204B8E /* function-constant.h */,
 				04CE39922753A83C00204B8E /* unlit.metal */,
+				04AD28452772AFB100B86C7E /* shadow_common.h */,
+				04AD28462772AFDB00B86C7E /* shadow_common.metal */,
 				04CE398A2753A83B00204B8E /* blinn-phong.metal */,
 				0431589027688F9D0070FBEC /* particle.metal */,
 				04CE398F2753A83B00204B8E /* skybox.metal */,
@@ -4712,6 +4717,7 @@
 				0431558B276087A60070FBEC /* framebuffer-picker-color.metal in Sources */,
 				0416100A2750A720006CD384 /* scene.mm in Sources */,
 				04CE3815274D167F00204B8E /* imgui.cpp in Sources */,
+				04AD28472772AFDB00B86C7E /* shadow_common.metal in Sources */,
 				04CE3816274D167F00204B8E /* imgui_draw.cpp in Sources */,
 				04A79AC2275DE5D200182CCB /* point_light.mm in Sources */,
 				04A79AC6275DEA4E00182CCB /* spot_light.mm in Sources */,
