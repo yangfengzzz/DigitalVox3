@@ -612,7 +612,6 @@
 		04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AD9275E2C4F00182CCB /* InputManager.h */; };
 		04AD284127729A9F00B86C7E /* texture_packer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284027729A9F00B86C7E /* texture_packer.metal */; };
 		04AD28472772AFDB00B86C7E /* shadow_common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28462772AFDB00B86C7E /* shadow_common.metal */; };
-		04AD28482772B12400B86C7E /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
@@ -844,6 +843,7 @@
 		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
 		04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
 		04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E782771E0670038F34A /* shadow_debugger.metal */; };
+		04D47E7B2772D51C0038F34A /* cascade_shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1927,6 +1927,7 @@
 		04D47E53276C85880038F34A /* skybox_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = skybox_view.mm; sourceTree = "<group>"; };
 		04D47E6F277166550038F34A /* shadowMap_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = shadowMap_view.mm; sourceTree = "<group>"; };
 		04D47E782771E0670038F34A /* shadow_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shadow_debugger.metal; sourceTree = "<group>"; };
+		04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = cascade_shadowMap_view.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2975,6 +2976,7 @@
 				04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */,
 				04C2EA50276EF58B00091FB3 /* ibl_view.mm */,
 				04D47E6F277166550038F34A /* shadowMap_view.mm */,
+				04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";
@@ -4527,7 +4529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AD28482772B12400B86C7E /* windows_view.mm in Sources */,
+				04D47E7B2772D51C0038F34A /* cascade_shadowMap_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
