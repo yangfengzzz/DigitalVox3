@@ -462,7 +462,7 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
     }
 }
 
-void BasicRenderPipeline::_updateCascades() {
+void BasicRenderPipeline::_updateCascades(DirectLight* light) {
     std::array<float, SHADOW_MAP_CASCADE_COUNT> cascadeSplits{};
 
     float nearClip = _camera->nearClipPlane();
@@ -485,21 +485,66 @@ void BasicRenderPipeline::_updateCascades() {
         cascadeSplits[i] = (d - nearClip) / clipRange;
     }
     
+    std::array<math::Float3, 8> frustumCorners = {
+        math::Float3(-1.0f,  1.0f, -1.0f),
+        math::Float3( 1.0f,  1.0f, -1.0f),
+        math::Float3( 1.0f, -1.0f, -1.0f),
+        math::Float3(-1.0f, -1.0f, -1.0f),
+        math::Float3(-1.0f,  1.0f,  1.0f),
+        math::Float3( 1.0f,  1.0f,  1.0f),
+        math::Float3( 1.0f, -1.0f,  1.0f),
+        math::Float3(-1.0f, -1.0f,  1.0f),
+    };
+    
+    // Project frustum corners into world space
+    Matrix invCam = math::invert(_camera->projectionMatrix() * _camera->viewMatrix());
+    for (uint32_t i = 0; i < 8; i++) {
+        Float4 invCorner = transformToVec4(frustumCorners[i], invCam);
+        frustumCorners[i] = invCorner.xyz() / invCorner.w;
+    }
+    
     // Calculate orthographic projection matrix for each cascade
     float lastSplitDist = 0.0;
     for (uint32_t i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++) {
         float splitDist = cascadeSplits[i];
+        std::array<math::Float3, 8> _frustumCorners = frustumCorners;
+        
+        for (uint32_t i = 0; i < 4; i++) {
+            Float3 dist = _frustumCorners[i + 4] - _frustumCorners[i];
+            _frustumCorners[i + 4] = _frustumCorners[i] + (dist * splitDist);
+            _frustumCorners[i] = _frustumCorners[i] + (dist * lastSplitDist);
+        }
 
-        math::Float3 frustumCorners[8] = {
-            math::Float3(-1.0f,  1.0f, -1.0f),
-            math::Float3( 1.0f,  1.0f, -1.0f),
-            math::Float3( 1.0f, -1.0f, -1.0f),
-            math::Float3(-1.0f, -1.0f, -1.0f),
-            math::Float3(-1.0f,  1.0f,  1.0f),
-            math::Float3( 1.0f,  1.0f,  1.0f),
-            math::Float3( 1.0f, -1.0f,  1.0f),
-            math::Float3(-1.0f, -1.0f,  1.0f),
-        };
+        // Get frustum center
+        Float3 frustumCenter = Float3(0.0f);
+        for (uint32_t i = 0; i < 8; i++) {
+            frustumCenter = frustumCenter + _frustumCorners[i];
+        }
+        frustumCenter = frustumCenter / 8.0f;
+        
+        float radius = 0.0f;
+        for (uint32_t i = 0; i < 8; i++) {
+            float distance = Length(_frustumCorners[i] - frustumCenter);
+            radius = std::max<float>(radius, distance);
+        }
+        radius = std::ceil(radius * 16.0f) / 16.0f;
+        
+        Float3 maxExtents = Float3(radius);
+        Float3 minExtents = -maxExtents;
+        
+        Float3 lightDir = light->direction();
+        Matrix lightViewMatrix = Matrix::lookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, Float3(0.0f, 1.0f, 0.0f));
+        Matrix lightOrthoMatrix = Matrix::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
+
+        // Store split distance and matrix in cascade
+        shadowDatas[shadowCount].cascadeSplits[i] = (_camera->nearClipPlane() + splitDist * clipRange) * -1.0f;
+        auto vp = lightOrthoMatrix * lightViewMatrix;
+        shadowDatas[shadowCount].vp[i].columns[0] = simd_make_float4(vp.elements[0], vp.elements[1], vp.elements[2], vp.elements[3]);
+        shadowDatas[shadowCount].vp[i].columns[1] = simd_make_float4(vp.elements[4], vp.elements[5], vp.elements[6], vp.elements[7]);
+        shadowDatas[shadowCount].vp[i].columns[2] = simd_make_float4(vp.elements[8], vp.elements[9], vp.elements[10], vp.elements[11]);
+        shadowDatas[shadowCount].vp[i].columns[3] = simd_make_float4(vp.elements[12], vp.elements[13], vp.elements[14], vp.elements[15]);
+        
+        lastSplitDist = cascadeSplits[i];
     }
 }
 

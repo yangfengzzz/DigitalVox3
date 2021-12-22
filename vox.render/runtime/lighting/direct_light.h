@@ -29,6 +29,8 @@ public:
 public:
     math::Matrix shadowProjectionMatrix() override;
     
+    math::Float3 direction();
+    
 private:
     /**
      * Mount to the current Scene.

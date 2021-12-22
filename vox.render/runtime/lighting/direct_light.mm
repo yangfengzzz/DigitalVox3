@@ -41,6 +41,10 @@ void DirectLight::_updateShaderData(ShaderData& shaderData) {
     shaderData.setData(DirectLight::_directionProperty, _combinedDirection);
 }
 
+math::Float3 DirectLight::direction() {
+    return entity()->transform->worldForward();
+}
+
 math::Matrix DirectLight::shadowProjectionMatrix() {
     return math::Matrix::ortho(-17, 17, -10, 10, 0.1, 100);
 }

@@ -105,7 +105,7 @@ private:
         Calculate frustum split depths and matrices for the shadow map cascades
         Based on https://johanmedestrom.wordpress.com/2016/03/18/opengl-cascaded-shadow-maps/
     */
-    void _updateCascades();
+    void _updateCascades(DirectLight* light);
     
     void _drawSky(const Sky& sky);
     
