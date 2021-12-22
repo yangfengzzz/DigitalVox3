@@ -37,12 +37,6 @@ typedef struct {
     float coneAttenuation;
 } Light;
 
-typedef struct {
-    uint lightCount;
-    vector_float3 cameraPosition;
-    uint tiling;
-} FragmentUniforms;
-
 typedef enum {
     Position = 0,
     Normal = 1,

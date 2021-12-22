@@ -10,7 +10,6 @@
 
 #include "../component.h"
 #include "maths/matrix.h"
-#include "../shadow/light_shadow.h"
 #include "../shaderlib/shader_common.h"
 
 namespace vox {
