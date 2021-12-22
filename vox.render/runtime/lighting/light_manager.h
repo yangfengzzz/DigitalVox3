@@ -35,13 +35,29 @@ public:
     void detachRenderLight(Light* light);
     
     const std::vector<Light*>& visibleLights() const;
-        
+    
+public:
+    /**
+     * Register a light object to the current scene.
+     * @param light direct light
+     */
+    void attachDirectLight(DirectLight* light);
+
+    /**
+     * Remove a light object from the current scene.
+     * @param light direct light
+     */
+    void detachDirectLight(DirectLight* light);
+    
+    const std::vector<DirectLight*>& directLights() const;
+
 private:
     friend class Scene;
     
     void _updateShaderData(ShaderData& shaderData);
 
     std::vector<Light*> _visibleLights;
+    std::vector<DirectLight*> _directLights;
 };
 
 }

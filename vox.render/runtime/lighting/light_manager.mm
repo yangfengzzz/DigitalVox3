@@ -45,6 +45,28 @@ const std::vector<Light*>& LightManager::visibleLights() const {
     return _visibleLights;
 }
 
+//MARK: - Direct Light
+void LightManager::attachDirectLight(DirectLight* light) {
+    auto iter = std::find(_directLights.begin(), _directLights.end(), light);
+    if (iter == _directLights.end()) {
+        _directLights.push_back(light);
+    } else {
+        log::Err() << "Light already attached." << std::endl;;
+    }
+}
+
+void LightManager::detachDirectLight(DirectLight* light) {
+    auto iter = std::find(_directLights.begin(), _directLights.end(), light);
+    if (iter != _directLights.end()) {
+        _directLights.erase(iter);
+    }
+}
+
+const std::vector<DirectLight*>& LightManager::directLights() const {
+    return _directLights;
+}
+
+//MARK: - Internal Uploader
 void LightManager::_updateShaderData(ShaderData& shaderData) {
     /**
      * ambientLight and envMapLight only use the last one in the scene
