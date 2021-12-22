@@ -31,7 +31,7 @@ int main(int, char**) {
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
     
-    Shader::create("shadowMapDebugger", "vertex_shadow_debugger", "fragment_shadow_debugger");
+    Shader::create("shadowMapDebugger", "vertex_shadow_debugger", "fragment_cascade_shadow_debugger");
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
@@ -52,9 +52,9 @@ int main(int, char**) {
     auto boxMesh = PrimitiveMesh::createCuboid(&engine, cubeSize, cubeSize, cubeSize);
     auto boxMtl = std::make_shared<BlinnPhongMaterial>(&engine);
     boxMtl->setBaseColor(math::Color(0.3, 0.3, 0.3, 0.5));
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 6; i++) {
         auto boxEntity = rootEntity->createChild("BoxEntity");
-        boxEntity->transform->setPosition(Float3(0, 2, i * 10 - 10));
+        boxEntity->transform->setPosition(Float3(0, 2, i * 10 - 20));
 
         auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
         boxRenderer->setMesh(boxMesh);
@@ -63,24 +63,14 @@ int main(int, char**) {
     }
     
     auto planeEntity = rootEntity->createChild("PlaneEntity");
-    auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
-    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
+    auto planeMtl = std::make_shared<ShadowDebugMaterial>(&engine);
+//    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
     planeMtl->setRenderFace(RenderFace::Enum::Double);
     
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
-    planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 50));
+    planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 80));
     planeRenderer->setMaterial(planeMtl);
     planeRenderer->receiveShadow = true;
-    
-    // shadow view
-//    auto shadowViewEntity = rootEntity->createChild("ShadowDebugEntity");
-//    shadowViewEntity->transform->setPosition(Float3(6, 0, 0));
-//    auto shadowMtl = std::make_shared<ShadowDebugMaterial>(&engine);
-//    shadowMtl->setRenderFace(RenderFace::Enum::Double);
-//
-//    auto shadowViewRenderer = shadowViewEntity->addComponent<MeshRenderer>();
-//    shadowViewRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 2, 2));
-//    shadowViewRenderer->setMaterial(shadowMtl);
 
     engine.run();
 }

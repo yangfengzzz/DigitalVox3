@@ -34,15 +34,17 @@ typedef struct {
 typedef struct {
     float4 position [[position]];
     float2 v_uv;
+    float3 view_pos;
 } VertexOut;
 
 vertex VertexOut vertex_shadow_debugger(const VertexIn in [[stage_in]],
-                                        constant matrix_float4x4 &u_MVPMat [[buffer(7)]]) {
+                                        constant matrix_float4x4 &u_MVPMat [[buffer(7)]],
+                                        constant matrix_float4x4 &u_MVMat [[buffer(8)]]) {
     VertexOut out;
     
     out.v_uv = in.TEXCOORD_0;
     out.position = u_MVPMat * float4( in.position, 1.0);
-    
+    out.view_pos = (u_MVMat * float4( in.position, 1.0)).xyz;
     return out;
 }
 
@@ -60,4 +62,30 @@ fragment float4 fragment_shadow_debugger(VertexOut in [[stage_in]],
     return float4(float3(1.0-LinearizeDepth(depth)), 1.0);
 }
 
-
+fragment float4 fragment_cascade_shadow_debugger(VertexOut in [[stage_in]],
+                                                 sampler textureSampler [[sampler(0)]],
+                                                 constant ShadowData* u_shadowData [[buffer(27), function_constant(hasShadow)]],
+                                                 depth2d_array<float> u_shadowMap [[texture(5), function_constant(hasShadow)]]) {
+    // Get cascade index for the current fragment's view position
+    uint cascadeIndex = 0;
+    for(uint i = 0; i < 4 - 1; ++i) {
+        if(in.view_pos.z < u_shadowData[0].cascadeSplits[i]) {
+            cascadeIndex = i + 1;
+        }
+    }
+    
+    
+    float depth = u_shadowMap.sample(textureSampler, in.v_uv, 0);
+    
+    if (cascadeIndex == 0) {
+        return float4(1,1,1,1);
+    } else if (cascadeIndex == 1) {
+        return float4(1,0,0,1);
+    } else if (cascadeIndex == 2) {
+        return float4(0,1,0,1);
+    } else if (cascadeIndex == 3) {
+        return float4(0,0,1,1);
+    } else {
+        return float4(float3(1.0-LinearizeDepth(depth)), 1.0);
+    }
+}

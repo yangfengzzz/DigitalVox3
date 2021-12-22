@@ -120,7 +120,7 @@ private:
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
     
-    float cascadeSplitLambda = 0.95f;
+    float cascadeSplitLambda = 0.5f;
     const int shadowMapSize = 2000; // resolution
     uint32_t shadowCount = 0;
     std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
