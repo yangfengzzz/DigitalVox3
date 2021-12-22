@@ -73,7 +73,7 @@ int main(int, char**) {
     characterMtl->setOcclusionTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_ao.png", false));
     characterMtl->setNormalTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_normal.png", false));
     characterMtl->setMetallicRoughnessTexture(resourceLoader->createMetallicRoughnessTexture("../models/Doggy", "T_Doggy_metallic.png",
-                                                                                             "T_Doggy_metallic.png", false));
+                                                                                             "T_Doggy_roughness.png", false));
 
     auto characterEntity = rootEntity->createChild("characterEntity");
     characterEntity->transform->setScale(3, 3, 3);
