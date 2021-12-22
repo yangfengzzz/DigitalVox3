@@ -8,6 +8,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include "function-constant.h"
+#include "shadow_common.h"
 
 typedef struct {
     float3 position [[attribute(Position)]];
@@ -599,7 +600,9 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
                              texture2d<float> u_metallicRoughnessTexture [[texture(6), function_constant(hasMetalRoughnessMap)]],
                              texture2d<float> u_specularGlossinessTexture [[texture(7), function_constant(hasSpecularGlossinessMap)]],
                              texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
-                             bool is_front_face [[front_facing]]) {
+                             bool is_front_face [[front_facing]],
+                             constant ShadowData* u_shadowData [[buffer(30), function_constant(hasShadow)]],
+                             depth2d_array<float> u_shadowMap [[texture(9), function_constant(hasShadow)]]) {
     GeometricContext geometry;
     geometry.position = in.v_pos;
     geometry.normal = getPbrNormal(in, u_normalIntensity, textureSampler, u_normalTexture, is_front_face);
@@ -655,6 +658,18 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
     if (hasEmissiveMap) {
         float4 emissiveMapColor = u_emissiveTexture.sample(textureSampler, in.v_uv);
         emissiveRadiance = emissiveMapColor.rgb;
+    }
+
+    if (hasShadow) {
+        float shadow = 0;
+        for( int i = 0; i < shadowMapCount; i++) {
+            shadow += filterPCF(in.v_pos, u_shadowMap, u_shadowData, i);
+//            shadow += textureProj(in.v_pos, float2(0), u_shadowMap, u_shadowData, i);
+        }
+        shadow /= shadowMapCount;
+        
+        reflectedLight.directDiffuse *= shadow;
+        reflectedLight.indirectDiffuse *= shadow;
     }
     
     float3 totalRadiance = reflectedLight.directDiffuse +

@@ -44,14 +44,6 @@ int main(int, char**) {
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
     
-    const std::string path =
-    "/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images";
-    const std::array<std::string, 6> images = {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"};
-    auto specularTexture = resourceLoader->createSpecularTexture(path, images);
-    scene->ambientLight().setSpecularTexture(specularTexture);
-    auto diffuseTexture = resourceLoader->createIrradianceTexture(path, images);
-    scene->ambientLight().setDiffuseTexture(diffuseTexture);
-    
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(10, 10, 10);
@@ -63,10 +55,17 @@ int main(int, char**) {
     auto light = rootEntity->createChild("light");
     light->transform->setPosition(0, 10, 0);
     light->transform->lookAt(Float3(0, 0, 0), Float3(1, 0, 0));
-    light->addComponent<lightMovemenet>();
-    auto directionLight = light->addComponent<SpotLight>();
-    directionLight->intensity = 1.0;
-    directionLight->setEnableShadow(true);
+    auto spotLight = light->addComponent<SpotLight>();
+    spotLight->intensity = 0.8;
+    spotLight->shadow.intensity = 0.05;
+    spotLight->setEnableShadow(true);
+    
+    auto light2 = rootEntity->createChild("light3");
+    light2->addComponent<lightMovemenet>();
+    auto directLight = light2->addComponent<DirectLight>();
+    directLight->intensity = 0.2;
+    directLight->shadow.intensity = 0.2;
+    directLight->setEnableShadow(true);
     
     auto characterMtl = std::make_shared<PBRMaterial>(&engine);
     characterMtl->setBaseTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_1_diffuse.png", false));
