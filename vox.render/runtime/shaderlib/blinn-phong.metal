@@ -260,16 +260,17 @@ float filterPCF(float3 worldPos,
     float texelSize = 1.0 / mapSize;
     float total = 0.0;
     for (int x = -neighborWidth; x <= neighborWidth; x++) {
-      for (int y = -neighborWidth; y <= neighborWidth; y++) {
-        float shadow_sample = u_shadowMap.sample(s, xy + float2(x, y) * texelSize, index);
-        float current_sample = shadowCoord.z / shadowCoord.w;
-        if (current_sample > shadow_sample ) {
-          total += 1.0;
+        for (int y = -neighborWidth; y <= neighborWidth; y++) {
+            float shadow_sample = u_shadowMap.sample(s, xy + float2(x, y) * texelSize, index);
+            float current_sample = shadowCoord.z / shadowCoord.w;
+            if (current_sample > shadow_sample ) {
+                total += u_shadowData[index].intensity;
+            } else {
+                total += 1.0;
+            }
         }
-      }
     }
-    total /= neighbors;
-    return 1.0 - total;
+    return total /= neighbors;
 }
 
 
