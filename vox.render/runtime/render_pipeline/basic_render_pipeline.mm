@@ -7,10 +7,10 @@
 
 #include "basic_render_pipeline.h"
 #include "../material/material.h"
-#include "../lighting/light.h"
 #include "../camera.h"
 #include "../engine.h"
 #include "../renderer.h"
+#include "../lighting/direct_light.h"
 
 namespace vox {
 bool BasicRenderPipeline::_compareFromNearToFar(const RenderElement& a, const RenderElement& b) {
@@ -45,8 +45,17 @@ void BasicRenderPipeline::destroy() {
 void BasicRenderPipeline::render(RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map
+    shadowCount = 0;
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    
     _drawShadowMap(context);
     _drawCascadeShadowMap(context);
+    if (!shadowMaps.empty()) {
+        packedTexture = rhi.mergeResource(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
+        shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
+        shaderData.setData(BasicRenderPipeline::_shadowDataProp, shadowDatas);
+    }
     
     // Composition
     _opaqueQueue.clear();
@@ -303,8 +312,6 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     const auto& engine = _camera->engine();
     auto& rhi = engine->_hardwareRenderer;
     
-    shadowCount = 0;
-    std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     const auto& lights = context.scene()->light_manager.visibleLights();
     for (const auto& light : lights) {
         if (light->enableShadow()) {
@@ -376,15 +383,83 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             shadowCount++;
         }
     }
-    if (!shadowMaps.empty()) {
-        packedTexture = rhi.mergeResource(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
-        shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
-        shaderData.setData(BasicRenderPipeline::_shadowDataProp, shadowDatas);
-    }
 }
 
 void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
     
+    const auto& lights = context.scene()->light_manager.directLights();
+    for (const auto& light : lights) {
+        if (light->enableShadow()) {
+            id<MTLTexture> texture = nullptr;
+            if (shadowCount < shadowMaps.size()) {
+                texture = shadowMaps[shadowCount];
+            } else {
+                texture = rhi.resourceLoader()->buildTexture(2560, 1440,
+                                                             MTLPixelFormatDepth32Float);
+                shadowMaps.push_back(texture);
+            }
+            
+            MTLRenderPassDescriptor* shadowRenderPassDescriptor = [[MTLRenderPassDescriptor alloc]init];
+            shadowRenderPassDescriptor.depthAttachment.texture = texture;
+            shadowRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
+            shadowRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
+            shadowRenderPassDescriptor.depthAttachment.clearDepth = 1;
+            rhi.activeRenderTarget(shadowRenderPassDescriptor);
+            rhi.beginRenderPass(shadowRenderPassDescriptor, _camera, 0);
+            
+            MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+            depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
+            depthStencilDescriptor.depthWriteEnabled = true;
+            rhi.setDepthStencilState(depthStencilDescriptor);
+            rhi.setCullMode(MTLCullModeNone);
+            rhi.setDepthBias(0.01, 1.0, 0.01);
+            
+            std::vector<RenderElement> opaqueQueue{};
+            std::vector<RenderElement> transparentQueue{};
+            std::vector<RenderElement> alphaTestQueue{};
+            light->updateShadowMatrix();
+            BoundingFrustum frustum;
+            frustum.calculateFromMatrix(light->shadow.vp);
+            engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
+            if (shadowCount < LightManager::MAX_SHADOW) {
+                shadowDatas[shadowCount] = light->shadow;
+            } else {
+                std::cerr << "too much shadow caster!" << std::endl;
+            }
+            
+            for (const auto& element : opaqueQueue) {
+                if (element.component->castShadow) {
+                    Shader shader("shadowMap", "vertex_depth", "");
+                    auto program = shader.findShaderProgram(engine, element.component->_globalShaderMacro);
+                    
+                    MTLRenderPipelineDescriptor* pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc]init];
+                    pipelineDescriptor.vertexFunction = program->vertexShader();
+                    pipelineDescriptor.fragmentFunction = NULL;
+                    pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatInvalid;
+                    pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
+                    pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+                    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(pipelineDescriptor);
+                    rhi.setRenderPipelineState(pipelineState);
+                    
+                    auto modelMatrix = element.component->entity()->transform->worldMatrix();
+                    rhi.setVertexBytes(light->shadow.vp, 11);
+                    rhi.setVertexBytes(modelMatrix, 12);
+                    
+                    auto& buffers = element.mesh->_vertexBuffer;
+                    for (uint32_t index = 0; index < buffers.size(); index++) {
+                        rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
+                    }
+                    rhi.drawPrimitive(element.subMesh);
+                }
+            }
+            
+            // render loop
+            rhi.endRenderPass();
+            shadowCount++;
+        }
+    }
 }
 
 }

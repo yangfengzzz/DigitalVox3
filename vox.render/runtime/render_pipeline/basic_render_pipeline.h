@@ -13,6 +13,8 @@
 #include "render_pass.h"
 #include "render_context.h"
 #include "../sky/sky.h"
+#include "../lighting/light_manager.h"
+#include "../lighting/light.h"
 #include <optional>
 #include <vector>
 
@@ -112,6 +114,7 @@ private:
     
     const int shadowMapSize = 2000; // resolution
     uint32_t shadowCount = 0;
+    std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     std::vector<id<MTLTexture>> shadowMaps;
     id<MTLTexture> packedTexture{nullptr};
     
