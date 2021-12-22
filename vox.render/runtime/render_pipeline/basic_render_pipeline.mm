@@ -474,6 +474,7 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
 
 void BasicRenderPipeline::_updateCascades(DirectLight* light) {
     std::array<float, SHADOW_MAP_CASCADE_COUNT> cascadeSplits{};
+    auto worldPos = light->entity()->transform->worldPosition();
 
     float nearClip = _camera->nearClipPlane();
     float farClip = _camera->farClipPlane();
@@ -496,10 +497,10 @@ void BasicRenderPipeline::_updateCascades(DirectLight* light) {
     }
     
     std::array<math::Float3, 8> frustumCorners = {
-        math::Float3(-1.0f,  1.0f, -1.0f),
-        math::Float3( 1.0f,  1.0f, -1.0f),
-        math::Float3( 1.0f, -1.0f, -1.0f),
-        math::Float3(-1.0f, -1.0f, -1.0f),
+        math::Float3(-1.0f,  1.0f, 0.0f),
+        math::Float3( 1.0f,  1.0f, 0.0f),
+        math::Float3( 1.0f, -1.0f, 0.0f),
+        math::Float3(-1.0f, -1.0f, 0.0f),
         math::Float3(-1.0f,  1.0f,  1.0f),
         math::Float3( 1.0f,  1.0f,  1.0f),
         math::Float3( 1.0f, -1.0f,  1.0f),
@@ -524,36 +525,65 @@ void BasicRenderPipeline::_updateCascades(DirectLight* light) {
             _frustumCorners[i + 4] = _frustumCorners[i] + (dist * splitDist);
             _frustumCorners[i] = _frustumCorners[i] + (dist * lastSplitDist);
         }
+        
+        auto lightMat = light->entity()->transform->worldMatrix();
+        auto lightViewMat = invert(lightMat);
+        for (uint32_t i = 0; i < 8; i++) {
+            _frustumCorners[i] = transformCoordinate(_frustumCorners[i], lightViewMat);
+        }
+        float farDist = Length(_frustumCorners[7] - _frustumCorners[5]);
+        float crossDist = Length(_frustumCorners[7] - _frustumCorners[1]);
+        float maxDist = farDist > crossDist ? farDist : crossDist;
+        
+        float minX = std::numeric_limits<float>::infinity();
+        float maxX = -std::numeric_limits<float>::infinity();
+        float minY = std::numeric_limits<float>::infinity();
+        float maxY = -std::numeric_limits<float>::infinity();
+        float minZ = std::numeric_limits<float>::infinity();
+        float maxZ = -std::numeric_limits<float>::infinity();
+        for (uint32_t i = 0; i < 8; i++) {
+            minX = std::min(minX, _frustumCorners[i].x);
+            maxX = std::max(maxX, _frustumCorners[i].x);
+            minY = std::min(minY, _frustumCorners[i].y);
+            maxY = std::max(maxY, _frustumCorners[i].y);
+            minZ = std::min(minZ, _frustumCorners[i].z);
+            maxZ = std::max(maxZ, _frustumCorners[i].z);
+        }
+        
+        // texel tile
+        float fWorldUnitsPerTexel = maxDist / (float)1000;
+        float posX = (minX + maxX)*0.5f;
+        posX /= fWorldUnitsPerTexel;
+        posX = floor(posX);
+        posX *= fWorldUnitsPerTexel;
 
-        // Get frustum center
-        Float3 frustumCenter = Float3(0.0f);
-        for (uint32_t i = 0; i < 8; i++) {
-            frustumCenter = frustumCenter + _frustumCorners[i];
-        }
-        frustumCenter = frustumCenter / 8.0f;
+        float posY = (minY + maxY)*0.5f;
+        posY /= fWorldUnitsPerTexel;
+        posY = floor(posY);
+        posY *= fWorldUnitsPerTexel;
+
+        float posZ = maxZ;
+        posZ /= fWorldUnitsPerTexel;
+        posZ = floor(posZ);
+        posZ *= fWorldUnitsPerTexel;
         
-        float radius = 0.0f;
-        for (uint32_t i = 0; i < 8; i++) {
-            float distance = Length(_frustumCorners[i] - frustumCenter);
-            radius = std::max<float>(radius, distance);
-        }
-        radius = std::ceil(radius * 16.0f) / 16.0f;
-        
+        Float3 center = Float3(posX, posY, posZ);
+        center = transformCoordinate(center, lightMat);
+        light->entity()->transform->setWorldPosition(center);
+
+        float radius = maxDist / 2.0;
         Float3 maxExtents = Float3(radius);
         Float3 minExtents = -maxExtents;
-        
-        Float3 lightDir = light->direction();
-        Matrix lightViewMatrix = Matrix::lookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, Float3(0.0f, 1.0f, 0.0f));
-        Matrix lightOrthoMatrix = Matrix::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
+        Matrix lightOrthoMatrix = Matrix::ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxZ - minZ);
 
         // Store split distance and matrix in cascade
         shadowDatas[shadowCount].cascadeSplits[i] = (_camera->nearClipPlane() + splitDist * clipRange) * -1.0f;
-        auto vp = lightOrthoMatrix * lightViewMatrix;
+        auto vp = lightOrthoMatrix * invert(light->entity()->transform->worldMatrix());
         shadowDatas[shadowCount].vp[i].columns[0] = simd_make_float4(vp.elements[0], vp.elements[1], vp.elements[2], vp.elements[3]);
         shadowDatas[shadowCount].vp[i].columns[1] = simd_make_float4(vp.elements[4], vp.elements[5], vp.elements[6], vp.elements[7]);
         shadowDatas[shadowCount].vp[i].columns[2] = simd_make_float4(vp.elements[8], vp.elements[9], vp.elements[10], vp.elements[11]);
         shadowDatas[shadowCount].vp[i].columns[3] = simd_make_float4(vp.elements[12], vp.elements[13], vp.elements[14], vp.elements[15]);
-        
+        light->entity()->transform->setWorldPosition(worldPos);
         lastSplitDist = cascadeSplits[i];
     }
 }
