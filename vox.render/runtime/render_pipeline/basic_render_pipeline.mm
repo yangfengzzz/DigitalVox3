@@ -319,7 +319,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             if (shadowCount < shadowMaps.size()) {
                 texture = shadowMaps[shadowCount];
             } else {
-                texture = rhi.resourceLoader()->buildTexture(2560, 1440,
+                texture = rhi.resourceLoader()->buildTexture(shadowMapSize, shadowMapSize,
                                                              MTLPixelFormatDepth32Float);
                 shadowMaps.push_back(texture);
             }
@@ -344,7 +344,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
             std::vector<RenderElement> alphaTestQueue{};
             light->updateShadowMatrix();
             BoundingFrustum frustum;
-            frustum.calculateFromMatrix(light->shadow.vp);
+            frustum.calculateFromMatrix(light->shadow.vp[0]);
             engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
             if (shadowCount < LightManager::MAX_SHADOW) {
                 shadowDatas[shadowCount] = light->shadow;
@@ -396,7 +396,7 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
             if (shadowCount < shadowMaps.size()) {
                 texture = shadowMaps[shadowCount];
             } else {
-                texture = rhi.resourceLoader()->buildTexture(2560, 1440,
+                texture = rhi.resourceLoader()->buildTexture(shadowMapSize, shadowMapSize,
                                                              MTLPixelFormatDepth32Float);
                 shadowMaps.push_back(texture);
             }
@@ -421,7 +421,7 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
             std::vector<RenderElement> alphaTestQueue{};
             light->updateShadowMatrix();
             BoundingFrustum frustum;
-            frustum.calculateFromMatrix(light->shadow.vp);
+            frustum.calculateFromMatrix(light->shadow.vp[0]);
             engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
             if (shadowCount < LightManager::MAX_SHADOW) {
                 shadowDatas[shadowCount] = light->shadow;
@@ -459,6 +459,47 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
             rhi.endRenderPass();
             shadowCount++;
         }
+    }
+}
+
+void BasicRenderPipeline::_updateCascades() {
+    std::array<float, SHADOW_MAP_CASCADE_COUNT> cascadeSplits{};
+
+    float nearClip = _camera->nearClipPlane();
+    float farClip = _camera->farClipPlane();
+    float clipRange = farClip - nearClip;
+
+    float minZ = nearClip;
+    float maxZ = nearClip + clipRange;
+
+    float range = maxZ - minZ;
+    float ratio = maxZ / minZ;
+    
+    // Calculate split depths based on view camera frustum
+    // Based on method presented in https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch10.html
+    for (uint32_t i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++) {
+        float p = (i + 1) / static_cast<float>(SHADOW_MAP_CASCADE_COUNT);
+        float log = minZ * std::pow(ratio, p);
+        float uniform = minZ + range * p;
+        float d = cascadeSplitLambda * (log - uniform) + uniform;
+        cascadeSplits[i] = (d - nearClip) / clipRange;
+    }
+    
+    // Calculate orthographic projection matrix for each cascade
+    float lastSplitDist = 0.0;
+    for (uint32_t i = 0; i < SHADOW_MAP_CASCADE_COUNT; i++) {
+        float splitDist = cascadeSplits[i];
+
+        math::Float3 frustumCorners[8] = {
+            math::Float3(-1.0f,  1.0f, -1.0f),
+            math::Float3( 1.0f,  1.0f, -1.0f),
+            math::Float3( 1.0f, -1.0f, -1.0f),
+            math::Float3(-1.0f, -1.0f, -1.0f),
+            math::Float3(-1.0f,  1.0f,  1.0f),
+            math::Float3( 1.0f,  1.0f,  1.0f),
+            math::Float3( 1.0f, -1.0f,  1.0f),
+            math::Float3(-1.0f, -1.0f,  1.0f),
+        };
     }
 }
 

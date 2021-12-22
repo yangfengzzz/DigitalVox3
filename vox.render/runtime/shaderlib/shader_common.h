@@ -99,9 +99,13 @@ struct ShadowData {
      */
     float radius = 1;
     /**
-     * Light view projection matrix.
+     * Light view projection matrix.(cascade)
      */
-    matrix_float4x4 vp;
+    matrix_float4x4 vp[4];
+    /**
+     * Light cascade depth.
+     */
+    float cascadeSplits[4];
 };
 
 #endif /* shader_common_h */

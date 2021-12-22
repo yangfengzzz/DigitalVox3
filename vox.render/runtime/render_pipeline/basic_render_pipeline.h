@@ -26,6 +26,8 @@ using namespace math;
  */
 class BasicRenderPipeline {
 public:
+    static constexpr int SHADOW_MAP_CASCADE_COUNT = 4;
+    
     /**
      * Create a basic render pipeline.
      * @param camera - Camera
@@ -99,6 +101,12 @@ private:
     
     void _drawCascadeShadowMap(RenderContext& context);
     
+    /*
+        Calculate frustum split depths and matrices for the shadow map cascades
+        Based on https://johanmedestrom.wordpress.com/2016/03/18/opengl-cascaded-shadow-maps/
+    */
+    void _updateCascades();
+    
     void _drawSky(const Sky& sky);
     
 private:
@@ -112,6 +120,7 @@ private:
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
     
+    float cascadeSplitLambda = 0.95f;
     const int shadowMapSize = 2000; // resolution
     uint32_t shadowCount = 0;
     std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};

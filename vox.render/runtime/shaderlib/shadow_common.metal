@@ -15,7 +15,7 @@ float textureProj(float3 worldPos, float2 off,
                   int index) {
     constexpr sampler s(coord::normalized, filter::linear,
                         address::clamp_to_edge, compare_func:: less);
-    float4 shadowCoord = u_shadowData[index].vp * float4(worldPos, 1.0);
+    float4 shadowCoord = u_shadowData[index].vp[0] * float4(worldPos, 1.0);
     float2 xy = shadowCoord.xy;
     xy /= shadowCoord.w;
     xy = xy * 0.5 + 0.5;
@@ -34,7 +34,7 @@ float filterPCF(float3 worldPos,
                 depth2d_array<float> u_shadowMap,
                 constant ShadowData* u_shadowData,
                 int index) {
-    float4 shadowCoord = u_shadowData[index].vp * float4(worldPos, 1.0);
+    float4 shadowCoord = u_shadowData[index].vp[0] * float4(worldPos, 1.0);
     float2 xy = shadowCoord.xy;
     xy /= shadowCoord.w;
     xy = xy * 0.5 + 0.5;
