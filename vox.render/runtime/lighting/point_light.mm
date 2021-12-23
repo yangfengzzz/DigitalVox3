@@ -15,40 +15,40 @@ ShaderProperty PointLight::_colorProperty = Shader::createProperty("u_pointLight
 ShaderProperty PointLight::_positionProperty = Shader::createProperty("u_pointLightPosition", ShaderDataGroup::Scene);
 ShaderProperty PointLight::_distanceProperty = Shader::createProperty("u_pointLightDistance", ShaderDataGroup::Scene);
 
-std::array<math::Color, Light::_maxLight> PointLight::_combinedColor = {};
-std::array<math::Float3, Light::_maxLight> PointLight::_combinedPosition = {};
-std::array<float, Light::_maxLight> PointLight::_combinedDistance = {};
+std::array<math::Color, Light::MAX_LIGHT> PointLight::_combinedColor = {};
+std::array<math::Float3, Light::MAX_LIGHT> PointLight::_combinedPosition = {};
+std::array<float, Light::MAX_LIGHT> PointLight::_combinedDistance = {};
 
 PointLight::PointLight(Entity* entity):
 Light(entity) {
-    RenderPipelineState::register_vertex_uploader<std::array<math::Color, Light::_maxLight>>(
-    [](const std::array<math::Color, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: x.data() length:sizeof(std::array<math::Color, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_vertex_uploader<std::array<math::Color, Light::MAX_LIGHT>>(
+    [](const std::array<math::Color, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: x.data() length:sizeof(std::array<math::Color, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_vertex_uploader<std::array<math::Float3, Light::_maxLight>>(
-    [](const std::array<math::Float3, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: x.data() length:sizeof(std::array<math::Float3, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_vertex_uploader<std::array<math::Float3, Light::MAX_LIGHT>>(
+    [](const std::array<math::Float3, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: x.data() length:sizeof(std::array<math::Float3, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_vertex_uploader<std::array<float, Light::_maxLight>>(
-    [](const std::array<float, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: x.data() length:sizeof(std::array<float, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_vertex_uploader<std::array<float, Light::MAX_LIGHT>>(
+    [](const std::array<float, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: x.data() length:sizeof(std::array<float, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::_maxLight>>(
-    [](const std::array<math::Color, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::MAX_LIGHT>>(
+    [](const std::array<math::Color, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::_maxLight>>(
-    [](const std::array<math::Float3, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::MAX_LIGHT>>(
+    [](const std::array<math::Float3, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<std::array<float, Light::_maxLight>>(
-    [](const std::array<float, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<float, Light::MAX_LIGHT>>(
+    [](const std::array<float, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, Light::MAX_LIGHT>) atIndex:location];
     });
 }
 

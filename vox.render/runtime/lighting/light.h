@@ -18,6 +18,11 @@ namespace vox {
  */
 class Light :public Component {
 public:
+    /**
+     * Each type of light source is at most 10, beyond which it will not take effect.
+     * */
+    static constexpr uint32_t MAX_LIGHT = 10;
+    
     Light(Entity* entity);
     
     /**
@@ -46,12 +51,6 @@ public:
     void updateShadowMatrix();
     
     virtual math::Matrix shadowProjectionMatrix() = 0;
-    
-protected:
-    /**
-     * Each type of light source is at most 10, beyond which it will not take effect.
-     * */
-    static constexpr size_t _maxLight = 10;
     
 private:
     /**

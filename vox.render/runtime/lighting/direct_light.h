@@ -52,8 +52,8 @@ private:
     static ShaderProperty _colorProperty;
     static ShaderProperty _directionProperty;
     
-    static std::array<math::Color, Light::_maxLight> _combinedColor;
-    static std::array<math::Float3, Light::_maxLight> _combinedDirection;
+    static std::array<math::Color, Light::MAX_LIGHT> _combinedColor;
+    static std::array<math::Float3, Light::MAX_LIGHT> _combinedDirection;
 };
 
 }

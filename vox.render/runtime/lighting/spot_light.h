@@ -49,12 +49,12 @@ private:
     static ShaderProperty _angleCosProperty;
     static ShaderProperty _penumbraCosProperty;
     
-    static std::array<math::Color, Light::_maxLight> _combinedColor;
-    static std::array<math::Float3, Light::_maxLight> _combinedPosition;
-    static std::array<math::Float3, Light::_maxLight> _combinedDirection;
-    static std::array<float, Light::_maxLight> _combinedDistance;
-    static std::array<float, Light::_maxLight> _combinedAngleCos;
-    static std::array<float, Light::_maxLight> _combinedPenumbraCos;
+    static std::array<math::Color, Light::MAX_LIGHT> _combinedColor;
+    static std::array<math::Float3, Light::MAX_LIGHT> _combinedPosition;
+    static std::array<math::Float3, Light::MAX_LIGHT> _combinedDirection;
+    static std::array<float, Light::MAX_LIGHT> _combinedDistance;
+    static std::array<float, Light::MAX_LIGHT> _combinedAngleCos;
+    static std::array<float, Light::MAX_LIGHT> _combinedPenumbraCos;
 };
 
 }

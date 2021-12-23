@@ -42,9 +42,9 @@ private:
     static ShaderProperty _positionProperty;
     static ShaderProperty _distanceProperty;
     
-    static std::array<math::Color, Light::_maxLight> _combinedColor;
-    static std::array<math::Float3, Light::_maxLight> _combinedPosition;
-    static std::array<float, Light::_maxLight> _combinedDistance;
+    static std::array<math::Color, Light::MAX_LIGHT> _combinedColor;
+    static std::array<math::Float3, Light::MAX_LIGHT> _combinedPosition;
+    static std::array<float, Light::MAX_LIGHT> _combinedDistance;
 };
 
 }

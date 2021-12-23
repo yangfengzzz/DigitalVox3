@@ -843,7 +843,7 @@
 		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
 		04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
 		04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E782771E0670038F34A /* shadow_debugger.metal */; };
-		04D47E7B2772D51C0038F34A /* cascade_shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */; };
+		04D47E7E27741EA00038F34A /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4529,7 +4529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D47E7B2772D51C0038F34A /* cascade_shadowMap_view.mm in Sources */,
+				04D47E7E27741EA00038F34A /* shadowMap_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,19 +15,19 @@ namespace vox {
 ShaderProperty DirectLight::_colorProperty = Shader::createProperty("u_directLightColor", ShaderDataGroup::Scene);
 ShaderProperty DirectLight::_directionProperty = Shader::createProperty("u_directLightDirection", ShaderDataGroup::Scene);
 
-std::array<math::Color, Light::_maxLight> DirectLight::_combinedColor = {};
-std::array<math::Float3, Light::_maxLight> DirectLight::_combinedDirection = {};
+std::array<math::Color, Light::MAX_LIGHT> DirectLight::_combinedColor = {};
+std::array<math::Float3, Light::MAX_LIGHT> DirectLight::_combinedDirection = {};
 
 DirectLight::DirectLight(Entity* entity):
 Light(entity) {
-    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::_maxLight>>(
-    [](const std::array<math::Color, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::MAX_LIGHT>>(
+    [](const std::array<math::Color, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::_maxLight>>(
-    [](const std::array<math::Float3, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::MAX_LIGHT>>(
+    [](const std::array<math::Float3, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::MAX_LIGHT>) atIndex:location];
     });
 }
 

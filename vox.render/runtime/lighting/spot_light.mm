@@ -18,28 +18,28 @@ ShaderProperty SpotLight::_distanceProperty = Shader::createProperty("u_spotLigh
 ShaderProperty SpotLight::_angleCosProperty = Shader::createProperty("u_spotLightAngleCos", ShaderDataGroup::Scene);
 ShaderProperty SpotLight::_penumbraCosProperty = Shader::createProperty("u_spotLightPenumbraCos", ShaderDataGroup::Scene);
 
-std::array<math::Color, Light::_maxLight> SpotLight::_combinedColor = {};
-std::array<math::Float3, Light::_maxLight> SpotLight::_combinedPosition = {};
-std::array<math::Float3, Light::_maxLight> SpotLight::_combinedDirection = {};
-std::array<float, Light::_maxLight> SpotLight::_combinedDistance = {};
-std::array<float, Light::_maxLight> SpotLight::_combinedAngleCos = {};
-std::array<float, Light::_maxLight> SpotLight::_combinedPenumbraCos = {};
+std::array<math::Color, Light::MAX_LIGHT> SpotLight::_combinedColor = {};
+std::array<math::Float3, Light::MAX_LIGHT> SpotLight::_combinedPosition = {};
+std::array<math::Float3, Light::MAX_LIGHT> SpotLight::_combinedDirection = {};
+std::array<float, Light::MAX_LIGHT> SpotLight::_combinedDistance = {};
+std::array<float, Light::MAX_LIGHT> SpotLight::_combinedAngleCos = {};
+std::array<float, Light::MAX_LIGHT> SpotLight::_combinedPenumbraCos = {};
 
 SpotLight::SpotLight(Entity* entity):
 Light(entity) {
-    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::_maxLight>>(
-    [](const std::array<math::Color, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::MAX_LIGHT>>(
+    [](const std::array<math::Color, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::_maxLight>>(
-    [](const std::array<math::Float3, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::MAX_LIGHT>>(
+    [](const std::array<math::Float3, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::MAX_LIGHT>) atIndex:location];
     });
     
-    RenderPipelineState::register_fragment_uploader<std::array<float, Light::_maxLight>>(
-    [](const std::array<float, Light::_maxLight>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, Light::_maxLight>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<float, Light::MAX_LIGHT>>(
+    [](const std::array<float, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, Light::MAX_LIGHT>) atIndex:location];
     });
 }
 
