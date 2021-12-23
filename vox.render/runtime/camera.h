@@ -19,7 +19,7 @@
 #include "updateFlag.h"
 #include "shader/shader.h"
 #include "shader/shader_data.h"
-#include "render_pipeline/basic_render_pipeline.h"
+#include "render_pipeline/render_pipeline.h"
 #include "render_pipeline/render_context.h"
 
 namespace vox {
@@ -258,7 +258,7 @@ public:
     
 private:
     friend class ComponentsManager;
-    friend class BasicRenderPipeline;
+    friend class RenderPipeline;
     
     void _projMatChange();
     
@@ -285,7 +285,7 @@ private:
     
     ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
     BoundingFrustum _frustum = BoundingFrustum();
-    BasicRenderPipeline _renderPipeline;
+    RenderPipeline _renderPipeline;
     
     bool _isOrthographic = false;
     bool _isProjMatSetting = false;

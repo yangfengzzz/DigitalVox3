@@ -1,12 +1,12 @@
 //
-//  basic_render_pipeline.hpp
+//  render_pipeline.hpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/11/27.
 //
 
-#ifndef basic_render_pipeline_hpp
-#define basic_render_pipeline_hpp
+#ifndef render_pipeline_hpp
+#define render_pipeline_hpp
 
 #include "maths/vec_float.h"
 #include "../enums/textureCube_face.h"
@@ -24,7 +24,7 @@ using namespace math;
 /**
  * Basic render pipeline.
  */
-class BasicRenderPipeline {
+class RenderPipeline {
 public:
     static constexpr int SHADOW_MAP_CASCADE_COUNT = 4;
     
@@ -32,7 +32,7 @@ public:
      * Create a basic render pipeline.
      * @param camera - Camera
      */
-    BasicRenderPipeline(Camera* camera);
+    RenderPipeline(Camera* camera);
     
     /**
      * Destroy internal resources.
@@ -137,4 +137,4 @@ private:
 }
 
 
-#endif /* basic_render_pipeline_hpp */
+#endif /* render_pipeline_hpp */

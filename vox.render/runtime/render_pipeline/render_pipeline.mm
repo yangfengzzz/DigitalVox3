@@ -1,11 +1,11 @@
 //
-//  basic_render_pipeline.cpp
+//  render_pipeline.cpp
 //  vox.render
 //
 //  Created by 杨丰 on 2021/11/27.
 //
 
-#include "basic_render_pipeline.h"
+#include "render_pipeline.h"
 #include "../material/material.h"
 #include "../camera.h"
 #include "../engine.h"
@@ -13,36 +13,36 @@
 #include "../lighting/direct_light.h"
 
 namespace vox {
-bool BasicRenderPipeline::_compareFromNearToFar(const RenderElement& a, const RenderElement& b) {
+bool RenderPipeline::_compareFromNearToFar(const RenderElement& a, const RenderElement& b) {
     return (a.material->renderQueueType < b.material->renderQueueType) ||
     (a.component->_distanceForSort < b.component->_distanceForSort) ||
     (b.component->_renderSortId < a.component->_renderSortId);
 }
 
-bool BasicRenderPipeline::_compareFromFarToNear(const RenderElement& a, const RenderElement& b) {
+bool RenderPipeline::_compareFromFarToNear(const RenderElement& a, const RenderElement& b) {
     return (a.material->renderQueueType < b.material->renderQueueType) ||
     (b.component->_distanceForSort < a.component->_distanceForSort) ||
     (b.component->_renderSortId < a.component->_renderSortId);
 }
 
 //MARK: - RenderElement
-ShaderProperty BasicRenderPipeline::_shadowMapProp = Shader::createProperty("u_shadowMap", ShaderDataGroup::Enum::Internal);
-ShaderProperty BasicRenderPipeline::_shadowDataProp = Shader::createProperty("u_shadowData", ShaderDataGroup::Enum::Internal);
-BasicRenderPipeline::BasicRenderPipeline(Camera* camera):
+ShaderProperty RenderPipeline::_shadowMapProp = Shader::createProperty("u_shadowMap", ShaderDataGroup::Enum::Internal);
+ShaderProperty RenderPipeline::_shadowDataProp = Shader::createProperty("u_shadowData", ShaderDataGroup::Enum::Internal);
+RenderPipeline::RenderPipeline(Camera* camera):
 _camera(camera) {
     auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
     _defaultPass = pass.get();
     addRenderPass(std::move(pass));
 }
 
-void BasicRenderPipeline::destroy() {
+void RenderPipeline::destroy() {
     _opaqueQueue.clear();
     _alphaTestQueue.clear();
     _transparentQueue.clear();
     _renderPassArray.clear();
 }
 
-void BasicRenderPipeline::render(RenderContext& context,
+void RenderPipeline::render(RenderContext& context,
                                  std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map
     shadowCount = 0;
@@ -53,8 +53,8 @@ void BasicRenderPipeline::render(RenderContext& context,
     _drawCascadeShadowMap(context);
     if (!shadowMaps.empty()) {
         packedTexture = rhi.createTextureArray(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
-        shaderData.setData(BasicRenderPipeline::_shadowMapProp, packedTexture);
-        shaderData.setData(BasicRenderPipeline::_shadowDataProp, shadowDatas);
+        shaderData.setData(RenderPipeline::_shadowMapProp, packedTexture);
+        shaderData.setData(RenderPipeline::_shadowDataProp, shadowDatas);
     }
     
     // Composition
@@ -64,20 +64,20 @@ void BasicRenderPipeline::render(RenderContext& context,
     
     _camera->engine()->_componentsManager.callRender(context, _opaqueQueue, _alphaTestQueue, _transparentQueue);
     
-    std::sort(_opaqueQueue.begin(), _opaqueQueue.end(), BasicRenderPipeline::_compareFromNearToFar);
-    std::sort(_alphaTestQueue.begin(), _alphaTestQueue.end(), BasicRenderPipeline::_compareFromNearToFar);
-    std::sort(_transparentQueue.begin(), _transparentQueue.end(), BasicRenderPipeline::_compareFromFarToNear);
+    std::sort(_opaqueQueue.begin(), _opaqueQueue.end(), RenderPipeline::_compareFromNearToFar);
+    std::sort(_alphaTestQueue.begin(), _alphaTestQueue.end(), RenderPipeline::_compareFromNearToFar);
+    std::sort(_transparentQueue.begin(), _transparentQueue.end(), RenderPipeline::_compareFromFarToNear);
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         _drawRenderPass(_renderPassArray[i].get(), _camera, cubeFace, mipLevel);
     }
 }
 
 //MARK: - RenderPass
-RenderPass* BasicRenderPipeline::defaultRenderPass() {
+RenderPass* RenderPipeline::defaultRenderPass() {
     return _defaultPass;
 }
 
-void BasicRenderPipeline::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
+void RenderPipeline::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
     _renderPassArray.emplace_back(std::move(pass));
     std::sort(_renderPassArray.begin(), _renderPassArray.end(),
               [](const std::unique_ptr<RenderPass>& p1, const std::unique_ptr<RenderPass>& p2){
@@ -85,7 +85,7 @@ void BasicRenderPipeline::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
     });
 }
 
-void BasicRenderPipeline::addRenderPass(const std::string& name,
+void RenderPipeline::addRenderPass(const std::string& name,
                                         int priority,
                                         MTLRenderPassDescriptor* renderTarget,
                                         Layer mask) {
@@ -97,7 +97,7 @@ void BasicRenderPipeline::addRenderPass(const std::string& name,
     });
 }
 
-void BasicRenderPipeline::removeRenderPass(const std::string& name) {
+void RenderPipeline::removeRenderPass(const std::string& name) {
     ssize_t index = -1;
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         const auto& pass = _renderPassArray[i];
@@ -109,7 +109,7 @@ void BasicRenderPipeline::removeRenderPass(const std::string& name) {
     }
 }
 
-void BasicRenderPipeline::removeRenderPass(const RenderPass* p) {
+void RenderPipeline::removeRenderPass(const RenderPass* p) {
     ssize_t index = -1;
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         const auto& pass = _renderPassArray[i];
@@ -121,7 +121,7 @@ void BasicRenderPipeline::removeRenderPass(const RenderPass* p) {
     }
 }
 
-RenderPass* BasicRenderPipeline::getRenderPass(const std::string& name) {
+RenderPass* RenderPipeline::getRenderPass(const std::string& name) {
     for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
         const auto& pass = _renderPassArray[i];
         if (pass->name == name) return pass.get();
@@ -131,7 +131,7 @@ RenderPass* BasicRenderPipeline::getRenderPass(const std::string& name) {
 }
 
 //MARK: - Internal Pipeline Method
-void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
+void RenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
                                           std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     pass->preRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
     
@@ -177,7 +177,7 @@ void BasicRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
     pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
 }
 
-void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, RenderPass* pass) {
+void RenderPipeline::_drawElement(const std::vector<RenderElement>& items, RenderPass* pass) {
     if (items.size() == 0) {
         return;
     }
@@ -251,7 +251,7 @@ void BasicRenderPipeline::_drawElement(const std::vector<RenderElement>& items, 
     }
 }
 
-void BasicRenderPipeline::_drawSky(const Sky& sky) {
+void RenderPipeline::_drawSky(const Sky& sky) {
     const auto& material = sky.material;
     const auto& mesh = sky.mesh;
     if (!material) {
@@ -308,7 +308,7 @@ void BasicRenderPipeline::_drawSky(const Sky& sky) {
     rhi.drawPrimitive(mesh->subMesh(0));
 }
 
-void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
+void RenderPipeline::_drawShadowMap(RenderContext& context) {
     const auto& engine = _camera->engine();
     auto& rhi = engine->_hardwareRenderer;
     
@@ -385,7 +385,7 @@ void BasicRenderPipeline::_drawShadowMap(RenderContext& context) {
     }
 }
 
-void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
+void RenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
     const auto& engine = _camera->engine();
     auto& rhi = engine->_hardwareRenderer;
     
@@ -472,7 +472,7 @@ void BasicRenderPipeline::_drawCascadeShadowMap(RenderContext& context) {
     }
 }
 
-void BasicRenderPipeline::_updateCascades(DirectLight* light) {
+void RenderPipeline::_updateCascades(DirectLight* light) {
     std::array<float, SHADOW_MAP_CASCADE_COUNT> cascadeSplits{};
     auto worldPos = light->entity()->transform->worldPosition();
 

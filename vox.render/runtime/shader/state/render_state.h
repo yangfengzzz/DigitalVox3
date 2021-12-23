@@ -29,7 +29,7 @@ struct RenderState {
     RasterState rasterState = RasterState();
 
 private:
-    friend class BasicRenderPipeline;
+    friend class RenderPipeline;
     
     void _apply(Engine* engine,
                 MTLRenderPipelineDescriptor* pipelineDescriptor,

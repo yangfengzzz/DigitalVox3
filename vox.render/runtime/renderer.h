@@ -117,7 +117,7 @@ protected:
     virtual void update(float deltaTime) {}
     
 protected:
-    friend class BasicRenderPipeline;
+    friend class RenderPipeline;
     friend class ComponentsManager;
     
     void _updateShaderData(RenderContext& context);
