@@ -30,7 +30,8 @@ struct RenderState {
 
 private:
     friend class RenderPipeline;
-    
+    friend class ForwardRenderPipeline;
+
     void _apply(Engine* engine,
                 MTLRenderPipelineDescriptor* pipelineDescriptor,
                 MTLDepthStencilDescriptor* depthStencilDescriptor);

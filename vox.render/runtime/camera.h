@@ -285,7 +285,7 @@ private:
     
     ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
     BoundingFrustum _frustum = BoundingFrustum();
-    RenderPipeline _renderPipeline;
+    std::unique_ptr<RenderPipeline> _renderPipeline;
     
     bool _isOrthographic = false;
     bool _isProjMatSetting = false;

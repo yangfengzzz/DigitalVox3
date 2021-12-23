@@ -8,6 +8,7 @@
 #include "camera.h"
 #include "entity.h"
 #include "engine.h"
+#include "render_pipeline/forward_render_pipeline.h"
 
 namespace vox {
 ShaderProperty Camera::_viewMatrixProperty = Shader::createProperty("u_viewMat", ShaderDataGroup::Camera);
@@ -18,9 +19,9 @@ ShaderProperty Camera::_inverseProjectionMatrixProperty = Shader::createProperty
 ShaderProperty Camera::_cameraPositionProperty = Shader::createProperty("u_cameraPos", ShaderDataGroup::Camera);
 
 Camera::Camera(Entity* entity):
-Component(entity),
-_renderPipeline(RenderPipeline(this))
-{
+Component(entity) {
+    _renderPipeline = std::make_unique<ForwardRenderPipeline>(this);
+    
     auto transform = entity->transform;
     _transform = transform;
     _isViewMatrixDirty = transform->registerWorldChangeFlag();
@@ -257,7 +258,7 @@ void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // union scene and camera macro.
     shaderData.mergeMacro(scene()->_globalShaderMacro, _globalShaderMacro);
     
-    _renderPipeline.render(context, cubeFace, mipLevel);
+    _renderPipeline->render(context, cubeFace, mipLevel);
 }
 
 void Camera::_onActive() {
@@ -319,22 +320,22 @@ Matrix Camera::inverseProjectionMatrix() {
 
 //MARK: - Export method in render pipeline
 void Camera::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
-    _renderPipeline.addRenderPass(std::move(pass));
+    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->addRenderPass(std::move(pass));
 }
 
 void Camera::addRenderPass(const std::string& name,
                            int priority,
                            MTLRenderPassDescriptor* renderTarget,
                            Layer mask) {
-    _renderPipeline.addRenderPass(name, priority, renderTarget, mask);
+    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->addRenderPass(name, priority, renderTarget, mask);
 }
 
 void Camera::removeRenderPass(const std::string& name) {
-    _renderPipeline.removeRenderPass(name);
+    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->removeRenderPass(name);
 }
 
 void Camera::removeRenderPass(const RenderPass* pass) {
-    _renderPipeline.removeRenderPass(pass);
+    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->removeRenderPass(pass);
 }
 
 }

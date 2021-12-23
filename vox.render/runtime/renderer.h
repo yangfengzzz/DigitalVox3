@@ -118,6 +118,7 @@ protected:
     
 protected:
     friend class RenderPipeline;
+    friend class ForwardRenderPipeline;
     friend class ComponentsManager;
     
     void _updateShaderData(RenderContext& context);
