@@ -10,33 +10,6 @@
 
 #import <simd/simd.h>
 
-typedef struct {
-    matrix_float4x4 modelMatrix;
-    matrix_float4x4 viewMatrix;
-    matrix_float4x4 projectionMatrix;
-    matrix_float3x3 normalMatrix;
-} Uniforms;
-
-typedef enum {
-    unused = 0,
-    Sunlight = 1,
-    Spotlight = 2,
-    Pointlight = 3,
-    Ambientlight = 4
-} LightType;
-
-typedef struct {
-    vector_float3 position;
-    vector_float3 color;
-    vector_float3 specularColor;
-    float intensity;
-    vector_float3 attenuation;
-    LightType type;
-    float coneAngle;
-    vector_float3 coneDirection;
-    float coneAttenuation;
-} Light;
-
 typedef enum {
     Position = 0,
     Normal = 1,
@@ -55,35 +28,13 @@ typedef enum {
     UV_7 = 14,
 } Attributes;
 
-typedef enum {
-    BaseColorTexture = 0,
-    NormalTexture = 1
-} Textures;
-
-typedef enum {
-    BufferIndexVertices = 0,
-    BufferIndexUniforms = 15,
-    BufferIndexLights = 16,
-    BufferIndexFragmentUniforms = 17,
-    BufferIndexMaterials = 18
-} BufferIndices;
-
-typedef struct {
-    vector_float3 baseColor;
-    vector_float3 specularColor;
-    float roughness;
-    float metallic;
-    vector_float3 ambientOcclusion;
-    float shininess;
-} MaterialConstant;
-
-typedef struct {
+struct EnvMapLight {
     vector_float3 diffuse;
     float diffuseIntensity;
     float specularIntensity;
     int mipMapLevel;
     matrix_float4x4 transformMatrix;
-} EnvMapLight;
+};
 
 struct ShadowData {
     /**

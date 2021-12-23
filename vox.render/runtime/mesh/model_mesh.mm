@@ -229,7 +229,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::Normal] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeNormal
                                          format:MDLVertexFormatFloat3
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 3;
         elementCount += 3;
     }
@@ -237,7 +237,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::Color_0] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeColor
                                          format:MDLVertexFormatFloat4
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 4;
         elementCount += 4;
     }
@@ -245,7 +245,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::Weights_0] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointWeights
                                          format:MDLVertexFormatFloat4
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 4;
         elementCount += 4;
     }
@@ -253,7 +253,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::Joints_0] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointIndices
                                          format:MDLVertexFormatShort4
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(short) * 4;
         elementCount += 1;
     }
@@ -261,7 +261,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::Tangent] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTangent
                                          format:MDLVertexFormatFloat4
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 4;
         elementCount += 4;
     }
@@ -269,7 +269,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_0] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -277,7 +277,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_1] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -285,7 +285,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_2] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -293,7 +293,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_3] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -301,7 +301,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_4] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -309,7 +309,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_5] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -317,7 +317,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_6] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
@@ -325,7 +325,7 @@ MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
         descriptor.attributes[Attributes::UV_7] =
         [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
                                          format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:BufferIndexVertices];
+                                         offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
