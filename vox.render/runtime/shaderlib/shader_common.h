@@ -36,6 +36,26 @@ struct EnvMapLight {
     matrix_float4x4 transformMatrix;
 };
 
+struct PointLightData {
+    vector_float3 color;
+    vector_float3 position;
+    float distance;
+};
+
+struct SpotLightData {
+    vector_float3 color;
+    vector_float3 position;
+    vector_float3 direction;
+    float distance;
+    float angleCos;
+    float penumbraCos;
+};
+
+struct DirectLightData {
+    vector_float3 color;
+    vector_float3 direction;
+};
+
 struct ShadowData {
     /**
      * Shadow bias.
