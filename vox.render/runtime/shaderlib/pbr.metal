@@ -41,6 +41,7 @@ typedef struct {
     float3 tangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 bitangentW [[function_constant(hasNormalAndHasTangentAndHasNormalTexture)]];
     float3 v_normal [[function_constant(hasNormalNotHasTangentOrHasNormalTexture)]];
+    float3 view_pos;
 } VertexOut;
 
 vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
@@ -156,6 +157,10 @@ vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
     if (needWorldPos) {
         float4 temp_pos = u_modelMat * position;
         out.v_pos = temp_pos.xyz / temp_pos.w;
+    }
+    
+    if (hasShadow) {
+        out.view_pos = (u_MVMat * float4( in.position, 1.0)).xyz;
     }
     
     out.position = u_MVPMat * position;
@@ -663,8 +668,8 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
     if (hasShadow) {
         float shadow = 0;
         for( int i = 0; i < shadowMapCount; i++) {
-//            shadow += filterPCF(in.v_pos, u_shadowMap, u_shadowData, i);
-//            shadow += textureProj(in.v_pos, float2(0), u_shadowMap, u_shadowData, i);
+            shadow += filterPCF(in.v_pos, in.view_pos, u_shadowMap, u_shadowData, i);
+//            shadow += textureProj(in.v_pos, in.view_pos, float2(0), u_shadowMap, u_shadowData, i);
         }
         shadow /= shadowMapCount;
         
