@@ -185,26 +185,6 @@ float4 linearToGamma(float4 linearIn){
 }
 
 typedef struct {
-    float3 color;
-    float3 direction;
-} DirectLight;
-
-typedef struct {
-    float3 color;
-    float3 position;
-    float distance;
-} PointLight;
-
-typedef struct {
-    float3 color;
-    float3 position;
-    float3 direction;
-    float distance;
-    float angleCos;
-    float penumbraCos;
-} SpotLight;
-
-typedef struct {
     float3 directDiffuse;
     float3 directSpecular;
     float3 indirectDiffuse;
@@ -367,7 +347,7 @@ void addDirectRadiance(float3 incidentDirection, float3 color,
     reflectedLight.directDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );
 }
 
-void addDirectionalDirectLightRadiance(DirectLight directionalLight, GeometricContext geometry,
+void addDirectionalDirectLightRadiance(DirectLightData directionalLight, GeometricContext geometry,
                                        PhysicalMaterial material, thread ReflectedLight& reflectedLight) {
     float3 color = directionalLight.color;
     float3 direction = -directionalLight.direction;
@@ -375,7 +355,7 @@ void addDirectionalDirectLightRadiance(DirectLight directionalLight, GeometricCo
     addDirectRadiance( direction, color, geometry, material, reflectedLight );
 }
 
-void addPointDirectLightRadiance(PointLight pointLight, GeometricContext geometry,
+void addPointDirectLightRadiance(PointLightData pointLight, GeometricContext geometry,
                                  PhysicalMaterial material, thread ReflectedLight& reflectedLight) {
     
     float3 lVector = pointLight.position - geometry.position;
@@ -389,7 +369,7 @@ void addPointDirectLightRadiance(PointLight pointLight, GeometricContext geometr
     addDirectRadiance( direction, color, geometry, material, reflectedLight );
 }
 
-void addSpotDirectLightRadiance(SpotLight spotLight, GeometricContext geometry,
+void addSpotDirectLightRadiance(SpotLightData spotLight, GeometricContext geometry,
                                 PhysicalMaterial material, thread ReflectedLight& reflectedLight) {
     
     float3 lVector = spotLight.position - geometry.position;
@@ -409,58 +389,24 @@ void addSpotDirectLightRadiance(SpotLight spotLight, GeometricContext geometry,
 
 void addTotalDirectRadiance(GeometricContext geometry, PhysicalMaterial material,
                             thread ReflectedLight& reflectedLight,
-                            // direct_light_frag
-                            constant float3 *u_directLightColor [[buffer(8), function_constant(hasDirectLight)]],
-                            constant float3 *u_directLightDirection [[buffer(9), function_constant(hasDirectLight)]],
-                            // point_light_frag
-                            constant float3 *u_pointLightColor [[buffer(10), function_constant(hasPointLight)]],
-                            constant float3 *u_pointLightPosition [[buffer(11), function_constant(hasPointLight)]],
-                            constant float *u_pointLightDistance [[buffer(12), function_constant(hasPointLight)]],
-                            // spot_light_frag
-                            constant float3 *u_spotLightColor [[buffer(13), function_constant(hasSpotLight)]],
-                            constant float3 *u_spotLightPosition [[buffer(14), function_constant(hasSpotLight)]],
-                            constant float3 *u_spotLightDirection [[buffer(15), function_constant(hasSpotLight)]],
-                            constant float *u_spotLightDistance [[buffer(16), function_constant(hasSpotLight)]],
-                            constant float *u_spotLightAngleCos [[buffer(17), function_constant(hasSpotLight)]],
-                            constant float *u_spotLightPenumbraCos [[buffer(18), function_constant(hasSpotLight)]]){
+                            constant DirectLightData *u_directLight [[buffer(10), function_constant(hasDirectLight)]],
+                            constant PointLightData *u_pointLight [[buffer(11), function_constant(hasPointLight)]],
+                            constant SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]]){
     if (directLightCount) {
-        DirectLight directionalLight;
-        
         for ( int i = 0; i < directLightCount; i ++ ) {
-            
-            directionalLight.color = u_directLightColor[i];
-            directionalLight.direction = u_directLightDirection[i];
-            
-            addDirectionalDirectLightRadiance( directionalLight, geometry, material, reflectedLight );
+            addDirectionalDirectLightRadiance( u_directLight[i], geometry, material, reflectedLight );
         }
     }
     
     if (pointLightCount) {
-        PointLight pointLight;
-        
         for ( int i = 0; i < pointLightCount; i ++ ) {
-            
-            pointLight.color = u_pointLightColor[i];
-            pointLight.position = u_pointLightPosition[i];
-            pointLight.distance = u_pointLightDistance[i];
-            
-            addPointDirectLightRadiance( pointLight, geometry, material, reflectedLight );
+            addPointDirectLightRadiance( u_pointLight[i], geometry, material, reflectedLight );
         }
     }
     
     if (spotLightCount) {
-        SpotLight spotLight;
-        
         for ( int i = 0; i < spotLightCount; i ++ ) {
-            
-            spotLight.color = u_spotLightColor[i];
-            spotLight.position = u_spotLightPosition[i];
-            spotLight.direction = u_spotLightDirection[i];
-            spotLight.distance = u_spotLightDistance[i];
-            spotLight.angleCos = u_spotLightAngleCos[i];
-            spotLight.penumbraCos = u_spotLightPenumbraCos[i];
-            
-            addSpotDirectLightRadiance( spotLight, geometry, material, reflectedLight );
+            addSpotDirectLightRadiance( u_spotLight[i], geometry, material, reflectedLight );
         }
     }
 }
@@ -568,46 +514,35 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
                              constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
                              constant matrix_float4x4 &u_normalMat [[buffer(6)]],
                              constant float3 &u_cameraPos [[buffer(7)]],
-                             // direct_light_frag
-                             constant float3 *u_directLightColor [[buffer(8), function_constant(hasDirectLight)]],
-                             constant float3 *u_directLightDirection [[buffer(9), function_constant(hasDirectLight)]],
-                             // point_light_frag
-                             constant float3 *u_pointLightColor [[buffer(10), function_constant(hasPointLight)]],
-                             constant float3 *u_pointLightPosition [[buffer(11), function_constant(hasPointLight)]],
-                             constant float *u_pointLightDistance [[buffer(12), function_constant(hasPointLight)]],
-                             // spot_light_frag
-                             constant float3 *u_spotLightColor [[buffer(13), function_constant(hasSpotLight)]],
-                             constant float3 *u_spotLightPosition [[buffer(14), function_constant(hasSpotLight)]],
-                             constant float3 *u_spotLightDirection [[buffer(15), function_constant(hasSpotLight)]],
-                             constant float *u_spotLightDistance [[buffer(16), function_constant(hasSpotLight)]],
-                             constant float *u_spotLightAngleCos [[buffer(17), function_constant(hasSpotLight)]],
-                             constant float *u_spotLightPenumbraCos [[buffer(18), function_constant(hasSpotLight)]],
+                             constant DirectLightData *u_directLight [[buffer(8), function_constant(hasDirectLight)]],
+                             constant PointLightData *u_pointLight [[buffer(9), function_constant(hasPointLight)]],
+                             constant SpotLightData *u_spotLight [[buffer(10), function_constant(hasSpotLight)]],
+                             constant ShadowData* u_shadowData [[buffer(11), function_constant(hasShadow)]],
+                             depth2d_array<float> u_shadowMap [[texture(0), function_constant(hasShadow)]],
                              // pbr_envmap_light_frag_define
-                             constant EnvMapLight &u_envMapLight [[buffer(19)]],
-                             constant float3 *u_env_sh [[buffer(20), function_constant(hasSH)]],
-                             texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
-                             texturecube<float> u_env_diffuseTexture [[texture(1), function_constant(hasDiffuseEnv)]],
-                             texture2d<float> samplerBRDFLUT [[texture(2)]],
+                             constant EnvMapLight &u_envMapLight [[buffer(12)]],
+                             constant float3 *u_env_sh [[buffer(13), function_constant(hasSH)]],
+                             texturecube<float> u_env_specularTexture [[texture(1), function_constant(hasSpecularEnv)]],
+                             texturecube<float> u_env_diffuseTexture [[texture(2), function_constant(hasDiffuseEnv)]],
+                             texture2d<float> samplerBRDFLUT [[texture(3)]],
                              //pbr base frag define
-                             constant float &u_alphaCutoff [[buffer(21)]],
-                             constant float4 &u_baseColor [[buffer(22)]],
-                             constant float &u_metal [[buffer(23)]],
-                             constant float &u_roughness [[buffer(24)]],
-                             constant float3 &u_specularColor [[buffer(25)]],
-                             constant float &u_glossiness [[buffer(26)]],
-                             constant float3 &u_emissiveColor [[buffer(27)]],
-                             constant float &u_normalIntensity [[buffer(28)]],
-                             constant float &u_occlusionStrength [[buffer(29)]],
+                             constant float &u_alphaCutoff [[buffer(14)]],
+                             constant float4 &u_baseColor [[buffer(15)]],
+                             constant float &u_metal [[buffer(16)]],
+                             constant float &u_roughness [[buffer(17)]],
+                             constant float3 &u_specularColor [[buffer(18)]],
+                             constant float &u_glossiness [[buffer(19)]],
+                             constant float3 &u_emissiveColor [[buffer(20)]],
+                             constant float &u_normalIntensity [[buffer(21)]],
+                             constant float &u_occlusionStrength [[buffer(22)]],
                              // pbr_texture_frag_define
-                             texture2d<float> u_baseColorTexture [[texture(3), function_constant(hasBaseColorMap)]],
-                             texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
-                             texture2d<float> u_emissiveTexture [[texture(5), function_constant(hasEmissiveMap)]],
-                             texture2d<float> u_metallicRoughnessTexture [[texture(6), function_constant(hasMetalRoughnessMap)]],
-                             texture2d<float> u_specularGlossinessTexture [[texture(7), function_constant(hasSpecularGlossinessMap)]],
-                             texture2d<float> u_occlusionTexture [[texture(8), function_constant(hasOcclusionMap)]],
-                             bool is_front_face [[front_facing]],
-                             constant ShadowData* u_shadowData [[buffer(30), function_constant(hasShadow)]],
-                             depth2d_array<float> u_shadowMap [[texture(9), function_constant(hasShadow)]]) {
+                             texture2d<float> u_baseColorTexture [[texture(4), function_constant(hasBaseColorMap)]],
+                             texture2d<float> u_normalTexture [[texture(5), function_constant(hasNormalTexture)]],
+                             texture2d<float> u_emissiveTexture [[texture(6), function_constant(hasEmissiveMap)]],
+                             texture2d<float> u_metallicRoughnessTexture [[texture(7), function_constant(hasMetalRoughnessMap)]],
+                             texture2d<float> u_specularGlossinessTexture [[texture(8), function_constant(hasSpecularGlossinessMap)]],
+                             texture2d<float> u_occlusionTexture [[texture(9), function_constant(hasOcclusionMap)]],
+                             bool is_front_face [[front_facing]]) {
     GeometricContext geometry;
     geometry.position = in.v_pos;
     geometry.normal = getPbrNormal(in, u_normalIntensity, textureSampler, u_normalTexture, is_front_face);
@@ -621,17 +556,7 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
     
     // Direct Light
     addTotalDirectRadiance(geometry, material, reflectedLight,
-                           u_directLightColor,
-                           u_directLightDirection,
-                           u_pointLightColor,
-                           u_pointLightPosition,
-                           u_pointLightDistance,
-                           u_spotLightColor,
-                           u_spotLightPosition,
-                           u_spotLightDirection,
-                           u_spotLightDistance,
-                           u_spotLightAngleCos,
-                           u_spotLightPenumbraCos);
+                           u_directLight, u_pointLight, u_spotLight);
     // IBL diffuse
     float3 irradiance;
     if (hasSH) {
