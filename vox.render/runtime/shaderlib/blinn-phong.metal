@@ -167,26 +167,6 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
     return out;
 }
 
-typedef struct {
-    float3 color;
-    float3 direction;
-} DirectLight;
-
-typedef struct {
-    float3 color;
-    float3 position;
-    float distance;
-} PointLight;
-
-typedef struct {
-    float3 color;
-    float3 position;
-    float3 direction;
-    float distance;
-    float angleCos;
-    float penumbraCos;
-} SpotLight;
-
 float3 getNormal(VertexOut in, float u_normalIntensity,
                  sampler smp, texture2d<float> u_normalTexture,
                  bool is_front_face) {
@@ -240,30 +220,22 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      constant EnvMapLight &u_envMapLight [[buffer(8)]],
                                      constant float3 *u_env_sh [[buffer(9), function_constant(hasSH)]],
                                      texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
-                                     constant float3 *u_directLightColor [[buffer(10), function_constant(hasDirectLight)]],
-                                     constant float3 *u_directLightDirection [[buffer(11), function_constant(hasDirectLight)]],
-                                     constant float3 *u_pointLightColor [[buffer(12), function_constant(hasPointLight)]],
-                                     constant float3 *u_pointLightPosition [[buffer(13), function_constant(hasPointLight)]],
-                                     constant float *u_pointLightDistance [[buffer(14), function_constant(hasPointLight)]],
-                                     constant float3 *u_spotLightColor [[buffer(15), function_constant(hasSpotLight)]],
-                                     constant float3 *u_spotLightPosition [[buffer(16), function_constant(hasSpotLight)]],
-                                     constant float3 *u_spotLightDirection [[buffer(17), function_constant(hasSpotLight)]],
-                                     constant float *u_spotLightDistance [[buffer(18), function_constant(hasSpotLight)]],
-                                     constant float *u_spotLightAngleCos [[buffer(19), function_constant(hasSpotLight)]],
-                                     constant float *u_spotLightPenumbraCos [[buffer(20), function_constant(hasSpotLight)]],
-                                     constant float4 &u_emissiveColor [[buffer(21)]],
-                                     constant float4 &u_diffuseColor [[buffer(22)]],
-                                     constant float4 &u_specularColor [[buffer(23)]],
-                                     constant float &u_shininess [[buffer(24)]],
-                                     constant float &u_normalIntensity [[buffer(25)]],
-                                     constant float &u_alphaCutoff [[buffer(26)]],
-                                     texture2d<float> u_emissiveTexture [[texture(1), function_constant(hasEmissiveTexture)]],
-                                     texture2d<float> u_diffuseTexture [[texture(2), function_constant(hasDiffuseTexture)]],
-                                     texture2d<float> u_specularTexture [[texture(3), function_constant(hasSpecularTexture)]],
-                                     texture2d<float> u_normalTexture [[texture(4), function_constant(hasNormalTexture)]],
-                                     bool is_front_face [[front_facing]],
-                                     constant ShadowData* u_shadowData [[buffer(27), function_constant(hasShadow)]],
-                                     depth2d_array<float> u_shadowMap [[texture(5), function_constant(hasShadow)]]) {
+                                     constant DirectLightData *u_directLight [[buffer(10), function_constant(hasDirectLight)]],
+                                     constant PointLightData *u_pointLight [[buffer(11), function_constant(hasPointLight)]],
+                                     constant SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]],
+                                     constant ShadowData* u_shadowData [[buffer(13), function_constant(hasShadow)]],
+                                     depth2d_array<float> u_shadowMap [[texture(1), function_constant(hasShadow)]],
+                                     constant float4 &u_emissiveColor [[buffer(14)]],
+                                     constant float4 &u_diffuseColor [[buffer(15)]],
+                                     constant float4 &u_specularColor [[buffer(16)]],
+                                     constant float &u_shininess [[buffer(17)]],
+                                     constant float &u_normalIntensity [[buffer(18)]],
+                                     constant float &u_alphaCutoff [[buffer(19)]],
+                                     texture2d<float> u_emissiveTexture [[texture(2), function_constant(hasEmissiveTexture)]],
+                                     texture2d<float> u_diffuseTexture [[texture(3), function_constant(hasDiffuseTexture)]],
+                                     texture2d<float> u_specularTexture [[texture(4), function_constant(hasSpecularTexture)]],
+                                     texture2d<float> u_normalTexture [[texture(5), function_constant(hasNormalTexture)]],
+                                     bool is_front_face [[front_facing]]) {
     float4 ambient = float4(0.0);
     float4 emission = u_emissiveColor;
     float4 diffuse = u_diffuseColor;
@@ -291,65 +263,45 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     float3 lightDiffuse = float3( 0.0, 0.0, 0.0 );
     float3 lightSpecular = float3( 0.0, 0.0, 0.0 );
     if (hasDirectLight) {
-        DirectLight directionalLight;
-        
         for( int i = 0; i < directLightCount; i++ ) {
-            directionalLight.color = u_directLightColor[i];
-            directionalLight.direction = u_directLightDirection[i];
+            float d = max(dot(N, -u_directLight[i].direction), 0.0);
+            lightDiffuse += u_directLight[i].color * d;
             
-            float d = max(dot(N, -directionalLight.direction), 0.0);
-            lightDiffuse += directionalLight.color * d;
-            
-            float3 halfDir = normalize( V - directionalLight.direction );
+            float3 halfDir = normalize( V - u_directLight[i].direction );
             float s = pow( clamp( dot( N, halfDir ), 0.0, 1.0 ), u_shininess );
-            lightSpecular += directionalLight.color * s;
+            lightSpecular += u_directLight[i].color * s;
         }
     }
     if (hasPointLight) {
-        PointLight pointLight;
-        
         for( int i = 0; i < pointLightCount; i++ ) {
-            pointLight.color = u_pointLightColor[i];
-            pointLight.position = u_pointLightPosition[i];
-            pointLight.distance = u_pointLightDistance[i];
-            
-            float3 direction = in.v_pos - pointLight.position;
+            float3 direction = in.v_pos - u_pointLight[i].position;
             float dist = length( direction );
             direction /= dist;
-            float decay = clamp(1.0 - pow(dist / pointLight.distance, 4.0), 0.0, 1.0);
+            float decay = clamp(1.0 - pow(dist / u_pointLight[i].distance, 4.0), 0.0, 1.0);
             
             float d =  max( dot( N, -direction ), 0.0 ) * decay;
-            lightDiffuse += pointLight.color * d;
+            lightDiffuse += u_pointLight[i].color * d;
             
             float3 halfDir = normalize( V - direction );
             float s = pow( clamp( dot( N, halfDir ), 0.0, 1.0 ), u_shininess )  * decay;
-            lightSpecular += pointLight.color * s;
+            lightSpecular += u_pointLight[i].color * s;
         }
     }
     if (hasSpotLight) {
-        SpotLight spotLight;
-        
         for( int i = 0; i < spotLightCount; i++) {
-            spotLight.color = u_spotLightColor[i];
-            spotLight.position = u_spotLightPosition[i];
-            spotLight.direction = u_spotLightDirection[i];
-            spotLight.distance = u_spotLightDistance[i];
-            spotLight.angleCos = u_spotLightAngleCos[i];
-            spotLight.penumbraCos = u_spotLightPenumbraCos[i];
-            
-            float3 direction = spotLight.position - in.v_pos;
+            float3 direction = u_spotLight[i].position - in.v_pos;
             float lightDistance = length( direction );
             direction /= lightDistance;
-            float angleCos = dot( direction, -spotLight.direction );
-            float decay = clamp(1.0 - pow(lightDistance/spotLight.distance, 4.0), 0.0, 1.0);
-            float spotEffect = smoothstep( spotLight.penumbraCos, spotLight.angleCos, angleCos );
+            float angleCos = dot( direction, -u_spotLight[i].direction );
+            float decay = clamp(1.0 - pow(lightDistance/u_spotLight[i].distance, 4.0), 0.0, 1.0);
+            float spotEffect = smoothstep( u_spotLight[i].penumbraCos, u_spotLight[i].angleCos, angleCos );
             float decayTotal = decay * spotEffect;
             float d = max( dot( N, direction ), 0.0 )  * decayTotal;
-            lightDiffuse += spotLight.color * d;
+            lightDiffuse += u_spotLight[i].color * d;
             
             float3 halfDir = normalize( V + direction );
             float s = pow( clamp( dot( N, halfDir ), 0.0, 1.0 ), u_shininess ) * decayTotal;
-            lightSpecular += spotLight.color * s;
+            lightSpecular += u_spotLight[i].color * s;
         }
     }
     

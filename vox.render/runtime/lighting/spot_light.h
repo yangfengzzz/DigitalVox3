@@ -42,19 +42,8 @@ private:
     
     static void _updateShaderData(ShaderData& shaderData);
     
-    static ShaderProperty _colorProperty;
-    static ShaderProperty _positionProperty;
-    static ShaderProperty _directionProperty;
-    static ShaderProperty _distanceProperty;
-    static ShaderProperty _angleCosProperty;
-    static ShaderProperty _penumbraCosProperty;
-    
-    static std::array<math::Color, Light::MAX_LIGHT> _combinedColor;
-    static std::array<math::Float3, Light::MAX_LIGHT> _combinedPosition;
-    static std::array<math::Float3, Light::MAX_LIGHT> _combinedDirection;
-    static std::array<float, Light::MAX_LIGHT> _combinedDistance;
-    static std::array<float, Light::MAX_LIGHT> _combinedAngleCos;
-    static std::array<float, Light::MAX_LIGHT> _combinedPenumbraCos;
+    static ShaderProperty _spotLightProperty;
+    static std::array<SpotLightData, Light::MAX_LIGHT> _shaderData;
 };
 
 }

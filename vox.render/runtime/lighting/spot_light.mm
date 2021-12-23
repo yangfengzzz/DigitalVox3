@@ -11,54 +11,30 @@
 #include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
-ShaderProperty SpotLight::_colorProperty = Shader::createProperty("u_spotLightColor", ShaderDataGroup::Scene);
-ShaderProperty SpotLight::_positionProperty = Shader::createProperty("u_spotLightPosition", ShaderDataGroup::Scene);
-ShaderProperty SpotLight::_directionProperty = Shader::createProperty("u_spotLightDirection", ShaderDataGroup::Scene);
-ShaderProperty SpotLight::_distanceProperty = Shader::createProperty("u_spotLightDistance", ShaderDataGroup::Scene);
-ShaderProperty SpotLight::_angleCosProperty = Shader::createProperty("u_spotLightAngleCos", ShaderDataGroup::Scene);
-ShaderProperty SpotLight::_penumbraCosProperty = Shader::createProperty("u_spotLightPenumbraCos", ShaderDataGroup::Scene);
-
-std::array<math::Color, Light::MAX_LIGHT> SpotLight::_combinedColor = {};
-std::array<math::Float3, Light::MAX_LIGHT> SpotLight::_combinedPosition = {};
-std::array<math::Float3, Light::MAX_LIGHT> SpotLight::_combinedDirection = {};
-std::array<float, Light::MAX_LIGHT> SpotLight::_combinedDistance = {};
-std::array<float, Light::MAX_LIGHT> SpotLight::_combinedAngleCos = {};
-std::array<float, Light::MAX_LIGHT> SpotLight::_combinedPenumbraCos = {};
+ShaderProperty SpotLight::_spotLightProperty = Shader::createProperty("u_spotLight", ShaderDataGroup::Scene);
+std::array<SpotLightData, Light::MAX_LIGHT> SpotLight::_shaderData = {};
 
 SpotLight::SpotLight(Entity* entity):
 Light(entity) {
-    RenderPipelineState::register_fragment_uploader<std::array<math::Color, Light::MAX_LIGHT>>(
-    [](const std::array<math::Color, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Color, Light::MAX_LIGHT>) atIndex:location];
-    });
-    
-    RenderPipelineState::register_fragment_uploader<std::array<math::Float3, Light::MAX_LIGHT>>(
-    [](const std::array<math::Float3, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<math::Float3, Light::MAX_LIGHT>) atIndex:location];
-    });
-    
-    RenderPipelineState::register_fragment_uploader<std::array<float, Light::MAX_LIGHT>>(
-    [](const std::array<float, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, Light::MAX_LIGHT>) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<std::array<SpotLightData, Light::MAX_LIGHT>>(
+    [](const std::array<SpotLightData, Light::MAX_LIGHT>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: x.data() length:sizeof(std::array<SpotLightData, Light::MAX_LIGHT>) atIndex:location];
     });
 }
 
 void SpotLight::_appendData(size_t lightIndex) {
-    _combinedColor[lightIndex] = color * intensity;
-    _combinedPosition[lightIndex] = entity()->transform->worldPosition();
-    _combinedDirection[lightIndex] = entity()->transform->worldForward();
-    _combinedDistance[lightIndex] = distance;
-    _combinedAngleCos[lightIndex] = std::cos(angle);
-    _combinedPenumbraCos[lightIndex] = std::cos(angle + penumbra);
+    _shaderData[lightIndex].color = simd_make_float3(color.r * intensity, color.g * intensity, color.b * intensity);
+    auto position = entity()->transform->worldPosition();
+    _shaderData[lightIndex].position = simd_make_float3(position.x, position.y, position.z);
+    auto direction = entity()->transform->worldForward();
+    _shaderData[lightIndex].direction = simd_make_float3(direction.x, direction.y, direction.z);
+    _shaderData[lightIndex].distance = distance;
+    _shaderData[lightIndex].angleCos = std::cos(angle);
+    _shaderData[lightIndex].penumbraCos = std::cos(angle + penumbra);
 }
 
 void SpotLight::_updateShaderData(ShaderData& shaderData) {
-    shaderData.setData(SpotLight::_colorProperty, _combinedColor);
-    shaderData.setData(SpotLight::_positionProperty, _combinedPosition);
-    shaderData.setData(SpotLight::_directionProperty, _combinedDirection);
-    shaderData.setData(SpotLight::_distanceProperty, _combinedDistance);
-    shaderData.setData(SpotLight::_angleCosProperty, _combinedAngleCos);
-    shaderData.setData(SpotLight::_penumbraCosProperty, _combinedPenumbraCos);
+    shaderData.setData(SpotLight::_spotLightProperty, _shaderData);
 }
 
 math::Matrix SpotLight::shadowProjectionMatrix() {
