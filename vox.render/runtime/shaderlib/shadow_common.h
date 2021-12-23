@@ -12,7 +12,7 @@
 using namespace metal;
 #include "function-constant.h"
 
-float textureProj(float3 worldPos, float2 off,
+float textureProj(float3 worldPos, float3 viewPos, float2 off,
                   depth2d_array<float> u_shadowMap,
                   constant ShadowData* u_shadowData,
                   int index);

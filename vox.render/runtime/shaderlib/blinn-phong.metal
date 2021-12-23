@@ -358,7 +358,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
         float shadow = 0;
         for( int i = 0; i < shadowMapCount; i++) {
             shadow += filterPCF(in.v_pos, in.view_pos, u_shadowMap, u_shadowData, i);
-//            shadow += textureProj(in.v_pos, float2(0), u_shadowMap, u_shadowData, i);
+//            shadow += textureProj(in.v_pos, in.view_pos, float2(0), u_shadowMap, u_shadowData, i);
         }
         shadow /= shadowMapCount;
         diffuse *= shadow;
