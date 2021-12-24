@@ -23,6 +23,16 @@ LightManager::LightManager() {
     [](const std::array<ShadowData, MAX_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setFragmentBytes: &x length:sizeof(std::array<ShadowData, MAX_SHADOW>) atIndex:location];
     });
+    
+    RenderPipelineState::register_vertex_uploader<std::array<CubeShadowData, MAX_CUBE_SHADOW>>(
+    [](const std::array<CubeShadowData, MAX_CUBE_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setVertexBytes: &x length:sizeof(std::array<CubeShadowData, MAX_CUBE_SHADOW>) atIndex:location];
+    });
+    
+    RenderPipelineState::register_fragment_uploader<std::array<CubeShadowData, MAX_CUBE_SHADOW>>(
+    [](const std::array<CubeShadowData, MAX_CUBE_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
+        [encoder setFragmentBytes: &x length:sizeof(std::array<CubeShadowData, MAX_CUBE_SHADOW>) atIndex:location];
+    });
 }
 
 //MARK: - Point Light

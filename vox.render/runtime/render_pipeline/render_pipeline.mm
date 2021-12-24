@@ -243,7 +243,7 @@ void RenderPipeline::_drawPointShadowMap(RenderContext& context) {
                 BoundingFrustum frustum;
                 frustum.calculateFromMatrix(light->shadow.vp[i]);
                 engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
-                if (cubeShadowCount < LightManager::MAX_SHADOW) {
+                if (cubeShadowCount < LightManager::MAX_CUBE_SHADOW) {
                     cubeShadowDatas[cubeShadowCount] = light->shadow;
                 } else {
                     std::cerr << "too much shadow caster!" << std::endl;
@@ -264,7 +264,7 @@ void RenderPipeline::_drawPointShadowMap(RenderContext& context) {
                         rhi.setRenderPipelineState(pipelineState);
                         
                         auto modelMatrix = element.component->entity()->transform->worldMatrix();
-                        rhi.setVertexBytes(light->shadow.vp, 11);
+                        rhi.setVertexBytes(light->shadow.vp[i], 11);
                         rhi.setVertexBytes(modelMatrix, 12);
                         
                         auto& buffers = element.mesh->_vertexBuffer;

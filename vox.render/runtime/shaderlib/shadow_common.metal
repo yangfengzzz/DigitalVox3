@@ -51,11 +51,11 @@ float textureProj(float3 worldPos, float3 viewPos, float2 off,
     }
 }
 
-float textureProj(float3 worldPos, float3 viewPos, float2 off,
-                  depthcube_array<float> u_shadowMap,
-                  constant CubeShadowData* u_shadowData,
-                  int index) {
-    float3 direction = worldPos - u_shadowData[0].lightPos;
+float cubeTextureProj(float3 worldPos, float3 viewPos, float2 off,
+                      depthcube_array<float> u_shadowMap,
+                      constant CubeShadowData* u_shadowData,
+                      int index) {
+    float3 direction = worldPos - u_shadowData[index].lightPos;
     float scale = 1.0 / max(max(abs(direction.x), abs(direction.y)), abs(direction.z));
     direction *= scale;
     uint faceIndex = 0;
@@ -136,9 +136,9 @@ float filterPCF(float3 worldPos, float3 viewPos,
     return total /= neighbors;
 }
 
-float filterPCF(float3 worldPos, float3 viewPos,
-                depthcube_array<float> u_shadowMap,
-                constant CubeShadowData* u_shadowData,
-                int index) {
+float cubeFilterPCF(float3 worldPos, float3 viewPos,
+                    depthcube_array<float> u_shadowMap,
+                    constant CubeShadowData* u_shadowData,
+                    int index) {
     return 0.0;
 }

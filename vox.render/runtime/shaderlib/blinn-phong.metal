@@ -224,7 +224,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      constant PointLightData *u_pointLight [[buffer(11), function_constant(hasPointLight)]],
                                      constant SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]],
                                      constant ShadowData* u_shadowData [[buffer(13), function_constant(hasShadow)]],
-                                     constant CubeShadowData* u_cubeShadowData [[buffer(14), function_constant(hasShadow)]],
+                                     constant CubeShadowData* u_cubeShadowData [[buffer(14), function_constant(hasCubeShadow)]],
                                      depth2d_array<float> u_shadowMap [[texture(1), function_constant(hasShadow)]],
                                      depthcube_array<float> u_cubeShadowMap [[texture(2), function_constant(hasCubeShadow)]],
                                      constant float4 &u_emissiveColor [[buffer(15)]],
@@ -320,7 +320,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     if (hasCubeShadow) {
         for( int i = 0; i < cubeShadowMapCount; i++) {
 //            shadow += filterPCF(in.v_pos, in.view_pos, u_shadowMap, u_shadowData, i);
-            shadow += textureProj(in.v_pos, in.view_pos, float2(0), u_shadowMap, u_shadowData, i);
+            shadow += cubeTextureProj(in.v_pos, in.view_pos, float2(0), u_cubeShadowMap, u_cubeShadowData, i);
         }
         totalShadow += cubeShadowMapCount;
     }

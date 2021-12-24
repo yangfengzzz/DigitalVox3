@@ -125,7 +125,7 @@ protected:
     std::array<id<MTLTexture>, 6> cubeMapSlices{};
     std::vector<id<MTLTexture>> cubeShadowMaps{};
     id<MTLTexture> packedCubeTexture{nullptr};
-    std::array<CubeShadowData, LightManager::MAX_SHADOW> cubeShadowDatas{};
+    std::array<CubeShadowData, LightManager::MAX_CUBE_SHADOW> cubeShadowDatas{};
 
     uint32_t shadowCount = 0;
     std::array<id<MTLTexture>, SHADOW_MAP_CASCADE_COUNT> cascadeShadowMaps{};

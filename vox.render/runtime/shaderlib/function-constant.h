@@ -73,7 +73,7 @@ constant bool is2D [[function_constant(IS_2D)]];
 constant int shadowMapCount [[function_constant(SHADOW_MAP_COUNT)]];
 constant int cubeShadowMapCount [[function_constant(CUBE_SHADOW_MAP_COUNT)]];
 constant bool hasShadow = shadowMapCount > 0;
-constant bool hasCubeShadow = shadowMapCount > 0;
+constant bool hasCubeShadow = cubeShadowMapCount > 0;
 
 //MARK: - Function Signature
 float4x4 getJointMatrix(sampler smp, texture2d<float> joint_tex,
