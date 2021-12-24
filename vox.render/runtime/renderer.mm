@@ -170,7 +170,7 @@ void Renderer::_updateShaderData(RenderContext& context) {
     _mvMatrix = context.camera()->viewMatrix() * worldMatrix;
     _mvpMatrix = context.viewProjectMatrix() * worldMatrix;
     _mvInvMatrix = invert(_mvMatrix);
-    _normalMatrix = invert(_normalMatrix);
+    _normalMatrix = invert(worldMatrix);
     _normalMatrix = transpose(_normalMatrix);
     
     shaderData.setData(Renderer::_localMatrixProperty, entity()->transform->localMatrix());
