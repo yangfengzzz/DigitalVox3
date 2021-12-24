@@ -23,6 +23,10 @@ public:
                                 MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget,
                                 MTLStorageMode storageMode = MTLStorageModePrivate);
     
+    id<MTLTexture> buildCubeTexture(int size, MTLPixelFormat pixelFormat,
+                                    MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget,
+                                    MTLStorageMode storageMode = MTLStorageModePrivate);
+    
     id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft = true);
     
     id<MTLTexture> loadTexture(MDLTexture* texture);

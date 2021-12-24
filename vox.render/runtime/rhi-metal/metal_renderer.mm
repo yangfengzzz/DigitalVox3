@@ -146,6 +146,7 @@ void MetalRenderer::endRenderPass() {
     [_renderEncoder endEncoding];
 }
 
+//MARK: - Blit Encoder
 void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
     auto blit = [_commandBuffer blitCommandEncoder];
     [blit synchronizeResource:resource];
@@ -179,6 +180,33 @@ id<MTLTexture> MetalRenderer::createTextureArray(const std::vector<id<MTLTexture
     return packedTextures;
 }
 
+id<MTLTexture> MetalRenderer::createCubeTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
+                                                     const std::vector<id<MTLTexture>>::iterator& texturesEnd,
+                                                     id<MTLTexture> packedTextures) {
+    if (packedTextures == nullptr || packedTextures.arrayLength != texturesEnd - texturesBegin) {
+        MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+        descriptor.textureType = MTLTextureTypeCubeArray;
+        descriptor.pixelFormat = (*texturesBegin).pixelFormat;
+        descriptor.width = (*texturesBegin).width;
+        descriptor.height = (*texturesBegin).height;
+        descriptor.arrayLength = texturesEnd - texturesBegin;
+        descriptor.storageMode = MTLStorageModePrivate;
+        
+        packedTextures = [_device newTextureWithDescriptor:descriptor];
+    }
+    
+    int destinationSlice = 0;
+    auto blitEncoder = [_commandBuffer blitCommandEncoder];
+    for (auto iter = texturesBegin; iter < texturesEnd; iter++) {
+        [blitEncoder copyFromTexture:*iter sourceSlice:0 sourceLevel:0
+                           toTexture:packedTextures destinationSlice:destinationSlice destinationLevel:0
+                          sliceCount:6 levelCount:1];
+        destinationSlice += 6;
+    }
+    [blitEncoder endEncoding];
+    return packedTextures;
+}
+
 id<MTLTexture> MetalRenderer::createAtlas(const std::array<id<MTLTexture>, 4>& textures,
                                           id<MTLTexture> packedTextures) {
     auto blitEncoder = [_commandBuffer blitCommandEncoder];
@@ -204,6 +232,26 @@ id<MTLTexture> MetalRenderer::createAtlas(const std::array<id<MTLTexture>, 4>& t
     return packedTextures;
 }
 
+id<MTLTexture> MetalRenderer::createCubeAtlas(const std::array<id<MTLTexture>, 6>& textures,
+                                              id<MTLTexture> packedTextures) {
+    auto blitEncoder = [_commandBuffer blitCommandEncoder];
+    [blitEncoder copyFromTexture:textures[0] sourceSlice:0 sourceLevel:0
+                       toTexture:packedTextures destinationSlice:0 destinationLevel:0 sliceCount:1 levelCount:1];
+    [blitEncoder copyFromTexture:textures[1] sourceSlice:0 sourceLevel:0
+                       toTexture:packedTextures destinationSlice:1 destinationLevel:0 sliceCount:1 levelCount:1];
+    [blitEncoder copyFromTexture:textures[2] sourceSlice:0 sourceLevel:0
+                       toTexture:packedTextures destinationSlice:2 destinationLevel:0 sliceCount:1 levelCount:1];
+    [blitEncoder copyFromTexture:textures[3] sourceSlice:0 sourceLevel:0
+                       toTexture:packedTextures destinationSlice:3 destinationLevel:0 sliceCount:1 levelCount:1];
+    [blitEncoder copyFromTexture:textures[4] sourceSlice:0 sourceLevel:0
+                       toTexture:packedTextures destinationSlice:4 destinationLevel:0 sliceCount:1 levelCount:1];
+    [blitEncoder copyFromTexture:textures[5] sourceSlice:0 sourceLevel:0
+                       toTexture:packedTextures destinationSlice:5 destinationLevel:0 sliceCount:1 levelCount:1];
+    [blitEncoder endEncoding];
+    return packedTextures;
+}
+
+//MARK: - Encoder State
 id <MTLRenderPipelineState> MetalRenderer::createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor) {
     NSError *error = nil;
     auto state = [_device newRenderPipelineStateWithDescriptor:descriptor error:&error];

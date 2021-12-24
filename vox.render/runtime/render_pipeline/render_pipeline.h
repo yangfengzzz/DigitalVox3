@@ -98,7 +98,7 @@ protected:
     void _drawPointShadowMap(RenderContext& context);
     
     void _drawSpotShadowMap(RenderContext& context);
-
+    
     void _drawDirectShadowMap(RenderContext& context);
     
     /*
@@ -120,15 +120,31 @@ protected:
     
     float cascadeSplitLambda = 0.5f;
     const int shadowMapSize = 2000; // resolution
+    
+    uint32_t cubeShadowCount = 0;
+    const std::array<std::pair<Float3, Float3>, 6> cubeMapDirection = {
+        std::make_pair(Float3(10, 0, 0), Float3(0, 1, 0)),
+        std::make_pair(Float3(-10, 0, 0), Float3(0, 1, 0)),
+        std::make_pair(Float3(0, 10, 0), Float3(1, 0, 0)),
+        std::make_pair(Float3(0, -10, 0), Float3(1, 0, 0)),
+        std::make_pair(Float3(0, 0, 10), Float3(0, 1, 0)),
+        std::make_pair(Float3(0, 0, -10), Float3(0, 1, 0)),
+    };
+    std::array<id<MTLTexture>, 6> cubeMapSlices{};
+    std::vector<id<MTLTexture>> cubeShadowMaps{};
+    id<MTLTexture> packedCubeTexture{nullptr};
+    
     uint32_t shadowCount = 0;
-    std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     std::array<id<MTLTexture>, SHADOW_MAP_CASCADE_COUNT> cascadeShadowMaps{};
-    std::vector<id<MTLTexture>> shadowMaps;
+    std::vector<id<MTLTexture>> shadowMaps{};
     id<MTLTexture> packedTexture{nullptr};
+    
+    std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     
     /** Shader data. */
     ShaderData shaderData = ShaderData();
     static ShaderProperty _shadowMapProp;
+    static ShaderProperty _cubeShadowMapProp;
     static ShaderProperty _shadowDataProp;
     
     RenderPass* _defaultPass;

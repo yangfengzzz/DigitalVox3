@@ -52,8 +52,15 @@ public:
                                       const std::vector<id<MTLTexture>>::iterator& texturesEnd,
                                       id<MTLTexture> packedTextures);
     
+    id<MTLTexture> createCubeTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
+                                          const std::vector<id<MTLTexture>>::iterator& texturesEnd,
+                                          id<MTLTexture> packedTextures);
+    
     id<MTLTexture> createAtlas(const std::array<id<MTLTexture>, 4>& textures,
                                id<MTLTexture> packedTextures);
+    
+    id<MTLTexture> createCubeAtlas(const std::array<id<MTLTexture>, 6>& textures,
+                                   id<MTLTexture> packedTextures);
     
 public:
     template<typename T>

@@ -27,6 +27,16 @@ id<MTLTexture> MetalLoader::buildTexture(int width, int height, MTLPixelFormat p
     return [_device newTextureWithDescriptor:descriptor];
 }
 
+id<MTLTexture> MetalLoader::buildCubeTexture(int size, MTLPixelFormat pixelFormat,
+                                             MTLTextureUsage usage, MTLStorageMode storageMode) {
+    MTLTextureDescriptor* descriptor = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:pixelFormat
+                                                                                             size:size
+                                                                                        mipmapped:false];
+    descriptor.usage = usage;
+    descriptor.storageMode = storageMode;
+    return [_device newTextureWithDescriptor:descriptor];
+}
+
 id<MTLTexture> MetalLoader::loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
     NSString* textureName = [[NSString alloc]initWithUTF8String:imageName.c_str()];
@@ -344,7 +354,7 @@ id<MTLTexture> MetalLoader::createMetallicRoughnessTexture(const std::string& pa
     }
     auto commandBuffer = [_commandQueue commandBuffer];
     auto commandEncoder = [commandBuffer computeCommandEncoder];
-        
+    
     [commandEncoder setComputePipelineState:pipelineState];
     [commandEncoder setTexture:metallicTex atIndex:0];
     [commandEncoder setTexture:roughnessTex atIndex:1];
@@ -356,7 +366,7 @@ id<MTLTexture> MetalLoader::createMetallicRoughnessTexture(const std::string& pa
                                     metallicTex.width / threadsPerThreadgroup.height, 1);
     [commandEncoder dispatchThreadgroups:threadgroups threadsPerThreadgroup:threadsPerThreadgroup];
     [commandEncoder endEncoding];
-
+    
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
     
