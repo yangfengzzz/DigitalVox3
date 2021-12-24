@@ -16,8 +16,9 @@ DeferredRenderPipeline::~DeferredRenderPipeline() {
     
 }
 
-void DeferredRenderPipeline::render(RenderContext& context,
-                                    std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
+                                             std::optional<TextureCubeFace> cubeFace,
+                                             int mipLevel) {
     
 }
 

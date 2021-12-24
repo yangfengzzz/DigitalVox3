@@ -17,14 +17,10 @@ public:
     
     ~DeferredRenderPipeline();
     
-    /**
-     * Perform scene rendering.
-     * @param context - Render context
-     * @param cubeFace - Render surface of cube texture
-     * @param mipLevel - Set mip level the data want to write
-     */
-    void render(RenderContext& context,
-                std::optional<TextureCubeFace> cubeFace = std::nullopt, int mipLevel = 0) override;
+private:
+    void _drawRenderPass(RenderPass* pass, Camera* camera,
+                         std::optional<TextureCubeFace> cubeFace = std::nullopt,
+                         int mipLevel = 0) override;
 };
 
 }

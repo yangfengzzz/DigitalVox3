@@ -327,15 +327,15 @@ void Camera::addRenderPass(const std::string& name,
                            int priority,
                            MTLRenderPassDescriptor* renderTarget,
                            Layer mask) {
-    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->addRenderPass(name, priority, renderTarget, mask);
+    _renderPipeline->addRenderPass(name, priority, renderTarget, mask);
 }
 
 void Camera::removeRenderPass(const std::string& name) {
-    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->removeRenderPass(name);
+    _renderPipeline->removeRenderPass(name);
 }
 
 void Camera::removeRenderPass(const RenderPass* pass) {
-    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->removeRenderPass(pass);
+    _renderPipeline->removeRenderPass(pass);
 }
 
 }

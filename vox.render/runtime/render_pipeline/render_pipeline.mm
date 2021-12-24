@@ -30,6 +30,9 @@ ShaderProperty RenderPipeline::_shadowMapProp = Shader::createProperty("u_shadow
 ShaderProperty RenderPipeline::_shadowDataProp = Shader::createProperty("u_shadowData", ShaderDataGroup::Enum::Internal);
 RenderPipeline::RenderPipeline(Camera* camera):
 _camera(camera) {
+    auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
+    _defaultPass = pass.get();
+    addRenderPass(std::move(pass));
 }
 
 RenderPipeline::~RenderPipeline() {
@@ -38,6 +41,95 @@ RenderPipeline::~RenderPipeline() {
     _transparentQueue.clear();
 }
 
+void RenderPipeline::render(RenderContext& context,
+                                   std::optional<TextureCubeFace> cubeFace, int mipLevel) {
+    // generate shadow map
+    shadowCount = 0;
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    
+    _drawShadowMap(context);
+    _drawCascadeShadowMap(context);
+    if (!shadowMaps.empty()) {
+        packedTexture = rhi.createTextureArray(shadowMaps.begin(), shadowMaps.begin() + shadowCount, packedTexture);
+        shaderData.setData(RenderPipeline::_shadowMapProp, packedTexture);
+        shaderData.setData(RenderPipeline::_shadowDataProp, shadowDatas);
+    }
+    
+    // Composition
+    _opaqueQueue.clear();
+    _alphaTestQueue.clear();
+    _transparentQueue.clear();
+    
+    _camera->engine()->_componentsManager.callRender(context, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+    
+    std::sort(_opaqueQueue.begin(), _opaqueQueue.end(), RenderPipeline::_compareFromNearToFar);
+    std::sort(_alphaTestQueue.begin(), _alphaTestQueue.end(), RenderPipeline::_compareFromNearToFar);
+    std::sort(_transparentQueue.begin(), _transparentQueue.end(), RenderPipeline::_compareFromFarToNear);
+    for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
+        _drawRenderPass(_renderPassArray[i].get(), _camera, cubeFace, mipLevel);
+    }
+}
+
+//MARK: - RenderPass
+RenderPass* RenderPipeline::defaultRenderPass() {
+    return _defaultPass;
+}
+
+void RenderPipeline::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
+    _renderPassArray.emplace_back(std::move(pass));
+    std::sort(_renderPassArray.begin(), _renderPassArray.end(),
+              [](const std::unique_ptr<RenderPass>& p1, const std::unique_ptr<RenderPass>& p2){
+        return p1->priority - p2->priority;
+    });
+}
+
+void RenderPipeline::addRenderPass(const std::string& name,
+                                          int priority,
+                                          MTLRenderPassDescriptor* renderTarget,
+                                          Layer mask) {
+    auto renderPass = std::make_unique<RenderPass>(name, priority, renderTarget, mask);
+    _renderPassArray.emplace_back(std::move(renderPass));
+    std::sort(_renderPassArray.begin(), _renderPassArray.end(),
+              [](const std::unique_ptr<RenderPass>& p1, const std::unique_ptr<RenderPass>& p2){
+        return p1->priority - p2->priority;
+    });
+}
+
+void RenderPipeline::removeRenderPass(const std::string& name) {
+    ssize_t index = -1;
+    for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
+        const auto& pass = _renderPassArray[i];
+        if (pass->name == name) index = i;
+    }
+    
+    if (index != -1) {
+        _renderPassArray.erase(_renderPassArray.begin() + index);
+    }
+}
+
+void RenderPipeline::removeRenderPass(const RenderPass* p) {
+    ssize_t index = -1;
+    for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
+        const auto& pass = _renderPassArray[i];
+        if (pass->name == p->name) index = i;
+    }
+    
+    if (index != -1) {
+        _renderPassArray.erase(_renderPassArray.begin() + index);
+    }
+}
+
+RenderPass* RenderPipeline::getRenderPass(const std::string& name) {
+    for (size_t i = 0, len = _renderPassArray.size(); i < len; i++) {
+        const auto& pass = _renderPassArray[i];
+        if (pass->name == name) return pass.get();
+    }
+    
+    return nullptr;
+}
+
+//MARK: - Draw Methods
 void RenderPipeline::_drawSky(const Sky& sky) {
     const auto& material = sky.material;
     const auto& mesh = sky.mesh;
