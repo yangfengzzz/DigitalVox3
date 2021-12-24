@@ -614,6 +614,8 @@
 		04AD28472772AFDB00B86C7E /* shadow_common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28462772AFDB00B86C7E /* shadow_common.metal */; };
 		04AD284B27753C9E00B86C7E /* forward_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284927753C9E00B86C7E /* forward_render_pipeline.mm */; };
 		04AD284C27753C9E00B86C7E /* forward_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AD284A27753C9E00B86C7E /* forward_render_pipeline.h */; };
+		04AD284F277544C400B86C7E /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
+		04AD2850277544C400B86C7E /* deferred_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AD284E277544C400B86C7E /* deferred_render_pipeline.h */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
@@ -1582,6 +1584,8 @@
 		04AD28462772AFDB00B86C7E /* shadow_common.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shadow_common.metal; sourceTree = "<group>"; };
 		04AD284927753C9E00B86C7E /* forward_render_pipeline.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = forward_render_pipeline.mm; sourceTree = "<group>"; };
 		04AD284A27753C9E00B86C7E /* forward_render_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = forward_render_pipeline.h; sourceTree = "<group>"; };
+		04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = deferred_render_pipeline.mm; sourceTree = "<group>"; };
+		04AD284E277544C400B86C7E /* deferred_render_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deferred_render_pipeline.h; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
 		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
 		04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = cubemap_debugger.metal; sourceTree = "<group>"; };
@@ -3592,6 +3596,8 @@
 				04CE396A27526AEE00204B8E /* render_pipeline.mm */,
 				04AD284A27753C9E00B86C7E /* forward_render_pipeline.h */,
 				04AD284927753C9E00B86C7E /* forward_render_pipeline.mm */,
+				04AD284E277544C400B86C7E /* deferred_render_pipeline.h */,
+				04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */,
 			);
 			path = render_pipeline;
 			sourceTree = "<group>";
@@ -3927,6 +3933,7 @@
 				04C698AD276A1B7F00C4248F /* gltf_loader.h in Headers */,
 				041610072750A577006CD384 /* script.h in Headers */,
 				04CE397D2753491200204B8E /* buffer_mesh.h in Headers */,
+				04AD2850277544C400B86C7E /* deferred_render_pipeline.h in Headers */,
 				04CE394B2751E3E600204B8E /* shader.h in Headers */,
 				04160FC7274F6124006CD384 /* bounding_frustum.h in Headers */,
 				04A79ADB275E2C4F00182CCB /* InputManager.h in Headers */,
@@ -4625,6 +4632,7 @@
 				041610322758ED2C006CD384 /* collider_shape.cpp in Sources */,
 				04CE399B2753A83C00204B8E /* skybox.metal in Sources */,
 				0416103727599B05006CD384 /* physics_manager.mm in Sources */,
+				04AD284F277544C400B86C7E /* deferred_render_pipeline.mm in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
 				04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
