@@ -19,6 +19,8 @@ class MetalLoader {
 public:
     MetalLoader(id <MTLDevice> device);
     
+    id <MTLTexture> buildTexture(MTLTextureDescriptor *descriptor);
+    
     id<MTLTexture> buildTexture(int width, int height, MTLPixelFormat pixelFormat,
                                 MTLTextureUsage usage = MTLTextureUsageShaderRead|MTLTextureUsageRenderTarget,
                                 MTLStorageMode storageMode = MTLStorageModePrivate);

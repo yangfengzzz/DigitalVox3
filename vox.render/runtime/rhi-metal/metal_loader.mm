@@ -17,6 +17,10 @@ _device(device){
     _textureLoader = [[MTKTextureLoader alloc] initWithDevice:_device];
 }
 
+id <MTLTexture> MetalLoader::buildTexture(MTLTextureDescriptor *descriptor) {
+    return [_device newTextureWithDescriptor:descriptor];
+}
+
 id<MTLTexture> MetalLoader::buildTexture(int width, int height, MTLPixelFormat pixelFormat,
                                          MTLTextureUsage usage, MTLStorageMode storageMode) {
     MTLTextureDescriptor* descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pixelFormat

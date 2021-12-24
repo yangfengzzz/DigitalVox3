@@ -21,6 +21,18 @@ private:
     void _drawRenderPass(RenderPass* pass, Camera* camera,
                          std::optional<TextureCubeFace> cubeFace = std::nullopt,
                          int mipLevel = 0) override;
+    
+private:
+    MTLPixelFormat _albedo_specular_GBufferFormat;
+    id <MTLTexture> _albedo_specular_GBuffer;
+    MTLPixelFormat _normal_shadow_GBufferFormat;
+    id <MTLTexture> _normal_shadow_GBuffer;
+    MTLPixelFormat _depth_GBufferFormat;
+    id <MTLTexture> _depth_GBuffer;
+    
+    MTLRenderPipelineDescriptor* _renderPipelineDescriptor;
+    MTLRenderPassDescriptor *_GBufferRenderPassDescriptor;
+    MTLRenderPassDescriptor *_finalRenderPassDescriptor;
 };
 
 }
