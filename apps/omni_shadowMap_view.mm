@@ -45,14 +45,14 @@ int main(int, char**) {
     auto directLight = light->addComponent<PointLight>();
     directLight->intensity = 1.0;
 //    directLight->setEnableShadow(true);
-
-    auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
-    planeMtl->setBaseColor(math::Color(1.0, 0, 0, 1.0));
-    planeMtl->setRenderFace(RenderFace::Enum::Double);
+    
     auto planeMesh = PrimitiveMesh::createPlane(&engine, 10, 10);
     
     auto planeEntity = rootEntity->createChild("PlaneEntity");
     planeEntity->transform->setPosition(0, 5, 0);
+    auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl->setBaseColor(math::Color(0.2, 0.2, 0.2, 1.0));
+    planeMtl->setRenderFace(RenderFace::Enum::Double);
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(planeMesh);
     planeRenderer->setMaterial(planeMtl);
@@ -60,33 +60,45 @@ int main(int, char**) {
     
     auto planeEntity2 = rootEntity->createChild("PlaneEntity2");
     planeEntity2->transform->setPosition(0, -5, 0);
+    auto planeMtl2 = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl2->setBaseColor(math::Color(0.4, 0.4, 0.4, 1.0));
+    planeMtl2->setRenderFace(RenderFace::Enum::Double);
     auto planeRenderer2 = planeEntity2->addComponent<MeshRenderer>();
     planeRenderer2->setMesh(planeMesh);
-    planeRenderer2->setMaterial(planeMtl);
+    planeRenderer2->setMaterial(planeMtl2);
 //    planeRenderer2->receiveShadow = true;
     
     auto planeEntity3 = rootEntity->createChild("PlaneEntity3");
     planeEntity3->transform->setPosition(5, 0, 0);
     planeEntity3->transform->setRotation(90, 0, 0);
+    auto planeMtl3 = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl3->setBaseColor(math::Color(0.6, 0.6, 0.6, 1.0));
+    planeMtl3->setRenderFace(RenderFace::Enum::Double);
     auto planeRenderer3 = planeEntity3->addComponent<MeshRenderer>();
     planeRenderer3->setMesh(planeMesh);
-    planeRenderer3->setMaterial(planeMtl);
+    planeRenderer3->setMaterial(planeMtl3);
 //    planeRenderer3->receiveShadow = true;
     
     auto planeEntity4 = rootEntity->createChild("PlaneEntity4");
     planeEntity4->transform->setPosition(-5, 0, 0);
     planeEntity4->transform->setRotation(-90, 0, 0);
+    auto planeMtl4 = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl4->setBaseColor(math::Color(0.8, 0.8, 0.8, 1.0));
+    planeMtl4->setRenderFace(RenderFace::Enum::Double);
     auto planeRenderer4 = planeEntity4->addComponent<MeshRenderer>();
     planeRenderer4->setMesh(planeMesh);
-    planeRenderer4->setMaterial(planeMtl);
+    planeRenderer4->setMaterial(planeMtl4);
 //    planeRenderer4->receiveShadow = true;
     
     auto planeEntity5 = rootEntity->createChild("PlaneEntity5");
     planeEntity5->transform->setPosition(0, 0, -5);
     planeEntity5->transform->setRotation(0, 0, 90);
+    auto planeMtl5 = std::make_shared<BlinnPhongMaterial>(&engine);
+    planeMtl5->setBaseColor(math::Color(1.0, 1.0, 1.0, 1.0));
+    planeMtl5->setRenderFace(RenderFace::Enum::Double);
     auto planeRenderer5 = planeEntity5->addComponent<MeshRenderer>();
     planeRenderer5->setMesh(planeMesh);
-    planeRenderer5->setMaterial(planeMtl);
+    planeRenderer5->setMaterial(planeMtl5);
 //    planeRenderer5->receiveShadow = true;
 
     engine.run();
