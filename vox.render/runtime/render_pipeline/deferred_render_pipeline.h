@@ -22,6 +22,8 @@ private:
                          std::optional<TextureCubeFace> cubeFace = std::nullopt,
                          int mipLevel = 0) override;
     
+    void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
+    
 private:
     MTLPixelFormat _albedo_specular_GBufferFormat;
     id <MTLTexture> _albedo_specular_GBuffer;

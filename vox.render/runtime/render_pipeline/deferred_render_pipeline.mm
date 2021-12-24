@@ -96,7 +96,7 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         const auto& background = scene->background;
         auto& rhi = engine->_hardwareRenderer;
         
-        // command encoder
+        // GBuffer
         if (pass->renderOverride) {
             pass->render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
         } else {
@@ -105,10 +105,25 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
             }
         }
         
+        //MARK: -  Composition
+        rhi.activeRenderTarget(_finalRenderPassDescriptor);
+        // set clear flag
+        const auto& clearFlags = pass->clearFlags != std::nullopt ? pass->clearFlags.value(): camera->clearFlags;
+        const auto& color = pass->clearColor != std::nullopt? pass->clearColor.value(): background.solidColor;
+        if (clearFlags != CameraClearFlags::None) {
+            rhi.clearRenderTarget(clearFlags, color);
+        }
+        // command encoder
+        rhi.beginRenderPass(_finalRenderPassDescriptor, camera, mipLevel);
         rhi.endRenderPass();// renderEncoder
     }
     
     pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
+}
+
+void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& renderQueue,
+                                          RenderPass* pass) {
+    
 }
 
 }
