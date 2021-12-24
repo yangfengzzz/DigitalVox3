@@ -68,8 +68,9 @@ enum MacroName {
     
     // Shadow
     SHADOW_MAP_COUNT = 39,
-    
-    TOTAL_COUNT = 40,
+    CUBE_SHADOW_MAP_COUNT = 40,
+
+    TOTAL_COUNT = 41,
 };
 
 #endif /* macro_name_h */

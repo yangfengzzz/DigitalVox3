@@ -25,6 +25,17 @@ public:
     ShadowDebugMaterial(Engine* engine):BaseMaterial(engine, Shader::find("shadowMapDebugger")){}
 };
 
+class MoveScript :public Script {
+    float totalTime = 0;
+public:
+    MoveScript(Entity* entity):Script(entity) {}
+    
+    void onUpdate(float deltaTime) override {
+        entity()->transform->setPosition(std::sin(totalTime), 0, std::cos(totalTime));
+        totalTime += deltaTime;
+    }
+};
+
 int main(int, char**) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
@@ -43,7 +54,7 @@ int main(int, char**) {
     auto light = rootEntity->createChild("light");
     light->transform->setPosition(0, 0, 0);
     auto directLight = light->addComponent<PointLight>();
-    directLight->intensity = 1.0;
+    directLight->intensity = 0.5;
     directLight->setEnableShadow(true);
     
     auto planeMesh = PrimitiveMesh::createPlane(&engine, 10, 10);
@@ -108,6 +119,7 @@ int main(int, char**) {
     boxMtl->setBaseColor(math::Color(1.0, 0.0, 0.0, 0.5));
     boxMtl->setRenderFace(RenderFace::Enum::Double); // bug
     auto boxEntity = rootEntity->createChild("BoxEntity");
+    boxEntity->addComponent<MoveScript>();
     boxEntity->transform->setPosition(0, 0, -3);
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(boxMesh);

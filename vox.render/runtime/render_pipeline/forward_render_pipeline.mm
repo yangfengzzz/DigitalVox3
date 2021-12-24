@@ -101,6 +101,10 @@ void ForwardRenderPipeline::_drawElement(const std::vector<RenderElement>& items
             rendererData.enableMacro(SHADOW_MAP_COUNT, std::make_pair(shadowCount, MTLDataTypeInt));
         }
         
+        if (renderer->receiveShadow && cubeShadowCount != 0) {
+            rendererData.enableMacro(CUBE_SHADOW_MAP_COUNT, std::make_pair(cubeShadowCount, MTLDataTypeInt));
+        }
+        
         // union render global macro and material self macro.
         materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
         

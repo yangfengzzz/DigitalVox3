@@ -63,6 +63,7 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     
     // Shadow
     {SHADOW_MAP_COUNT, {0, MTLDataTypeInt}},
+    {CUBE_SHADOW_MAP_COUNT, {0, MTLDataTypeInt}},
 };
 
 MTLFunctionConstantValues* ShaderMacroCollection::createDefaultFunction() {

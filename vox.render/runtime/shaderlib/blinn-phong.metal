@@ -225,16 +225,17 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
                                      constant SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]],
                                      constant ShadowData* u_shadowData [[buffer(13), function_constant(hasShadow)]],
                                      depth2d_array<float> u_shadowMap [[texture(1), function_constant(hasShadow)]],
+                                     depthcube_array<float> u_cubeShadowMap [[texture(2), function_constant(hasCubeShadow)]],
                                      constant float4 &u_emissiveColor [[buffer(14)]],
                                      constant float4 &u_diffuseColor [[buffer(15)]],
                                      constant float4 &u_specularColor [[buffer(16)]],
                                      constant float &u_shininess [[buffer(17)]],
                                      constant float &u_normalIntensity [[buffer(18)]],
                                      constant float &u_alphaCutoff [[buffer(19)]],
-                                     texture2d<float> u_emissiveTexture [[texture(2), function_constant(hasEmissiveTexture)]],
-                                     texture2d<float> u_diffuseTexture [[texture(3), function_constant(hasDiffuseTexture)]],
-                                     texture2d<float> u_specularTexture [[texture(4), function_constant(hasSpecularTexture)]],
-                                     texture2d<float> u_normalTexture [[texture(5), function_constant(hasNormalTexture)]],
+                                     texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveTexture)]],
+                                     texture2d<float> u_diffuseTexture [[texture(4), function_constant(hasDiffuseTexture)]],
+                                     texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularTexture)]],
+                                     texture2d<float> u_normalTexture [[texture(6), function_constant(hasNormalTexture)]],
                                      bool is_front_face [[front_facing]]) {
     float4 ambient = float4(0.0);
     float4 emission = u_emissiveColor;
@@ -306,13 +307,32 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     }
     
     diffuse *= float4( lightDiffuse, 1.0 );
+    float shadow = 0;
+    float totalShadow = 0;
     if (hasShadow) {
-        float shadow = 0;
         for( int i = 0; i < shadowMapCount; i++) {
             shadow += filterPCF(in.v_pos, in.view_pos, u_shadowMap, u_shadowData, i);
-//            shadow += textureProj(in.v_pos, in.view_pos, float2(0), u_shadowMap, u_shadowData, i);
+            shadow += textureProj(in.v_pos, in.view_pos, float2(0), u_shadowMap, u_shadowData, i);
         }
-        shadow /= shadowMapCount;
+        totalShadow += shadowMapCount;
+    }
+    if (hasCubeShadow) {
+        constexpr sampler s(coord::normalized, filter::linear,
+                            address::clamp_to_edge, compare_func:: less);
+                
+        for( int i = 0; i < cubeShadowMapCount; i++) {
+            float3 direction = in.v_pos - u_pointLight[0].position;
+            float scale = 1.0 / max(max(abs(direction.x), abs(direction.y)), abs(direction.z));
+            direction *= scale;
+            float sampledDist = u_cubeShadowMap.sample(s, scale, 0);
+            float dist = length(direction);
+            shadow += (dist <= sampledDist) ? 1.0 : 0.2;
+        }
+        totalShadow += cubeShadowMapCount;
+    }
+    
+    if (hasShadow || hasCubeShadow) {
+        shadow /= totalShadow;
         diffuse *= shadow;
     }
     
