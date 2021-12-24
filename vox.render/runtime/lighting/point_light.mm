@@ -8,6 +8,7 @@
 #include "point_light.h"
 #include "../shader/shader.h"
 #include "../entity.h"
+#include "../scene.h"
 #include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
@@ -41,5 +42,14 @@ void PointLight::_updateShaderData(ShaderData& shaderData) {
 math::Matrix PointLight::shadowProjectionMatrix() {
     return math::Matrix::perspective(math::degreeToRadian(50), 1, 0.5, 50);
 }
+
+void PointLight::_onEnable() {
+    scene()->light_manager.attachPointLight(this);
+}
+
+void PointLight::_onDisable() {
+    scene()->light_manager.detachPointLight(this);
+}
+
 
 }

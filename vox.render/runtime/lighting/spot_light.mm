@@ -8,6 +8,7 @@
 #include "spot_light.h"
 #include "../shader/shader.h"
 #include "../entity.h"
+#include "../scene.h"
 #include "../rhi-metal/render_pipeline_state.h"
 
 namespace vox {
@@ -40,6 +41,14 @@ void SpotLight::_updateShaderData(ShaderData& shaderData) {
 math::Matrix SpotLight::shadowProjectionMatrix() {
     const auto fov = std::min(M_PI / 2, angle * 2 * std::sqrt(2));
     return math::Matrix::perspective(fov, 1, 0.1, distance + 5);
+}
+
+void SpotLight::_onEnable() {
+    scene()->light_manager.attachSpotLight(this);
+}
+
+void SpotLight::_onDisable() {
+    scene()->light_manager.detachSpotLight(this);
 }
 
 }

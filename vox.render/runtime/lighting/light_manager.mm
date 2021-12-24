@@ -25,24 +25,46 @@ LightManager::LightManager() {
     });
 }
 
-void LightManager::attachRenderLight(Light* light) {
-    auto iter = std::find(_visibleLights.begin(), _visibleLights.end(), light);
-    if (iter == _visibleLights.end()) {
-        _visibleLights.push_back(light);
+//MARK: - Point Light
+void LightManager::attachPointLight(PointLight* light) {
+    auto iter = std::find(_pointLights.begin(), _pointLights.end(), light);
+    if (iter == _pointLights.end()) {
+        _pointLights.push_back(light);
     } else {
         log::Err() << "Light already attached." << std::endl;;
     }
 }
 
-void LightManager::detachRenderLight(Light* light) {
-    auto iter = std::find(_visibleLights.begin(), _visibleLights.end(), light);
-    if (iter != _visibleLights.end()) {
-        _visibleLights.erase(iter);
+void LightManager::detachPointLight(PointLight* light) {
+    auto iter = std::find(_pointLights.begin(), _pointLights.end(), light);
+    if (iter != _pointLights.end()) {
+        _pointLights.erase(iter);
     }
 }
 
-const std::vector<Light*>& LightManager::visibleLights() const {
-    return _visibleLights;
+const std::vector<PointLight*>& LightManager::pointLights() const {
+    return _pointLights;
+}
+
+//MARK: - Spot Light
+void LightManager::attachSpotLight(SpotLight* light) {
+    auto iter = std::find(_spotLights.begin(), _spotLights.end(), light);
+    if (iter == _spotLights.end()) {
+        _spotLights.push_back(light);
+    } else {
+        log::Err() << "Light already attached." << std::endl;;
+    }
+}
+
+void LightManager::detachSpotLight(SpotLight* light) {
+    auto iter = std::find(_spotLights.begin(), _spotLights.end(), light);
+    if (iter != _spotLights.end()) {
+        _spotLights.erase(iter);
+    }
+}
+
+const std::vector<SpotLight*>& LightManager::spotLights() const {
+    return _spotLights;
 }
 
 //MARK: - Direct Light
@@ -75,18 +97,19 @@ void LightManager::_updateShaderData(ShaderData& shaderData) {
     size_t pointLightCount = 0;
     size_t spotLightCount = 0;
     
+    for (size_t i = 0; i < _pointLights.size(); i++) {
+        const auto& light = _pointLights[i];
+        light->_appendData(pointLightCount++);
+    }
+    
+    for (size_t i = 0; i < _spotLights.size(); i++) {
+        const auto& light = _spotLights[i];
+        light->_appendData(spotLightCount++);
+    }
+    
     for (size_t i = 0; i < _directLights.size(); i++) {
         const auto& light = _directLights[i];
         light->_appendData(directLightCount++);
-    }
-    
-    for (size_t i = 0; i < _visibleLights.size(); i++) {
-        const auto& light = _visibleLights[i];
-        if (dynamic_cast<PointLight*>(light) != nullptr) {
-            light->_appendData(pointLightCount++);
-        } else if (dynamic_cast<SpotLight*>(light) != nullptr) {
-            light->_appendData(spotLightCount++);
-        }
     }
     
     if (directLightCount) {

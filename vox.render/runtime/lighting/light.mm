@@ -32,12 +32,4 @@ void Light::updateShadowMatrix() {
     shadow.cascadeSplits[0] = 1; shadow.cascadeSplits[1] = -1; // mark cascade with negative sign
 }
 
-void Light::_onEnable() {
-    scene()->light_manager.attachRenderLight(this);
-}
-
-void Light::_onDisable() {
-    scene()->light_manager.detachRenderLight(this);
-}
-
 }

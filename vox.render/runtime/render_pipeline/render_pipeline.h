@@ -95,9 +95,11 @@ protected:
                                  std::optional<TextureCubeFace> cubeFace = std::nullopt,
                                  int mipLevel = 0) = 0;
     
-    void _drawShadowMap(RenderContext& context);
+    void _drawPointShadowMap(RenderContext& context);
     
-    void _drawCascadeShadowMap(RenderContext& context);
+    void _drawSpotShadowMap(RenderContext& context);
+
+    void _drawDirectShadowMap(RenderContext& context);
     
     /*
      * Calculate frustum split depths and matrices for the shadow map cascades

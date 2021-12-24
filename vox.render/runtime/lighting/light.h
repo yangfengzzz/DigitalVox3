@@ -52,17 +52,6 @@ public:
     
     virtual math::Matrix shadowProjectionMatrix() = 0;
     
-private:
-    /**
-     * Mount to the current Scene.
-     */
-    void _onEnable() override;
-    
-    /**
-     * Unmount from the current Scene.
-     */
-    void _onDisable() override;
-    
 private:    
     bool _enableShadow = false;
 };

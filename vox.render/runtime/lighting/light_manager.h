@@ -26,15 +26,30 @@ public:
      * Register a light object to the current scene.
      * @param light render light
      */
-    void attachRenderLight(Light* light);
+    void attachPointLight(PointLight* light);
 
     /**
      * Remove a light object from the current scene.
      * @param light render light
      */
-    void detachRenderLight(Light* light);
+    void detachPointLight(PointLight* light);
     
-    const std::vector<Light*>& visibleLights() const;
+    const std::vector<PointLight*>& pointLights() const;
+    
+public:
+    /**
+     * Register a light object to the current scene.
+     * @param light render light
+     */
+    void attachSpotLight(SpotLight* light);
+
+    /**
+     * Remove a light object from the current scene.
+     * @param light render light
+     */
+    void detachSpotLight(SpotLight* light);
+    
+    const std::vector<SpotLight*>& spotLights() const;
     
 public:
     /**
@@ -56,7 +71,8 @@ private:
     
     void _updateShaderData(ShaderData& shaderData);
 
-    std::vector<Light*> _visibleLights;
+    std::vector<PointLight*> _pointLights;
+    std::vector<SpotLight*> _spotLights;
     std::vector<DirectLight*> _directLights;
 };
 
