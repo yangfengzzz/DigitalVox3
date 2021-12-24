@@ -17,9 +17,19 @@ float textureProj(float3 worldPos, float3 viewPos, float2 off,
                   constant ShadowData* u_shadowData,
                   int index);
 
+float textureProj(float3 worldPos, float3 viewPos, float2 off,
+                  depthcube_array<float> u_shadowMap,
+                  constant CubeShadowData* u_shadowData,
+                  int index);
+
 float filterPCF(float3 worldPos, float3 viewPos,
                 depth2d_array<float> u_shadowMap,
                 constant ShadowData* u_shadowData,
+                int index);
+
+float filterPCF(float3 worldPos, float3 viewPos,
+                depthcube_array<float> u_shadowMap,
+                constant CubeShadowData* u_shadowData,
                 int index);
 
 #endif /* shadow_common_h */

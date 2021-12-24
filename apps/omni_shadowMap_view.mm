@@ -119,7 +119,7 @@ int main(int, char**) {
     boxMtl->setBaseColor(math::Color(1.0, 0.0, 0.0, 0.5));
     boxMtl->setRenderFace(RenderFace::Enum::Double); // bug
     auto boxEntity = rootEntity->createChild("BoxEntity");
-    boxEntity->addComponent<MoveScript>();
+//    boxEntity->addComponent<MoveScript>();
     boxEntity->transform->setPosition(0, 0, -3);
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(boxMesh);

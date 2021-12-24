@@ -31,6 +31,8 @@ public:
     
     math::Float3 direction();
     
+    ShadowData shadow;
+    
 private:
     /**
      * Mount to the current Scene.

@@ -122,23 +122,15 @@ protected:
     const int shadowMapSize = 2000; // resolution
     
     uint32_t cubeShadowCount = 0;
-    const std::array<std::pair<Float3, Float3>, 6> cubeMapDirection = {
-        std::make_pair(Float3(10, 0, 0), Float3(0, 1, 0)),
-        std::make_pair(Float3(-10, 0, 0), Float3(0, 1, 0)),
-        std::make_pair(Float3(0, 10, 0), Float3(1, 0, 0)),
-        std::make_pair(Float3(0, -10, 0), Float3(1, 0, 0)),
-        std::make_pair(Float3(0, 0, 10), Float3(0, 1, 0)),
-        std::make_pair(Float3(0, 0, -10), Float3(0, 1, 0)),
-    };
     std::array<id<MTLTexture>, 6> cubeMapSlices{};
     std::vector<id<MTLTexture>> cubeShadowMaps{};
     id<MTLTexture> packedCubeTexture{nullptr};
-    
+    std::array<CubeShadowData, LightManager::MAX_SHADOW> cubeShadowDatas{};
+
     uint32_t shadowCount = 0;
     std::array<id<MTLTexture>, SHADOW_MAP_CASCADE_COUNT> cascadeShadowMaps{};
     std::vector<id<MTLTexture>> shadowMaps{};
     id<MTLTexture> packedTexture{nullptr};
-    
     std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     
     /** Shader data. */
@@ -146,6 +138,7 @@ protected:
     static ShaderProperty _shadowMapProp;
     static ShaderProperty _cubeShadowMapProp;
     static ShaderProperty _shadowDataProp;
+    static ShaderProperty _cubeShadowDataProp;
     
     RenderPass* _defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;

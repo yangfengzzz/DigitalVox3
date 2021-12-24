@@ -35,6 +35,10 @@ public:
 public:
     math::Matrix shadowProjectionMatrix() override;
     
+    void updateShadowMatrix();
+    
+    ShadowData shadow;
+    
 private:
     /**
      * Mount to the current Scene.

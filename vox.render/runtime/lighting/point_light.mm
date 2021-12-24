@@ -43,6 +43,19 @@ math::Matrix PointLight::shadowProjectionMatrix() {
     return math::Matrix::perspective(math::degreeToRadian(50), 1, 0.5, 50);
 }
 
+void PointLight::updateShadowMatrix() {
+    auto projMatrix = shadowProjectionMatrix();
+    auto worldPos = entity()->transform->worldPosition();
+    shadow.lightPos = simd_make_float3(worldPos.x, worldPos.y, worldPos.z);
+    
+    for (int i = 0; i < 6; i++) {
+        entity()->transform->lookAt(worldPos + cubeMapDirection[i].first, cubeMapDirection[i].second);
+        auto viewMatrix = invert(entity()->transform->worldMatrix());
+        auto vp = projMatrix * viewMatrix;
+        shadow.vp[i] = vp.toSimdMatrix();
+    }
+}
+
 void PointLight::_onEnable() {
     scene()->light_manager.attachPointLight(this);
 }

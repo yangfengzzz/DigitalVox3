@@ -31,6 +31,7 @@ bool RenderPipeline::_compareFromFarToNear(const RenderElement& a, const RenderE
 ShaderProperty RenderPipeline::_shadowMapProp = Shader::createProperty("u_shadowMap", ShaderDataGroup::Enum::Internal);
 ShaderProperty RenderPipeline::_cubeShadowMapProp = Shader::createProperty("u_cubeShadowMap", ShaderDataGroup::Enum::Internal);
 ShaderProperty RenderPipeline::_shadowDataProp = Shader::createProperty("u_shadowData", ShaderDataGroup::Enum::Internal);
+ShaderProperty RenderPipeline::_cubeShadowDataProp = Shader::createProperty("u_cubeShadowData", ShaderDataGroup::Enum::Internal);
 RenderPipeline::RenderPipeline(Camera* camera):
 _camera(camera) {
     auto pass = std::make_unique<RenderPass>("default", 0, nullptr);
@@ -47,12 +48,10 @@ RenderPipeline::~RenderPipeline() {
 void RenderPipeline::render(RenderContext& context,
                             std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map
-    shadowCount = 0;
-    cubeShadowCount = 0;
     const auto& engine = _camera->engine();
     auto& rhi = engine->_hardwareRenderer;
     
-    _drawPointShadowMap(context);
+    shadowCount = 0;
     _drawSpotShadowMap(context);
     _drawDirectShadowMap(context);
     if (shadowCount) {
@@ -60,9 +59,12 @@ void RenderPipeline::render(RenderContext& context,
         shaderData.setData(RenderPipeline::_shadowMapProp, packedTexture);
         shaderData.setData(RenderPipeline::_shadowDataProp, shadowDatas);
     }
+    cubeShadowCount = 0;
+    _drawPointShadowMap(context);
     if (cubeShadowCount) {
         packedCubeTexture = rhi.createCubeTextureArray(cubeShadowMaps.begin(), cubeShadowMaps.begin() + cubeShadowCount, packedCubeTexture);
         shaderData.setData(RenderPipeline::_cubeShadowMapProp, packedCubeTexture);
+        shaderData.setData(RenderPipeline::_cubeShadowDataProp, cubeShadowDatas);
     }
     
     // Composition
@@ -212,7 +214,7 @@ void RenderPipeline::_drawPointShadowMap(RenderContext& context) {
                 cubeShadowMaps.push_back(texture);
             }
             
-            auto worldPos = light->entity()->transform->worldPosition();
+            light->updateShadowMatrix();
             for (int i = 0; i < 6; i++) {
                 if (cubeMapSlices[i] == nullptr) {
                     cubeMapSlices[i] = rhi.resourceLoader()->buildTexture(shadowMapSize, shadowMapSize,
@@ -238,13 +240,11 @@ void RenderPipeline::_drawPointShadowMap(RenderContext& context) {
                 std::vector<RenderElement> transparentQueue{};
                 std::vector<RenderElement> alphaTestQueue{};
                 
-                light->entity()->transform->lookAt(worldPos + cubeMapDirection[i].first, cubeMapDirection[i].second);
-                light->updateShadowMatrix();
                 BoundingFrustum frustum;
-                frustum.calculateFromMatrix(light->shadow.vp[0]);
+                frustum.calculateFromMatrix(light->shadow.vp[i]);
                 engine->_componentsManager.callRender(frustum, opaqueQueue, alphaTestQueue, transparentQueue);
                 if (cubeShadowCount < LightManager::MAX_SHADOW) {
-                    shadowDatas[cubeShadowCount] = light->shadow;
+                    cubeShadowDatas[cubeShadowCount] = light->shadow;
                 } else {
                     std::cerr << "too much shadow caster!" << std::endl;
                 }
@@ -555,10 +555,7 @@ void RenderPipeline::_updateCascades(DirectLight* light) {
         // Store split distance and matrix in cascade
         shadowDatas[shadowCount].cascadeSplits[i] = (_camera->nearClipPlane() + splitDist * clipRange) * -1.0f;
         auto vp = lightOrthoMatrix * invert(light->entity()->transform->worldMatrix());
-        shadowDatas[shadowCount].vp[i].columns[0] = simd_make_float4(vp.elements[0], vp.elements[1], vp.elements[2], vp.elements[3]);
-        shadowDatas[shadowCount].vp[i].columns[1] = simd_make_float4(vp.elements[4], vp.elements[5], vp.elements[6], vp.elements[7]);
-        shadowDatas[shadowCount].vp[i].columns[2] = simd_make_float4(vp.elements[8], vp.elements[9], vp.elements[10], vp.elements[11]);
-        shadowDatas[shadowCount].vp[i].columns[3] = simd_make_float4(vp.elements[12], vp.elements[13], vp.elements[14], vp.elements[15]);
+        shadowDatas[shadowCount].vp[i] = vp.toSimdMatrix();
         light->entity()->transform->setWorldPosition(worldPos);
         lastSplitDist = cascadeSplits[i];
     }

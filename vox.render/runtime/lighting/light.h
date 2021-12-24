@@ -46,10 +46,6 @@ public:
         _enableShadow = enabled;
     }
     
-    ShadowData shadow;
-    
-    void updateShadowMatrix();
-    
     virtual math::Matrix shadowProjectionMatrix() = 0;
     
 private:    

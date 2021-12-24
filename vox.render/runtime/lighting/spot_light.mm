@@ -43,6 +43,14 @@ math::Matrix SpotLight::shadowProjectionMatrix() {
     return math::Matrix::perspective(fov, 1, 0.1, distance + 5);
 }
 
+void SpotLight::updateShadowMatrix() {
+    auto viewMatrix = invert(entity()->transform->worldMatrix());
+    auto projMatrix = shadowProjectionMatrix();
+    auto vp = projMatrix * viewMatrix;
+    shadow.vp[0] = vp.toSimdMatrix();
+    shadow.cascadeSplits[0] = 1; shadow.cascadeSplits[1] = -1; // mark cascade with negative sign
+}
+
 void SpotLight::_onEnable() {
     scene()->light_manager.attachSpotLight(this);
 }

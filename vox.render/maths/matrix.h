@@ -11,6 +11,7 @@
 #include <cassert>
 #include <cmath>
 #include <array>
+#include <simd/simd.h>
 #include "maths/math_constant.h"
 #include "platform.h"
 #include "quaternion.h"
@@ -392,6 +393,15 @@ struct Matrix {
         e[13] = m42;
         e[14] = m43;
         e[15] = m44;
+    }
+    
+    VOX_INLINE matrix_float4x4 toSimdMatrix() {
+        matrix_float4x4 simd_mat;
+        simd_mat.columns[0] = simd_make_float4(elements[0], elements[1], elements[2], elements[3]);
+        simd_mat.columns[1] = simd_make_float4(elements[4], elements[5], elements[6], elements[7]);
+        simd_mat.columns[2] = simd_make_float4(elements[8], elements[9], elements[10], elements[11]);
+        simd_mat.columns[3] = simd_make_float4(elements[12], elements[13], elements[14], elements[15]);
+        return simd_mat;
     }
     
     /**
