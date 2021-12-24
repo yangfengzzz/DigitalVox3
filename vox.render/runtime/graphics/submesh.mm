@@ -13,7 +13,15 @@ SubMesh::SubMesh(MeshBuffer indexBuffer, MTLIndexType indexType,
 indexBuffer(indexBuffer),
 indexType(indexType),
 indexCount(indexCount),
-topology(topology) {
+_topology(topology) {
+}
+
+void SubMesh::setTopology(MTLPrimitiveType topology) {
+    _topology = topology;
+}
+
+MTLPrimitiveType SubMesh::topology() const {
+    return _topology;
 }
 
 }

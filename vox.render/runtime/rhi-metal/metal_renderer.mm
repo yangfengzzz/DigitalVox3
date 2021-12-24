@@ -256,7 +256,7 @@ void MetalRenderer::bindTexture(id <MTLTexture> texture, int location) {
 }
 
 void MetalRenderer::drawPrimitive(const SubMesh *subPrimitive) const {
-    [_renderEncoder drawIndexedPrimitives:subPrimitive->topology
+    [_renderEncoder drawIndexedPrimitives:subPrimitive->topology()
                                indexCount:subPrimitive->indexCount
                                 indexType:subPrimitive->indexType
                               indexBuffer:subPrimitive->indexBuffer.buffer

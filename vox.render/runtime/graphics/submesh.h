@@ -21,8 +21,10 @@ struct SubMesh {
     const MTLIndexType indexType;
     /** Drawing count. */
     const size_t indexCount;
-    /** Drawing topology. */
-    const MTLPrimitiveType topology;
+    
+    void setTopology(MTLPrimitiveType topology);
+    
+    MTLPrimitiveType topology() const;
     
     /**
      * Create a sub-mesh.
@@ -33,6 +35,10 @@ struct SubMesh {
      */
     SubMesh(MeshBuffer indexBuffer, MTLIndexType indexType,
             size_t indexCount = 0, MTLPrimitiveType topology = MTLPrimitiveTypeTriangle);
+    
+private:
+    /** Drawing topology. */
+    MTLPrimitiveType _topology;
 };
 
 }

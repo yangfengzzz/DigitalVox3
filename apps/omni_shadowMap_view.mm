@@ -35,7 +35,7 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(0, 10, 50);
+    cameraEntity->transform->setPosition(0, 0, 20);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
@@ -44,7 +44,7 @@ int main(int, char**) {
     light->transform->setPosition(0, 0, 0);
     auto directLight = light->addComponent<PointLight>();
     directLight->intensity = 1.0;
-//    directLight->setEnableShadow(true);
+    //    directLight->setEnableShadow(true);
     
     auto planeMesh = PrimitiveMesh::createPlane(&engine, 10, 10);
     
@@ -56,7 +56,7 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(planeMesh);
     planeRenderer->setMaterial(planeMtl);
-//    planeRenderer->receiveShadow = true;
+    //    planeRenderer->receiveShadow = true;
     
     auto planeEntity2 = rootEntity->createChild("PlaneEntity2");
     planeEntity2->transform->setPosition(0, -5, 0);
@@ -66,7 +66,7 @@ int main(int, char**) {
     auto planeRenderer2 = planeEntity2->addComponent<MeshRenderer>();
     planeRenderer2->setMesh(planeMesh);
     planeRenderer2->setMaterial(planeMtl2);
-//    planeRenderer2->receiveShadow = true;
+    //    planeRenderer2->receiveShadow = true;
     
     auto planeEntity3 = rootEntity->createChild("PlaneEntity3");
     planeEntity3->transform->setPosition(5, 0, 0);
@@ -77,7 +77,7 @@ int main(int, char**) {
     auto planeRenderer3 = planeEntity3->addComponent<MeshRenderer>();
     planeRenderer3->setMesh(planeMesh);
     planeRenderer3->setMaterial(planeMtl3);
-//    planeRenderer3->receiveShadow = true;
+    //    planeRenderer3->receiveShadow = true;
     
     auto planeEntity4 = rootEntity->createChild("PlaneEntity4");
     planeEntity4->transform->setPosition(-5, 0, 0);
@@ -88,7 +88,7 @@ int main(int, char**) {
     auto planeRenderer4 = planeEntity4->addComponent<MeshRenderer>();
     planeRenderer4->setMesh(planeMesh);
     planeRenderer4->setMaterial(planeMtl4);
-//    planeRenderer4->receiveShadow = true;
+    //    planeRenderer4->receiveShadow = true;
     
     auto planeEntity5 = rootEntity->createChild("PlaneEntity5");
     planeEntity5->transform->setPosition(0, 0, -5);
@@ -99,8 +99,21 @@ int main(int, char**) {
     auto planeRenderer5 = planeEntity5->addComponent<MeshRenderer>();
     planeRenderer5->setMesh(planeMesh);
     planeRenderer5->setMaterial(planeMtl5);
-//    planeRenderer5->receiveShadow = true;
-
+    //    planeRenderer5->receiveShadow = true;
+    
+    // create box test entity
+    float cubeSize = 2.0;
+    auto boxMesh = PrimitiveMesh::createCuboid(&engine, cubeSize, cubeSize, cubeSize);
+    boxMesh->subMesh(0)->setTopology(MTLPrimitiveTypeLine);
+    auto boxMtl = std::make_shared<BlinnPhongMaterial>(&engine);
+    boxMtl->setBaseColor(math::Color(1.0, 0.0, 0.0, 0.5));
+    boxMtl->setRenderFace(RenderFace::Enum::Double); // bug
+    auto boxEntity = rootEntity->createChild("BoxEntity");
+    auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
+    boxRenderer->setMesh(boxMesh);
+    boxRenderer->setMaterial(boxMtl);
+    boxRenderer->castShadow = true;
+    
     engine.run();
 }
 
