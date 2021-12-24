@@ -594,6 +594,7 @@
 		049E3EC6276D595C003FEE00 /* metal_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049E3EC4276D595C003FEE00 /* metal_loader.mm */; };
 		049E3EC7276D595C003FEE00 /* metal_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 049E3EC5276D595C003FEE00 /* metal_loader.h */; };
 		049E3ECE276DC26E003FEE00 /* function-common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398B2753A83B00204B8E /* function-common.metal */; };
+		04A710DF2775711F00BF6864 /* omni_shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -847,7 +848,6 @@
 		04D47E52276C67C70038F34A /* skybox_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D47E50276C67C70038F34A /* skybox_material.h */; };
 		04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE39942753A83C00204B8E /* shadow-map.metal */; };
 		04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E782771E0670038F34A /* shadow_debugger.metal */; };
-		04D47E802774290E0038F34A /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1562,6 +1562,7 @@
 		049E3EC5276D595C003FEE00 /* metal_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = metal_loader.h; sourceTree = "<group>"; };
 		049E3ECB276DA75A003FEE00 /* pbrbasic.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbrbasic.metal; sourceTree = "<group>"; };
 		049E3ECF276DC40A003FEE00 /* pbr_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pbr_view.mm; sourceTree = "<group>"; };
+		04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = omni_shadowMap_view.mm; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -2985,6 +2986,7 @@
 				04C2EA50276EF58B00091FB3 /* ibl_view.mm */,
 				04D47E6F277166550038F34A /* shadowMap_view.mm */,
 				04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */,
+				04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";
@@ -4543,7 +4545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D47E802774290E0038F34A /* shadowMap_view.mm in Sources */,
+				04A710DF2775711F00BF6864 /* omni_shadowMap_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
