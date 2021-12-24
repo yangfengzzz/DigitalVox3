@@ -27,11 +27,23 @@ public:
 
 class MoveScript :public Script {
     float totalTime = 0;
+    float height = 2;
+    float vel = 4;
+    int8_t velSign = -1;
+
 public:
     MoveScript(Entity* entity):Script(entity) {}
     
     void onUpdate(float deltaTime) override {
-        entity()->transform->setPosition(std::sin(totalTime), 0, std::cos(totalTime));
+        if (height >= 2) {
+            velSign = -1;
+        }
+        if (height <= -2) {
+            velSign = 1;
+        }
+        height += deltaTime * vel * float(velSign);
+        
+        entity()->transform->setPosition(std::sin(totalTime), height, std::cos(totalTime));
         totalTime += deltaTime;
     }
 };
@@ -119,8 +131,7 @@ int main(int, char**) {
     boxMtl->setBaseColor(math::Color(1.0, 0.0, 0.0, 0.5));
     boxMtl->setRenderFace(RenderFace::Enum::Double); // bug
     auto boxEntity = rootEntity->createChild("BoxEntity");
-//    boxEntity->addComponent<MoveScript>();
-    boxEntity->transform->setPosition(0, 0, -3);
+    boxEntity->addComponent<MoveScript>();
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(boxMesh);
     boxRenderer->setMaterial(boxMtl);

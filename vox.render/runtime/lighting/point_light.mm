@@ -40,7 +40,7 @@ void PointLight::_updateShaderData(ShaderData& shaderData) {
 }
 
 math::Matrix PointLight::shadowProjectionMatrix() {
-    return math::Matrix::perspective(math::degreeToRadian(50), 1, 0.5, 50);
+    return math::Matrix::perspective(math::degreeToRadian(90), 1, 0.1, 100);
 }
 
 void PointLight::updateShadowMatrix() {

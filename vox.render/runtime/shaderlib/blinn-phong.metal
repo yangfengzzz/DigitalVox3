@@ -9,6 +9,7 @@
 using namespace metal;
 #include "function-constant.h"
 #include "shadow_common.h"
+#include "pbr_common.h"
 
 typedef struct {
     float3 position [[attribute(Position)]];
@@ -319,7 +320,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     }
     if (hasCubeShadow) {
         for( int i = 0; i < cubeShadowMapCount; i++) {
-//            shadow += filterPCF(in.v_pos, in.view_pos, u_shadowMap, u_shadowData, i);
+//            shadow += cubeFilterPCF(in.v_pos, in.view_pos, u_cubeShadowMap, u_cubeShadowData, i);// too expensive
             shadow += cubeTextureProj(in.v_pos, in.view_pos, float2(0), u_cubeShadowMap, u_cubeShadowData, i);
         }
         totalShadow += cubeShadowMapCount;

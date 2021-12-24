@@ -59,17 +59,17 @@ float cubeTextureProj(float3 worldPos, float3 viewPos, float2 off,
     float scale = 1.0 / max(max(abs(direction.x), abs(direction.y)), abs(direction.z));
     direction *= scale;
     uint faceIndex = 0;
-    if (direction.x == 1) {
+    if (abs(direction.x - 1) < 1.0e-3) {
         faceIndex = 0;
-    } else if (direction.x == -1) {
+    } else if (abs(direction.x + 1) < 1.0e-3) {
         faceIndex = 1;
-    }  else if (direction.y == 1) {
+    }  else if (abs(direction.y - 1) < 1.0e-3) {
         faceIndex = 2;
-    } else if (direction.y == -1) {
+    } else if (abs(direction.y + 1) < 1.0e-3) {
         faceIndex = 3;
-    } else if (direction.z == 1) {
+    } else if (abs(direction.z - 1) < 1.0e-3) {
         faceIndex = 4;
-    } else if (direction.z == -1) {
+    } else if (abs(direction.z + 1) < 1.0e-3) {
         faceIndex = 5;
     }
     
@@ -92,6 +92,7 @@ float cubeTextureProj(float3 worldPos, float3 viewPos, float2 off,
     }
 }
 
+//MARK: - PCF
 float filterPCF(float3 worldPos, float3 viewPos,
                 depth2d_array<float> u_shadowMap,
                 constant ShadowData* u_shadowData,
@@ -140,5 +141,49 @@ float cubeFilterPCF(float3 worldPos, float3 viewPos,
                     depthcube_array<float> u_shadowMap,
                     constant CubeShadowData* u_shadowData,
                     int index) {
-    return 0.0;
+    float3 direction = worldPos - u_shadowData[index].lightPos;
+    float scale = 1.0 / max(max(abs(direction.x), abs(direction.y)), abs(direction.z));
+    direction *= scale;
+    uint faceIndex = 0;
+    if (abs(direction.x - 1) < 1.0e-3) {
+        faceIndex = 0;
+    } else if (abs(direction.x + 1) < 1.0e-3) {
+        faceIndex = 1;
+    }  else if (abs(direction.y - 1) < 1.0e-3) {
+        faceIndex = 2;
+    } else if (abs(direction.y + 1) < 1.0e-3) {
+        faceIndex = 3;
+    } else if (abs(direction.z - 1) < 1.0e-3) {
+        faceIndex = 4;
+    } else if (abs(direction.z + 1) < 1.0e-3) {
+        faceIndex = 5;
+    }
+    
+    float4 shadowCoord = u_shadowData[index].vp[faceIndex] * float4(worldPos, 1.0);
+    float2 xy = shadowCoord.xy;
+    xy /= shadowCoord.w;
+    xy = xy * 0.5 + 0.5;
+    xy.y = 1 - xy.y;
+    constexpr sampler s(coord::normalized, filter::linear,
+                        address::clamp_to_edge, compare_func:: less);
+    
+    const int neighborWidth = 3;
+    const float neighbors = (neighborWidth * 2.0 + 1.0) * (neighborWidth * 2.0 + 1.0);
+    float mapSize = 4096;
+    float texelSize = 1.0 / mapSize;
+    float total = 0.0;
+    for (int x = -neighborWidth; x <= neighborWidth; x++) {
+        for (int y = -neighborWidth; y <= neighborWidth; y++) {
+            float3 dir = convertUVToDirection(faceIndex, xy + float2(x, y) * texelSize);
+
+            float shadow_sample = u_shadowMap.sample(s, dir, index);
+            float current_sample = shadowCoord.z / shadowCoord.w;
+            if (current_sample > shadow_sample ) {
+                total += u_shadowData[index].intensity;
+            } else {
+                total += 1.0;
+            }
+        }
+    }
+    return total /= neighbors;
 }
