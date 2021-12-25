@@ -70,7 +70,7 @@ RenderPipeline(camera) {
         _normal_shadow_GBuffer = loader->buildTexture(GBufferTextureDesc);
         _normal_shadow_GBuffer.label   = @"Normal + Specular GBuffer";
         GBufferTextureDesc.pixelFormat = _depth_GBufferFormat;
-        _normal_shadow_GBuffer = loader->buildTexture(GBufferTextureDesc);
+        _depth_GBuffer = loader->buildTexture(GBufferTextureDesc);
         _depth_GBuffer.label = @"Depth GBuffer";
         
         _GBufferRenderPassDescriptor.colorAttachments[0].texture = _albedo_specular_GBuffer;
@@ -96,14 +96,16 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         const auto& background = scene->background;
         auto& rhi = engine->_hardwareRenderer;
         
-        // GBuffer
+        //MARK: - GBuffer
+        rhi.activeRenderTarget(_GBufferRenderPassDescriptor);
+        // command encoder
+        rhi.beginRenderPass(_GBufferRenderPassDescriptor, camera, mipLevel);
         if (pass->renderOverride) {
             pass->render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
         } else {
-            if (background.mode == BackgroundMode::Sky) {
-                _drawSky(background.sky);
-            }
+            _drawElement(_opaqueQueue, pass);
         }
+        rhi.endRenderPass();// renderEncoder
         
         //MARK: -  Composition
         _finalRenderPassDescriptor.colorAttachments[0].texture = rhi.drawableTexture();
