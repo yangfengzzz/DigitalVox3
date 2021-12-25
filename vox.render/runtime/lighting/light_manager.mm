@@ -112,7 +112,7 @@ void LightManager::_updateShaderData(ShaderData& shaderData) {
     size_t spotLightCount = _spotLights.size();
     _spotLightDatas.resize(spotLightCount);
     size_t directLightCount = _directLights.size();
-    _directLights.resize(directLightCount);
+    _directLightDatas.resize(directLightCount);
     
     for (size_t i = 0; i < pointLightCount; i++) {
         _pointLights[i]->_updateShaderData(_pointLightDatas[i]);
