@@ -219,7 +219,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
         
         //MARK:- Set Pipeline State
-        ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros);
+        ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros, true);
         if (!program->isValid()) {
             continue;
         }
