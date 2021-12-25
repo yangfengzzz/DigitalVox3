@@ -43,7 +43,7 @@ fragment float4
 deferred_directional_lighting_fragment_traditional(QuadInOut in [[ stage_in ]],
                                                    texture2d<float> diffuse_occlusion_GBuffer [[texture(0)]],
                                                    texture2d<float> specular_roughness_GBuffer [[texture(1)]],
-                                                   texture2d<float> normal_shadow_GBuffer [[texture(2)]],
+                                                   texture2d<float> normal_GBuffer [[texture(2)]],
                                                    texture2d<float> emissive_GBuffer [[texture(3)]]) {
     uint2 position = uint2(in.position.xy);
     float4 diffuse_occlusion = diffuse_occlusion_GBuffer.read(position.xy);

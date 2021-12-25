@@ -34,9 +34,10 @@ int main(int, char**) {
     
     // init point light
     auto light = rootEntity->createChild("light");
-    light->transform->setPosition(0, 3, 0);
+    light->transform->setPosition(0, 10, 0);
     auto pointLight = light->addComponent<PointLight>();
     pointLight->intensity = 0.3;
+    pointLight->setEnableShadow(true);
     
     // create box test entity
     float cubeSize = 2.0;
@@ -48,6 +49,7 @@ int main(int, char**) {
     auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
     boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, cubeSize, cubeSize, cubeSize));
     boxRenderer->setMaterial(boxMtl);
+    boxRenderer->castShadow = true;
     
     auto planeEntity = rootEntity->createChild("PlaneEntity");
     auto planeMtl = std::make_shared<BlinnPhongMaterial>(&engine);
@@ -57,6 +59,7 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
-
+    planeRenderer->receiveShadow = true;
+    
     engine.run();
 }

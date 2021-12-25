@@ -29,8 +29,8 @@ private:
     id <MTLTexture> _diffuse_occlusion_GBuffer;
     MTLPixelFormat _specular_roughness_GBufferFormat;
     id <MTLTexture> _specular_roughness_GBuffer;
-    MTLPixelFormat _normal_shadow_GBufferFormat;
-    id <MTLTexture> _normal_shadow_GBuffer;
+    MTLPixelFormat _normal_GBufferFormat;
+    id <MTLTexture> _normal_GBuffer;
     MTLPixelFormat _emissive_GBufferFormat;
     id <MTLTexture> _emissive_GBuffer;
 

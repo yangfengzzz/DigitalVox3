@@ -349,7 +349,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
 struct GBufferData {
     float4 diffuse_occlusion [[color(0)]];
     float4 specular_roughness [[color(1)]];
-    float4 normal_shadow [[color(2)]];
+    float4 normal [[color(2)]];
     float4 emissive [[color(3)]];
     float depth [[depth(greater)]];
 };
@@ -422,14 +422,13 @@ fragment GBufferData deferred_fragment_blinn_phong(VertexOut in [[stage_in]],
     
     if (hasShadow || hasCubeShadow) {
         shadow /= totalShadow;
-    } else {
-        shadow = 1.0;
+        diffuse *= shadow;
     }
         
     GBufferData out;
     out.diffuse_occlusion = diffuse;
     out.specular_roughness = specular;
-    out.normal_shadow = float4(in.v_normal, shadow);
+    out.normal = float4(in.v_normal, 1.0);
     out.emissive = emission;
     out.depth = in.position.z;
     return out;
