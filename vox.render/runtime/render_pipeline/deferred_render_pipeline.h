@@ -25,12 +25,14 @@ private:
     void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
     
 private:
-    MTLPixelFormat _albedo_specular_GBufferFormat;
-    id <MTLTexture> _albedo_specular_GBuffer;
+    MTLPixelFormat _diffuse_occlusion_GBufferFormat;
+    id <MTLTexture> _diffuse_occlusion_GBuffer;
+    MTLPixelFormat _specular_roughness_GBufferFormat;
+    id <MTLTexture> _specular_roughness_GBuffer;
     MTLPixelFormat _normal_shadow_GBufferFormat;
     id <MTLTexture> _normal_shadow_GBuffer;
-    MTLPixelFormat _depth_GBufferFormat;
-    id <MTLTexture> _depth_GBuffer;
+    MTLPixelFormat _emissive_GBufferFormat;
+    id <MTLTexture> _emissive_GBuffer;
 
     // GBuffer
     MTLRenderPassDescriptor *_GBufferRenderPassDescriptor;

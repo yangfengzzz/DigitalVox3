@@ -16,9 +16,10 @@ RenderPipeline(camera) {
     const auto& loader = camera->engine()->resourceLoader();
     auto& rhi = camera->engine()->_hardwareRenderer;
     
-    _albedo_specular_GBufferFormat = MTLPixelFormatRGBA8Unorm_sRGB;
-    _normal_shadow_GBufferFormat = MTLPixelFormatRGBA8Snorm;
-    _depth_GBufferFormat = MTLPixelFormatDepth32Float_Stencil8;
+    _diffuse_occlusion_GBufferFormat = MTLPixelFormatRGBA32Float;
+    _specular_roughness_GBufferFormat = MTLPixelFormatRGBA32Float;
+    _normal_shadow_GBufferFormat = MTLPixelFormatRGBA32Float;
+    _emissive_GBufferFormat = MTLPixelFormatRGBA32Float;
     
     //MARK: - GBuffer
     // Create a render pass descriptor to create an encoder for rendering to the GBuffers.
@@ -50,18 +51,23 @@ RenderPipeline(camera) {
         GBufferTextureDesc.usage |= MTLTextureUsageRenderTarget;
         GBufferTextureDesc.storageMode = MTLStorageModePrivate;
 
-        GBufferTextureDesc.pixelFormat = _albedo_specular_GBufferFormat;
-        _albedo_specular_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _albedo_specular_GBuffer.label = @"Albedo + Shadow GBuffer";
+        GBufferTextureDesc.pixelFormat = _diffuse_occlusion_GBufferFormat;
+        _diffuse_occlusion_GBuffer = loader->buildTexture(GBufferTextureDesc);
+        _diffuse_occlusion_GBuffer.label = @"Diffuse + Occlusion GBuffer";
+        GBufferTextureDesc.pixelFormat = _specular_roughness_GBufferFormat;
+        _specular_roughness_GBuffer = loader->buildTexture(GBufferTextureDesc);
+        _specular_roughness_GBuffer.label = @"Specular + Roughness GBuffer";
         GBufferTextureDesc.pixelFormat = _normal_shadow_GBufferFormat;
         _normal_shadow_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _normal_shadow_GBuffer.label   = @"Normal + Specular GBuffer";
-        GBufferTextureDesc.pixelFormat = _depth_GBufferFormat;
-        _depth_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _depth_GBuffer.label = @"Depth GBuffer";
+        _normal_shadow_GBuffer.label   = @"Normal + Shadow GBuffer";
+        GBufferTextureDesc.pixelFormat = _emissive_GBufferFormat;
+        _emissive_GBuffer = loader->buildTexture(GBufferTextureDesc);
+        _emissive_GBuffer.label = @"Emissive GBuffer";
         
-        _GBufferRenderPassDescriptor.colorAttachments[0].texture = _albedo_specular_GBuffer;
-        _GBufferRenderPassDescriptor.colorAttachments[1].texture = _normal_shadow_GBuffer;
+        _GBufferRenderPassDescriptor.colorAttachments[0].texture = _diffuse_occlusion_GBuffer;
+        _GBufferRenderPassDescriptor.colorAttachments[1].texture = _specular_roughness_GBuffer;
+        _GBufferRenderPassDescriptor.colorAttachments[2].texture = _normal_shadow_GBuffer;
+        _GBufferRenderPassDescriptor.colorAttachments[3].texture = _emissive_GBuffer;
         _GBufferRenderPassDescriptor.depthAttachment.texture = rhi.depthTexture();
         _GBufferRenderPassDescriptor.stencilAttachment.texture = rhi.stencilTexture();
     };
@@ -70,10 +76,12 @@ RenderPipeline(camera) {
 
     _GBufferRenderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
     _GBufferRenderPipelineDescriptor.label = @"G-buffer Creation";
-    _GBufferRenderPipelineDescriptor.colorAttachments[0].pixelFormat = _albedo_specular_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.colorAttachments[1].pixelFormat = _normal_shadow_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.depthAttachmentPixelFormat = _depth_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.stencilAttachmentPixelFormat = _depth_GBufferFormat;
+    _GBufferRenderPipelineDescriptor.colorAttachments[0].pixelFormat = _diffuse_occlusion_GBufferFormat;
+    _GBufferRenderPipelineDescriptor.colorAttachments[1].pixelFormat = _specular_roughness_GBufferFormat;
+    _GBufferRenderPipelineDescriptor.colorAttachments[2].pixelFormat = _normal_shadow_GBufferFormat;
+    _GBufferRenderPipelineDescriptor.colorAttachments[3].pixelFormat = _emissive_GBufferFormat;
+    _GBufferRenderPipelineDescriptor.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+    _GBufferRenderPipelineDescriptor.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
     
     _GBufferStencilStateDesc = [MTLStencilDescriptor new];
     _GBufferStencilStateDesc.stencilCompareFunction = MTLCompareFunctionAlways;
@@ -164,9 +172,11 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         rhi.setStencilReferenceValue(128);
         rhi.setRenderPipelineState(_directionalLightPipelineState);
         rhi.setDepthStencilState(_directionLightDepthStencilState);
-        rhi.setFragmentTexture(_albedo_specular_GBuffer, 0);
-        rhi.setFragmentTexture(_normal_shadow_GBuffer, 1);
-        
+        rhi.setFragmentTexture(_diffuse_occlusion_GBuffer, 0);
+        rhi.setFragmentTexture(_specular_roughness_GBuffer, 1);
+        rhi.setFragmentTexture(_normal_shadow_GBuffer, 2);
+        rhi.setFragmentTexture(_emissive_GBuffer, 3);
+
         rhi.drawPrimitive(MTLPrimitiveTypeTriangle, 0, 6);
         
         rhi.endRenderPass();// renderEncoder

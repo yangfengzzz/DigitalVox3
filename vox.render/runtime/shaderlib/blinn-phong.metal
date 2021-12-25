@@ -347,9 +347,11 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
 //MARK: - Deferred Fragment
 // G-buffer outputs using Raster Order Groups
 struct GBufferData {
-    half4 albedo_specular [[color(0)]];
-    half4 normal_shadow   [[color(1)]];
-    float depth           [[depth(greater)]];
+    float4 diffuse_occlusion [[color(0)]];
+    float4 specular_roughness [[color(1)]];
+    float4 normal_shadow [[color(2)]];
+    float4 emissive [[color(3)]];
+    float depth [[depth(greater)]];
 };
 
 fragment GBufferData deferred_fragment_blinn_phong(VertexOut in [[stage_in]],
@@ -383,6 +385,24 @@ fragment GBufferData deferred_fragment_blinn_phong(VertexOut in [[stage_in]],
                                                    texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularTexture)]],
                                                    texture2d<float> u_normalTexture [[texture(6), function_constant(hasNormalTexture)]],
                                                    bool is_front_face [[front_facing]]) {
+    float4 ambient = float4(0.0);
+    float4 emission = u_emissiveColor;
+    float4 diffuse = u_diffuseColor;
+    float4 specular = u_specularColor;
+    if (hasEmissiveTexture) {
+        emission = u_emissiveTexture.sample(textureSampler, in.v_uv);
+    }
+    if (hasDiffuseTexture) {
+        diffuse *= u_diffuseTexture.sample(textureSampler, in.v_uv);
+    }
+    if (hasVertexColor) {
+        diffuse *= in.v_color;
+    }
+    if (hasSpecularTexture) {
+        specular *= u_specularTexture.sample(textureSampler, in.v_uv);
+    }
+    ambient = float4(u_envMapLight.diffuse * u_envMapLight.diffuseIntensity, 1.0) * diffuse;
+    
     float shadow = 0;
     float totalShadow = 0;
     if (hasShadow) {
@@ -407,8 +427,10 @@ fragment GBufferData deferred_fragment_blinn_phong(VertexOut in [[stage_in]],
     }
         
     GBufferData out;
-    out.albedo_specular = half4(u_diffuseColor);
-    out.normal_shadow = half4(in.v_normal.x, in.v_normal.y, in.v_normal.z, shadow);
+    out.diffuse_occlusion = diffuse;
+    out.specular_roughness = specular;
+    out.normal_shadow = float4(in.v_normal, shadow);
+    out.emissive = emission;
     out.depth = in.position.z;
     return out;
 }
