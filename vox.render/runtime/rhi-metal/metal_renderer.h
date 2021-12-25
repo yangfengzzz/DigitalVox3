@@ -31,6 +31,8 @@ public:
     
     id <MTLTexture> drawableTexture();
     
+    MTLPixelFormat depthStencilPixelFormat();
+    
     id <MTLTexture> depthTexture();
     
     id <MTLTexture> stencilTexture();
@@ -76,13 +78,15 @@ public:
     
     void setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index);
     
+    void setFragmentTexture(id<MTLTexture> texture, uint32_t index);
+    
     id <MTLRenderPipelineState> createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor);
     
     void setRenderPipelineState(id <MTLRenderPipelineState> state);
     
     void setRenderPipelineState(RenderPipelineState *state);
     
-    void setDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor);
+    id <MTLDepthStencilState> createDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor);
     
     void setDepthStencilState(id <MTLDepthStencilState> depthStencilState);
     
@@ -97,6 +101,9 @@ public:
     void bindTexture(id <MTLTexture> texture, int location);
     
     void drawPrimitive(const SubMesh *subPrimitive) const;
+
+    void drawPrimitive(MTLPrimitiveType primitiveType,
+                       uint32_t vertexStart, uint32_t vertexCount) const;
     
 private:
     id <MTLSamplerState> buildSamplerState();

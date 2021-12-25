@@ -57,6 +57,10 @@ id <MTLTexture> MetalRenderer::drawableTexture() {
     return _drawable.texture;
 }
 
+MTLPixelFormat MetalRenderer::depthStencilPixelFormat() {
+    return MTLPixelFormatDepth32Float_Stencil8;
+}
+
 id <MTLTexture> MetalRenderer::depthTexture() {
     return _depthTexture;
 }
@@ -287,9 +291,12 @@ void MetalRenderer::setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint3
     [_renderEncoder setVertexBuffer:buffer offset:offset atIndex:index];
 }
 
-void MetalRenderer::setDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor) {
-    auto depthStencilState = [_device newDepthStencilStateWithDescriptor:depthStencilDescriptor];
-    [_renderEncoder setDepthStencilState:depthStencilState];
+void MetalRenderer::setFragmentTexture(id<MTLTexture> texture, uint32_t index) {
+    [_renderEncoder setFragmentTexture:texture atIndex:index];
+}
+
+id <MTLDepthStencilState> MetalRenderer::createDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor) {
+    return [_device newDepthStencilStateWithDescriptor:depthStencilDescriptor];
 }
 
 void MetalRenderer::setDepthStencilState(id <MTLDepthStencilState> depthStencilState) {
@@ -322,6 +329,11 @@ void MetalRenderer::drawPrimitive(const SubMesh *subPrimitive) const {
                                 indexType:subPrimitive->indexType
                               indexBuffer:subPrimitive->indexBuffer.buffer
                         indexBufferOffset:subPrimitive->indexBuffer.offset];
+}
+
+void MetalRenderer::drawPrimitive(MTLPrimitiveType primitiveType,
+                                  uint32_t vertexStart, uint32_t vertexCount) const {
+    [_renderEncoder drawPrimitives:primitiveType vertexStart:vertexStart vertexCount:vertexCount];
 }
 
 }

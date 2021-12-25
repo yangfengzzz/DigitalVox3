@@ -31,10 +31,16 @@ private:
     id <MTLTexture> _normal_shadow_GBuffer;
     MTLPixelFormat _depth_GBufferFormat;
     id <MTLTexture> _depth_GBuffer;
-    
-    MTLRenderPipelineDescriptor* _renderPipelineDescriptor;
+
+    // GBuffer
     MTLRenderPassDescriptor *_GBufferRenderPassDescriptor;
+    MTLRenderPipelineDescriptor* _renderPipelineDescriptor;
+    
+    // Compositor
     MTLRenderPassDescriptor *_finalRenderPassDescriptor;
+    id <MTLRenderPipelineState> _directionalLightPipelineState;
+    id <MTLDepthStencilState> _directionLightDepthStencilState;
+
 };
 
 }

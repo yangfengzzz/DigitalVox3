@@ -19,13 +19,7 @@ RenderPipeline(camera) {
     _normal_shadow_GBufferFormat = MTLPixelFormatRGBA8Snorm;
     _depth_GBufferFormat = MTLPixelFormatDepth32Float_Stencil8;
     
-    _renderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
-    _renderPipelineDescriptor.label = @"G-buffer Creation";
-    _renderPipelineDescriptor.colorAttachments[0].pixelFormat = _albedo_specular_GBufferFormat;
-    _renderPipelineDescriptor.colorAttachments[1].pixelFormat = _normal_shadow_GBufferFormat;
-    _renderPipelineDescriptor.depthAttachmentPixelFormat = _depth_GBufferFormat;
-    _renderPipelineDescriptor.stencilAttachmentPixelFormat = _depth_GBufferFormat;
-
+    //MARK: - GBuffer
     // Create a render pass descriptor to create an encoder for rendering to the GBuffers.
     // The encoder stores rendered data of each attachment when encoding ends.
     _GBufferRenderPassDescriptor = [MTLRenderPassDescriptor new];
@@ -43,15 +37,6 @@ RenderPipeline(camera) {
     _GBufferRenderPassDescriptor.stencilAttachment.clearStencil = 0;
     _GBufferRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionClear;
     _GBufferRenderPassDescriptor.stencilAttachment.storeAction = MTLStoreActionStore;
-
-    // Create a render pass descriptor for thelighting and composition pass
-    _finalRenderPassDescriptor = [MTLRenderPassDescriptor new];
-
-    // Whatever rendered in the final pass needs to be stored so it can be displayed
-    _finalRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-    _finalRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
-    _finalRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
-    
     auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
@@ -81,6 +66,53 @@ RenderPipeline(camera) {
     };
     createFrameBuffer(_camera->engine()->canvas()->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
+
+    _renderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
+    _renderPipelineDescriptor.label = @"G-buffer Creation";
+    _renderPipelineDescriptor.colorAttachments[0].pixelFormat = _albedo_specular_GBufferFormat;
+    _renderPipelineDescriptor.colorAttachments[1].pixelFormat = _normal_shadow_GBufferFormat;
+    _renderPipelineDescriptor.depthAttachmentPixelFormat = _depth_GBufferFormat;
+    _renderPipelineDescriptor.stencilAttachmentPixelFormat = _depth_GBufferFormat;
+    
+    //MARK: - Compositor
+    // Create a render pass descriptor for thelighting and composition pass
+    _finalRenderPassDescriptor = [MTLRenderPassDescriptor new];
+
+    // Whatever rendered in the final pass needs to be stored so it can be displayed
+    _finalRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+    _finalRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
+    _finalRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
+    
+    Shader shader("Deferred Directional Lighting", "deferred_direction_lighting_vertex",
+                  "deferred_directional_lighting_fragment_traditional");
+    auto program = shader.findShaderProgram(camera->engine(), ShaderMacroCollection());
+    MTLRenderPipelineDescriptor *renderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
+
+    renderPipelineDescriptor.label = @"Deferred Directional Lighting";
+    renderPipelineDescriptor.vertexDescriptor = nil;
+    renderPipelineDescriptor.vertexFunction = program->vertexShader();
+    renderPipelineDescriptor.fragmentFunction = program->fragmentShader();
+    renderPipelineDescriptor.colorAttachments[0].pixelFormat = camera->engine()->_hardwareRenderer.colorPixelFormat();
+    renderPipelineDescriptor.depthAttachmentPixelFormat = camera->engine()->_hardwareRenderer.depthStencilPixelFormat();
+    renderPipelineDescriptor.stencilAttachmentPixelFormat = camera->engine()->_hardwareRenderer.depthStencilPixelFormat();
+    _directionalLightPipelineState = camera->engine()->_hardwareRenderer.createRenderPipelineState(renderPipelineDescriptor);
+    
+    // Stencil state setup so direction lighting fragment shader only executed on pixels
+    // drawn in GBuffer stage (i.e. mask out the background/sky)
+    MTLStencilDescriptor *stencilStateDesc = [MTLStencilDescriptor new];
+    stencilStateDesc.stencilCompareFunction = MTLCompareFunctionEqual;
+    stencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
+    stencilStateDesc.depthFailureOperation = MTLStencilOperationKeep;
+    stencilStateDesc.depthStencilPassOperation = MTLStencilOperationKeep;
+    stencilStateDesc.readMask = 0xFF;
+    stencilStateDesc.writeMask = 0x0;
+    MTLDepthStencilDescriptor *depthStencilDesc = [MTLDepthStencilDescriptor new];
+    depthStencilDesc.label = @"Deferred Directional Lighting";
+    depthStencilDesc.depthWriteEnabled = NO;
+    depthStencilDesc.depthCompareFunction = MTLCompareFunctionAlways;
+    depthStencilDesc.frontFaceStencil = stencilStateDesc;
+    depthStencilDesc.backFaceStencil = stencilStateDesc;
+    _directionLightDepthStencilState = camera->engine()->_hardwareRenderer.createDepthStencilState(depthStencilDesc);
 }
 
 DeferredRenderPipeline::~DeferredRenderPipeline() {
@@ -123,6 +155,17 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         }
         // command encoder
         rhi.beginRenderPass(_finalRenderPassDescriptor, camera, mipLevel);
+        
+        rhi.setCullMode(MTLCullModeBack);
+        rhi.setStencilReferenceValue(128);
+        rhi.setRenderPipelineState(_directionalLightPipelineState);
+        rhi.setDepthStencilState(_directionLightDepthStencilState);
+        rhi.setFragmentTexture(_albedo_specular_GBuffer, 0);
+        rhi.setFragmentTexture(_normal_shadow_GBuffer, 1);
+        rhi.setFragmentTexture(_depth_GBuffer, 2);
+        
+        rhi.drawPrimitive(MTLPrimitiveTypeTriangle, 0, 6);
+        
         rhi.endRenderPass();// renderEncoder
     }
     
@@ -184,7 +227,8 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
 
         MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
         material->renderState._apply(engine, _renderPipelineDescriptor, depthStencilDescriptor);
-        rhi.setDepthStencilState(depthStencilDescriptor);
+        auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
+        rhi.setDepthStencilState(depthStencilState);
         
         const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_renderPipelineDescriptor);
         rhi.setRenderPipelineState(pipelineState);

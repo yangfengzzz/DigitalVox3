@@ -184,7 +184,8 @@ void RenderPipeline::_drawSky(const Sky& sky) {
     
     auto depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
     material->renderState._apply(engine, descriptor, depthStencilDescriptor);
-    rhi.setDepthStencilState(depthStencilDescriptor);
+    auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
+    rhi.setDepthStencilState(depthStencilState);
     
     auto pipelineState = rhi.resouceCache.request_graphics_pipeline(descriptor);
     rhi.setRenderPipelineState(pipelineState);
@@ -232,7 +233,8 @@ void RenderPipeline::_drawPointShadowMap(RenderContext& context) {
                 MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
                 depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
                 depthStencilDescriptor.depthWriteEnabled = true;
-                rhi.setDepthStencilState(depthStencilDescriptor);
+                auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
+                rhi.setDepthStencilState(depthStencilState);
                 rhi.setCullMode(MTLCullModeNone);
                 rhi.setDepthBias(0.01, 1.0, 0.01);
                 
@@ -311,7 +313,8 @@ void RenderPipeline::_drawSpotShadowMap(RenderContext& context) {
             MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
             depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
             depthStencilDescriptor.depthWriteEnabled = true;
-            rhi.setDepthStencilState(depthStencilDescriptor);
+            auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
+            rhi.setDepthStencilState(depthStencilState);
             rhi.setCullMode(MTLCullModeNone);
             rhi.setDepthBias(0.01, 1.0, 0.01);
             
@@ -395,7 +398,8 @@ void RenderPipeline::_drawDirectShadowMap(RenderContext& context) {
                 MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
                 depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionLess;
                 depthStencilDescriptor.depthWriteEnabled = true;
-                rhi.setDepthStencilState(depthStencilDescriptor);
+                auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
+                rhi.setDepthStencilState(depthStencilState);
                 rhi.setCullMode(MTLCullModeNone);
                 rhi.setDepthBias(0.01, 1.0, 0.01);
                 

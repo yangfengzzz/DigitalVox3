@@ -124,7 +124,8 @@ void ForwardRenderPipeline::_drawElement(const std::vector<RenderElement>& items
 
         MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
         material->renderState._apply(engine, descriptor, depthStencilDescriptor);
-        rhi.setDepthStencilState(depthStencilDescriptor);
+        auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
+        rhi.setDepthStencilState(depthStencilState);
         
         const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(descriptor);
         rhi.setRenderPipelineState(pipelineState);

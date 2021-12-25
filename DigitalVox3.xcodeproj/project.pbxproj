@@ -617,6 +617,7 @@
 		04AD284F277544C400B86C7E /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
 		04AD2850277544C400B86C7E /* deferred_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AD284E277544C400B86C7E /* deferred_render_pipeline.h */; };
 		04AD28522776924500B86C7E /* deferred_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28512776924500B86C7E /* deferred_view.mm */; };
+		04AD28542776CC0C00B86C7E /* deferred_compositor.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28532776CC0C00B86C7E /* deferred_compositor.metal */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
@@ -1588,6 +1589,7 @@
 		04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = deferred_render_pipeline.mm; sourceTree = "<group>"; };
 		04AD284E277544C400B86C7E /* deferred_render_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deferred_render_pipeline.h; sourceTree = "<group>"; };
 		04AD28512776924500B86C7E /* deferred_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = deferred_view.mm; sourceTree = "<group>"; };
+		04AD28532776CC0C00B86C7E /* deferred_compositor.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = deferred_compositor.metal; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
 		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
 		04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = cubemap_debugger.metal; sourceTree = "<group>"; };
@@ -3627,6 +3629,7 @@
 				04C2EA48276EC59600091FB3 /* specular_map.metal */,
 				04AD284027729A9F00B86C7E /* texture_packer.metal */,
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
+				04AD28532776CC0C00B86C7E /* deferred_compositor.metal */,
 				04860853276B17F100C05BDA /* core */,
 				0434AC84276611C5009AD4EA /* editor-grid.metal */,
 				0434AC882766133E009AD4EA /* editor */,
@@ -4574,6 +4577,7 @@
 				04CE379A274D167E00204B8E /* stream.cc in Sources */,
 				0434A29A27590B86009AD4EA /* box_collider_shape.cpp in Sources */,
 				04D47E3E276C21550038F34A /* scene_animation_clip.mm in Sources */,
+				04AD28542776CC0C00B86C7E /* deferred_compositor.metal in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
