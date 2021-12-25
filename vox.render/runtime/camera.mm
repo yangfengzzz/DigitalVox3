@@ -9,6 +9,7 @@
 #include "entity.h"
 #include "engine.h"
 #include "render_pipeline/forward_render_pipeline.h"
+#include "render_pipeline/deferred_render_pipeline.h"
 
 namespace vox {
 ShaderProperty Camera::_viewMatrixProperty = Shader::createProperty("u_viewMat", ShaderDataGroup::Camera);
@@ -20,7 +21,7 @@ ShaderProperty Camera::_cameraPositionProperty = Shader::createProperty("u_camer
 
 Camera::Camera(Entity* entity):
 Component(entity) {
-    _renderPipeline = std::make_unique<ForwardRenderPipeline>(this);
+    _renderPipeline = std::make_unique<DeferredRenderPipeline>(this);
     
     auto transform = entity->transform;
     _transform = transform;

@@ -29,6 +29,12 @@ public:
     
     MTLPixelFormat colorPixelFormat();
     
+    id <MTLTexture> drawableTexture();
+    
+    id <MTLTexture> depthTexture();
+    
+    id <MTLTexture> stencilTexture();
+    
     MetalLoaderPtr resourceLoader();
     
 public:

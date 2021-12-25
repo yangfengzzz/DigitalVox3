@@ -106,6 +106,10 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         }
         
         //MARK: -  Composition
+        _finalRenderPassDescriptor.colorAttachments[0].texture = rhi.drawableTexture();
+        _finalRenderPassDescriptor.depthAttachment.texture = rhi.depthTexture();
+        _finalRenderPassDescriptor.stencilAttachment.texture = rhi.stencilTexture();
+        
         rhi.activeRenderTarget(_finalRenderPassDescriptor);
         // set clear flag
         const auto& clearFlags = pass->clearFlags != std::nullopt ? pass->clearFlags.value(): camera->clearFlags;

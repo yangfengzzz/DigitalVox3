@@ -39,7 +39,7 @@ resouceCache(this) {
         _layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
         
         // depth texture
-        _depthTexture = _metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float);
+        _depthTexture = _metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float_Stencil8);
     };
     createFrameBuffer(canvas->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
@@ -51,6 +51,18 @@ id <MTLLibrary> MetalRenderer::library() {
 
 MTLPixelFormat MetalRenderer::colorPixelFormat() {
     return _colorPixelFormat;
+}
+
+id <MTLTexture> MetalRenderer::drawableTexture() {
+    return _drawable.texture;
+}
+
+id <MTLTexture> MetalRenderer::depthTexture() {
+    return _depthTexture;
+}
+
+id <MTLTexture> MetalRenderer::stencilTexture() {
+    return _depthTexture;
 }
 
 MetalLoaderPtr MetalRenderer::resourceLoader() {
@@ -66,6 +78,7 @@ id <MTLSamplerState> MetalRenderer::buildSamplerState() {
     return [_device newSamplerStateWithDescriptor:descriptor];
 }
 
+//MARK: - Internal Render State
 void MetalRenderer::begin() {
     _commandBuffer = [_commandQueue commandBuffer];
     _drawable = [_layer nextDrawable];
