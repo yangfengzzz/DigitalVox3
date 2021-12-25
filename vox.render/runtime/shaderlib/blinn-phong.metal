@@ -349,7 +349,7 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
 struct GBufferData {
     half4 albedo_specular [[color(0)]];
     half4 normal_shadow   [[color(1)]];
-    float depth           [[color(2)]];
+    float depth           [[depth(greater)]];
 };
 
 fragment GBufferData deferred_fragment_blinn_phong(VertexOut in [[stage_in]],

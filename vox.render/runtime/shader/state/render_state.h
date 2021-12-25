@@ -31,6 +31,7 @@ struct RenderState {
 private:
     friend class RenderPipeline;
     friend class ForwardRenderPipeline;
+    friend class DeferredRenderPipeline;
 
     void _apply(Engine* engine,
                 MTLRenderPipelineDescriptor* pipelineDescriptor,

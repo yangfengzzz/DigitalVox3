@@ -80,7 +80,8 @@ public:
 protected:
     friend class RenderPipeline;
     friend class ForwardRenderPipeline;
-    
+    friend class DeferredRenderPipeline;
+
     MDLVertexDescriptor* _vertexDescriptor = nullptr;
     std::vector<std::optional<MeshBuffer>> _vertexBuffer;
     std::vector<SubMesh> _subMeshes;

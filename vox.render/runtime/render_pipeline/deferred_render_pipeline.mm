@@ -17,14 +17,15 @@ RenderPipeline(camera) {
     
     _albedo_specular_GBufferFormat = MTLPixelFormatRGBA8Unorm_sRGB;
     _normal_shadow_GBufferFormat = MTLPixelFormatRGBA8Snorm;
-    _depth_GBufferFormat = MTLPixelFormatR32Float;
+    _depth_GBufferFormat = MTLPixelFormatDepth32Float_Stencil8;
     
     _renderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
     _renderPipelineDescriptor.label = @"G-buffer Creation";
     _renderPipelineDescriptor.colorAttachments[0].pixelFormat = _albedo_specular_GBufferFormat;
     _renderPipelineDescriptor.colorAttachments[1].pixelFormat = _normal_shadow_GBufferFormat;
-    _renderPipelineDescriptor.colorAttachments[2].pixelFormat = _depth_GBufferFormat;
-    
+    _renderPipelineDescriptor.depthAttachmentPixelFormat = _depth_GBufferFormat;
+    _renderPipelineDescriptor.stencilAttachmentPixelFormat = _depth_GBufferFormat;
+
     // Create a render pass descriptor to create an encoder for rendering to the GBuffers.
     // The encoder stores rendered data of each attachment when encoding ends.
     _GBufferRenderPassDescriptor = [MTLRenderPassDescriptor new];
@@ -75,7 +76,8 @@ RenderPipeline(camera) {
         
         _GBufferRenderPassDescriptor.colorAttachments[0].texture = _albedo_specular_GBuffer;
         _GBufferRenderPassDescriptor.colorAttachments[1].texture = _normal_shadow_GBuffer;
-        _GBufferRenderPassDescriptor.colorAttachments[2].texture = _depth_GBuffer;
+        _GBufferRenderPassDescriptor.depthAttachment.texture = _depth_GBuffer;
+        _GBufferRenderPassDescriptor.stencilAttachment.texture = _depth_GBuffer;
     };
     createFrameBuffer(_camera->engine()->canvas()->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
@@ -127,9 +129,79 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
     pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
 }
 
-void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& renderQueue,
+void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& items,
                                           RenderPass* pass) {
+    if (items.size() == 0) {
+        return;
+    }
     
+    const auto& engine = _camera->engine();
+    const auto& scene = _camera->scene();
+    auto& rhi = engine->_hardwareRenderer;
+    const auto& sceneData = scene->shaderData;
+    const auto& cameraData = _camera->shaderData;
+    
+    //MARK:- Start Render
+    for (size_t i = 0; i < items.size(); i++) {
+        const auto& item = items[i];
+        const auto& renderPassFlag = item.component->entity()->layer;
+        
+        if ((renderPassFlag & pass->mask) == 0) {
+            continue;
+        }
+        
+        // RenderElement
+        auto compileMacros = ShaderMacroCollection();
+        const auto& element = item;
+        const auto& renderer = element.component;
+        auto material = pass->material(element);
+        if (material == nullptr) {
+            material = element.material;
+        }
+        auto& rendererData = renderer->shaderData;
+        const auto& materialData = material->shaderData;
+        
+        if (renderer->receiveShadow && shadowCount != 0) {
+            rendererData.enableMacro(SHADOW_MAP_COUNT, std::make_pair(shadowCount, MTLDataTypeInt));
+        }
+        
+        if (renderer->receiveShadow && cubeShadowCount != 0) {
+            rendererData.enableMacro(CUBE_SHADOW_MAP_COUNT, std::make_pair(cubeShadowCount, MTLDataTypeInt));
+        }
+        
+        // union render global macro and material self macro.
+        materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
+        
+        //MARK:- Set Pipeline State
+        ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros);
+        if (!program->isValid()) {
+            continue;
+        }
+        
+        _renderPipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
+        _renderPipelineDescriptor.vertexFunction = program->vertexShader();
+        _renderPipelineDescriptor.fragmentFunction = program->fragmentShader();
+
+        MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+        material->renderState._apply(engine, _renderPipelineDescriptor, depthStencilDescriptor);
+        rhi.setDepthStencilState(depthStencilDescriptor);
+        
+        const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_renderPipelineDescriptor);
+        rhi.setRenderPipelineState(pipelineState);
+        
+        //MARK:- Load Resouces
+        pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
+        pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
+        pipelineState->uploadAll(pipelineState->rendererUniformBlock, rendererData);
+        pipelineState->uploadAll(pipelineState->materialUniformBlock, materialData);
+        pipelineState->uploadAll(pipelineState->internalUniformBlock, shaderData);
+        
+        auto& buffers = element.mesh->_vertexBuffer;
+        for (uint32_t index = 0; index < buffers.size(); index++) {
+            rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
+        }
+        rhi.drawPrimitive(element.subMesh);
+    }
 }
 
 }
