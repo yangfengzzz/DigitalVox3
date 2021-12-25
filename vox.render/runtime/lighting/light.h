@@ -35,8 +35,6 @@ public:
      */
     math::Matrix inverseViewMatrix();
     
-    virtual void _appendData(size_t lightIndex) = 0;
-    
 public:
     bool enableShadow() {
         return _enableShadow;

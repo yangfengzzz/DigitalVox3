@@ -9,8 +9,6 @@
 #define direct_light_hpp
 
 #include "light.h"
-#include "../shader/shader_property.h"
-#include "../shader/shader_data.h"
 #include "maths/color.h"
 
 namespace vox {
@@ -34,6 +32,8 @@ public:
     ShadowData shadow;
     
 private:
+    friend class LightManager;
+
     /**
      * Mount to the current Scene.
      */
@@ -43,16 +43,8 @@ private:
      * Unmount from the current Scene.
      */
     void _onDisable() override;
-
-private:
-    friend class LightManager;
     
-    void _appendData(size_t lightIndex) override;
-    
-    static void _updateShaderData(ShaderData& shaderData);
-    
-    static ShaderProperty _directLightProperty;
-    static std::array<DirectLightData, Light::MAX_LIGHT> _shaderData;
+    void _updateShaderData(DirectLightData& shaderData);
 };
 
 }

@@ -9,8 +9,6 @@
 #define point_light_hpp
 
 #include "light.h"
-#include "../shader/shader_property.h"
-#include "../shader/shader_data.h"
 #include "maths/color.h"
 
 namespace vox {
@@ -46,6 +44,8 @@ private:
      */
     void _onDisable() override;
     
+    void _updateShaderData(PointLightData& shaderData);
+    
 private:
     friend class LightManager;
     
@@ -57,13 +57,6 @@ private:
         std::make_pair(math::Float3(0, 0, 10), math::Float3(0, 1, 0)),
         std::make_pair(math::Float3(0, 0, -10), math::Float3(0, 1, 0)),
     };
-    
-    void _appendData(size_t lightIndex) override;
-    
-    static void _updateShaderData(ShaderData& shaderData);
-    
-    static ShaderProperty _pointLightProperty;
-    static std::array<PointLightData, Light::MAX_LIGHT> _shaderData;
 };
 
 }

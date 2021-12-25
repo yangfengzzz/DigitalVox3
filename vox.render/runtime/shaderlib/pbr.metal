@@ -389,9 +389,9 @@ void addSpotDirectLightRadiance(SpotLightData spotLight, GeometricContext geomet
 
 void addTotalDirectRadiance(GeometricContext geometry, PhysicalMaterial material,
                             thread ReflectedLight& reflectedLight,
-                            constant DirectLightData *u_directLight [[buffer(10), function_constant(hasDirectLight)]],
-                            constant PointLightData *u_pointLight [[buffer(11), function_constant(hasPointLight)]],
-                            constant SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]]){
+                            device DirectLightData *u_directLight [[buffer(10), function_constant(hasDirectLight)]],
+                            device PointLightData *u_pointLight [[buffer(11), function_constant(hasPointLight)]],
+                            device SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]]){
     if (directLightCount) {
         for ( int i = 0; i < directLightCount; i ++ ) {
             addDirectionalDirectLightRadiance( u_directLight[i], geometry, material, reflectedLight );
@@ -514,9 +514,9 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
                              constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
                              constant matrix_float4x4 &u_normalMat [[buffer(6)]],
                              constant float3 &u_cameraPos [[buffer(7)]],
-                             constant DirectLightData *u_directLight [[buffer(8), function_constant(hasDirectLight)]],
-                             constant PointLightData *u_pointLight [[buffer(9), function_constant(hasPointLight)]],
-                             constant SpotLightData *u_spotLight [[buffer(10), function_constant(hasSpotLight)]],
+                             device DirectLightData *u_directLight [[buffer(8), function_constant(hasDirectLight)]],
+                             device PointLightData *u_pointLight [[buffer(9), function_constant(hasPointLight)]],
+                             device SpotLightData *u_spotLight [[buffer(10), function_constant(hasSpotLight)]],
                              constant ShadowData* u_shadowData [[buffer(11), function_constant(hasShadow)]],
                              depth2d_array<float> u_shadowMap [[texture(0), function_constant(hasShadow)]],
                              // pbr_envmap_light_frag_define

@@ -10,10 +10,17 @@
 #include "spot_light.h"
 #include "direct_light.h"
 #include "../rhi-metal/render_pipeline_state.h"
+#include "../shader/shader.h"
+#include "../scene.h"
+#include "../engine.h"
 #include "../../log.h"
 
 namespace vox {
-LightManager::LightManager() {
+ShaderProperty LightManager::_pointLightProperty = Shader::createProperty("u_pointLight", ShaderDataGroup::Scene);
+ShaderProperty LightManager::_spotLightProperty = Shader::createProperty("u_spotLight", ShaderDataGroup::Scene);
+ShaderProperty LightManager::_directLightProperty = Shader::createProperty("u_directLight", ShaderDataGroup::Scene);
+LightManager::LightManager(Scene* scene):
+_scene(scene) {
     RenderPipelineState::register_vertex_uploader<std::array<ShadowData, MAX_SHADOW>>(
     [](const std::array<ShadowData, MAX_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
         [encoder setVertexBytes: &x length:sizeof(std::array<ShadowData, MAX_SHADOW>) atIndex:location];
@@ -100,45 +107,63 @@ const std::vector<DirectLight*>& LightManager::directLights() const {
 
 //MARK: - Internal Uploader
 void LightManager::_updateShaderData(ShaderData& shaderData) {
-    /**
-     * ambientLight and envMapLight only use the last one in the scene
-     * */
-    size_t directLightCount = 0;
-    size_t pointLightCount = 0;
-    size_t spotLightCount = 0;
+    size_t pointLightCount = _pointLights.size();
+    _pointLightDatas.resize(pointLightCount);
+    size_t spotLightCount = _spotLights.size();
+    _spotLightDatas.resize(spotLightCount);
+    size_t directLightCount = _directLights.size();
+    _directLights.resize(directLightCount);
     
-    for (size_t i = 0; i < _pointLights.size(); i++) {
-        const auto& light = _pointLights[i];
-        light->_appendData(pointLightCount++);
+    for (size_t i = 0; i < pointLightCount; i++) {
+        _pointLights[i]->_updateShaderData(_pointLightDatas[i]);
     }
     
-    for (size_t i = 0; i < _spotLights.size(); i++) {
-        const auto& light = _spotLights[i];
-        light->_appendData(spotLightCount++);
+    for (size_t i = 0; i < spotLightCount; i++) {
+        _spotLights[i]->_updateShaderData(_spotLightDatas[i]);
     }
     
-    for (size_t i = 0; i < _directLights.size(); i++) {
-        const auto& light = _directLights[i];
-        light->_appendData(directLightCount++);
+    for (size_t i = 0; i < directLightCount; i++) {
+        _directLights[i]->_updateShaderData(_directLightDatas[i]);
     }
     
     if (directLightCount) {
-        DirectLight::_updateShaderData(shaderData);
+        if (_directLightBuffer == nullptr || [_directLightBuffer length] != sizeof(DirectLightData) * _directLightDatas.size()) {
+            _directLightBuffer = _scene->engine()->resourceLoader()->buildBuffer(_directLightDatas.data(),
+                                                                                 _directLightDatas.size() * sizeof(DirectLightData), NULL);
+        } else {
+            memcpy([_directLightBuffer contents], _directLightDatas.data(), _directLightDatas.size() * sizeof(DirectLightData));
+        }
+        
         shaderData.enableMacro(DIRECT_LIGHT_COUNT, std::make_pair(directLightCount, MTLDataTypeInt));
+        shaderData.setData(LightManager::_directLightProperty, _directLightBuffer);
     } else {
         shaderData.disableMacro(DIRECT_LIGHT_COUNT);
     }
     
     if (pointLightCount) {
-        PointLight::_updateShaderData(shaderData);
+        if (_pointLightBuffer == nullptr || [_pointLightBuffer length] != sizeof(PointLightData) * _pointLightDatas.size()) {
+            _pointLightBuffer = _scene->engine()->resourceLoader()->buildBuffer(_pointLightDatas.data(),
+                                                                                 _pointLightDatas.size() * sizeof(PointLightData), NULL);
+        } else {
+            memcpy([_pointLightBuffer contents], _pointLightDatas.data(), _pointLightDatas.size() * sizeof(PointLightData));
+        }
+        
         shaderData.enableMacro(POINT_LIGHT_COUNT, std::make_pair(pointLightCount, MTLDataTypeInt));
+        shaderData.setData(LightManager::_pointLightProperty, _pointLightBuffer);
     } else {
         shaderData.disableMacro(POINT_LIGHT_COUNT);
     }
     
     if (spotLightCount) {
-        SpotLight::_updateShaderData(shaderData);
+        if (_spotLightBuffer == nullptr || [_spotLightBuffer length] != sizeof(SpotLightData) * _spotLightDatas.size()) {
+            _spotLightBuffer = _scene->engine()->resourceLoader()->buildBuffer(_spotLightDatas.data(),
+                                                                               _spotLightDatas.size() * sizeof(SpotLightData), NULL);
+        } else {
+            memcpy([_spotLightBuffer contents], _spotLightDatas.data(), _spotLightDatas.size() * sizeof(SpotLightData));
+        }
+        
         shaderData.enableMacro(SPOT_LIGHT_COUNT, std::make_pair(spotLightCount, MTLDataTypeInt));
+        shaderData.setData(LightManager::_spotLightProperty, _spotLightBuffer);
     } else {
         shaderData.disableMacro(SPOT_LIGHT_COUNT);
     }

@@ -14,7 +14,8 @@ namespace vox {
 Scene::Scene(Engine* engine, std::string name):
 EngineObject(engine),
 name(name),
-_ambientLight(this) {}
+_ambientLight(this),
+light_manager(this) {}
 
 AmbientLight& Scene::ambientLight() {
     return _ambientLight;

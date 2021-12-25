@@ -9,8 +9,6 @@
 #define spot_light_hpp
 
 #include "light.h"
-#include "../shader/shader_property.h"
-#include "../shader/shader_data.h"
 #include "maths/color.h"
 
 namespace vox {
@@ -40,6 +38,8 @@ public:
     ShadowData shadow;
     
 private:
+    friend class LightManager;
+
     /**
      * Mount to the current Scene.
      */
@@ -50,15 +50,7 @@ private:
      */
     void _onDisable() override;
     
-private:
-    friend class LightManager;
-    
-    void _appendData(size_t lightIndex) override;
-    
-    static void _updateShaderData(ShaderData& shaderData);
-    
-    static ShaderProperty _spotLightProperty;
-    static std::array<SpotLightData, Light::MAX_LIGHT> _shaderData;
+    void _updateShaderData(SpotLightData& shaderData);
 };
 
 }
