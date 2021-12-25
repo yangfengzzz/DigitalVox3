@@ -168,6 +168,7 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
     return out;
 }
 
+//MARK: - Forward Fragment
 float3 getNormal(VertexOut in, float u_normalIntensity,
                  sampler smp, texture2d<float> u_normalTexture,
                  bool is_front_face) {
@@ -341,4 +342,73 @@ fragment float4 fragment_blinn_phong(VertexOut in [[stage_in]],
     float4 final_color = emission + ambient + diffuse + specular;
     final_color.a = diffuse.a;
     return final_color;
+}
+
+//MARK: - Deferred Fragment
+// G-buffer outputs using Raster Order Groups
+struct GBufferData {
+    half4 albedo_specular [[color(0)]];
+    half4 normal_shadow   [[color(1)]];
+    float depth           [[color(2)]];
+};
+
+fragment GBufferData deferred_fragment_blinn_phong(VertexOut in [[stage_in]],
+                                                   sampler textureSampler [[sampler(0)]],
+                                                   constant matrix_float4x4 &u_localMat [[buffer(0)]],
+                                                   constant matrix_float4x4 &u_modelMat [[buffer(1)]],
+                                                   constant matrix_float4x4 &u_viewMat [[buffer(2)]],
+                                                   constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                                                   constant matrix_float4x4 &u_MVMat [[buffer(4)]],
+                                                   constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
+                                                   constant matrix_float4x4 &u_normalMat [[buffer(6)]],
+                                                   constant float3 &u_cameraPos [[buffer(7)]],
+                                                   constant EnvMapLight &u_envMapLight [[buffer(8)]],
+                                                   constant float3 *u_env_sh [[buffer(9), function_constant(hasSH)]],
+                                                   texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
+                                                   constant DirectLightData *u_directLight [[buffer(10), function_constant(hasDirectLight)]],
+                                                   constant PointLightData *u_pointLight [[buffer(11), function_constant(hasPointLight)]],
+                                                   constant SpotLightData *u_spotLight [[buffer(12), function_constant(hasSpotLight)]],
+                                                   constant ShadowData* u_shadowData [[buffer(13), function_constant(hasShadow)]],
+                                                   constant CubeShadowData* u_cubeShadowData [[buffer(14), function_constant(hasCubeShadow)]],
+                                                   depth2d_array<float> u_shadowMap [[texture(1), function_constant(hasShadow)]],
+                                                   depthcube_array<float> u_cubeShadowMap [[texture(2), function_constant(hasCubeShadow)]],
+                                                   constant float4 &u_emissiveColor [[buffer(15)]],
+                                                   constant float4 &u_diffuseColor [[buffer(16)]],
+                                                   constant float4 &u_specularColor [[buffer(17)]],
+                                                   constant float &u_shininess [[buffer(18)]],
+                                                   constant float &u_normalIntensity [[buffer(19)]],
+                                                   constant float &u_alphaCutoff [[buffer(20)]],
+                                                   texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveTexture)]],
+                                                   texture2d<float> u_diffuseTexture [[texture(4), function_constant(hasDiffuseTexture)]],
+                                                   texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularTexture)]],
+                                                   texture2d<float> u_normalTexture [[texture(6), function_constant(hasNormalTexture)]],
+                                                   bool is_front_face [[front_facing]]) {
+    float shadow = 0;
+    float totalShadow = 0;
+    if (hasShadow) {
+        for( int i = 0; i < shadowMapCount; i++) {
+            shadow += filterPCF(in.v_pos, in.view_pos, u_shadowMap, u_shadowData, i);
+            //            shadow += textureProj(in.v_pos, in.view_pos, float2(0), u_shadowMap, u_shadowData, i);
+        }
+        totalShadow += shadowMapCount;
+    }
+    if (hasCubeShadow) {
+        for( int i = 0; i < cubeShadowMapCount; i++) {
+            //            shadow += cubeFilterPCF(in.v_pos, in.view_pos, u_cubeShadowMap, u_cubeShadowData, i);// too expensive
+            shadow += cubeTextureProj(in.v_pos, in.view_pos, float2(0), u_cubeShadowMap, u_cubeShadowData, i);
+        }
+        totalShadow += cubeShadowMapCount;
+    }
+    
+    if (hasShadow || hasCubeShadow) {
+        shadow /= totalShadow;
+    } else {
+        shadow = 1.0;
+    }
+        
+    GBufferData out;
+    out.albedo_specular = half4(u_diffuseColor);
+    out.normal_shadow = half4(in.v_normal.x, in.v_normal.y, in.v_normal.z, shadow);
+    out.depth = in.position.z;
+    return out;
 }

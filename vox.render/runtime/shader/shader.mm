@@ -15,25 +15,32 @@ std::unordered_map<std::string, ShaderProperty> Shader::_propertyNameMap = {};
 
 Shader::Shader(const std::string& name,
                const std::string& vertexSource,
-               const std::string& fragmentSource):
+               const std::string& fragmentSource,
+               const std::string& deferredFragmentSource):
 name(name),
 _vertexSource(vertexSource),
-_fragmentSource(fragmentSource){
+_fragmentSource(fragmentSource),
+_deferredFragmentSource(deferredFragmentSource){
 }
 
-ShaderProgram* Shader::findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection) {
-    return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _fragmentSource, macroCollection);
+ShaderProgram* Shader::findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection, bool isDeferred) {
+    if (isDeferred) {
+        return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _deferredFragmentSource, macroCollection);
+    } else {
+        return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _fragmentSource, macroCollection);
+    }
 }
 
 Shader* Shader::create(const std::string& name,
-                      const std::string& vertexSource,
-                      const std::string& fragmentSource) {
+                       const std::string& vertexSource,
+                       const std::string& fragmentSource,
+                       const std::string& deferredFragmentSource) {
     auto iter = Shader::_shaderMap.find(name);
     
     if (iter != Shader::_shaderMap.end()) {
         log::Err() << ("Shader named" + name + "already exists.") << std::endl;
     }
-    auto shader = std::make_unique<Shader>(name, vertexSource, fragmentSource);
+    auto shader = std::make_unique<Shader>(name, vertexSource, fragmentSource, deferredFragmentSource);
     auto shaderPtr = shader.get();
     Shader::_shaderMap.insert(std::make_pair(name, std::move(shader)));
     return shaderPtr;

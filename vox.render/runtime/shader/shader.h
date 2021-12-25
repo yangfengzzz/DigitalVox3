@@ -25,9 +25,10 @@ public:
     /** The name of shader. */
     std::string name;
     
-    Shader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
+    Shader(const std::string& name, const std::string& vertexSource,
+           const std::string& fragmentSource, const std::string& deferredFragmentSource = "");
     
-    ShaderProgram* findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection);
+    ShaderProgram* findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection, bool isDeferred = false);
     
     /**
      * Create a shader.
@@ -35,7 +36,8 @@ public:
      * @param vertexSource - Vertex source code
      * @param fragmentSource - Fragment source code
      */
-    static Shader* create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
+    static Shader* create(const std::string& name, const std::string& vertexSource,
+                          const std::string& fragmentSource, const std::string& deferredFragmentSource = "");
     
     /**
      * Find a shader by name.
@@ -70,6 +72,7 @@ private:
     int _shaderId = 0;
     std::string _vertexSource;
     std::string _fragmentSource;
+    std::string _deferredFragmentSource;
 };
 
 }
