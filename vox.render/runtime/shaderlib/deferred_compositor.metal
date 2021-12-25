@@ -42,10 +42,8 @@ deferred_direction_lighting_vertex(uint vid[[ vertex_id ]]) {
 fragment half4
 deferred_directional_lighting_fragment_traditional(QuadInOut in [[ stage_in ]],
                                                    texture2d<half> albedo_specular_GBuffer [[ texture(0) ]],
-                                                   texture2d<half> normal_shadow_GBuffer [[ texture(1) ]],
-                                                   texture2d<float> depth_GBuffer [[ texture(2)  ]]) {
+                                                   texture2d<half> normal_shadow_GBuffer [[ texture(1) ]]) {
     uint2 position = uint2(in.position.xy);
-    float depth = depth_GBuffer.read(position.xy).x;
     half4 normal_shadow = normal_shadow_GBuffer.read(position.xy);
     half4 albedo_specular = albedo_specular_GBuffer.read(position.xy);
     return albedo_specular;

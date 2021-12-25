@@ -34,7 +34,8 @@ private:
 
     // GBuffer
     MTLRenderPassDescriptor *_GBufferRenderPassDescriptor;
-    MTLRenderPipelineDescriptor* _renderPipelineDescriptor;
+    MTLRenderPipelineDescriptor* _GBufferRenderPipelineDescriptor;
+    MTLStencilDescriptor *_GBufferStencilStateDesc;
     
     // Compositor
     MTLRenderPassDescriptor *_finalRenderPassDescriptor;
