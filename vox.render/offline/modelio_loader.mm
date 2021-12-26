@@ -7,6 +7,7 @@
 
 #include "modelio_loader.h"
 #include "../runtime/engine.h"
+#include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
 
 namespace vox {
 namespace offline {
@@ -44,6 +45,38 @@ void ModeIOLoader::loadFromFile(const std::string& path, const std::string& mode
 }
 
 void ModeIOLoader::loadNode(EntityPtr parent, MDLObject* object) {
+    auto entity = parent->createChild();
+    
+    // If this Model I/O  object is a mesh object (not a camera, light, or something else),
+    // create an app-specific AAPLMesh object from it
+    if ([object isKindOfClass:[MDLMesh class]]) {
+        MDLMesh* mesh = (MDLMesh*) object;
+        loadMesh(entity, mesh);
+    }
+    
+    // Recursively traverse the ModelIO asset hierarchy to find ModelIO meshes that are children
+    // of this ModelIO object and create app-specific AAPLMesh objects from those ModelIO meshes
+    for (MDLObject *child in object.children) {
+        loadNode(entity, child);
+    }
+}
+
+void ModeIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
+    // Have ModelIO create the tangents from mesh texture coordinates and normals
+    [modelIOMesh addTangentBasisForTextureCoordinateAttributeNamed:MDLVertexAttributeTextureCoordinate
+                                              normalAttributeNamed:MDLVertexAttributeNormal
+                                             tangentAttributeNamed:MDLVertexAttributeTangent];
+
+    // Have ModelIO create bitangents from mesh texture coordinates and the newly created tangents
+    [modelIOMesh addTangentBasisForTextureCoordinateAttributeNamed:MDLVertexAttributeTextureCoordinate
+                                             tangentAttributeNamed:MDLVertexAttributeTangent
+                                           bitangentAttributeNamed:MDLVertexAttributeBitangent];
+    
+    // Create the metalKit mesh which will contain the Metal buffer(s) with the mesh's vertex data
+    //   and submeshes with info to draw the mesh
+    MTKMesh* metalKitMesh = engine->_hardwareRenderer.convertFrom(modelIOMesh);
+    
+    auto renderer = parent->addComponent<GPUSkinnedMeshRenderer>();
     
 }
 

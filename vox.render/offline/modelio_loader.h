@@ -28,6 +28,8 @@ public:
 private:
     void loadNode(EntityPtr parent, MDLObject* object);
     
+    void loadMesh(EntityPtr parent, MDLMesh* modelIOMesh);
+    
 private:
     Engine* engine;
 };
