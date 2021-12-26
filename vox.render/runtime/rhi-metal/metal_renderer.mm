@@ -163,6 +163,26 @@ void MetalRenderer::endRenderPass() {
     [_renderEncoder endEncoding];
 }
 
+//MARK: - MTLKit Loader
+MTKMeshBufferAllocator* MetalRenderer::createBufferAllocator() {
+    // Create a MetalKit mesh buffer allocator so that ModelIO will load mesh data directly into
+    // Metal buffers accessible by the GPU
+    return [[MTKMeshBufferAllocator alloc] initWithDevice:_device];
+}
+
+MTKMesh* MetalRenderer::convertFrom(MDLMesh *modelIOMesh) {
+    NSError* error;
+    // Create the metalKit mesh which will contain the Metal buffer(s) with the mesh's vertex data
+    //   and submeshes with info to draw the mesh
+    MTKMesh* metalKitMesh = [[MTKMesh alloc] initWithMesh:modelIOMesh
+                                                   device:_device
+                                                    error:&error];
+    if (error != nil) {
+        NSLog(@"Error: failed to create MTKMesh state: %@", error);
+    }
+    return metalKitMesh;
+}
+
 //MARK: - Blit Encoder
 void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
     auto blit = [_commandBuffer blitCommandEncoder];
@@ -272,8 +292,7 @@ id<MTLTexture> MetalRenderer::createCubeAtlas(const std::array<id<MTLTexture>, 6
 id <MTLRenderPipelineState> MetalRenderer::createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor) {
     NSError *error = nil;
     auto state = [_device newRenderPipelineStateWithDescriptor:descriptor error:&error];
-    if (error != nil)
-    {
+    if (error != nil) {
         NSLog(@"Error: failed to create Metal pipeline state: %@", error);
     }
     return state;

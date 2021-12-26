@@ -54,6 +54,11 @@ public:
     void endRenderPass();
     
 public:
+    MTKMeshBufferAllocator *createBufferAllocator();
+    
+    MTKMesh* convertFrom(MDLMesh *modelIOMesh);
+    
+public:
     void synchronizeResource(id<MTLResource> resource);
     
     id<MTLTexture> createTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
