@@ -84,7 +84,7 @@ MeshPtr ParticleRenderer::_createMesh() {
     const auto n_position = position.length();
     bool shouldResize = _numberOfVertex != n_position;
     
-    std::vector<float> flatData(n_position * sizeof(float) * 3);
+    std::vector<float> flatData(n_position * 3);
     for (size_t i = 0; i < n_position; i++) {
         flatData[3*i] = position[i].x;
         flatData[3*i+1] = position[i].y;

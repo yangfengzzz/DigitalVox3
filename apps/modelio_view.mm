@@ -75,6 +75,7 @@ public:
     PointLightManager(Entity* entity):Script(entity) {
         lightEntities.reserve(numLights);
         speeds.reserve(numLights);
+        originalPositions.reserve(numLights);
         particle = entity->addComponent<ParticleRenderer>();
         particle->setMaterial(std::make_shared<ParticleMaterial>(engine()));
         particle->particleSystemData()->resize(numLights);
@@ -106,7 +107,9 @@ public:
                 speed *= (random()%2)*2-1;
             }
             speed *= .05;
-            lightEntity->transform->setPosition(distance*sinf(angle), height, distance*cosf(angle));
+            auto pos = Float3(distance*sinf(angle), height, distance*cosf(angle));
+            originalPositions.push_back(pos);
+            lightEntity->transform->setPosition(pos);
             auto worldPos = lightEntity->transform->worldPosition();
             particle->particleSystemData()->positions()[lightId].x = worldPos.x;
             particle->particleSystemData()->positions()[lightId].y = worldPos.y;
@@ -128,7 +131,7 @@ public:
     
     void onUpdate(float deltaTime) override {
         for (uint32 lightId = 0; lightId < numLights; lightId++) {
-            Float3 originalLightPositions = lightEntities[lightId]->transform->position();
+            Float3 originalLightPositions = originalPositions[lightId];
             Float3 currentPosition;
             if (lightId < treeLights) {
                 double lightPeriod = speeds[lightId] * totalTime;
@@ -151,13 +154,14 @@ public:
             particle->particleSystemData()->positions()[lightId].y = worldPos.y;
             particle->particleSystemData()->positions()[lightId].z = worldPos.z;
         }
-        totalTime += deltaTime;
+        totalTime += deltaTime * 500;
     }
     
 private:
     float totalTime = 0;
     std::vector<EntityPtr> lightEntities;
     std::vector<float> speeds;
+    std::vector<Float3> originalPositions;
     ParticleRenderer* particle;
 };
 
