@@ -15,14 +15,14 @@
 
 namespace vox {
 namespace offline {
-class ModeIOLoader {
+class ModelIOLoader {
 public:
     EntityPtr defaultSceneRoot;
 
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
     
-    ModeIOLoader(Engine* engine);
+    ModelIOLoader(Engine* engine);
     
     void loadFromFile(const std::string& path, const std::string& modelName);
     

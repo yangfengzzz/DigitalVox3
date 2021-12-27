@@ -13,7 +13,7 @@
 
 namespace vox {
 namespace offline {
-ModeIOLoader::ModeIOLoader(Engine* engine):
+ModelIOLoader::ModelIOLoader(Engine* engine):
 engine(engine),
 metalResourceLoader(engine->resourceLoader()) {
     defaultSceneRoot = std::make_shared<Entity>(engine);
@@ -61,7 +61,7 @@ metalResourceLoader(engine->resourceLoader()) {
     _modelIOVertexDescriptor.attributes[Attributes::UV_0].name = MDLVertexAttributeTextureCoordinate;
 }
 
-void ModeIOLoader::loadFromFile(const std::string& path, const std::string& modelName) {
+void ModelIOLoader::loadFromFile(const std::string& path, const std::string& modelName) {
     NSString* pathName = [[NSString alloc]initWithUTF8String:path.c_str()];
     NSString* textureName = [[NSString alloc]initWithUTF8String:modelName.c_str()];
     NSURL* url = [[NSBundle bundleWithPath:pathName]URLForResource:textureName withExtension:nil];
@@ -89,7 +89,7 @@ void ModeIOLoader::loadFromFile(const std::string& path, const std::string& mode
     }
 }
 
-void ModeIOLoader::loadNode(EntityPtr parent, MDLObject* object) {
+void ModelIOLoader::loadNode(EntityPtr parent, MDLObject* object) {
     auto entity = parent->createChild();
     
     // If this Model I/O  object is a mesh object (not a camera, light, or something else),
@@ -106,7 +106,7 @@ void ModeIOLoader::loadNode(EntityPtr parent, MDLObject* object) {
     }
 }
 
-void ModeIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
+void ModelIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
     // Have ModelIO create the tangents from mesh texture coordinates and normals
     [modelIOMesh addTangentBasisForTextureCoordinateAttributeNamed:MDLVertexAttributeTextureCoordinate
                                               normalAttributeNamed:MDLVertexAttributeNormal
@@ -150,7 +150,7 @@ void ModeIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
     renderer->setMesh(newMesh);
 }
 
-void ModeIOLoader::loadMaterial(std::shared_ptr<BlinnPhongMaterial>& pbr, MDLMaterial* material) {
+void ModelIOLoader::loadMaterial(std::shared_ptr<BlinnPhongMaterial>& pbr, MDLMaterial* material) {
     pbr->setBaseTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticBaseColor));
     pbr->setSpecularTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticSpecular));
     pbr->setNormalTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticTangentSpaceNormal));

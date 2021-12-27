@@ -596,6 +596,7 @@
 		049E3EC6276D595C003FEE00 /* metal_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049E3EC4276D595C003FEE00 /* metal_loader.mm */; };
 		049E3EC7276D595C003FEE00 /* metal_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 049E3EC5276D595C003FEE00 /* metal_loader.h */; };
 		049E3ECE276DC26E003FEE00 /* function-common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398B2753A83B00204B8E /* function-common.metal */; };
+		04A7110B2779463900BF6864 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -619,7 +620,6 @@
 		04AD284F277544C400B86C7E /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
 		04AD2850277544C400B86C7E /* deferred_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AD284E277544C400B86C7E /* deferred_render_pipeline.h */; };
 		04AD28542776CC0C00B86C7E /* deferred_compositor.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28532776CC0C00B86C7E /* deferred_compositor.metal */; };
-		04AD28592777788700B86C7E /* deferred_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28512776924500B86C7E /* deferred_view.mm */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
 		04C2EA49276EC59600091FB3 /* specular_map.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA48276EC59600091FB3 /* specular_map.metal */; };
 		04C2EA4D276EE49700091FB3 /* brdf_lut.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398D2753A83B00204B8E /* brdf_lut.metal */; };
@@ -1568,6 +1568,7 @@
 		049E3ECB276DA75A003FEE00 /* pbrbasic.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbrbasic.metal; sourceTree = "<group>"; };
 		049E3ECF276DC40A003FEE00 /* pbr_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pbr_view.mm; sourceTree = "<group>"; };
 		04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = omni_shadowMap_view.mm; sourceTree = "<group>"; };
+		04A7110A2779463900BF6864 /* modelio_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = modelio_view.mm; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -2995,6 +2996,7 @@
 				04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */,
 				04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */,
 				04AD28512776924500B86C7E /* deferred_view.mm */,
+				04A7110A2779463900BF6864 /* modelio_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";
@@ -4557,7 +4559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AD28592777788700B86C7E /* deferred_view.mm in Sources */,
+				04A7110B2779463900BF6864 /* modelio_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
