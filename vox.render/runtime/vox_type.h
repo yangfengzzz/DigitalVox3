@@ -33,6 +33,7 @@ using PBRMaterialPtr = std::shared_ptr<PBRMaterial>;
 class Camera;
 class Renderer;
 class MeshRenderer;
+class GPUSkinnedMeshRenderer;
 class Script;
 class Animator;
 class SceneAnimator;

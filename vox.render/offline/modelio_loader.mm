@@ -131,6 +131,7 @@ void ModelIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
     MTKMesh* metalKitMesh = engine->_hardwareRenderer.convertFrom(modelIOMesh);
     
     auto renderer = parent->addComponent<GPUSkinnedMeshRenderer>();
+    renderers.push_back(renderer);
     auto newMesh = std::make_shared<BufferMesh>(engine);
     newMesh->setVertexDescriptor(modelIOMesh.vertexDescriptor);
     for (int i = 0; i < metalKitMesh.vertexBuffers.count; i++) {

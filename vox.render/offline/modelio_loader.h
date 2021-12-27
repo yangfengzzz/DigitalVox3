@@ -21,6 +21,7 @@ public:
 
     std::vector<id<MTLTexture>> textures;
     std::vector<MaterialPtr> materials;
+    std::vector<GPUSkinnedMeshRenderer*> renderers;
     
     ModelIOLoader(Engine* engine);
     
