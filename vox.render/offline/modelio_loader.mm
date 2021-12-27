@@ -7,12 +7,15 @@
 
 #include "modelio_loader.h"
 #include "../runtime/engine.h"
+#include "../runtime/mesh/buffer_mesh.h"
 #include "../runtime/mesh/gpu_skinned_mesh_renderer.h"
+#include "../runtime/material/blinn_phong_material.h"
 
 namespace vox {
 namespace offline {
 ModeIOLoader::ModeIOLoader(Engine* engine):
-engine(engine) {
+engine(engine),
+metalResourceLoader(engine->resourceLoader()) {
     defaultSceneRoot = std::make_shared<Entity>(engine);
 }
 
@@ -77,7 +80,29 @@ void ModeIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
     MTKMesh* metalKitMesh = engine->_hardwareRenderer.convertFrom(modelIOMesh);
     
     auto renderer = parent->addComponent<GPUSkinnedMeshRenderer>();
+    auto newMesh = std::make_shared<BufferMesh>(engine);
+    newMesh->setVertexDescriptor(modelIOMesh.vertexDescriptor);
+    for (int i = 0; i < metalKitMesh.vertexBuffers.count; i++) {
+        newMesh->setVertexBufferBinding(metalKitMesh.vertexBuffers[i].buffer, 0, i);
+    }
     
+    for (int i = 0; i < metalKitMesh.submeshes.count; i++) {
+        const auto& mtkSubmesh = metalKitMesh.submeshes[i];
+        newMesh->addSubMesh(MeshBuffer(mtkSubmesh.indexBuffer.buffer, mtkSubmesh.indexBuffer.length, mtkSubmesh.indexBuffer.type),
+                            mtkSubmesh.indexType, mtkSubmesh.indexCount, mtkSubmesh.primitiveType);
+        
+        auto mat = std::make_shared<BlinnPhongMaterial>(engine);
+        loadMaterial(mat, modelIOMesh.submeshes[i].material);
+        materials.push_back(mat);
+        renderer->setMaterial(i, mat);
+    }
+    renderer->setMesh(newMesh);
+}
+
+void ModeIOLoader::loadMaterial(std::shared_ptr<BlinnPhongMaterial>& pbr, MDLMaterial* material) {
+    pbr->setBaseTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticBaseColor));
+    pbr->setSpecularTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticSpecular));
+    pbr->setNormalTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticTangentSpaceNormal));
 }
 
 }

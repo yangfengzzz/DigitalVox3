@@ -67,6 +67,68 @@ id<MTLTexture> MetalLoader::loadTexture(const std::string& path, const std::stri
     return texture;
 }
 
+id<MTLTexture> MetalLoader::loadTexture(MDLMaterial* material, MDLMaterialSemantic materialSemantic) {
+    id<MTLTexture> texture;
+    
+    NSArray<MDLMaterialProperty *> *propertiesWithSemantic =
+    [material propertiesWithSemantic:materialSemantic];
+    
+    for (MDLMaterialProperty *property in propertiesWithSemantic) {
+        if(property.type == MDLMaterialPropertyTypeString ||
+           property.type == MDLMaterialPropertyTypeURL) {
+            // Load the textures with shader read using private storage
+            NSDictionary *textureLoaderOptions = @{
+                MTKTextureLoaderOptionTextureUsage       : @(MTLTextureUsageShaderRead),
+                MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate)
+            };
+            
+            // First will interpret the string as a file path and attempt to load it with
+            //    -[MTKTextureLoader newTextureWithContentsOfURL:options:error:]
+            
+            NSURL *url = property.URLValue;
+            NSMutableString *URLString = nil;
+            if(property.type == MDLMaterialPropertyTypeURL) {
+                URLString = [[NSMutableString alloc] initWithString:[url absoluteString]];
+            } else {
+                URLString = [[NSMutableString alloc] initWithString:@"file://"];
+                [URLString appendString:property.stringValue];
+            }
+            
+            NSURL *textureURL = [NSURL URLWithString:URLString];
+            
+            // Attempt to load the texture from the file system
+            texture = [_textureLoader newTextureWithContentsOfURL:textureURL
+                                                          options:textureLoaderOptions
+                                                            error:nil];
+            
+            // If the texture has been found for a material using the string as a file path name...
+            if(texture) {
+                // ...return it
+                return texture;
+            }
+            
+            // If no texture found by interpreting it as a file path or as an asset name
+            // in the asset catalog, something went wrong (Perhaps the file was missing or
+            // misnamed in the asset catalog, model/material file, or file system)
+            
+            // Depending on how the Metal render pipeline use with this submesh is implemented,
+            // this condition can be handled more gracefully.  The app could load a dummy texture
+            // that will look okay when set with the pipeline or ensure that the pipelines
+            // rendering this submesh do not require a material with this property.
+            
+            [NSException raise:@"Texture data for material property not found"
+                        format:@"Requested material property semantic: %lu string: %@",
+             materialSemantic, property.stringValue];
+        }
+    }
+    
+    [NSException raise:@"No appropriate material property from which to create texture"
+                format:@"Requested material property semantic: %lu", materialSemantic];
+    
+    // If we're here, this model doesn't have any textures
+    return nullptr;
+}
+
 id<MTLTexture> MetalLoader::loadTexture(MDLTexture* texture) {
     NSDictionary<MTKTextureLoaderOption, id> * options = @{
         MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,

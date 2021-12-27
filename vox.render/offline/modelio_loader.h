@@ -20,6 +20,7 @@ public:
     EntityPtr defaultSceneRoot;
 
     std::vector<id<MTLTexture>> textures;
+    std::vector<MaterialPtr> materials;
     
     ModeIOLoader(Engine* engine);
     
@@ -30,8 +31,12 @@ private:
     
     void loadMesh(EntityPtr parent, MDLMesh* modelIOMesh);
     
+    void loadMaterial(std::shared_ptr<BlinnPhongMaterial>& pbr, MDLMaterial* material);
+
+    
 private:
     Engine* engine;
+    MetalLoaderPtr metalResourceLoader;
 };
 
 }
