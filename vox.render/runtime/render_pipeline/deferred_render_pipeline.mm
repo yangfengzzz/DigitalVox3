@@ -101,19 +101,12 @@ RenderPipeline(camera) {
     _finalRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
     _finalRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
     
-    Shader shader("Deferred Directional Lighting", "deferred_direction_lighting_vertex",
-                  "deferred_directional_lighting_fragment_traditional");
-    auto program = shader.findShaderProgram(camera->engine(), ShaderMacroCollection());
-    MTLRenderPipelineDescriptor *renderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
-
-    renderPipelineDescriptor.label = @"Deferred Directional Lighting";
-    renderPipelineDescriptor.vertexDescriptor = nil;
-    renderPipelineDescriptor.vertexFunction = program->vertexShader();
-    renderPipelineDescriptor.fragmentFunction = program->fragmentShader();
-    renderPipelineDescriptor.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
-    renderPipelineDescriptor.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
-    renderPipelineDescriptor.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
-    _directionalLightPipelineState = rhi.createRenderPipelineState(renderPipelineDescriptor);
+    _directionalLightPipelineDesc = [MTLRenderPipelineDescriptor new];
+    _directionalLightPipelineDesc.label = @"Deferred Directional Lighting";
+    _directionalLightPipelineDesc.vertexDescriptor = nil;
+    _directionalLightPipelineDesc.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
+    _directionalLightPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+    _directionalLightPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
     
     // Stencil state setup so direction lighting fragment shader only executed on pixels
     // drawn in GBuffer stage (i.e. mask out the background/sky)
@@ -167,18 +160,7 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         
         rhi.activeRenderTarget(_finalRenderPassDescriptor);
         rhi.beginRenderPass(_finalRenderPassDescriptor, camera, mipLevel);
-        
-        rhi.setCullMode(MTLCullModeBack);
-        rhi.setStencilReferenceValue(128);
-        rhi.setRenderPipelineState(_directionalLightPipelineState);
-        rhi.setDepthStencilState(_directionLightDepthStencilState);
-        rhi.setFragmentTexture(_diffuse_occlusion_GBuffer, 0);
-        rhi.setFragmentTexture(_specular_roughness_GBuffer, 1);
-        rhi.setFragmentTexture(_normal_GBuffer, 2);
-        rhi.setFragmentTexture(_emissive_GBuffer, 3);
-
-        rhi.drawPrimitive(MTLPrimitiveTypeTriangle, 0, 6);
-        
+        _drawDirectionalLights();
         rhi.endRenderPass();// renderEncoder
     }
     
@@ -262,6 +244,40 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         }
         rhi.drawPrimitive(element.subMesh);
     }
+}
+
+void DeferredRenderPipeline::_drawDirectionalLights() {
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    const auto& cameraData = _camera->shaderData;
+    const auto& scene = _camera->scene();
+    const auto& sceneData = scene->shaderData;
+    auto compileMacros = scene->_globalShaderMacro;
+    Shader shader("Deferred Directional Lighting", "deferred_direction_lighting_vertex",
+                  "deferred_directional_lighting_fragment_traditional");
+    ShaderProgram* program = shader.findShaderProgram(engine, compileMacros, true);
+    if (!program->isValid()) {
+        return;
+    }
+    
+    _directionalLightPipelineDesc.vertexFunction = program->vertexShader();
+    _directionalLightPipelineDesc.fragmentFunction = program->fragmentShader();
+    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_directionalLightPipelineDesc);
+    rhi.setRenderPipelineState(pipelineState);
+    
+    rhi.setCullMode(MTLCullModeBack);
+    rhi.setStencilReferenceValue(128);
+    rhi.setDepthStencilState(_directionLightDepthStencilState);
+    rhi.setFragmentTexture(_diffuse_occlusion_GBuffer, 0);
+    rhi.setFragmentTexture(_specular_roughness_GBuffer, 1);
+    rhi.setFragmentTexture(_normal_GBuffer, 2);
+    rhi.setFragmentTexture(_emissive_GBuffer, 3);
+    rhi.setFragmentTexture(rhi.depthTexture(), 4);
+    
+    pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
+    pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
+    
+    rhi.drawPrimitive(MTLPrimitiveTypeTriangle, 0, 6);
 }
 
 }

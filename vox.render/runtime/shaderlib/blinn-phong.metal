@@ -146,7 +146,7 @@ vertex VertexOut vertex_blinn_phong(const VertexIn in [[stage_in]],
             out.tangentW = normalize( float3x3(u_normalMat.columns[0].xyz,
                                                u_normalMat.columns[1].xyz,
                                                u_normalMat.columns[2].xyz) * tangent.xyz);
-            out.bitangentW = -cross( out.normalW, out.tangentW );
+            out.bitangentW = -cross( out.normalW, out.tangentW ); // sign is important
         } else {
             out.v_normal = normalize( float3x3(u_normalMat.columns[0].xyz,
                                                u_normalMat.columns[1].xyz,

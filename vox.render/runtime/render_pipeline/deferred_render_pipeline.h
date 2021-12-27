@@ -24,6 +24,8 @@ private:
     
     void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
     
+    void _drawDirectionalLights();
+    
 private:
     MTLPixelFormat _diffuse_occlusion_GBufferFormat;
     id <MTLTexture> _diffuse_occlusion_GBuffer;
@@ -41,7 +43,7 @@ private:
     
     // Compositor
     MTLRenderPassDescriptor *_finalRenderPassDescriptor;
-    id <MTLRenderPipelineState> _directionalLightPipelineState;
+    MTLRenderPipelineDescriptor *_directionalLightPipelineDesc;
     id <MTLDepthStencilState> _directionLightDepthStencilState;
 
 };

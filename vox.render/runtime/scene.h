@@ -102,6 +102,7 @@ public:
     void destroy();
     
 private:
+    friend class DeferredRenderPipeline;
     friend class SceneManager;
     friend class Engine;
     friend class Entity;

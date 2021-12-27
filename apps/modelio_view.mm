@@ -195,7 +195,7 @@ int main(int, char**) {
         renderer->castShadow = true;
         renderer->receiveShadow = true;
     }
-    loader.defaultSceneRoot->addComponent<PointLightManager>();
+//    loader.defaultSceneRoot->addComponent<PointLightManager>();
     rootEntity->addChild(loader.defaultSceneRoot);
     
     engine.run();
