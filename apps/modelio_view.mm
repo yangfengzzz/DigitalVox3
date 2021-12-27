@@ -29,9 +29,9 @@ int main(int, char**) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(5, 5, 1);
+    cameraEntity->transform->setPosition(-6.02535057, 36.6681671, 48.6991844);
     cameraEntity->addComponent<vox::Camera>();
-    cameraEntity->addComponent<control::FreeControl>();
+    cameraEntity->addComponent<control::OrbitControl>();
     
     // init point light
     auto light = rootEntity->createChild("light");
@@ -40,6 +40,7 @@ int main(int, char**) {
     
     auto loader = offline::ModelIOLoader(&engine);
     loader.loadFromFile("../models/Temple", "Temple.obj");
+    loader.defaultSceneRoot->transform->setScale(0.05, 0.05, 0.05);
     rootEntity->addChild(loader.defaultSceneRoot);
     
     engine.run();
