@@ -35,7 +35,7 @@ RenderPipeline(camera) {
     _GBufferRenderPassDescriptor.depthAttachment.clearDepth = 1.0;
     _GBufferRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
     _GBufferRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
-
+    
     _GBufferRenderPassDescriptor.stencilAttachment.clearStencil = 0;
     _GBufferRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionClear;
     _GBufferRenderPassDescriptor.stencilAttachment.storeAction = MTLStoreActionStore;
@@ -43,14 +43,14 @@ RenderPipeline(camera) {
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
         MTLTextureDescriptor *GBufferTextureDesc =
-            [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
-                                                               width:buffer_width
-                                                              height:buffer_height
-                                                           mipmapped:NO];
+        [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
+                                                           width:buffer_width
+                                                          height:buffer_height
+                                                       mipmapped:NO];
         GBufferTextureDesc.textureType = MTLTextureType2D;
         GBufferTextureDesc.usage |= MTLTextureUsageRenderTarget;
         GBufferTextureDesc.storageMode = MTLStorageModePrivate;
-
+        
         GBufferTextureDesc.pixelFormat = _diffuse_occlusion_GBufferFormat;
         _diffuse_occlusion_GBuffer = loader->buildTexture(GBufferTextureDesc);
         _diffuse_occlusion_GBuffer.label = @"Diffuse + Occlusion GBuffer";
@@ -73,7 +73,7 @@ RenderPipeline(camera) {
     };
     createFrameBuffer(_camera->engine()->canvas()->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
-
+    
     _GBufferRenderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
     _GBufferRenderPipelineDescriptor.label = @"G-buffer Creation";
     _GBufferRenderPipelineDescriptor.colorAttachments[0].pixelFormat = _diffuse_occlusion_GBufferFormat;
@@ -92,38 +92,92 @@ RenderPipeline(camera) {
     _GBufferStencilStateDesc.writeMask = 0xFF;
     
     //MARK: - Compositor
-    // Create a render pass descriptor for thelighting and composition pass
-    _finalRenderPassDescriptor = [MTLRenderPassDescriptor new];
-
-    // Whatever rendered in the final pass needs to be stored so it can be displayed
-    _finalRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-    _finalRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-    _finalRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
-    _finalRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
-    
-    _directionalLightPipelineDesc = [MTLRenderPipelineDescriptor new];
-    _directionalLightPipelineDesc.label = @"Deferred Directional Lighting";
-    _directionalLightPipelineDesc.vertexDescriptor = nil;
-    _directionalLightPipelineDesc.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
-    _directionalLightPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
-    _directionalLightPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
-    
-    // Stencil state setup so direction lighting fragment shader only executed on pixels
-    // drawn in GBuffer stage (i.e. mask out the background/sky)
-    MTLStencilDescriptor *stencilStateDesc = [MTLStencilDescriptor new];
-    stencilStateDesc.stencilCompareFunction = MTLCompareFunctionEqual;
-    stencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
-    stencilStateDesc.depthFailureOperation = MTLStencilOperationKeep;
-    stencilStateDesc.depthStencilPassOperation = MTLStencilOperationKeep;
-    stencilStateDesc.readMask = 0xFF;
-    stencilStateDesc.writeMask = 0x0;
-    MTLDepthStencilDescriptor *depthStencilDesc = [MTLDepthStencilDescriptor new];
-    depthStencilDesc.label = @"Deferred Directional Lighting";
-    depthStencilDesc.depthWriteEnabled = NO;
-    depthStencilDesc.depthCompareFunction = MTLCompareFunctionAlways;
-    depthStencilDesc.frontFaceStencil = stencilStateDesc;
-    depthStencilDesc.backFaceStencil = stencilStateDesc;
-    _directionLightDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
+#pragma mark GBuffer render pass descriptor setup
+    {
+        // Create a render pass descriptor for thelighting and composition pass
+        _finalRenderPassDescriptor = [MTLRenderPassDescriptor new];
+        // Whatever rendered in the final pass needs to be stored so it can be displayed
+        _finalRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+        _finalRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+        _finalRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
+        _finalRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
+    }
+#pragma mark Directional lighting render pipeline setup
+    {
+        _directionalLightPipelineDesc = [MTLRenderPipelineDescriptor new];
+        _directionalLightPipelineDesc.label = @"Deferred Directional Lighting";
+        _directionalLightPipelineDesc.vertexDescriptor = nil;
+        _directionalLightPipelineDesc.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
+        _directionalLightPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _directionalLightPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+    }
+#pragma mark Directional lighting mask depth stencil state setup
+    {
+        // Stencil state setup so direction lighting fragment shader only executed on pixels
+        // drawn in GBuffer stage (i.e. mask out the background/sky)
+        MTLStencilDescriptor *stencilStateDesc = [MTLStencilDescriptor new];
+        stencilStateDesc.stencilCompareFunction = MTLCompareFunctionEqual;
+        stencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
+        stencilStateDesc.depthFailureOperation = MTLStencilOperationKeep;
+        stencilStateDesc.depthStencilPassOperation = MTLStencilOperationKeep;
+        stencilStateDesc.readMask = 0xFF;
+        stencilStateDesc.writeMask = 0x0;
+        MTLDepthStencilDescriptor *depthStencilDesc = [MTLDepthStencilDescriptor new];
+        depthStencilDesc.label = @"Deferred Directional Lighting";
+        depthStencilDesc.depthWriteEnabled = NO;
+        depthStencilDesc.depthCompareFunction = MTLCompareFunctionAlways;
+        depthStencilDesc.frontFaceStencil = stencilStateDesc;
+        depthStencilDesc.backFaceStencil = stencilStateDesc;
+        _directionLightDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
+    }
+#pragma mark Setup icosahedron mesh for fairy light volumes
+    {
+        MTKMeshBufferAllocator *bufferAllocator = rhi.createBufferAllocator();
+        const double unitInscribe = sqrtf(3.0) / 12.0 * (3.0 + sqrtf(5.0));
+        MDLMesh *icosahedronMDLMesh = [MDLMesh newIcosahedronWithRadius:1/unitInscribe inwardNormals:NO allocator:bufferAllocator];
+        MDLVertexDescriptor *icosahedronDescriptor = [[MDLVertexDescriptor alloc] init];
+        icosahedronDescriptor.attributes[0].name = MDLVertexAttributePosition;
+        icosahedronDescriptor.attributes[0].format = MDLVertexFormatFloat4;
+        icosahedronDescriptor.attributes[0].offset = 0;
+        icosahedronDescriptor.attributes[0].bufferIndex = 0;
+        icosahedronDescriptor.layouts[0].stride = sizeof(vector_float4);
+        // Set the vertex descriptor to relayout vertices
+        icosahedronMDLMesh.vertexDescriptor = icosahedronDescriptor;
+        _icosahedronMesh = rhi.convertFrom(icosahedronMDLMesh);
+    }
+#pragma mark Light mask render pipeline state setup
+    {
+        Shader shader("Point Light Mask", "light_mask_vertex", "", "");
+        ShaderProgram* program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection(), true);
+        if (!program->isValid()) {
+            return;
+        }
+        _lightMaskPipelineDesc = [MTLRenderPipelineDescriptor new];
+        _lightMaskPipelineDesc.label = @"Point Light Mask";
+        _lightMaskPipelineDesc.vertexDescriptor = nil;
+        _lightMaskPipelineDesc.vertexFunction = program->vertexShader();
+        _lightMaskPipelineDesc.fragmentFunction = nil;
+        _lightMaskPipelineDesc.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
+        _lightMaskPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _lightMaskPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+    }
+#pragma mark Light mask depth stencil state setup
+    {
+        MTLStencilDescriptor *stencilStateDesc = [MTLStencilDescriptor new];
+        stencilStateDesc.stencilCompareFunction = MTLCompareFunctionAlways;
+        stencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
+        stencilStateDesc.depthFailureOperation = MTLStencilOperationIncrementClamp;
+        stencilStateDesc.depthStencilPassOperation = MTLStencilOperationKeep;
+        stencilStateDesc.readMask = 0x0;
+        stencilStateDesc.writeMask = 0xFF;
+        MTLDepthStencilDescriptor *depthStencilDesc = [MTLDepthStencilDescriptor new];
+        depthStencilDesc.label = @"Point Light Mask";
+        depthStencilDesc.depthWriteEnabled = NO;
+        depthStencilDesc.depthCompareFunction = MTLCompareFunctionLessEqual;
+        depthStencilDesc.frontFaceStencil = stencilStateDesc;
+        depthStencilDesc.backFaceStencil = stencilStateDesc;
+        _lightMaskDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
+    }
 }
 
 DeferredRenderPipeline::~DeferredRenderPipeline() {
@@ -161,6 +215,10 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         rhi.activeRenderTarget(_finalRenderPassDescriptor);
         rhi.beginRenderPass(_finalRenderPassDescriptor, camera, mipLevel);
         _drawDirectionalLights();
+        size_t numPointLights = scene->light_manager.pointLights().size();
+        if (numPointLights > 0) {
+            _drawPointLightMask(numPointLights);
+        }
         rhi.endRenderPass();// renderEncoder
     }
     
@@ -219,7 +277,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         _GBufferRenderPipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
         _GBufferRenderPipelineDescriptor.vertexFunction = program->vertexShader();
         _GBufferRenderPipelineDescriptor.fragmentFunction = program->fragmentShader();
-
+        
         MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
         material->renderState._apply(engine, _GBufferRenderPipelineDescriptor, depthStencilDescriptor);
         depthStencilDescriptor.frontFaceStencil = _GBufferStencilStateDesc;
@@ -227,7 +285,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
         rhi.setDepthStencilState(depthStencilState);
         rhi.setStencilReferenceValue(128);
-
+        
         const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_GBufferRenderPipelineDescriptor);
         rhi.setRenderPipelineState(pipelineState);
         
@@ -278,6 +336,32 @@ void DeferredRenderPipeline::_drawDirectionalLights() {
     pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
     
     rhi.drawPrimitive(MTLPrimitiveTypeTriangle, 0, 6);
+}
+
+void DeferredRenderPipeline::_drawPointLightMask(size_t numPointLights) {
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    const auto& cameraData = _camera->shaderData;
+    const auto& scene = _camera->scene();
+    const auto& sceneData = scene->shaderData;
+    
+    rhi.pushDebugGroup("Draw Light Mask");
+    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_lightMaskPipelineDesc);
+    rhi.setRenderPipelineState(pipelineState);
+    rhi.setDepthStencilState(_lightMaskDepthStencilState);
+    rhi.setStencilReferenceValue(128);
+    rhi.setCullMode(MTLCullModeFront);
+    pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
+    pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
+    
+    MTKMeshBuffer *vertexBuffer = _icosahedronMesh.vertexBuffers[0];
+    rhi.setVertexBuffer(vertexBuffer.buffer, static_cast<uint32_t>(vertexBuffer.offset), 0);
+    MTKSubmesh *icosahedronSubmesh = _icosahedronMesh.submeshes[0];
+    rhi.drawIndexedPrimitives(icosahedronSubmesh.primitiveType, icosahedronSubmesh.indexCount,
+                              icosahedronSubmesh.indexType, icosahedronSubmesh.indexBuffer.buffer,
+                              icosahedronSubmesh.indexBuffer.offset, numPointLights);
+    
+    rhi.popDebugGroup();
 }
 
 }

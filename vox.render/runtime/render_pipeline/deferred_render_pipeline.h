@@ -9,6 +9,7 @@
 #define deferred_render_pipeline_hpp
 
 #include "render_pipeline.h"
+#include <MetalKit/MetalKit.h>
 
 namespace vox {
 class DeferredRenderPipeline :public RenderPipeline {
@@ -26,6 +27,8 @@ private:
     
     void _drawDirectionalLights();
     
+    void _drawPointLightMask(size_t numPointLights);
+    
 private:
     MTLPixelFormat _diffuse_occlusion_GBufferFormat;
     id <MTLTexture> _diffuse_occlusion_GBuffer;
@@ -41,11 +44,15 @@ private:
     MTLRenderPipelineDescriptor* _GBufferRenderPipelineDescriptor;
     MTLStencilDescriptor *_GBufferStencilStateDesc;
     
-    // Compositor
+    // directional light Compositor
     MTLRenderPassDescriptor *_finalRenderPassDescriptor;
     MTLRenderPipelineDescriptor *_directionalLightPipelineDesc;
     id <MTLDepthStencilState> _directionLightDepthStencilState;
 
+    // point light compositor
+    MTKMesh *_icosahedronMesh;
+    MTLRenderPipelineDescriptor *_lightMaskPipelineDesc;
+    id <MTLDepthStencilState> _lightMaskDepthStencilState;
 };
 
 }

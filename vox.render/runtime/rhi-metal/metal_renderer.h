@@ -53,6 +53,10 @@ public:
     
     void endRenderPass();
     
+    void pushDebugGroup(const std::string& groupName);
+    
+    void popDebugGroup();
+    
 public:
     MTKMeshBufferAllocator *createBufferAllocator();
     
@@ -106,9 +110,13 @@ public:
     void bindTexture(id <MTLTexture> texture, int location);
     
     void drawPrimitive(const SubMesh *subPrimitive) const;
-
+    
     void drawPrimitive(MTLPrimitiveType primitiveType,
                        uint32_t vertexStart, uint32_t vertexCount) const;
+    
+    void drawIndexedPrimitives(MTLPrimitiveType primitiveType, size_t indexCount,
+                               MTLIndexType indexType, id<MTLBuffer> indexBuffer,
+                               size_t indexBufferOffset, size_t instanceCount) const;
     
 private:
     id <MTLSamplerState> buildSamplerState();

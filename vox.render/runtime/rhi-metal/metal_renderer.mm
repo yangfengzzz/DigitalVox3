@@ -163,6 +163,14 @@ void MetalRenderer::endRenderPass() {
     [_renderEncoder endEncoding];
 }
 
+void MetalRenderer::pushDebugGroup(const std::string& groupName) {
+    [_renderEncoder pushDebugGroup:[[NSString alloc]initWithUTF8String:groupName.c_str()]];
+}
+
+void MetalRenderer::popDebugGroup() {
+    [_renderEncoder popDebugGroup];
+}
+
 //MARK: - MTLKit Loader
 MTKMeshBufferAllocator* MetalRenderer::createBufferAllocator() {
     // Create a MetalKit mesh buffer allocator so that ModelIO will load mesh data directly into
@@ -353,6 +361,14 @@ void MetalRenderer::drawPrimitive(const SubMesh *subPrimitive) const {
 void MetalRenderer::drawPrimitive(MTLPrimitiveType primitiveType,
                                   uint32_t vertexStart, uint32_t vertexCount) const {
     [_renderEncoder drawPrimitives:primitiveType vertexStart:vertexStart vertexCount:vertexCount];
+}
+
+void MetalRenderer::drawIndexedPrimitives(MTLPrimitiveType primitiveType, size_t indexCount,
+                                          MTLIndexType indexType, id<MTLBuffer> indexBuffer,
+                                          size_t indexBufferOffset, size_t instanceCount) const {
+    [_renderEncoder drawIndexedPrimitives:primitiveType indexCount:indexCount
+                                indexType:indexType indexBuffer:indexBuffer
+                        indexBufferOffset:indexBufferOffset instanceCount:instanceCount];
 }
 
 }

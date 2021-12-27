@@ -68,7 +68,28 @@ deferred_directional_lighting_fragment_traditional(QuadInOut in [[ stage_in ]],
     }
     
     float3 diffuse = diffuse_occlusion.xyz * lightDiffuse;
-    float3 specular = specular_roughness.xyz * lightSpecular;
+    float3 specular = specular_roughness.x * lightSpecular * diffuse_occlusion.xyz; // diff
     
     return float4(diffuse + specular, 1.0);
+}
+
+//MARK: - Point Light
+struct LightMaskOut {
+    float4 position [[position]];
+};
+
+vertex LightMaskOut
+light_mask_vertex(const device float4 *vertices [[ buffer(0) ]],
+                  const device PointLightData *u_pointLight [[buffer(11)]],
+                  constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                  uint iid [[ instance_id ]],
+                  uint vid [[ vertex_id ]]) {
+    LightMaskOut out;
+    
+    // Transform light to position relative to the temple
+    float4 vertex_eye_position = float4(vertices[vid].xyz * u_pointLight[iid].distance + u_pointLight[iid].position, 1);
+    
+    out.position = u_projMat * vertex_eye_position;
+    
+    return out;
 }
