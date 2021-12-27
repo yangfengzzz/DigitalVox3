@@ -93,3 +93,85 @@ light_mask_vertex(const device float4 *vertices [[ buffer(0) ]],
     
     return out;
 }
+
+struct LightInOut {
+    float4 position [[position]];
+    float3 eye_position;
+    uint iid [[flat]];
+};
+
+vertex LightInOut
+deferred_point_lighting_vertex(const device float4 *vertices [[ buffer(0) ]],
+                               const device PointLightData *u_pointLight [[ buffer(11) ]],
+                               constant matrix_float4x4 &u_VPMat [[buffer(3)]],
+                               uint iid [[ instance_id ]],
+                               uint vid [[ vertex_id ]]) {
+    LightInOut out;
+    
+    // Transform light to position relative to the temple
+    float3 vertex_eye_position = vertices[vid].xyz * u_pointLight[iid].distance + u_pointLight[iid].position;
+    
+    out.position = u_VPMat * float4(vertex_eye_position, 1);
+    
+    // Sending light position in view space to next stage
+    out.eye_position = vertex_eye_position;
+    
+    out.iid = iid;
+    
+    return out;
+}
+
+fragment float4
+deferred_point_lighting_fragment_traditional(LightInOut in [[ stage_in ]],
+                                             texture2d<float> diffuse_occlusion_GBuffer [[texture(0)]],
+                                             texture2d<float> specular_roughness_GBuffer [[texture(1)]],
+                                             texture2d<float> normal_GBuffer [[texture(2)]],
+                                             texture2d<float> emissive_GBuffer [[texture(3)]],
+                                             depth2d<float> depth_GBuffer [[texture(4)]],
+                                             const device PointLightData *u_pointLight [[ buffer(11) ]]) {
+    uint2 position = uint2(in.position.xy);
+    float4 diffuse_occlusion = diffuse_occlusion_GBuffer.read(position.xy);
+    float4 specular_roughness = specular_roughness_GBuffer.read(position.xy);
+    float3 normal = normal_GBuffer.read(position.xy).xyz;
+    float depth = depth_GBuffer.read(position.xy);
+    
+    float4 lighting = float4(0);
+    // Used eye_space depth to determine the position of the fragment in eye_space
+    float3 eye_space_fragment_pos = in.eye_position * (depth / in.eye_position.z);
+    
+    float3 light_eye_position = u_pointLight[in.iid].position;
+    float light_distance = length(light_eye_position - eye_space_fragment_pos);
+    float light_radius = u_pointLight[in.iid].distance;
+    
+    if (light_distance < light_radius) {
+        float4 eye_space_light_pos = float4(light_eye_position,1);
+        
+        float3 eye_space_fragment_to_light = eye_space_light_pos.xyz - eye_space_fragment_pos;
+        
+        float3 light_direction = normalize(eye_space_fragment_to_light);
+        
+        float3 light_color = float3(u_pointLight[in.iid].color);
+        
+        // Diffuse contribution
+        float4 diffuse_contribution = float4(diffuse_occlusion.xyz, specular_roughness.x)
+        * max(dot(normal, light_direction),0.0f)
+        * float4(light_color,1);
+        
+        // Specular Contribution
+        float3 halfway_vector = normalize(eye_space_fragment_to_light - eye_space_fragment_pos);
+        
+        float specular_intensity = 32; // fix
+        
+        float specular_factor = powr(max(dot(float3(normal.xyz), float3(halfway_vector)),0.0), specular_intensity);
+        
+        float3 specular_contribution = specular_factor * float3(diffuse_occlusion.xyz) * light_color;
+        
+        // Light falloff
+        float attenuation = 1.0 - (light_distance / light_radius);
+        attenuation *= attenuation;
+        
+        lighting += (diffuse_contribution + float4(specular_contribution, 0)) * attenuation;
+    }
+    
+    return lighting;
+}

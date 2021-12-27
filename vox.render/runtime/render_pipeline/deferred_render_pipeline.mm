@@ -178,6 +178,46 @@ RenderPipeline(camera) {
         depthStencilDesc.backFaceStencil = stencilStateDesc;
         _lightMaskDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
     }
+#pragma mark Point light render pipeline setup
+    {
+        Shader shader("Point Light", "deferred_point_lighting_vertex", "", "deferred_point_lighting_fragment_traditional");
+        ShaderProgram* program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection(), true);
+        if (!program->isValid()) {
+            return;
+        }
+        _lightPipelineDesc = [MTLRenderPipelineDescriptor new];
+        // Enable additive blending
+        _lightPipelineDesc.colorAttachments[0].blendingEnabled = YES;
+        _lightPipelineDesc.colorAttachments[0].rgbBlendOperation = MTLBlendOperationAdd;
+        _lightPipelineDesc.colorAttachments[0].alphaBlendOperation = MTLBlendOperationAdd;
+        _lightPipelineDesc.colorAttachments[0].destinationRGBBlendFactor = MTLBlendFactorOne;
+        _lightPipelineDesc.colorAttachments[0].destinationAlphaBlendFactor = MTLBlendFactorOne;
+        _lightPipelineDesc.colorAttachments[0].sourceRGBBlendFactor = MTLBlendFactorOne;
+        _lightPipelineDesc.colorAttachments[0].sourceAlphaBlendFactor = MTLBlendFactorOne;
+        _lightPipelineDesc.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
+        _lightPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _lightPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _lightPipelineDesc.label = @"Light";
+        _lightPipelineDesc.vertexFunction = program->vertexShader();
+        _lightPipelineDesc.fragmentFunction = program->fragmentShader();
+    }
+#pragma mark Point light depth state setup
+    {
+        MTLStencilDescriptor *stencilStateDesc = [MTLStencilDescriptor new];
+        stencilStateDesc.stencilCompareFunction = MTLCompareFunctionLess;
+        stencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
+        stencilStateDesc.depthFailureOperation = MTLStencilOperationKeep;
+        stencilStateDesc.depthStencilPassOperation = MTLStencilOperationKeep;
+        stencilStateDesc.readMask = 0xFF;
+        stencilStateDesc.writeMask = 0x0;
+        MTLDepthStencilDescriptor *depthStencilDesc = [MTLDepthStencilDescriptor new];
+        depthStencilDesc.depthWriteEnabled = NO;
+        depthStencilDesc.depthCompareFunction = MTLCompareFunctionLessEqual;
+        depthStencilDesc.frontFaceStencil = stencilStateDesc;
+        depthStencilDesc.backFaceStencil = stencilStateDesc;
+        depthStencilDesc.label = @"Point Light";
+        _pointLightDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
+    }
 }
 
 DeferredRenderPipeline::~DeferredRenderPipeline() {
@@ -218,6 +258,7 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         size_t numPointLights = scene->light_manager.pointLights().size();
         if (numPointLights > 0) {
             _drawPointLightMask(numPointLights);
+            _drawPointLights(numPointLights);
         }
         rhi.endRenderPass();// renderEncoder
     }
@@ -361,6 +402,38 @@ void DeferredRenderPipeline::_drawPointLightMask(size_t numPointLights) {
                               icosahedronSubmesh.indexType, icosahedronSubmesh.indexBuffer.buffer,
                               icosahedronSubmesh.indexBuffer.offset, numPointLights);
     
+    rhi.popDebugGroup();
+}
+
+void DeferredRenderPipeline::_drawPointLights(size_t numPointLights) {
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    const auto& cameraData = _camera->shaderData;
+    const auto& scene = _camera->scene();
+    const auto& sceneData = scene->shaderData;
+    
+    rhi.pushDebugGroup("Draw Point Lights");
+    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_lightPipelineDesc);
+    rhi.setRenderPipelineState(pipelineState);
+    rhi.setFragmentTexture(_diffuse_occlusion_GBuffer, 0);
+    rhi.setFragmentTexture(_specular_roughness_GBuffer, 1);
+    rhi.setFragmentTexture(_normal_GBuffer, 2);
+    rhi.setFragmentTexture(_emissive_GBuffer, 3);
+    rhi.setFragmentTexture(rhi.depthTexture(), 4);
+
+    rhi.setDepthStencilState(_pointLightDepthStencilState);
+    rhi.setStencilReferenceValue(128);
+    rhi.setCullMode(MTLCullModeBack);
+    pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
+    pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
+
+    MTKMeshBuffer *vertexBuffer = _icosahedronMesh.vertexBuffers[0];
+    rhi.setVertexBuffer(vertexBuffer.buffer, static_cast<uint32_t>(vertexBuffer.offset), 0);
+    MTKSubmesh *icosahedronSubmesh = _icosahedronMesh.submeshes[0];
+    rhi.drawIndexedPrimitives(icosahedronSubmesh.primitiveType, icosahedronSubmesh.indexCount,
+                              icosahedronSubmesh.indexType, icosahedronSubmesh.indexBuffer.buffer,
+                              icosahedronSubmesh.indexBuffer.offset, numPointLights);
+
     rhi.popDebugGroup();
 }
 

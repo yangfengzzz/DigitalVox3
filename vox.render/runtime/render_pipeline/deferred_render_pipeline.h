@@ -29,6 +29,8 @@ private:
     
     void _drawPointLightMask(size_t numPointLights);
     
+    void _drawPointLights(size_t numPointLights);
+    
 private:
     MTLPixelFormat _diffuse_occlusion_GBufferFormat;
     id <MTLTexture> _diffuse_occlusion_GBuffer;
@@ -53,6 +55,8 @@ private:
     MTKMesh *_icosahedronMesh;
     MTLRenderPipelineDescriptor *_lightMaskPipelineDesc;
     id <MTLDepthStencilState> _lightMaskDepthStencilState;
+    MTLRenderPipelineDescriptor * _lightPipelineDesc;
+    id <MTLDepthStencilState> _pointLightDepthStencilState;
 };
 
 }
