@@ -253,7 +253,7 @@ void DeferredRenderPipeline::_drawDirectionalLights() {
     const auto& scene = _camera->scene();
     const auto& sceneData = scene->shaderData;
     auto compileMacros = scene->_globalShaderMacro;
-    Shader shader("Deferred Directional Lighting", "deferred_direction_lighting_vertex",
+    Shader shader("Deferred Directional Lighting", "deferred_direction_lighting_vertex", "",
                   "deferred_directional_lighting_fragment_traditional");
     ShaderProgram* program = shader.findShaderProgram(engine, compileMacros, true);
     if (!program->isValid()) {

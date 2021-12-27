@@ -43,8 +43,9 @@ deferred_directional_lighting_fragment_traditional(QuadInOut in [[ stage_in ]],
                                                    texture2d<float> normal_GBuffer [[texture(2)]],
                                                    texture2d<float> emissive_GBuffer [[texture(3)]],
                                                    depth2d<float> depth_GBuffer [[texture(4)]],
-                                                   constant float &u_shininess [[buffer(18)]],
                                                    device DirectLightData *u_directLight [[buffer(2), function_constant(hasDirectLight)]]) {
+    float u_shininess = 1.0; // rely on material which can't be get
+    
     uint2 position = uint2(in.position.xy);
     float4 diffuse_occlusion = diffuse_occlusion_GBuffer.read(position.xy);
     float4 specular_roughness = specular_roughness_GBuffer.read(position.xy);
