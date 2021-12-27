@@ -69,7 +69,8 @@ id<MTLTexture> MetalLoader::loadTexture(const std::string& path, const std::stri
 
 id<MTLTexture> MetalLoader::loadTexture(MDLMaterial* material, MDLMaterialSemantic materialSemantic) {
     id<MTLTexture> texture;
-    
+    NSError *error;
+
     NSArray<MDLMaterialProperty *> *propertiesWithSemantic =
     [material propertiesWithSemantic:materialSemantic];
     
@@ -84,23 +85,15 @@ id<MTLTexture> MetalLoader::loadTexture(MDLMaterial* material, MDLMaterialSemant
             
             // First will interpret the string as a file path and attempt to load it with
             //    -[MTKTextureLoader newTextureWithContentsOfURL:options:error:]
-            
-            NSURL *url = property.URLValue;
-            NSMutableString *URLString = nil;
-            if(property.type == MDLMaterialPropertyTypeURL) {
-                URLString = [[NSMutableString alloc] initWithString:[url absoluteString]];
-            } else {
-                URLString = [[NSMutableString alloc] initWithString:@"file://"];
-                [URLString appendString:property.stringValue];
-            }
-            
-            NSURL *textureURL = [NSURL URLWithString:URLString];
+            NSURL *textureURL = property.URLValue;
             
             // Attempt to load the texture from the file system
             texture = [_textureLoader newTextureWithContentsOfURL:textureURL
                                                           options:textureLoaderOptions
-                                                            error:nil];
-            
+                                                            error:&error];
+            if (error != nil) {
+                NSLog(@"Error: failed to create Metal Texture: %@", error);
+            }
             // If the texture has been found for a material using the string as a file path name...
             if(texture) {
                 // ...return it
