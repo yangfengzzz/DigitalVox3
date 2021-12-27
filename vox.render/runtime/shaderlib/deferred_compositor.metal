@@ -81,7 +81,7 @@ struct LightMaskOut {
 vertex LightMaskOut
 light_mask_vertex(const device float4 *vertices [[ buffer(0) ]],
                   const device PointLightData *u_pointLight [[buffer(11)]],
-                  constant matrix_float4x4 &u_projMat [[buffer(3)]],
+                  constant matrix_float4x4 &u_VPMat [[buffer(3)]],
                   uint iid [[ instance_id ]],
                   uint vid [[ vertex_id ]]) {
     LightMaskOut out;
@@ -89,7 +89,7 @@ light_mask_vertex(const device float4 *vertices [[ buffer(0) ]],
     // Transform light to position relative to the temple
     float4 vertex_eye_position = float4(vertices[vid].xyz * u_pointLight[iid].distance + u_pointLight[iid].position, 1);
     
-    out.position = u_projMat * vertex_eye_position;
+    out.position = u_VPMat * vertex_eye_position;
     
     return out;
 }
