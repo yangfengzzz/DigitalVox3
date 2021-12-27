@@ -38,7 +38,7 @@ private:
 class SunMove: public Script {
 public:
     SunMove(Entity* entity):Script(entity) {
-        entity->transform->setPosition(-0.25, -0.5, 1.0);
+        entity->transform->setPosition(0.25, 0.5, -1.0);
     }
     
     void onUpdate(float deltaTime) override {
@@ -51,7 +51,8 @@ int main(int, char**) {
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    
+    scene->ambientLight().setDiffuseSolidColor(math::Color(0.1,0.1,0.1));
+
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(-6.02535057, 36.6681671, 48.6991844);
@@ -63,12 +64,14 @@ int main(int, char**) {
     auto sun = sky->createChild("sun");
     sun->addComponent<SunMove>();
     auto diretLight = sun->addComponent<DirectLight>();
+    diretLight->shadow.intensity = 0;
     diretLight->intensity = 1.0;
     diretLight->setEnableShadow(true);
     
     auto loader = offline::ModelIOLoader(&engine);
     loader.loadFromFile("../models/Temple", "Temple.obj");
     loader.defaultSceneRoot->transform->setScale(0.05, 0.05, 0.05);
+    loader.defaultSceneRoot->transform->setPosition(0, -10, 0);
     for (auto& renderer : loader.renderers) {
         renderer->castShadow = true;
         renderer->receiveShadow = true;

@@ -21,7 +21,7 @@ resouceCache(this) {
     _library = [_device newDefaultLibrary];
     _metalResourceLoader = std::make_shared<MetalLoader>(_device);
     
-    _colorPixelFormat = MTLPixelFormatBGRA8Unorm;
+    _colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB; // linear space
     _samplerState = buildSamplerState();
     
     ImGui_ImplMetal_Init(_device);
