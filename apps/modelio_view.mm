@@ -18,6 +18,7 @@
 #include "../vox.render/runtime/controls/free_control.h"
 #include "../vox.render/runtime/lighting/point_light.h"
 #include "../vox.render/runtime/lighting/direct_light.h"
+#include "../vox.render/runtime/particle/particle_renderer.h"
 #include "../vox.render/offline/modelio_loader.h"
 
 using namespace vox;
@@ -46,6 +47,16 @@ public:
     }
 };
 
+class ParticleMaterial: public BaseMaterial {
+public:
+    ParticleMaterial(Engine* engine):BaseMaterial(engine, Shader::find("particle-shader")) {
+        setIsTransparent(true);
+    }
+    
+private:
+    ShaderProperty _baseTextureProp = Shader::createProperty("u_particleTexture", ShaderDataGroup::Material);
+};
+
 class PointLightManager: public Script {
 public:
     static constexpr uint32_t numLights = 100;
@@ -64,6 +75,9 @@ public:
     PointLightManager(Entity* entity):Script(entity) {
         lightEntities.reserve(numLights);
         speeds.reserve(numLights);
+        particle = entity->addComponent<ParticleRenderer>();
+        particle->setMaterial(std::make_shared<ParticleMaterial>(engine()));
+        particle->particleSystemData()->resize(numLights);
         for (uint32 lightId = 0; lightId < numLights; lightId++) {
             auto lightEntity = entity->createChild("PointLight" + std::to_string(lightId));
             lightEntities.push_back(lightEntity);
@@ -93,6 +107,11 @@ public:
             }
             speed *= .05;
             lightEntity->transform->setPosition(distance*sinf(angle), height, distance*cosf(angle));
+            auto worldPos = lightEntity->transform->worldPosition();
+            particle->particleSystemData()->positions()[lightId].x = worldPos.x;
+            particle->particleSystemData()->positions()[lightId].y = worldPos.y;
+            particle->particleSystemData()->positions()[lightId].z = worldPos.z;
+            
             light->distance = random_float(25,35)/10.0;
             speeds.push_back(speed);
             
@@ -127,6 +146,10 @@ public:
                 currentPosition = transformCoordinate(originalLightPositions, rotMat);
             }
             lightEntities[lightId]->transform->setPosition(currentPosition);
+            auto worldPos = lightEntities[lightId]->transform->worldPosition();
+            particle->particleSystemData()->positions()[lightId].x = worldPos.x;
+            particle->particleSystemData()->positions()[lightId].y = worldPos.y;
+            particle->particleSystemData()->positions()[lightId].z = worldPos.z;
         }
         totalTime += deltaTime;
     }
@@ -135,6 +158,7 @@ private:
     float totalTime = 0;
     std::vector<EntityPtr> lightEntities;
     std::vector<float> speeds;
+    ParticleRenderer* particle;
 };
 
 int main(int, char**) {
