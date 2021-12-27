@@ -67,9 +67,14 @@ id<MTLTexture> MetalLoader::loadTexture(const std::string& path, const std::stri
     return texture;
 }
 
-id<MTLTexture> MetalLoader::loadTexture(MDLMaterial* material, MDLMaterialSemantic materialSemantic) {
+id<MTLTexture> MetalLoader::loadTexture(MDLMaterial* material, MDLMaterialSemantic materialSemantic, bool isTopLeft) {
     id<MTLTexture> texture;
     NSError *error;
+    
+    MTKTextureLoaderOrigin origin = MTKTextureLoaderOriginTopLeft;
+    if (!isTopLeft) {
+        origin = MTKTextureLoaderOriginBottomLeft;
+    }
 
     NSArray<MDLMaterialProperty *> *propertiesWithSemantic =
     [material propertiesWithSemantic:materialSemantic];
@@ -80,7 +85,8 @@ id<MTLTexture> MetalLoader::loadTexture(MDLMaterial* material, MDLMaterialSemant
             // Load the textures with shader read using private storage
             NSDictionary *textureLoaderOptions = @{
                 MTKTextureLoaderOptionTextureUsage       : @(MTLTextureUsageShaderRead),
-                MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate)
+                MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate),
+                MTKTextureLoaderOptionOrigin: origin
             };
             
             // First will interpret the string as a file path and attempt to load it with

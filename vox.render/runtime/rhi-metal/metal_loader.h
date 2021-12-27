@@ -31,7 +31,7 @@ public:
     
     id<MTLTexture> loadTexture(const std::string& path, const std::string& imageName, bool isTopLeft = true);
     
-    id<MTLTexture> loadTexture(MDLMaterial* material, MDLMaterialSemantic materialSemantic);
+    id<MTLTexture> loadTexture(MDLMaterial* material, MDLMaterialSemantic materialSemantic, bool isTopLeft = true);
     
     id<MTLTexture> loadTexture(MDLTexture* texture);
     

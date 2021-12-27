@@ -151,9 +151,9 @@ void ModelIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
 }
 
 void ModelIOLoader::loadMaterial(std::shared_ptr<BlinnPhongMaterial>& pbr, MDLMaterial* material) {
-    pbr->setBaseTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticBaseColor));
-    pbr->setSpecularTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticSpecular));
-    pbr->setNormalTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticTangentSpaceNormal));
+    pbr->setBaseTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticBaseColor, false));
+    pbr->setSpecularTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticSpecular, false));
+    pbr->setNormalTexture(metalResourceLoader->loadTexture(material, MDLMaterialSemanticTangentSpaceNormal, false));
 }
 
 }
