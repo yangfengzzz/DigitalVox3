@@ -37,6 +37,12 @@ private:
 private:
     Engine* engine;
     MetalLoaderPtr metalResourceLoader;
+    
+    // Vertex descriptor for models loaded with MetalKit
+    MTLVertexDescriptor *_defaultVertexDescriptor;
+    // Create a ModelIO vertexDescriptor so that the format/layout of the ModelIO mesh vertices
+    //   cah be made to match Metal render pipeline's vertex descriptor layout
+    MDLVertexDescriptor *_modelIOVertexDescriptor;
 };
 
 }

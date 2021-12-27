@@ -17,6 +17,48 @@ ModeIOLoader::ModeIOLoader(Engine* engine):
 engine(engine),
 metalResourceLoader(engine->resourceLoader()) {
     defaultSceneRoot = std::make_shared<Entity>(engine);
+    
+    _defaultVertexDescriptor = [MTLVertexDescriptor new];
+
+    // Positions.
+    _defaultVertexDescriptor.attributes[Attributes::Position].format = MTLVertexFormatFloat3;
+    _defaultVertexDescriptor.attributes[Attributes::Position].offset = 0;
+    _defaultVertexDescriptor.attributes[Attributes::Position].bufferIndex = 0;
+
+    // Normals.
+    _defaultVertexDescriptor.attributes[Attributes::Normal].format = MTLVertexFormatFloat3;
+    _defaultVertexDescriptor.attributes[Attributes::Normal].offset = 0;
+    _defaultVertexDescriptor.attributes[Attributes::Normal].bufferIndex = 1;
+    
+    // Tangents
+    _defaultVertexDescriptor.attributes[Attributes::Tangent].format = MTLVertexFormatFloat4;
+    _defaultVertexDescriptor.attributes[Attributes::Tangent].offset = 12;
+    _defaultVertexDescriptor.attributes[Attributes::Tangent].bufferIndex = 1;
+    
+    // Texture coordinates.
+    _defaultVertexDescriptor.attributes[Attributes::UV_0].format = MTLVertexFormatFloat2;
+    _defaultVertexDescriptor.attributes[Attributes::UV_0].offset = 28;
+    _defaultVertexDescriptor.attributes[Attributes::UV_0].bufferIndex = 1;
+
+    // Position Buffer Layout
+    _defaultVertexDescriptor.layouts[0].stride = 12;
+    _defaultVertexDescriptor.layouts[0].stepRate = 1;
+    _defaultVertexDescriptor.layouts[0].stepFunction = MTLVertexStepFunctionPerVertex;
+
+    // Generic Attribute Buffer Layout
+    _defaultVertexDescriptor.layouts[1].stride = 36;
+    _defaultVertexDescriptor.layouts[1].stepRate = 1;
+    _defaultVertexDescriptor.layouts[1].stepFunction = MTLVertexStepFunctionPerVertex;
+    
+    // Create a ModelIO vertexDescriptor so that the format/layout of the ModelIO mesh vertices
+    //   cah be made to match Metal render pipeline's vertex descriptor layout
+    _modelIOVertexDescriptor = MTKModelIOVertexDescriptorFromMetal(_defaultVertexDescriptor);
+
+    // Indicate how each Metal vertex descriptor attribute maps to each ModelIO attribute
+    _modelIOVertexDescriptor.attributes[Attributes::Position].name = MDLVertexAttributePosition;
+    _modelIOVertexDescriptor.attributes[Attributes::Normal].name = MDLVertexAttributeNormal;
+    _modelIOVertexDescriptor.attributes[Attributes::Tangent].name = MDLVertexAttributeTangent;
+    _modelIOVertexDescriptor.attributes[Attributes::UV_0].name = MDLVertexAttributeTextureCoordinate;
 }
 
 void ModeIOLoader::loadFromFile(const std::string& path, const std::string& modelName) {
@@ -69,11 +111,20 @@ void ModeIOLoader::loadMesh(EntityPtr parent, MDLMesh* modelIOMesh) {
     [modelIOMesh addTangentBasisForTextureCoordinateAttributeNamed:MDLVertexAttributeTextureCoordinate
                                               normalAttributeNamed:MDLVertexAttributeNormal
                                              tangentAttributeNamed:MDLVertexAttributeTangent];
+    
+    // Apply the ModelIO vertex descriptor that the renderer created to match the Metal vertex descriptor.
 
-    // Have ModelIO create bitangents from mesh texture coordinates and the newly created tangents
-    [modelIOMesh addTangentBasisForTextureCoordinateAttributeNamed:MDLVertexAttributeTextureCoordinate
-                                             tangentAttributeNamed:MDLVertexAttributeTangent
-                                           bitangentAttributeNamed:MDLVertexAttributeBitangent];
+    // Assigning a new vertex descriptor to a ModelIO mesh performs a re-layout of the vertex
+    // vertex data.  In this case, rthe renderer created the ModelIO vertex descriptor so that the
+    // layout of the vertices in the ModelIO mesh match the layout of vertices the Metal render
+    // pipeline expects as input into its vertex shader
+
+    // Note ModelIO must create tangents and bitangents (as done above) before this relayout occur
+    // This is because Model IO's addTangentBasis methods only works with vertex data is all in
+    // 32-bit floating-point.  The vertex descriptor applied, changes those floats into 16-bit
+    // floats or other types from which ModelIO cannot produce tangents
+
+    modelIOMesh.vertexDescriptor = _modelIOVertexDescriptor;
     
     // Create the metalKit mesh which will contain the Metal buffer(s) with the mesh's vertex data
     //   and submeshes with info to draw the mesh
