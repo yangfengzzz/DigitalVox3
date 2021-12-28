@@ -498,7 +498,7 @@ void DeferredRenderPipeline::_drawFairies(size_t numPointLights) {
     const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_fairyPipelineDesc);
     rhi.setRenderPipelineState(pipelineState);
     rhi.setDepthStencilState(_dontWriteDepthStencilState);
-    rhi.setCullMode(MTLCullModeFront);
+    rhi.setCullMode(MTLCullModeBack);
     pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
     pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
     rhi.setVertexBuffer(_fairy, 0, 0);
