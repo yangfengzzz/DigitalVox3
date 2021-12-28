@@ -303,7 +303,7 @@ int main(int, char **) {
             dir = dir * 50;
             
             switch (key) {
-                case GLFW_KEY_SPACE:
+                case GLFW_KEY_ENTER:
                     addSphere(0.5, cameraEntity->transform->position(),
                               cameraEntity->transform->rotationQuaternion(), dir);
                     break;
