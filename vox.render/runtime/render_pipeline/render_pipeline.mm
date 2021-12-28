@@ -189,7 +189,7 @@ void RenderPipeline::_drawSky(const Sky &sky) {
     descriptor.fragmentFunction = program->fragmentShader();
     
     descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
-    descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+    descriptor.depthAttachmentPixelFormat = engine->_hardwareRenderer.depthStencilPixelFormat();
     
     auto depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc] init];
     material->renderState._apply(engine, descriptor, depthStencilDescriptor);

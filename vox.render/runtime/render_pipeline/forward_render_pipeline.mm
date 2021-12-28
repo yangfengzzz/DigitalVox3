@@ -120,7 +120,7 @@ void ForwardRenderPipeline::_drawElement(const std::vector<RenderElement> &items
         descriptor.fragmentFunction = program->fragmentShader();
         
         descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
-        descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
+        descriptor.depthAttachmentPixelFormat = engine->_hardwareRenderer.depthStencilPixelFormat();
         
         MTLDepthStencilDescriptor *depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc] init];
         material->renderState._apply(engine, descriptor, depthStencilDescriptor);

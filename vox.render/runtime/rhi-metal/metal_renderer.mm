@@ -21,7 +21,8 @@ resouceCache(this) {
     _library = [_device newDefaultLibrary];
     _metalResourceLoader = std::make_shared<MetalLoader>(_device);
     
-    _colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB; // linear space
+    _depthStencilPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
+    _colorPixelFormat = MTLPixelFormatBGRA8Unorm; // linear space
     _samplerState = buildSamplerState();
     
     ImGui_ImplMetal_Init(_device);
@@ -39,7 +40,7 @@ resouceCache(this) {
         _layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
         
         // depth texture
-        _depthTexture = _metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float_Stencil8);
+        _depthTexture = _metalResourceLoader->buildTexture(buffer_width, buffer_height, _depthStencilPixelFormat);
     };
     createFrameBuffer(canvas->handle(), 0, 0);
     Canvas::resize_callbacks.push_back(createFrameBuffer);
@@ -58,7 +59,7 @@ id <MTLTexture> MetalRenderer::drawableTexture() {
 }
 
 MTLPixelFormat MetalRenderer::depthStencilPixelFormat() {
-    return MTLPixelFormatDepth32Float_Stencil8;
+    return _depthStencilPixelFormat;
 }
 
 id <MTLTexture> MetalRenderer::depthTexture() {

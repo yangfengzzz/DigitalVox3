@@ -32,10 +32,10 @@ Script(entity) {
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
         
         colorRenderTarget.colorAttachments[0].texture =
-        metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatBGRA8Unorm,
+        metalResourceLoader->buildTexture(buffer_width, buffer_height, entity->engine()->_hardwareRenderer.colorPixelFormat(),
                                           MTLTextureUsageRenderTarget, MTLStorageModeManaged);
         colorRenderTarget.depthAttachment.texture =
-        metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatDepth32Float);
+        metalResourceLoader->buildTexture(buffer_width, buffer_height, entity->engine()->_hardwareRenderer.depthStencilPixelFormat());
     };
     
     colorRenderTarget = [[MTLRenderPassDescriptor alloc] init];

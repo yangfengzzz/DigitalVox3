@@ -145,6 +145,7 @@ private:
     
     // todo delete
     MTLPixelFormat _colorPixelFormat;
+    MTLPixelFormat _depthStencilPixelFormat;
     id <MTLSamplerState> _samplerState;
     
     id <MTLTexture> _depthTexture;
