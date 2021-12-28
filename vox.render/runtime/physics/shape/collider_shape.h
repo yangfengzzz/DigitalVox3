@@ -18,23 +18,23 @@ class ColliderShape {
 public:
     ColliderShape();
     
-    Collider* collider();
+    Collider *collider();
     
 public:
     void setLocalPose(const math::Transform &pose);
     
     math::Transform localPose() const;
     
-    void setPosition(const math::Float3& pos);
+    void setPosition(const math::Float3 &pos);
     
     math::Float3 position() const;
     
-    virtual void setWorldScale(const math::Float3& scale) = 0;
+    virtual void setWorldScale(const math::Float3 &scale) = 0;
     
 public:
-    void setMaterial(PxMaterial* materials);
+    void setMaterial(PxMaterial *materials);
     
-    PxMaterial* material();
+    PxMaterial *material();
     
 public:
     void setQueryFilterData(const PxFilterData &data);
@@ -61,11 +61,11 @@ public:
 protected:
     friend class Collider;
     
-    PxShape* _nativeShape = nullptr;
+    PxShape *_nativeShape = nullptr;
     std::shared_ptr<PxGeometry> _nativeGeometry = nullptr;
-    PxMaterial* _nativeMaterial = nullptr;
+    PxMaterial *_nativeMaterial = nullptr;
     
-    Collider* _collider = nullptr;
+    Collider *_collider = nullptr;
     
     math::Transform _pose;
     static const float halfSqrt;

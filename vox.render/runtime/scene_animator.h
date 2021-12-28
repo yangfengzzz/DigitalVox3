@@ -14,15 +14,15 @@
 #include <string>
 
 namespace vox {
-class SceneAnimator: public Component {
+class SceneAnimator : public Component {
 public:
-    SceneAnimator(Entity* entity);
+    SceneAnimator(Entity *entity);
     
     void update(float deltaTime);
     
-    void addAnimationClip(std::unique_ptr<SceneAnimationClip>&& clip);
+    void addAnimationClip(std::unique_ptr<SceneAnimationClip> &&clip);
     
-    void play(const std::string& name);
+    void play(const std::string &name);
     
 private:
     void _onEnable() override;
@@ -31,7 +31,7 @@ private:
     
 private:
     friend class ComponentsManager;
-
+    
     ssize_t _onUpdateIndex = -1;
     ssize_t _activeAnimation = -1;
     std::vector<std::unique_ptr<SceneAnimationClip>> _animationClips;

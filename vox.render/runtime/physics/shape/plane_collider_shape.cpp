@@ -18,11 +18,11 @@ PlaneColliderShape::PlaneColliderShape() {
 }
 
 math::Float3 PlaneColliderShape::rotation() {
-    const auto& rot = _pose.rotation;
+    const auto &rot = _pose.rotation;
     return math::ToEuler(rot);
 }
 
-void PlaneColliderShape::setRotation(const math::Float3& value) {
+void PlaneColliderShape::setRotation(const math::Float3 &value) {
     _pose.rotation = math::Quaternion::FromEuler(value.x, value.y, value.z);
     _pose.rotation = math::Quaternion::rotateZ(_pose.rotation, M_PI * 0.5);
     _pose.rotation = math::Normalize(_pose.rotation);

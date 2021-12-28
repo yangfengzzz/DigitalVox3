@@ -17,23 +17,23 @@ namespace input {
  */
 class InputManager {
 public:
-    InputManager(Engine* engine);
+    InputManager(Engine *engine);
     
     /**
      * Pointer List.
      */
-    std::vector<Pointer>& pointers();
-
+    std::vector<Pointer> &pointers();
+    
     /**
      *  Whether to handle multi-pointer.
      */
     bool multiPointerEnabled();
-
+    
     void setMultiPointerEnabled(bool enabled);
     
 private:
     void _update();
-
+    
     void _destroy();
     
     PointerManager _pointerManager;

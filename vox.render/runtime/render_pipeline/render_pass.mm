@@ -10,9 +10,9 @@
 namespace vox {
 size_t RenderPass::passNum = 0;
 
-RenderPass::RenderPass(const std::string& name,
+RenderPass::RenderPass(const std::string &name,
                        int priority,
-                       MTLRenderPassDescriptor* renderTarget,
+                       MTLRenderPassDescriptor *renderTarget,
                        Layer mask) {
     if (name != "") {
         this->name = name;

@@ -25,10 +25,10 @@ public:
     /** The name of shader. */
     std::string name;
     
-    Shader(const std::string& name, const std::string& vertexSource,
-           const std::string& fragmentSource, const std::string& deferredFragmentSource = "");
+    Shader(const std::string &name, const std::string &vertexSource,
+           const std::string &fragmentSource, const std::string &deferredFragmentSource = "");
     
-    ShaderProgram* findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection, bool isDeferred = false);
+    ShaderProgram *findShaderProgram(Engine *engine, const ShaderMacroCollection &macroCollection, bool isDeferred = false);
     
     /**
      * Create a shader.
@@ -36,14 +36,14 @@ public:
      * @param vertexSource - Vertex source code
      * @param fragmentSource - Fragment source code
      */
-    static Shader* create(const std::string& name, const std::string& vertexSource,
-                          const std::string& fragmentSource, const std::string& deferredFragmentSource = "");
+    static Shader *create(const std::string &name, const std::string &vertexSource,
+                          const std::string &fragmentSource, const std::string &deferredFragmentSource = "");
     
     /**
      * Find a shader by name.
      * @param name - Name of the shader
      */
-    static Shader* find(const std::string& name);
+    static Shader *find(const std::string &name);
     
 public:
     /**
@@ -51,23 +51,23 @@ public:
      * @param name - Name of the shader property
      * @returns Shader property
      */
-    static std::optional<ShaderProperty> getPropertyByName(const std::string& name);
+    static std::optional<ShaderProperty> getPropertyByName(const std::string &name);
     
-    static std::optional<ShaderDataGroup::Enum> getShaderPropertyGroup(const std::string& propertyName);
-
+    static std::optional<ShaderDataGroup::Enum> getShaderPropertyGroup(const std::string &propertyName);
+    
     /**
      * Create shader property by name.
      * @param name - Name of the shader property
      * @param group - Group of shader data
      * @returns Shader property
      */
-    static ShaderProperty createProperty(const std::string& name, ShaderDataGroup::Enum group);    
+    static ShaderProperty createProperty(const std::string &name, ShaderDataGroup::Enum group);
     
 private:
     // common shader map
     static std::unordered_map<std::string, std::unique_ptr<Shader>> _shaderMap;
     static std::unordered_map<std::string, ShaderProperty> _propertyNameMap;
-
+    
     // object shader data
     int _shaderId = 0;
     std::string _vertexSource;

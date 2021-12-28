@@ -8,7 +8,7 @@
 #include "buffer_mesh.h"
 
 namespace vox {
-BufferMesh::BufferMesh(Engine* engine, const std::string& name):
+BufferMesh::BufferMesh(Engine *engine, const std::string &name) :
 Mesh(engine, name) {
 }
 
@@ -20,19 +20,19 @@ void BufferMesh::setInstanceCount(size_t newValue) {
     _instanceCount = newValue;
 }
 
-const std::vector<std::optional<MeshBuffer>>& BufferMesh::vertexBuffer() {
+const std::vector<std::optional<MeshBuffer>> &BufferMesh::vertexBuffer() {
     return _vertexBuffer;
 }
 
-MDLVertexDescriptor* BufferMesh::vertexDescriptor() {
+MDLVertexDescriptor *BufferMesh::vertexDescriptor() {
     return _vertexDescriptor;
 }
 
-void BufferMesh::setVertexDescriptor(MDLVertexDescriptor* descriptor) {
+void BufferMesh::setVertexDescriptor(MDLVertexDescriptor *descriptor) {
     _vertexDescriptor = descriptor;
 }
 
-void BufferMesh::setVertexBuffer(const MeshBuffer& vertexBuffer, size_t index) {
+void BufferMesh::setVertexBuffer(const MeshBuffer &vertexBuffer, size_t index) {
     if (_vertexBuffer.size() <= index) {
         _vertexBuffer.reserve(index + 1);
         for (size_t i = _vertexBuffer.size(); i < index; i++) {
@@ -42,7 +42,7 @@ void BufferMesh::setVertexBuffer(const MeshBuffer& vertexBuffer, size_t index) {
     _setVertexBuffer(index, vertexBuffer);
 }
 
-void BufferMesh::setVertexBufferBinding(id<MTLBuffer> vertexBuffer, int offset, size_t index) {
+void BufferMesh::setVertexBufferBinding(id <MTLBuffer> vertexBuffer, int offset, size_t index) {
     auto binding = MeshBuffer(vertexBuffer, offset, MDLMeshBufferTypeVertex);
     if (_vertexBuffer.size() <= index) {
         _vertexBuffer.reserve(index + 1);
@@ -53,7 +53,7 @@ void BufferMesh::setVertexBufferBinding(id<MTLBuffer> vertexBuffer, int offset, 
     _setVertexBuffer(index, binding);
 }
 
-void BufferMesh::setVertexBufferBindings(const std::vector<MeshBuffer>& vertexBufferBindings, size_t firstIndex) {
+void BufferMesh::setVertexBufferBindings(const std::vector<MeshBuffer> &vertexBufferBindings, size_t firstIndex) {
     auto count = vertexBufferBindings.size();
     auto needLength = firstIndex + count;
     if (_vertexBuffer.size() < needLength) {

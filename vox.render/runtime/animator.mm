@@ -12,11 +12,11 @@
 #include <string>
 
 namespace vox {
-Animator::Animator(Entity* entity):
+Animator::Animator(Entity *entity) :
 Component(entity) {
 }
 
-bool Animator::addAnimationClip(const std::string& filename) {
+bool Animator::addAnimationClip(const std::string &filename) {
     const auto skinnedMesh = entity()->getComponent<SkinnedMeshRenderer>();
     if (skinnedMesh) {
         return addAnimationClip(filename, skinnedMesh->numJoints(), skinnedMesh->numSoaJoints());
@@ -25,7 +25,7 @@ bool Animator::addAnimationClip(const std::string& filename) {
     }
 }
 
-bool Animator::addAnimationClip(const std::string& filename, int num_joints, int num_soa_joints) {
+bool Animator::addAnimationClip(const std::string &filename, int num_joints, int num_soa_joints) {
     vox::unique_ptr<AnimationClip> clip = vox::make_unique<AnimationClip>();
     
     if (!vox::offline::loader::LoadAnimation(filename.c_str(), &clip->animation)) {

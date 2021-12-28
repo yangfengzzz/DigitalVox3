@@ -12,7 +12,7 @@
 
 namespace vox {
 namespace editor {
-class Debugger: public EditorComponent {
+class Debugger : public EditorComponent {
 public:
     void onUpdate() override;
 };

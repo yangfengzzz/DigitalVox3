@@ -26,18 +26,18 @@ struct RasterState {
     
 private:
     friend class RenderState;
-
+    
     bool _cullFaceEnable = true;
     
-    void _apply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                MTLDepthStencilDescriptor* depthStencilDescriptor,
-                MetalRenderer* hardwareRenderer) {
+    void _apply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                MTLDepthStencilDescriptor *depthStencilDescriptor,
+                MetalRenderer *hardwareRenderer) {
         _platformApply(pipelineDescriptor, depthStencilDescriptor, hardwareRenderer);
     }
     
-    void _platformApply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                        MTLDepthStencilDescriptor* depthStencilDescriptor,
-                        MetalRenderer* hardwareRenderer);
+    void _platformApply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                        MTLDepthStencilDescriptor *depthStencilDescriptor,
+                        MetalRenderer *hardwareRenderer);
 };
 
 }

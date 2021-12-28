@@ -20,12 +20,13 @@
 
 using namespace vox;
 
-class ShadowDebugMaterial :public BaseMaterial {
+class ShadowDebugMaterial : public BaseMaterial {
 public:
-    ShadowDebugMaterial(Engine* engine):BaseMaterial(engine, Shader::find("shadowMapDebugger")){}
+    ShadowDebugMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("shadowMapDebugger")) {
+    }
 };
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
@@ -46,7 +47,7 @@ int main(int, char**) {
     auto directLight = light->addComponent<DirectLight>();
     directLight->intensity = 1.0;
     directLight->setEnableShadow(true);
-
+    
     // create box test entity
     float cubeSize = 2.0;
     auto boxMesh = PrimitiveMesh::createCuboid(&engine, cubeSize, cubeSize, cubeSize);
@@ -55,7 +56,7 @@ int main(int, char**) {
     for (int i = 0; i < 6; i++) {
         auto boxEntity = rootEntity->createChild("BoxEntity");
         boxEntity->transform->setPosition(Float3(0, 2, i * 10 - 20));
-
+        
         auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
         boxRenderer->setMesh(boxMesh);
         boxRenderer->setMaterial(boxMtl);
@@ -71,6 +72,6 @@ int main(int, char**) {
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 80));
     planeRenderer->setMaterial(planeMtl);
     planeRenderer->receiveShadow = true;
-
+    
     engine.run();
 }

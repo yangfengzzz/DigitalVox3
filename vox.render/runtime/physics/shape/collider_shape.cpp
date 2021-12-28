@@ -11,21 +11,22 @@
 namespace vox {
 namespace physics {
 const float ColliderShape::halfSqrt = 0.70710678118655;
-ColliderShape::ColliderShape():
+
+ColliderShape::ColliderShape() :
 _nativeMaterial(PhysicsManager::_nativePhysics()->createMaterial(0, 0, 0)) {
     _pose.rotation = math::Quaternion(0, 0, halfSqrt, halfSqrt);
     _pose.scale = math::Float3(1, 1, 1);
 }
 
-Collider* ColliderShape::collider() {
+Collider *ColliderShape::collider() {
     return _collider;
 }
 
 void ColliderShape::setLocalPose(const math::Transform &pose) {
     _pose = pose;
     
-    const auto& p = pose.translation;
-    const auto& q = pose.rotation;
+    const auto &p = pose.translation;
+    const auto &q = pose.rotation;
     _nativeShape->setLocalPose(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
 }
 
@@ -33,7 +34,7 @@ math::Transform ColliderShape::localPose() const {
     return _pose;
 }
 
-void ColliderShape::setPosition(const math::Float3& pos) {
+void ColliderShape::setPosition(const math::Float3 &pos) {
     _pose.translation = pos;
     setLocalPose(_pose);
 }
@@ -42,14 +43,14 @@ math::Float3 ColliderShape::position() const {
     return _pose.translation;
 }
 
-void ColliderShape::setMaterial(PxMaterial* material) {
+void ColliderShape::setMaterial(PxMaterial *material) {
     _nativeMaterial = material;
     
     std::vector<PxMaterial *> materials = {material};
     _nativeShape->setMaterials(materials.data(), 1);
 }
 
-PxMaterial* ColliderShape::material() {
+PxMaterial *ColliderShape::material() {
     return _nativeMaterial;
 }
 

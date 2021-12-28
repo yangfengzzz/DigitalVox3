@@ -8,6 +8,7 @@
 #include "background.h"
 
 namespace vox {
-Background::Background(Engine* engine) {}
+Background::Background(Engine *engine) {
+}
 
 }

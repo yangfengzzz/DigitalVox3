@@ -10,24 +10,24 @@
 
 namespace vox {
 namespace control {
-OrbitControl::OrbitControl(Entity* entity):
+OrbitControl::OrbitControl(Entity *entity) :
 Script(entity),
 camera(entity) {
     window = engine()->canvas()->handle();
     
-    cursorPosCallback = [&](GLFWwindow* window, double xpos, double ypos) {
+    cursorPosCallback = [&](GLFWwindow *window, double xpos, double ypos) {
         onMouseMove(xpos, ypos);
     };
     
-    scrollCallback = [&](GLFWwindow* window, double xoffset, double yoffset) {
+    scrollCallback = [&](GLFWwindow *window, double xoffset, double yoffset) {
         onMouseWheel(xoffset, yoffset);
     };
-
-    keyCallback = [&](GLFWwindow* window, int key, int scancode, int action, int mods) {
+    
+    keyCallback = [&](GLFWwindow *window, int key, int scancode, int action, int mods) {
         onKeyDown(key);
     };
     
-    mouseButtonCallback = [&](GLFWwindow* window, int button, int action, int mods){
+    mouseButtonCallback = [&](GLFWwindow *window, int button, int action, int mods) {
         if (action == GLFW_PRESS) {
             onMouseDown(button);
             Canvas::cursor_callbacks.push_back(cursorPosCallback);
@@ -85,7 +85,7 @@ void OrbitControl::onDestroy() {
 void OrbitControl::onUpdate(float dtime) {
     if (!enabled()) return;
     
-    const auto& position = camera->transform->position();
+    const auto &position = camera->transform->position();
     _offset = position;
     _offset = _offset - target;
     _spherical.setFromVec3(_offset);
@@ -158,15 +158,15 @@ void OrbitControl::rotateUp(float radian) {
     }
 }
 
-void OrbitControl::panLeft(float distance, const math::Matrix& worldMatrix) {
-    const auto& e = worldMatrix.elements;
+void OrbitControl::panLeft(float distance, const math::Matrix &worldMatrix) {
+    const auto &e = worldMatrix.elements;
     _vPan = Float3(e[0], e[1], e[2]);
     _vPan = _vPan * distance;
     _panOffset = _panOffset + _vPan;
 }
 
-void OrbitControl::panUp(float distance, const math::Matrix& worldMatrix) {
-    const auto& e = worldMatrix.elements;
+void OrbitControl::panUp(float distance, const math::Matrix &worldMatrix) {
+    const auto &e = worldMatrix.elements;
     _vPan = Float3(e[4], e[5], e[6]);
     _vPan = _vPan * distance;
     _panOffset = _panOffset + _vPan;
@@ -208,13 +208,13 @@ void OrbitControl::handleMouseDownZoom() {
     _zoomStart = Float2(x, y);
 }
 
-void OrbitControl::handleMouseDownPan(){
+void OrbitControl::handleMouseDownPan() {
     double x, y;
     glfwGetCursorPos(window, &x, &y);
     _panStart = Float2(x, y);
 }
 
-void OrbitControl::handleMouseMoveRotate(double xpos, double ypos){
+void OrbitControl::handleMouseMoveRotate(double xpos, double ypos) {
     _rotateEnd = Float2(xpos, ypos);
     _rotateDelta = _rotateEnd - _rotateStart;
     
@@ -226,7 +226,7 @@ void OrbitControl::handleMouseMoveRotate(double xpos, double ypos){
     _rotateStart = _rotateEnd;
 }
 
-void OrbitControl::handleMouseMoveZoom(double xpos, double ypos){
+void OrbitControl::handleMouseMoveZoom(double xpos, double ypos) {
     _zoomEnd = Float2(xpos, ypos);
     _zoomDelta = _zoomEnd - _zoomStart;
     
@@ -239,7 +239,7 @@ void OrbitControl::handleMouseMoveZoom(double xpos, double ypos){
     _zoomStart = _zoomEnd;
 }
 
-void OrbitControl::handleMouseMovePan(double xpos, double ypos){
+void OrbitControl::handleMouseMovePan(double xpos, double ypos) {
     _panEnd = Float2(xpos, ypos);
     _panDelta = _panEnd - _panStart;
     
@@ -248,7 +248,7 @@ void OrbitControl::handleMouseMovePan(double xpos, double ypos){
     _panStart = _panEnd;
 }
 
-void OrbitControl::handleMouseWheel(double xoffset, double yoffset){
+void OrbitControl::handleMouseWheel(double xoffset, double yoffset) {
     if (yoffset < 0) {
         zoomIn(zoomScale());
     } else if (yoffset > 0) {
@@ -256,7 +256,7 @@ void OrbitControl::handleMouseWheel(double xoffset, double yoffset){
     }
 }
 
-void OrbitControl::onMouseDown(int button){
+void OrbitControl::onMouseDown(int button) {
     if (enabled() == false) return;
     
     _isMouseUp = false;
@@ -285,7 +285,7 @@ void OrbitControl::onMouseDown(int button){
     }
 }
 
-void OrbitControl::onMouseMove(double xpos, double ypos){
+void OrbitControl::onMouseMove(double xpos, double ypos) {
     if (enabled() == false) return;
     
     switch (_state) {
@@ -311,14 +311,14 @@ void OrbitControl::onMouseMove(double xpos, double ypos){
     }
 }
 
-void OrbitControl::onMouseUp(){
+void OrbitControl::onMouseUp() {
     if (enabled() == false) return;
     
     _isMouseUp = true;
     _state = STATE::NONE;
 }
 
-void OrbitControl::onMouseWheel(double xoffset, double yoffset){
+void OrbitControl::onMouseWheel(double xoffset, double yoffset) {
     if (enabled() == false || enableZoom == false ||
         (_state != STATE::NONE && _state != STATE::ROTATE))
         return;
@@ -327,7 +327,7 @@ void OrbitControl::onMouseWheel(double xoffset, double yoffset){
 }
 
 //MARK: - KeyBoard
-void OrbitControl::handleKeyDown(int key){
+void OrbitControl::handleKeyDown(int key) {
     switch (key) {
         case GLFW_KEY_UP:
             pan(0, keyPanSpeed);
@@ -344,30 +344,39 @@ void OrbitControl::handleKeyDown(int key){
     }
 }
 
-void OrbitControl::onKeyDown(int key){
+void OrbitControl::onKeyDown(int key) {
     if (enabled() == false || enableKeys == false || enablePan == false) return;
     
     handleKeyDown(key);
 }
 
 //MARK: - Touch
-void OrbitControl::handleTouchStartRotate(){}
+void OrbitControl::handleTouchStartRotate() {
+}
 
-void OrbitControl::handleTouchStartZoom(){}
+void OrbitControl::handleTouchStartZoom() {
+}
 
-void OrbitControl::handleTouchStartPan(){}
+void OrbitControl::handleTouchStartPan() {
+}
 
-void OrbitControl::handleTouchMoveRotate(){}
+void OrbitControl::handleTouchMoveRotate() {
+}
 
-void OrbitControl::handleTouchMoveZoom(){}
+void OrbitControl::handleTouchMoveZoom() {
+}
 
-void OrbitControl::handleTouchMovePan(){}
+void OrbitControl::handleTouchMovePan() {
+}
 
-void OrbitControl::onTouchStart(){}
+void OrbitControl::onTouchStart() {
+}
 
-void OrbitControl::onTouchMove(){}
+void OrbitControl::onTouchMove() {
+}
 
-void OrbitControl::onTouchEnd(){}
+void OrbitControl::onTouchEnd() {
+}
 
 }
 }

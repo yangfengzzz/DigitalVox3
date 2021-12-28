@@ -11,10 +11,10 @@
 
 namespace vox {
 namespace input {
-PointerManager::PointerManager(Engine* engine):
+PointerManager::PointerManager(Engine *engine) :
 _engine(engine),
-_canvas(engine->canvas()){
-    auto pointerEventCallback = [&](GLFWwindow* window, int button, int action, int mods) {
+_canvas(engine->canvas()) {
+    auto pointerEventCallback = [&](GLFWwindow *window, int button, int action, int mods) {
         _nativeEvents.push_back(PointerEvent());
     };
     Canvas::mouse_button_callbacks.push_back(pointerEventCallback);
@@ -89,7 +89,7 @@ void PointerManager::_addPointer(size_t pointerId, float x, float y, PointerPhas
                 break;
             }
         }
-        auto& pointer = _pointerPool[i];
+        auto &pointer = _pointerPool[i];
         if (pointer.id == -1) {
             pointer.id = i;
         }
@@ -106,39 +106,39 @@ void PointerManager::_removePointer(size_t pointerIndex) {
 }
 
 void PointerManager::_updatePointer(size_t pointerId, float x, float y, PointerPhase::Enum phase) {
-    auto& updatedPointer = _pointers[pointerId];
+    auto &updatedPointer = _pointers[pointerId];
     updatedPointer.position = math::Float2(x, y);
     updatedPointer._needUpdate = true;
     updatedPointer.phase = phase;
 }
 
-void PointerManager::_handlePointerEvent(std::vector<PointerEvent>& nativeEvents) {
+void PointerManager::_handlePointerEvent(std::vector<PointerEvent> &nativeEvents) {
     
 }
 
-Entity* PointerManager::_pointerRayCast() {
+Entity *PointerManager::_pointerRayCast() {
     return nullptr;
 }
 
 void PointerManager::_firePointerDrag() {
     if (_currentPressedEntity) {
-        const auto& scripts = _currentPressedEntity->scripts();
+        const auto &scripts = _currentPressedEntity->scripts();
         for (size_t i = 0; i < scripts.size(); i++) {
             scripts[i]->onPointerDrag();
         }
     }
 }
 
-void PointerManager::_firePointerExitAndEnter(Entity* rayCastEntity) {
+void PointerManager::_firePointerExitAndEnter(Entity *rayCastEntity) {
     if (_currentEnteredEntity != rayCastEntity) {
         if (_currentEnteredEntity) {
-            const auto& scripts = _currentEnteredEntity->scripts();
+            const auto &scripts = _currentEnteredEntity->scripts();
             for (size_t i = 0; i < scripts.size(); i++) {
                 scripts[i]->onPointerExit();
             }
         }
         if (rayCastEntity) {
-            const auto& scripts = rayCastEntity->scripts();
+            const auto &scripts = rayCastEntity->scripts();
             for (size_t i = 0; i < scripts.size(); i++) {
                 scripts[i]->onPointerEnter();
             }
@@ -147,9 +147,9 @@ void PointerManager::_firePointerExitAndEnter(Entity* rayCastEntity) {
     }
 }
 
-void PointerManager::_firePointerDown(Entity* rayCastEntity) {
+void PointerManager::_firePointerDown(Entity *rayCastEntity) {
     if (rayCastEntity) {
-        const auto& scripts = rayCastEntity->scripts();
+        const auto &scripts = rayCastEntity->scripts();
         for (size_t i = 0; i < scripts.size(); i++) {
             scripts[i]->onPointerDown();
         }
@@ -157,12 +157,12 @@ void PointerManager::_firePointerDown(Entity* rayCastEntity) {
     _currentPressedEntity = rayCastEntity;
 }
 
-void PointerManager::_firePointerUpAndClick(Entity* rayCastEntity) {
+void PointerManager::_firePointerUpAndClick(Entity *rayCastEntity) {
     if (_currentPressedEntity) {
         auto sameTarget = _currentPressedEntity == rayCastEntity;
-        const auto& scripts = _currentPressedEntity->scripts();
+        const auto &scripts = _currentPressedEntity->scripts();
         for (size_t i = 0; i < scripts.size(); i++) {
-            const auto& script = scripts[i];
+            const auto &script = scripts[i];
             if (sameTarget) {
                 script->onPointerClick();
             }

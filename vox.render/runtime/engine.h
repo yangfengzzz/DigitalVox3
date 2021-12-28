@@ -30,14 +30,14 @@ public:
      * Create engine.
      * @param canvas - The canvas to use for rendering
      */
-    Engine(Canvas* canvas);
+    Engine(Canvas *canvas);
     
     ~Engine();
     
     /**
      * The canvas to use for rendering.
      */
-    Canvas* canvas();
+    Canvas *canvas();
     
     /**
      * Get the resource manager.
@@ -64,6 +64,7 @@ public:
      * @remarks 0 means that the vertical synchronization is turned off.
      */
     int vSyncCount();
+    
     void setVSyncCount(int newValue);
     
     /**
@@ -73,6 +74,7 @@ public:
      * The larger the value, the higher the target frame rate, Number.POSITIVE_INFINITY represents the infinite target frame rate.
      */
     float targetFrameRate();
+    
     void setTargetFrameRate(float newValue);
     
 public:
@@ -99,7 +101,7 @@ public:
 protected:
     void _render(ScenePtr scene, float deltaTime);
     
-    Canvas* _canvas;
+    Canvas *_canvas;
     
 private:
     friend class Scene;

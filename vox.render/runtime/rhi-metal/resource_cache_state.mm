@@ -10,19 +10,19 @@
 #include "maths/math_ex.h"
 
 namespace vox {
-ResourceCache::ResourceCache(MetalRenderer* render):
-render(render){
+ResourceCache::ResourceCache(MetalRenderer *render) :
+render(render) {
     
 }
 
-ShaderProgram* ResourceCache::request_shader_module(const std::string& vertexSource, const std::string& fragmentSource,
-                                                    const ShaderMacroCollection& macroInfo) {
+ShaderProgram *ResourceCache::request_shader_module(const std::string &vertexSource, const std::string &fragmentSource,
+                                                    const ShaderMacroCollection &macroInfo) {
     std::size_t hash{0U};
     math::hash_combine(hash, std::hash<std::string>{}(vertexSource));
     math::hash_combine(hash, std::hash<std::string>{}(fragmentSource));
     math::hash_combine(hash, macroInfo.hash());
     auto iter = state.shader_modules.find(hash);
-
+    
     if (iter == state.shader_modules.end()) {
         state.shader_modules[hash] = std::make_unique<ShaderProgram>(render->library(), vertexSource, fragmentSource, macroInfo);
         return state.shader_modules[hash].get();
@@ -31,7 +31,7 @@ ShaderProgram* ResourceCache::request_shader_module(const std::string& vertexSou
     }
 }
 
-RenderPipelineState* ResourceCache::request_graphics_pipeline(MTLRenderPipelineDescriptor* pipelineDescriptor) {
+RenderPipelineState *ResourceCache::request_graphics_pipeline(MTLRenderPipelineDescriptor *pipelineDescriptor) {
     const auto hash = pipelineDescriptor.hash;
     auto iter = state.graphics_pipelines.find(hash);
     if (iter == state.graphics_pipelines.end()) {
@@ -43,7 +43,7 @@ RenderPipelineState* ResourceCache::request_graphics_pipeline(MTLRenderPipelineD
     }
 }
 
-ComputePipelineState* ResourceCache::request_compute_pipeline(MTLComputePipelineDescriptor* pipelineDescriptor) {
+ComputePipelineState *ResourceCache::request_compute_pipeline(MTLComputePipelineDescriptor *pipelineDescriptor) {
     const auto hash = pipelineDescriptor.hash;
     auto iter = state.compute_pipelines.find(hash);
     if (iter == state.compute_pipelines.end()) {
@@ -64,7 +64,7 @@ void ResourceCache::clear() {
     state.shader_modules.clear();
 }
 
-const ResourceCacheState& ResourceCache::get_internal_state() const {
+const ResourceCacheState &ResourceCache::get_internal_state() const {
     return state;
 }
 

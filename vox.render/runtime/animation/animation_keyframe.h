@@ -29,6 +29,7 @@
 #define VOX_ANIMATION_RUNTIME_ANIMATION_KEYFRAME_H_
 
 #include "platform.h"
+
 #ifndef VOX_INCLUDE_PRIVATE_HEADER
 #error "This header is private, it cannot be included from public headers."
 #endif  // VOX_INCLUDE_PRIVATE_HEADER
@@ -47,9 +48,9 @@ namespace animation {
 // Translation values are stored as half precision floats with 16 bits per
 // component.
 struct Float3Key {
-  float ratio;
-  uint16_t track;
-  uint16_t value[3];
+    float ratio;
+    uint16_t track;
+    uint16_t value[3];
 };
 
 // Defines the rotation key frame type.
@@ -68,11 +69,11 @@ struct Float3Key {
 // key frames, but in this case RotationKey structure would induce 16 bits of
 // padding.
 struct QuaternionKey {
-  float ratio;
-  uint16_t track : 13;   // The track this key frame belongs to.
-  uint16_t largest : 2;  // The largest component of the quaternion.
-  uint16_t sign : 1;     // The sign of the largest component. 1 for negative.
-  int16_t value[3];      // The quantized value of the 3 smallest components.
+    float ratio;
+    uint16_t track: 13;   // The track this key frame belongs to.
+    uint16_t largest: 2;  // The largest component of the quaternion.
+    uint16_t sign: 1;     // The sign of the largest component. 1 for negative.
+    int16_t value[3];      // The quantized value of the 3 smallest components.
 };
 
 }  // namespace animation

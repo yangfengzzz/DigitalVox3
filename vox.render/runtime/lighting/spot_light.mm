@@ -10,7 +10,7 @@
 #include "../scene.h"
 
 namespace vox {
-SpotLight::SpotLight(Entity* entity):
+SpotLight::SpotLight(Entity *entity) :
 Light(entity) {
 }
 
@@ -22,7 +22,7 @@ void SpotLight::_onDisable() {
     scene()->light_manager.detachSpotLight(this);
 }
 
-void SpotLight::_updateShaderData(SpotLightData& shaderData) {
+void SpotLight::_updateShaderData(SpotLightData &shaderData) {
     shaderData.color = simd_make_float3(color.r * intensity, color.g * intensity, color.b * intensity);
     auto position = entity()->transform->worldPosition();
     shaderData.position = simd_make_float3(position.x, position.y, position.z);
@@ -44,7 +44,8 @@ void SpotLight::updateShadowMatrix() {
     auto projMatrix = shadowProjectionMatrix();
     auto vp = projMatrix * viewMatrix;
     shadow.vp[0] = vp.toSimdMatrix();
-    shadow.cascadeSplits[0] = 1; shadow.cascadeSplits[1] = -1; // mark cascade with negative sign
+    shadow.cascadeSplits[0] = 1;
+    shadow.cascadeSplits[1] = -1; // mark cascade with negative sign
 }
 
 }

@@ -19,9 +19,9 @@ namespace control {
 /**
  * The camera's roaming controller, can move up and down, left and right, and rotate the viewing angle.
  */
-class FreeControl :public Script {
+class FreeControl : public Script {
 public:
-    FreeControl(Entity* entity);
+    FreeControl(Entity *entity);
     
     /**
      * Keyboard press event.

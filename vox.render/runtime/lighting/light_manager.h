@@ -21,72 +21,73 @@ class LightManager {
 public:
     static constexpr uint32_t MAX_SHADOW = 10;
     static constexpr uint32_t MAX_CUBE_SHADOW = 5;
-
-    LightManager(Scene* scene);
+    
+    LightManager(Scene *scene);
     
     /**
      * Register a light object to the current scene.
      * @param light render light
      */
-    void attachPointLight(PointLight* light);
-
+    void attachPointLight(PointLight *light);
+    
     /**
      * Remove a light object from the current scene.
      * @param light render light
      */
-    void detachPointLight(PointLight* light);
+    void detachPointLight(PointLight *light);
     
-    const std::vector<PointLight*>& pointLights() const;
+    const std::vector<PointLight *> &pointLights() const;
     
 public:
     /**
      * Register a light object to the current scene.
      * @param light render light
      */
-    void attachSpotLight(SpotLight* light);
-
+    void attachSpotLight(SpotLight *light);
+    
     /**
      * Remove a light object from the current scene.
      * @param light render light
      */
-    void detachSpotLight(SpotLight* light);
+    void detachSpotLight(SpotLight *light);
     
-    const std::vector<SpotLight*>& spotLights() const;
+    const std::vector<SpotLight *> &spotLights() const;
     
 public:
     /**
      * Register a light object to the current scene.
      * @param light direct light
      */
-    void attachDirectLight(DirectLight* light);
-
+    void attachDirectLight(DirectLight *light);
+    
     /**
      * Remove a light object from the current scene.
      * @param light direct light
      */
-    void detachDirectLight(DirectLight* light);
+    void detachDirectLight(DirectLight *light);
     
-    const std::vector<DirectLight*>& directLights() const;
-
+    const std::vector<DirectLight *> &directLights() const;
+    
 private:
     friend class Scene;
-    Scene* _scene;
     
-    void _updateShaderData(ShaderData& shaderData);
-
-    std::vector<PointLight*> _pointLights;
+    Scene *_scene;
+    
+    void _updateShaderData(ShaderData &shaderData);
+    
+    std::vector<PointLight *> _pointLights;
     std::vector<PointLightData> _pointLightDatas;
-    id<MTLBuffer> _pointLightBuffer;
+    id <MTLBuffer> _pointLightBuffer;
     static ShaderProperty _pointLightProperty;
-
-    std::vector<SpotLight*> _spotLights;
+    
+    std::vector<SpotLight *> _spotLights;
     std::vector<SpotLightData> _spotLightDatas;
-    id<MTLBuffer> _spotLightBuffer;
+    id <MTLBuffer> _spotLightBuffer;
     static ShaderProperty _spotLightProperty;
-
-    std::vector<DirectLight*> _directLights;
+    
+    std::vector<DirectLight *> _directLights;
     std::vector<DirectLightData> _directLightDatas;
-    id<MTLBuffer> _directLightBuffer;
+    id <MTLBuffer> _directLightBuffer;
     static ShaderProperty _directLightProperty;
 };
 

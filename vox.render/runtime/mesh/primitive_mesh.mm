@@ -9,7 +9,7 @@
 #include "../engine.h"
 
 namespace vox {
-ModelMeshPtr PrimitiveMesh::createSphere(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createSphere(Engine *engine,
                                          float radius,
                                          size_t segments,
                                          bool noLongerAccessible) {
@@ -77,7 +77,7 @@ ModelMeshPtr PrimitiveMesh::createSphere(Engine* engine,
     
 }
 
-ModelMeshPtr PrimitiveMesh::createCuboid(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createCuboid(Engine *engine,
                                          float width,
                                          float height,
                                          float depth,
@@ -227,7 +227,7 @@ ModelMeshPtr PrimitiveMesh::createCuboid(Engine* engine,
 }
 
 
-ModelMeshPtr PrimitiveMesh::createPlane(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createPlane(Engine *engine,
                                         float width,
                                         float height,
                                         size_t horizontalSegments,
@@ -293,7 +293,7 @@ ModelMeshPtr PrimitiveMesh::createPlane(Engine* engine,
     
 }
 
-ModelMeshPtr PrimitiveMesh::createCylinder(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createCylinder(Engine *engine,
                                            float radiusTop,
                                            float radiusBottom,
                                            float height,
@@ -440,7 +440,7 @@ ModelMeshPtr PrimitiveMesh::createCylinder(Engine* engine,
     
 }
 
-ModelMeshPtr PrimitiveMesh::createTorus(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createTorus(Engine *engine,
                                         float radius,
                                         float tubeRadius,
                                         size_t radialSegments,
@@ -511,7 +511,7 @@ ModelMeshPtr PrimitiveMesh::createTorus(Engine* engine,
     return mesh;
 }
 
-ModelMeshPtr PrimitiveMesh::createCone(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createCone(Engine *engine,
                                        float radius,
                                        float height,
                                        size_t radialSegments,
@@ -624,7 +624,7 @@ ModelMeshPtr PrimitiveMesh::createCone(Engine* engine,
     
 }
 
-ModelMeshPtr PrimitiveMesh::createCapsule(Engine* engine,
+ModelMeshPtr PrimitiveMesh::createCapsule(Engine *engine,
                                           float radius,
                                           float height,
                                           size_t radialSegments,
@@ -784,7 +784,7 @@ void PrimitiveMesh::_createCapsuleCap(float radius,
     }
 }
 
-void PrimitiveMesh::_initialize(Engine* engine,
+void PrimitiveMesh::_initialize(Engine *engine,
                                 const ModelMeshPtr &mesh,
                                 const std::vector<Float3> &positions,
                                 const std::vector<Float3> &normals,

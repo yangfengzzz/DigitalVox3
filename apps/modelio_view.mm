@@ -23,9 +23,10 @@
 
 using namespace vox;
 
-class SkyMove: public Script {
+class SkyMove : public Script {
 public:
-    SkyMove(Entity* entity):Script(entity) {}
+    SkyMove(Entity *entity) : Script(entity) {
+    }
     
     void onUpdate(float deltaTime) override {
         skyRotation += 0.5f;
@@ -36,9 +37,9 @@ private:
     float skyRotation = -135;
 };
 
-class SunMove: public Script {
+class SunMove : public Script {
 public:
-    SunMove(Entity* entity):Script(entity) {
+    SunMove(Entity *entity) : Script(entity) {
         entity->transform->setPosition(0.25, 0.5, -1.0);
     }
     
@@ -47,9 +48,9 @@ public:
     }
 };
 
-class ParticleMaterial: public BaseMaterial {
+class ParticleMaterial : public BaseMaterial {
 public:
-    ParticleMaterial(Engine* engine):BaseMaterial(engine, Shader::find("particle-shader")) {
+    ParticleMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("particle-shader")) {
         setIsTransparent(true);
     }
     
@@ -57,22 +58,22 @@ private:
     ShaderProperty _baseTextureProp = Shader::createProperty("u_particleTexture", ShaderDataGroup::Material);
 };
 
-class PointLightManager: public Script {
+class PointLightManager : public Script {
 public:
     static constexpr uint32_t numLights = 256;
     // 30% of lights are around the tree
     // 40% of lights are on the ground inside the columns
     // 30% of lights are around the outside of the columns
-    static constexpr uint32_t treeLights   = 0 + 0.30 * numLights;
+    static constexpr uint32_t treeLights = 0 + 0.30 * numLights;
     static constexpr uint32_t groundLights = treeLights + 0.40 * numLights;
     static constexpr uint32_t columnLights = groundLights + 0.30 * numLights;
     
     // Generates a random float value inside the given range.
     inline static float random_float(float min, float max) {
-        return (((double)random()/RAND_MAX) * (max-min)) + min;
+        return (((double) random() / RAND_MAX) * (max - min)) + min;
     }
     
-    PointLightManager(Entity* entity):Script(entity) {
+    PointLightManager(Entity *entity) : Script(entity) {
         lightEntities.reserve(numLights);
         speeds.reserve(numLights);
         originalPositions.reserve(numLights);
@@ -86,37 +87,37 @@ public:
             float speed = 0;
             
             if (lightId < treeLights) {
-                distance = random_float(38,42);
-                height = random_float(0,1);
-                angle = random_float(0, M_PI*2);
-                speed = random_float(0.003,0.014);
+                distance = random_float(38, 42);
+                height = random_float(0, 1);
+                angle = random_float(0, M_PI * 2);
+                speed = random_float(0.003, 0.014);
             } else if (lightId < groundLights) {
-                distance = random_float(140,260);
-                height = random_float(140,150);
-                angle = random_float(0, M_PI*2);
-                speed = random_float(0.006,0.027);
-                speed *= (random()%2)*2-1;
+                distance = random_float(140, 260);
+                height = random_float(140, 150);
+                angle = random_float(0, M_PI * 2);
+                speed = random_float(0.006, 0.027);
+                speed *= (random() % 2) * 2 - 1;
             } else if (lightId < columnLights) {
-                distance = random_float(365,380);
-                height = random_float(150,190);
-                angle = random_float(0, M_PI*2);
-                speed = random_float(0.004,0.014);
-                speed *= (random()%2)*2-1;
+                distance = random_float(365, 380);
+                height = random_float(150, 190);
+                angle = random_float(0, M_PI * 2);
+                speed = random_float(0.004, 0.014);
+                speed *= (random() % 2) * 2 - 1;
             }
             speed *= .05;
-            auto pos = Float3(distance*sinf(angle), height, distance*cosf(angle));
+            auto pos = Float3(distance * sinf(angle), height, distance * cosf(angle));
             originalPositions.push_back(pos);
             lightEntity->transform->setPosition(pos);
-            light->distance = random_float(25,35)/10.0;
+            light->distance = random_float(25, 35) / 10.0;
             speeds.push_back(speed);
             
-            int colorId = random()%3;
-            if( colorId == 0) {
-                light->color = Color(random_float(4,6),random_float(0,4),random_float(0,4));
-            } else if ( colorId == 1) {
-                light->color = Color(random_float(0,4),random_float(4,6),random_float(0,4));
+            int colorId = random() % 3;
+            if (colorId == 0) {
+                light->color = Color(random_float(4, 6), random_float(0, 4), random_float(0, 4));
+            } else if (colorId == 1) {
+                light->color = Color(random_float(0, 4), random_float(4, 6), random_float(0, 4));
             } else {
-                light->color = Color(random_float(0,4),random_float(0,4),random_float(4,6));
+                light->color = Color(random_float(0, 4), random_float(0, 4), random_float(4, 6));
             }
         }
     }
@@ -152,12 +153,12 @@ private:
     std::vector<Float3> originalPositions;
 };
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseSolidColor(math::Color(0.0,0.0,0.0));
+    scene->ambientLight().setDiffuseSolidColor(math::Color(0.0, 0.0, 0.0));
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
@@ -179,7 +180,7 @@ int main(int, char**) {
     loader.loadFromFile("../models/Temple", "Temple.obj");
     loader.defaultSceneRoot->transform->setScale(0.05, 0.05, 0.05);
     loader.defaultSceneRoot->transform->setPosition(0, -10, 0);
-    for (auto& renderer : loader.renderers) {
+    for (auto &renderer: loader.renderers) {
         renderer->castShadow = true;
         renderer->receiveShadow = true;
     }

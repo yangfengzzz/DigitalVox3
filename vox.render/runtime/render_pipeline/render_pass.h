@@ -19,6 +19,7 @@
 
 namespace vox {
 using namespace math;
+
 /**
  * RenderPass.
  */
@@ -27,7 +28,7 @@ public:
     std::string name;
     bool enabled;
     int priority;
-    MTLRenderPassDescriptor* renderTarget;
+    MTLRenderPassDescriptor *renderTarget;
     Layer mask;
     bool renderOverride;
     std::optional<CameraClearFlags::Enum> clearFlags;
@@ -40,12 +41,14 @@ public:
      * @param renderTarget - The specified Render Target
      * @param mask - Perform bit and operations with Entity.Layer to filter the objects that this Pass needs to render
      */
-    RenderPass(const std::string& name = "",
+    RenderPass(const std::string &name = "",
                int priority = 0,
-               MTLRenderPassDescriptor* renderTarget = nullptr,
+               MTLRenderPassDescriptor *renderTarget = nullptr,
                Layer mask = Layer::Everything);
     
-    virtual MaterialPtr material(const RenderElement& element) { return nullptr; }
+    virtual MaterialPtr material(const RenderElement &element) {
+        return nullptr;
+    }
     
     /**
      * Rendering callback, will be executed if renderOverride is set to true.
@@ -54,9 +57,10 @@ public:
      * @param alphaTestQueue - Alpha test queue
      * @param transparentQueue - Transparent queue
      */
-    virtual void render(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
-                        const std::vector<RenderElement>& alphaTestQueue,
-                        const std::vector<RenderElement>& transparentQueue) {}
+    virtual void render(Camera *camera, const std::vector<RenderElement> &opaqueQueue,
+                        const std::vector<RenderElement> &alphaTestQueue,
+                        const std::vector<RenderElement> &transparentQueue) {
+    }
     
     /**
      * Post rendering callback.
@@ -65,9 +69,10 @@ public:
      * @param alphaTestQueue - Alpha test queue
      * @param transparentQueue - Transparent queue
      */
-    virtual void preRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
-                           const std::vector<RenderElement>& alphaTestQueue,
-                           const std::vector<RenderElement>& transparentQueue) {}
+    virtual void preRender(Camera *camera, const std::vector<RenderElement> &opaqueQueue,
+                           const std::vector<RenderElement> &alphaTestQueue,
+                           const std::vector<RenderElement> &transparentQueue) {
+    }
     
     /**
      * Post rendering callback.
@@ -76,9 +81,10 @@ public:
      * @param alphaTestQueue - Alpha test queue
      * @param transparentQueue - Transparent queue
      */
-    virtual void postRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
-                            const std::vector<RenderElement>& alphaTestQueue,
-                            const std::vector<RenderElement>& transparentQueue) {}
+    virtual void postRender(Camera *camera, const std::vector<RenderElement> &opaqueQueue,
+                            const std::vector<RenderElement> &alphaTestQueue,
+                            const std::vector<RenderElement> &transparentQueue) {
+    }
     
 private:
     static size_t passNum;

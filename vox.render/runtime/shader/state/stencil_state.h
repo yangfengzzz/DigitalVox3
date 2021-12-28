@@ -12,6 +12,7 @@
 
 namespace vox {
 class MetalRenderer;
+
 /**
  * Stencil state.
  */
@@ -40,19 +41,19 @@ struct StencilState {
     MTLStencilOperation zFailOperationFront = MTLStencilOperationKeep;
     /** specifying the function to use for back face when the stencil test passes, but the depth test fails. */
     MTLStencilOperation zFailOperationBack = MTLStencilOperationKeep;
-
+    
 private:
     friend class RenderState;
-
-    void _apply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                MTLDepthStencilDescriptor* depthStencilDescriptor,
-                MetalRenderer* hardwareRenderer) {
+    
+    void _apply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                MTLDepthStencilDescriptor *depthStencilDescriptor,
+                MetalRenderer *hardwareRenderer) {
         _platformApply(pipelineDescriptor, depthStencilDescriptor, hardwareRenderer);
     }
-
-    void _platformApply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                        MTLDepthStencilDescriptor* depthStencilDescriptor,
-                        MetalRenderer* hardwareRenderer);
+    
+    void _platformApply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                        MTLDepthStencilDescriptor *depthStencilDescriptor,
+                        MetalRenderer *hardwareRenderer);
 };
 
 }

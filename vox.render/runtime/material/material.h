@@ -18,12 +18,12 @@ namespace vox {
 /**
  * Material.
  */
-class Material: EngineObject {
+class Material : public EngineObject {
 public:
     /** Name. */
     std::string name = "";
     /** Shader used by the material. */
-    Shader* shader;
+    Shader *shader;
     /** Render queue type. */
     RenderQueueType::Enum renderQueueType = RenderQueueType::Enum::Opaque;
     /** Shader data. */
@@ -36,7 +36,7 @@ public:
      * @param engine - Engine to which the material belongs
      * @param shader - Shader used by the material
      */
-    Material(Engine* engine, Shader* shader);
+    Material(Engine *engine, Shader *shader);
 };
 
 }

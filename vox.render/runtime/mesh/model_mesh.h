@@ -39,7 +39,7 @@ struct ValueChanged {
 /**
  * Mesh containing common vertex elements of the model.
  */
-class ModelMesh: public Mesh {
+class ModelMesh : public Mesh {
 public:
     /**
      * Whether to access data of the mesh.
@@ -56,77 +56,77 @@ public:
      * @param engine - Engine to which the mesh belongs
      * @param name - Mesh name
      */
-    ModelMesh(Engine* engine, const std::string& name = "");
+    ModelMesh(Engine *engine, const std::string &name = "");
     
 public:
     /**
      * Set positions for the mesh.
      * @param positions - The positions for the mesh.
      */
-    void setPositions(const std::vector<Float3>& positions);
+    void setPositions(const std::vector<Float3> &positions);
     
     /**
      * Get positions for the mesh.
      * @remarks Please call the setPositions() method after modification to ensure that the modification takes effect.
      */
-    const std::vector<Float3>& positions();
+    const std::vector<Float3> &positions();
     
     /**
      * Set per-vertex normals for the mesh.
      * @param normals - The normals for the mesh.
      */
-    void setNormals(const std::vector<Float3>& normals);
+    void setNormals(const std::vector<Float3> &normals);
     
     /**
      * Get normals for the mesh.
      * @remarks Please call the setNormals() method after modification to ensure that the modification takes effect.
      */
-    const std::vector<Float3>& normals();
+    const std::vector<Float3> &normals();
     
     /**
      * Set per-vertex colors for the mesh.
      * @param colors - The colors for the mesh.
      */
-    void setColors(const std::vector<math::Color>& colors);
+    void setColors(const std::vector<math::Color> &colors);
     
     /**
      * Get colors for the mesh.
      * @remarks Please call the setColors() method after modification to ensure that the modification takes effect.
      */
-    const std::vector<math::Color>& colors();
+    const std::vector<math::Color> &colors();
     
     /**
      * Set per-vertex tangents for the mesh.
      * @param tangents - The tangents for the mesh.
      */
-    void setTangents(const std::vector<Float4>& tangents);
+    void setTangents(const std::vector<Float4> &tangents);
     
     /**
      * Get tangents for the mesh.
      * @remarks Please call the setTangents() method after modification to ensure that the modification takes effect.
      */
-    const std::vector<Float4>& tangents();
+    const std::vector<Float4> &tangents();
     
     /**
      * Set per-vertex uv for the mesh by channelIndex.
      * @param uv - The uv for the mesh.
      * @param channelIndex - The index of uv channels, in [0 ~ 7] range.
      */
-    void setUVs(const std::vector<Float2>& uv, int channelIndex = 0);
+    void setUVs(const std::vector<Float2> &uv, int channelIndex = 0);
     
     /**
      * Get uv for the mesh by channelIndex.
      * @param channelIndex - The index of uv channels, in [0 ~ 7] range.
      * @remarks Please call the setUV() method after modification to ensure that the modification takes effect.
      */
-    const std::vector<Float2>& uvs(int channelIndex = 0);
+    const std::vector<Float2> &uvs(int channelIndex = 0);
     
     /**
      * Set indices for the mesh.
      * @param indices - The indices for the mesh.
      */
-    void setIndices(const std::vector<uint32_t>& indices);
-
+    void setIndices(const std::vector<uint32_t> &indices);
+    
     /**
      * Get indices for the mesh.
      */
@@ -140,16 +140,17 @@ public:
     
 private:
     MetalLoaderPtr resourceLoader;
-    MDLVertexDescriptor* _updateVertexDescriptor();
     
-    void _updateVertices(std::vector<float>& vertices);
+    MDLVertexDescriptor *_updateVertexDescriptor();
+    
+    void _updateVertices(std::vector<float> &vertices);
     
     void _releaseCache();
     
     bool _hasBlendShape = false;
     bool _useBlendShapeNormal = false;
     bool _useBlendShapeTangent = false;
-    id<MTLTexture> _blendShapeTexture;
+    id <MTLTexture> _blendShapeTexture;
     
     bool _accessible = true;
     int _vertexChangeFlag;

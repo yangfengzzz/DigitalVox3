@@ -8,7 +8,7 @@
 #include "material.h"
 
 namespace vox {
-Material::Material(Engine* engine, Shader* shader):EngineObject(engine), shader(shader) {
-}
+    Material::Material(Engine *engine, Shader *shader) : EngineObject(engine), shader(shader) {
+    }
 
 }

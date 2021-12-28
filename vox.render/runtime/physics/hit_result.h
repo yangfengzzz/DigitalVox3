@@ -19,7 +19,7 @@ namespace physics {
  */
 struct HitResult {
     /** The entity that was hit. */
-    Entity* entity = nullptr;
+    Entity *entity = nullptr;
     /** The distance from the ray's origin to the impact point. */
     float distance = 0;
     /** The impact point in world space where the ray hit the collider. */

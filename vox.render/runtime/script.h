@@ -13,6 +13,7 @@
 namespace vox {
 namespace physics {
 class ColliderShape;
+
 using ColliderShapePtr = std::shared_ptr<ColliderShape>;
 }
 
@@ -21,115 +22,135 @@ using ColliderShapePtr = std::shared_ptr<ColliderShape>;
  */
 class Script : public Component {
 public:
-    explicit Script(Entity* entity);
+    explicit Script(Entity *entity);
     
     /**
      * Called when be enabled first time, only once.
      */
-    virtual void onAwake() {}
+    virtual void onAwake() {
+    }
     
     /**
      * Called when be enabled.
      */
-    virtual void onEnable() {}
+    virtual void onEnable() {
+    }
     
     /**
      * Called before the frame-level loop start for the first time, only once.
      */
-    virtual void onStart() {}
+    virtual void onStart() {
+    }
     
     /**
      * The main loop, called frame by frame.
      * @param deltaTime - The deltaTime when the script update.
      */
-    virtual void onUpdate(float deltaTime) {}
+    virtual void onUpdate(float deltaTime) {
+    }
     
     /**
      * Called after the onUpdate finished, called frame by frame.
      * @param deltaTime - The deltaTime when the script update.
      */
-    virtual void onLateUpdate(float deltaTime) {}
+    virtual void onLateUpdate(float deltaTime) {
+    }
     
     /**
      * Called before camera rendering, called per camera.
      * @param camera - Current camera.
      */
-    virtual void onBeginRender(Camera* camera) {}
+    virtual void onBeginRender(Camera *camera) {
+    }
     
     /**
      * Called after camera rendering, called per camera.
      * @param camera - Current camera.
      */
-    virtual void onEndRender(Camera* camera) {}
+    virtual void onEndRender(Camera *camera) {
+    }
     
     /**
      * Called after command buffer commit.
      */
-    virtual void onEndFrame() {}
+    virtual void onEndFrame() {
+    }
     
     /**
      * Called when the collision enter.
      * @param other ColliderShape
      */
-    virtual void onTriggerEnter(physics::ColliderShapePtr other) {}
-
+    virtual void onTriggerEnter(physics::ColliderShapePtr other) {
+    }
+    
     /**
      * Called when the collision stay.
      * @remarks onTriggerStay is called every frame while the collision stay.
      * @param other ColliderShape
      */
-    virtual void onTriggerExit(physics::ColliderShapePtr other) {}
-
+    virtual void onTriggerExit(physics::ColliderShapePtr other) {
+    }
+    
     /**
      * Called when the collision exit.
      * @param other ColliderShape
      */
-    virtual void onTriggerStay(physics::ColliderShapePtr other) {}
+    virtual void onTriggerStay(physics::ColliderShapePtr other) {
+    }
     
     /**
      * Called when the pointer is down while over the ColliderShape.
      */
-    virtual void onPointerDown() {}
+    virtual void onPointerDown() {
+    }
     
     /**
      * Called when the pointer is up while over the ColliderShape.
      */
-    virtual void onPointerUp() {}
+    virtual void onPointerUp() {
+    }
     
     /**
      * Called when the pointer is down and up with the same collider.
      */
-    virtual void onPointerClick() {}
+    virtual void onPointerClick() {
+    }
     
     /**
      * Called when the pointer is enters the ColliderShape.
      */
-    virtual void onPointerEnter() {}
+    virtual void onPointerEnter() {
+    }
     
     /**
      * Called when the pointer is no longer over the ColliderShape.
      */
-    virtual void onPointerExit() {}
+    virtual void onPointerExit() {
+    }
     
     /**
      * Called when the pointer is down while over the ColliderShape and is still holding down.
      * @remarks onPointerDrag is called every frame while the pointer is down.
      */
-    virtual void onPointerDrag() {}
+    virtual void onPointerDrag() {
+    }
     
     /**
      * Called when be disabled.
      */
-    virtual void onDisable() {}
+    virtual void onDisable() {
+    }
     
     /**
      * Called at the end of the destroyed frame.
      */
-    virtual void onDestroy() {}
+    virtual void onDestroy() {
+    }
     
     
 private:
     friend class Entity;
+    
     friend class ComponentsManager;
     
     void _onAwake() override;

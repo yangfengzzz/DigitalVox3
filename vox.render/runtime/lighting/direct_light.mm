@@ -10,7 +10,7 @@
 #include "../entity.h"
 
 namespace vox {
-DirectLight::DirectLight(Entity* entity):
+DirectLight::DirectLight(Entity *entity) :
 Light(entity) {
 }
 
@@ -22,7 +22,7 @@ void DirectLight::_onDisable() {
     scene()->light_manager.detachDirectLight(this);
 }
 
-void DirectLight::_updateShaderData(DirectLightData& shaderData) {
+void DirectLight::_updateShaderData(DirectLightData &shaderData) {
     shaderData.color = simd_make_float3(color.r * intensity, color.g * intensity, color.b * intensity);
     auto direction = entity()->transform->worldForward();
     shaderData.direction = simd_make_float3(direction.x, direction.y, direction.z);

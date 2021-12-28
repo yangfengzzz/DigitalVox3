@@ -14,7 +14,7 @@ Physics::Physics() {
     _physics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), false, nullptr);
 }
 
-PxPhysics* Physics::operator()() {
+PxPhysics *Physics::operator()() {
     return _physics;
 }
 

@@ -18,7 +18,8 @@ namespace vox {
  */
 struct ShaderMacroCollection {
     static std::unordered_map<MacroName, std::pair<int, MTLDataType>> defaultValue;
-    static MTLFunctionConstantValues* createDefaultFunction();
+    
+    static MTLFunctionConstantValues *createDefaultFunction();
     
     /**
      * Union of two macro collection.
@@ -26,18 +27,19 @@ struct ShaderMacroCollection {
      * @param right - input macro collection
      * @param result - union output macro collection
      */
-    static void unionCollection(const ShaderMacroCollection& left, const ShaderMacroCollection& right,
-                                ShaderMacroCollection& result);
+    static void unionCollection(const ShaderMacroCollection &left, const ShaderMacroCollection &right,
+                                ShaderMacroCollection &result);
     
     size_t hash() const;
-
+    
 private:
     friend class ShaderProgram;
+    
     friend class ShaderData;
     
     std::unordered_map<MacroName, std::pair<int, MTLDataType>> _value{};
 };
-    
+
 }
 
 #endif /* shader_macro_collection_hpp */

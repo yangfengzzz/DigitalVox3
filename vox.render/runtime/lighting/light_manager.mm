@@ -19,31 +19,32 @@ namespace vox {
 ShaderProperty LightManager::_pointLightProperty = Shader::createProperty("u_pointLight", ShaderDataGroup::Scene);
 ShaderProperty LightManager::_spotLightProperty = Shader::createProperty("u_spotLight", ShaderDataGroup::Scene);
 ShaderProperty LightManager::_directLightProperty = Shader::createProperty("u_directLight", ShaderDataGroup::Scene);
-LightManager::LightManager(Scene* scene):
+
+LightManager::LightManager(Scene *scene) :
 _scene(scene) {
     RenderPipelineState::register_vertex_uploader<std::array<ShadowData, MAX_SHADOW>>(
-    [](const std::array<ShadowData, MAX_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: &x length:sizeof(std::array<ShadowData, MAX_SHADOW>) atIndex:location];
-    });
+                                                                                      [](const std::array<ShadowData, MAX_SHADOW> &x, size_t location, id <MTLRenderCommandEncoder> encoder) {
+                                                                                          [encoder setVertexBytes:&x length:sizeof(std::array<ShadowData, MAX_SHADOW>) atIndex:location];
+                                                                                      });
     
     RenderPipelineState::register_fragment_uploader<std::array<ShadowData, MAX_SHADOW>>(
-    [](const std::array<ShadowData, MAX_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: &x length:sizeof(std::array<ShadowData, MAX_SHADOW>) atIndex:location];
-    });
+                                                                                        [](const std::array<ShadowData, MAX_SHADOW> &x, size_t location, id <MTLRenderCommandEncoder> encoder) {
+                                                                                            [encoder setFragmentBytes:&x length:sizeof(std::array<ShadowData, MAX_SHADOW>) atIndex:location];
+                                                                                        });
     
     RenderPipelineState::register_vertex_uploader<std::array<CubeShadowData, MAX_CUBE_SHADOW>>(
-    [](const std::array<CubeShadowData, MAX_CUBE_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setVertexBytes: &x length:sizeof(std::array<CubeShadowData, MAX_CUBE_SHADOW>) atIndex:location];
-    });
+                                                                                               [](const std::array<CubeShadowData, MAX_CUBE_SHADOW> &x, size_t location, id <MTLRenderCommandEncoder> encoder) {
+                                                                                                   [encoder setVertexBytes:&x length:sizeof(std::array<CubeShadowData, MAX_CUBE_SHADOW>) atIndex:location];
+                                                                                               });
     
     RenderPipelineState::register_fragment_uploader<std::array<CubeShadowData, MAX_CUBE_SHADOW>>(
-    [](const std::array<CubeShadowData, MAX_CUBE_SHADOW>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: &x length:sizeof(std::array<CubeShadowData, MAX_CUBE_SHADOW>) atIndex:location];
-    });
+                                                                                                 [](const std::array<CubeShadowData, MAX_CUBE_SHADOW> &x, size_t location, id <MTLRenderCommandEncoder> encoder) {
+                                                                                                     [encoder setFragmentBytes:&x length:sizeof(std::array<CubeShadowData, MAX_CUBE_SHADOW>) atIndex:location];
+                                                                                                 });
 }
 
 //MARK: - Point Light
-void LightManager::attachPointLight(PointLight* light) {
+void LightManager::attachPointLight(PointLight *light) {
     auto iter = std::find(_pointLights.begin(), _pointLights.end(), light);
     if (iter == _pointLights.end()) {
         _pointLights.push_back(light);
@@ -52,19 +53,19 @@ void LightManager::attachPointLight(PointLight* light) {
     }
 }
 
-void LightManager::detachPointLight(PointLight* light) {
+void LightManager::detachPointLight(PointLight *light) {
     auto iter = std::find(_pointLights.begin(), _pointLights.end(), light);
     if (iter != _pointLights.end()) {
         _pointLights.erase(iter);
     }
 }
 
-const std::vector<PointLight*>& LightManager::pointLights() const {
+const std::vector<PointLight *> &LightManager::pointLights() const {
     return _pointLights;
 }
 
 //MARK: - Spot Light
-void LightManager::attachSpotLight(SpotLight* light) {
+void LightManager::attachSpotLight(SpotLight *light) {
     auto iter = std::find(_spotLights.begin(), _spotLights.end(), light);
     if (iter == _spotLights.end()) {
         _spotLights.push_back(light);
@@ -73,19 +74,19 @@ void LightManager::attachSpotLight(SpotLight* light) {
     }
 }
 
-void LightManager::detachSpotLight(SpotLight* light) {
+void LightManager::detachSpotLight(SpotLight *light) {
     auto iter = std::find(_spotLights.begin(), _spotLights.end(), light);
     if (iter != _spotLights.end()) {
         _spotLights.erase(iter);
     }
 }
 
-const std::vector<SpotLight*>& LightManager::spotLights() const {
+const std::vector<SpotLight *> &LightManager::spotLights() const {
     return _spotLights;
 }
 
 //MARK: - Direct Light
-void LightManager::attachDirectLight(DirectLight* light) {
+void LightManager::attachDirectLight(DirectLight *light) {
     auto iter = std::find(_directLights.begin(), _directLights.end(), light);
     if (iter == _directLights.end()) {
         _directLights.push_back(light);
@@ -94,19 +95,19 @@ void LightManager::attachDirectLight(DirectLight* light) {
     }
 }
 
-void LightManager::detachDirectLight(DirectLight* light) {
+void LightManager::detachDirectLight(DirectLight *light) {
     auto iter = std::find(_directLights.begin(), _directLights.end(), light);
     if (iter != _directLights.end()) {
         _directLights.erase(iter);
     }
 }
 
-const std::vector<DirectLight*>& LightManager::directLights() const {
+const std::vector<DirectLight *> &LightManager::directLights() const {
     return _directLights;
 }
 
 //MARK: - Internal Uploader
-void LightManager::_updateShaderData(ShaderData& shaderData) {
+void LightManager::_updateShaderData(ShaderData &shaderData) {
     size_t pointLightCount = _pointLights.size();
     _pointLightDatas.resize(pointLightCount);
     size_t spotLightCount = _spotLights.size();
@@ -143,7 +144,7 @@ void LightManager::_updateShaderData(ShaderData& shaderData) {
     if (pointLightCount) {
         if (_pointLightBuffer == nullptr || [_pointLightBuffer length] != sizeof(PointLightData) * _pointLightDatas.size()) {
             _pointLightBuffer = _scene->engine()->resourceLoader()->buildBuffer(_pointLightDatas.data(),
-                                                                                 _pointLightDatas.size() * sizeof(PointLightData), NULL);
+                                                                                _pointLightDatas.size() * sizeof(PointLightData), NULL);
         } else {
             memcpy([_pointLightBuffer contents], _pointLightDatas.data(), _pointLightDatas.size() * sizeof(PointLightData));
         }

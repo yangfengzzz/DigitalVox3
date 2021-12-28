@@ -15,8 +15,8 @@ void Joint::setActors(Collider *actor0, Collider *actor1) {
 }
 
 void Joint::setLocalPose(PxJointActorIndex::Enum actor, const math::Transform &localPose) {
-    const auto& p = localPose.translation;
-    const auto& q = localPose.rotation;
+    const auto &p = localPose.translation;
+    const auto &q = localPose.rotation;
     _nativeJoint->setLocalPose(actor, PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
 }
 

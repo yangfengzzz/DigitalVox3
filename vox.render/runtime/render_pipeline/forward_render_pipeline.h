@@ -11,18 +11,18 @@
 #include "render_pipeline.h"
 
 namespace vox {
-class ForwardRenderPipeline :public RenderPipeline {
+class ForwardRenderPipeline : public RenderPipeline {
 public:
-    ForwardRenderPipeline(Camera* camera);
+    ForwardRenderPipeline(Camera *camera);
     
     ~ForwardRenderPipeline();
     
 private:
-    void _drawRenderPass(RenderPass* pass, Camera* camera,
+    void _drawRenderPass(RenderPass *pass, Camera *camera,
                          std::optional<TextureCubeFace> cubeFace = std::nullopt,
                          int mipLevel = 0) override;
     
-    void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
+    void _drawElement(const std::vector<RenderElement> &renderQueue, RenderPass *pass);
 };
 
 }

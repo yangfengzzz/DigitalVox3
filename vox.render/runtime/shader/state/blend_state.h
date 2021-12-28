@@ -31,15 +31,15 @@ private:
     /**
      * Apply the current blend state by comparing with the last blend state.
      */
-    void _apply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                MTLDepthStencilDescriptor* depthStencilDescriptor,
-                MetalRenderer* hardwareRenderer) {
+    void _apply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                MTLDepthStencilDescriptor *depthStencilDescriptor,
+                MetalRenderer *hardwareRenderer) {
         _platformApply(pipelineDescriptor, depthStencilDescriptor, hardwareRenderer);
     }
-
-    void _platformApply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                        MTLDepthStencilDescriptor* depthStencilDescriptor,
-                        MetalRenderer* hardwareRenderer);
+    
+    void _platformApply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                        MTLDepthStencilDescriptor *depthStencilDescriptor,
+                        MetalRenderer *hardwareRenderer);
 };
 
 }

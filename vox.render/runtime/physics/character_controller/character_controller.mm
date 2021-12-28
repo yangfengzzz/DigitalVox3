@@ -10,7 +10,7 @@
 
 namespace vox {
 namespace physics {
-CharacterController::CharacterController(Entity* entity) :
+CharacterController::CharacterController(Entity *entity) :
 Component(entity) {
 }
 

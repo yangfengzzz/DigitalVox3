@@ -22,22 +22,23 @@
 
 using namespace vox;
 
-class lightMovemenet: public Script {
+class lightMovemenet : public Script {
 public:
     const float speed = 1;
     float totalTime = 0;
     
-    lightMovemenet(Entity* entity):Script(entity) {}
+    lightMovemenet(Entity *entity) : Script(entity) {
+    }
     
     void onUpdate(float deltaTime) override {
         totalTime += deltaTime;
         totalTime = fmod(totalTime, 100);
-        entity()->transform->setPosition(10*std::sin(speed * totalTime), 10, 10*std::cos(speed * totalTime));
+        entity()->transform->setPosition(10 * std::sin(speed * totalTime), 10, 10 * std::cos(speed * totalTime));
         entity()->transform->lookAt(Float3(0, 0, 0));
     }
 };
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto resourceLoader = engine.resourceLoader();
@@ -73,7 +74,7 @@ int main(int, char**) {
     characterMtl->setNormalTexture(resourceLoader->loadTexture("../models/Doggy", "T_Doggy_normal.png", false));
     characterMtl->setMetallicRoughnessTexture(resourceLoader->createMetallicRoughnessTexture("../models/Doggy", "T_Doggy_metallic.png",
                                                                                              "T_Doggy_roughness.png", false));
-
+    
     auto characterEntity = rootEntity->createChild("characterEntity");
     characterEntity->transform->setScale(3, 3, 3);
     auto characterRenderer = characterEntity->addComponent<SkinnedMeshRenderer>();

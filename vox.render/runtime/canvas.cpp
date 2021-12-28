@@ -8,48 +8,52 @@
 #include "canvas.h"
 #include "../gui/imgui_impl_glfw.h"
 
-static void glfw_error_callback(int error, const char* description)
-{
+static void glfw_error_callback(int error, const char *description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
 namespace vox {
 std::vector<Canvas::CursorPosFunc> Canvas::cursor_callbacks = {};
-void Canvas::cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
-    for (auto& callback : cursor_callbacks) {
+
+void Canvas::cursorPosCallback(GLFWwindow *window, double xpos, double ypos) {
+    for (auto &callback: cursor_callbacks) {
         callback(window, xpos, ypos);
     }
 }
 
 std::vector<Canvas::MouseButtonFunc> Canvas::mouse_button_callbacks = {};
-void Canvas::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
-    for (auto& callback : mouse_button_callbacks) {
+
+void Canvas::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
+    for (auto &callback: mouse_button_callbacks) {
         callback(window, button, action, mods);
     }
 }
 
 std::vector<Canvas::ScrollFunc> Canvas::scroll_callbacks = {};
-void Canvas::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
-    for (auto& callback : scroll_callbacks) {
+
+void Canvas::scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
+    for (auto &callback: scroll_callbacks) {
         callback(window, xoffset, yoffset);
     }
 }
 
 std::vector<Canvas::KeyFunc> Canvas::key_callbacks = {};
-void Canvas::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    for (auto& callback : key_callbacks) {
+
+void Canvas::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+    for (auto &callback: key_callbacks) {
         callback(window, key, scancode, action, mods);
     }
 }
 
 std::vector<Canvas::ResizeFunc> Canvas::resize_callbacks = {};
-void Canvas::windowResizeCallback(GLFWwindow* window, int width, int height) {
-    for (auto& callback : resize_callbacks) {
+
+void Canvas::windowResizeCallback(GLFWwindow *window, int width, int height) {
+    for (auto &callback: resize_callbacks) {
         callback(window, width, height);
     }
 }
 
-Canvas::Canvas(int width, int height, const char* title) {
+Canvas::Canvas(int width, int height, const char *title) {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -66,7 +70,7 @@ Canvas::Canvas(int width, int height, const char* title) {
     glfwSetScrollCallback(window, scrollCallback);
     glfwSetKeyCallback(window, keyCallback);
     
-    resize_callbacks.push_back([&](GLFWwindow* window, int width, int height){
+    resize_callbacks.push_back([&](GLFWwindow *window, int width, int height) {
         _width = width;
         _height = height;
     });
@@ -77,34 +81,34 @@ Canvas::Canvas(int width, int height, const char* title) {
     ImGui::CreateContext();
     
     ImGuiStyle &style = ImGui::GetStyle();
-
+    
     // Color scheme
-    style.Colors[ImGuiCol_TitleBg]          = ImVec4(1.0f, 0.0f, 0.0f, 0.6f);
-    style.Colors[ImGuiCol_TitleBgActive]    = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
-    style.Colors[ImGuiCol_MenuBarBg]        = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
-    style.Colors[ImGuiCol_Header]           = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
-    style.Colors[ImGuiCol_HeaderActive]     = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
-    style.Colors[ImGuiCol_HeaderHovered]    = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
-    style.Colors[ImGuiCol_FrameBg]          = ImVec4(0.0f, 0.0f, 0.0f, 0.8f);
-    style.Colors[ImGuiCol_CheckMark]        = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
-    style.Colors[ImGuiCol_SliderGrab]       = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_TitleBg] = ImVec4(1.0f, 0.0f, 0.0f, 0.6f);
+    style.Colors[ImGuiCol_TitleBgActive] = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
+    style.Colors[ImGuiCol_MenuBarBg] = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_Header] = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_HeaderActive] = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_FrameBg] = ImVec4(0.0f, 0.0f, 0.0f, 0.8f);
+    style.Colors[ImGuiCol_CheckMark] = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
+    style.Colors[ImGuiCol_SliderGrab] = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
     style.Colors[ImGuiCol_SliderGrabActive] = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
-    style.Colors[ImGuiCol_FrameBgHovered]   = ImVec4(1.0f, 1.0f, 1.0f, 0.1f);
-    style.Colors[ImGuiCol_FrameBgActive]    = ImVec4(1.0f, 1.0f, 1.0f, 0.2f);
-    style.Colors[ImGuiCol_Button]           = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
-    style.Colors[ImGuiCol_ButtonHovered]    = ImVec4(1.0f, 0.0f, 0.0f, 0.6f);
-    style.Colors[ImGuiCol_ButtonActive]     = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
+    style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(1.0f, 1.0f, 1.0f, 0.1f);
+    style.Colors[ImGuiCol_FrameBgActive] = ImVec4(1.0f, 1.0f, 1.0f, 0.2f);
+    style.Colors[ImGuiCol_Button] = ImVec4(1.0f, 0.0f, 0.0f, 0.4f);
+    style.Colors[ImGuiCol_ButtonHovered] = ImVec4(1.0f, 0.0f, 0.0f, 0.6f);
+    style.Colors[ImGuiCol_ButtonActive] = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
     
     // Borderless window
     style.WindowBorderSize = 0.0f;
-
+    
     // Global scale
     style.ScaleAllSizes(getDpiFactor());
     
-    ImGuiIO& io = ImGui::GetIO();
-    io.DisplaySize.x           = static_cast<float>(width);
-    io.DisplaySize.y           = static_cast<float>(height);
-    io.FontGlobalScale         = 1.0f;
+    ImGuiIO &io = ImGui::GetIO();
+    io.DisplaySize.x = static_cast<float>(width);
+    io.DisplaySize.y = static_cast<float>(height);
+    io.FontGlobalScale = 1.0f;
     io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
     io.Fonts->AddFontFromFileTTF("../models/Roboto-Regular.ttf", 16.0f);
     
@@ -142,7 +146,7 @@ void Canvas::setHeight(float value) {
     glfwSetWindowSize(window, _width, _height);
 }
 
-GLFWwindow* Canvas::handle() {
+GLFWwindow *Canvas::handle() {
     return window;
 }
 
@@ -160,16 +164,16 @@ void Canvas::close() {
 
 float Canvas::getDpiFactor() const {
     auto primary_monitor = glfwGetPrimaryMonitor();
-    auto vidmode         = glfwGetVideoMode(primary_monitor);
+    auto vidmode = glfwGetVideoMode(primary_monitor);
     
     int width_mm, height_mm;
     glfwGetMonitorPhysicalSize(primary_monitor, &width_mm, &height_mm);
     
     // As suggested by the GLFW monitor guide
-    static const float inch_to_mm       = 25.0f;
+    static const float inch_to_mm = 25.0f;
     static const float win_base_density = 96.0f;
     
-    auto dpi        = static_cast<uint32_t>(vidmode->width / (width_mm / inch_to_mm));
+    auto dpi = static_cast<uint32_t>(vidmode->width / (width_mm / inch_to_mm));
     auto dpi_factor = dpi / win_base_density;
     return dpi_factor;
 }

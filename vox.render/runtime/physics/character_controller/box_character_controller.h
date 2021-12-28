@@ -15,22 +15,22 @@ namespace physics {
 /**
  * A box character controller.
  */
-class BoxCharacterController :public CharacterController {
+class BoxCharacterController : public CharacterController {
 public:
-    BoxCharacterController(Entity* entity);
+    BoxCharacterController(Entity *entity);
     
-    void setDesc(const PxBoxControllerDesc& desc);
+    void setDesc(const PxBoxControllerDesc &desc);
     
     float halfHeight() const;
-
+    
     float halfSideExtent() const;
-
+    
     float halfForwardExtent() const;
-
+    
     bool setHalfHeight(float halfHeight);
-
+    
     bool setHalfSideExtent(float halfSideExtent);
-
+    
     bool setHalfForwardExtent(float halfForwardExtent);
 };
 

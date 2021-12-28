@@ -10,7 +10,7 @@
 
 namespace vox {
 namespace control {
-Spherical::Spherical(float radius, float phi, float theta):
+Spherical::Spherical(float radius, float phi, float theta) :
 radius(radius),
 phi(phi),
 theta(theta) {
@@ -26,7 +26,7 @@ void Spherical::makeSafe() {
     this->phi = math::Clamp<float>(phi, math::kNormalizationToleranceSq, M_PI - math::kNormalizationToleranceSq);
 }
 
-void Spherical::setFromVec3(const math::Float3& v3) {
+void Spherical::setFromVec3(const math::Float3 &v3) {
     radius = Length(v3);
     if (radius == 0) {
         theta = 0;
@@ -37,7 +37,7 @@ void Spherical::setFromVec3(const math::Float3& v3) {
     }
 }
 
-void Spherical::setToVec3(math::Float3& v3) {
+void Spherical::setToVec3(math::Float3 &v3) {
     const auto sinPhiRadius = std::sin(phi) * radius;
     
     v3.x = sinPhiRadius * std::sin(theta);

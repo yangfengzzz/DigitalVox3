@@ -23,7 +23,7 @@ class MetalRenderer {
 public:
     ResourceCache resouceCache;
     
-    explicit MetalRenderer(Canvas* canvas);
+    explicit MetalRenderer(Canvas *canvas);
     
     id <MTLLibrary> library();
     
@@ -53,41 +53,41 @@ public:
     
     void endRenderPass();
     
-    void pushDebugGroup(const std::string& groupName);
+    void pushDebugGroup(const std::string &groupName);
     
     void popDebugGroup();
     
 public:
     MTKMeshBufferAllocator *createBufferAllocator();
     
-    MTKMesh* convertFrom(MDLMesh *modelIOMesh);
+    MTKMesh *convertFrom(MDLMesh *modelIOMesh);
     
 public:
-    void synchronizeResource(id<MTLResource> resource);
+    void synchronizeResource(id <MTLResource> resource);
     
-    id<MTLTexture> createTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
-                                      const std::vector<id<MTLTexture>>::iterator& texturesEnd,
-                                      id<MTLTexture> packedTextures);
+    id <MTLTexture> createTextureArray(const std::vector<id <MTLTexture>>::iterator &texturesBegin,
+                                       const std::vector<id <MTLTexture>>::iterator &texturesEnd,
+                                       id <MTLTexture> packedTextures);
     
-    id<MTLTexture> createCubeTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
-                                          const std::vector<id<MTLTexture>>::iterator& texturesEnd,
-                                          id<MTLTexture> packedTextures);
+    id <MTLTexture> createCubeTextureArray(const std::vector<id <MTLTexture>>::iterator &texturesBegin,
+                                           const std::vector<id <MTLTexture>>::iterator &texturesEnd,
+                                           id <MTLTexture> packedTextures);
     
-    id<MTLTexture> createAtlas(const std::array<id<MTLTexture>, 4>& textures,
-                               id<MTLTexture> packedTextures);
+    id <MTLTexture> createAtlas(const std::array<id <MTLTexture>, 4> &textures,
+                                id <MTLTexture> packedTextures);
     
-    id<MTLTexture> createCubeAtlas(const std::array<id<MTLTexture>, 6>& textures,
-                                   id<MTLTexture> packedTextures);
+    id <MTLTexture> createCubeAtlas(const std::array<id <MTLTexture>, 6> &textures,
+                                    id <MTLTexture> packedTextures);
     
 public:
     template<typename T>
-    void setVertexBytes(T& data, uint32_t location) {
-        [_renderEncoder setVertexBytes: &data length:sizeof(T) atIndex:location];
+    void setVertexBytes(T &data, uint32_t location) {
+        [_renderEncoder setVertexBytes:&data length:sizeof(T) atIndex:location];
     }
     
-    void setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index);
+    void setVertexBuffer(id <MTLBuffer> buffer, uint32_t offset, uint32_t index);
     
-    void setFragmentTexture(id<MTLTexture> texture, uint32_t index);
+    void setFragmentTexture(id <MTLTexture> texture, uint32_t index);
     
     id <MTLRenderPipelineState> createRenderPipelineState(MTLRenderPipelineDescriptor *descriptor);
     
@@ -95,7 +95,7 @@ public:
     
     void setRenderPipelineState(RenderPipelineState *state);
     
-    id <MTLDepthStencilState> createDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor);
+    id <MTLDepthStencilState> createDepthStencilState(MTLDepthStencilDescriptor *depthStencilDescriptor);
     
     void setDepthStencilState(id <MTLDepthStencilState> depthStencilState);
     
@@ -118,7 +118,7 @@ public:
                        size_t vertexStart, size_t vertexCount, size_t instanceCount) const;
     
     void drawIndexedPrimitives(MTLPrimitiveType primitiveType, size_t indexCount,
-                               MTLIndexType indexType, id<MTLBuffer> indexBuffer,
+                               MTLIndexType indexType, id <MTLBuffer> indexBuffer,
                                size_t indexBufferOffset, size_t instanceCount) const;
     
 private:
@@ -126,11 +126,12 @@ private:
     
 private:
     friend class RenderPipelineState;
+    
     friend class ComputePipelineState;
     
     const int maxAnisotropy = 8;
     
-    Canvas* _canvas;
+    Canvas *_canvas;
     id <MTLDevice> _device;
     id <MTLCommandQueue> _commandQueue;
     id <MTLLibrary> _library;
@@ -146,7 +147,7 @@ private:
     MTLPixelFormat _colorPixelFormat;
     id <MTLSamplerState> _samplerState;
     
-    id<MTLTexture> _depthTexture;
+    id <MTLTexture> _depthTexture;
 };
 
 }

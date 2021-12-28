@@ -12,18 +12,18 @@
 #include <MetalKit/MetalKit.h>
 
 namespace vox {
-class DeferredRenderPipeline :public RenderPipeline {
+class DeferredRenderPipeline : public RenderPipeline {
 public:
-    DeferredRenderPipeline(Camera* camera);
+    DeferredRenderPipeline(Camera *camera);
     
     ~DeferredRenderPipeline();
     
 private:
-    void _drawRenderPass(RenderPass* pass, Camera* camera,
+    void _drawRenderPass(RenderPass *pass, Camera *camera,
                          std::optional<TextureCubeFace> cubeFace = std::nullopt,
                          int mipLevel = 0) override;
     
-    void _drawElement(const std::vector<RenderElement>& renderQueue, RenderPass* pass);
+    void _drawElement(const std::vector<RenderElement> &renderQueue, RenderPass *pass);
     
     void _drawDirectionalLights();
     
@@ -42,27 +42,27 @@ private:
     id <MTLTexture> _normal_GBuffer;
     MTLPixelFormat _emissive_GBufferFormat;
     id <MTLTexture> _emissive_GBuffer;
-
+    
     // GBuffer
     MTLRenderPassDescriptor *_GBufferRenderPassDesc;
-    MTLRenderPipelineDescriptor* _GBufferRenderPipelineDesc;
+    MTLRenderPipelineDescriptor *_GBufferRenderPipelineDesc;
     MTLStencilDescriptor *_GBufferStencilStateDesc;
     
     // directional light Compositor
     MTLRenderPassDescriptor *_finalRenderPassDesc;
     MTLRenderPipelineDescriptor *_directionalLightPipelineDesc;
     id <MTLDepthStencilState> _directionLightDepthStencilState;
-
+    
     // point light compositor
     MTKMesh *_icosahedronMesh;
     MTLRenderPipelineDescriptor *_lightMaskPipelineDesc;
     id <MTLDepthStencilState> _lightMaskDepthStencilState;
-    MTLRenderPipelineDescriptor * _lightPipelineDesc;
+    MTLRenderPipelineDescriptor *_lightPipelineDesc;
     id <MTLDepthStencilState> _pointLightDepthStencilState;
     
     // point light debugger
-    id<MTLTexture> _fairyMap;
-    id<MTLBuffer> _fairy;
+    id <MTLTexture> _fairyMap;
+    id <MTLBuffer> _fairy;
     MTLRenderPipelineDescriptor *_fairyPipelineDesc;
     id <MTLDepthStencilState> _dontWriteDepthStencilState;
 };

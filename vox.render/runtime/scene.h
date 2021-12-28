@@ -41,12 +41,12 @@ public:
      * @param engine - Engine
      * @param name - Name
      */
-    Scene(Engine* engine, std::string name = "");
+    Scene(Engine *engine, std::string name = "");
     
     /**
      * Ambient light.
      */
-    AmbientLight& ambientLight();
+    AmbientLight &ambientLight();
     
     /**
      * Count of root entities.
@@ -56,7 +56,7 @@ public:
     /**
      * Root entity collection.
      */
-    const std::vector<EntityPtr>& rootEntities();
+    const std::vector<EntityPtr> &rootEntities();
     
     /**
      * Whether it's destroyed.
@@ -94,7 +94,7 @@ public:
      * @param name - Entity name
      * @returns Entity
      */
-    EntityPtr findEntityByName(const std::string& name);
+    EntityPtr findEntityByName(const std::string &name);
     
     /**
      * Destroy this scene.
@@ -103,26 +103,30 @@ public:
     
 private:
     friend class DeferredRenderPipeline;
+    
     friend class SceneManager;
+    
     friend class Engine;
+    
     friend class Entity;
+    
     friend class Camera;
     
-    void _attachRenderCamera(Camera* camera);
+    void _attachRenderCamera(Camera *camera);
     
-    void _detachRenderCamera(Camera* camera);
+    void _detachRenderCamera(Camera *camera);
     
     void _processActive(bool active);
     
     void _updateShaderData();
     
     void _removeEntity(EntityPtr entity);
-
-    std::vector<Camera*> _activeCameras;
+    
+    std::vector<Camera *> _activeCameras;
     bool _isActiveInEngine = false;
     ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
     static ShaderProperty _frameBufferSizeProperty;
-
+    
     bool _destroyed = false;
     std::vector<EntityPtr> _rootEntities;
     AmbientLight _ambientLight;

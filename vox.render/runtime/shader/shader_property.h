@@ -23,8 +23,8 @@ struct ShaderProperty {
     
     const int uniqueId;
     
-    ShaderProperty(const std::string& name, ShaderDataGroup::Enum group);
-
+    ShaderProperty(const std::string &name, ShaderDataGroup::Enum group);
+    
 private:
     static int _propertyNameCounter;
 };

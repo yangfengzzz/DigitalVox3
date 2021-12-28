@@ -15,7 +15,7 @@ type(type),
 offset(offset) {
 }
 
-MeshBuffer::MeshBuffer(const MeshBuffer& buffer) :
+MeshBuffer::MeshBuffer(const MeshBuffer &buffer) :
 buffer(buffer.buffer),
 length(buffer.length),
 type(buffer.type),
@@ -23,7 +23,7 @@ offset(buffer.offset) {
 }
 
 MeshBuffer
-MeshBuffer::operator=(const MeshBuffer& buffer) {
+MeshBuffer::operator=(const MeshBuffer &buffer) {
     return MeshBuffer(buffer.buffer, buffer.length, buffer.type, buffer.offset);
 }
 

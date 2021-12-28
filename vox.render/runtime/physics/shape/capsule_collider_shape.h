@@ -29,7 +29,7 @@ struct ColliderShapeUpAxis {
 /**
  * Physical collider shape for capsule.
  */
-class CapsuleColliderShape :public ColliderShape {
+class CapsuleColliderShape : public ColliderShape {
 public:
     CapsuleColliderShape();
     
@@ -54,7 +54,7 @@ public:
     
     void setUpAxis(ColliderShapeUpAxis::Enum value);
     
-    void setWorldScale(const math::Float3& scale) override;
+    void setWorldScale(const math::Float3 &scale) override;
     
 private:
     float _radius = 1;

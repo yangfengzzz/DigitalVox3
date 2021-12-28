@@ -15,14 +15,14 @@ namespace vox {
 /**
  * Directional light.
  */
-class DirectLight :public Light {
+class DirectLight : public Light {
 public:
     /** Light color. */
     math::Color color = math::Color(1, 1, 1, 1);
     /** Light intensity. */
     float intensity = 1.0;
     
-    DirectLight(Entity* entity);
+    DirectLight(Entity *entity);
     
 public:
     math::Matrix shadowProjectionMatrix() override;
@@ -33,7 +33,7 @@ public:
     
 private:
     friend class LightManager;
-
+    
     /**
      * Mount to the current Scene.
      */
@@ -44,7 +44,7 @@ private:
      */
     void _onDisable() override;
     
-    void _updateShaderData(DirectLightData& shaderData);
+    void _updateShaderData(DirectLightData &shaderData);
 };
 
 }

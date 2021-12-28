@@ -14,9 +14,10 @@ AnimatorController::AnimatorController()
 previous_time_ratio_(0.f),
 playback_speed_(1.f),
 play_(true),
-loop_(true) {}
+loop_(true) {
+}
 
-void AnimatorController::Update(const animation::Animation& _animation,
+void AnimatorController::Update(const animation::Animation &_animation,
                                 float _dt) {
     float new_time = time_ratio_;
     
@@ -44,7 +45,9 @@ void AnimatorController::set_time_ratio(float _ratio) {
 }
 
 // Gets animation current time.
-float AnimatorController::time_ratio() const { return time_ratio_; }
+float AnimatorController::time_ratio() const {
+    return time_ratio_;
+}
 
 // Gets animation time of last update.
 float AnimatorController::previous_time_ratio() const {

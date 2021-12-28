@@ -16,22 +16,23 @@
 namespace vox {
 namespace physics {
 
-class Collider: public Component {
+class Collider : public Component {
 public:
-    Collider(Entity* entity);
+    Collider(Entity *entity);
     
-    void addShape(const ColliderShapePtr& shape);
+    void addShape(const ColliderShapePtr &shape);
     
-    void removeShape(const ColliderShapePtr& shape);
+    void removeShape(const ColliderShapePtr &shape);
     
     void clearShapes();
     
-    PxRigidActor * handle();
+    PxRigidActor *handle();
     
 public:
     void _onUpdate();
     
-    virtual void _onLateUpdate(){}
+    virtual void _onLateUpdate() {
+    }
     
     void _onEnable() override;
     
@@ -44,7 +45,7 @@ protected:
     
     ssize_t _index = -1;
     std::unique_ptr<UpdateFlag> _updateFlag;
-    physx::PxRigidActor * _nativeActor;
+    physx::PxRigidActor *_nativeActor;
     std::vector<ColliderShapePtr> _shapes;
 };
 

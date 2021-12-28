@@ -13,7 +13,7 @@
 #include "shader/shader_pool.h"
 
 namespace vox {
-Engine::Engine(Canvas* canvas):_canvas(canvas), _hardwareRenderer(canvas) {
+Engine::Engine(Canvas *canvas) : _canvas(canvas), _hardwareRenderer(canvas) {
     ShaderPool::initialization();
     _sceneManager.setActiveScene(std::make_shared<Scene>(this, "DefaultScene"));
 }
@@ -23,7 +23,7 @@ Engine::~Engine() {
     pause();
 }
 
-Canvas* Engine::canvas() {
+Canvas *Engine::canvas() {
     return _canvas;
 }
 
@@ -82,10 +82,10 @@ void Engine::resume() {
 void Engine::update() {
     const float deltaTime = _timer.tick();
     
-    const auto& scene = _sceneManager._activeScene;
+    const auto &scene = _sceneManager._activeScene;
     if (scene) {
         std::sort(scene->_activeCameras.begin(), scene->_activeCameras.end(),
-                  [](const Camera* camera1, const Camera* camera2){
+                  [](const Camera *camera1, const Camera *camera2) {
             return camera1->priority - camera2->priority;
         });
         
@@ -113,15 +113,15 @@ void Engine::update() {
 }
 
 void Engine::_render(ScenePtr scene, float deltaTime) {
-    const auto& cameras = scene->_activeCameras;
+    const auto &cameras = scene->_activeCameras;
     _componentsManager.callRendererOnUpdate(deltaTime);
     
     scene->_updateShaderData();
     
     if (cameras.size() > 0) {
         for (size_t i = 0, l = cameras.size(); i < l; i++) {
-            const auto& camera = cameras[i];
-            const auto& cameraEntity = camera->entity();
+            const auto &camera = cameras[i];
+            const auto &cameraEntity = camera->entity();
             if (camera->enabled() && cameraEntity->isActiveInHierarchy()) {
                 _componentsManager.callCameraOnBeginRender(camera);
                 camera->render();

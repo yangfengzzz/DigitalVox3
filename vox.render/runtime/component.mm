@@ -40,7 +40,7 @@ Entity *Component::entity() const {
     return _entity;
 }
 
-Scene* Component::scene() {
+Scene *Component::scene() {
     return _entity->scene();
 }
 

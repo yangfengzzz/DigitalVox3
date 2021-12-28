@@ -20,42 +20,45 @@
 
 using namespace vox;
 
-class ShadowDebugMaterial :public BaseMaterial {
+class ShadowDebugMaterial : public BaseMaterial {
 public:
-    ShadowDebugMaterial(Engine* engine):BaseMaterial(engine, Shader::find("shadowMapDebugger")){}
+    ShadowDebugMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("shadowMapDebugger")) {
+    }
 };
 
-class lightMovemenet: public Script {
+class lightMovemenet : public Script {
 public:
     const float speed = 1;
     float totalTime = 0;
     
-    lightMovemenet(Entity* entity):Script(entity) {}
+    lightMovemenet(Entity *entity) : Script(entity) {
+    }
     
     void onUpdate(float deltaTime) override {
         totalTime += deltaTime;
         totalTime = fmod(totalTime, 100);
-        entity()->transform->setPosition(10*std::sin(speed * totalTime), 10, 10*std::cos(speed * totalTime));
+        entity()->transform->setPosition(10 * std::sin(speed * totalTime), 10, 10 * std::cos(speed * totalTime));
         entity()->transform->lookAt(Float3(0, 0, 0));
     }
 };
 
-class lightMovemenetReverse: public Script {
+class lightMovemenetReverse : public Script {
 public:
     const float speed = 1;
     float totalTime = 0;
     
-    lightMovemenetReverse(Entity* entity):Script(entity) {}
+    lightMovemenetReverse(Entity *entity) : Script(entity) {
+    }
     
     void onUpdate(float deltaTime) override {
         totalTime += deltaTime;
         totalTime = fmod(totalTime, 100);
-        entity()->transform->setPosition(10*std::cos(speed * totalTime), 10, 10*std::sin(speed * totalTime));
+        entity()->transform->setPosition(10 * std::cos(speed * totalTime), 10, 10 * std::sin(speed * totalTime));
         entity()->transform->lookAt(Float3(0, 0, 0));
     }
 };
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
@@ -76,7 +79,7 @@ int main(int, char**) {
     auto spotLight = light->addComponent<SpotLight>();
     spotLight->intensity = 0.2;
     spotLight->setEnableShadow(true);
-
+    
     auto light2 = rootEntity->createChild("light2");
     light2->transform->setPosition(0, 10, 0);
     light2->transform->lookAt(Float3(0, 0, 0), Float3(1, 0, 0));
@@ -89,7 +92,7 @@ int main(int, char**) {
     auto directLight = light3->addComponent<DirectLight>();
     directLight->intensity = 0.2;
     directLight->setEnableShadow(true);
-
+    
     // create box test entity
     float cubeSize = 2.0;
     auto boxEntity = rootEntity->createChild("BoxEntity");

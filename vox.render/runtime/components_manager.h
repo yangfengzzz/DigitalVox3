@@ -19,41 +19,41 @@ namespace vox {
  */
 class ComponentsManager {
 public:
-    void addOnStartScript(Script* script);
+    void addOnStartScript(Script *script);
     
-    void removeOnStartScript(Script* script);
+    void removeOnStartScript(Script *script);
     
-    void addOnUpdateScript(Script* script);
+    void addOnUpdateScript(Script *script);
     
-    void removeOnUpdateScript(Script* script);
+    void removeOnUpdateScript(Script *script);
     
-    void addOnLateUpdateScript(Script* script);
+    void addOnLateUpdateScript(Script *script);
     
-    void removeOnLateUpdateScript(Script* script);
+    void removeOnLateUpdateScript(Script *script);
     
-    void addOnEndFrameScript(Script* script);
+    void addOnEndFrameScript(Script *script);
     
-    void removeOnEndFrameScript(Script* script);
+    void removeOnEndFrameScript(Script *script);
     
-    void addDestroyComponent(Script* component);
-    
-public:
-    void addRenderer(Renderer* renderer);
-    
-    void removeRenderer(Renderer* renderer);
-    
-    void addOnUpdateRenderers(Renderer* renderer);
-    
-    void removeOnUpdateRenderers(Renderer* renderer);
+    void addDestroyComponent(Script *component);
     
 public:
-    void addOnUpdateAnimators(Animator* animator);
+    void addRenderer(Renderer *renderer);
     
-    void removeOnUpdateAnimators(Animator* animator);
+    void removeRenderer(Renderer *renderer);
     
-    void addOnUpdateSceneAnimators(SceneAnimator* animator);
+    void addOnUpdateRenderers(Renderer *renderer);
     
-    void removeOnUpdateSceneAnimators(SceneAnimator* animator);
+    void removeOnUpdateRenderers(Renderer *renderer);
+    
+public:
+    void addOnUpdateAnimators(Animator *animator);
+    
+    void removeOnUpdateAnimators(Animator *animator);
+    
+    void addOnUpdateSceneAnimators(SceneAnimator *animator);
+    
+    void removeOnUpdateSceneAnimators(SceneAnimator *animator);
     
 public:
     void callScriptOnStart();
@@ -72,20 +72,20 @@ public:
     
     void callComponentDestroy();
     
-    void callCameraOnBeginRender(Camera* camera);
+    void callCameraOnBeginRender(Camera *camera);
     
-    void callCameraOnEndRender(Camera* camera);
+    void callCameraOnEndRender(Camera *camera);
     
 public:
-    void callRender(RenderContext& context,
-                    std::vector<RenderElement>& opaqueQueue,
-                    std::vector<RenderElement>& alphaTestQueue,
-                    std::vector<RenderElement>& transparentQueue);
+    void callRender(RenderContext &context,
+                    std::vector<RenderElement> &opaqueQueue,
+                    std::vector<RenderElement> &alphaTestQueue,
+                    std::vector<RenderElement> &transparentQueue);
     
-    void callRender(const BoundingFrustum& frustrum,
-                    std::vector<RenderElement>& opaqueQueue,
-                    std::vector<RenderElement>& alphaTestQueue,
-                    std::vector<RenderElement>& transparentQueue);
+    void callRender(const BoundingFrustum &frustrum,
+                    std::vector<RenderElement> &opaqueQueue,
+                    std::vector<RenderElement> &alphaTestQueue,
+                    std::vector<RenderElement> &transparentQueue);
     
 public:
     std::vector<Component *> getActiveChangedTempList();
@@ -101,12 +101,12 @@ private:
     std::vector<Script *> _destroyComponents;
     
     // Animatior
-    std::vector<Animator*> _onUpdateAnimators;
-    std::vector<SceneAnimator*> _onUpdateSceneAnimators;
+    std::vector<Animator *> _onUpdateAnimators;
+    std::vector<SceneAnimator *> _onUpdateSceneAnimators;
     
     // Render
-    std::vector<Renderer*> _renderers;
-    std::vector<Renderer*> _onUpdateRenderers;
+    std::vector<Renderer *> _renderers;
+    std::vector<Renderer *> _onUpdateRenderers;
     
     // Delay dispose active/inActive Pool
     std::vector<std::vector<Component *>> _componentsContainerPool;

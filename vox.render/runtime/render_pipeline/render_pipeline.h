@@ -32,7 +32,7 @@ public:
      * Create a basic render pipeline.
      * @param camera - Camera
      */
-    RenderPipeline(Camera* camera);
+    RenderPipeline(Camera *camera);
     
     /**
      * Destroy internal resources.
@@ -49,20 +49,20 @@ public:
      * @param cubeFace - Render surface of cube texture
      * @param mipLevel - Set mip level the data want to write
      */
-    void render(RenderContext& context,
+    void render(RenderContext &context,
                 std::optional<TextureCubeFace> cubeFace = std::nullopt, int mipLevel = 0);
     
 public:
     /**
      * Default render pass.
      */
-    RenderPass* defaultRenderPass();
+    RenderPass *defaultRenderPass();
     
     /**
      * Add render pass.
      * @param pass - The name of this Pass.
      */
-    void addRenderPass(std::unique_ptr<RenderPass>&& pass);
+    void addRenderPass(std::unique_ptr<RenderPass> &&pass);
     
     /**
      * Add render pass.
@@ -71,71 +71,73 @@ public:
      * @param renderTarget - The specified Render Target
      * @param mask - Perform bit and operations with Entity.Layer to filter the objects that this Pass needs to render
      */
-    void addRenderPass(const std::string& name,
+    void addRenderPass(const std::string &name,
                        int priority = 0,
-                       MTLRenderPassDescriptor* renderTarget = nullptr,
+                       MTLRenderPassDescriptor *renderTarget = nullptr,
                        Layer mask = Layer::Everything);
     
     /**
      * Remove render pass by name or render pass object.
      * @param name - Render pass name
      */
-    void removeRenderPass(const std::string& name);
+    void removeRenderPass(const std::string &name);
     
     /**
      * Remove render pass by name or render pass object.
      * @param pass - Render pass object
      */
-    void removeRenderPass(const RenderPass* pass);
+    void removeRenderPass(const RenderPass *pass);
     
     /**
      * Get render pass by name.
      * @param  name - Render pass name
      */
-    RenderPass* getRenderPass(const std::string& name);
+    RenderPass *getRenderPass(const std::string &name);
     
 protected:
-    virtual void _drawRenderPass(RenderPass* pass, Camera* camera,
+    virtual void _drawRenderPass(RenderPass *pass, Camera *camera,
                                  std::optional<TextureCubeFace> cubeFace = std::nullopt,
                                  int mipLevel = 0) = 0;
     
-    void _drawPointShadowMap(RenderContext& context);
+    void _drawPointShadowMap(RenderContext &context);
     
-    void _drawSpotShadowMap(RenderContext& context);
+    void _drawSpotShadowMap(RenderContext &context);
     
-    void _drawDirectShadowMap(RenderContext& context);
+    void _drawDirectShadowMap(RenderContext &context);
     
     /*
      * Calculate frustum split depths and matrices for the shadow map cascades
      * Based on https://johanmedestrom.wordpress.com/2016/03/18/opengl-cascaded-shadow-maps/
      */
-    void _updateCascades(DirectLight* light);
+    void _updateCascades(DirectLight *light);
     
-    void _drawSky(const Sky& sky);
+    void _drawSky(const Sky &sky);
     
 protected:
-    static bool _compareFromNearToFar(const RenderElement& a, const RenderElement& b);
-    static bool _compareFromFarToNear(const RenderElement& a, const RenderElement& b);
+    static bool _compareFromNearToFar(const RenderElement &a, const RenderElement &b);
+    
+    static bool _compareFromFarToNear(const RenderElement &a, const RenderElement &b);
+    
     std::vector<RenderElement> _opaqueQueue;
     std::vector<RenderElement> _transparentQueue;
     std::vector<RenderElement> _alphaTestQueue;
     
     bool _openDebugger = false;
-    Camera* _camera;
+    Camera *_camera;
     
     float cascadeSplitLambda = 0.5f;
     const int shadowMapSize = 2000; // resolution
     
     uint32_t cubeShadowCount = 0;
-    std::array<id<MTLTexture>, 6> cubeMapSlices{};
-    std::vector<id<MTLTexture>> cubeShadowMaps{};
-    id<MTLTexture> packedCubeTexture{nullptr};
+    std::array<id <MTLTexture>, 6> cubeMapSlices{};
+    std::vector<id <MTLTexture>> cubeShadowMaps{};
+    id <MTLTexture> packedCubeTexture{nullptr};
     std::array<CubeShadowData, LightManager::MAX_CUBE_SHADOW> cubeShadowDatas{};
-
+    
     uint32_t shadowCount = 0;
-    std::array<id<MTLTexture>, SHADOW_MAP_CASCADE_COUNT> cascadeShadowMaps{};
-    std::vector<id<MTLTexture>> shadowMaps{};
-    id<MTLTexture> packedTexture{nullptr};
+    std::array<id <MTLTexture>, SHADOW_MAP_CASCADE_COUNT> cascadeShadowMaps{};
+    std::vector<id <MTLTexture>> shadowMaps{};
+    id <MTLTexture> packedTexture{nullptr};
     std::array<ShadowData, LightManager::MAX_SHADOW> shadowDatas{};
     
     /** Shader data. */
@@ -145,7 +147,7 @@ protected:
     static ShaderProperty _shadowDataProp;
     static ShaderProperty _cubeShadowDataProp;
     
-    RenderPass* _defaultPass;
+    RenderPass *_defaultPass;
     std::vector<std::unique_ptr<RenderPass>> _renderPassArray;
 };
 

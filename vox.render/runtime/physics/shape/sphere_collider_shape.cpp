@@ -23,13 +23,13 @@ float SphereColliderShape::radius() {
 
 void SphereColliderShape::setRadius(float value) {
     _radius = value;
-    static_cast<PxSphereGeometry*>(_nativeGeometry.get())->radius = value * std::max(std::max(_pose.scale.x, _pose.scale.y), _pose.scale.z);
+    static_cast<PxSphereGeometry *>(_nativeGeometry.get())->radius = value * std::max(std::max(_pose.scale.x, _pose.scale.y), _pose.scale.z);
     _nativeShape->setGeometry(*_nativeGeometry);
 }
 
-void SphereColliderShape::setWorldScale(const math::Float3& scale) {
+void SphereColliderShape::setWorldScale(const math::Float3 &scale) {
     _pose.scale = scale;
-    static_cast<PxSphereGeometry*>(_nativeGeometry.get())->radius = _radius * std::max(std::max(_pose.scale.x, _pose.scale.y), _pose.scale.z);
+    static_cast<PxSphereGeometry *>(_nativeGeometry.get())->radius = _radius * std::max(std::max(_pose.scale.x, _pose.scale.y), _pose.scale.z);
     _nativeShape->setGeometry(*_nativeGeometry);
 }
 

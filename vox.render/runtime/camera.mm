@@ -19,9 +19,9 @@ ShaderProperty Camera::_inverseViewMatrixProperty = Shader::createProperty("u_vi
 ShaderProperty Camera::_inverseProjectionMatrixProperty = Shader::createProperty("u_projInvMat", ShaderDataGroup::Camera);
 ShaderProperty Camera::_cameraPositionProperty = Shader::createProperty("u_cameraPos", ShaderDataGroup::Camera);
 
-Camera::Camera(Entity* entity):
+Camera::Camera(Entity *entity) :
 Component(entity) {
-    _renderPipeline = std::make_unique<DeferredRenderPipeline>(this);
+    _renderPipeline = std::make_unique<ForwardRenderPipeline>(this);
     
     auto transform = entity->transform;
     _transform = transform;
@@ -58,7 +58,7 @@ void Camera::setFieldOfView(float value) {
 }
 
 float Camera::aspectRatio() const {
-    const auto& canvas = _entity->engine()->canvas();
+    const auto &canvas = _entity->engine()->canvas();
     if (_customAspectRatio == std::nullopt) {
         return (canvas->width() * _viewport.z) / (canvas->height() * _viewport.w);
     } else {
@@ -75,7 +75,7 @@ Float4 Camera::viewport() const {
     return _viewport;
 }
 
-void Camera::setViewport(const Float4& value) {
+void Camera::setViewport(const Float4 &value) {
     _viewport = value;
     _projMatChange();
 }
@@ -107,14 +107,14 @@ Matrix Camera::viewMatrix() {
     return _viewMatrix;
 }
 
-void Camera::setProjectionMatrix(const Matrix& value) {
+void Camera::setProjectionMatrix(const Matrix &value) {
     _projectionMatrix = value;
     _isProjMatSetting = true;
     _projMatChange();
 }
 
 Matrix Camera::projectionMatrix() {
-    const auto& canvas = _entity->engine()->canvas();
+    const auto &canvas = _entity->engine()->canvas();
     if ((!_isProjectionDirty || _isProjMatSetting) &&
         _lastAspectSize.x == canvas->width() &&
         _lastAspectSize.y == canvas->height()) {
@@ -144,11 +144,11 @@ void Camera::setEnableHDR(bool value) {
     assert(false && "not implementation");
 }
 
-MTLRenderPassDescriptor* Camera::renderTarget() {
+MTLRenderPassDescriptor *Camera::renderTarget() {
     return _renderTarget;
 }
 
-void Camera::setRenderTarget(MTLRenderPassDescriptor* value) {
+void Camera::setRenderTarget(MTLRenderPassDescriptor *value) {
     _renderTarget = value;
 }
 
@@ -162,7 +162,7 @@ void Camera::resetAspectRatio() {
     _projMatChange();
 }
 
-Float4 Camera::worldToViewportPoint(const Float3& point) {
+Float4 Camera::worldToViewportPoint(const Float3 &point) {
     auto tempMat4 = projectionMatrix() * viewMatrix();
     auto tempVec4 = Float4(point.x, point.y, point.z, 1.0);
     tempVec4 = transform(tempVec4, tempMat4);
@@ -176,11 +176,11 @@ Float4 Camera::worldToViewportPoint(const Float3& point) {
     return Float4((nx + 1.0) * 0.5, (1.0 - ny) * 0.5, nz, w);
 }
 
-Float3 Camera::viewportToWorldPoint(const Float3& point) {
+Float3 Camera::viewportToWorldPoint(const Float3 &point) {
     return _innerViewportToWorldPoint(point, invViewProjMat());
 }
 
-Ray Camera::viewportPointToRay(const Float2& point) {
+Ray Camera::viewportPointToRay(const Float2 &point) {
     Ray out;
     // Use the intersection of the near clipping plane as the origin point.
     Float3 clipPoint = Float3(point.x, point.y, 0);
@@ -194,59 +194,59 @@ Ray Camera::viewportPointToRay(const Float2& point) {
     return out;
 }
 
-Float2 Camera::screenToViewportPoint(const Float2& point) {
-    const auto& canvas = engine()->canvas();
+Float2 Camera::screenToViewportPoint(const Float2 &point) {
+    const auto &canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
     return Float2((point.x / canvas->width() - viewport.x) / viewport.z,
                   (point.y / canvas->height() - viewport.y) / viewport.w);
 }
 
-Float3 Camera::screenToViewportPoint(const Float3& point) {
-    const auto& canvas = engine()->canvas();
+Float3 Camera::screenToViewportPoint(const Float3 &point) {
+    const auto &canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
     return Float3((point.x / canvas->width() - viewport.x) / viewport.z,
                   (point.y / canvas->height() - viewport.y) / viewport.w, 0);
 }
 
-Float2 Camera::viewportToScreenPoint(const Float2& point) {
-    const auto& canvas = engine()->canvas();
+Float2 Camera::viewportToScreenPoint(const Float2 &point) {
+    const auto &canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
     return Float2((viewport.x + point.x * viewport.z) * canvas->width(),
                   (viewport.y + point.y * viewport.w) * canvas->height());
 }
 
-Float3 Camera::viewportToScreenPoint(const Float3& point) {
-    const auto& canvas = engine()->canvas();
+Float3 Camera::viewportToScreenPoint(const Float3 &point) {
+    const auto &canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
     return Float3((viewport.x + point.x * viewport.z) * canvas->width(),
                   (viewport.y + point.y * viewport.w) * canvas->height(), 0);
 }
 
-Float4 Camera::viewportToScreenPoint(const Float4& point) {
-    const auto& canvas = engine()->canvas();
+Float4 Camera::viewportToScreenPoint(const Float4 &point) {
+    const auto &canvas = engine()->canvas();
     const Float4 viewport = this->viewport();
     return Float4((viewport.x + point.x * viewport.z) * canvas->width(),
                   (viewport.y + point.y * viewport.w) * canvas->height(), 0, 0);
 }
 
-Float4 Camera::worldToScreenPoint(const Float3& point) {
+Float4 Camera::worldToScreenPoint(const Float3 &point) {
     auto out = worldToViewportPoint(point);
     return viewportToScreenPoint(out);
 }
 
-Float3 Camera::screenToWorldPoint(const Float3&  point) {
+Float3 Camera::screenToWorldPoint(const Float3 &point) {
     auto out = screenToViewportPoint(point);
     return viewportToWorldPoint(out);
 }
 
-Ray Camera::screenPointToRay(const Float2& point) {
+Ray Camera::screenPointToRay(const Float2 &point) {
     Float2 viewportPoint = screenToViewportPoint(point);
     return viewportPointToRay(viewportPoint);
 }
 
 void Camera::render(std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // compute cull frustum.
-    auto& context = engine()->_renderContext;
+    auto &context = engine()->_renderContext;
     context.resetContext(scene(), this);
     if (enableFrustumCulling && (_frustumViewChangeFlag->flag || _isFrustumProjectDirty)) {
         _frustum.calculateFromMatrix(context.viewProjectMatrix());
@@ -282,7 +282,7 @@ void Camera::_projMatChange() {
     _isInvViewProjDirty->flag = true;
 }
 
-Float3 Camera::_innerViewportToWorldPoint(const Float3& point, const Matrix& invViewProjMat) {
+Float3 Camera::_innerViewportToWorldPoint(const Float3 &point, const Matrix &invViewProjMat) {
     // Depth is a normalized value, 0 is nearPlane, 1 is farClipPlane.
     const auto depth = point.z * 2 - 1;
     // Transform to clipping space matrix
@@ -294,7 +294,7 @@ Float3 Camera::_innerViewportToWorldPoint(const Float3& point, const Matrix& inv
                   clipPoint.z * invW);
 }
 
-void Camera::_updateShaderData(const RenderContext& context) {
+void Camera::_updateShaderData(const RenderContext &context) {
     shaderData.setData(Camera::_viewMatrixProperty, viewMatrix());
     shaderData.setData(Camera::_projectionMatrixProperty, projectionMatrix());
     shaderData.setData(Camera::_vpMatrixProperty, context.viewProjectMatrix());
@@ -320,22 +320,22 @@ Matrix Camera::inverseProjectionMatrix() {
 }
 
 //MARK: - Export method in render pipeline
-void Camera::addRenderPass(std::unique_ptr<RenderPass>&& pass) {
-    static_cast<ForwardRenderPipeline*>(_renderPipeline.get())->addRenderPass(std::move(pass));
+void Camera::addRenderPass(std::unique_ptr<RenderPass> &&pass) {
+    static_cast<ForwardRenderPipeline *>(_renderPipeline.get())->addRenderPass(std::move(pass));
 }
 
-void Camera::addRenderPass(const std::string& name,
+void Camera::addRenderPass(const std::string &name,
                            int priority,
-                           MTLRenderPassDescriptor* renderTarget,
+                           MTLRenderPassDescriptor *renderTarget,
                            Layer mask) {
     _renderPipeline->addRenderPass(name, priority, renderTarget, mask);
 }
 
-void Camera::removeRenderPass(const std::string& name) {
+void Camera::removeRenderPass(const std::string &name) {
     _renderPipeline->removeRenderPass(name);
 }
 
-void Camera::removeRenderPass(const RenderPass* pass) {
+void Camera::removeRenderPass(const RenderPass *pass) {
     _renderPipeline->removeRenderPass(pass);
 }
 

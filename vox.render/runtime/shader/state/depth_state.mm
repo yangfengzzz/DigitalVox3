@@ -8,9 +8,9 @@
 #include "depth_state.h"
 
 namespace vox {
-void DepthState::_platformApply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                                MTLDepthStencilDescriptor* depthStencilDescriptor,
-                                MetalRenderer* hardwareRenderer) {
+void DepthState::_platformApply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                                MTLDepthStencilDescriptor *depthStencilDescriptor,
+                                MetalRenderer *hardwareRenderer) {
     if (enabled) {
         // apply compare func.
         depthStencilDescriptor.depthCompareFunction = compareFunction;

@@ -19,12 +19,12 @@ size_t ModelMesh::vertexCount() {
     return _vertexCount;
 }
 
-ModelMesh::ModelMesh(Engine* engine, const std::string& name):
+ModelMesh::ModelMesh(Engine *engine, const std::string &name) :
 Mesh(engine, name),
-resourceLoader(engine->resourceLoader()){
+resourceLoader(engine->resourceLoader()) {
 }
 
-void ModelMesh::setPositions(const std::vector<Float3>& positions) {
+void ModelMesh::setPositions(const std::vector<Float3> &positions) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -38,7 +38,7 @@ void ModelMesh::setPositions(const std::vector<Float3>& positions) {
     }
 }
 
-const std::vector<Float3>& ModelMesh::positions() {
+const std::vector<Float3> &ModelMesh::positions() {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -46,7 +46,7 @@ const std::vector<Float3>& ModelMesh::positions() {
     return _positions;
 }
 
-void ModelMesh::setNormals(const std::vector<Float3>& normals) {
+void ModelMesh::setNormals(const std::vector<Float3> &normals) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -59,14 +59,14 @@ void ModelMesh::setNormals(const std::vector<Float3>& normals) {
     _normals = normals;
 }
 
-const std::vector<Float3>& ModelMesh::normals() {
+const std::vector<Float3> &ModelMesh::normals() {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
     return _normals;
 }
 
-void ModelMesh::setColors(const std::vector<math::Color>& colors) {
+void ModelMesh::setColors(const std::vector<math::Color> &colors) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -79,14 +79,14 @@ void ModelMesh::setColors(const std::vector<math::Color>& colors) {
     _colors = colors;
 }
 
-const std::vector<math::Color>& ModelMesh::colors() {
+const std::vector<math::Color> &ModelMesh::colors() {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
     return _colors;
 }
 
-void ModelMesh::setTangents(const std::vector<Float4>& tangents) {
+void ModelMesh::setTangents(const std::vector<Float4> &tangents) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -99,14 +99,14 @@ void ModelMesh::setTangents(const std::vector<Float4>& tangents) {
     _tangents = tangents;
 }
 
-const std::vector<Float4>& ModelMesh::tangents() {
+const std::vector<Float4> &ModelMesh::tangents() {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
     return _tangents;
 }
 
-void ModelMesh::setUVs(const std::vector<Float2>& uv, int channelIndex) {
+void ModelMesh::setUVs(const std::vector<Float2> &uv, int channelIndex) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -154,7 +154,7 @@ void ModelMesh::setUVs(const std::vector<Float2>& uv, int channelIndex) {
 }
 
 
-const std::vector<Float2>& ModelMesh::uvs(int channelIndex) {
+const std::vector<Float2> &ModelMesh::uvs(int channelIndex) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -180,7 +180,7 @@ const std::vector<Float2>& ModelMesh::uvs(int channelIndex) {
     }
 }
 
-void ModelMesh::setIndices(const std::vector<uint32_t>& indices) {
+void ModelMesh::setIndices(const std::vector<uint32_t> &indices) {
     if (!_accessible) {
         assert(false && "Not allowed to access data while accessible is false.");
     }
@@ -216,130 +216,130 @@ void ModelMesh::uploadData(bool noLongerAccessible) {
     }
 }
 
-MDLVertexDescriptor* ModelMesh::_updateVertexDescriptor() {
-    auto descriptor = [[MDLVertexDescriptor alloc]init];
+MDLVertexDescriptor *ModelMesh::_updateVertexDescriptor() {
+    auto descriptor = [[MDLVertexDescriptor alloc] init];
     descriptor.attributes[Attributes::Position] =
-    [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributePosition
-                                     format:MDLVertexFormatFloat3
-                                     offset:0 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributePosition
+                                      format:MDLVertexFormatFloat3
+                                      offset:0 bufferIndex:0];
     
     size_t offset = 12;
     size_t elementCount = 3;
     if (!_normals.empty()) {
         descriptor.attributes[Attributes::Normal] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeNormal
-                                         format:MDLVertexFormatFloat3
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeNormal
+                                          format:MDLVertexFormatFloat3
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 3;
         elementCount += 3;
     }
     if (!_colors.empty()) {
         descriptor.attributes[Attributes::Color_0] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeColor
-                                         format:MDLVertexFormatFloat4
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeColor
+                                          format:MDLVertexFormatFloat4
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 4;
         elementCount += 4;
     }
     if (!_boneWeights.empty()) {
         descriptor.attributes[Attributes::Weights_0] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointWeights
-                                         format:MDLVertexFormatFloat4
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeJointWeights
+                                          format:MDLVertexFormatFloat4
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 4;
         elementCount += 4;
     }
     if (!_boneIndices.empty()) {
         descriptor.attributes[Attributes::Joints_0] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeJointIndices
-                                         format:MDLVertexFormatShort4
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeJointIndices
+                                          format:MDLVertexFormatShort4
+                                          offset:offset bufferIndex:0];
         offset += sizeof(short) * 4;
         elementCount += 1;
     }
     if (!_tangents.empty()) {
         descriptor.attributes[Attributes::Tangent] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTangent
-                                         format:MDLVertexFormatFloat4
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTangent
+                                          format:MDLVertexFormatFloat4
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 4;
         elementCount += 4;
     }
     if (!_uv.empty()) {
         descriptor.attributes[Attributes::UV_0] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv1.empty()) {
         descriptor.attributes[Attributes::UV_1] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv2.empty()) {
         descriptor.attributes[Attributes::UV_2] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv3.empty()) {
         descriptor.attributes[Attributes::UV_3] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv4.empty()) {
         descriptor.attributes[Attributes::UV_4] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv5.empty()) {
         descriptor.attributes[Attributes::UV_5] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv6.empty()) {
         descriptor.attributes[Attributes::UV_6] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
     if (!_uv7.empty()) {
         descriptor.attributes[Attributes::UV_7] =
-        [[MDLVertexAttribute alloc]initWithName:MDLVertexAttributeTextureCoordinate
-                                         format:MDLVertexFormatFloat2
-                                         offset:offset bufferIndex:0];
+        [[MDLVertexAttribute alloc] initWithName:MDLVertexAttributeTextureCoordinate
+                                          format:MDLVertexFormatFloat2
+                                          offset:offset bufferIndex:0];
         offset += sizeof(float) * 2;
         elementCount += 2;
     }
-    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:offset];
+    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc] initWithStride:offset];
     
     _elementCount = elementCount;
     return descriptor;
 }
 
-void ModelMesh::_updateVertices(std::vector<float>& vertices) {
+void ModelMesh::_updateVertices(std::vector<float> &vertices) {
     if ((_vertexChangeFlag & ValueChanged::Position) != 0) {
         for (size_t i = 0; i < _vertexCount; i++) {
             auto start = _elementCount * i;
-            const auto& position = _positions[i];
+            const auto &position = _positions[i];
             vertices[start] = position.x;
             vertices[start + 1] = position.y;
             vertices[start + 2] = position.z;
@@ -352,7 +352,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::Normal) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& normal = _normals[i];
+                const auto &normal = _normals[i];
                 vertices[start] = normal.x;
                 vertices[start + 1] = normal.y;
                 vertices[start + 2] = normal.z;
@@ -365,7 +365,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::Color) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& color = _colors[i];
+                const auto &color = _colors[i];
                 vertices[start] = color.r;
                 vertices[start + 1] = color.g;
                 vertices[start + 2] = color.b;
@@ -379,7 +379,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::Tangent) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& tangent = _tangents[i];
+                const auto &tangent = _tangents[i];
                 vertices[start] = tangent.x;
                 vertices[start + 1] = tangent.y;
                 vertices[start + 2] = tangent.z;
@@ -391,7 +391,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv[i];
+                const auto &uv = _uv[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }
@@ -402,7 +402,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV1) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv1[i];
+                const auto &uv = _uv1[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }
@@ -413,7 +413,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV2) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv2[i];
+                const auto &uv = _uv2[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
                 
@@ -425,7 +425,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV3) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv3[i];
+                const auto &uv = _uv3[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }
@@ -436,18 +436,18 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV4) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv4[i];
+                const auto &uv = _uv4[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }
         }
         offset += 2;
     }
-    if (!_uv5 .empty()) {
+    if (!_uv5.empty()) {
         if ((_vertexChangeFlag & ValueChanged::UV5) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv5[i];
+                const auto &uv = _uv5[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }
@@ -458,7 +458,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV6) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv6[i];
+                const auto &uv = _uv6[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }
@@ -469,7 +469,7 @@ void ModelMesh::_updateVertices(std::vector<float>& vertices) {
         if ((_vertexChangeFlag & ValueChanged::UV7) != 0) {
             for (size_t i = 0; i < _vertexCount; i++) {
                 auto start = _elementCount * i + offset;
-                const auto& uv = _uv7[i];
+                const auto &uv = _uv7[i];
                 vertices[start] = uv.x;
                 vertices[start + 1] = uv.y;
             }

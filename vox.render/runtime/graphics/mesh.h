@@ -19,6 +19,7 @@
 
 namespace vox {
 using namespace math;
+
 /**
  * Mesh.
  */
@@ -34,17 +35,17 @@ public:
      * @param engine - Engine
      * @param name - Mesh name
      */
-    Mesh(Engine* engine, const std::string& name = "");
+    Mesh(Engine *engine, const std::string &name = "");
     
     /**
      * First sub-mesh. Rendered using the first material.
      */
-    SubMesh* subMesh(size_t index);
+    SubMesh *subMesh(size_t index);
     
     /**
      * A collection of sub-mesh, each sub-mesh can be rendered with an independent material.
      */
-    const std::vector<SubMesh>& subMeshes() const;
+    const std::vector<SubMesh> &subMeshes() const;
     
     /**
      * Add sub-mesh, each sub-mesh can correspond to an independent material.
@@ -75,18 +76,20 @@ public:
     
     void _setVertexBuffer(size_t index, MeshBuffer buffer);
     
-    MDLVertexDescriptor* vertexDescriptor();
+    MDLVertexDescriptor *vertexDescriptor();
     
 protected:
     friend class RenderPipeline;
+    
     friend class ForwardRenderPipeline;
+    
     friend class DeferredRenderPipeline;
-
-    MDLVertexDescriptor* _vertexDescriptor = nullptr;
+    
+    MDLVertexDescriptor *_vertexDescriptor = nullptr;
     std::vector<std::optional<MeshBuffer>> _vertexBuffer;
     std::vector<SubMesh> _subMeshes;
     UpdateFlagManager _updateFlagManager = UpdateFlagManager();
-
+    
     //MARK: - useless
     size_t _instanceCount;
     size_t _vertexCount = 0;

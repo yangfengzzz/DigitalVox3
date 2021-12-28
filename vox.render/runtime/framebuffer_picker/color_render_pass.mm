@@ -12,26 +12,26 @@
 
 namespace vox {
 namespace picker {
-ColorRenderPass::ColorRenderPass(const std::string& name, int priority,
-                                 MTLRenderPassDescriptor* renderTarget, Layer mask, Engine* engine):
-RenderPass(name, priority, renderTarget, mask){
+ColorRenderPass::ColorRenderPass(const std::string &name, int priority,
+                                 MTLRenderPassDescriptor *renderTarget, Layer mask, Engine *engine) :
+RenderPass(name, priority, renderTarget, mask) {
     Shader::create("framebuffer-picker-color", "vertex_picker", "fragment_picker");
     _material = std::make_shared<ColorMaterial>(engine);
     _needPick = false;
 }
 
-void ColorRenderPass::setPickFunctor(std::function<void(Renderer*, MeshPtr)> func) {
+void ColorRenderPass::setPickFunctor(std::function<void(Renderer *, MeshPtr)> func) {
     _onPick = func;
 }
 
-MaterialPtr ColorRenderPass::material(const RenderElement& element) {
+MaterialPtr ColorRenderPass::material(const RenderElement &element) {
     _material->_preRender(element);
     return _material;
 }
 
-void ColorRenderPass::preRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
-                                const std::vector<RenderElement>& alphaTestQueue,
-                                const std::vector<RenderElement>& transparentQueue) {
+void ColorRenderPass::preRender(Camera *camera, const std::vector<RenderElement> &opaqueQueue,
+                                const std::vector<RenderElement> &alphaTestQueue,
+                                const std::vector<RenderElement> &transparentQueue) {
     if (_needPick) {
         enabled = true;
         _material->reset();
@@ -40,7 +40,7 @@ void ColorRenderPass::preRender(Camera* camera, const std::vector<RenderElement>
     }
 }
 
-void ColorRenderPass::execute(Camera* camera) {
+void ColorRenderPass::execute(Camera *camera) {
     if (_needPick) {
         auto color = readColorFromRenderTarget(camera);
         auto object = _material->getObjectByColor(color);
@@ -50,20 +50,20 @@ void ColorRenderPass::execute(Camera* camera) {
     }
 }
 
-void ColorRenderPass::pick(const math::Float2& pos) {
+void ColorRenderPass::pick(const math::Float2 &pos) {
     _pickPos = pos;
     _needPick = true;
 }
 
-void ColorRenderPass::postRender(Camera* camera, const std::vector<RenderElement>& opaqueQueue,
-                                 const std::vector<RenderElement>& alphaTestQueue,
-                                 const std::vector<RenderElement>& transparentQueue) {
+void ColorRenderPass::postRender(Camera *camera, const std::vector<RenderElement> &opaqueQueue,
+                                 const std::vector<RenderElement> &alphaTestQueue,
+                                 const std::vector<RenderElement> &transparentQueue) {
     camera->engine()->_hardwareRenderer.synchronizeResource(renderTarget.colorAttachments[0].texture);
 }
 
-std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera* camera) {
-    const auto& screenPoint = _pickPos;
-    auto window =  camera->engine()->canvas()->handle();
+std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera *camera) {
+    const auto &screenPoint = _pickPos;
+    auto window = camera->engine()->canvas()->handle();
     int clientWidth, clientHeight;
     glfwGetWindowSize(window, &clientWidth, &clientHeight);
     int canvasWidth, canvasHeight;
@@ -84,7 +84,7 @@ std::array<uint8_t, 4> ColorRenderPass::readColorFromRenderTarget(Camera* camera
     std::array<uint8_t, 4> pixel;
     
     [renderTarget.colorAttachments[0].texture getBytes:pixel.data()
-                                           bytesPerRow:sizeof(uint8_t)*4
+                                           bytesPerRow:sizeof(uint8_t) * 4
                                             fromRegion:MTLRegionMake2D(left, canvasHeight - bottom, 1, 1)
                                            mipmapLevel:0];
     

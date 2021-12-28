@@ -15,7 +15,7 @@ namespace vox {
 /**
  * Point light.
  */
-class PointLight :public Light {
+class PointLight : public Light {
 public:
     /** Light color. */
     math::Color color = math::Color(1, 1, 1, 1);
@@ -24,15 +24,15 @@ public:
     /** Defines a distance cutoff at which the light's intensity must be considered zero. */
     float distance = 100;
     
-    PointLight(Entity* entity);
+    PointLight(Entity *entity);
     
 public:
     math::Matrix shadowProjectionMatrix() override;
-        
+    
     void updateShadowMatrix();
     
     CubeShadowData shadow;
-
+    
 private:
     /**
      * Mount to the current Scene.
@@ -44,7 +44,7 @@ private:
      */
     void _onDisable() override;
     
-    void _updateShaderData(PointLightData& shaderData);
+    void _updateShaderData(PointLightData &shaderData);
     
 private:
     friend class LightManager;

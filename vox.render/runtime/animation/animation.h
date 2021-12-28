@@ -35,6 +35,7 @@
 namespace vox {
 namespace io {
 class IArchive;
+
 class OArchive;
 }  // namespace io
 namespace animation {
@@ -59,73 +60,88 @@ struct QuaternionKey;
 // coherency when sampling the animation, Keyframes in this array are sorted by
 // time, then by track number.
 class Animation {
- public:
-  // Builds a default animation.
-  Animation();
-
-  // Declares the public non-virtual destructor.
-  ~Animation();
-
-  // Gets the animation clip duration.
-  float duration() const { return duration_; }
-
-  // Gets the number of animated tracks.
-  int num_tracks() const { return num_tracks_; }
-
-  // Returns the number of SoA elements matching the number of tracks of *this
-  // animation. This value is useful to allocate SoA runtime data structures.
-  int num_soa_tracks() const { return (num_tracks_ + 3) / 4; }
-
-  // Gets animation name.
-  const char* name() const { return name_ ? name_ : ""; }
-
-  // Gets the buffer of translations keys.
-  span<const Float3Key> translations() const {
-    return translations_;
-  }
-
-  // Gets the buffer of rotation keys.
-  span<const QuaternionKey> rotations() const { return rotations_; }
-
-  // Gets the buffer of scale keys.
-  span<const Float3Key> scales() const { return scales_; }
-
-  // Get the estimated animation's size in bytes.
-  size_t size() const;
-
-  // Serialization functions.
-  // Should not be called directly but through io::Archive << and >> operators.
-  void Save(vox::io::OArchive& _archive) const;
-  void Load(vox::io::IArchive& _archive, uint32_t _version);
-
- protected:
- private:
-  // Disables copy and assignation.
-  Animation(Animation const&);
-  void operator=(Animation const&);
-
-  // AnimationBuilder class is allowed to instantiate an Animation.
-  friend class offline::AnimationBuilder;
-
-  // Internal destruction function.
-  void Allocate(size_t _name_len, size_t _translation_count,
-                size_t _rotation_count, size_t _scale_count);
-  void Deallocate();
-
-  // Duration of the animation clip.
-  float duration_;
-
-  // The number of joint tracks. Can differ from the data stored in translation/
-  // rotation/scale buffers because of SoA requirements.
-  int num_tracks_;
-
-  // Animation name.
-  char* name_;
-
-  // Stores all translation/rotation/scale keys begin and end of buffers.
-  span<Float3Key> translations_;
-  span<QuaternionKey> rotations_;
-  span<Float3Key> scales_;
+public:
+    // Builds a default animation.
+    Animation();
+    
+    // Declares the public non-virtual destructor.
+    ~Animation();
+    
+    // Gets the animation clip duration.
+    float duration() const {
+        return duration_;
+    }
+    
+    // Gets the number of animated tracks.
+    int num_tracks() const {
+        return num_tracks_;
+    }
+    
+    // Returns the number of SoA elements matching the number of tracks of *this
+    // animation. This value is useful to allocate SoA runtime data structures.
+    int num_soa_tracks() const {
+        return (num_tracks_ + 3) / 4;
+    }
+    
+    // Gets animation name.
+    const char *name() const {
+        return name_ ? name_ : "";
+    }
+    
+    // Gets the buffer of translations keys.
+    span<const Float3Key> translations() const {
+        return translations_;
+    }
+    
+    // Gets the buffer of rotation keys.
+    span<const QuaternionKey> rotations() const {
+        return rotations_;
+    }
+    
+    // Gets the buffer of scale keys.
+    span<const Float3Key> scales() const {
+        return scales_;
+    }
+    
+    // Get the estimated animation's size in bytes.
+    size_t size() const;
+    
+    // Serialization functions.
+    // Should not be called directly but through io::Archive << and >> operators.
+    void Save(vox::io::OArchive &_archive) const;
+    
+    void Load(vox::io::IArchive &_archive, uint32_t _version);
+    
+protected:
+private:
+    // Disables copy and assignation.
+    Animation(Animation const &);
+    
+    void operator=(Animation const &);
+    
+    // AnimationBuilder class is allowed to instantiate an Animation.
+    friend class offline::AnimationBuilder;
+    
+    // Internal destruction function.
+    void Allocate(size_t _name_len, size_t _translation_count,
+                  size_t _rotation_count, size_t _scale_count);
+    
+    void Deallocate();
+    
+    // Duration of the animation clip.
+    float duration_;
+    
+    // The number of joint tracks. Can differ from the data stored in translation/
+    // rotation/scale buffers because of SoA requirements.
+    int num_tracks_;
+    
+    // Animation name.
+    char *name_;
+    
+    // Stores all translation/rotation/scale keys begin and end of buffers.
+    span<Float3Key> translations_;
+    span<QuaternionKey> rotations_;
+    span<Float3Key> scales_;
 };
 }  // namespace animation
 

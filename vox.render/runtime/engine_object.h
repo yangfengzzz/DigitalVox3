@@ -13,16 +13,16 @@
 namespace vox {
 class EngineObject {
 public:
-    EngineObject(Engine* engine);
+    EngineObject(Engine *engine);
     
     /** Engine unique id. */
     int instanceId();
     
-    Engine* engine();
+    Engine *engine();
     
 protected:
     /** Engine to which the object belongs. */
-    Engine* _engine;
+    Engine *_engine;
     
 private:
     static int _instanceIdCounter;

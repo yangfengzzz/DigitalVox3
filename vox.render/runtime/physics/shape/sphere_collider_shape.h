@@ -26,7 +26,7 @@ public:
     
     void setRadius(float value);
     
-    void setWorldScale(const math::Float3& scale) override;
+    void setWorldScale(const math::Float3 &scale) override;
     
 private:
     float _radius = 1.0;

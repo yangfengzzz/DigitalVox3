@@ -18,12 +18,12 @@
 
 using namespace vox;
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
+    scene->ambientLight().setDiffuseSolidColor(math::Color(1, 1, 1));
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
@@ -62,13 +62,13 @@ int main(int, char**) {
     // add framebuffer picker component
     auto framebufferPicker = rootEntity->addComponent<picker::FramebufferPicker>();
     framebufferPicker->setCamera(camera);
-    framebufferPicker->setPickFunctor([&](Renderer *render, MeshPtr mesh){
+    framebufferPicker->setPickFunctor([&](Renderer *render, MeshPtr mesh) {
         if (render && mesh) {
-            static_cast<BlinnPhongMaterial*>(render->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
+            static_cast<BlinnPhongMaterial *>(render->getMaterial().get())->setBaseColor(math::Color(u(e), u(e), u(e), 1));
         }
     });
     
-    Canvas::mouse_button_callbacks.push_back([&](GLFWwindow* window, int button, int action, int mods){
+    Canvas::mouse_button_callbacks.push_back([&](GLFWwindow *window, int button, int action, int mods) {
         if (action == GLFW_PRESS) {
             double xpos, ypos;
             glfwGetCursorPos(window, &xpos, &ypos);

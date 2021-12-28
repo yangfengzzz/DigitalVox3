@@ -26,9 +26,9 @@ struct MeshBuffer {
      */
     MeshBuffer(id <MTLBuffer> buffer, size_t length, MDLMeshBufferType type, size_t offset = 0);
     
-    MeshBuffer(const MeshBuffer& buffer);
+    MeshBuffer(const MeshBuffer &buffer);
     
-    MeshBuffer operator=(const MeshBuffer& buffer);
+    MeshBuffer operator=(const MeshBuffer &buffer);
 };
 
 }

@@ -232,8 +232,7 @@ void value::dump(dump_context_t &context, int level) const {
                 if (!first) {
                     context.out << ',';
                     context.write_newline();
-                }
-                else first = false;
+                } else first = false;
                 context.write_indent(level + 1);
                 context.out << '\"' << entry.first << "\":";
                 if (!entry.second.is_structured()) {
@@ -260,8 +259,7 @@ void value::dump(dump_context_t &context, int level) const {
                 if (!first) {
                     context.out << ',';
                     context.write_newline();
-                }
-                else first = false;
+                } else first = false;
                 if (!entry.is_structured()) {
                     context.write_indent(level + 1);
                     entry.dump(context, 0);

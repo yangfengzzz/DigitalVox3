@@ -15,12 +15,12 @@ namespace editor {
 class Grid : public Script {
 public:
     Grid(Entity *entity);
-        
-private:
-    ModelMeshPtr createPlane(Engine* engine);
     
 private:
-    MeshRenderer* _renderer;
+    ModelMeshPtr createPlane(Engine *engine);
+    
+private:
+    MeshRenderer *_renderer;
     MaterialPtr _mtl;
 };
 

@@ -15,7 +15,7 @@ namespace physics {
 /**
  * Physical collider shape plane.
  */
-class PlaneColliderShape :public ColliderShape {
+class PlaneColliderShape : public ColliderShape {
 public:
     PlaneColliderShape();
     
@@ -24,9 +24,10 @@ public:
      */
     math::Float3 rotation();
     
-    void setRotation(const math::Float3& value);
+    void setRotation(const math::Float3 &value);
     
-    void setWorldScale(const math::Float3& scale) {}
+    void setWorldScale(const math::Float3 &scale) {
+    }
 };
 
 }

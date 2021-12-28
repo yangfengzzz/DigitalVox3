@@ -55,7 +55,7 @@ public:
      * Create the Camera component.
      * @param entity - Entity
      */
-    Camera(Entity* entity);
+    Camera(Entity *entity);
     
     /**
      * Near clip plane - the closest point to the camera when rendering occurs.
@@ -92,7 +92,7 @@ public:
      */
     Float4 viewport() const;
     
-    void setViewport(const Float4& value);
+    void setViewport(const Float4 &value);
     
     /**
      * Whether it is orthogonal, the default is false. True will use orthographic projection, false will use perspective projection.
@@ -117,7 +117,7 @@ public:
      * The projection matrix is ​​calculated by the relevant parameters of the camera by default.
      * If it is manually set, the manual value will be maintained. Call resetProjectionMatrix() to restore it.
      */
-    void setProjectionMatrix(const Matrix& value);
+    void setProjectionMatrix(const Matrix &value);
     
     Matrix projectionMatrix();
     
@@ -132,9 +132,9 @@ public:
     /**
      * RenderTarget. After setting, it will be rendered to the renderTarget. If it is empty, it will be rendered to the main canvas.
      */
-    MTLRenderPassDescriptor* renderTarget();
+    MTLRenderPassDescriptor *renderTarget();
     
-    void setRenderTarget(MTLRenderPassDescriptor* value);
+    void setRenderTarget(MTLRenderPassDescriptor *value);
     
 public:
     /**
@@ -153,7 +153,7 @@ public:
      * @return out - A point in the viewport space, X and Y are the viewport space coordinates,
      * Z is the viewport depth, the near clipping plane is 0, the far clipping plane is 1, and W is the world unit distance from the camera
      */
-    Float4 worldToViewportPoint(const Float3& point);
+    Float4 worldToViewportPoint(const Float3 &point);
     
     /**
      * Transform a point from viewport space to world space.
@@ -161,55 +161,55 @@ public:
      * Z is the viewport depth. The near clipping plane is 0, and the far clipping plane is 1
      * @returns Point in world space
      */
-    Float3 viewportToWorldPoint(const Float3& point);
+    Float3 viewportToWorldPoint(const Float3 &point);
     
     /**
      * Generate a ray by a point in viewport.
      * @param point - Point in viewport space, which is represented by normalization
      * @returns Ray
      */
-    Ray viewportPointToRay(const Float2& point);
+    Ray viewportPointToRay(const Float2 &point);
     
     /**
      * Transform the X and Y coordinates of a point from screen space to viewport space
      * @param point - Point in screen space
      * @returns Point in viewport space
      */
-    Float2 screenToViewportPoint(const Float2& point);
+    Float2 screenToViewportPoint(const Float2 &point);
     
-    Float3 screenToViewportPoint(const Float3& point);
+    Float3 screenToViewportPoint(const Float3 &point);
     
     /**
      * Transform the X and Y coordinates of a point from viewport space to screen space.
      * @param point - Point in viewport space
      * @returns Point in screen space
      */
-    Float2 viewportToScreenPoint(const Float2& point);
+    Float2 viewportToScreenPoint(const Float2 &point);
     
-    Float3 viewportToScreenPoint(const Float3& point);
+    Float3 viewportToScreenPoint(const Float3 &point);
     
-    Float4 viewportToScreenPoint(const Float4& point);
+    Float4 viewportToScreenPoint(const Float4 &point);
     
     /**
      * Transform a point from world space to screen space.
      * @param point - Point in world space
      * @returns Point of screen space
      */
-    Float4 worldToScreenPoint(const Float3& point);
+    Float4 worldToScreenPoint(const Float3 &point);
     
     /**
      * Transform a point from screen space to world space.
      * @param point - Screen space point
      * @returns Point in world space
      */
-    Float3 screenToWorldPoint(const Float3&  point);
+    Float3 screenToWorldPoint(const Float3 &point);
     
     /**
      * Generate a ray by a point in screen.
      * @param point - Point in screen space, the unit is pixel
      * @returns Ray
      */
-    Ray screenPointToRay(const Float2& point);
+    Ray screenPointToRay(const Float2 &point);
     
     /**
      * Manually call the rendering of the camera.
@@ -227,7 +227,7 @@ public:
      * Add render pass.
      * @param pass - The name of this Pass.
      */
-    void addRenderPass(std::unique_ptr<RenderPass>&& pass);
+    void addRenderPass(std::unique_ptr<RenderPass> &&pass);
     
     /**
      * Add render pass.
@@ -236,22 +236,22 @@ public:
      * @param renderTarget - The specified Render Target
      * @param mask - Perform bit and operations with Entity.Layer to filter the objects that this Pass needs to render
      */
-    void addRenderPass(const std::string& name,
+    void addRenderPass(const std::string &name,
                        int priority = 0,
-                       MTLRenderPassDescriptor* renderTarget = nullptr,
+                       MTLRenderPassDescriptor *renderTarget = nullptr,
                        Layer mask = Layer::Everything);
     
     /**
      * Remove render pass by name or render pass object.
      * @param name - Render pass name
      */
-    void removeRenderPass(const std::string& name);
+    void removeRenderPass(const std::string &name);
     
     /**
      * Remove render pass by name or render pass object.
      * @param pass - Render pass object
      */
-    void removeRenderPass(const RenderPass* pass);
+    void removeRenderPass(const RenderPass *pass);
     
 public:
     void _onActive() override;
@@ -262,13 +262,14 @@ public:
     
 private:
     friend class ComponentsManager;
+    
     friend class RenderPipeline;
     
     void _projMatChange();
     
-    Float3 _innerViewportToWorldPoint(const Float3& point, const Matrix& invViewProjMat);
+    Float3 _innerViewportToWorldPoint(const Float3 &point, const Matrix &invViewProjMat);
     
-    void _updateShaderData(const RenderContext& context);
+    void _updateShaderData(const RenderContext &context);
     
     /**
      * The inverse matrix of view projection matrix.
@@ -301,10 +302,10 @@ private:
     bool _isInvProjMatDirty = true;
     bool _isFrustumProjectDirty = true;
     std::optional<float> _customAspectRatio = std::nullopt;
-    MTLRenderPassDescriptor* _renderTarget = nullptr;
+    MTLRenderPassDescriptor *_renderTarget = nullptr;
     
     std::unique_ptr<UpdateFlag> _frustumViewChangeFlag;
-    Transform* _transform;
+    Transform *_transform;
     std::unique_ptr<UpdateFlag> _isViewMatrixDirty;
     std::unique_ptr<UpdateFlag> _isInvViewProjDirty;
     Matrix _projectionMatrix = Matrix();

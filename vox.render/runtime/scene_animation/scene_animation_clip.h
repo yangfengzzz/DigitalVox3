@@ -15,25 +15,29 @@ namespace vox {
 class SceneAnimationClip {
 public:
     struct AnimationChannel {
-        enum PathType { TRANSLATION, ROTATION, SCALE };
+        enum PathType {
+            TRANSLATION, ROTATION, SCALE
+        };
         PathType path;
         EntityPtr node;
         uint32_t samplerIndex;
     };
-
+    
     struct AnimationSampler {
-        enum InterpolationType { LINEAR, STEP, CUBICSPLINE };
+        enum InterpolationType {
+            LINEAR, STEP, CUBICSPLINE
+        };
         InterpolationType interpolation;
         std::vector<float> inputs;
         std::vector<math::Float4> outputsVec4;
     };
     
 public:
-    SceneAnimationClip(const std::string& name);
+    SceneAnimationClip(const std::string &name);
     
     void update(float deltaTime);
-
-    const std::string& name() const;
+    
+    const std::string &name() const;
     
     float start() const;
     
@@ -43,9 +47,9 @@ public:
     
     void setEnd(float time);
     
-    void addSampler(const AnimationSampler& sampler);
+    void addSampler(const AnimationSampler &sampler);
     
-    void addChannel(const AnimationChannel& channel);
+    void addChannel(const AnimationChannel &channel);
     
 private:
     std::string _name;

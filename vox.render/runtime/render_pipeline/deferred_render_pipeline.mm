@@ -11,10 +11,10 @@
 #include "../renderer.h"
 
 namespace vox {
-DeferredRenderPipeline::DeferredRenderPipeline(Camera* camera):
+DeferredRenderPipeline::DeferredRenderPipeline(Camera *camera) :
 RenderPipeline(camera) {
-    const auto& loader = camera->engine()->resourceLoader();
-    auto& rhi = camera->engine()->_hardwareRenderer;
+    const auto &loader = camera->engine()->resourceLoader();
+    auto &rhi = camera->engine()->_hardwareRenderer;
     
     _diffuse_occlusion_GBufferFormat = MTLPixelFormatRGBA32Float;
     _specular_roughness_GBufferFormat = MTLPixelFormatRGBA32Float;
@@ -41,7 +41,7 @@ RenderPipeline(camera) {
         _GBufferRenderPassDesc.stencilAttachment.clearStencil = 0;
         _GBufferRenderPassDesc.stencilAttachment.loadAction = MTLLoadActionClear;
         _GBufferRenderPassDesc.stencilAttachment.storeAction = MTLStoreActionStore;
-        auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+        auto createFrameBuffer = [&](GLFWwindow *window, int width, int height) {
             int buffer_width, buffer_height;
             glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
             MTLTextureDescriptor *GBufferTextureDesc =
@@ -61,7 +61,7 @@ RenderPipeline(camera) {
             _specular_roughness_GBuffer.label = @"Specular + Roughness GBuffer";
             GBufferTextureDesc.pixelFormat = _normal_GBufferFormat;
             _normal_GBuffer = loader->buildTexture(GBufferTextureDesc);
-            _normal_GBuffer.label   = @"Normal GBuffer";
+            _normal_GBuffer.label = @"Normal GBuffer";
             GBufferTextureDesc.pixelFormat = _emissive_GBufferFormat;
             _emissive_GBuffer = loader->buildTexture(GBufferTextureDesc);
             _emissive_GBuffer.label = @"Emissive GBuffer";
@@ -140,7 +140,7 @@ RenderPipeline(camera) {
     {
         MTKMeshBufferAllocator *bufferAllocator = rhi.createBufferAllocator();
         const double unitInscribe = sqrtf(3.0) / 12.0 * (3.0 + sqrtf(5.0));
-        MDLMesh *icosahedronMDLMesh = [MDLMesh newIcosahedronWithRadius:1/unitInscribe inwardNormals:NO allocator:bufferAllocator];
+        MDLMesh *icosahedronMDLMesh = [MDLMesh newIcosahedronWithRadius:1 / unitInscribe inwardNormals:NO allocator:bufferAllocator];
         MDLVertexDescriptor *icosahedronDescriptor = [[MDLVertexDescriptor alloc] init];
         icosahedronDescriptor.attributes[0].name = MDLVertexAttributePosition;
         icosahedronDescriptor.attributes[0].format = MDLVertexFormatFloat4;
@@ -154,7 +154,7 @@ RenderPipeline(camera) {
 #pragma mark Light mask render pipeline state setup
     {
         Shader shader("Point Light Mask", "light_mask_vertex", "", "");
-        ShaderProgram* program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection(), true);
+        ShaderProgram *program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection(), true);
         if (!program->isValid()) {
             return;
         }
@@ -187,7 +187,7 @@ RenderPipeline(camera) {
 #pragma mark Point light render pipeline setup
     {
         Shader shader("Point Light", "deferred_point_lighting_vertex", "", "deferred_point_lighting_fragment_traditional");
-        ShaderProgram* program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection(), true);
+        ShaderProgram *program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection(), true);
         if (!program->isValid()) {
             return;
         }
@@ -227,7 +227,7 @@ RenderPipeline(camera) {
 #pragma mark Fairy billboard render pipeline setup
     {
         Shader shader("Fairy Drawing", "fairy_vertex", "fairy_fragment", "");
-        ShaderProgram* program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection());
+        ShaderProgram *program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection());
         if (!program->isValid()) {
             return;
         }
@@ -258,10 +258,10 @@ RenderPipeline(camera) {
 #pragma mark Setup 2D circle mesh for fairy billboards
     {
         Float2 fairyVertices[7];
-        const float angle = 2*M_PI/(float)7;
-        for(int vtx = 0; vtx < 7; vtx++) {
-            int point = (vtx%2) ? (vtx+1)/2 : -vtx/2;
-            fairyVertices[vtx] = Float2(sin(point*angle), cos(point*angle));
+        const float angle = 2 * M_PI / (float) 7;
+        for (int vtx = 0; vtx < 7; vtx++) {
+            int point = (vtx % 2) ? (vtx + 1) / 2 : -vtx / 2;
+            fairyVertices[vtx] = Float2(sin(point * angle), cos(point * angle));
         }
         _fairy = loader->buildBuffer(fairyVertices, sizeof(fairyVertices), NULL);
         _fairy.label = @"Fairy Vertices";
@@ -277,16 +277,16 @@ DeferredRenderPipeline::~DeferredRenderPipeline() {
     
 }
 
-void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
+void DeferredRenderPipeline::_drawRenderPass(RenderPass *pass, Camera *camera,
                                              std::optional<TextureCubeFace> cubeFace,
                                              int mipLevel) {
     pass->preRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
     
     if (pass->enabled) {
-        const auto& engine = camera->engine();
-        const auto& scene = camera->scene();
-        const auto& background = scene->background;
-        auto& rhi = engine->_hardwareRenderer;
+        const auto &engine = camera->engine();
+        const auto &scene = camera->scene();
+        const auto &background = scene->background;
+        auto &rhi = engine->_hardwareRenderer;
         
         //MARK: - GBuffer
         rhi.activeRenderTarget(_GBufferRenderPassDesc);
@@ -299,7 +299,7 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         rhi.endRenderPass();// renderEncoder
         
         //MARK: -  Composition
-        const auto& color = pass->clearColor != std::nullopt? pass->clearColor.value(): background.solidColor;
+        const auto &color = pass->clearColor != std::nullopt ? pass->clearColor.value() : background.solidColor;
         _finalRenderPassDesc.colorAttachments[0].clearColor = MTLClearColorMake(color.r, color.g, color.b, 1.0);
         _finalRenderPassDesc.colorAttachments[0].texture = rhi.drawableTexture();
         _finalRenderPassDesc.depthAttachment.texture = rhi.depthTexture();
@@ -322,22 +322,22 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
     pass->postRender(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
 }
 
-void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& items,
-                                          RenderPass* pass) {
+void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement> &items,
+                                          RenderPass *pass) {
     if (items.size() == 0) {
         return;
     }
     
-    const auto& engine = _camera->engine();
-    const auto& scene = _camera->scene();
-    auto& rhi = engine->_hardwareRenderer;
-    const auto& sceneData = scene->shaderData;
-    const auto& cameraData = _camera->shaderData;
+    const auto &engine = _camera->engine();
+    const auto &scene = _camera->scene();
+    auto &rhi = engine->_hardwareRenderer;
+    const auto &sceneData = scene->shaderData;
+    const auto &cameraData = _camera->shaderData;
     
     //MARK:- Start Render
     for (size_t i = 0; i < items.size(); i++) {
-        const auto& item = items[i];
-        const auto& renderPassFlag = item.component->entity()->layer;
+        const auto &item = items[i];
+        const auto &renderPassFlag = item.component->entity()->layer;
         
         if ((renderPassFlag & pass->mask) == 0) {
             continue;
@@ -345,14 +345,14 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         
         // RenderElement
         auto compileMacros = ShaderMacroCollection();
-        const auto& element = item;
-        const auto& renderer = element.component;
+        const auto &element = item;
+        const auto &renderer = element.component;
         auto material = pass->material(element);
         if (material == nullptr) {
             material = element.material;
         }
-        auto& rendererData = renderer->shaderData;
-        const auto& materialData = material->shaderData;
+        auto &rendererData = renderer->shaderData;
+        const auto &materialData = material->shaderData;
         
         if (renderer->receiveShadow && shadowCount != 0) {
             rendererData.enableMacro(SHADOW_MAP_COUNT, std::make_pair(shadowCount, MTLDataTypeInt));
@@ -366,7 +366,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         materialData.mergeMacro(renderer->_globalShaderMacro, compileMacros);
         
         //MARK:- Set Pipeline State
-        ShaderProgram* program = material->shader->findShaderProgram(engine, compileMacros, true);
+        ShaderProgram *program = material->shader->findShaderProgram(engine, compileMacros, true);
         if (!program->isValid()) {
             continue;
         }
@@ -375,7 +375,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         _GBufferRenderPipelineDesc.vertexFunction = program->vertexShader();
         _GBufferRenderPipelineDesc.fragmentFunction = program->fragmentShader();
         
-        MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
+        MTLDepthStencilDescriptor *depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc] init];
         material->renderState._apply(engine, _GBufferRenderPipelineDesc, depthStencilDescriptor);
         depthStencilDescriptor.frontFaceStencil = _GBufferStencilStateDesc;
         depthStencilDescriptor.backFaceStencil = _GBufferStencilStateDesc;
@@ -383,7 +383,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         rhi.setDepthStencilState(depthStencilState);
         rhi.setStencilReferenceValue(128);
         
-        const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_GBufferRenderPipelineDesc);
+        const auto &pipelineState = rhi.resouceCache.request_graphics_pipeline(_GBufferRenderPipelineDesc);
         rhi.setRenderPipelineState(pipelineState);
         
         //MARK:- Load Resouces
@@ -393,7 +393,7 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
         pipelineState->uploadAll(pipelineState->materialUniformBlock, materialData);
         pipelineState->uploadAll(pipelineState->internalUniformBlock, shaderData);
         
-        auto& buffers = element.mesh->_vertexBuffer;
+        auto &buffers = element.mesh->_vertexBuffer;
         for (uint32_t index = 0; index < buffers.size(); index++) {
             rhi.setVertexBuffer(buffers[index]->buffer, 0, index);
         }
@@ -402,22 +402,22 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
 }
 
 void DeferredRenderPipeline::_drawDirectionalLights() {
-    const auto& engine = _camera->engine();
-    auto& rhi = engine->_hardwareRenderer;
-    const auto& cameraData = _camera->shaderData;
-    const auto& scene = _camera->scene();
-    const auto& sceneData = scene->shaderData;
+    const auto &engine = _camera->engine();
+    auto &rhi = engine->_hardwareRenderer;
+    const auto &cameraData = _camera->shaderData;
+    const auto &scene = _camera->scene();
+    const auto &sceneData = scene->shaderData;
     auto compileMacros = scene->_globalShaderMacro;
     Shader shader("Deferred Directional Lighting", "deferred_direction_lighting_vertex", "",
                   "deferred_directional_lighting_fragment_traditional");
-    ShaderProgram* program = shader.findShaderProgram(engine, compileMacros, true);
+    ShaderProgram *program = shader.findShaderProgram(engine, compileMacros, true);
     if (!program->isValid()) {
         return;
     }
     
     _directionalLightPipelineDesc.vertexFunction = program->vertexShader();
     _directionalLightPipelineDesc.fragmentFunction = program->fragmentShader();
-    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_directionalLightPipelineDesc);
+    const auto &pipelineState = rhi.resouceCache.request_graphics_pipeline(_directionalLightPipelineDesc);
     rhi.setRenderPipelineState(pipelineState);
     
     rhi.setCullMode(MTLCullModeBack);
@@ -436,14 +436,14 @@ void DeferredRenderPipeline::_drawDirectionalLights() {
 }
 
 void DeferredRenderPipeline::_drawPointLightMask(size_t numPointLights) {
-    const auto& engine = _camera->engine();
-    auto& rhi = engine->_hardwareRenderer;
-    const auto& cameraData = _camera->shaderData;
-    const auto& scene = _camera->scene();
-    const auto& sceneData = scene->shaderData;
+    const auto &engine = _camera->engine();
+    auto &rhi = engine->_hardwareRenderer;
+    const auto &cameraData = _camera->shaderData;
+    const auto &scene = _camera->scene();
+    const auto &sceneData = scene->shaderData;
     
     rhi.pushDebugGroup("Draw Light Mask");
-    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_lightMaskPipelineDesc);
+    const auto &pipelineState = rhi.resouceCache.request_graphics_pipeline(_lightMaskPipelineDesc);
     rhi.setRenderPipelineState(pipelineState);
     rhi.setDepthStencilState(_lightMaskDepthStencilState);
     rhi.setStencilReferenceValue(128);
@@ -462,14 +462,14 @@ void DeferredRenderPipeline::_drawPointLightMask(size_t numPointLights) {
 }
 
 void DeferredRenderPipeline::_drawPointLights(size_t numPointLights) {
-    const auto& engine = _camera->engine();
-    auto& rhi = engine->_hardwareRenderer;
-    const auto& cameraData = _camera->shaderData;
-    const auto& scene = _camera->scene();
-    const auto& sceneData = scene->shaderData;
+    const auto &engine = _camera->engine();
+    auto &rhi = engine->_hardwareRenderer;
+    const auto &cameraData = _camera->shaderData;
+    const auto &scene = _camera->scene();
+    const auto &sceneData = scene->shaderData;
     
     rhi.pushDebugGroup("Draw Point Lights");
-    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_lightPipelineDesc);
+    const auto &pipelineState = rhi.resouceCache.request_graphics_pipeline(_lightPipelineDesc);
     rhi.setRenderPipelineState(pipelineState);
     rhi.setFragmentTexture(_diffuse_occlusion_GBuffer, 0);
     rhi.setFragmentTexture(_specular_roughness_GBuffer, 1);
@@ -494,14 +494,14 @@ void DeferredRenderPipeline::_drawPointLights(size_t numPointLights) {
 }
 
 void DeferredRenderPipeline::_drawFairies(size_t numPointLights) {
-    const auto& engine = _camera->engine();
-    auto& rhi = engine->_hardwareRenderer;
-    const auto& cameraData = _camera->shaderData;
-    const auto& scene = _camera->scene();
-    const auto& sceneData = scene->shaderData;
+    const auto &engine = _camera->engine();
+    auto &rhi = engine->_hardwareRenderer;
+    const auto &cameraData = _camera->shaderData;
+    const auto &scene = _camera->scene();
+    const auto &sceneData = scene->shaderData;
     
     rhi.pushDebugGroup("Draw Fairies");
-    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_fairyPipelineDesc);
+    const auto &pipelineState = rhi.resouceCache.request_graphics_pipeline(_fairyPipelineDesc);
     rhi.setRenderPipelineState(pipelineState);
     rhi.setDepthStencilState(_dontWriteDepthStencilState);
     rhi.setCullMode(MTLCullModeBack);

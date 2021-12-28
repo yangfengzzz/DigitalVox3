@@ -13,7 +13,7 @@
 #include <random>
 
 namespace vox {
-ParticleRenderer::ParticleRenderer(Entity* entity):
+ParticleRenderer::ParticleRenderer(Entity *entity) :
 Renderer(entity) {
     metalResourceLoader = entity->engine()->resourceLoader();
     
@@ -45,21 +45,21 @@ void ParticleRenderer::update(float deltaTime) {
     const auto n_position = position.length();
     bool shouldResize = _numberOfVertex != n_position;
     if (shouldResize) {
-        _renderRelatedInfo.resize(n_position*4);
+        _renderRelatedInfo.resize(n_position * 4);
         for (size_t i = 0; i < _renderRelatedInfo.size(); i += 4) {
             _renderRelatedInfo[i] = u(e);
-            _renderRelatedInfo[i+1] = u(e);
-            _renderRelatedInfo[i+2] = u(e);
-            _renderRelatedInfo[i+3] = 1.0;
+            _renderRelatedInfo[i + 1] = u(e);
+            _renderRelatedInfo[i + 2] = u(e);
+            _renderRelatedInfo[i + 3] = 1.0;
         }
     }
 }
 
-void ParticleRenderer::_render(std::vector<RenderElement>& opaqueQueue,
-                               std::vector<RenderElement>& alphaTestQueue,
-                               std::vector<RenderElement>& transparentQueue) {
+void ParticleRenderer::_render(std::vector<RenderElement> &opaqueQueue,
+                               std::vector<RenderElement> &alphaTestQueue,
+                               std::vector<RenderElement> &transparentQueue) {
     auto render_mesh = _createMesh();
-    auto& subMeshes = render_mesh->subMeshes();
+    auto &subMeshes = render_mesh->subMeshes();
     for (size_t i = 0; i < subMeshes.size(); i++) {
         MaterialPtr material;
         if (i < _materials.size()) {
@@ -74,7 +74,7 @@ void ParticleRenderer::_render(std::vector<RenderElement>& opaqueQueue,
     }
 }
 
-void ParticleRenderer::_updateBounds(BoundingBox& worldBounds) {
+void ParticleRenderer::_updateBounds(BoundingBox &worldBounds) {
     worldBounds.min = Float3(-10, -10, -10);
     worldBounds.max = Float3(10, 10, 10);
 }
@@ -86,9 +86,9 @@ MeshPtr ParticleRenderer::_createMesh() {
     
     std::vector<float> flatData(n_position * 3);
     for (size_t i = 0; i < n_position; i++) {
-        flatData[3*i] = position[i].x;
-        flatData[3*i+1] = position[i].y;
-        flatData[3*i+2] = position[i].z;
+        flatData[3 * i] = position[i].x;
+        flatData[3 * i + 1] = position[i].y;
+        flatData[3 * i + 2] = position[i].z;
     }
     
     if (_vertexBuffers == nullptr || shouldResize) {
@@ -126,7 +126,7 @@ MeshPtr ParticleRenderer::_createMesh() {
     mesh->setVertexDescriptor(vertexDescriptor);
     mesh->setVertexBufferBinding(_vertexBuffers, 0, 0);
     mesh->setVertexBufferBinding(_renderBuffers, 0, 1);
-
+    
     mesh->addSubMesh(MeshBuffer(_indexBuffers,
                                 n_position * sizeof(uint32_t),
                                 MDLMeshBufferTypeIndex),

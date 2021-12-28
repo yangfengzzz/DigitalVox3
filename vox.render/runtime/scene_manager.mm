@@ -9,7 +9,7 @@
 
 namespace vox {
 ScenePtr SceneManager::activeScene() {
-  return _activeScene;
+    return _activeScene;
 }
 
 void SceneManager::setActiveScene(ScenePtr newValue) {

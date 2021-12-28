@@ -11,14 +11,16 @@
 
 namespace vox {
 ShaderProperty GPUSkinnedMeshRenderer::_jointMatrixProperty = Shader::createProperty("u_jointMatrix", ShaderDataGroup::Renderer);
-GPUSkinnedMeshRenderer::GPUSkinnedMeshRenderer(Entity* entity):
-MeshRenderer(entity) {}
+
+GPUSkinnedMeshRenderer::GPUSkinnedMeshRenderer(Entity *entity) :
+MeshRenderer(entity) {
+}
 
 GPUSkinnedMeshRenderer::SkinPtr GPUSkinnedMeshRenderer::skin() {
     return _skin;
 }
 
-void GPUSkinnedMeshRenderer::setSkin(const SkinPtr& skin) {
+void GPUSkinnedMeshRenderer::setSkin(const SkinPtr &skin) {
     _skin = skin;
 }
 

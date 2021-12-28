@@ -27,13 +27,13 @@ public:
     /** The layer the entity belongs to. */
     int layer = Layer::Layer0;
     /** Transform component. */
-    vox::Transform* transform;
+    vox::Transform *transform;
     
     /**
      * Create a entity.
      * @param engine - The engine the entity belongs to.
      */
-    Entity(Engine* engine, std::string name = "");
+    Entity(Engine *engine, std::string name = "");
     
     /**
      * Whether to activate locally.
@@ -50,7 +50,7 @@ public:
     /**
      * The parent entity.
      */
-    Entity* parent();
+    Entity *parent();
     
     /**
      * Number of the children entities
@@ -60,7 +60,7 @@ public:
     /**
      * The scene the entity belongs to.
      */
-    Scene* scene();
+    Scene *scene();
     
     /**
      * The children entities
@@ -72,10 +72,10 @@ public:
      * @returns    The component which has been added.
      */
     template<typename T>
-    T* addComponent() {
+    T *addComponent() {
         // ComponentsDependencies._addCheck(this, type);
         auto component = std::make_unique<T>(this);
-        T* componentPtr = component.get();
+        T *componentPtr = component.get();
         _components.emplace_back(std::move(component));
         if (_isActiveInHierarchy) {
             componentPtr->_setActive(true);
@@ -88,9 +88,9 @@ public:
      * @returns    The first component which match type.
      */
     template<typename T>
-    T* getComponent() {
+    T *getComponent() {
         for (size_t i = 0; i < _components.size(); i++) {
-            T* component = dynamic_cast<T*>(_components[i].get());
+            T *component = dynamic_cast<T *>(_components[i].get());
             if (component) {
                 return component;
             }
@@ -103,10 +103,10 @@ public:
      * @returns    The components which match type.
      */
     template<typename T>
-    std::vector<T*> getComponents() {
-        std::vector<T*> results;
+    std::vector<T *> getComponents() {
+        std::vector<T *> results;
         for (size_t i = 0; i < _components.size(); i++) {
-            T* component = dynamic_cast<T*>(_components[i].get());
+            T *component = dynamic_cast<T *>(_components[i].get());
             if (component) {
                 results.push_back(component);
             }
@@ -119,8 +119,8 @@ public:
      * @returns    The components collection which match the type.
      */
     template<typename T>
-    std::vector<T*> getComponentsIncludeChildren() {
-        std::vector<T*> results;
+    std::vector<T *> getComponentsIncludeChildren() {
+        std::vector<T *> results;
         _getComponentsInChildren<T>(results);
         return results;
     }
@@ -149,21 +149,21 @@ public:
      * @param name - The name of the entity which want to be found.
      * @returns The component which be found.
      */
-    EntityPtr findByName(const std::string& name);
+    EntityPtr findByName(const std::string &name);
     
     /**
      * Find the entity by path.
      * @param path - The path fo the entity eg: /entity.
      * @returns The component which be found.
      */
-    EntityPtr findByPath(const std::string& path);
+    EntityPtr findByPath(const std::string &path);
     
     /**
      * Create child entity.
      * @param name - The child entity's name.
      * @returns The child entity.
      */
-    EntityPtr createChild(const std::string& name = "");
+    EntityPtr createChild(const std::string &name = "");
     
     /**
      * Clear children entities.
@@ -182,31 +182,35 @@ public:
     void destroy();
     
 public:
-    std::vector<Script*> scripts();
+    std::vector<Script *> scripts();
     
 private:
     friend class Scene;
+    
     friend class Component;
+    
     friend class ComponentsManager;
+    
     friend class vox::Transform;
+    
     friend class Script;
     
-    void _removeComponent(Component* component);
+    void _removeComponent(Component *component);
     
-    void _addScript(Script* script);
+    void _addScript(Script *script);
     
-    void _removeScript(Script* script);
+    void _removeScript(Script *script);
     
-    Entity* _removeFromParent();
+    Entity *_removeFromParent();
     
     void _processActive();
     
     void _processInActive();
     
     template<typename T>
-    void _getComponentsInChildren(std::vector<T*>& results) {
+    void _getComponentsInChildren(std::vector<T *> &results) {
         for (size_t i = 0; i < _components.size(); i++) {
-            T* component = dynamic_cast<T*>(_components[i].get());
+            T *component = dynamic_cast<T *>(_components[i].get());
             if (component) {
                 results.push_back(component);
             }
@@ -218,26 +222,26 @@ private:
     
     void _setActiveComponents(bool isActive);
     
-    void _setActiveInHierarchy(std::vector<Component*>& activeChangedComponents);
+    void _setActiveInHierarchy(std::vector<Component *> &activeChangedComponents);
     
-    void _setInActiveInHierarchy(std::vector<Component*>& activeChangedComponents);
+    void _setInActiveInHierarchy(std::vector<Component *> &activeChangedComponents);
     
     void _setTransformDirty();
     
-    static EntityPtr _findChildByName(Entity* root, const std::string& name);
+    static EntityPtr _findChildByName(Entity *root, const std::string &name);
     
-    static void _traverseSetOwnerScene(Entity* entity, Scene* scene);
+    static void _traverseSetOwnerScene(Entity *entity, Scene *scene);
     
     bool _isActiveInHierarchy = false;
     std::vector<std::unique_ptr<Component>> _components{};
-    std::vector<Script*> _scripts{};
+    std::vector<Script *> _scripts{};
     std::vector<EntityPtr> _children{};
-    Scene* _scene = nullptr;
+    Scene *_scene = nullptr;
     bool _isRoot = false;
     bool _isActive = true;
     
-    Entity* _parent = nullptr;
-    std::vector<Component*> _activeChangedComponents{};
+    Entity *_parent = nullptr;
+    std::vector<Component *> _activeChangedComponents{};
     
     std::unique_ptr<UpdateFlag> _inverseWorldMatFlag = nullptr;
 };

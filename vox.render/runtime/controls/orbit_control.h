@@ -21,7 +21,7 @@ namespace control {
  */
 class OrbitControl : public Script {
 public:
-    explicit OrbitControl(Entity* entity);
+    explicit OrbitControl(Entity *entity);
     
     void onDisable() override;
     
@@ -54,12 +54,12 @@ public:
     /**
      * Pan left.
      */
-    void panLeft(float distance, const math::Matrix& worldMatrix);
+    void panLeft(float distance, const math::Matrix &worldMatrix);
     
     /**
      * Pan right.
      */
-    void panUp(float distance, const math::Matrix& worldMatrix);
+    void panUp(float distance, const math::Matrix &worldMatrix);
     
     /**
      * Pan.
@@ -231,7 +231,7 @@ private:
     };
     
     EntityPtr camera;
-    GLFWwindow* window;
+    GLFWwindow *window;
     
     float fov = 45;
     // Target position.

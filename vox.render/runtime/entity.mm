@@ -10,7 +10,7 @@
 #include "engine.h"
 
 namespace vox {
-EntityPtr Entity::_findChildByName(Entity* root, const std::string &name) {
+EntityPtr Entity::_findChildByName(Entity *root, const std::string &name) {
     const auto &children = root->_children;
     for (size_t i = 0; i < children.size(); i++) {
         const auto &child = children[i];
@@ -21,7 +21,7 @@ EntityPtr Entity::_findChildByName(Entity* root, const std::string &name) {
     return nullptr;
 }
 
-void Entity::_traverseSetOwnerScene(Entity* entity, Scene* scene) {
+void Entity::_traverseSetOwnerScene(Entity *entity, Scene *scene) {
     entity->_scene = scene;
     const auto &children = entity->_children;
     for (size_t i = 0; i < entity->_children.size(); i++) {
@@ -29,7 +29,7 @@ void Entity::_traverseSetOwnerScene(Entity* entity, Scene* scene) {
     }
 }
 
-Entity::Entity(Engine* engine, std::string name) : EngineObject(engine), name(name) {
+Entity::Entity(Engine *engine, std::string name) : EngineObject(engine), name(name) {
     transform = addComponent<Transform>();
     _inverseWorldMatFlag = transform->registerWorldChangeFlag();
 }
@@ -59,7 +59,7 @@ bool Entity::isActiveInHierarchy() {
     return _isActiveInHierarchy;
 }
 
-Entity* Entity::parent() {
+Entity *Entity::parent() {
     return _parent;
 }
 
@@ -71,7 +71,7 @@ size_t Entity::childCount() {
     return _children.size();
 }
 
-Scene* Entity::scene() {
+Scene *Entity::scene() {
     return _scene;
 }
 
@@ -187,7 +187,7 @@ void Entity::destroy() {
     if (_parent != nullptr) {
         auto &parentChildren = _parent->_children;
         parentChildren.erase(std::remove_if(parentChildren.begin(), parentChildren.end(),
-                                            [&](const auto& child) {
+                                            [&](const auto &child) {
             return child.get() == this;
         }), parentChildren.end());
     }
@@ -213,12 +213,12 @@ void Entity::_removeScript(Script *script) {
     script->_entityCacheIndex = -1;
 }
 
-Entity* Entity::_removeFromParent() {
+Entity *Entity::_removeFromParent() {
     auto oldParent = _parent;
     if (oldParent != nullptr) {
         auto &oldParentChildren = oldParent->_children;
         oldParentChildren.erase(std::remove_if(oldParentChildren.begin(), oldParentChildren.end(),
-                                               [&](const auto& child){
+                                               [&](const auto &child) {
             return child.get() == this;
         }), oldParentChildren.end());
         _parent = nullptr;
@@ -287,7 +287,7 @@ void Entity::_setTransformDirty() {
     }
 }
 
-std::vector<Script*> Entity::scripts() {
+std::vector<Script *> Entity::scripts() {
     return _scripts;
 }
 

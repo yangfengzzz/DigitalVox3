@@ -20,8 +20,8 @@ void BaseMaterial::setIsTransparent(bool newValue) {
     }
     _isTransparent = newValue;
     
-    auto& depthState = renderState.depthState;
-    auto& targetBlendState = renderState.blendState.targetBlendState;
+    auto &depthState = renderState.depthState;
+    auto &targetBlendState = renderState.blendState.targetBlendState;
     
     if (newValue) {
         targetBlendState.enabled = true;
@@ -50,11 +50,11 @@ void BaseMaterial::setAlphaCutoff(float newValue) {
     }
 }
 
-const RenderFace::Enum& BaseMaterial::renderFace() {
+const RenderFace::Enum &BaseMaterial::renderFace() {
     return _renderFace;
 }
 
-void BaseMaterial::setRenderFace(const RenderFace::Enum& newValue) {
+void BaseMaterial::setRenderFace(const RenderFace::Enum &newValue) {
     _renderFace = newValue;
     
     switch (newValue) {
@@ -70,14 +70,14 @@ void BaseMaterial::setRenderFace(const RenderFace::Enum& newValue) {
     }
 }
 
-const BlendMode::Enum& BaseMaterial::blendMode() {
+const BlendMode::Enum &BaseMaterial::blendMode() {
     return _blendMode;
 }
 
-void BaseMaterial::setBlendMode(const BlendMode::Enum& newValue) {
+void BaseMaterial::setBlendMode(const BlendMode::Enum &newValue) {
     _blendMode = newValue;
     
-    auto& target = renderState.blendState.targetBlendState;
+    auto &target = renderState.blendState.targetBlendState;
     
     switch (newValue) {
         case BlendMode::Normal:
@@ -99,8 +99,8 @@ void BaseMaterial::setBlendMode(const BlendMode::Enum& newValue) {
     }
 }
 
-BaseMaterial::BaseMaterial(Engine* engine, Shader* shader):
-Material(engine, shader){
+BaseMaterial::BaseMaterial(Engine *engine, Shader *shader) :
+Material(engine, shader) {
     setBlendMode(BlendMode::Enum::Normal);
     shaderData.setData(BaseMaterial::_alphaCutoffProp, 0.0f);
 }

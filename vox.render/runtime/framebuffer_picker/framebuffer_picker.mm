@@ -11,11 +11,11 @@
 
 namespace vox {
 namespace picker {
-Camera* FramebufferPicker::camera() {
+Camera *FramebufferPicker::camera() {
     return _camera;
 }
 
-void FramebufferPicker::setCamera(Camera* value) {
+void FramebufferPicker::setCamera(Camera *value) {
     if (_camera != value) {
         _camera = value;
         auto pass = std::make_unique<ColorRenderPass>("ColorRenderTarget_FBP", -1, colorRenderTarget, Layer::Everything, engine());
@@ -24,13 +24,13 @@ void FramebufferPicker::setCamera(Camera* value) {
     }
 }
 
-FramebufferPicker::FramebufferPicker(Entity* entity):
+FramebufferPicker::FramebufferPicker(Entity *entity) :
 Script(entity) {
     metalResourceLoader = entity->engine()->resourceLoader();
-    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+    auto createFrameBuffer = [&](GLFWwindow *window, int width, int height) {
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
-
+        
         colorRenderTarget.colorAttachments[0].texture =
         metalResourceLoader->buildTexture(buffer_width, buffer_height, MTLPixelFormatBGRA8Unorm,
                                           MTLTextureUsageRenderTarget, MTLStorageModeManaged);
@@ -43,7 +43,7 @@ Script(entity) {
     Canvas::resize_callbacks.push_back(createFrameBuffer);
 }
 
-void FramebufferPicker::setPickFunctor(std::function<void(Renderer*, MeshPtr)> func) {
+void FramebufferPicker::setPickFunctor(std::function<void(Renderer *, MeshPtr)> func) {
     colorRenderPass->setPickFunctor(func);
 }
 

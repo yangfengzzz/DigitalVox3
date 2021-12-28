@@ -43,9 +43,9 @@ struct ParticleRendererBlendMode {
 /**
  * Particle Renderer Component.
  */
-class ParticleRenderer :public MeshRenderer {
+class ParticleRenderer : public MeshRenderer {
 public:
-    ParticleRenderer(Entity* entity);
+    ParticleRenderer(Entity *entity);
     
     /**
      * Sprite sheet of texture.
@@ -55,230 +55,230 @@ public:
     /**
      * Texture of particle.
      */
-    id<MTLTexture> texture();
+    id <MTLTexture> texture();
     
-    void setTexture(id<MTLTexture> texture);
+    void setTexture(id <MTLTexture> texture);
     
     /**
      * Position of particles.
      */
     math::Float3 position();
     
-    void setPosition(const math::Float3& value);
+    void setPosition(const math::Float3 &value);
     
     /**
      * Random range of positions.
      */
     math::Float3 positionRandomness();
     
-    void setPositionRandomness(const math::Float3& value);
+    void setPositionRandomness(const math::Float3 &value);
     
     /**
      * Array of fixed positions.
      */
-    const std::vector<math::Float3>& positionArray() const;
+    const std::vector<math::Float3> &positionArray() const;
     
-    void setPositionArray(const std::vector<math::Float3>& value);
+    void setPositionArray(const std::vector<math::Float3> &value);
     
     /**
      * Velocity of particles.
      */
     math::Float3 velocity();
     
-    void setVelocity(const math::Float3& value);
+    void setVelocity(const math::Float3 &value);
     
     /**
      * Random range of velocity.
      */
     math::Float3 velocityRandomness();
     
-    void setVelocityRandomness(const math::Float3& value);
+    void setVelocityRandomness(const math::Float3 &value);
     
     /**
      * Acceleration of particles.
      */
     math::Float3 acceleration();
     
-    void setAcceleration(const math::Float3& value);
+    void setAcceleration(const math::Float3 &value);
     
     /**
      * Random range of acceleration.
      */
     math::Float3 accelerationRandomness();
     
-    void setAccelerationRandomness(const math::Float3& value);
+    void setAccelerationRandomness(const math::Float3 &value);
     
     /**
      * Color of particles.
      */
     math::Color color();
     
-    void setColor(const math::Color& value);
+    void setColor(const math::Color &value);
     
     /**
      * Random range of color.
      */
     float colorRandomness();
-
+    
     void setColorRandomness(float value);
-
+    
     /**
      * Size of particles.
      */
     float size();
-
+    
     void setSize(float value);
-
+    
     /**
      * Random range of size.
      */
     float sizeRandomness();
-
+    
     void setSizeRandomness(float value);
-
+    
     /**
      * Alpha of particles.
      */
     float alpha();
-
+    
     void setAlpha(float value);
-
+    
     /**
      * Random range of alpha.
      */
     float alphaRandomness();
-
+    
     void setAlphaRandomness(float value);
-
+    
     /**
      * Angle of particles.
      */
     float angle();
-
+    
     void setAngle(float value);
-
+    
     /**
      * Random range of angle.
      */
     float angleRandomness();
-
+    
     void setAngleRandomness(float value);
-
+    
     /**
      * Rotate velocity of particles.
      */
     float rotateVelocity();
-
+    
     void setRotateVelocity(float value);
-
+    
     /**
      * Random range of rotate velocity.
      */
     float rotateVelocityRandomness();
-
+    
     void setRotateVelocityRandomness(float value);
-
+    
     /**
      * Lifetime of particles.
      */
     float lifetime();
-
+    
     void setLifetime(float value);
-
+    
     /**
      * Random range of start time.
      */
     float startTimeRandomness();
-
+    
     void setStartTimeRandomness(float value);
-
+    
     /**
      * Scale factor of particles.
      */
     float scale();
-
+    
     void setScale(float value);
-
+    
     /**
      * Max count of particles.
      */
     size_t maxCount();
-
+    
     void setMaxCount(size_t value);
-
+    
     /**
      * Whether play once.
      */
     bool isOnce();
-
+    
     void setIsOnce(bool value);
-
+    
     /**
      * Whether follow the direction of velocity.
      */
     bool isRotateToVelocity();
-
+    
     void setIsRotateToVelocity(bool value);
-
+    
     /**
      * Whether use origin color.
      */
     bool isUseOriginColor();
-
+    
     void setIsUseOriginColor(bool value);
-
+    
     /**
      * Whether scale by lifetime.
      */
     bool isScaleByLifetime();
-
+    
     void setIsScaleByLifetime(bool value);
-
+    
     /**
      * Whether 2D rendering.
      */
     bool is2d();
-
+    
     void setIs2d(bool value);
-
+    
     /**
      * Whether fade in.
      */
     bool isFadeIn();
-
+    
     void setIsFadeIn(bool value);
-
+    
     /**
      * Whether fade out.
      */
     bool isFadeOut();
-
+    
     void setIsFadeOut(bool value);
-
+    
     /**
      * Whether play on enable.
      */
     bool playOnEnable();
-
+    
     void setPlayOnEnable(bool value);
-
+    
     /**
      * Blend mode of the particle renderer's material.
      */
     ParticleRendererBlendMode::Enum blendMode();
-
+    
     void setBlendMode(ParticleRendererBlendMode::Enum value);
     
 public:
     void update(float deltaTime) override;
-
+    
     void _onEnable() override;
-
+    
     /**
      * Start emitting.
      */
     void start();
-
+    
     /**
      * Stop emitting.
      */
@@ -286,27 +286,28 @@ public:
     
 private:
     MaterialPtr _createMaterial();
-
+    
     MeshPtr _createMesh();
-
+    
     void _updateBuffer();
-
+    
     void _updateSingleBuffer(size_t i);
-
+    
     void _updateSingleUv(size_t i, size_t k0, size_t k1, size_t k2, size_t k3);
     
 private:
     static float _getRandom();
+    
     static std::default_random_engine e;
     static std::uniform_real_distribution<float> u;
     
     static ShaderProperty _textureProp;
     static ShaderProperty _timeProp;
     static ShaderProperty _onceProp;
-
+    
     uint32_t _vertexStride;
     std::vector<float> _vertices;
-    id<MTLBuffer> _vertexBuffer;
+    id <MTLBuffer> _vertexBuffer;
     size_t _maxCount = 1000;
     math::Float3 _position;
     math::Float3 _positionRandomness;

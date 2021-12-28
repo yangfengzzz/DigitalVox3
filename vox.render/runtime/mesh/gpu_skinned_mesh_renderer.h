@@ -12,34 +12,35 @@
 
 namespace vox {
 
-class GPUSkinnedMeshRenderer:public MeshRenderer {
+class GPUSkinnedMeshRenderer : public MeshRenderer {
 public:
     struct Skin {
         std::string name;
         std::vector<Matrix> inverseBindMatrices;
-        std::vector<Entity*> joints;
+        std::vector<Entity *> joints;
     };
     using SkinPtr = std::shared_ptr<Skin>;
     
 public:
-    GPUSkinnedMeshRenderer(Entity* entity);
+    GPUSkinnedMeshRenderer(Entity *entity);
     
     /**
      * Skin Object.
      */
     SkinPtr skin();
     
-    void setSkin(const SkinPtr& skin);
+    void setSkin(const SkinPtr &skin);
     
     void update(float deltaTime) override;
     
 private:
     SkinPtr _skin;
-
+    
     void _initJoints();
+    
     bool _hasInitJoints = false;
     
-    id<MTLBuffer> matrixPalette;
+    id <MTLBuffer> matrixPalette;
     std::vector<float> jointMatrix{};
     static ShaderProperty _jointMatrixProperty;
 };

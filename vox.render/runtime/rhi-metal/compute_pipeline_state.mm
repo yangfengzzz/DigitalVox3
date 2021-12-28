@@ -9,20 +9,19 @@
 #include "metal_renderer.h"
 
 namespace vox {
-ComputePipelineState::ComputePipelineState(MetalRenderer* _render, MTLComputePipelineDescriptor* descriptor):
+ComputePipelineState::ComputePipelineState(MetalRenderer *_render, MTLComputePipelineDescriptor *descriptor) :
 _render(_render) {
     MTLComputePipelineReflection *_reflection;
     NSError *error = nil;
     _handle = [_render->_device newComputePipelineStateWithDescriptor:descriptor
                                                               options:MTLPipelineOptionArgumentInfo
                                                            reflection:&_reflection error:&error];
-    if (error != nil)
-    {
+    if (error != nil) {
         NSLog(@"Error: failed to create Metal pipeline state: %@", error);
     }
 }
 
-id<MTLComputePipelineState> ComputePipelineState::handle() {
+id <MTLComputePipelineState> ComputePipelineState::handle() {
     return _handle;
 }
 

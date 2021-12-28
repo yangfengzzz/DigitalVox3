@@ -51,7 +51,7 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     {HAS_SH, {0, MTLDataTypeBool}},
     {HAS_SPECULAR_ENV, {0, MTLDataTypeBool}},
     {HAS_DIFFUSE_ENV, {0, MTLDataTypeBool}},
-
+    
     // Particle Render
     {HAS_PARTICLE_TEXTURE, {0, MTLDataTypeBool}},
     {NEED_ROTATE_TO_VELOCITY, {0, MTLDataTypeBool}},
@@ -66,11 +66,11 @@ std::unordered_map<MacroName, std::pair<int, MTLDataType>> ShaderMacroCollection
     {CUBE_SHADOW_MAP_COUNT, {0, MTLDataTypeInt}},
 };
 
-MTLFunctionConstantValues* ShaderMacroCollection::createDefaultFunction() {
-    MTLFunctionConstantValues* functionConstants = [[MTLFunctionConstantValues alloc]init];
+MTLFunctionConstantValues *ShaderMacroCollection::createDefaultFunction() {
+    MTLFunctionConstantValues *functionConstants = [[MTLFunctionConstantValues alloc] init];
     for (size_t i = 0; i < TOTAL_COUNT; i++) {
         const auto macro = ShaderMacroCollection::defaultValue[MacroName(i)];
-
+        
         int value = macro.first;
         auto type = macro.second;
         if (type == MTLDataTypeBool) {
@@ -88,8 +88,8 @@ MTLFunctionConstantValues* ShaderMacroCollection::createDefaultFunction() {
     return functionConstants;
 }
 
-void ShaderMacroCollection::unionCollection(const ShaderMacroCollection& left, const ShaderMacroCollection& right,
-                                            ShaderMacroCollection& result){
+void ShaderMacroCollection::unionCollection(const ShaderMacroCollection &left, const ShaderMacroCollection &right,
+                                            ShaderMacroCollection &result) {
     result._value.insert(left._value.begin(), left._value.end());
     result._value.insert(right._value.begin(), right._value.end());
 }

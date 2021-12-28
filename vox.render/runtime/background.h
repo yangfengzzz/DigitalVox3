@@ -17,7 +17,7 @@ namespace vox {
  * The Background mode enumeration.
  */
 struct BackgroundMode {
-     enum Enum {
+    enum Enum {
         /* Solid color. */
         SolidColor,
         /* Sky. */
@@ -38,7 +38,7 @@ public:
      * @remarks If using `BackgroundMode.Sky` mode and material or mesh of the `sky` is not defined, it will downgrade to `BackgroundMode.SolidColor`.
      */
     BackgroundMode::Enum mode = BackgroundMode::Enum::SolidColor;
-
+    
     /**
      * Background solid color.
      * @defaultValue `new Color(0.25, 0.25, 0.25, 1.0)`
@@ -52,7 +52,7 @@ public:
      */
     Sky sky = Sky();
     
-    Background(Engine* engine);
+    Background(Engine *engine);
 };
 
 }

@@ -15,7 +15,7 @@ namespace vox {
 /**
  * Spot light.
  */
-class SpotLight :public Light {
+class SpotLight : public Light {
 public:
     /** Light color. */
     math::Color color = math::Color(1, 1, 1, 1);
@@ -28,7 +28,7 @@ public:
     /** Angle, in radians, from falloff begins to ends. */
     float penumbra = M_PI / 12;
     
-    SpotLight(Entity* entity);
+    SpotLight(Entity *entity);
     
 public:
     math::Matrix shadowProjectionMatrix() override;
@@ -39,7 +39,7 @@ public:
     
 private:
     friend class LightManager;
-
+    
     /**
      * Mount to the current Scene.
      */
@@ -50,7 +50,7 @@ private:
      */
     void _onDisable() override;
     
-    void _updateShaderData(SpotLightData& shaderData);
+    void _updateShaderData(SpotLightData &shaderData);
 };
 
 }

@@ -9,7 +9,7 @@
 #include "shader.h"
 
 namespace vox {
-std::any ShaderData::getData(const std::string& property_name) {
+std::any ShaderData::getData(const std::string &property_name) {
     auto property = Shader::getPropertyByName(property_name);
     if (property.has_value()) {
         return getData(property.value());
@@ -18,7 +18,7 @@ std::any ShaderData::getData(const std::string& property_name) {
     }
 }
 
-std::any ShaderData::getData(const ShaderProperty& property) {
+std::any ShaderData::getData(const ShaderProperty &property) {
     auto iter = _properties.find(property.uniqueId);
     if (iter != _properties.end()) {
         return iter->second;
@@ -27,7 +27,7 @@ std::any ShaderData::getData(const ShaderProperty& property) {
     }
 }
 
-void ShaderData::setData(const std::string& property_name, std::any value) {
+void ShaderData::setData(const std::string &property_name, std::any value) {
     auto property = Shader::getPropertyByName(property_name);
     if (property.has_value()) {
         setData(property.value(), value);
@@ -40,7 +40,7 @@ void ShaderData::setData(ShaderProperty property, std::any value) {
     _properties[property.uniqueId] = value;
 }
 
-const std::unordered_map<int, std::any>& ShaderData::properties() const {
+const std::unordered_map<int, std::any> &ShaderData::properties() const {
     return _properties;
 }
 
@@ -60,8 +60,8 @@ void ShaderData::disableMacro(MacroName macroName) {
     }
 }
 
-void ShaderData::mergeMacro(const ShaderMacroCollection& macros,
-                            ShaderMacroCollection& result) const {
+void ShaderData::mergeMacro(const ShaderMacroCollection &macros,
+                            ShaderMacroCollection &result) const {
     ShaderMacroCollection::unionCollection(macros, _macroCollection, result);
 }
 

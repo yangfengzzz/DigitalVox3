@@ -14,13 +14,13 @@
 namespace vox {
 class ComputePipelineState {
 public:
-    ComputePipelineState(MetalRenderer* _render, MTLComputePipelineDescriptor* descriptor);
-
-    id<MTLComputePipelineState> handle();
-        
+    ComputePipelineState(MetalRenderer *_render, MTLComputePipelineDescriptor *descriptor);
+    
+    id <MTLComputePipelineState> handle();
+    
 private:
     MetalRenderer *_render;
-    id<MTLComputePipelineState> _handle;
+    id <MTLComputePipelineState> _handle;
 };
 
 }

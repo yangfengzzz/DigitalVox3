@@ -13,12 +13,12 @@
 namespace vox {
 ShaderProperty Scene::_frameBufferSizeProperty = Shader::createProperty("u_framebuffer_size", ShaderDataGroup::Scene);
 
-Scene::Scene(Engine* engine, std::string name):
+Scene::Scene(Engine *engine, std::string name) :
 EngineObject(engine),
 name(name),
 _ambientLight(this),
 light_manager(this) {
-    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+    auto createFrameBuffer = [&](GLFWwindow *window, int width, int height) {
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
         shaderData.setData(Scene::_frameBufferSizeProperty, Float2(buffer_width, buffer_height));
@@ -27,7 +27,7 @@ light_manager(this) {
     Canvas::resize_callbacks.push_back(createFrameBuffer);
 }
 
-AmbientLight& Scene::ambientLight() {
+AmbientLight &Scene::ambientLight() {
     return _ambientLight;
 }
 
@@ -35,7 +35,7 @@ size_t Scene::rootEntitiesCount() {
     return _rootEntities.size();
 }
 
-const std::vector<EntityPtr>& Scene::rootEntities() {
+const std::vector<EntityPtr> &Scene::rootEntities() {
     return _rootEntities;
 }
 
@@ -96,17 +96,17 @@ EntityPtr Scene::getRootEntity(size_t index) {
     return _rootEntities[index];
 }
 
-EntityPtr Scene::findEntityByName(const std::string& name) {
-    const auto& children = _rootEntities;
+EntityPtr Scene::findEntityByName(const std::string &name) {
+    const auto &children = _rootEntities;
     for (size_t i = 0; i < children.size(); i++) {
-        const auto& child = children[i];
+        const auto &child = children[i];
         if (child->name == name) {
             return child;
         }
     }
     
     for (size_t i = 0; i < children.size(); i++) {
-        const auto& child = children[i];
+        const auto &child = children[i];
         const auto entity = child->findByName(name);
         if (entity) {
             return entity;
@@ -129,7 +129,7 @@ void Scene::destroy() {
     _destroyed = true;
 }
 
-void Scene::_attachRenderCamera(Camera* camera) {
+void Scene::_attachRenderCamera(Camera *camera) {
     auto iter = std::find(_activeCameras.begin(), _activeCameras.end(), camera);
     if (iter == _activeCameras.end()) {
         _activeCameras.push_back(camera);
@@ -138,7 +138,7 @@ void Scene::_attachRenderCamera(Camera* camera) {
     }
 }
 
-void Scene::_detachRenderCamera(Camera* camera) {
+void Scene::_detachRenderCamera(Camera *camera) {
     auto iter = std::find(_activeCameras.begin(), _activeCameras.end(), camera);
     if (iter != _activeCameras.end()) {
         _activeCameras.erase(iter);
@@ -147,9 +147,9 @@ void Scene::_detachRenderCamera(Camera* camera) {
 
 void Scene::_processActive(bool active) {
     _isActiveInEngine = active;
-    const auto& rootEntities = _rootEntities;
+    const auto &rootEntities = _rootEntities;
     for (size_t i = 0; i < rootEntities.size(); i++) {
-        const auto& entity = rootEntities[i];
+        const auto &entity = rootEntities[i];
         if (entity->_isActive) {
             active ? entity->_processActive() : entity->_processInActive();
         }
@@ -163,7 +163,7 @@ void Scene::_updateShaderData() {
 }
 
 void Scene::_removeEntity(EntityPtr entity) {
-    auto& oldRootEntities = _rootEntities;
+    auto &oldRootEntities = _rootEntities;
     oldRootEntities.erase(std::remove(oldRootEntities.begin(),
                                       oldRootEntities.end(), entity), oldRootEntities.end());
 }

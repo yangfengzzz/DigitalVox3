@@ -14,23 +14,23 @@
 
 namespace vox {
 namespace editor {
-class GridMaterial: public BaseMaterial {
+class GridMaterial : public BaseMaterial {
 public:
-    GridMaterial(Engine* engine): BaseMaterial(engine, Shader::find("editor-grid")) {
+    GridMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("editor-grid")) {
         setIsTransparent(true);
     }
 };
 
-Grid::Grid(Entity *entity):
-Script(entity){
+Grid::Grid(Entity *entity) :
+Script(entity) {
     Shader::create("editor-grid", "vertex_grid", "fragment_grid");
-
+    
     _renderer = entity->addComponent<MeshRenderer>();
     _renderer->setMesh(createPlane(engine()));
     _renderer->setMaterial(std::make_shared<GridMaterial>(engine()));
 }
 
-ModelMeshPtr Grid::createPlane(Engine* engine) {
+ModelMeshPtr Grid::createPlane(Engine *engine) {
     auto mesh = std::make_shared<ModelMesh>(engine);
     
     auto positions = std::vector<Float3>(4);

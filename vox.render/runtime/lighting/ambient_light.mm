@@ -18,7 +18,7 @@ ShaderProperty AmbientLight::_diffuseTextureProperty = Shader::createProperty("u
 ShaderProperty AmbientLight::_specularTextureProperty = Shader::createProperty("u_env_specularTexture", ShaderDataGroup::Enum::Scene);
 ShaderProperty AmbientLight::_brdfTextureProperty = Shader::createProperty("u_env_brdfTexture", ShaderDataGroup::Enum::Scene);
 
-AmbientLight::AmbientLight(Scene* value) {
+AmbientLight::AmbientLight(Scene *value) {
     _scene = value;
     if (!value) return;
     
@@ -29,15 +29,15 @@ AmbientLight::AmbientLight(Scene* value) {
     _scene->shaderData.setData(AmbientLight::_brdfTextureProperty,
                                value->engine()->resourceLoader()->createBRDFLookupTable());
     
-    RenderPipelineState::register_fragment_uploader<EnvMapLight>([](const EnvMapLight& x, size_t location,
-                                                                    id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: &x length:sizeof(EnvMapLight) atIndex:location];
+    RenderPipelineState::register_fragment_uploader<EnvMapLight>([](const EnvMapLight &x, size_t location,
+                                                                    id <MTLRenderCommandEncoder> encoder) {
+        [encoder setFragmentBytes:&x length:sizeof(EnvMapLight) atIndex:location];
     });
     
     RenderPipelineState::register_fragment_uploader<std::array<float, 27>>(
-    [](const std::array<float, 27>& x, size_t location, id <MTLRenderCommandEncoder> encoder){
-        [encoder setFragmentBytes: x.data() length:sizeof(std::array<float, 27>) atIndex:location];
-    });
+                                                                           [](const std::array<float, 27> &x, size_t location, id <MTLRenderCommandEncoder> encoder) {
+                                                                               [encoder setFragmentBytes:x.data() length:sizeof(std::array<float, 27>) atIndex:location];
+                                                                           });
 }
 
 DiffuseMode::Enum AmbientLight::diffuseMode() {
@@ -68,31 +68,31 @@ math::Color AmbientLight::diffuseSolidColor() {
     return math::Color(_envMapLight.diffuse.x, _envMapLight.diffuse.y, _envMapLight.diffuse.z);
 }
 
-void AmbientLight::setDiffuseSolidColor(const math::Color& value) {
+void AmbientLight::setDiffuseSolidColor(const math::Color &value) {
     _envMapLight.diffuse = simd_make_float3(value.r, value.g, value.b);
     _scene->shaderData.setData(AmbientLight::_envMapProperty, _envMapLight);
 }
 
-const math::SphericalHarmonics3& AmbientLight::diffuseSphericalHarmonics() {
+const math::SphericalHarmonics3 &AmbientLight::diffuseSphericalHarmonics() {
     return _diffuseSphericalHarmonics;
 }
 
-void AmbientLight::setDiffuseSphericalHarmonics(const math::SphericalHarmonics3& value) {
+void AmbientLight::setDiffuseSphericalHarmonics(const math::SphericalHarmonics3 &value) {
     _diffuseSphericalHarmonics = value;
     if (!_scene) return;
     
     _scene->shaderData.setData(AmbientLight::_diffuseSHProperty, _preComputeSH(value));
 }
 
-id<MTLTexture> AmbientLight::diffuseTexture() {
+id <MTLTexture> AmbientLight::diffuseTexture() {
     return _diffuseTexture;
 }
 
-void AmbientLight::setDiffuseTexture(id<MTLTexture> value) {
+void AmbientLight::setDiffuseTexture(id <MTLTexture> value) {
     _diffuseTexture = value;
     if (!_scene) return;
     
-    auto& shaderData = _scene->shaderData;
+    auto &shaderData = _scene->shaderData;
     
     if (value) {
         shaderData.setData(AmbientLight::_diffuseTextureProperty, _diffuseTexture);
@@ -122,15 +122,15 @@ void AmbientLight::setSpecularTextureDecodeRGBM(bool value) {
     
 }
 
-id<MTLTexture> AmbientLight::specularTexture() {
+id <MTLTexture> AmbientLight::specularTexture() {
     return _specularReflection;
 }
 
-void AmbientLight::setSpecularTexture(id<MTLTexture> value) {
+void AmbientLight::setSpecularTexture(id <MTLTexture> value) {
     _specularReflection = value;
     if (!_scene) return;
     
-    auto& shaderData = _scene->shaderData;
+    auto &shaderData = _scene->shaderData;
     
     if (value) {
         shaderData.setData(AmbientLight::_specularTextureProperty, _specularReflection);
@@ -154,15 +154,15 @@ void AmbientLight::setSpecularIntensity(float value) {
 }
 
 //MARK: - BRDF Texture
-id<MTLTexture> AmbientLight::brdfTexture() {
+id <MTLTexture> AmbientLight::brdfTexture() {
     return _brdfLutTexture;
 }
 
-void AmbientLight::setBRDFTexture(id<MTLTexture> value) {
+void AmbientLight::setBRDFTexture(id <MTLTexture> value) {
     
 }
 
-std::array<float, 27> AmbientLight::_preComputeSH(const math::SphericalHarmonics3& sh) {
+std::array<float, 27> AmbientLight::_preComputeSH(const math::SphericalHarmonics3 &sh) {
     /**
      * Basis constants
      *
@@ -187,7 +187,7 @@ std::array<float, 27> AmbientLight::_preComputeSH(const math::SphericalHarmonics
      * 2: Math.PI / 4
      */
     
-    const auto& src = sh.coefficients();
+    const auto &src = sh.coefficients();
     std::array<float, 27> out;
     // l0
     out[0] = src[0] * 0.886227; // kernel0 * basis0 = 0.886227

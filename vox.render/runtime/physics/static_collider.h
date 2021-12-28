@@ -12,9 +12,9 @@
 
 namespace vox {
 namespace physics {
-class StaticCollider: public Collider {
+class StaticCollider : public Collider {
 public:
-    StaticCollider(Entity* entity);
+    StaticCollider(Entity *entity);
 };
 
 }

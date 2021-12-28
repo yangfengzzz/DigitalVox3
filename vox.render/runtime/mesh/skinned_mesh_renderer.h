@@ -17,21 +17,21 @@
 namespace vox {
 class SkinnedMeshRenderer : public Renderer {
 public:
-    SkinnedMeshRenderer(Entity* entity);
+    SkinnedMeshRenderer(Entity *entity);
     
-    void _render(std::vector<RenderElement>& opaqueQueue,
-                 std::vector<RenderElement>& alphaTestQueue,
-                 std::vector<RenderElement>& transparentQueue) override;
+    void _render(std::vector<RenderElement> &opaqueQueue,
+                 std::vector<RenderElement> &alphaTestQueue,
+                 std::vector<RenderElement> &transparentQueue) override;
     
-    void _updateBounds(BoundingBox& worldBounds) override;
+    void _updateBounds(BoundingBox &worldBounds) override;
     
     void update(float deltaTime) override;
     
-    bool loadSkeleton(const std::string& filename);
+    bool loadSkeleton(const std::string &filename);
     
-    bool addSkinnedMesh(const std::string& skin_filename,
-                        const std::string& skel_filename);
-
+    bool addSkinnedMesh(const std::string &skin_filename,
+                        const std::string &skel_filename);
+    
 public:
     int numJoints();
     
@@ -41,22 +41,22 @@ private:
     // Computes the bounding box of _skeleton. This is the box that encloses all
     // skeleton's joints in model space.
     // _bound must be a valid math::Box instance.
-    static void computeSkeletonBounds(const animation::Skeleton& _skeleton,
-                                      math::BoundingBox* _bound);
+    static void computeSkeletonBounds(const animation::Skeleton &_skeleton,
+                                      math::BoundingBox *_bound);
     
     // Computes the bounding box of posture defines be _matrices range.
     // _bound must be a valid math::Box instance.
     static void computePostureBounds(vox::span<const vox::math::Float4x4> _matrices,
-                                     math::BoundingBox* _bound);
+                                     math::BoundingBox *_bound);
     
     // Renders a skinned mesh at a specified location.
     std::shared_ptr<Mesh> drawSkinnedMesh(size_t index,
-                                          const vox::offline::loader::Mesh& _mesh,
+                                          const vox::offline::loader::Mesh &_mesh,
                                           const span<math::Float4x4> _skinning_matrices,
-                                          const vox::math::Float4x4& _transform);
+                                          const vox::math::Float4x4 &_transform);
     
-private:    
-    Animator* animator = nullptr;
+private:
+    Animator *animator = nullptr;
     
     // Runtime skeleton.
     vox::animation::Skeleton skeleton_;

@@ -17,13 +17,16 @@
 
 using namespace vox;
 
-int main(int, char**) {
+int main(int, char **) {
     struct Material {
         std::string name;
         math::Color baseColor;
         float roughness;
         float metallic;
-        Material() {};
+        
+        Material() {
+        };
+        
         Material(std::string n, math::Color c, float r, float m) : name(n) {
             roughness = r;
             metallic = m;
@@ -46,12 +49,12 @@ int main(int, char**) {
     
     const int materialIndex = 0;
     Material mat = materials[materialIndex];
-
+    
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
+    scene->ambientLight().setDiffuseSolidColor(math::Color(1, 1, 1));
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
@@ -71,11 +74,11 @@ int main(int, char**) {
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 7; j++) {
             auto sphereEntity = rootEntity->createChild("SphereEntity" + std::to_string(i) + std::to_string(j));
-            sphereEntity->transform->setPosition(math::Float3(i-3, j-3, 0));
+            sphereEntity->transform->setPosition(math::Float3(i - 3, j - 3, 0));
             auto sphereMtl = std::make_shared<PBRMaterial>(&engine);
             sphereMtl->setBaseColor(mat.baseColor);
-            sphereMtl->setMetallic(Clamp(float(i)/float(7-1), 0.1f, 1.0f));
-            sphereMtl->setRoughness(Clamp(float(j)/float(7-1), 0.05f, 1.0f));
+            sphereMtl->setMetallic(Clamp(float(i) / float(7 - 1), 0.1f, 1.0f));
+            sphereMtl->setRoughness(Clamp(float(j) / float(7 - 1), 0.05f, 1.0f));
             
             auto sphereRenderer = sphereEntity->addComponent<MeshRenderer>();
             sphereRenderer->setMesh(sphere);

@@ -33,7 +33,7 @@ public:
      * @param ray - The ray
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
-    bool raycast(const math::Ray& ray);
+    bool raycast(const math::Ray &ray);
     
     /**
      * Casts a ray through the Scene and returns the first hit.
@@ -41,7 +41,7 @@ public:
      * @param outHitResult - If true is returned, outHitResult will contain more detailed collision information
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
-    bool raycast(const math::Ray& ray, HitResult& outHitResult);
+    bool raycast(const math::Ray &ray, HitResult &outHitResult);
     
     /**
      * Casts a ray through the Scene and returns the first hit.
@@ -49,7 +49,7 @@ public:
      * @param distance - The max distance the ray should check
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
-    bool raycast(const math::Ray& ray, float distance);
+    bool raycast(const math::Ray &ray, float distance);
     
     /**
      * Casts a ray through the Scene and returns the first hit.
@@ -58,7 +58,7 @@ public:
      * @param outHitResult - If true is returned, outHitResult will contain more detailed collision information
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
-    bool raycast(const math::Ray& ray, float distance, HitResult&  outHitResult);
+    bool raycast(const math::Ray &ray, float distance, HitResult &outHitResult);
     
     /**
      * Casts a ray through the Scene and returns the first hit.
@@ -67,7 +67,7 @@ public:
      * @param layerMask - Layer mask that is used to selectively ignore Colliders when casting
      * @returns Returns True if the ray intersects with a collider, otherwise false
      */
-    bool raycast(const math::Ray& ray, float distance, Layer layerMask);
+    bool raycast(const math::Ray &ray, float distance, Layer layerMask);
     
     /**
      * Casts a ray through the Scene and returns the first hit.
@@ -77,7 +77,7 @@ public:
      * @param outHitResult - If true is returned, outHitResult will contain more detailed collision information
      * @returns Returns True if the ray intersects with a collider, otherwise false.
      */
-    bool raycast(const math::Ray& ray, float distance, Layer layerMask, HitResult&  outHitResult);
+    bool raycast(const math::Ray &ray, float distance, Layer layerMask, HitResult &outHitResult);
     
 public:
     /**
@@ -93,58 +93,61 @@ public:
     
 private:
     friend class Collider;
+    
     friend class CharacterController;
+    
     friend class BoxCharacterController;
+    
     friend class CapsuleCharacterController;
     
     /**
      * Add ColliderShape into the manager.
      * @param colliderShape - The Collider Shape.
      */
-    void _addColliderShape(const ColliderShapePtr& colliderShape);
+    void _addColliderShape(const ColliderShapePtr &colliderShape);
     
     /**
      * Remove ColliderShape.
      * @param colliderShape - The Collider Shape.
      */
-    void _removeColliderShape(const ColliderShapePtr& colliderShape);
+    void _removeColliderShape(const ColliderShapePtr &colliderShape);
     
     /**
      * Add collider into the manager.
      * @param collider - StaticCollider or DynamicCollider.
      */
-    void _addCollider(Collider* collider);
+    void _addCollider(Collider *collider);
     
     /**
      * Remove collider.
      * @param collider - StaticCollider or DynamicCollider.
      */
-    void _removeCollider(Collider* collider);
+    void _removeCollider(Collider *collider);
     
     /**
      * Add CharacterController into the manager.
      * @param characterController The Character Controller.
      */
-    void _addCharacterController(CharacterController* characterController);
-
+    void _addCharacterController(CharacterController *characterController);
+    
     /**
      * Remove CharacterController.
      * @param characterController The Character Controller.
      */
-    void _removeCharacterController(CharacterController* characterController);
+    void _removeCharacterController(CharacterController *characterController);
     
-    bool _raycast(const math::Ray& ray, float distance,
+    bool _raycast(const math::Ray &ray, float distance,
                   std::function<void(uint32_t, float,
-                                     const math::Float3&,
-                                     const math::Float3&)> outHitResult);
+                                     const math::Float3 &,
+                                     const math::Float3 &)> outHitResult);
     
 private:
-    PxControllerManager* _nativeCharacterControllerManager;
-    PxScene* _nativePhysicsManager;
+    PxControllerManager *_nativeCharacterControllerManager;
+    PxScene *_nativePhysicsManager;
     
     std::unordered_map<uint32_t, ColliderShapePtr> _physicalObjectsMap;
-    std::vector<Collider*> _colliders;
-    std::vector<CharacterController* > _controllers;
+    std::vector<Collider *> _colliders;
+    std::vector<CharacterController *> _controllers;
     
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactEnter;
     std::function<void(PxShape *obj1, PxShape *obj2)> onContactExit;

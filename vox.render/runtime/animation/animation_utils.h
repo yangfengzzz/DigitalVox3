@@ -35,9 +35,11 @@ namespace animation {
 
 // Count translation, rotation or scale keyframes for a given track number. Use
 // a negative _track value to count all tracks.
-int CountTranslationKeyframes(const Animation& _animation, int _track = -1);
-int CountRotationKeyframes(const Animation& _animation, int _track = -1);
-int CountScaleKeyframes(const Animation& _animation, int _track = -1);
+int CountTranslationKeyframes(const Animation &_animation, int _track = -1);
+
+int CountRotationKeyframes(const Animation &_animation, int _track = -1);
+
+int CountScaleKeyframes(const Animation &_animation, int _track = -1);
 }  // namespace animation
 }  // namespace vox
 #endif  // VOX_VOX_ANIMATION_RUNTIME_ANIMATION_UTILS_H_

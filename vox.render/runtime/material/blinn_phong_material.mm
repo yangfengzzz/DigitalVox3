@@ -24,15 +24,15 @@ math::Color BlinnPhongMaterial::baseColor() {
     return std::any_cast<math::Color>(shaderData.getData(BlinnPhongMaterial::_diffuseColorProp));
 }
 
-void BlinnPhongMaterial::setBaseColor(const math::Color& newValue) {
+void BlinnPhongMaterial::setBaseColor(const math::Color &newValue) {
     shaderData.setData(BlinnPhongMaterial::_diffuseColorProp, newValue);
 }
 
-id<MTLTexture> BlinnPhongMaterial::baseTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_baseTextureProp));
+id <MTLTexture> BlinnPhongMaterial::baseTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_baseTextureProp));
 }
 
-void BlinnPhongMaterial::setBaseTexture(id<MTLTexture> newValue) {
+void BlinnPhongMaterial::setBaseTexture(id <MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_baseTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_DIFFUSE_TEXTURE);
@@ -45,15 +45,15 @@ math::Color BlinnPhongMaterial::specularColor() {
     return std::any_cast<math::Color>(shaderData.getData(BlinnPhongMaterial::_specularColorProp));
 }
 
-void BlinnPhongMaterial::setSpecularColor(const math::Color& newValue) {
+void BlinnPhongMaterial::setSpecularColor(const math::Color &newValue) {
     shaderData.setData(BlinnPhongMaterial::_specularColorProp, newValue);
 }
 
-id<MTLTexture> BlinnPhongMaterial::specularTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_specularTextureProp));
+id <MTLTexture> BlinnPhongMaterial::specularTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_specularTextureProp));
 }
 
-void BlinnPhongMaterial::setSpecularTexture(id<MTLTexture> newValue) {
+void BlinnPhongMaterial::setSpecularTexture(id <MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_specularTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_SPECULAR_TEXTURE);
@@ -66,15 +66,15 @@ math::Color BlinnPhongMaterial::emissiveColor() {
     return std::any_cast<math::Color>(shaderData.getData(BlinnPhongMaterial::_emissiveColorProp));
 }
 
-void BlinnPhongMaterial::setEmissiveColor(const math::Color& newValue) {
+void BlinnPhongMaterial::setEmissiveColor(const math::Color &newValue) {
     shaderData.setData(BlinnPhongMaterial::_emissiveColorProp, newValue);
 }
 
-id<MTLTexture> BlinnPhongMaterial::emissiveTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_emissiveTextureProp));
+id <MTLTexture> BlinnPhongMaterial::emissiveTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_emissiveTextureProp));
 }
 
-void BlinnPhongMaterial::BlinnPhongMaterial::setEmissiveTexture(id<MTLTexture> newValue) {
+void BlinnPhongMaterial::BlinnPhongMaterial::setEmissiveTexture(id <MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_emissiveTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_EMISSIVE_TEXTURE);
@@ -83,11 +83,11 @@ void BlinnPhongMaterial::BlinnPhongMaterial::setEmissiveTexture(id<MTLTexture> n
     }
 }
 
-id<MTLTexture> BlinnPhongMaterial::normalTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_normalTextureProp));
+id <MTLTexture> BlinnPhongMaterial::normalTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(BlinnPhongMaterial::_normalTextureProp));
 }
 
-void BlinnPhongMaterial::setNormalTexture(id<MTLTexture> newValue) {
+void BlinnPhongMaterial::setNormalTexture(id <MTLTexture> newValue) {
     shaderData.setData(BlinnPhongMaterial::_normalTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_NORMAL_TEXTURE);
@@ -116,15 +116,15 @@ math::Float4 BlinnPhongMaterial::tilingOffset() {
     return std::any_cast<math::Float4>(shaderData.getData(BlinnPhongMaterial::_tilingOffsetProp));
 }
 
-void BlinnPhongMaterial::setTilingOffset(const math::Float4& newValue) {
+void BlinnPhongMaterial::setTilingOffset(const math::Float4 &newValue) {
     shaderData.setData(BlinnPhongMaterial::_tilingOffsetProp, newValue);
 }
 
-BlinnPhongMaterial::BlinnPhongMaterial(Engine* engine):
-BaseMaterial(engine, Shader::find("blinn-phong")){
+BlinnPhongMaterial::BlinnPhongMaterial(Engine *engine) :
+BaseMaterial(engine, Shader::find("blinn-phong")) {
     shaderData.enableMacro(NEED_WORLDPOS);
     shaderData.enableMacro(NEED_TILINGOFFSET);
-
+    
     shaderData.setData(BlinnPhongMaterial::_diffuseColorProp, math::Color(1, 1, 1, 1));
     shaderData.setData(BlinnPhongMaterial::_specularColorProp, math::Color(1, 1, 1, 1));
     shaderData.setData(BlinnPhongMaterial::_emissiveColorProp, math::Color(0, 0, 0, 1));

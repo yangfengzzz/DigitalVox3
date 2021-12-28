@@ -10,11 +10,11 @@
 
 namespace vox {
 namespace physics {
-BoxCharacterController::BoxCharacterController(Entity* entity):
-CharacterController(entity){
+BoxCharacterController::BoxCharacterController(Entity *entity) :
+CharacterController(entity) {
 }
 
-void BoxCharacterController::setDesc(const PxBoxControllerDesc& desc) {
+void BoxCharacterController::setDesc(const PxBoxControllerDesc &desc) {
     _nativeController = engine()->_physicsManager._nativeCharacterControllerManager->createController(desc);
 }
 

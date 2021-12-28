@@ -23,16 +23,17 @@
 
 using namespace vox;
 
-class BakerMaterial :public BaseMaterial {
+class BakerMaterial : public BaseMaterial {
 public:
-    BakerMaterial(Engine* engine):BaseMaterial(engine, Shader::find("cubemapDebugger")){}
-    
-    /// Base texture.
-    id<MTLTexture> baseTexture() {
-        return std::any_cast<id<MTLTexture>>(shaderData.getData(_baseTextureProp));
+    BakerMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("cubemapDebugger")) {
     }
     
-    void setBaseTexture(id<MTLTexture> newValue) {
+    /// Base texture.
+    id <MTLTexture> baseTexture() {
+        return std::any_cast<id <MTLTexture>>(shaderData.getData(_baseTextureProp));
+    }
+    
+    void setBaseTexture(id <MTLTexture> newValue) {
         shaderData.setData(_baseTextureProp, newValue);
     }
     
@@ -40,6 +41,7 @@ public:
     int faceIndex() {
         return std::any_cast<uint>(shaderData.getData(_faceIndexProp));
     }
+    
     void setFaceInex(int newValue) {
         shaderData.setData(_faceIndexProp, newValue);
     }
@@ -49,7 +51,7 @@ private:
     ShaderProperty _faceIndexProp = Shader::createProperty("u_faceIndex", ShaderDataGroup::Material);
 };
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto resourceLoader = engine.resourceLoader();
@@ -95,11 +97,12 @@ int main(int, char**) {
     planes[4]->transform->setPosition(-1, 0, 0); // PZ
     planes[5]->transform->setPosition(3, 0, 0); // NZ
     
-    const std::string path = "/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images";
+    const std::string path =
+    "/Users/yangfeng/Desktop/met-materials/12-environment/projects/resources/IrradianceGenerator/IrradianceGenerator/Sky Images";
     const std::array<std::string, 6> images = {"posx.png", "negx.png", "posy.png", "negy.png", "posz.png", "negz.png"};
     auto textures = resourceLoader->createSpecularTexture(path, images, true);
     scene->ambientLight().setSpecularTexture(textures);
-
+    
     auto changeMip = [&](int mipLevel) {
         auto mipSize = textures.width >> mipLevel;
         for (int i = 0; i < 6; i++) {

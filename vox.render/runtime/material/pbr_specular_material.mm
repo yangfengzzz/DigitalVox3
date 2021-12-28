@@ -16,7 +16,7 @@ math::Color PBRSpecularMaterial::specularColor() {
     return std::any_cast<math::Color>(shaderData.getData(PBRSpecularMaterial::_specularColorProp));
 }
 
-void PBRSpecularMaterial::setSpecularColor(const math::Color& newValue) {
+void PBRSpecularMaterial::setSpecularColor(const math::Color &newValue) {
     shaderData.setData(PBRSpecularMaterial::_specularColorProp, newValue);
 }
 
@@ -28,11 +28,11 @@ void PBRSpecularMaterial::setGlossiness(float newValue) {
     shaderData.setData(PBRSpecularMaterial::_glossinessProp, newValue);
 }
 
-id<MTLTexture> PBRSpecularMaterial::specularGlossinessTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRSpecularMaterial::_specularGlossinessTextureProp));
+id <MTLTexture> PBRSpecularMaterial::specularGlossinessTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(PBRSpecularMaterial::_specularGlossinessTextureProp));
 }
 
-void PBRSpecularMaterial::setSpecularGlossinessTexture(id<MTLTexture> newValue) {
+void PBRSpecularMaterial::setSpecularGlossinessTexture(id <MTLTexture> newValue) {
     shaderData.setData(PBRSpecularMaterial::_specularGlossinessTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_SPECULARGLOSSINESSMAP);
@@ -41,8 +41,8 @@ void PBRSpecularMaterial::setSpecularGlossinessTexture(id<MTLTexture> newValue) 
     }
 }
 
-PBRSpecularMaterial::PBRSpecularMaterial(Engine* engine):
-PBRBaseMaterial(engine){
+PBRSpecularMaterial::PBRSpecularMaterial(Engine *engine) :
+PBRBaseMaterial(engine) {
     shaderData.setData(PBRSpecularMaterial::_specularColorProp, math::Color(1, 1, 1, 1));
     shaderData.setData(PBRSpecularMaterial::_glossinessProp, 1.f);
 }

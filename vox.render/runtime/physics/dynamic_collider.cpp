@@ -11,9 +11,9 @@
 
 namespace vox {
 namespace physics {
-DynamicCollider::DynamicCollider(Entity* entity):
+DynamicCollider::DynamicCollider(Entity *entity) :
 Collider(entity) {
-    const auto& p = entity->transform->worldPosition();
+    const auto &p = entity->transform->worldPosition();
     auto q = entity->transform->worldRotationQuaternion();
     q = Normalize(q);
     
@@ -38,20 +38,20 @@ void DynamicCollider::setAngularDamping(float newValue) {
 }
 
 math::Float3 DynamicCollider::linearVelocity() {
-    const auto& vel = static_cast<PxRigidDynamic *>(_nativeActor)->getLinearVelocity();
+    const auto &vel = static_cast<PxRigidDynamic *>(_nativeActor)->getLinearVelocity();
     return math::Float3(vel.x, vel.y, vel.z);
 }
 
-void DynamicCollider::setLinearVelocity(const math::Float3& newValue) {
+void DynamicCollider::setLinearVelocity(const math::Float3 &newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setLinearVelocity(PxVec3(newValue.x, newValue.y, newValue.z));
 }
 
 math::Float3 DynamicCollider::angularVelocity() {
-    const auto& vel = static_cast<PxRigidDynamic *>(_nativeActor)->getAngularVelocity();
+    const auto &vel = static_cast<PxRigidDynamic *>(_nativeActor)->getAngularVelocity();
     return math::Float3(vel.x, vel.y, vel.z);
 }
 
-void DynamicCollider::setAngularVelocity(const math::Float3& newValue) {
+void DynamicCollider::setAngularVelocity(const math::Float3 &newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setAngularVelocity(PxVec3(newValue.x, newValue.y, newValue.z));
 }
 
@@ -64,26 +64,26 @@ void DynamicCollider::setMass(float newValue) {
 }
 
 math::Transform DynamicCollider::centerOfMass() {
-    const auto& pose = static_cast<PxRigidDynamic *>(_nativeActor)->getCMassLocalPose();
+    const auto &pose = static_cast<PxRigidDynamic *>(_nativeActor)->getCMassLocalPose();
     math::Transform trans;
     trans.translation = math::Float3(pose.p.x, pose.p.y, pose.p.z);
     trans.rotation = math::Quaternion(pose.q.x, pose.q.y, pose.q.z, pose.q.w);
     return trans;
 }
 
-void DynamicCollider::setCenterOfMass(const math::Transform& newValue) {
-    const auto& p = newValue.translation;
-    const auto& q = newValue.rotation;
+void DynamicCollider::setCenterOfMass(const math::Transform &newValue) {
+    const auto &p = newValue.translation;
+    const auto &q = newValue.rotation;
     static_cast<PxRigidDynamic *>(_nativeActor)->setCMassLocalPose(PxTransform(PxVec3(p.x, p.y, p.z),
                                                                                PxQuat(q.x, q.y, q.z, q.w)));
 }
 
 math::Float3 DynamicCollider::inertiaTensor() {
-    const auto& tensor = static_cast<PxRigidDynamic *>(_nativeActor)->getMassSpaceInertiaTensor();
+    const auto &tensor = static_cast<PxRigidDynamic *>(_nativeActor)->getMassSpaceInertiaTensor();
     return math::Float3(tensor.x, tensor.y, tensor.z);
 }
 
-void DynamicCollider::setInertiaTensor(const math::Float3& newValue) {
+void DynamicCollider::setInertiaTensor(const math::Float3 &newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setMassSpaceInertiaTensor(PxVec3(newValue.x, newValue.y, newValue.z));
 }
 
@@ -169,17 +169,17 @@ void DynamicCollider::setFreezeRotation(bool newValue) {
     static_cast<PxRigidDynamic *>(_nativeActor)->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::Enum::eLOCK_ANGULAR_Z, true);
 }
 
-void DynamicCollider::applyForce(const math::Float3& force) {
+void DynamicCollider::applyForce(const math::Float3 &force) {
     static_cast<PxRigidDynamic *>(_nativeActor)->addForce(PxVec3(force.x, force.y, force.z));
 }
 
-void DynamicCollider::applyTorque(const math::Float3& torque) {
+void DynamicCollider::applyTorque(const math::Float3 &torque) {
     static_cast<PxRigidDynamic *>(_nativeActor)->addTorque(PxVec3(torque.x, torque.y, torque.z));
 }
 
-void DynamicCollider::setKinematicTarget(const math::Transform& pose) {
-    const auto& p = pose.translation;
-    const auto& q = pose.rotation;
+void DynamicCollider::setKinematicTarget(const math::Transform &pose) {
+    const auto &p = pose.translation;
+    const auto &q = pose.rotation;
     static_cast<PxRigidDynamic *>(_nativeActor)->setKinematicTarget(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
 }
 
@@ -192,7 +192,7 @@ void DynamicCollider::wakeUp() {
 }
 
 void DynamicCollider::_onLateUpdate() {
-    const auto& transform = entity()->transform;
+    const auto &transform = entity()->transform;
     
     PxTransform pose = _nativeActor->getGlobalPose();
     transform->setWorldPosition(Float3(pose.p.x, pose.p.y, pose.p.z));

@@ -11,8 +11,9 @@
 #include <iostream>
 
 namespace vox {
-SceneAnimator::SceneAnimator(Entity* entity):
-Component(entity) {}
+SceneAnimator::SceneAnimator(Entity *entity) :
+Component(entity) {
+}
 
 void SceneAnimator::update(float deltaTime) {
     if (_activeAnimation != -1) {
@@ -20,12 +21,12 @@ void SceneAnimator::update(float deltaTime) {
     }
 }
 
-void SceneAnimator::addAnimationClip(std::unique_ptr<SceneAnimationClip>&& clip) {
+void SceneAnimator::addAnimationClip(std::unique_ptr<SceneAnimationClip> &&clip) {
     _animationClips.emplace_back(std::move(clip));
 }
 
-void SceneAnimator::play(const std::string& name) {
-    auto iter = std::find_if(_animationClips.begin(), _animationClips.end(), [&](const auto& u){
+void SceneAnimator::play(const std::string &name) {
+    auto iter = std::find_if(_animationClips.begin(), _animationClips.end(), [&](const auto &u) {
         return u->name() == name;
     });
     if (iter != _animationClips.end()) {

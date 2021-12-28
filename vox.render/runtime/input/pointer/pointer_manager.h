@@ -15,7 +15,8 @@
 
 namespace vox {
 namespace input {
-struct PointerEvent{};
+struct PointerEvent {
+};
 
 /**
  * Pointer Manager.
@@ -26,7 +27,7 @@ public:
      * Create a PointerManager.
      * @param engine - The current engine instance
      */
-    PointerManager(Engine* engine);
+    PointerManager(Engine *engine);
     
 private:
     void _update();
@@ -43,17 +44,17 @@ private:
     
     void _updatePointer(size_t pointerId, float x, float y, PointerPhase::Enum phase);
     
-    void _handlePointerEvent(std::vector<PointerEvent>& nativeEvents);
+    void _handlePointerEvent(std::vector<PointerEvent> &nativeEvents);
     
-    Entity* _pointerRayCast();
+    Entity *_pointerRayCast();
     
     void _firePointerDrag();
     
-    void _firePointerExitAndEnter(Entity* rayCastEntity);
+    void _firePointerExitAndEnter(Entity *rayCastEntity);
     
-    void _firePointerDown(Entity* rayCastEntity);
+    void _firePointerDown(Entity *rayCastEntity);
     
-    void _firePointerUpAndClick(Entity* rayCastEntity);
+    void _firePointerUpAndClick(Entity *rayCastEntity);
     
     
 private:
@@ -66,20 +67,20 @@ private:
             Leave
         };
     };
-
+    
     std::vector<Pointer> _pointers;
     bool _multiPointerEnabled = true;
     
-    Engine* _engine;
-    Canvas* _canvas;
+    Engine *_engine;
+    Canvas *_canvas;
     std::vector<PointerEvent> _nativeEvents;
     std::array<Pointer, 11> _pointerPool{};
     std::vector<PointerKeyEvent::Enum> _keyEventList;
     size_t _keyEventCount;
     bool _needOverallPointers = false;
     math::Float2 _currentPosition;
-    Entity* _currentPressedEntity;
-    Entity* _currentEnteredEntity;
+    Entity *_currentPressedEntity;
+    Entity *_currentEnteredEntity;
 };
 
 }

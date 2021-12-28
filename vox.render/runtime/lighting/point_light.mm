@@ -10,7 +10,7 @@
 #include "../scene.h"
 
 namespace vox {
-PointLight::PointLight(Entity* entity):
+PointLight::PointLight(Entity *entity) :
 Light(entity) {
 }
 
@@ -22,7 +22,7 @@ void PointLight::_onDisable() {
     scene()->light_manager.detachPointLight(this);
 }
 
-void PointLight::_updateShaderData(PointLightData& shaderData) {
+void PointLight::_updateShaderData(PointLightData &shaderData) {
     shaderData.color = simd_make_float3(color.r * intensity, color.g * intensity, color.b * intensity);
     auto position = entity()->transform->worldPosition();
     shaderData.position = simd_make_float3(position.x, position.y, position.z);

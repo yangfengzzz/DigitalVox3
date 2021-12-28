@@ -16,15 +16,15 @@ namespace vox {
  */
 struct RenderElement {
     /** Render component. */
-    Renderer* component;
+    Renderer *component;
     /** Mesh. */
     MeshPtr mesh;
     /** Sub mesh. */
-    const SubMesh* subMesh;
+    const SubMesh *subMesh;
     /** Material. */
     MaterialPtr material;
-
-    RenderElement(Renderer* component, MeshPtr mesh, const SubMesh* subMesh, MaterialPtr material);
+    
+    RenderElement(Renderer *component, MeshPtr mesh, const SubMesh *subMesh, MaterialPtr material);
 };
 
 }

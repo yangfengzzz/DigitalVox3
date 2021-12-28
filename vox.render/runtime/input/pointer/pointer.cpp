@@ -9,7 +9,7 @@
 
 namespace vox {
 namespace input {
-Pointer::Pointer(size_t id):id(id) {
+Pointer::Pointer(size_t id) : id(id) {
 }
 
 }

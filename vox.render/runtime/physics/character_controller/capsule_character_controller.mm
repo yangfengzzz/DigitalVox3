@@ -10,11 +10,11 @@
 
 namespace vox {
 namespace physics {
-CapsuleCharacterController::CapsuleCharacterController(Entity* entity):
-CharacterController(entity){
+CapsuleCharacterController::CapsuleCharacterController(Entity *entity) :
+CharacterController(entity) {
 }
 
-void CapsuleCharacterController::setDesc(const PxCapsuleControllerDesc& desc) {
+void CapsuleCharacterController::setDesc(const PxCapsuleControllerDesc &desc) {
     _nativeController = engine()->_physicsManager._nativeCharacterControllerManager->createController(desc);
 }
 

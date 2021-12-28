@@ -40,13 +40,13 @@ struct DiffuseMode {
  */
 class AmbientLight {
 public:
-    AmbientLight(Scene* value);
+    AmbientLight(Scene *value);
     
     /**
      * Diffuse mode of ambient light.
      */
     DiffuseMode::Enum diffuseMode();
-
+    
     void setDiffuseMode(DiffuseMode::Enum value);
     
     /**
@@ -54,30 +54,30 @@ public:
      * @remarks Effective when diffuse reflection mode is `DiffuseMode.SolidColor`.
      */
     math::Color diffuseSolidColor();
-
-    void setDiffuseSolidColor(const math::Color& value);
+    
+    void setDiffuseSolidColor(const math::Color &value);
     
     /**
      * Diffuse reflection spherical harmonics 3.
      * @remarks Effective when diffuse reflection mode is `DiffuseMode.SphericalHarmonics`.
      */
-    const math::SphericalHarmonics3& diffuseSphericalHarmonics();
-
-    void setDiffuseSphericalHarmonics(const math::SphericalHarmonics3& value);
+    const math::SphericalHarmonics3 &diffuseSphericalHarmonics();
+    
+    void setDiffuseSphericalHarmonics(const math::SphericalHarmonics3 &value);
     
     /**
      * Diffuse reflection texture.
      * @remarks This texture must be baked from MetalLoader::createIrradianceTexture
      */
-    id<MTLTexture> diffuseTexture();
-
-    void setDiffuseTexture(id<MTLTexture> value);
+    id <MTLTexture> diffuseTexture();
+    
+    void setDiffuseTexture(id <MTLTexture> value);
     
     /**
      * Diffuse reflection intensity.
      */
     float diffuseIntensity();
-
+    
     void setDiffuseIntensity(float value);
     
 public:
@@ -85,22 +85,22 @@ public:
      * Whether to decode from specularTexture with RGBM format.
      */
     bool specularTextureDecodeRGBM();
-
+    
     void setSpecularTextureDecodeRGBM(bool value);
     
     /**
      * Specular reflection texture.
      * @remarks This texture must be baked from MetalLoader::createSpecularTexture
      */
-    id<MTLTexture> specularTexture();
-
-    void setSpecularTexture(id<MTLTexture> value);
+    id <MTLTexture> specularTexture();
+    
+    void setSpecularTexture(id <MTLTexture> value);
     
     /**
      * Specular reflection intensity.
      */
     float specularIntensity();
-
+    
     void setSpecularIntensity(float value);
     
 public:
@@ -108,12 +108,12 @@ public:
      * brdf loopup texture.
      * @remarks This texture must be baked from MetalLoader::createBRDFLookupTable
      */
-    id<MTLTexture> brdfTexture();
-
-    void setBRDFTexture(id<MTLTexture> value);
+    id <MTLTexture> brdfTexture();
     
-private:    
-    std::array<float, 27> _preComputeSH(const math::SphericalHarmonics3& sh);
+    void setBRDFTexture(id <MTLTexture> value);
+    
+private:
+    std::array<float, 27> _preComputeSH(const math::SphericalHarmonics3 &sh);
     
     static ShaderProperty _envMapProperty;
     static ShaderProperty _diffuseSHProperty;
@@ -121,18 +121,18 @@ private:
     static ShaderProperty _specularTextureProperty;
     static ShaderProperty _brdfTextureProperty;
     
-    Scene* _scene;
+    Scene *_scene;
     EnvMapLight _envMapLight;
-
+    
     DiffuseMode::Enum _diffuseMode = DiffuseMode::Enum::SolidColor;
     math::SphericalHarmonics3 _diffuseSphericalHarmonics;
     std::array<float, 27> _shArray;
-    id<MTLTexture> _diffuseTexture = nullptr;
-
-    bool _specularTextureDecodeRGBM = false;
-    id<MTLTexture> _specularReflection = nullptr;
+    id <MTLTexture> _diffuseTexture = nullptr;
     
-    id<MTLTexture> _brdfLutTexture = nullptr;
+    bool _specularTextureDecodeRGBM = false;
+    id <MTLTexture> _specularReflection = nullptr;
+    
+    id <MTLTexture> _brdfLutTexture = nullptr;
 };
 
 }

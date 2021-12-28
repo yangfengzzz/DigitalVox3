@@ -26,16 +26,16 @@ float SkyBoxMaterial::RGBMDecodeFactor() {
 void SkyBoxMaterial::setRGBMDecodeFactor(float value) {
     _decodeParam.y = value;
 }
-    
-id<MTLTexture> SkyBoxMaterial::textureCubeMap() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(SkyBoxMaterial::_skyboxTextureProp));
+
+id <MTLTexture> SkyBoxMaterial::textureCubeMap() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(SkyBoxMaterial::_skyboxTextureProp));
 }
 
-void SkyBoxMaterial::setTextureCubeMap(id<MTLTexture> v) {
+void SkyBoxMaterial::setTextureCubeMap(id <MTLTexture> v) {
     shaderData.setData(SkyBoxMaterial::_skyboxTextureProp, v);
 }
 
-SkyBoxMaterial::SkyBoxMaterial(Engine* engine):
+SkyBoxMaterial::SkyBoxMaterial(Engine *engine) :
 Material(engine, Shader::find("skybox")) {
     renderState.rasterState.cullMode = MTLCullModeBack;
     renderState.depthState.compareFunction = MTLCompareFunctionLessEqual;

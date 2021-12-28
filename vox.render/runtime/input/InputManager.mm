@@ -10,11 +10,11 @@
 
 namespace vox {
 namespace input {
-InputManager::InputManager(Engine* engine):
-_pointerManager(PointerManager(engine)){
+InputManager::InputManager(Engine *engine) :
+_pointerManager(PointerManager(engine)) {
 }
 
-std::vector<Pointer>& InputManager::pointers() {
+std::vector<Pointer> &InputManager::pointers() {
     return _pointerManager._pointers;
 }
 

@@ -12,15 +12,15 @@
 
 namespace vox {
 namespace physics {
-class BoxColliderShape:public ColliderShape {
+class BoxColliderShape : public ColliderShape {
 public:
     BoxColliderShape();
     
     math::Float3 size();
     
-    void setSize(const math::Float3& value);
+    void setSize(const math::Float3 &value);
     
-    void setWorldScale(const math::Float3& scale) override;
+    void setWorldScale(const math::Float3 &scale) override;
     
 private:
     math::Float3 _half = math::Float3(0.5, 0.5, 0.5);

@@ -21,6 +21,7 @@ public:
     
 private:
     friend class UpdateFlag;
+    
     std::vector<UpdateFlag *> _updateFlags;
 };
 

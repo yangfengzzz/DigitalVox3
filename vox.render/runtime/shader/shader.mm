@@ -13,17 +13,17 @@ namespace vox {
 std::unordered_map<std::string, std::unique_ptr<Shader>> Shader::_shaderMap = {};
 std::unordered_map<std::string, ShaderProperty> Shader::_propertyNameMap = {};
 
-Shader::Shader(const std::string& name,
-               const std::string& vertexSource,
-               const std::string& fragmentSource,
-               const std::string& deferredFragmentSource):
+Shader::Shader(const std::string &name,
+               const std::string &vertexSource,
+               const std::string &fragmentSource,
+               const std::string &deferredFragmentSource) :
 name(name),
 _vertexSource(vertexSource),
 _fragmentSource(fragmentSource),
-_deferredFragmentSource(deferredFragmentSource){
+_deferredFragmentSource(deferredFragmentSource) {
 }
 
-ShaderProgram* Shader::findShaderProgram(Engine* engine, const ShaderMacroCollection& macroCollection, bool isDeferred) {
+ShaderProgram *Shader::findShaderProgram(Engine *engine, const ShaderMacroCollection &macroCollection, bool isDeferred) {
     if (isDeferred) {
         return engine->_hardwareRenderer.resouceCache.request_shader_module(_vertexSource, _deferredFragmentSource, macroCollection);
     } else {
@@ -31,10 +31,10 @@ ShaderProgram* Shader::findShaderProgram(Engine* engine, const ShaderMacroCollec
     }
 }
 
-Shader* Shader::create(const std::string& name,
-                       const std::string& vertexSource,
-                       const std::string& fragmentSource,
-                       const std::string& deferredFragmentSource) {
+Shader *Shader::create(const std::string &name,
+                       const std::string &vertexSource,
+                       const std::string &fragmentSource,
+                       const std::string &deferredFragmentSource) {
     auto iter = Shader::_shaderMap.find(name);
     
     if (iter != Shader::_shaderMap.end()) {
@@ -46,7 +46,7 @@ Shader* Shader::create(const std::string& name,
     return shaderPtr;
 }
 
-Shader* Shader::find(const std::string& name) {
+Shader *Shader::find(const std::string &name) {
     auto iter = Shader::_shaderMap.find(name);
     if (iter != Shader::_shaderMap.end()) {
         return iter->second.get();
@@ -56,7 +56,7 @@ Shader* Shader::find(const std::string& name) {
 }
 
 //MARK: - Property
-std::optional<ShaderProperty> Shader::getPropertyByName(const std::string& name) {
+std::optional<ShaderProperty> Shader::getPropertyByName(const std::string &name) {
     auto iter = Shader::_propertyNameMap.find(name);
     if (iter != Shader::_propertyNameMap.end()) {
         return iter->second;
@@ -65,7 +65,7 @@ std::optional<ShaderProperty> Shader::getPropertyByName(const std::string& name)
     }
 }
 
-ShaderProperty Shader::createProperty(const std::string& name, ShaderDataGroup::Enum group) {
+ShaderProperty Shader::createProperty(const std::string &name, ShaderDataGroup::Enum group) {
     auto iter = Shader::_propertyNameMap.find(name);
     if (iter != Shader::_propertyNameMap.end()) {
         return iter->second;
@@ -76,7 +76,7 @@ ShaderProperty Shader::createProperty(const std::string& name, ShaderDataGroup::
     }
 }
 
-std::optional<ShaderDataGroup::Enum> Shader::getShaderPropertyGroup(const std::string& propertyName) {
+std::optional<ShaderDataGroup::Enum> Shader::getShaderPropertyGroup(const std::string &propertyName) {
     auto iter = Shader::_propertyNameMap.find(propertyName);
     if (iter != Shader::_propertyNameMap.end()) {
         return iter->second.group;

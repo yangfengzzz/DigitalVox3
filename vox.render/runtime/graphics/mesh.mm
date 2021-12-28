@@ -8,14 +8,14 @@
 #include "mesh.h"
 
 namespace vox {
-Mesh::Mesh(Engine* engine, const std::string&  name):EngineObject(engine), name(name) {
+Mesh::Mesh(Engine *engine, const std::string &name) : EngineObject(engine), name(name) {
 }
 
-SubMesh* Mesh::subMesh(size_t index) {
+SubMesh *Mesh::subMesh(size_t index) {
     return &_subMeshes[index];
 }
 
-const std::vector<SubMesh>& Mesh::subMeshes() const {
+const std::vector<SubMesh> &Mesh::subMeshes() const {
     return _subMeshes;
 }
 
@@ -41,7 +41,7 @@ void Mesh::_setVertexBuffer(size_t index, MeshBuffer buffer) {
     _vertexBuffer.insert(_vertexBuffer.begin() + index, buffer);
 }
 
-MDLVertexDescriptor* Mesh::vertexDescriptor() {
+MDLVertexDescriptor *Mesh::vertexDescriptor() {
     return _vertexDescriptor;
 }
 

@@ -16,19 +16,19 @@ namespace vox {
 /**
  * Particle Renderer Component.
  */
-class ParticleRenderer :public Renderer {
+class ParticleRenderer : public Renderer {
 public:
-    ParticleRenderer(Entity* entity);
+    ParticleRenderer(Entity *entity);
     
     void setParticleSystemSolver(const geometry::ParticleSystemSolver3Ptr solver);
     
     void update(float deltaTime) override;
     
-    void _render(std::vector<RenderElement>& opaqueQueue,
-                 std::vector<RenderElement>& alphaTestQueue,
-                 std::vector<RenderElement>& transparentQueue) override;
+    void _render(std::vector<RenderElement> &opaqueQueue,
+                 std::vector<RenderElement> &alphaTestQueue,
+                 std::vector<RenderElement> &transparentQueue) override;
     
-    void _updateBounds(BoundingBox& worldBounds) override;
+    void _updateBounds(BoundingBox &worldBounds) override;
     
     //!
     //! \brief      Returns the particle system data.
@@ -51,11 +51,11 @@ private:
     MetalLoaderPtr metalResourceLoader;
     
     size_t _numberOfVertex = 0;
-    id<MTLBuffer> _vertexBuffers;
-    id<MTLBuffer> _indexBuffers;
+    id <MTLBuffer> _vertexBuffers;
+    id <MTLBuffer> _indexBuffers;
     
     size_t _stride;
-    id<MTLBuffer> _renderBuffers;
+    id <MTLBuffer> _renderBuffers;
     std::vector<float> _renderRelatedInfo;
 };
 

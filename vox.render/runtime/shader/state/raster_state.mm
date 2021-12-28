@@ -9,9 +9,9 @@
 #include "../../rhi-metal/metal_renderer.h"
 
 namespace vox {
-void RasterState::_platformApply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                                 MTLDepthStencilDescriptor* depthStencilDescriptor,
-                                 MetalRenderer* hardwareRenderer) {
+void RasterState::_platformApply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                                 MTLDepthStencilDescriptor *depthStencilDescriptor,
+                                 MetalRenderer *hardwareRenderer) {
     bool cullFaceEnable = cullMode != MTLCullModeNone;
     
     // apply front face.

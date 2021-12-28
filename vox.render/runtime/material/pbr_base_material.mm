@@ -24,15 +24,15 @@ math::Color PBRBaseMaterial::baseColor() {
     return std::any_cast<math::Color>(shaderData.getData(PBRBaseMaterial::_baseColorProp));
 }
 
-void PBRBaseMaterial::setBaseColor(const math::Color& newValue) {
+void PBRBaseMaterial::setBaseColor(const math::Color &newValue) {
     shaderData.setData(PBRBaseMaterial::_baseColorProp, newValue);
 }
 
-id<MTLTexture> PBRBaseMaterial::baseTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRBaseMaterial::_baseTextureProp));
+id <MTLTexture> PBRBaseMaterial::baseTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(PBRBaseMaterial::_baseTextureProp));
 }
 
-void PBRBaseMaterial::setBaseTexture(id<MTLTexture> newValue) {
+void PBRBaseMaterial::setBaseTexture(id <MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_baseTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_BASE_COLORMAP);
@@ -41,11 +41,11 @@ void PBRBaseMaterial::setBaseTexture(id<MTLTexture> newValue) {
     }
 }
 
-id<MTLTexture> PBRBaseMaterial::normalTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRBaseMaterial::_normalTextureProp));
+id <MTLTexture> PBRBaseMaterial::normalTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(PBRBaseMaterial::_normalTextureProp));
 }
 
-void PBRBaseMaterial::setNormalTexture(id<MTLTexture> newValue) {
+void PBRBaseMaterial::setNormalTexture(id <MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_normalTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_NORMAL_TEXTURE);
@@ -66,15 +66,15 @@ math::Color PBRBaseMaterial::emissiveColor() {
     return std::any_cast<math::Color>(shaderData.getData(PBRBaseMaterial::_emissiveColorProp));
 }
 
-void PBRBaseMaterial::setEmissiveColor(const math::Color& newValue) {
+void PBRBaseMaterial::setEmissiveColor(const math::Color &newValue) {
     shaderData.setData(PBRBaseMaterial::_emissiveColorProp, newValue);
 }
 
-id<MTLTexture> PBRBaseMaterial::emissiveTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRBaseMaterial::_emissiveTextureProp));
+id <MTLTexture> PBRBaseMaterial::emissiveTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(PBRBaseMaterial::_emissiveTextureProp));
 }
 
-void PBRBaseMaterial::setEmissiveTexture(id<MTLTexture> newValue) {
+void PBRBaseMaterial::setEmissiveTexture(id <MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_emissiveTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_EMISSIVEMAP);
@@ -83,11 +83,11 @@ void PBRBaseMaterial::setEmissiveTexture(id<MTLTexture> newValue) {
     }
 }
 
-id<MTLTexture> PBRBaseMaterial::occlusionTexture() {
-    return std::any_cast<id<MTLTexture>>(shaderData.getData(PBRBaseMaterial::_occlusionTextureProp));
+id <MTLTexture> PBRBaseMaterial::occlusionTexture() {
+    return std::any_cast<id <MTLTexture>>(shaderData.getData(PBRBaseMaterial::_occlusionTextureProp));
 }
 
-void PBRBaseMaterial::setOcclusionTexture(id<MTLTexture> newValue) {
+void PBRBaseMaterial::setOcclusionTexture(id <MTLTexture> newValue) {
     shaderData.setData(PBRBaseMaterial::_occlusionTextureProp, newValue);
     if (newValue) {
         shaderData.enableMacro(HAS_OCCLUSIONMAP);
@@ -108,19 +108,19 @@ math::Float4 PBRBaseMaterial::tilingOffset() {
     return std::any_cast<math::Float4>(shaderData.getData(PBRBaseMaterial::_tilingOffsetProp));
 }
 
-void PBRBaseMaterial::setTilingOffset(const math::Float4& newValue) {
+void PBRBaseMaterial::setTilingOffset(const math::Float4 &newValue) {
     shaderData.setData(PBRBaseMaterial::_tilingOffsetProp, newValue);
 }
 
-PBRBaseMaterial::PBRBaseMaterial(Engine* engine):
-BaseMaterial(engine, Shader::find("pbr")){
+PBRBaseMaterial::PBRBaseMaterial(Engine *engine) :
+BaseMaterial(engine, Shader::find("pbr")) {
     shaderData.enableMacro(NEED_WORLDPOS);
     shaderData.enableMacro(NEED_TILINGOFFSET);
-
+    
     shaderData.setData(PBRBaseMaterial::_baseColorProp, math::Color(1, 1, 1, 1));
     shaderData.setData(PBRBaseMaterial::_emissiveColorProp, math::Color(0, 0, 0, 1));
     shaderData.setData(PBRBaseMaterial::_tilingOffsetProp, math::Float4(1, 1, 0, 0));
-
+    
     shaderData.setData(PBRBaseMaterial::_normalTextureIntensityProp, 1.f);
     shaderData.setData(PBRBaseMaterial::_occlusionTextureIntensityProp, 1.f);
 }

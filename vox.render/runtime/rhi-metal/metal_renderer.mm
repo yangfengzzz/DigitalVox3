@@ -13,7 +13,7 @@
 #include "../../gui/imgui_impl_metal.h"
 
 namespace vox {
-MetalRenderer::MetalRenderer(Canvas* canvas):
+MetalRenderer::MetalRenderer(Canvas *canvas) :
 _canvas(canvas),
 resouceCache(this) {
     _device = MTLCreateSystemDefaultDevice();
@@ -33,7 +33,7 @@ resouceCache(this) {
     nswin.contentView.layer = _layer;
     nswin.contentView.wantsLayer = YES;
     
-    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+    auto createFrameBuffer = [&](GLFWwindow *window, int width, int height) {
         int buffer_width, buffer_height;
         glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
         _layer.drawableSize = CGSizeMake(buffer_width, buffer_height);
@@ -163,8 +163,8 @@ void MetalRenderer::endRenderPass() {
     [_renderEncoder endEncoding];
 }
 
-void MetalRenderer::pushDebugGroup(const std::string& groupName) {
-    [_renderEncoder pushDebugGroup:[[NSString alloc]initWithUTF8String:groupName.c_str()]];
+void MetalRenderer::pushDebugGroup(const std::string &groupName) {
+    [_renderEncoder pushDebugGroup:[[NSString alloc] initWithUTF8String:groupName.c_str()]];
 }
 
 void MetalRenderer::popDebugGroup() {
@@ -172,17 +172,17 @@ void MetalRenderer::popDebugGroup() {
 }
 
 //MARK: - MTLKit Loader
-MTKMeshBufferAllocator* MetalRenderer::createBufferAllocator() {
+MTKMeshBufferAllocator *MetalRenderer::createBufferAllocator() {
     // Create a MetalKit mesh buffer allocator so that ModelIO will load mesh data directly into
     // Metal buffers accessible by the GPU
     return [[MTKMeshBufferAllocator alloc] initWithDevice:_device];
 }
 
-MTKMesh* MetalRenderer::convertFrom(MDLMesh *modelIOMesh) {
-    NSError* error;
+MTKMesh *MetalRenderer::convertFrom(MDLMesh *modelIOMesh) {
+    NSError *error;
     // Create the metalKit mesh which will contain the Metal buffer(s) with the mesh's vertex data
     //   and submeshes with info to draw the mesh
-    MTKMesh* metalKitMesh = [[MTKMesh alloc] initWithMesh:modelIOMesh
+    MTKMesh *metalKitMesh = [[MTKMesh alloc] initWithMesh:modelIOMesh
                                                    device:_device
                                                     error:&error];
     if (error != nil) {
@@ -192,17 +192,17 @@ MTKMesh* MetalRenderer::convertFrom(MDLMesh *modelIOMesh) {
 }
 
 //MARK: - Blit Encoder
-void MetalRenderer::synchronizeResource(id<MTLResource> resource) {
+void MetalRenderer::synchronizeResource(id <MTLResource> resource) {
     auto blit = [_commandBuffer blitCommandEncoder];
     [blit synchronizeResource:resource];
     [blit endEncoding];
 }
 
-id<MTLTexture> MetalRenderer::createTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
-                                                 const std::vector<id<MTLTexture>>::iterator& texturesEnd,
-                                                 id<MTLTexture> packedTextures) {
+id <MTLTexture> MetalRenderer::createTextureArray(const std::vector<id <MTLTexture>>::iterator &texturesBegin,
+                                                  const std::vector<id <MTLTexture>>::iterator &texturesEnd,
+                                                  id <MTLTexture> packedTextures) {
     if (packedTextures == nullptr || packedTextures.arrayLength != texturesEnd - texturesBegin) {
-        MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+        MTLTextureDescriptor *descriptor = [[MTLTextureDescriptor alloc] init];
         descriptor.textureType = MTLTextureType2DArray;
         descriptor.pixelFormat = (*texturesBegin).pixelFormat;
         descriptor.width = (*texturesBegin).width;
@@ -214,7 +214,7 @@ id<MTLTexture> MetalRenderer::createTextureArray(const std::vector<id<MTLTexture
     }
     
     auto blitEncoder = [_commandBuffer blitCommandEncoder];
-    MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
+    MTLOrigin origin = MTLOrigin{.x =  0, .y =  0, .z =  0};
     MTLSize size = MTLSize{.width =  packedTextures.width,
         .height =  packedTextures.height, .depth = 1};
     for (auto iter = texturesBegin; iter < texturesEnd; iter++) {
@@ -225,11 +225,11 @@ id<MTLTexture> MetalRenderer::createTextureArray(const std::vector<id<MTLTexture
     return packedTextures;
 }
 
-id<MTLTexture> MetalRenderer::createCubeTextureArray(const std::vector<id<MTLTexture>>::iterator& texturesBegin,
-                                                     const std::vector<id<MTLTexture>>::iterator& texturesEnd,
-                                                     id<MTLTexture> packedTextures) {
+id <MTLTexture> MetalRenderer::createCubeTextureArray(const std::vector<id <MTLTexture>>::iterator &texturesBegin,
+                                                      const std::vector<id <MTLTexture>>::iterator &texturesEnd,
+                                                      id <MTLTexture> packedTextures) {
     if (packedTextures == nullptr || packedTextures.arrayLength != texturesEnd - texturesBegin) {
-        MTLTextureDescriptor* descriptor = [[MTLTextureDescriptor alloc]init];
+        MTLTextureDescriptor *descriptor = [[MTLTextureDescriptor alloc] init];
         descriptor.textureType = MTLTextureTypeCubeArray;
         descriptor.pixelFormat = (*texturesBegin).pixelFormat;
         descriptor.width = (*texturesBegin).width;
@@ -252,10 +252,10 @@ id<MTLTexture> MetalRenderer::createCubeTextureArray(const std::vector<id<MTLTex
     return packedTextures;
 }
 
-id<MTLTexture> MetalRenderer::createAtlas(const std::array<id<MTLTexture>, 4>& textures,
-                                          id<MTLTexture> packedTextures) {
+id <MTLTexture> MetalRenderer::createAtlas(const std::array<id <MTLTexture>, 4> &textures,
+                                           id <MTLTexture> packedTextures) {
     auto blitEncoder = [_commandBuffer blitCommandEncoder];
-    MTLOrigin origin = MTLOrigin{ .x =  0, .y =  0, .z =  0};
+    MTLOrigin origin = MTLOrigin{.x =  0, .y =  0, .z =  0};
     MTLOrigin sourceOrigin = origin;
     MTLSize sourceSize = MTLSize{.width =  textures[0].width,
         .height =  textures[0].height, .depth = 1};
@@ -277,8 +277,8 @@ id<MTLTexture> MetalRenderer::createAtlas(const std::array<id<MTLTexture>, 4>& t
     return packedTextures;
 }
 
-id<MTLTexture> MetalRenderer::createCubeAtlas(const std::array<id<MTLTexture>, 6>& textures,
-                                              id<MTLTexture> packedTextures) {
+id <MTLTexture> MetalRenderer::createCubeAtlas(const std::array<id <MTLTexture>, 6> &textures,
+                                               id <MTLTexture> packedTextures) {
     auto blitEncoder = [_commandBuffer blitCommandEncoder];
     [blitEncoder copyFromTexture:textures[0] sourceSlice:0 sourceLevel:0
                        toTexture:packedTextures destinationSlice:0 destinationLevel:0 sliceCount:1 levelCount:1];
@@ -314,15 +314,15 @@ void MetalRenderer::setRenderPipelineState(RenderPipelineState *state) {
     [_renderEncoder setRenderPipelineState:state->handle()];
 }
 
-void MetalRenderer::setVertexBuffer(id<MTLBuffer> buffer, uint32_t offset, uint32_t index) {
+void MetalRenderer::setVertexBuffer(id <MTLBuffer> buffer, uint32_t offset, uint32_t index) {
     [_renderEncoder setVertexBuffer:buffer offset:offset atIndex:index];
 }
 
-void MetalRenderer::setFragmentTexture(id<MTLTexture> texture, uint32_t index) {
+void MetalRenderer::setFragmentTexture(id <MTLTexture> texture, uint32_t index) {
     [_renderEncoder setFragmentTexture:texture atIndex:index];
 }
 
-id <MTLDepthStencilState> MetalRenderer::createDepthStencilState(MTLDepthStencilDescriptor* depthStencilDescriptor) {
+id <MTLDepthStencilState> MetalRenderer::createDepthStencilState(MTLDepthStencilDescriptor *depthStencilDescriptor) {
     return [_device newDepthStencilStateWithDescriptor:depthStencilDescriptor];
 }
 
@@ -370,7 +370,7 @@ void MetalRenderer::drawPrimitive(MTLPrimitiveType primitiveType,
 }
 
 void MetalRenderer::drawIndexedPrimitives(MTLPrimitiveType primitiveType, size_t indexCount,
-                                          MTLIndexType indexType, id<MTLBuffer> indexBuffer,
+                                          MTLIndexType indexType, id <MTLBuffer> indexBuffer,
                                           size_t indexBufferOffset, size_t instanceCount) const {
     [_renderEncoder drawIndexedPrimitives:primitiveType indexCount:indexCount
                                 indexType:indexType indexBuffer:indexBuffer

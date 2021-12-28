@@ -10,7 +10,7 @@
 
 namespace vox {
 namespace physics {
-BoxColliderShape::BoxColliderShape():ColliderShape() {
+BoxColliderShape::BoxColliderShape() : ColliderShape() {
     auto halfExtent = _half * _pose.scale;
     _nativeGeometry = std::make_shared<PxBoxGeometry>(halfExtent.x, halfExtent.y, halfExtent.z);
     _nativeShape = PhysicsManager::_nativePhysics()->createShape(*_nativeGeometry, *_nativeMaterial, true);
@@ -22,17 +22,17 @@ math::Float3 BoxColliderShape::size() {
     return _half;
 }
 
-void BoxColliderShape::setSize(const math::Float3& size) {
+void BoxColliderShape::setSize(const math::Float3 &size) {
     _half = size * 0.5;
     auto halfExtent = _half * _pose.scale;
-    static_cast<PxBoxGeometry*>(_nativeGeometry.get())->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
+    static_cast<PxBoxGeometry *>(_nativeGeometry.get())->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
     _nativeShape->setGeometry(*_nativeGeometry);
 }
 
-void BoxColliderShape::setWorldScale(const math::Float3& scale) {
+void BoxColliderShape::setWorldScale(const math::Float3 &scale) {
     _pose.scale = scale;
     auto halfExtent = _half * _pose.scale;
-    static_cast<PxBoxGeometry*>(_nativeGeometry.get())->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
+    static_cast<PxBoxGeometry *>(_nativeGeometry.get())->halfExtents = PxVec3(halfExtent.x, halfExtent.y, halfExtent.z);
     _nativeShape->setGeometry(*_nativeGeometry);
 }
 

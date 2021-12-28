@@ -15,68 +15,77 @@ namespace vox {
 /**
  * PBR (Physically-Based Rendering) Material.
  */
-class PBRBaseMaterial: public BaseMaterial {
+class PBRBaseMaterial : public BaseMaterial {
 public:
     /**
      * Base color.
      */
     math::Color baseColor();
-    void setBaseColor(const math::Color& newValue);
+    
+    void setBaseColor(const math::Color &newValue);
     
     /**
      * Base texture.
      */
-    id<MTLTexture> baseTexture();
-    void setBaseTexture(id<MTLTexture> newValue);
+    id <MTLTexture> baseTexture();
+    
+    void setBaseTexture(id <MTLTexture> newValue);
     
     /**
      * Normal texture.
      */
-    id<MTLTexture> normalTexture();
-    void setNormalTexture(id<MTLTexture> newValue);
+    id <MTLTexture> normalTexture();
+    
+    void setNormalTexture(id <MTLTexture> newValue);
     
     /**
      * Normal texture intensity.
      */
     float normalTextureIntensity();
+    
     void setNormalTextureIntensity(float newValue);
     
     /**
      * Emissive color.
      */
     math::Color emissiveColor();
-    void setEmissiveColor(const math::Color& newValue);
+    
+    void setEmissiveColor(const math::Color &newValue);
     
     /**
      * Emissive texture.
      */
-    id<MTLTexture> emissiveTexture();
-    void setEmissiveTexture(id<MTLTexture> newValue);
+    id <MTLTexture> emissiveTexture();
+    
+    void setEmissiveTexture(id <MTLTexture> newValue);
     
     /**
      * Occlusion texture.
      */
-    id<MTLTexture> occlusionTexture();
-    void setOcclusionTexture(id<MTLTexture> newValue);
+    id <MTLTexture> occlusionTexture();
+    
+    void setOcclusionTexture(id <MTLTexture> newValue);
     
     /**
      * Occlusion texture intensity.
      */
     float occlusionTextureIntensity();
+    
     void setOcclusionTextureIntensity(float newValue);
     
     /**
      * Tiling and offset of main textures.
      */
     math::Float4 tilingOffset();
-    void setTilingOffset(const math::Float4& newValue);
+    
+    void setTilingOffset(const math::Float4 &newValue);
     
 protected:
     /**
      * Create a pbr base material instance.
      * @param engine - Engine to which the material belongs
      */
-    explicit PBRBaseMaterial(Engine* engine);
+    explicit PBRBaseMaterial(Engine *engine);
     
 private:
     static ShaderProperty _tilingOffsetProp;

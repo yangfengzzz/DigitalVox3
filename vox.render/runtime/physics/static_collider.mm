@@ -11,9 +11,9 @@
 
 namespace vox {
 namespace physics {
-StaticCollider::StaticCollider(Entity* entity):
+StaticCollider::StaticCollider(Entity *entity) :
 Collider(entity) {
-    const auto& p = entity->transform->worldPosition();
+    const auto &p = entity->transform->worldPosition();
     auto q = entity->transform->worldRotationQuaternion();
     q = Normalize(q);
     

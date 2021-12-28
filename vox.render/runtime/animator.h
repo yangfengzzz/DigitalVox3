@@ -19,13 +19,14 @@
 #include <string>
 
 namespace vox {
-class Animator: public Component {
+class Animator : public Component {
 public:
     // Sampler structure contains all the data required to sample a single
     // animation.
     struct AnimationClip {
         // Constructor, default initialization.
-        AnimationClip() : weight(1.f) {}
+        AnimationClip() : weight(1.f) {
+        }
         
         // Playback animation controller. This is a utility class that helps with
         // controlling animation playback time.
@@ -44,11 +45,11 @@ public:
         vox::vector<vox::math::SoaTransform> locals;
     };
     
-    Animator(Entity* entity);
+    Animator(Entity *entity);
     
-    bool addAnimationClip(const std::string& filename);
+    bool addAnimationClip(const std::string &filename);
     
-    bool addAnimationClip(const std::string& filename, int num_joints, int num_soa_joints);
+    bool addAnimationClip(const std::string &filename, int num_joints, int num_soa_joints);
     
     void update(float deltaTime);
     

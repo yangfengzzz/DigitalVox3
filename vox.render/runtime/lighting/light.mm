@@ -9,7 +9,7 @@
 #include "../scene.h"
 
 namespace vox {
-Light::Light(Entity* entity):
+Light::Light(Entity *entity) :
 Component(entity) {
 }
 

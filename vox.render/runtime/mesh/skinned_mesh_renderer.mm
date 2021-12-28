@@ -20,12 +20,12 @@
 #include <MetalKit/MetalKit.h>
 
 namespace vox {
-SkinnedMeshRenderer::SkinnedMeshRenderer(Entity* entity):
-Renderer(entity){
+SkinnedMeshRenderer::SkinnedMeshRenderer(Entity *entity) :
+Renderer(entity) {
     threshold_ = vox::animation::BlendingJob().threshold;
 }
 
-bool SkinnedMeshRenderer::loadSkeleton(const std::string& filename) {
+bool SkinnedMeshRenderer::loadSkeleton(const std::string &filename) {
     // Reading skeleton.
     if (!vox::offline::loader::LoadSkeleton(filename.c_str(), &skeleton_)) {
         return false;
@@ -44,8 +44,8 @@ bool SkinnedMeshRenderer::loadSkeleton(const std::string& filename) {
     return true;
 }
 
-bool SkinnedMeshRenderer::addSkinnedMesh(const std::string& skin_filename,
-                                         const std::string& skel_filename) {
+bool SkinnedMeshRenderer::addSkinnedMesh(const std::string &skin_filename,
+                                         const std::string &skel_filename) {
     if (models_.size() == 0) {
         loadSkeleton(skel_filename);
     }
@@ -123,9 +123,9 @@ void SkinnedMeshRenderer::update(float deltaTime) {
     }
 }
 
-void SkinnedMeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
-                                  std::vector<RenderElement>& alphaTestQueue,
-                                  std::vector<RenderElement>& transparentQueue) {
+void SkinnedMeshRenderer::_render(std::vector<RenderElement> &opaqueQueue,
+                                  std::vector<RenderElement> &alphaTestQueue,
+                                  std::vector<RenderElement> &transparentQueue) {
     // Builds skinning matrices, based on the output of the animation stage.
     // The mesh might not use (aka be skinned by) all skeleton joints. We use
     // the joint remapping table (available from the mesh object) to reorder
@@ -139,7 +139,7 @@ void SkinnedMeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
         // Renders skin.
         auto render_mesh = drawSkinnedMesh(index, mesh, make_span(skinning_matrices_),
                                            vox::math::Float4x4::identity());
-        const auto& vertexDescriptor = render_mesh->vertexDescriptor();
+        const auto &vertexDescriptor = render_mesh->vertexDescriptor();
         
         shaderData.disableMacro(HAS_UV);
         shaderData.disableMacro(HAS_NORMAL);
@@ -159,7 +159,7 @@ void SkinnedMeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
             shaderData.enableMacro(HAS_VERTEXCOLOR);
         }
         
-        auto& subMeshes = render_mesh->subMeshes();
+        auto &subMeshes = render_mesh->subMeshes();
         for (size_t i = 0; i < subMeshes.size(); i++) {
             MaterialPtr material;
             if (i < _materials.size()) {
@@ -217,9 +217,9 @@ const float kDefaultUVsArray[][2] = {
 } // namespace
 
 std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
-                                                           const vox::offline::loader::Mesh& _mesh,
+                                                           const vox::offline::loader::Mesh &_mesh,
                                                            const span<math::Float4x4> _skinning_matrices,
-                                                           const vox::math::Float4x4& _transform) {
+                                                           const vox::math::Float4x4 &_transform) {
     ScratchBuffer vbo_buffer_;
     ScratchBuffer uv_buffer_;
     const int vertex_count = _mesh.vertex_count();
@@ -391,7 +391,7 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
         processed_vertex_count += part_vertex_count;
     }
     
-    const auto& resourceLoader = engine()->resourceLoader();
+    const auto &resourceLoader = engine()->resourceLoader();
     if (vertexBuffers[index] == nullptr) {
         vertexBuffers[index] = resourceLoader->buildBuffer(vbo_map, skinned_data_size, NULL);
     } else {
@@ -422,12 +422,12 @@ std::shared_ptr<Mesh> SkinnedMeshRenderer::drawSkinnedMesh(size_t index,
     return mesh;
 }
 
-void SkinnedMeshRenderer::_updateBounds(BoundingBox& worldBounds) {
+void SkinnedMeshRenderer::_updateBounds(BoundingBox &worldBounds) {
     SkinnedMeshRenderer::computeSkeletonBounds(skeleton_, &worldBounds);
 }
 
-void SkinnedMeshRenderer::computeSkeletonBounds(const animation::Skeleton& _skeleton,
-                                                math::BoundingBox* _bound) {
+void SkinnedMeshRenderer::computeSkeletonBounds(const animation::Skeleton &_skeleton,
+                                                math::BoundingBox *_bound) {
     using vox::math::Float4x4;
     
     assert(_bound);
@@ -455,7 +455,7 @@ void SkinnedMeshRenderer::computeSkeletonBounds(const animation::Skeleton& _skel
 }
 
 void SkinnedMeshRenderer::computePostureBounds(vox::span<const vox::math::Float4x4> _matrices,
-                                               math::BoundingBox* _bound) {
+                                               math::BoundingBox *_bound) {
     assert(_bound);
     
     // Set a default box.
@@ -468,7 +468,7 @@ void SkinnedMeshRenderer::computePostureBounds(vox::span<const vox::math::Float4
     // Loops through matrices and stores min/max.
     // Matrices array cannot be empty, it was checked at the beginning of the
     // function.
-    const vox::math::Float4x4* current = _matrices.begin();
+    const vox::math::Float4x4 *current = _matrices.begin();
     math::SimdFloat4 min = current->cols[3];
     math::SimdFloat4 max = current->cols[3];
     ++current;

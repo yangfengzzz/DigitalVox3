@@ -89,14 +89,14 @@ void GUIEntry::onUpdate(float deltaTime) {
         ImGui::SetNextWindowBgAlpha(0.0);
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize, ImGuiCond_Always);
         ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-        const ImGuiWindowFlags flags   = (ImGuiWindowFlags_NoMove |
-                                          ImGuiWindowFlags_NoTitleBar|
+        const ImGuiWindowFlags flags = (ImGuiWindowFlags_NoMove |
+                                        ImGuiWindowFlags_NoTitleBar |
                                         ImGuiWindowFlags_NoScrollbar |
                                         ImGuiWindowFlags_NoResize |
                                         ImGuiWindowFlags_AlwaysAutoResize |
                                         ImGuiWindowFlags_AlwaysUseWindowPadding |
                                         ImGuiWindowFlags_NoSavedSettings);
-        bool                   is_open = true;
+        bool is_open = true;
         ImGui::Begin("Options", &is_open, flags);
         
         nodeEditor();
@@ -105,12 +105,12 @@ void GUIEntry::onUpdate(float deltaTime) {
         ImGui::PopStyleVar();
     } else {
         ImGui::SetNextWindowPos(ImVec2(10, 10));
-        ImGui::SetNextWindowSize(ImVec2(350,  ImGui::GetIO().DisplaySize.y - 20), ImGuiCond_Always);
-
+        ImGui::SetNextWindowSize(ImVec2(350, ImGui::GetIO().DisplaySize.y - 20), ImGuiCond_Always);
+        
         ImGui::Begin("Editor");
-
+        
         ImGui::Checkbox("Open Node Editor", &showEditor);
-
+        
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::Separator();
         
@@ -148,7 +148,7 @@ void GUIEntry::onUpdate(float deltaTime) {
         for (auto &component: _editorScripts) {
             component->onUpdate();
         }
-                
+        
         ImGui::End();
     }
     

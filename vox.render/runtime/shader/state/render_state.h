@@ -27,15 +27,17 @@ struct RenderState {
     StencilState stencilState = StencilState();
     /** Raster state. */
     RasterState rasterState = RasterState();
-
+    
 private:
     friend class RenderPipeline;
+    
     friend class ForwardRenderPipeline;
+    
     friend class DeferredRenderPipeline;
-
-    void _apply(Engine* engine,
-                MTLRenderPipelineDescriptor* pipelineDescriptor,
-                MTLDepthStencilDescriptor* depthStencilDescriptor);
+    
+    void _apply(Engine *engine,
+                MTLRenderPipelineDescriptor *pipelineDescriptor,
+                MTLDepthStencilDescriptor *depthStencilDescriptor);
 };
 
 }

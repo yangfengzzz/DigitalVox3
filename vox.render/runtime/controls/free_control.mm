@@ -11,13 +11,13 @@
 
 namespace vox {
 namespace control {
-FreeControl::FreeControl(Entity* entity):
+FreeControl::FreeControl(Entity *entity) :
 Script(entity) {
-    cursorPosCallback = [&](GLFWwindow* window, double xpos, double ypos) {
+    cursorPosCallback = [&](GLFWwindow *window, double xpos, double ypos) {
         onMouseMove(window, xpos, ypos);
     };
     
-    keyCallback = [&](GLFWwindow* window, int key, int scancode, int action, int mods) {
+    keyCallback = [&](GLFWwindow *window, int key, int scancode, int action, int mods) {
         if (action == GLFW_PRESS) {
             onKeyDown(key);
         } else if (action == GLFW_RELEASE) {
@@ -25,7 +25,7 @@ Script(entity) {
         }
     };
     
-    mouseButtonCallback = [&](GLFWwindow* window, int button, int action, int mods){
+    mouseButtonCallback = [&](GLFWwindow *window, int button, int action, int mods) {
         if (action == GLFW_PRESS) {
             onMouseDown(window);
         } else if (action == GLFW_RELEASE) {
@@ -41,19 +41,23 @@ Script(entity) {
 
 void FreeControl::onKeyDown(int key) {
     switch (key) {
-        case GLFW_KEY_W: case GLFW_KEY_UP:
+        case GLFW_KEY_W:
+        case GLFW_KEY_UP:
             _moveForward = true;
             break;
             
-        case GLFW_KEY_S: case GLFW_KEY_DOWN:
+        case GLFW_KEY_S:
+        case GLFW_KEY_DOWN:
             _moveBackward = true;
             break;
             
-        case GLFW_KEY_A: case GLFW_KEY_LEFT:
+        case GLFW_KEY_A:
+        case GLFW_KEY_LEFT:
             _moveLeft = true;
             break;
             
-        case GLFW_KEY_D: case GLFW_KEY_RIGHT:
+        case GLFW_KEY_D:
+        case GLFW_KEY_RIGHT:
             _moveRight = true;
             break;
             
@@ -64,19 +68,23 @@ void FreeControl::onKeyDown(int key) {
 
 void FreeControl::onKeyUp(int key) {
     switch (key) {
-        case GLFW_KEY_W: case GLFW_KEY_UP:
+        case GLFW_KEY_W:
+        case GLFW_KEY_UP:
             _moveForward = false;
             break;
             
-        case GLFW_KEY_S: case GLFW_KEY_DOWN:
+        case GLFW_KEY_S:
+        case GLFW_KEY_DOWN:
             _moveBackward = false;
             break;
             
-        case GLFW_KEY_A: case GLFW_KEY_LEFT:
+        case GLFW_KEY_A:
+        case GLFW_KEY_LEFT:
             _moveLeft = false;
             break;
             
-        case GLFW_KEY_D: case GLFW_KEY_RIGHT:
+        case GLFW_KEY_D:
+        case GLFW_KEY_RIGHT:
             _moveRight = false;
             break;
             

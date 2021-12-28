@@ -26,12 +26,12 @@
 
 using namespace vox;
 
-class ControllerScript: public Script {
+class ControllerScript : public Script {
 public:
-    physics::CharacterController* character;
+    physics::CharacterController *character;
     math::Float3 displacement;
     
-    ControllerScript(Entity* entity):Script(entity) {
+    ControllerScript(Entity *entity) : Script(entity) {
         character = entity->getComponent<physics::CharacterController>();
     }
     
@@ -46,7 +46,7 @@ public:
     }
 };
 
-int main(int, char**) {
+int main(int, char **) {
     std::default_random_engine e;
     std::uniform_real_distribution<float> u(0, 1);
     
@@ -62,7 +62,7 @@ int main(int, char**) {
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
     
-    auto addPlane = [&](const math::Float3& size, const math::Float3& position, const math::Quaternion& rotation) {
+    auto addPlane = [&](const math::Float3 &size, const math::Float3 &position, const math::Quaternion &rotation) {
         auto mtl = std::make_shared<UnlitMaterial>(&engine);
         mtl->setBaseColor(math::Color(0.03179807202597362, 0.3939682161541871, 0.41177952549087604, 1.0));
         auto planeEntity = rootEntity->createChild();
@@ -81,7 +81,7 @@ int main(int, char**) {
         return planeEntity;
     };
     
-    auto addBox = [&](const math::Float3& size, const math::Float3& position, const math::Quaternion& rotation) {
+    auto addBox = [&](const math::Float3 &size, const math::Float3 &position, const math::Quaternion &rotation) {
         auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
         boxMtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto boxEntity = rootEntity->createChild("BoxEntity");
@@ -105,7 +105,7 @@ int main(int, char**) {
         return boxEntity;
     };
     
-    auto addSphere = [&](float radius, const math::Float3& position, const math::Quaternion& rotation, const math::Float3& velocity) {
+    auto addSphere = [&](float radius, const math::Float3 &position, const math::Quaternion &rotation, const math::Float3 &velocity) {
         auto mtl = std::make_shared<UnlitMaterial>(&engine);
         mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto sphereEntity = rootEntity->createChild();
@@ -131,7 +131,7 @@ int main(int, char**) {
         return sphereEntity;
     };
     
-    auto addCapsule = [&](float radius, float height, const math::Float3& position, const math::Quaternion& rotation) {
+    auto addCapsule = [&](float radius, float height, const math::Float3 &position, const math::Quaternion &rotation) {
         auto mtl = std::make_shared<UnlitMaterial>(&engine);
         mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto capsuleEntity = rootEntity->createChild();
@@ -152,7 +152,7 @@ int main(int, char**) {
         return capsuleEntity;
     };
     
-    auto addPlayer = [&](float radius, float height, const math::Float3& position, const math::Quaternion& rotation) {
+    auto addPlayer = [&](float radius, float height, const math::Float3 &position, const math::Quaternion &rotation) {
         auto mtl = std::make_shared<UnlitMaterial>(&engine);
         mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto capsuleEntity = rootEntity->createChild();
@@ -172,16 +172,16 @@ int main(int, char**) {
         return capsuleEntity;
     };
     
-    auto transform = [&](const math::Float3& position, const math::Quaternion& rotation,
-                         math::Float3& outPosition, math::Quaternion& outRotation) {
+    auto transform = [&](const math::Float3 &position, const math::Quaternion &rotation,
+                         math::Float3 &outPosition, math::Quaternion &outRotation) {
         outRotation = rotation * outRotation;
         outPosition = math::transformByQuat(outPosition, rotation);
         outPosition = outPosition - position;
     };
     
-    auto createChain = [&](const math::Float3& position, const math::Quaternion& rotation, size_t length, float separation) {
+    auto createChain = [&](const math::Float3 &position, const math::Quaternion &rotation, size_t length, float separation) {
         auto offset = math::Float3(0, -separation / 2, 0);
-        physics::DynamicCollider* prevCollider = nullptr;
+        physics::DynamicCollider *prevCollider = nullptr;
         for (size_t i = 0; i < length; i++) {
             auto localTm_pos = math::Float3(0, -separation / 2 * (2 * float(i) + 1), 0);
             auto localTm_quat = math::Quaternion();
@@ -203,8 +203,8 @@ int main(int, char**) {
     };
     
     addPlane(math::Float3(30, 0.1, 30), math::Float3(), math::Quaternion());
-    for(int i = 0; i < 5; i++) {
-        for(int j = 0; j < 5; j++) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
             addBox(math::Float3(1, 1, 1),
                    math::Float3(-2.5 + i + 0.1 * i, u(e) * 6.f + 1, -2.5 + j + 0.1 * j),
                    Quaternion(0, 0, 0.3, 0.7));

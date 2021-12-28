@@ -13,23 +13,25 @@
 
 namespace vox {
 using namespace math;
+
 /**
  * Rendering context.
  */
 class RenderContext {
 public:
-    Camera* camera();
+    Camera *camera();
     
-    const Camera* camera() const;
+    const Camera *camera() const;
     
-    const Scene* scene() const;
+    const Scene *scene() const;
+    
     const Matrix viewProjectMatrix() const;
     
-    void resetContext(Scene* scene, Camera* camera);
+    void resetContext(Scene *scene, Camera *camera);
     
 private:
-    Camera* _camera{nullptr};
-    Scene* _scene{nullptr};
+    Camera *_camera{nullptr};
+    Scene *_scene{nullptr};
     Matrix _viewProjectMatrix;
 };
 

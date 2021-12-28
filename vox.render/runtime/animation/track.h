@@ -53,104 +53,133 @@ namespace internal {
 // mode are all store as separate buffers in order to access the cache
 // coherently. Ratios are usually accessed/read alone from the jobs that all
 // start by looking up the keyframes to interpolate indeed.
-template <typename _ValueType>
+template<typename _ValueType>
 class Track {
- public:
-  typedef _ValueType ValueType;
-
-  Track();
-  ~Track();
-
-  // Keyframe accessors.
-  span<const float> ratios() const { return ratios_; }
-  span<const _ValueType> values() const { return values_; }
-  span<const uint8_t> steps() const { return steps_; }
-
-  // Get the estimated track's size in bytes.
-  size_t size() const;
-
-  // Get track name.
-  const char* name() const { return name_ ? name_ : ""; }
-
-  // Serialization functions.
-  // Should not be called directly but through io::Archive << and >> operators.
-  void Save(vox::io::OArchive& _archive) const;
-  void Load(vox::io::IArchive& _archive, uint32_t _version);
-
- private:
-  // Disables copy and assignation.
-  Track(Track const&);
-  void operator=(Track const&);
-
-  // TrackBuilder class is allowed to allocate a Track.
-  friend class offline::TrackBuilder;
-
-  // Internal destruction function.
-  void Allocate(size_t _keys_count, size_t _name_len);
-  void Deallocate();
-
-  // Keyframe ratios (0 is the beginning of the track, 1 is the end).
-  span<float> ratios_;
-
-  // Keyframe values.
-  span<_ValueType> values_;
-
-  // Keyframe modes (1 bit per key): 1 for step, 0 for linear.
-  span<uint8_t> steps_;
-
-  // Track name.
-  char* name_;
+public:
+    typedef _ValueType ValueType;
+    
+    Track();
+    
+    ~Track();
+    
+    // Keyframe accessors.
+    span<const float> ratios() const {
+        return ratios_;
+    }
+    
+    span<const _ValueType> values() const {
+        return values_;
+    }
+    
+    span<const uint8_t> steps() const {
+        return steps_;
+    }
+    
+    // Get the estimated track's size in bytes.
+    size_t size() const;
+    
+    // Get track name.
+    const char *name() const {
+        return name_ ? name_ : "";
+    }
+    
+    // Serialization functions.
+    // Should not be called directly but through io::Archive << and >> operators.
+    void Save(vox::io::OArchive &_archive) const;
+    
+    void Load(vox::io::IArchive &_archive, uint32_t _version);
+    
+private:
+    // Disables copy and assignation.
+    Track(Track const &);
+    
+    void operator=(Track const &);
+    
+    // TrackBuilder class is allowed to allocate a Track.
+    friend class offline::TrackBuilder;
+    
+    // Internal destruction function.
+    void Allocate(size_t _keys_count, size_t _name_len);
+    
+    void Deallocate();
+    
+    // Keyframe ratios (0 is the beginning of the track, 1 is the end).
+    span<float> ratios_;
+    
+    // Keyframe values.
+    span<_ValueType> values_;
+    
+    // Keyframe modes (1 bit per key): 1 for step, 0 for linear.
+    span<uint8_t> steps_;
+    
+    // Track name.
+    char *name_;
 };
 
 // Definition of operations policies per track value type.
-template <typename _ValueType>
+template<typename _ValueType>
 struct TrackPolicy {
-  inline static _ValueType Lerp(const _ValueType& _a, const _ValueType& _b,
-                                float _alpha) {
-    return math::Lerp(_a, _b, _alpha);
-  }
-  inline static float Distance(const _ValueType& _a, const _ValueType& _b) {
-    return math::Length(_a - _b);
-  }
-  inline static _ValueType identity() { return _ValueType(0.f); }
+    inline static _ValueType Lerp(const _ValueType &_a, const _ValueType &_b,
+                                  float _alpha) {
+        return math::Lerp(_a, _b, _alpha);
+    }
+    
+    inline static float Distance(const _ValueType &_a, const _ValueType &_b) {
+        return math::Length(_a - _b);
+    }
+    
+    inline static _ValueType identity() {
+        return _ValueType(0.f);
+    }
 };
 
 // Specialization for float policy.
-template <>
-inline float TrackPolicy<float>::Distance(const float& _a, const float& _b) {
-  return std::abs(_a - _b);
+template<>
+inline float TrackPolicy<float>::Distance(const float &_a, const float &_b) {
+    return std::abs(_a - _b);
 }
 
 // Specialization for quaternions policy.
-template <>
+template<>
 inline math::Quaternion TrackPolicy<math::Quaternion>::Lerp(
-    const math::Quaternion& _a, const math::Quaternion& _b, float _alpha) {
-  // Uses NLerp to favor speed. This same function is used when optimizing the
-  // curve (key frame reduction), so "constant speed" interpolation can still be
-  // approximated with a lower tolerance value if it matters.
-  return math::NLerp(_a, _b, _alpha);
+                                                            const math::Quaternion &_a, const math::Quaternion &_b, float _alpha) {
+    // Uses NLerp to favor speed. This same function is used when optimizing the
+    // curve (key frame reduction), so "constant speed" interpolation can still be
+    // approximated with a lower tolerance value if it matters.
+    return math::NLerp(_a, _b, _alpha);
 }
-template <>
+
+template<>
 inline float TrackPolicy<math::Quaternion>::Distance(
-    const math::Quaternion& _a, const math::Quaternion& _b) {
-  const float cos_half_angle =
-      _a.x * _b.x + _a.y * _b.y + _a.z * _b.z + _a.w * _b.w;
-  // Return value is 1 - half cosine, so the closer the quaternions, the closer
-  // to 0.
-  return 1.f - math::Min(1.f, std::abs(cos_half_angle));
+                                                     const math::Quaternion &_a, const math::Quaternion &_b) {
+    const float cos_half_angle =
+    _a.x * _b.x + _a.y * _b.y + _a.z * _b.z + _a.w * _b.w;
+    // Return value is 1 - half cosine, so the closer the quaternions, the closer
+    // to 0.
+    return 1.f - math::Min(1.f, std::abs(cos_half_angle));
 }
-template <>
+
+template<>
 inline math::Quaternion TrackPolicy<math::Quaternion>::identity() {
-  return math::Quaternion::identity();
+    return math::Quaternion::identity();
 }
 }  // namespace internal
 
 // Runtime track data structure instantiation.
-class FloatTrack : public internal::Track<float> {};
-class Float2Track : public internal::Track<math::Float2> {};
-class Float3Track : public internal::Track<math::Float3> {};
-class Float4Track : public internal::Track<math::Float4> {};
-class QuaternionTrack : public internal::Track<math::Quaternion> {};
+class FloatTrack : public internal::Track<float> {
+};
+
+class Float2Track : public internal::Track<math::Float2> {
+};
+
+class Float3Track : public internal::Track<math::Float3> {
+};
+
+class Float4Track : public internal::Track<math::Float4> {
+};
+
+class QuaternionTrack : public internal::Track<math::Quaternion> {
+};
 
 }  // namespace animation
 namespace io {

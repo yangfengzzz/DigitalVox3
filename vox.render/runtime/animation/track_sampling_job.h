@@ -37,35 +37,36 @@ namespace internal {
 
 // TrackSamplingJob internal implementation. See *TrackSamplingJob for more
 // details.
-template <typename _Track>
+template<typename _Track>
 struct TrackSamplingJob {
-  typedef typename _Track::ValueType ValueType;
-
-  TrackSamplingJob();
-
-  // Validates all parameters.
-  bool Validate() const;
-
-  // Validates and executes sampling.
-  bool Run() const;
-
-  // Ratio used to sample track, clamped in range [0,1] before job execution. 0
-  // is the beginning of the track, 1 is the end. This is a ratio rather than a
-  // ratio because tracks have no duration.
-  float ratio;
-
-  // Track to sample.
-  const _Track* track;
-
-  // Job output.
-  typename _Track::ValueType* result;
+    typedef typename _Track::ValueType ValueType;
+    
+    TrackSamplingJob();
+    
+    // Validates all parameters.
+    bool Validate() const;
+    
+    // Validates and executes sampling.
+    bool Run() const;
+    
+    // Ratio used to sample track, clamped in range [0,1] before job execution. 0
+    // is the beginning of the track, 1 is the end. This is a ratio rather than a
+    // ratio because tracks have no duration.
+    float ratio;
+    
+    // Track to sample.
+    const _Track *track;
+    
+    // Job output.
+    typename _Track::ValueType *result;
 };
 }  // namespace internal
 
 // Track sampling job implementation. Track sampling allows to query a track
 // value for a specified ratio. This is a ratio rather than a time because
 // tracks have no duration.
-struct FloatTrackSamplingJob : public internal::TrackSamplingJob<FloatTrack> {};
+struct FloatTrackSamplingJob : public internal::TrackSamplingJob<FloatTrack> {
+};
 struct Float2TrackSamplingJob : public internal::TrackSamplingJob<Float2Track> {
 };
 struct Float3TrackSamplingJob : public internal::TrackSamplingJob<Float3Track> {
@@ -73,7 +74,8 @@ struct Float3TrackSamplingJob : public internal::TrackSamplingJob<Float3Track> {
 struct Float4TrackSamplingJob : public internal::TrackSamplingJob<Float4Track> {
 };
 struct QuaternionTrackSamplingJob
-    : public internal::TrackSamplingJob<QuaternionTrack> {};
+: public internal::TrackSamplingJob<QuaternionTrack> {
+};
 
 }  // namespace animation
 }  // namespace vox

@@ -34,21 +34,29 @@ public:
     float previous_time_ratio() const;
     
     // Sets playback speed.
-    void set_playback_speed(float _speed) { playback_speed_ = _speed; }
+    void set_playback_speed(float _speed) {
+        playback_speed_ = _speed;
+    }
     
     // Gets playback speed.
-    float playback_speed() const { return playback_speed_; }
+    float playback_speed() const {
+        return playback_speed_;
+    }
     
     // Sets loop modes. If true, animation time is always clamped between 0 and 1.
-    void set_loop(bool _loop) { loop_ = _loop; }
+    void set_loop(bool _loop) {
+        loop_ = _loop;
+    }
     
     // Gets loop mode.
-    bool loop() const { return loop_; }
+    bool loop() const {
+        return loop_;
+    }
     
     // Updates animation time if in "play" state, according to playback speed and
     // given frame time _dt.
     // Returns true if animation has looped during update
-    void Update(const animation::Animation& _animation, float _dt);
+    void Update(const animation::Animation &_animation, float _dt);
     
     // Resets all parameters to their default value.
     void Reset();

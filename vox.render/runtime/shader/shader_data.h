@@ -20,15 +20,15 @@ namespace vox {
  */
 class ShaderData {
 public:
-    std::any getData(const std::string& property_name);
+    std::any getData(const std::string &property_name);
     
-    std::any getData(const ShaderProperty& property);
+    std::any getData(const ShaderProperty &property);
     
-    void setData(const std::string& property, std::any value);
+    void setData(const std::string &property, std::any value);
     
     void setData(ShaderProperty property, std::any value);
     
-    const std::unordered_map<int, std::any>& properties() const;
+    const std::unordered_map<int, std::any> &properties() const;
     
 public:
     /**
@@ -51,8 +51,8 @@ public:
      */
     void disableMacro(MacroName macroName);
     
-    void mergeMacro(const ShaderMacroCollection& macros,
-                    ShaderMacroCollection& result) const;
+    void mergeMacro(const ShaderMacroCollection &macros,
+                    ShaderMacroCollection &result) const;
     
 private:
     std::unordered_map<int, std::any> _properties;

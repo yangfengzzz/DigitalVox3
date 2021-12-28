@@ -18,15 +18,16 @@ public:
     Spherical(float radius = 1.0, float phi = 0, float theta = 0);
     
     void set(float radius, float phi, float theta);
-
+    
     void makeSafe();
     
-    void setFromVec3(const math::Float3& v3);
+    void setFromVec3(const math::Float3 &v3);
     
-    void setToVec3(math::Float3& v3);
-
+    void setToVec3(math::Float3 &v3);
+    
 private:
     friend class OrbitControl;
+    
     friend class FreeControl;
     
     float radius;

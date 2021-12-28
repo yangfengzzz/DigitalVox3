@@ -16,11 +16,17 @@ namespace vox {
 namespace physics {
 //MARK: - Forward Declare
 class PhysicsMaterial;
+
 class ColliderShape;
+
 using ColliderShapePtr = std::shared_ptr<ColliderShape>;
+
 class Collider;
+
 class CharacterController;
+
 class BoxCharacterController;
+
 class CapsuleCharacterController;
 
 using namespace physx;
@@ -30,10 +36,10 @@ class Physics {
 public:
     Physics();
     
-    PxPhysics* operator()();
+    PxPhysics *operator()();
     
 private:
-    PxPhysics* _physics;
+    PxPhysics *_physics;
     PxDefaultAllocator gAllocator;
     PxDefaultErrorCallback gErrorCallback;
 };

@@ -23,7 +23,7 @@ size_t Renderer::materialCount() {
 }
 
 BoundingBox Renderer::bounds() {
-    auto& changeFlag = _transformChangeFlag;
+    auto &changeFlag = _transformChangeFlag;
     if (changeFlag->flag) {
         _updateBounds(_bounds);
         changeFlag->flag = false;
@@ -31,30 +31,30 @@ BoundingBox Renderer::bounds() {
     return _bounds;
 }
 
-Renderer::Renderer(Entity* entity):
+Renderer::Renderer(Entity *entity) :
 Component(entity),
 _transformChangeFlag(entity->transform->registerWorldChangeFlag()) {
     _overrideUpdate = true;
 }
 
-void Renderer::_onEnable()  {
-    auto& componentsManager = engine()->_componentsManager;
+void Renderer::_onEnable() {
+    auto &componentsManager = engine()->_componentsManager;
     if (_overrideUpdate) {
         componentsManager.addOnUpdateRenderers(this);
     }
     componentsManager.addRenderer(this);
 }
 
-void Renderer::_onDisable()  {
-    auto& componentsManager = engine()->_componentsManager;
+void Renderer::_onDisable() {
+    auto &componentsManager = engine()->_componentsManager;
     if (_overrideUpdate) {
         componentsManager.removeOnUpdateRenderers(this);
     }
     componentsManager.removeRenderer(this);
 }
 
-void Renderer::_onDestroy()  {
-    auto& flag = _transformChangeFlag;
+void Renderer::_onDestroy() {
+    auto &flag = _transformChangeFlag;
     if (flag != nullptr) {
         flag->destroy();
         _transformChangeFlag.reset();
@@ -62,9 +62,9 @@ void Renderer::_onDestroy()  {
 }
 
 MaterialPtr Renderer::getInstanceMaterial(size_t index) {
-    const auto& materials = _materials;
+    const auto &materials = _materials;
     if (materials.size() > index) {
-        const auto& material = materials[index];
+        const auto &material = materials[index];
         if (material != nullptr) {
             if (_materialsInstanced[index]) {
                 return material;
@@ -90,7 +90,7 @@ void Renderer::setMaterial(MaterialPtr material) {
         }
     }
     
-    const auto& internalMaterial = _materials[index];
+    const auto &internalMaterial = _materials[index];
     if (internalMaterial != material) {
         _materials[index] = material;
         if (index < _materialsInstanced.size()) {
@@ -107,7 +107,7 @@ void Renderer::setMaterial(size_t index, MaterialPtr material) {
         }
     }
     
-    const auto& internalMaterial = _materials[index];
+    const auto &internalMaterial = _materials[index];
     if (internalMaterial != material) {
         _materials[index] = material;
         if (index < _materialsInstanced.size()) {
@@ -129,7 +129,7 @@ std::vector<MaterialPtr> Renderer::getMaterials() {
     return _materials;
 }
 
-void Renderer::setMaterials(const std::vector<MaterialPtr>& materials) {
+void Renderer::setMaterials(const std::vector<MaterialPtr> &materials) {
     size_t count = materials.size();
     if (_materials.size() != count) {
         _materials.reserve(count);
@@ -142,18 +142,18 @@ void Renderer::setMaterials(const std::vector<MaterialPtr>& materials) {
     }
     
     for (size_t i = 0; i < count; i++) {
-        const auto& internalMaterial = _materials[i];
-        const auto& material = materials[i];
+        const auto &internalMaterial = _materials[i];
+        const auto &material = materials[i];
         if (internalMaterial != material) {
             _materials[i] = material;
         }
     }
 }
 
-void Renderer::pushPrimitive(const RenderElement& element,
-                             std::vector<RenderElement>& opaqueQueue,
-                             std::vector<RenderElement>& alphaTestQueue,
-                             std::vector<RenderElement>& transparentQueue) {
+void Renderer::pushPrimitive(const RenderElement &element,
+                             std::vector<RenderElement> &opaqueQueue,
+                             std::vector<RenderElement> &alphaTestQueue,
+                             std::vector<RenderElement> &transparentQueue) {
     const auto renderQueueType = element.material->renderQueueType;
     
     if (renderQueueType > (RenderQueueType::Transparent + RenderQueueType::AlphaTest) >> 1) {
@@ -165,7 +165,7 @@ void Renderer::pushPrimitive(const RenderElement& element,
     }
 }
 
-void Renderer::_updateShaderData(RenderContext& context) {
+void Renderer::_updateShaderData(RenderContext &context) {
     Matrix worldMatrix = entity()->transform->worldMatrix();
     _mvMatrix = context.camera()->viewMatrix() * worldMatrix;
     _mvpMatrix = context.viewProjectMatrix() * worldMatrix;
@@ -181,7 +181,7 @@ void Renderer::_updateShaderData(RenderContext& context) {
     shaderData.setData(Renderer::_normalMatrixProperty, _normalMatrix);
 }
 
-MaterialPtr Renderer::_createInstanceMaterial(const MaterialPtr& material, size_t index) {
+MaterialPtr Renderer::_createInstanceMaterial(const MaterialPtr &material, size_t index) {
     return nullptr;
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 040E9CB3277AA469009DF8B7 /* light_debugger.metal */; };
+		040E9CB5277ABBDE009DF8B7 /* shadowMap_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E6F277166550038F34A /* shadowMap_view.mm */; };
 		0414B0AF27789B62007ED649 /* modelio_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0414B0AD27789B62007ED649 /* modelio_loader.mm */; };
 		0414B0B027789B62007ED649 /* modelio_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0414B0AE27789B62007ED649 /* modelio_loader.h */; };
 		04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FC4274F6124006CD384 /* bounding_frustum.cpp */; };
@@ -597,7 +598,6 @@
 		049E3EC7276D595C003FEE00 /* metal_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 049E3EC5276D595C003FEE00 /* metal_loader.h */; };
 		049E3ECE276DC26E003FEE00 /* function-common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04CE398B2753A83B00204B8E /* function-common.metal */; };
 		04A7110D27794E8700BF6864 /* metal_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049E3EC4276D595C003FEE00 /* metal_loader.mm */; };
-		04A7110E27794E9000BF6864 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
 		04A79ABA275DE0B500182CCB /* light_manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79AB8275DE0B500182CCB /* light_manager.mm */; };
 		04A79ABB275DE0B500182CCB /* light_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A79AB9275DE0B500182CCB /* light_manager.h */; };
 		04A79ABE275DE28100182CCB /* light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A79ABC275DE28100182CCB /* light.mm */; };
@@ -4562,7 +4562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04A7110E27794E9000BF6864 /* modelio_view.mm in Sources */,
+				040E9CB5277ABBDE009DF8B7 /* shadowMap_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

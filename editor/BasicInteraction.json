@@ -1,1 +1,24 @@
-{"nodes":{"node:1":{"location":{"x":10,"y":10}},"node:4":{"location":{"x":295,"y":86}}},"selection":null,"view":{"scroll":{"x":0,"y":0},"zoom":1}}
+{
+  "nodes": {
+    "node:1": {
+      "location": {
+        "x": 10,
+        "y": 10
+      }
+    },
+    "node:4": {
+      "location": {
+        "x": 295,
+        "y": 86
+      }
+    }
+  },
+  "selection": null,
+  "view": {
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "zoom": 1
+  }
+}

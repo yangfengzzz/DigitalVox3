@@ -18,12 +18,12 @@
 
 using namespace vox;
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();
     scene->background.solidColor = math::Color(0.3, 0.7, 0.6, 1.0);
-    scene->ambientLight().setDiffuseSolidColor(math::Color(1,1,1));
+    scene->ambientLight().setDiffuseSolidColor(math::Color(1, 1, 1));
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
@@ -57,6 +57,6 @@ int main(int, char**) {
     auto planeRenderer = planeEntity->addComponent<MeshRenderer>();
     planeRenderer->setMesh(PrimitiveMesh::createPlane(&engine, 10, 10));
     planeRenderer->setMaterial(planeMtl);
-
+    
     engine.run();
 }

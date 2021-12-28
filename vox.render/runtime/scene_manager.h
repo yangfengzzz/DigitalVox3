@@ -20,13 +20,14 @@ public:
      * Get the activated scene.
      */
     ScenePtr activeScene();
-
+    
     void setActiveScene(ScenePtr scene);
     
 private:
     friend class Engine;
     
-    SceneManager(Engine* engine) {}
+    SceneManager(Engine *engine) {
+    }
     
     ScenePtr _activeScene;
 };

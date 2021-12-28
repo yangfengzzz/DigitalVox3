@@ -38,7 +38,7 @@ public:
     /**
      * The scene which the component's entity belongs to.
      */
-    Scene* scene();
+    Scene *scene();
     
     /**
      * Destroy this instance.
@@ -46,17 +46,23 @@ public:
     void destroy();
     
 public:
-    virtual void _onAwake() {}
+    virtual void _onAwake() {
+    }
     
-    virtual void _onEnable() {}
+    virtual void _onEnable() {
+    }
     
-    virtual void _onDisable() {}
+    virtual void _onDisable() {
+    }
     
-    virtual void _onDestroy() {}
+    virtual void _onDestroy() {
+    }
     
-    virtual void _onActive() {}
+    virtual void _onActive() {
+    }
     
-    virtual void _onInActive() {}
+    virtual void _onInActive() {
+    }
     
 protected:
     friend class Entity;

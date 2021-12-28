@@ -20,19 +20,21 @@
 
 using namespace vox;
 
-class ShadowDebugMaterial :public BaseMaterial {
+class ShadowDebugMaterial : public BaseMaterial {
 public:
-    ShadowDebugMaterial(Engine* engine):BaseMaterial(engine, Shader::find("shadowMapDebugger")){}
+    ShadowDebugMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("shadowMapDebugger")) {
+    }
 };
 
-class MoveScript :public Script {
+class MoveScript : public Script {
     float totalTime = 0;
     float height = 2;
     float vel = 4;
     int8_t velSign = -1;
-
+    
 public:
-    MoveScript(Entity* entity):Script(entity) {}
+    MoveScript(Entity *entity) : Script(entity) {
+    }
     
     void onUpdate(float deltaTime) override {
         if (height >= 2) {
@@ -48,7 +50,7 @@ public:
     }
 };
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto scene = engine.sceneManager().activeScene();

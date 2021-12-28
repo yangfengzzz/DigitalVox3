@@ -9,9 +9,9 @@
 #include "../../rhi-metal/metal_renderer.h"
 
 namespace vox {
-void BlendState::_platformApply(MTLRenderPipelineDescriptor* pipelineDescriptor,
-                                MTLDepthStencilDescriptor* depthStencilDescriptor,
-                                MetalRenderer* hardwareRenderer) {
+void BlendState::_platformApply(MTLRenderPipelineDescriptor *pipelineDescriptor,
+                                MTLDepthStencilDescriptor *depthStencilDescriptor,
+                                MetalRenderer *hardwareRenderer) {
     const auto enabled = targetBlendState.enabled;
     const auto colorBlendOperation = targetBlendState.colorBlendOperation;
     const auto alphaBlendOperation = targetBlendState.alphaBlendOperation;

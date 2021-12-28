@@ -15,22 +15,22 @@ namespace physics {
 /**
  * A capsule character controller.
  */
-class CapsuleCharacterController :public CharacterController {
+class CapsuleCharacterController : public CharacterController {
 public:
-    CapsuleCharacterController(Entity* entity);
+    CapsuleCharacterController(Entity *entity);
     
-    void setDesc(const PxCapsuleControllerDesc& desc);
+    void setDesc(const PxCapsuleControllerDesc &desc);
     
     float radius() const;
-
+    
     bool setRadius(float radius);
-
+    
     float height() const;
-
+    
     bool setHeight(float height);
-
+    
     PxCapsuleClimbingMode::Enum climbingMode() const;
-
+    
     bool setClimbingMode(PxCapsuleClimbingMode::Enum mode);
 };
 

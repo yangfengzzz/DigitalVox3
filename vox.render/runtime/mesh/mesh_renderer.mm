@@ -11,13 +11,13 @@
 #include "../camera.h"
 
 namespace vox {
-MeshRenderer::MeshRenderer(Entity* entity):
+MeshRenderer::MeshRenderer(Entity *entity) :
 Renderer(entity) {
     
 }
 
-void MeshRenderer::setMesh(const MeshPtr& newValue) {
-    auto& lastMesh = _mesh;
+void MeshRenderer::setMesh(const MeshPtr &newValue) {
+    auto &lastMesh = _mesh;
     if (lastMesh != newValue) {
         if (lastMesh != nullptr) {
             _meshUpdateFlag->destroy();
@@ -33,13 +33,13 @@ MeshPtr MeshRenderer::mesh() {
     return _mesh;
 }
 
-void MeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
-                           std::vector<RenderElement>& alphaTestQueue,
-                           std::vector<RenderElement>& transparentQueue) {
+void MeshRenderer::_render(std::vector<RenderElement> &opaqueQueue,
+                           std::vector<RenderElement> &alphaTestQueue,
+                           std::vector<RenderElement> &transparentQueue) {
     if (_mesh != nullptr) {
         if (_meshUpdateFlag->flag) {
-            const auto& vertexDescriptor = _mesh->vertexDescriptor();
-
+            const auto &vertexDescriptor = _mesh->vertexDescriptor();
+            
             shaderData.disableMacro(HAS_UV);
             shaderData.disableMacro(HAS_NORMAL);
             shaderData.disableMacro(HAS_TANGENT);
@@ -59,8 +59,8 @@ void MeshRenderer::_render(std::vector<RenderElement>& opaqueQueue,
             }
             _meshUpdateFlag->flag = false;
         }
-
-        auto& subMeshes = _mesh->subMeshes();
+        
+        auto &subMeshes = _mesh->subMeshes();
         for (size_t i = 0; i < subMeshes.size(); i++) {
             MaterialPtr material;
             if (i < _materials.size()) {
@@ -83,7 +83,7 @@ void MeshRenderer::_onDestroy() {
     _mesh = nullptr;
 }
 
-void MeshRenderer::_updateBounds(BoundingBox& worldBounds) {
+void MeshRenderer::_updateBounds(BoundingBox &worldBounds) {
     if (_mesh != nullptr) {
         const auto localBounds = _mesh->bounds;
         const auto worldMatrix = _entity->transform->worldMatrix();

@@ -15,6 +15,7 @@
 namespace vox {
 std::default_random_engine ParticleRenderer::e{};
 std::uniform_real_distribution<float> ParticleRenderer::u = std::uniform_real_distribution<float>(-0.5, 0.5);
+
 float ParticleRenderer::_getRandom() {
     return u(e);
 }
@@ -23,17 +24,17 @@ ShaderProperty ParticleRenderer::_textureProp = Shader::createProperty("u_textur
 ShaderProperty ParticleRenderer::_timeProp = Shader::createProperty("u_time", ShaderDataGroup::Renderer);
 ShaderProperty ParticleRenderer::_onceProp = Shader::createProperty("u_once", ShaderDataGroup::Renderer);
 
-ParticleRenderer::ParticleRenderer(Entity* entity):
+ParticleRenderer::ParticleRenderer(Entity *entity) :
 MeshRenderer(entity) {
     setIsOnce(false);
     setMaterial(_createMaterial());
 }
 
-id<MTLTexture> ParticleRenderer::texture() {
-    return std::any_cast<id<MTLTexture>>(getMaterial()->shaderData.getData("u_texture"));
+id <MTLTexture> ParticleRenderer::texture() {
+    return std::any_cast<id <MTLTexture>>(getMaterial()->shaderData.getData("u_texture"));
 }
 
-void ParticleRenderer::setTexture(id<MTLTexture> texture) {
+void ParticleRenderer::setTexture(id <MTLTexture> texture) {
     if (texture) {
         shaderData.enableMacro(HAS_PARTICLE_TEXTURE);
         getMaterial()->shaderData.setData("u_texture", texture);
@@ -46,7 +47,7 @@ math::Float3 ParticleRenderer::position() {
     return _position;
 }
 
-void ParticleRenderer::setPosition(const math::Float3& value) {
+void ParticleRenderer::setPosition(const math::Float3 &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Position;
     _position = value;
 }
@@ -55,16 +56,16 @@ math::Float3 ParticleRenderer::positionRandomness() {
     return _positionRandomness;
 }
 
-void ParticleRenderer::setPositionRandomness(const math::Float3& value) {
+void ParticleRenderer::setPositionRandomness(const math::Float3 &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Position;
     _positionRandomness = value;
 }
 
-const std::vector<math::Float3>& ParticleRenderer::positionArray() const {
+const std::vector<math::Float3> &ParticleRenderer::positionArray() const {
     return _positionArray;
 }
 
-void ParticleRenderer::setPositionArray(const std::vector<math::Float3>& value) {
+void ParticleRenderer::setPositionArray(const std::vector<math::Float3> &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Position;
     _positionArray = value;
 }
@@ -73,7 +74,7 @@ math::Float3 ParticleRenderer::velocity() {
     return _velocity;
 }
 
-void ParticleRenderer::setVelocity(const math::Float3& value) {
+void ParticleRenderer::setVelocity(const math::Float3 &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Velocity;
     _velocity = value;
 }
@@ -82,7 +83,7 @@ math::Float3 ParticleRenderer::velocityRandomness() {
     return _velocityRandomness;
 }
 
-void ParticleRenderer::setVelocityRandomness(const math::Float3& value) {
+void ParticleRenderer::setVelocityRandomness(const math::Float3 &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Velocity;
     _velocityRandomness = value;
 }
@@ -91,7 +92,7 @@ math::Float3 ParticleRenderer::acceleration() {
     return _acceleration;
 }
 
-void ParticleRenderer::setAcceleration(const math::Float3& value) {
+void ParticleRenderer::setAcceleration(const math::Float3 &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Acceleration;
     _acceleration = value;
 }
@@ -100,7 +101,7 @@ math::Float3 ParticleRenderer::accelerationRandomness() {
     return _accelerationRandomness;
 }
 
-void ParticleRenderer::setAccelerationRandomness(const math::Float3& value) {
+void ParticleRenderer::setAccelerationRandomness(const math::Float3 &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Acceleration;
     _accelerationRandomness = value;
 }
@@ -109,7 +110,7 @@ math::Color ParticleRenderer::color() {
     return _color;
 }
 
-void ParticleRenderer::setColor(const math::Color& value) {
+void ParticleRenderer::setColor(const math::Color &value) {
     _updateDirtyFlag |= DirtyFlagType::Enum::Color;
     _color = value;
 }
@@ -355,8 +356,8 @@ ParticleRendererBlendMode::Enum ParticleRenderer::blendMode() {
 }
 
 void ParticleRenderer::setBlendMode(ParticleRendererBlendMode::Enum value) {
-    auto& blendState = getMaterial()->renderState.blendState;
-    auto& target = blendState.targetBlendState;
+    auto &blendState = getMaterial()->renderState.blendState;
+    auto &target = blendState.targetBlendState;
     
     if (value == ParticleRendererBlendMode::Enum::Transparent) {
         target.enabled = true;
@@ -412,8 +413,8 @@ void ParticleRenderer::stop() {
 
 MaterialPtr ParticleRenderer::_createMaterial() {
     auto material = std::make_shared<Material>(engine(), Shader::find("particle-shader"));
-    auto& renderState = material->renderState;
-    auto& target = renderState.blendState.targetBlendState;
+    auto &renderState = material->renderState;
+    auto &target = renderState.blendState.targetBlendState;
     
     target.enabled = true;
     target.sourceColorBlendFactor = MTLBlendFactorSourceAlpha;
@@ -450,40 +451,40 @@ MeshPtr ParticleRenderer::_createMesh() {
         indices[idx++] = startIndex + 3;
     }
     
-    MDLVertexDescriptor* descriptor = [[MDLVertexDescriptor alloc]init];
+    MDLVertexDescriptor *descriptor = [[MDLVertexDescriptor alloc] init];
     descriptor.attributes[0] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_position"
-                                     format:MDLVertexFormatFloat3
-                                     offset:0 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_position"
+                                      format:MDLVertexFormatFloat3
+                                      offset:0 bufferIndex:0];
     descriptor.attributes[1] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_velocity"
-                                     format:MDLVertexFormatFloat3
-                                     offset:12 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_velocity"
+                                      format:MDLVertexFormatFloat3
+                                      offset:12 bufferIndex:0];
     descriptor.attributes[2] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_acceleration"
-                                     format:MDLVertexFormatFloat3
-                                     offset:24 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_acceleration"
+                                      format:MDLVertexFormatFloat3
+                                      offset:24 bufferIndex:0];
     descriptor.attributes[3] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_color"
-                                     format:MDLVertexFormatFloat4
-                                     offset:36 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_color"
+                                      format:MDLVertexFormatFloat4
+                                      offset:36 bufferIndex:0];
     descriptor.attributes[4] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_lifeAndSize"
-                                     format:MDLVertexFormatFloat4
-                                     offset:52 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_lifeAndSize"
+                                      format:MDLVertexFormatFloat4
+                                      offset:52 bufferIndex:0];
     descriptor.attributes[5] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_rotation"
-                                     format:MDLVertexFormatFloat2
-                                     offset:68 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_rotation"
+                                      format:MDLVertexFormatFloat2
+                                      offset:68 bufferIndex:0];
     descriptor.attributes[6] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_uv"
-                                     format:MDLVertexFormatFloat3
-                                     offset:76 bufferIndex:0];
+    [[MDLVertexAttribute alloc] initWithName:@"a_uv"
+                                      format:MDLVertexFormatFloat3
+                                      offset:76 bufferIndex:0];
     descriptor.attributes[7] =
-    [[MDLVertexAttribute alloc]initWithName:@"a_normalizedUv"
-                                     format:MDLVertexFormatFloat2
-                                     offset:88 bufferIndex:0];
-    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc]initWithStride:vertexStride];
+    [[MDLVertexAttribute alloc] initWithName:@"a_normalizedUv"
+                                      format:MDLVertexFormatFloat2
+                                      offset:88 bufferIndex:0];
+    descriptor.layouts[0] = [[MDLVertexBufferLayout alloc] initWithStride:vertexStride];
     
     auto vertexBuffer = engine()->resourceLoader()->buildBuffer(vertexFloatCount * sizeof(float),
                                                                 MTLResourceStorageModeShared);
@@ -526,7 +527,7 @@ void ParticleRenderer::_updateSingleBuffer(size_t i) {
             if (_positionArray.size() != _maxCount) {
                 assert(false && "The length of positionArray must be equal to maxCount.");
             }
-            const auto& pos = _positionArray[i];
+            const auto &pos = _positionArray[i];
             
             x += pos.x;
             y += pos.y;
@@ -653,16 +654,16 @@ void ParticleRenderer::_updateSingleUv(size_t i, size_t k0, size_t k1, size_t k2
     const auto texture = getMaterial()->shaderData.getData("u_texture");
     
     if (!texture.has_value()) {
-        auto realValue = std::any_cast<id<MTLTexture>>(texture);
+        auto realValue = std::any_cast<id <MTLTexture>>(texture);
         const auto width = realValue.width;
         const auto height = realValue.height;
         
         if (!spriteSheet.empty()) {
-            const auto& sheet = spriteSheet[i % spriteSheet.size()];
-            const auto& x = sheet.x;
-            const auto& y = sheet.y;
-            const auto& w = sheet.z;
-            const auto& h = sheet.w;
+            const auto &sheet = spriteSheet[i % spriteSheet.size()];
+            const auto &x = sheet.x;
+            const auto &y = sheet.y;
+            const auto &w = sheet.z;
+            const auto &h = sheet.w;
             
             const auto u = x / width;
             const auto v = y / height;

@@ -9,7 +9,7 @@
 #include "engine.h"
 
 namespace vox {
-Script::Script(Entity* entity):
+Script::Script(Entity *entity) :
 Component(entity) {
     
 }
@@ -19,7 +19,7 @@ void Script::_onAwake() {
 }
 
 void Script::_onEnable() {
-    auto& componentsManager = engine()->_componentsManager;
+    auto &componentsManager = engine()->_componentsManager;
     if (!_started) {
         componentsManager.addOnStartScript(this);
     }
@@ -32,7 +32,7 @@ void Script::_onEnable() {
 }
 
 void Script::_onDisable() {
-    auto& componentsManager = engine()->_componentsManager;
+    auto &componentsManager = engine()->_componentsManager;
     // Use "xxIndex" is more safe.
     // When call onDisable it maybe it still not in script queue,for example write "entity.isActive = false" in onWake().
     if (_onStartIndex != -1) {

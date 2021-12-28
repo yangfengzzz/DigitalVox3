@@ -23,7 +23,7 @@ using namespace math;
 /**
  * Renderable component.
  */
-class Renderer: public Component {
+class Renderer : public Component {
 public:
     /** ShaderData related to renderer. */
     ShaderData shaderData = ShaderData();
@@ -46,7 +46,7 @@ public:
      */
     BoundingBox bounds();
     
-    explicit Renderer(Entity* entity);
+    explicit Renderer(Entity *entity);
     
 public:
     /**
@@ -94,12 +94,12 @@ public:
      * Set all materials.
      * @param materials - All materials
      */
-    void setMaterials(const std::vector<MaterialPtr>& materials);
+    void setMaterials(const std::vector<MaterialPtr> &materials);
     
-    void pushPrimitive(const RenderElement& element,
-                       std::vector<RenderElement>& opaqueQueue,
-                       std::vector<RenderElement>& alphaTestQueue,
-                       std::vector<RenderElement>& transparentQueue);
+    void pushPrimitive(const RenderElement &element,
+                       std::vector<RenderElement> &opaqueQueue,
+                       std::vector<RenderElement> &alphaTestQueue,
+                       std::vector<RenderElement> &transparentQueue);
     
 protected:
     void _onEnable() override;
@@ -108,23 +108,28 @@ protected:
     
     void _onDestroy() override;
     
-    virtual void _render(std::vector<RenderElement>& opaqueQueue,
-                         std::vector<RenderElement>& alphaTestQueue,
-                         std::vector<RenderElement>& transparentQueue) = 0;
+    virtual void _render(std::vector<RenderElement> &opaqueQueue,
+                         std::vector<RenderElement> &alphaTestQueue,
+                         std::vector<RenderElement> &transparentQueue) = 0;
     
-    virtual void _updateBounds(BoundingBox& worldBounds) {}
+    virtual void _updateBounds(BoundingBox &worldBounds) {
+    }
     
-    virtual void update(float deltaTime) {}
+    virtual void update(float deltaTime) {
+    }
     
 protected:
     friend class RenderPipeline;
+    
     friend class ForwardRenderPipeline;
+    
     friend class DeferredRenderPipeline;
+    
     friend class ComponentsManager;
     
-    void _updateShaderData(RenderContext& context);
+    void _updateShaderData(RenderContext &context);
     
-    MaterialPtr _createInstanceMaterial(const MaterialPtr& material, size_t index);
+    MaterialPtr _createInstanceMaterial(const MaterialPtr &material, size_t index);
     
     float _distanceForSort = 0;
     ssize_t _onUpdateIndex = -1;

@@ -24,11 +24,11 @@ namespace vox {
  */
 struct ResourceCacheState {
     std::unordered_map<size_t, std::unique_ptr<ShaderProgram>> shader_modules;
-
+    
     std::unordered_map<size_t, std::unique_ptr<RenderPipelineState>> graphics_pipelines;
     
     std::unordered_map<size_t, std::unique_ptr<ComputePipelineState>> compute_pipelines;
-
+    
     std::unordered_map<size_t, std::unique_ptr<RenderPass>> render_passes;
 };
 
@@ -46,23 +46,23 @@ struct ResourceCacheState {
  */
 class ResourceCache {
 public:
-    MetalRenderer* render;
+    MetalRenderer *render;
     ResourceCacheState state;
     
-    ResourceCache(MetalRenderer* render);
+    ResourceCache(MetalRenderer *render);
     
-    ShaderProgram* request_shader_module(const std::string& vertexSource, const std::string& fragmentSource,
-                                         const ShaderMacroCollection& macroInfo);
+    ShaderProgram *request_shader_module(const std::string &vertexSource, const std::string &fragmentSource,
+                                         const ShaderMacroCollection &macroInfo);
     
-    RenderPipelineState* request_graphics_pipeline(MTLRenderPipelineDescriptor* pipelineDescriptor);
+    RenderPipelineState *request_graphics_pipeline(MTLRenderPipelineDescriptor *pipelineDescriptor);
     
-    ComputePipelineState* request_compute_pipeline(MTLComputePipelineDescriptor* pipelineDescriptor);
+    ComputePipelineState *request_compute_pipeline(MTLComputePipelineDescriptor *pipelineDescriptor);
     
     void clear_pipelines();
-
+    
     void clear();
     
-    const ResourceCacheState& get_internal_state() const;
+    const ResourceCacheState &get_internal_state() const;
 };
 
 }

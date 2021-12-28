@@ -14,24 +14,25 @@ namespace vox {
 /**
  * MeshRenderer Component.
  */
-class MeshRenderer: public Renderer {
+class MeshRenderer : public Renderer {
 public:
-    explicit MeshRenderer(Entity* entity);
+    explicit MeshRenderer(Entity *entity);
     
     /**
      * Mesh assigned to the renderer.
      */
-    void setMesh(const MeshPtr& mesh);
+    void setMesh(const MeshPtr &mesh);
+    
     MeshPtr mesh();
     
 private:
-    void _render(std::vector<RenderElement>& opaqueQueue,
-                 std::vector<RenderElement>& alphaTestQueue,
-                 std::vector<RenderElement>& transparentQueue) override;
+    void _render(std::vector<RenderElement> &opaqueQueue,
+                 std::vector<RenderElement> &alphaTestQueue,
+                 std::vector<RenderElement> &transparentQueue) override;
     
     void _onDestroy() override;
-
-    void _updateBounds(BoundingBox& worldBounds) override;
+    
+    void _updateBounds(BoundingBox &worldBounds) override;
     
 private:
     MeshPtr _mesh;

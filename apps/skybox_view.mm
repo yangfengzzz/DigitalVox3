@@ -23,7 +23,7 @@
 
 using namespace vox;
 
-int main(int, char**) {
+int main(int, char **) {
     auto canvas = std::make_unique<Canvas>(1280, 720, "vox.render");
     auto engine = Engine(canvas.get());
     auto resourceLoader = engine.resourceLoader();

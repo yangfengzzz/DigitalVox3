@@ -12,17 +12,17 @@
 
 namespace vox {
 namespace physics {
-Collider::Collider(Entity* entity):
+Collider::Collider(Entity *entity) :
 Component(entity) {
     _updateFlag = entity->transform->registerWorldChangeFlag();
 }
 
-PxRigidActor * Collider::handle() {
+PxRigidActor *Collider::handle() {
     return _nativeActor;
 }
 
-void Collider::addShape(const ColliderShapePtr& shape) {
-    const auto& oldCollider = shape->_collider;
+void Collider::addShape(const ColliderShapePtr &shape) {
+    const auto &oldCollider = shape->_collider;
     if (oldCollider != this) {
         if (oldCollider != nullptr) {
             oldCollider->removeShape(shape);
@@ -34,7 +34,7 @@ void Collider::addShape(const ColliderShapePtr& shape) {
     }
 }
 
-void Collider::removeShape(const ColliderShapePtr& shape) {
+void Collider::removeShape(const ColliderShapePtr &shape) {
     auto iter = std::find(_shapes.begin(), _shapes.end(), shape);
     
     if (iter != _shapes.end()) {
@@ -46,7 +46,7 @@ void Collider::removeShape(const ColliderShapePtr& shape) {
 }
 
 void Collider::clearShapes() {
-    for (size_t i = 0 ; i < _shapes.size(); i++) {
+    for (size_t i = 0; i < _shapes.size(); i++) {
         _nativeActor->detachShape(*_shapes[i]->_nativeShape);
         engine()->_physicsManager._removeColliderShape(_shapes[i]);
     }
@@ -55,15 +55,15 @@ void Collider::clearShapes() {
 
 void Collider::_onUpdate() {
     if (_updateFlag->flag) {
-        const auto& transform = entity()->transform;
-        const auto& p = transform->worldPosition();
+        const auto &transform = entity()->transform;
+        const auto &p = transform->worldPosition();
         auto q = transform->worldRotationQuaternion();
         q = Normalize(q);
         _nativeActor->setGlobalPose(PxTransform(PxVec3(p.x, p.y, p.z), PxQuat(q.x, q.y, q.z, q.w)));
         _updateFlag->flag = false;
-
+        
         const auto worldScale = transform->lossyWorldScale();
-        for (auto& _shape : _shapes) {
+        for (auto &_shape: _shapes) {
             _shape->setWorldScale(worldScale);
         }
     }

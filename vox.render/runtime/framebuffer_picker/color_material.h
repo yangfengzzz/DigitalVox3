@@ -17,9 +17,9 @@ namespace picker {
 /**
  * Color material, render as marker.
  */
-class ColorMaterial :public Material {
+class ColorMaterial : public Material {
 public:
-    ColorMaterial(Engine* engine);
+    ColorMaterial(Engine *engine);
     
     /**
      * Reset id and renderer element table.
@@ -35,20 +35,20 @@ public:
      * Convert RGB color to id.
      * @param color - Color
      */
-    uint32_t color2Id(const std::array<uint8_t, 4>& color);
+    uint32_t color2Id(const std::array<uint8_t, 4> &color);
     
     /**
      * Get renderer element by color.
      */
-    std::pair<Renderer*, MeshPtr> getObjectByColor(const std::array<uint8_t, 4>& color);
+    std::pair<Renderer *, MeshPtr> getObjectByColor(const std::array<uint8_t, 4> &color);
     
-    void _preRender(const RenderElement& renderElement);
+    void _preRender(const RenderElement &renderElement);
     
 private:
     static ShaderProperty _colorProp;
-
+    
     uint32_t _currentId = 0;
-    std::unordered_map<size_t, std::pair<Renderer*, MeshPtr>> _primitivesMap;
+    std::unordered_map<size_t, std::pair<Renderer *, MeshPtr>> _primitivesMap;
 };
 
 }
