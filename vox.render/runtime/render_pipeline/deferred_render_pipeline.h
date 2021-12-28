@@ -44,12 +44,12 @@ private:
     id <MTLTexture> _emissive_GBuffer;
 
     // GBuffer
-    MTLRenderPassDescriptor *_GBufferRenderPassDescriptor;
-    MTLRenderPipelineDescriptor* _GBufferRenderPipelineDescriptor;
+    MTLRenderPassDescriptor *_GBufferRenderPassDesc;
+    MTLRenderPipelineDescriptor* _GBufferRenderPipelineDesc;
     MTLStencilDescriptor *_GBufferStencilStateDesc;
     
     // directional light Compositor
-    MTLRenderPassDescriptor *_finalRenderPassDescriptor;
+    MTLRenderPassDescriptor *_finalRenderPassDesc;
     MTLRenderPipelineDescriptor *_directionalLightPipelineDesc;
     id <MTLDepthStencilState> _directionLightDepthStencilState;
 

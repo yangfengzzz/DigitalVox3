@@ -22,85 +22,91 @@ RenderPipeline(camera) {
     _emissive_GBufferFormat = MTLPixelFormatRGBA32Float;
     
     //MARK: - GBuffer
-    // Create a render pass descriptor to create an encoder for rendering to the GBuffers.
-    // The encoder stores rendered data of each attachment when encoding ends.
-    _GBufferRenderPassDescriptor = [MTLRenderPassDescriptor new];
-    
-    _GBufferRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionDontCare;
-    _GBufferRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-    _GBufferRenderPassDescriptor.colorAttachments[1].loadAction = MTLLoadActionDontCare;
-    _GBufferRenderPassDescriptor.colorAttachments[1].storeAction = MTLStoreActionStore;
-    _GBufferRenderPassDescriptor.colorAttachments[2].loadAction = MTLLoadActionDontCare;
-    _GBufferRenderPassDescriptor.colorAttachments[2].storeAction = MTLStoreActionStore;
-    _GBufferRenderPassDescriptor.depthAttachment.clearDepth = 1.0;
-    _GBufferRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
-    _GBufferRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionStore;
-    
-    _GBufferRenderPassDescriptor.stencilAttachment.clearStencil = 0;
-    _GBufferRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionClear;
-    _GBufferRenderPassDescriptor.stencilAttachment.storeAction = MTLStoreActionStore;
-    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
-        int buffer_width, buffer_height;
-        glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
-        MTLTextureDescriptor *GBufferTextureDesc =
-        [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
-                                                           width:buffer_width
-                                                          height:buffer_height
-                                                       mipmapped:NO];
-        GBufferTextureDesc.textureType = MTLTextureType2D;
-        GBufferTextureDesc.usage |= MTLTextureUsageRenderTarget;
-        GBufferTextureDesc.storageMode = MTLStorageModePrivate;
-        
-        GBufferTextureDesc.pixelFormat = _diffuse_occlusion_GBufferFormat;
-        _diffuse_occlusion_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _diffuse_occlusion_GBuffer.label = @"Diffuse + Occlusion GBuffer";
-        GBufferTextureDesc.pixelFormat = _specular_roughness_GBufferFormat;
-        _specular_roughness_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _specular_roughness_GBuffer.label = @"Specular + Roughness GBuffer";
-        GBufferTextureDesc.pixelFormat = _normal_GBufferFormat;
-        _normal_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _normal_GBuffer.label   = @"Normal GBuffer";
-        GBufferTextureDesc.pixelFormat = _emissive_GBufferFormat;
-        _emissive_GBuffer = loader->buildTexture(GBufferTextureDesc);
-        _emissive_GBuffer.label = @"Emissive GBuffer";
-        
-        _GBufferRenderPassDescriptor.colorAttachments[0].texture = _diffuse_occlusion_GBuffer;
-        _GBufferRenderPassDescriptor.colorAttachments[1].texture = _specular_roughness_GBuffer;
-        _GBufferRenderPassDescriptor.colorAttachments[2].texture = _normal_GBuffer;
-        _GBufferRenderPassDescriptor.colorAttachments[3].texture = _emissive_GBuffer;
-        _GBufferRenderPassDescriptor.depthAttachment.texture = rhi.depthTexture();
-        _GBufferRenderPassDescriptor.stencilAttachment.texture = rhi.stencilTexture();
-    };
-    createFrameBuffer(_camera->engine()->canvas()->handle(), 0, 0);
-    Canvas::resize_callbacks.push_back(createFrameBuffer);
-    
-    _GBufferRenderPipelineDescriptor = [MTLRenderPipelineDescriptor new];
-    _GBufferRenderPipelineDescriptor.label = @"G-buffer Creation";
-    _GBufferRenderPipelineDescriptor.colorAttachments[0].pixelFormat = _diffuse_occlusion_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.colorAttachments[1].pixelFormat = _specular_roughness_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.colorAttachments[2].pixelFormat = _normal_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.colorAttachments[3].pixelFormat = _emissive_GBufferFormat;
-    _GBufferRenderPipelineDescriptor.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
-    _GBufferRenderPipelineDescriptor.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
-    
-    _GBufferStencilStateDesc = [MTLStencilDescriptor new];
-    _GBufferStencilStateDesc.stencilCompareFunction = MTLCompareFunctionAlways;
-    _GBufferStencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
-    _GBufferStencilStateDesc.depthFailureOperation = MTLStencilOperationKeep;
-    _GBufferStencilStateDesc.depthStencilPassOperation = MTLStencilOperationReplace;
-    _GBufferStencilStateDesc.readMask = 0x0;
-    _GBufferStencilStateDesc.writeMask = 0xFF;
-    
-    //MARK: - Compositor
 #pragma mark GBuffer render pass descriptor setup
     {
+        // Create a render pass descriptor to create an encoder for rendering to the GBuffers.
+        // The encoder stores rendered data of each attachment when encoding ends.
+        _GBufferRenderPassDesc = [MTLRenderPassDescriptor new];
+        
+        _GBufferRenderPassDesc.colorAttachments[0].loadAction = MTLLoadActionDontCare;
+        _GBufferRenderPassDesc.colorAttachments[0].storeAction = MTLStoreActionStore;
+        _GBufferRenderPassDesc.colorAttachments[1].loadAction = MTLLoadActionDontCare;
+        _GBufferRenderPassDesc.colorAttachments[1].storeAction = MTLStoreActionStore;
+        _GBufferRenderPassDesc.colorAttachments[2].loadAction = MTLLoadActionDontCare;
+        _GBufferRenderPassDesc.colorAttachments[2].storeAction = MTLStoreActionStore;
+        _GBufferRenderPassDesc.depthAttachment.clearDepth = 1.0;
+        _GBufferRenderPassDesc.depthAttachment.loadAction = MTLLoadActionClear;
+        _GBufferRenderPassDesc.depthAttachment.storeAction = MTLStoreActionStore;
+        
+        _GBufferRenderPassDesc.stencilAttachment.clearStencil = 0;
+        _GBufferRenderPassDesc.stencilAttachment.loadAction = MTLLoadActionClear;
+        _GBufferRenderPassDesc.stencilAttachment.storeAction = MTLStoreActionStore;
+        auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+            int buffer_width, buffer_height;
+            glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
+            MTLTextureDescriptor *GBufferTextureDesc =
+            [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
+                                                               width:buffer_width
+                                                              height:buffer_height
+                                                           mipmapped:NO];
+            GBufferTextureDesc.textureType = MTLTextureType2D;
+            GBufferTextureDesc.usage |= MTLTextureUsageRenderTarget;
+            GBufferTextureDesc.storageMode = MTLStorageModePrivate;
+            
+            GBufferTextureDesc.pixelFormat = _diffuse_occlusion_GBufferFormat;
+            _diffuse_occlusion_GBuffer = loader->buildTexture(GBufferTextureDesc);
+            _diffuse_occlusion_GBuffer.label = @"Diffuse + Occlusion GBuffer";
+            GBufferTextureDesc.pixelFormat = _specular_roughness_GBufferFormat;
+            _specular_roughness_GBuffer = loader->buildTexture(GBufferTextureDesc);
+            _specular_roughness_GBuffer.label = @"Specular + Roughness GBuffer";
+            GBufferTextureDesc.pixelFormat = _normal_GBufferFormat;
+            _normal_GBuffer = loader->buildTexture(GBufferTextureDesc);
+            _normal_GBuffer.label   = @"Normal GBuffer";
+            GBufferTextureDesc.pixelFormat = _emissive_GBufferFormat;
+            _emissive_GBuffer = loader->buildTexture(GBufferTextureDesc);
+            _emissive_GBuffer.label = @"Emissive GBuffer";
+            
+            _GBufferRenderPassDesc.colorAttachments[0].texture = _diffuse_occlusion_GBuffer;
+            _GBufferRenderPassDesc.colorAttachments[1].texture = _specular_roughness_GBuffer;
+            _GBufferRenderPassDesc.colorAttachments[2].texture = _normal_GBuffer;
+            _GBufferRenderPassDesc.colorAttachments[3].texture = _emissive_GBuffer;
+            _GBufferRenderPassDesc.depthAttachment.texture = rhi.depthTexture();
+            _GBufferRenderPassDesc.stencilAttachment.texture = rhi.stencilTexture();
+        };
+        createFrameBuffer(_camera->engine()->canvas()->handle(), 0, 0);
+        Canvas::resize_callbacks.push_back(createFrameBuffer);
+    }
+#pragma mark GBuffer render pipeline setup
+    {
+        _GBufferRenderPipelineDesc = [MTLRenderPipelineDescriptor new];
+        _GBufferRenderPipelineDesc.label = @"G-buffer Creation";
+        _GBufferRenderPipelineDesc.colorAttachments[0].pixelFormat = _diffuse_occlusion_GBufferFormat;
+        _GBufferRenderPipelineDesc.colorAttachments[1].pixelFormat = _specular_roughness_GBufferFormat;
+        _GBufferRenderPipelineDesc.colorAttachments[2].pixelFormat = _normal_GBufferFormat;
+        _GBufferRenderPipelineDesc.colorAttachments[3].pixelFormat = _emissive_GBufferFormat;
+        _GBufferRenderPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _GBufferRenderPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+    }
+#pragma mark GBuffer depth state setup
+    {
+        _GBufferStencilStateDesc = [MTLStencilDescriptor new];
+        _GBufferStencilStateDesc.stencilCompareFunction = MTLCompareFunctionAlways;
+        _GBufferStencilStateDesc.stencilFailureOperation = MTLStencilOperationKeep;
+        _GBufferStencilStateDesc.depthFailureOperation = MTLStencilOperationKeep;
+        _GBufferStencilStateDesc.depthStencilPassOperation = MTLStencilOperationReplace;
+        _GBufferStencilStateDesc.readMask = 0x0;
+        _GBufferStencilStateDesc.writeMask = 0xFF;
+    }
+    //MARK: - Compositor
+#pragma mark Compositor render pass descriptor setup
+    {
         // Create a render pass descriptor for thelighting and composition pass
-        _finalRenderPassDescriptor = [MTLRenderPassDescriptor new];
+        _finalRenderPassDesc = [MTLRenderPassDescriptor new];
         // Whatever rendered in the final pass needs to be stored so it can be displayed
-        _finalRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        _finalRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-        _finalRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionLoad;
-        _finalRenderPassDescriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
+        _finalRenderPassDesc.colorAttachments[0].loadAction = MTLLoadActionClear;
+        _finalRenderPassDesc.colorAttachments[0].storeAction = MTLStoreActionStore;
+        _finalRenderPassDesc.depthAttachment.loadAction = MTLLoadActionLoad;
+        _finalRenderPassDesc.stencilAttachment.loadAction = MTLLoadActionLoad;
     }
 #pragma mark Directional lighting render pipeline setup
     {
@@ -283,8 +289,8 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         auto& rhi = engine->_hardwareRenderer;
         
         //MARK: - GBuffer
-        rhi.activeRenderTarget(_GBufferRenderPassDescriptor);
-        rhi.beginRenderPass(_GBufferRenderPassDescriptor, camera, mipLevel);
+        rhi.activeRenderTarget(_GBufferRenderPassDesc);
+        rhi.beginRenderPass(_GBufferRenderPassDesc, camera, mipLevel);
         if (pass->renderOverride) {
             pass->render(camera, _opaqueQueue, _alphaTestQueue, _transparentQueue);
         } else {
@@ -294,13 +300,13 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         
         //MARK: -  Composition
         const auto& color = pass->clearColor != std::nullopt? pass->clearColor.value(): background.solidColor;
-        _finalRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(color.r, color.g, color.b, 1.0);
-        _finalRenderPassDescriptor.colorAttachments[0].texture = rhi.drawableTexture();
-        _finalRenderPassDescriptor.depthAttachment.texture = rhi.depthTexture();
-        _finalRenderPassDescriptor.stencilAttachment.texture = rhi.stencilTexture();
+        _finalRenderPassDesc.colorAttachments[0].clearColor = MTLClearColorMake(color.r, color.g, color.b, 1.0);
+        _finalRenderPassDesc.colorAttachments[0].texture = rhi.drawableTexture();
+        _finalRenderPassDesc.depthAttachment.texture = rhi.depthTexture();
+        _finalRenderPassDesc.stencilAttachment.texture = rhi.stencilTexture();
         
-        rhi.activeRenderTarget(_finalRenderPassDescriptor);
-        rhi.beginRenderPass(_finalRenderPassDescriptor, camera, mipLevel);
+        rhi.activeRenderTarget(_finalRenderPassDesc);
+        rhi.beginRenderPass(_finalRenderPassDesc, camera, mipLevel);
         _drawDirectionalLights();
         size_t numPointLights = scene->light_manager.pointLights().size();
         if (numPointLights > 0) {
@@ -365,19 +371,19 @@ void DeferredRenderPipeline::_drawElement(const std::vector<RenderElement>& item
             continue;
         }
         
-        _GBufferRenderPipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
-        _GBufferRenderPipelineDescriptor.vertexFunction = program->vertexShader();
-        _GBufferRenderPipelineDescriptor.fragmentFunction = program->fragmentShader();
+        _GBufferRenderPipelineDesc.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
+        _GBufferRenderPipelineDesc.vertexFunction = program->vertexShader();
+        _GBufferRenderPipelineDesc.fragmentFunction = program->fragmentShader();
         
         MTLDepthStencilDescriptor* depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc]init];
-        material->renderState._apply(engine, _GBufferRenderPipelineDescriptor, depthStencilDescriptor);
+        material->renderState._apply(engine, _GBufferRenderPipelineDesc, depthStencilDescriptor);
         depthStencilDescriptor.frontFaceStencil = _GBufferStencilStateDesc;
         depthStencilDescriptor.backFaceStencil = _GBufferStencilStateDesc;
         auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
         rhi.setDepthStencilState(depthStencilState);
         rhi.setStencilReferenceValue(128);
         
-        const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_GBufferRenderPipelineDescriptor);
+        const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_GBufferRenderPipelineDesc);
         rhi.setRenderPipelineState(pipelineState);
         
         //MARK:- Load Resouces
