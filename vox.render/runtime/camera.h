@@ -219,6 +219,10 @@ public:
     void render(std::optional<TextureCubeFace> cubeFace = std::nullopt, int mipLevel = 0);
     
 public:
+    void openDebugger();
+    
+    void closeDebugger();
+    
     /**
      * Add render pass.
      * @param pass - The name of this Pass.

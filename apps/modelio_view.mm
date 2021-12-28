@@ -76,9 +76,6 @@ public:
         lightEntities.reserve(numLights);
         speeds.reserve(numLights);
         originalPositions.reserve(numLights);
-//        particle = entity->addComponent<ParticleRenderer>();
-//        particle->setMaterial(std::make_shared<ParticleMaterial>(engine()));
-//        particle->particleSystemData()->resize(numLights);
         for (uint32 lightId = 0; lightId < numLights; lightId++) {
             auto lightEntity = entity->createChild("PointLight" + std::to_string(lightId));
             lightEntities.push_back(lightEntity);
@@ -110,11 +107,6 @@ public:
             auto pos = Float3(distance*sinf(angle), height, distance*cosf(angle));
             originalPositions.push_back(pos);
             lightEntity->transform->setPosition(pos);
-//            auto worldPos = lightEntity->transform->worldPosition();
-//            particle->particleSystemData()->positions()[lightId].x = worldPos.x;
-//            particle->particleSystemData()->positions()[lightId].y = worldPos.y;
-//            particle->particleSystemData()->positions()[lightId].z = worldPos.z;
-            
             light->distance = random_float(25,35)/10.0;
             speeds.push_back(speed);
             
@@ -149,10 +141,6 @@ public:
                 currentPosition = transformCoordinate(originalLightPositions, rotMat);
             }
             lightEntities[lightId]->transform->setPosition(currentPosition);
-//            auto worldPos = lightEntities[lightId]->transform->worldPosition();
-//            particle->particleSystemData()->positions()[lightId].x = worldPos.x;
-//            particle->particleSystemData()->positions()[lightId].y = worldPos.y;
-//            particle->particleSystemData()->positions()[lightId].z = worldPos.z;
         }
         totalTime += deltaTime * 500;
     }
@@ -162,7 +150,6 @@ private:
     std::vector<EntityPtr> lightEntities;
     std::vector<float> speeds;
     std::vector<Float3> originalPositions;
-//    ParticleRenderer* particle;
 };
 
 int main(int, char**) {
@@ -175,7 +162,8 @@ int main(int, char**) {
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
     cameraEntity->transform->setPosition(-6.02535057, 36.6681671, 48.6991844);
-    cameraEntity->addComponent<vox::Camera>();
+    auto camera = cameraEntity->addComponent<vox::Camera>();
+    camera->openDebugger();
     cameraEntity->addComponent<control::OrbitControl>();
     
     auto sky = rootEntity->createChild("sky");

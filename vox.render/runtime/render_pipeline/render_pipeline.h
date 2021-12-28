@@ -39,6 +39,10 @@ public:
      */
     virtual ~RenderPipeline();
     
+    void openDebugger();
+    
+    void closeDebugger();
+    
     /**
      * Perform scene rendering.
      * @param context - Render context
@@ -116,6 +120,7 @@ protected:
     std::vector<RenderElement> _transparentQueue;
     std::vector<RenderElement> _alphaTestQueue;
     
+    bool _openDebugger = false;
     Camera* _camera;
     
     float cascadeSplitLambda = 0.5f;

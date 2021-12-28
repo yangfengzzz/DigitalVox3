@@ -363,6 +363,12 @@ void MetalRenderer::drawPrimitive(MTLPrimitiveType primitiveType,
     [_renderEncoder drawPrimitives:primitiveType vertexStart:vertexStart vertexCount:vertexCount];
 }
 
+void MetalRenderer::drawPrimitive(MTLPrimitiveType primitiveType,
+                                  size_t vertexStart, size_t vertexCount, size_t instanceCount) const {
+    [_renderEncoder drawPrimitives:primitiveType vertexStart:vertexStart
+                       vertexCount:vertexCount instanceCount:instanceCount];
+}
+
 void MetalRenderer::drawIndexedPrimitives(MTLPrimitiveType primitiveType, size_t indexCount,
                                           MTLIndexType indexType, id<MTLBuffer> indexBuffer,
                                           size_t indexBufferOffset, size_t instanceCount) const {

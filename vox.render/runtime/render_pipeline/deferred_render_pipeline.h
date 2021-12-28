@@ -31,6 +31,8 @@ private:
     
     void _drawPointLights(size_t numPointLights);
     
+    void _drawFairies(size_t numPointLights);
+    
 private:
     MTLPixelFormat _diffuse_occlusion_GBufferFormat;
     id <MTLTexture> _diffuse_occlusion_GBuffer;
@@ -57,6 +59,12 @@ private:
     id <MTLDepthStencilState> _lightMaskDepthStencilState;
     MTLRenderPipelineDescriptor * _lightPipelineDesc;
     id <MTLDepthStencilState> _pointLightDepthStencilState;
+    
+    // point light debugger
+    id<MTLTexture> _fairyMap;
+    id<MTLBuffer> _fairy;
+    MTLRenderPipelineDescriptor *_fairyPipelineDesc;
+    id <MTLDepthStencilState> _dontWriteDepthStencilState;
 };
 
 }

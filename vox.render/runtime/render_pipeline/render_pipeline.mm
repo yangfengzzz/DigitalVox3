@@ -45,6 +45,14 @@ RenderPipeline::~RenderPipeline() {
     _transparentQueue.clear();
 }
 
+void RenderPipeline::openDebugger() {
+    _openDebugger = true;
+}
+
+void RenderPipeline::closeDebugger() {
+    _openDebugger = false;
+}
+
 void RenderPipeline::render(RenderContext& context,
                             std::optional<TextureCubeFace> cubeFace, int mipLevel) {
     // generate shadow map

@@ -114,6 +114,9 @@ public:
     void drawPrimitive(MTLPrimitiveType primitiveType,
                        uint32_t vertexStart, uint32_t vertexCount) const;
     
+    void drawPrimitive(MTLPrimitiveType primitiveType,
+                       size_t vertexStart, size_t vertexCount, size_t instanceCount) const;
+    
     void drawIndexedPrimitives(MTLPrimitiveType primitiveType, size_t indexCount,
                                MTLIndexType indexType, id<MTLBuffer> indexBuffer,
                                size_t indexBufferOffset, size_t instanceCount) const;

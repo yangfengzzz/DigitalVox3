@@ -339,4 +339,12 @@ void Camera::removeRenderPass(const RenderPass* pass) {
     _renderPipeline->removeRenderPass(pass);
 }
 
+void Camera::openDebugger() {
+    _renderPipeline->openDebugger();
+}
+
+void Camera::closeDebugger() {
+    _renderPipeline->closeDebugger();
+}
+
 }

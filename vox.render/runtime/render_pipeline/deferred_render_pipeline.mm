@@ -218,6 +218,53 @@ RenderPipeline(camera) {
         depthStencilDesc.label = @"Point Light";
         _pointLightDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
     }
+#pragma mark Fairy billboard render pipeline setup
+    {
+        Shader shader("Fairy Drawing", "fairy_vertex", "fairy_fragment", "");
+        ShaderProgram* program = shader.findShaderProgram(_camera->engine(), ShaderMacroCollection());
+        if (!program->isValid()) {
+            return;
+        }
+        _fairyPipelineDesc = [MTLRenderPipelineDescriptor new];
+        _fairyPipelineDesc.label = @"Fairy Drawing";
+        _fairyPipelineDesc.vertexDescriptor = nil;
+        _fairyPipelineDesc.vertexFunction = program->vertexShader();
+        _fairyPipelineDesc.fragmentFunction = program->fragmentShader();
+        _fairyPipelineDesc.colorAttachments[0].pixelFormat = rhi.colorPixelFormat();
+        _fairyPipelineDesc.depthAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _fairyPipelineDesc.stencilAttachmentPixelFormat = rhi.depthStencilPixelFormat();
+        _fairyPipelineDesc.colorAttachments[0].blendingEnabled = YES;
+        _fairyPipelineDesc.colorAttachments[0].rgbBlendOperation = MTLBlendOperationAdd;
+        _fairyPipelineDesc.colorAttachments[0].alphaBlendOperation = MTLBlendOperationAdd;
+        _fairyPipelineDesc.colorAttachments[0].sourceRGBBlendFactor = MTLBlendFactorSourceAlpha;
+        _fairyPipelineDesc.colorAttachments[0].sourceAlphaBlendFactor = MTLBlendFactorSourceAlpha;
+        _fairyPipelineDesc.colorAttachments[0].destinationRGBBlendFactor = MTLBlendFactorOne;
+        _fairyPipelineDesc.colorAttachments[0].destinationAlphaBlendFactor = MTLBlendFactorOne;
+    }
+#pragma mark Post lighting depth state setup
+    {
+        MTLDepthStencilDescriptor *depthStencilDesc = [MTLDepthStencilDescriptor new];
+        depthStencilDesc.label = @"Less -Writes";
+        depthStencilDesc.depthCompareFunction = MTLCompareFunctionLess;
+        depthStencilDesc.depthWriteEnabled = NO;
+        _dontWriteDepthStencilState = rhi.createDepthStencilState(depthStencilDesc);
+    }
+#pragma mark Setup 2D circle mesh for fairy billboards
+    {
+        Float2 fairyVertices[7];
+        const float angle = 2*M_PI/(float)7;
+        for(int vtx = 0; vtx < 7; vtx++) {
+            int point = (vtx%2) ? (vtx+1)/2 : -vtx/2;
+            fairyVertices[vtx] = Float2(sin(point*angle), cos(point*angle));
+        }
+        _fairy = loader->buildBuffer(fairyVertices, sizeof(fairyVertices), NULL);
+        _fairy.label = @"Fairy Vertices";
+    }
+#pragma mark Load textures for non-mesh assets
+    {
+        _fairyMap = loader->loadTexture("../models/", "fairy.png");
+        _fairyMap.label = @"Fairy Map";
+    }
 }
 
 DeferredRenderPipeline::~DeferredRenderPipeline() {
@@ -259,6 +306,9 @@ void DeferredRenderPipeline::_drawRenderPass(RenderPass* pass, Camera* camera,
         if (numPointLights > 0) {
             _drawPointLightMask(numPointLights);
             _drawPointLights(numPointLights);
+            if (_openDebugger) {
+                _drawFairies(numPointLights);
+            }
         }
         rhi.endRenderPass();// renderEncoder
     }
@@ -420,20 +470,41 @@ void DeferredRenderPipeline::_drawPointLights(size_t numPointLights) {
     rhi.setFragmentTexture(_normal_GBuffer, 2);
     rhi.setFragmentTexture(_emissive_GBuffer, 3);
     rhi.setFragmentTexture(rhi.depthTexture(), 4);
-
+    
     rhi.setDepthStencilState(_pointLightDepthStencilState);
     rhi.setStencilReferenceValue(128);
     rhi.setCullMode(MTLCullModeFront);
     pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
     pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
-
+    
     MTKMeshBuffer *vertexBuffer = _icosahedronMesh.vertexBuffers[0];
     rhi.setVertexBuffer(vertexBuffer.buffer, static_cast<uint32_t>(vertexBuffer.offset), 0);
     MTKSubmesh *icosahedronSubmesh = _icosahedronMesh.submeshes[0];
     rhi.drawIndexedPrimitives(icosahedronSubmesh.primitiveType, icosahedronSubmesh.indexCount,
                               icosahedronSubmesh.indexType, icosahedronSubmesh.indexBuffer.buffer,
                               icosahedronSubmesh.indexBuffer.offset, numPointLights);
+    
+    rhi.popDebugGroup();
+}
 
+void DeferredRenderPipeline::_drawFairies(size_t numPointLights) {
+    const auto& engine = _camera->engine();
+    auto& rhi = engine->_hardwareRenderer;
+    const auto& cameraData = _camera->shaderData;
+    const auto& scene = _camera->scene();
+    const auto& sceneData = scene->shaderData;
+    
+    rhi.pushDebugGroup("Draw Fairies");
+    const auto& pipelineState = rhi.resouceCache.request_graphics_pipeline(_fairyPipelineDesc);
+    rhi.setRenderPipelineState(pipelineState);
+    rhi.setDepthStencilState(_dontWriteDepthStencilState);
+    rhi.setCullMode(MTLCullModeFront);
+    pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
+    pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
+    rhi.setVertexBuffer(_fairy, 0, 0);
+    rhi.setFragmentTexture(_fairyMap, 0);
+    
+    rhi.drawPrimitive(MTLPrimitiveTypeTriangleStrip, 0, 7, numPointLights);
     rhi.popDebugGroup();
 }
 
