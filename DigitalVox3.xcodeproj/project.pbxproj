@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0406F420277AD5B600217848 /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
-		0406F429277AE21A00217848 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
+		0406F42B277AE86F00217848 /* particle_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0431588E27688D7A0070FBEC /* particle_view.mm */; };
 		040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 040E9CB3277AA469009DF8B7 /* light_debugger.metal */; };
 		0414B0AF27789B62007ED649 /* modelio_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0414B0AD27789B62007ED649 /* modelio_loader.mm */; };
 		0414B0B027789B62007ED649 /* modelio_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0414B0AE27789B62007ED649 /* modelio_loader.h */; };
@@ -4562,7 +4562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0406F429277AE21A00217848 /* modelio_view.mm in Sources */,
+				0406F42B277AE86F00217848 /* particle_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,7 @@ class ParticleMaterial : public BaseMaterial {
 public:
     ParticleMaterial(Engine *engine) : BaseMaterial(engine, Shader::find("particle-shader")) {
         setIsTransparent(true);
-        auto texture = engine->_hardwareRenderer.loadTexture("../models/particle_smoke.ktx");
+        auto texture = engine->resourceLoader()->loadTexture("../models", "particle_smoke.ktx");
         shaderData.setData(ParticleMaterial::_baseTextureProp, texture);
     }
     

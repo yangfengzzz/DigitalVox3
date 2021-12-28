@@ -21,7 +21,7 @@ ShaderProperty Camera::_cameraPositionProperty = Shader::createProperty("u_camer
 
 Camera::Camera(Entity *entity) :
 Component(entity) {
-    _renderPipeline = std::make_unique<DeferredRenderPipeline>(this);
+    _renderPipeline = std::make_unique<ForwardRenderPipeline>(this);
     
     auto transform = entity->transform;
     _transform = transform;
