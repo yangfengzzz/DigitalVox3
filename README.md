@@ -3,7 +3,7 @@
 This project is inspired by [Oasis](https://github.com/oasis-engine) which is an ECS-liked based engine(not very strict)
 . Based on entity and component, it is easy to combine other open-source ability:
 
-1. [IMGUI](https://github.com/ocornut/imgui): GUI system
+1. [ImGui](https://github.com/ocornut/imgui): GUI system
 2. [OZZ-Animation](https://github.com/guillaumeblanc/ozz-animation): CPU Animation System
 3. [PhysX](https://github.com/NVIDIAGameWorks/PhysX): Physical System
 4. [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev): Fluid Simulation and CPU Particle System
@@ -24,14 +24,14 @@ Which can load a lot of model format including:
 on [GLTF](https://github.com/syoyo/tinygltf)
 ![GLTF Scene](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/gltf_scene.gif "GLTF Scene")
 
-### GPU Skinning Animation
+### GPU Skinning Animation with GLTF
 
 [Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/gltf_view.mm) can also load animation which
 control the tree of entities. GPU Skinning Animation limit the joint weight have only four component.
 
 ![GPU Animation](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/gpu_animation.gif "GPU Animation")
 
-### CPU Animation System
+### CPU Animation System with FBX
 
 [Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/windows_view.mm) about CPU animation system which
 is based on [OZZ-Animation](https://github.com/guillaumeblanc/ozz-animation). Ozz support CPU skinning, blending, IK and
@@ -44,3 +44,35 @@ free to use.
 [Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/particle_view.mm) about CPU particle system which
 can load [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) solvers.
 ![Particle Simulation](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/particle_sim.gif "Particle Simulation")
+
+### Physics System
+
+### PBR
+
+### Shadow System
+
+[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/shadowMap_view.mm) support multi-shadow from three
+kind of lights. All these based on ShadowMap.
+
+1. spot light: single shadow map
+2. directional light: cascaded shadow map(render four times)
+3. point light: shadow cube map (render six times)
+
+![Multi Shadow](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/multi_shadow.gif "Multi Shadow")
+![Cube Shadow from Point](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/cube_shadow.gif "Cube Shadow from Point")
+
+### Deferred Render Pipeline
+
+[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/modelio_view.mm) use 256 point lights to shader
+the whole scene which need deferred render pipeline to reduce fragment wastes.
+
+![Deferred Render Pipeline](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/deferred.gif "Deferred Render Pipeline")
+
+### GUI
+
+[Editor](https://github.com/yangfengzzz/DigitalVox3/blob/master/editor/gui_entry.h) use IMGUI to render gui
+and [FrameBuffer Picker](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/framebufferPicker_view.mm) to link
+the scene with panel. [ImGuizmo](https://github.com/CedricGuillemet/ImGuizmo)
+and [imgui-node-editor](https://github.com/thedmd/imgui-node-editor) build the basic infrastructure of editor. 
+
+![Editor](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/editor.gif "Editor")
