@@ -51,6 +51,8 @@ can load [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) solver
 is based on [PhysX](https://github.com/NVIDIAGameWorks/PhysX). Collider, Joint, Character Controller are all wrapped as
 component which is more easy to use.
 
+![PhysX](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/physx.gif "PhysX")
+
 ### PBR
 
 [Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/ibl_view.mm) use IBL to render basic pbr scene.
