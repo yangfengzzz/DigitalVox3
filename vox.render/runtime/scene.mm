@@ -11,11 +11,21 @@
 #include "log.h"
 
 namespace vox {
+ShaderProperty Scene::_frameBufferSizeProperty = Shader::createProperty("u_framebuffer_size", ShaderDataGroup::Scene);
+
 Scene::Scene(Engine* engine, std::string name):
 EngineObject(engine),
 name(name),
 _ambientLight(this),
-light_manager(this) {}
+light_manager(this) {
+    auto createFrameBuffer = [&](GLFWwindow* window, int width, int height){
+        int buffer_width, buffer_height;
+        glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
+        shaderData.setData(Scene::_frameBufferSizeProperty, Float2(buffer_width, buffer_height));
+    };
+    createFrameBuffer(engine->canvas()->handle(), 0, 0);
+    Canvas::resize_callbacks.push_back(createFrameBuffer);
+}
 
 AmbientLight& Scene::ambientLight() {
     return _ambientLight;

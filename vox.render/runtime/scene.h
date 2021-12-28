@@ -121,7 +121,8 @@ private:
     std::vector<Camera*> _activeCameras;
     bool _isActiveInEngine = false;
     ShaderMacroCollection _globalShaderMacro = ShaderMacroCollection();
-    
+    static ShaderProperty _frameBufferSizeProperty;
+
     bool _destroyed = false;
     std::vector<EntityPtr> _rootEntities;
     AmbientLight _ambientLight;
