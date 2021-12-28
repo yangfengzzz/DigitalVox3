@@ -46,9 +46,11 @@ public:
                MTLRenderPassDescriptor *renderTarget = nullptr,
                Layer mask = Layer::Everything);
     
-    virtual MaterialPtr material(const RenderElement &element) {
-        return nullptr;
-    }
+    virtual MaterialPtr material(const RenderElement &element);
+    
+    virtual std::optional<MTLPixelFormat> colorPixelFormat();
+    
+    virtual std::optional<MTLPixelFormat> depthStencilPixelFormat();
     
     /**
      * Rendering callback, will be executed if renderOverride is set to true.

@@ -27,4 +27,16 @@ RenderPass::RenderPass(const std::string &name,
     renderOverride = false; // If renderOverride is set to true, you need to implement the render method
 }
 
+MaterialPtr RenderPass::material(const RenderElement &element) {
+    return nullptr;
+}
+
+std::optional<MTLPixelFormat> RenderPass::colorPixelFormat() {
+    return std::nullopt;
+}
+
+std::optional<MTLPixelFormat> RenderPass::depthStencilPixelFormat() {
+    return std::nullopt;
+}
+
 }

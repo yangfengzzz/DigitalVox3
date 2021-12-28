@@ -118,12 +118,26 @@ void ForwardRenderPipeline::_drawElement(const std::vector<RenderElement> &items
         descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(element.mesh->vertexDescriptor());
         descriptor.vertexFunction = program->vertexShader();
         descriptor.fragmentFunction = program->fragmentShader();
-        
-        descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
-        descriptor.depthAttachmentPixelFormat = engine->_hardwareRenderer.depthStencilPixelFormat();
-        
         MTLDepthStencilDescriptor *depthStencilDescriptor = [[MTLDepthStencilDescriptor alloc] init];
         material->renderState._apply(engine, descriptor, depthStencilDescriptor);
+        
+        if (pass->colorPixelFormat().has_value()) {
+            descriptor.colorAttachments[0].pixelFormat = pass->colorPixelFormat().value();
+        } else {
+            descriptor.colorAttachments[0].pixelFormat = engine->_hardwareRenderer.colorPixelFormat();
+        }
+
+        if (pass->depthStencilPixelFormat().has_value()) {
+            if (pass->depthStencilPixelFormat().value() == MTLPixelFormatInvalid) {
+                depthStencilDescriptor.depthWriteEnabled = NO;
+                depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionNever;
+            } else {
+                descriptor.depthAttachmentPixelFormat = pass->depthStencilPixelFormat().value();
+            }
+        } else {
+            descriptor.depthAttachmentPixelFormat = engine->_hardwareRenderer.depthStencilPixelFormat();
+        }
+        
         auto depthStencilState = rhi.createDepthStencilState(depthStencilDescriptor);
         rhi.setDepthStencilState(depthStencilState);
         

@@ -29,6 +29,14 @@ MaterialPtr ColorRenderPass::material(const RenderElement &element) {
     return _material;
 }
 
+std::optional<MTLPixelFormat> ColorRenderPass::colorPixelFormat() {
+    return MTLPixelFormatBGRA8Unorm;
+}
+
+std::optional<MTLPixelFormat> ColorRenderPass::depthStencilPixelFormat() {
+    return MTLPixelFormatDepth32Float;
+}
+
 void ColorRenderPass::preRender(Camera *camera, const std::vector<RenderElement> &opaqueQueue,
                                 const std::vector<RenderElement> &alphaTestQueue,
                                 const std::vector<RenderElement> &transparentQueue) {

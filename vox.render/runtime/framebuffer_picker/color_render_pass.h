@@ -26,6 +26,10 @@ public:
 public:
     MaterialPtr material(const RenderElement &element) override;
     
+    std::optional<MTLPixelFormat> colorPixelFormat() override;
+    
+    std::optional<MTLPixelFormat> depthStencilPixelFormat() override;
+    
     /**
      * Determine whether need to render pass, reset state.
      */

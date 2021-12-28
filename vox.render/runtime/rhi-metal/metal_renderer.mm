@@ -22,7 +22,7 @@ resouceCache(this) {
     _metalResourceLoader = std::make_shared<MetalLoader>(_device);
     
     _depthStencilPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
-    _colorPixelFormat = MTLPixelFormatBGRA8Unorm; // linear space
+    _colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB; // linear space
     _samplerState = buildSamplerState();
     
     ImGui_ImplMetal_Init(_device);
