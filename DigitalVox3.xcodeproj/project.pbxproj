@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0406F41F277AD56C00217848 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
+		0406F420277AD5B600217848 /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
 		040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 040E9CB3277AA469009DF8B7 /* light_debugger.metal */; };
-		040E9CB6277ABC7B009DF8B7 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
 		0414B0AF27789B62007ED649 /* modelio_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0414B0AD27789B62007ED649 /* modelio_loader.mm */; };
 		0414B0B027789B62007ED649 /* modelio_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0414B0AE27789B62007ED649 /* modelio_loader.h */; };
 		04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FC4274F6124006CD384 /* bounding_frustum.cpp */; };
@@ -618,7 +619,6 @@
 		04AD28472772AFDB00B86C7E /* shadow_common.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28462772AFDB00B86C7E /* shadow_common.metal */; };
 		04AD284B27753C9E00B86C7E /* forward_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284927753C9E00B86C7E /* forward_render_pipeline.mm */; };
 		04AD284C27753C9E00B86C7E /* forward_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AD284A27753C9E00B86C7E /* forward_render_pipeline.h */; };
-		04AD284F277544C400B86C7E /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
 		04AD2850277544C400B86C7E /* deferred_render_pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AD284E277544C400B86C7E /* deferred_render_pipeline.h */; };
 		04AD28542776CC0C00B86C7E /* deferred_compositor.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04AD28532776CC0C00B86C7E /* deferred_compositor.metal */; };
 		04C2EA47276EB95300091FB3 /* cubemap_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */; };
@@ -4562,7 +4562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040E9CB6277ABC7B009DF8B7 /* modelio_view.mm in Sources */,
+				0406F41F277AD56C00217848 /* modelio_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4592,6 +4592,7 @@
 				04AD28542776CC0C00B86C7E /* deferred_compositor.metal in Sources */,
 				04CE379C274D167E00204B8E /* allocator.cc in Sources */,
 				04D47E792771E0670038F34A /* shadow_debugger.metal in Sources */,
+				0406F420277AD5B600217848 /* deferred_render_pipeline.mm in Sources */,
 				04CE38E8275103BC00204B8E /* scene_manager.mm in Sources */,
 				0416101D2755DD48006CD384 /* orbit_control.mm in Sources */,
 				041610542759FCF1006CD384 /* joint.cpp in Sources */,
@@ -4652,7 +4653,6 @@
 				041610322758ED2C006CD384 /* collider_shape.cpp in Sources */,
 				04CE399B2753A83C00204B8E /* skybox.metal in Sources */,
 				0416103727599B05006CD384 /* physics_manager.mm in Sources */,
-				04AD284F277544C400B86C7E /* deferred_render_pipeline.mm in Sources */,
 				04CE37E2274D167F00204B8E /* raw_skeleton_archive.cc in Sources */,
 				04D47E6E2771643B0038F34A /* shadow-map.metal in Sources */,
 				04CE37E4274D167F00204B8E /* skeleton_builder.cc in Sources */,
