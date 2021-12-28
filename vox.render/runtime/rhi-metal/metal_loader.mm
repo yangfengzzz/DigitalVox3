@@ -360,7 +360,7 @@ id <MTLTexture> MetalLoader::createSpecularTexture(const std::string &path,
         auto commandEncoder = [commandBuffer computeCommandEncoder];
         
         auto size = mtlTexture.width / int(pow(2, float(level)));
-        auto descriptor = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
+        auto descriptor = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
                                                                                 size:size mipmapped:false];
         descriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageShaderWrite;
         auto outputTexture = [_device newTextureWithDescriptor:descriptor];
