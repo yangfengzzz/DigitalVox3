@@ -957,6 +957,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0406F42A277AE3B500217848 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		040E9CB3277AA469009DF8B7 /* light_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = light_debugger.metal; sourceTree = "<group>"; };
 		0414B0AD27789B62007ED649 /* modelio_loader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = modelio_loader.mm; sourceTree = "<group>"; };
 		0414B0AE27789B62007ED649 /* modelio_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modelio_loader.h; sourceTree = "<group>"; };
@@ -2946,6 +2947,7 @@
 		04CE3673274D077100204B8E = {
 			isa = PBXGroup;
 			children = (
+				0406F42A277AE3B500217848 /* README.md */,
 				043155A72767475E0070FBEC /* vox.geometry */,
 				04CE3782274D156200204B8E /* vox.render */,
 				04CE367E274D077100204B8E /* apps */,

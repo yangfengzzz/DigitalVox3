@@ -42,7 +42,7 @@
 		<key>unit_tests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>vox.geometry.xcscheme_^#shared#^_</key>
 		<dict>
@@ -60,17 +60,17 @@
 		<key>0434A2AC275F96AB009AD4EA</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>0434AC8F276778DE009AD4EA</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>04CE367B274D077100204B8E</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 	</dict>
 </dict>
