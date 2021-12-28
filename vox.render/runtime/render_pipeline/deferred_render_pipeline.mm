@@ -391,7 +391,7 @@ void DeferredRenderPipeline::_drawPointLightMask(size_t numPointLights) {
     rhi.setRenderPipelineState(pipelineState);
     rhi.setDepthStencilState(_lightMaskDepthStencilState);
     rhi.setStencilReferenceValue(128);
-    rhi.setCullMode(MTLCullModeFront);
+    rhi.setCullMode(MTLCullModeBack);
     pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
     pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
     
@@ -423,7 +423,7 @@ void DeferredRenderPipeline::_drawPointLights(size_t numPointLights) {
 
     rhi.setDepthStencilState(_pointLightDepthStencilState);
     rhi.setStencilReferenceValue(128);
-    rhi.setCullMode(MTLCullModeBack);
+    rhi.setCullMode(MTLCullModeFront);
     pipelineState->uploadAll(pipelineState->sceneUniformBlock, sceneData);
     pipelineState->uploadAll(pipelineState->cameraUniformBlock, cameraData);
 

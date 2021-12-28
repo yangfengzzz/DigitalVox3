@@ -105,7 +105,6 @@ light_mask_vertex(const device float4 *vertices [[ buffer(0) ]],
 
 struct LightInOut {
     float4 position [[position]];
-    float3 eye_position;
     uint iid [[flat]];
 };
 
@@ -124,10 +123,6 @@ deferred_point_lighting_vertex(const device float4 *vertices [[ buffer(0) ]],
     float3 vertex_eye_position = vertices[vid].xyz * u_pointLight[iid].distance + viewPos.xyz;
     
     out.position = u_projMat * float4(vertex_eye_position, 1);
-    
-    // Sending light position in view space to next stage
-    out.eye_position = vertex_eye_position;
-    
     out.iid = iid;
     
     return out;
@@ -135,9 +130,9 @@ deferred_point_lighting_vertex(const device float4 *vertices [[ buffer(0) ]],
 
 fragment float4
 deferred_point_lighting_fragment_traditional(LightInOut in [[ stage_in ]],
-                                             constant matrix_float4x4 &u_projInvMat [[buffer(10)]],
-                                             constant float2 &u_framebuffer_size [[buffer(11)]],
-                                             constant matrix_float4x4 &u_viewMat [[buffer(12)]],
+                                             constant matrix_float4x4 &u_viewMat [[buffer(10)]],
+                                             constant matrix_float4x4 &u_projInvMat [[buffer(11)]],
+                                             constant float2 &u_framebuffer_size [[buffer(12)]],
                                              texture2d<float> diffuse_occlusion_GBuffer [[texture(0)]],
                                              texture2d<float> specular_roughness_GBuffer [[texture(1)]],
                                              texture2d<float> normal_GBuffer [[texture(2)]],
