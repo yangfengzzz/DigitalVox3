@@ -167,9 +167,62 @@ int main(int, char **) {
         physx::PxCapsuleControllerDesc characterControllerDesc;
         characterControllerDesc.radius = radius;
         characterControllerDesc.height = height;
+        characterControllerDesc.material = physics::PhysicsManager::_nativePhysics()->createMaterial(0,0,0);
+        auto worldPos = capsuleEntity->transform->worldPosition();
+        characterControllerDesc.position = physx::PxExtendedVec3(worldPos.x, worldPos.y, worldPos.z);
         characterController->setDesc(characterControllerDesc);
         
         return capsuleEntity;
+    };
+    
+    class ControllerScript: public Script {
+    public:
+        ControllerScript(Entity* entity):Script(entity) {
+            character = entity->getComponent<physics::CapsuleCharacterController>();
+        }
+        
+        void targetCamera(EntityPtr camera) {
+            Canvas::key_callbacks.push_back([&](GLFWwindow *window, int key, int scancode, int action, int mods){
+                Float3 forward = entity()->transform->position() - camera->transform->position();
+                forward.y = 0;
+                forward = Normalize(forward);
+                Float3 cross = Float3(forward.z, 0, -forward.x);
+                
+                switch (key) {
+                    case GLFW_KEY_W:
+                        displacement = forward * 0.3;
+                        break;
+                    case GLFW_KEY_S:
+                        displacement = -forward * 0.3;
+                        break;
+                    case GLFW_KEY_A:
+                        displacement = cross * 0.3;
+                        break;
+                    case GLFW_KEY_D:
+                        displacement = -cross * 0.3;
+                        break;
+                    case GLFW_KEY_SPACE:
+                        displacement.x = 0;
+                        displacement.y = 2;
+                        displacement.z = 0;
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+        
+        void onUpdate(float deltaTime) override {
+            auto flags = character->move(displacement, 0.1, deltaTime);
+            displacement = Float3();
+            if (!flags.isSet(physx::PxControllerCollisionFlag::Enum::eCOLLISION_DOWN)) {
+                character->move(Float3(0, -0.2, 0), 0.1, deltaTime);
+            }
+        }
+        
+    private:
+        physics::CharacterController* character = nullptr;
+        Float3 displacement = Float3();
     };
     
     auto transform = [&](const math::Float3 &position, const math::Quaternion &rotation,
@@ -201,6 +254,10 @@ int main(int, char **) {
             prevCollider = currentCollider;
         }
     };
+    
+    auto player = addPlayer(1, 3, Float3(0, 6.5, 0), Quaternion());
+    auto controller = player->addComponent<ControllerScript>();
+    controller->targetCamera(cameraEntity);
     
     addPlane(math::Float3(30, 0.1, 30), math::Float3(), math::Quaternion());
     for (int i = 0; i < 5; i++) {

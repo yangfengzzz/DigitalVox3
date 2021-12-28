@@ -47,6 +47,10 @@ can load [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) solver
 
 ### Physics System
 
+[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/physx_dynamic_view.mm) about Physics System which
+is based on [PhysX](https://github.com/NVIDIAGameWorks/PhysX). Collider, Joint, Character Controller are all wrapped as
+component which is more easy to use.
+
 ### PBR
 
 [Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/ibl_view.mm) use IBL to render basic pbr scene.
