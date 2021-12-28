@@ -21,7 +21,7 @@ vertex FairyInOut fairy_vertex(constant vector_float2 *vertices [[ buffer(0) ]],
                                const device PointLightData *u_pointLight [[ buffer(11) ]],
                                uint iid [[ instance_id ]],
                                uint vid [[ vertex_id ]]) {
-    float fairy_size = 0.4;
+    float fairy_size = 0.2;
     
     FairyInOut out;
     
