@@ -45,22 +45,22 @@ typedef struct {
 } VertexOut;
 
 vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
-                            constant matrix_float4x4 &u_localMat [[buffer(0)]],
-                            constant matrix_float4x4 &u_modelMat [[buffer(1)]],
-                            constant matrix_float4x4 &u_viewMat [[buffer(2)]],
-                            constant matrix_float4x4 &u_projMat [[buffer(3)]],
-                            constant matrix_float4x4 &u_MVMat [[buffer(4)]],
-                            constant matrix_float4x4 &u_MVPMat [[buffer(5)]],
-                            constant matrix_float4x4 &u_normalMat [[buffer(6)]],
-                            constant float3 &u_cameraPos [[buffer(7)]],
-                            constant float4 &u_tilingOffset [[buffer(8)]],
-                            constant matrix_float4x4 &u_viewMatFromLight [[buffer(9)]],
-                            constant matrix_float4x4 &u_projMatFromLight [[buffer(10)]],
+                            constant matrix_float4x4 &u_localMat [[buffer(10)]],
+                            constant matrix_float4x4 &u_modelMat [[buffer(11)]],
+                            constant matrix_float4x4 &u_viewMat [[buffer(12)]],
+                            constant matrix_float4x4 &u_projMat [[buffer(13)]],
+                            constant matrix_float4x4 &u_MVMat [[buffer(14)]],
+                            constant matrix_float4x4 &u_MVPMat [[buffer(15)]],
+                            constant matrix_float4x4 &u_normalMat [[buffer(16)]],
+                            constant float3 &u_cameraPos [[buffer(17)]],
+                            constant float4 &u_tilingOffset [[buffer(18)]],
+                            constant matrix_float4x4 &u_viewMatFromLight [[buffer(19)]],
+                            constant matrix_float4x4 &u_projMatFromLight [[buffer(20)]],
                             sampler u_jointSampler [[sampler(0), function_constant(hasSkinAndHasJointTexture)]],
                             texture2d<float> u_jointTexture [[texture(0), function_constant(hasSkinAndHasJointTexture)]],
-                            constant int &u_jointCount [[buffer(11), function_constant(hasSkinAndHasJointTexture)]],
-                            constant matrix_float4x4 *u_jointMatrix [[buffer(12), function_constant(hasSkinNotHasJointTexture)]],
-                            constant float *u_blendShapeWeights [[buffer(13), function_constant(hasBlendShape)]]) {
+                            constant int &u_jointCount [[buffer(21), function_constant(hasSkinAndHasJointTexture)]],
+                            constant matrix_float4x4 *u_jointMatrix [[buffer(22), function_constant(hasSkinNotHasJointTexture)]],
+                            constant float *u_blendShapeWeights [[buffer(23), function_constant(hasBlendShape)]]) {
     VertexOut out;
     
     // begin position
@@ -145,7 +145,7 @@ vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
             out.tangentW = normalize( float3x3(u_normalMat.columns[0].xyz,
                                                u_normalMat.columns[1].xyz,
                                                u_normalMat.columns[2].xyz) * tangent.xyz);
-            out.bitangentW = cross( out.normalW, out.tangentW ) * tangent.w;
+            out.bitangentW = -cross( out.normalW, out.tangentW ); // sign is important
         } else {
             out.v_normal = normalize( float3x3(u_normalMat.columns[0].xyz,
                                                u_normalMat.columns[1].xyz,
@@ -172,17 +172,6 @@ vertex VertexOut vertex_pbr(const VertexIn in [[stage_in]],
 #define RECIPROCAL_PI 0.31830988618
 #define EPSILON 1e-6
 #define LOG2 1.442695
-float4 RGBMToLinear(float4 value, float maxRange ) {
-    return float4( value.rgb * value.a * maxRange, 1.0 );
-}
-
-float4 gammaToLinear(float4 srgbIn){
-    return float4( pow(srgbIn.rgb, float3(2.2)), srgbIn.a);
-}
-
-float4 linearToGamma(float4 linearIn){
-    return float4( pow(linearIn.rgb, float3(1.0 / 2.2)), linearIn.a);
-}
 
 typedef struct {
     float3 directDiffuse;
@@ -608,13 +597,6 @@ fragment float4 fragment_pbr(VertexOut in [[stage_in]],
     reflectedLight.indirectSpecular +
     emissiveRadiance;
     
-    float4 targetColor =float4(totalRadiance, material.opacity);
-    
-    //MARK: - gamma_frag
-#ifdef GAMMA
-    float gamma = 2.2;
-    finalColor.rgb = pow(gl_FragColor.rgb, float3(1.0 / gamma));
-#endif
-    
+    float4 targetColor =float4(totalRadiance, material.opacity);    
     return targetColor;
 }

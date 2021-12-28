@@ -70,7 +70,7 @@ int main(int, char **) {
     NSWindow *nswin = glfwGetCocoaWindow(window);
     CAMetalLayer *layer = [CAMetalLayer layer];
     layer.device = device;
-    layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
+    layer.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
     nswin.contentView.layer = layer;
     nswin.contentView.wantsLayer = YES;
     

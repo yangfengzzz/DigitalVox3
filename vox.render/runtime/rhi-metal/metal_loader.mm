@@ -53,7 +53,6 @@ id <MTLTexture> MetalLoader::loadTexture(const std::string &path, const std::str
     
     NSDictionary < MTKTextureLoaderOption, id > *options = @{
         MTKTextureLoaderOptionOrigin: origin,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:TRUE]
     };
     
@@ -130,7 +129,6 @@ id <MTLTexture> MetalLoader::loadTexture(MDLMaterial *material, MDLMaterialSeman
 id <MTLTexture> MetalLoader::loadTexture(MDLTexture *texture) {
     NSDictionary < MTKTextureLoaderOption, id > *options = @{
         MTKTextureLoaderOptionOrigin: MTKTextureLoaderOriginBottomLeft,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE]
     };
     
@@ -167,7 +165,6 @@ id <MTLTexture> MetalLoader::loadCubeTexture(const std::string &path, const std:
     
     NSDictionary < MTKTextureLoaderOption, id > *options = @{
         MTKTextureLoaderOptionOrigin: origin,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedLong:MTLTextureUsageShaderRead]
     };
@@ -253,7 +250,6 @@ id <MTLTexture> MetalLoader::createIrradianceTexture(const std::string &path,
     
     NSDictionary < MTKTextureLoaderOption, id > *options = @{
         MTKTextureLoaderOptionOrigin: origin,
-        MTKTextureLoaderOptionSRGB: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionGenerateMipmaps: [NSNumber numberWithBool:FALSE],
         MTKTextureLoaderOptionTextureUsage: [NSNumber numberWithUnsignedLong:usage]
     };
@@ -364,7 +360,7 @@ id <MTLTexture> MetalLoader::createSpecularTexture(const std::string &path,
         auto commandEncoder = [commandBuffer computeCommandEncoder];
         
         auto size = mtlTexture.width / int(pow(2, float(level)));
-        auto descriptor = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
+        auto descriptor = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
                                                                                 size:size mipmapped:false];
         descriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageShaderWrite;
         auto outputTexture = [_device newTextureWithDescriptor:descriptor];

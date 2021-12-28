@@ -108,7 +108,7 @@ int main(int, char **) {
         for (int i = 0; i < 6; i++) {
             auto material = planeMaterials[i];
             std::vector<uint8_t> data(mipSize * mipSize * 4);
-            auto planeTexture = [textures newTextureViewWithPixelFormat:MTLPixelFormatBGRA8Unorm
+            auto planeTexture = [textures newTextureViewWithPixelFormat:MTLPixelFormatBGRA8Unorm_sRGB
                                                             textureType:MTLTextureType2D
                                                                  levels:NSMakeRange(mipLevel, 1)
                                                                  slices:NSMakeRange(i, 1)];

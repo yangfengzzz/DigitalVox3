@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0406F41F277AD56C00217848 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
 		0406F420277AD5B600217848 /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
+		0406F429277AE21A00217848 /* modelio_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A7110A2779463900BF6864 /* modelio_view.mm */; };
 		040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 040E9CB3277AA469009DF8B7 /* light_debugger.metal */; };
 		0414B0AF27789B62007ED649 /* modelio_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0414B0AD27789B62007ED649 /* modelio_loader.mm */; };
 		0414B0B027789B62007ED649 /* modelio_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0414B0AE27789B62007ED649 /* modelio_loader.h */; };
@@ -1834,7 +1834,6 @@
 		04CE38EA27510A8000204B8E /* camera.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = camera.mm; sourceTree = "<group>"; };
 		04CE38EB27510A8000204B8E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		04CE38F027510AF200204B8E /* camera_clear_flags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera_clear_flags.h; sourceTree = "<group>"; };
-		04CE38F127510B0700204B8E /* color_space.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = color_space.h; sourceTree = "<group>"; };
 		04CE38F227510EAE00204B8E /* textureCube_face.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textureCube_face.h; sourceTree = "<group>"; };
 		04CE38F42751131C00204B8E /* canvas.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = canvas.cpp; sourceTree = "<group>"; };
 		04CE38F52751131C00204B8E /* canvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = canvas.h; sourceTree = "<group>"; };
@@ -3464,7 +3463,6 @@
 			isa = PBXGroup;
 			children = (
 				04CE38F027510AF200204B8E /* camera_clear_flags.h */,
-				04CE38F127510B0700204B8E /* color_space.h */,
 				04CE38F227510EAE00204B8E /* textureCube_face.h */,
 			);
 			path = enums;
@@ -4562,7 +4560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0406F41F277AD56C00217848 /* modelio_view.mm in Sources */,
+				0406F429277AE21A00217848 /* modelio_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

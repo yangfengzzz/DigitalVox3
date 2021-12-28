@@ -45,7 +45,7 @@ RenderPipeline(camera) {
             int buffer_width, buffer_height;
             glfwGetFramebufferSize(window, &buffer_width, &buffer_height);
             MTLTextureDescriptor *GBufferTextureDesc =
-            [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
+            [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm_sRGB
                                                                width:buffer_width
                                                               height:buffer_height
                                                            mipmapped:NO];

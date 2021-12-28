@@ -115,7 +115,6 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       sampler textureSampler [[sampler(0)]],
                                       constant float3 &u_cameraPos [[buffer(5)]],
                                       constant float &exposure [[buffer(6)]],
-                                      constant float &gamma [[buffer(7)]],
                                       constant EnvMapLight &u_envMapLight [[buffer(8)]],
                                       constant float3 *u_env_sh [[buffer(9), function_constant(hasSH)]],
                                       texturecube<float> u_env_specularTexture [[texture(0), function_constant(hasSpecularEnv)]],
@@ -177,8 +176,6 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
     // Tone mapping
     color = Uncharted2Tonemap(color * exposure);
     color = color * (1.0f / Uncharted2Tonemap(float3(11.2f)));
-    // Gamma correction
-    color = pow(color, float3(1.0f / gamma));
     
     return float4(color, 1.0);
 }

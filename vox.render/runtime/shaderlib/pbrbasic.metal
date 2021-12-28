@@ -133,8 +133,5 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
     float3 color = u_baseColor * 0.02;
     color += Lo;
 
-    // Gamma correct
-    color = pow(color, float3(0.4545));
-
     return float4(color, 1.0);
 }
