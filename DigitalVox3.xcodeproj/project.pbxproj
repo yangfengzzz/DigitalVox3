@@ -1572,7 +1572,7 @@
 		049E3ECB276DA75A003FEE00 /* pbrbasic.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbrbasic.metal; sourceTree = "<group>"; };
 		049E3ECF276DC40A003FEE00 /* pbr_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = pbr_view.mm; sourceTree = "<group>"; };
 		04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = omni_shadowMap_view.mm; sourceTree = "<group>"; };
-		04A7110A2779463900BF6864 /* modelio_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = modelio_view.mm; sourceTree = "<group>"; };
+		04A7110A2779463900BF6864 /* deferred_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = deferred_view.mm; sourceTree = "<group>"; };
 		04A79AB8275DE0B500182CCB /* light_manager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light_manager.mm; sourceTree = "<group>"; };
 		04A79AB9275DE0B500182CCB /* light_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = light_manager.h; sourceTree = "<group>"; };
 		04A79ABC275DE28100182CCB /* light.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = light.mm; sourceTree = "<group>"; };
@@ -1597,7 +1597,6 @@
 		04AD284A27753C9E00B86C7E /* forward_render_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = forward_render_pipeline.h; sourceTree = "<group>"; };
 		04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = deferred_render_pipeline.mm; sourceTree = "<group>"; };
 		04AD284E277544C400B86C7E /* deferred_render_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deferred_render_pipeline.h; sourceTree = "<group>"; };
-		04AD28512776924500B86C7E /* deferred_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = deferred_view.mm; sourceTree = "<group>"; };
 		04AD28532776CC0C00B86C7E /* deferred_compositor.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = deferred_compositor.metal; sourceTree = "<group>"; };
 		04C2EA3E276DEE2900091FB3 /* pbribl.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = pbribl.metal; sourceTree = "<group>"; };
 		04C2EA41276E1B3700091FB3 /* Irradiance_view.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Irradiance_view.mm; sourceTree = "<group>"; };
@@ -2999,8 +2998,7 @@
 				04D47E6F277166550038F34A /* shadowMap_view.mm */,
 				04D47E7A2772D51C0038F34A /* cascade_shadowMap_view.mm */,
 				04A710DE2775711F00BF6864 /* omni_shadowMap_view.mm */,
-				04AD28512776924500B86C7E /* deferred_view.mm */,
-				04A7110A2779463900BF6864 /* modelio_view.mm */,
+				04A7110A2779463900BF6864 /* deferred_view.mm */,
 			);
 			path = apps;
 			sourceTree = "<group>";

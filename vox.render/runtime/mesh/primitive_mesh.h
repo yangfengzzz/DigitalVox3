@@ -140,7 +140,7 @@ private:
                                   size_t radialSegments,
                                   float capAlphaRange,
                                   size_t offset,
-                                  size_t posIndex,
+                                  ssize_t posIndex,
                                   std::vector<Float3> &positions,
                                   std::vector<Float3> &normals,
                                   std::vector<Float2> &uvs,
