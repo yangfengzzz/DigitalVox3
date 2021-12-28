@@ -12,7 +12,6 @@
 #include "../vox.render/runtime/mesh/skinned_mesh_renderer.h"
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
 #include "../vox.render/runtime/animator.h"
-#include "../vox.render/runtime/material/unlit_material.h"
 #include "../vox.render/runtime/material/blinn_phong_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/physics/static_collider.h"
@@ -23,6 +22,7 @@
 #include "../vox.render/runtime/physics/shape/sphere_collider_shape.h"
 #include "../vox.render/runtime/physics/shape/plane_collider_shape.h"
 #include "../vox.render/runtime/physics/shape/capsule_collider_shape.h"
+#include "../vox.render/runtime/lighting/direct_light.h"
 #include <random>
 
 using namespace vox;
@@ -64,12 +64,13 @@ int main(int, char **) {
     cameraEntity->addComponent<control::OrbitControl>();
     
     auto addPlane = [&](const math::Float3 &size, const math::Float3 &position, const math::Quaternion &rotation) {
-        auto mtl = std::make_shared<UnlitMaterial>(&engine);
+        auto mtl = std::make_shared<BlinnPhongMaterial>(&engine);
         mtl->setBaseColor(math::Color(0.03179807202597362, 0.3939682161541871, 0.41177952549087604, 1.0));
         auto planeEntity = rootEntity->createChild();
         planeEntity->layer = Layer::Layer1;
         
         auto renderer = planeEntity->addComponent<MeshRenderer>();
+        renderer->receiveShadow = true;
         renderer->setMesh(PrimitiveMesh::createCuboid(&engine, size.x, size.y, size.z));
         renderer->setMaterial(mtl);
         planeEntity->transform->setPosition(position);
@@ -83,11 +84,11 @@ int main(int, char **) {
     };
     
     auto addBox = [&](const math::Float3 &size, const math::Float3 &position, const math::Quaternion &rotation) {
-        auto boxMtl = std::make_shared<UnlitMaterial>(&engine);
+        auto boxMtl = std::make_shared<BlinnPhongMaterial>(&engine);
         boxMtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto boxEntity = rootEntity->createChild("BoxEntity");
         auto boxRenderer = boxEntity->addComponent<MeshRenderer>();
-        
+        boxRenderer->castShadow = true;
         boxRenderer->setMesh(PrimitiveMesh::createCuboid(&engine, size.x, size.y, size.z));
         boxRenderer->setMaterial(boxMtl);
         boxEntity->transform->setPosition(position);
@@ -107,11 +108,11 @@ int main(int, char **) {
     };
     
     auto addSphere = [&](float radius, const math::Float3 &position, const math::Quaternion &rotation, const math::Float3 &velocity) {
-        auto mtl = std::make_shared<UnlitMaterial>(&engine);
+        auto mtl = std::make_shared<BlinnPhongMaterial>(&engine);
         mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto sphereEntity = rootEntity->createChild();
         auto renderer = sphereEntity->addComponent<MeshRenderer>();
-        
+        renderer->castShadow = true;
         renderer->setMesh(PrimitiveMesh::createSphere(&engine, radius));
         renderer->setMaterial(mtl);
         sphereEntity->transform->setPosition(position);
@@ -133,11 +134,11 @@ int main(int, char **) {
     };
     
     auto addCapsule = [&](float radius, float height, const math::Float3 &position, const math::Quaternion &rotation) {
-        auto mtl = std::make_shared<UnlitMaterial>(&engine);
+        auto mtl = std::make_shared<BlinnPhongMaterial>(&engine);
         mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto capsuleEntity = rootEntity->createChild();
         auto renderer = capsuleEntity->addComponent<MeshRenderer>();
-        
+        renderer->castShadow = true;
         renderer->setMesh(PrimitiveMesh::createCapsule(&engine, radius, height));
         renderer->setMaterial(mtl);
         capsuleEntity->transform->setPosition(position);
@@ -154,11 +155,11 @@ int main(int, char **) {
     };
     
     auto addPlayer = [&](float radius, float height, const math::Float3 &position, const math::Quaternion &rotation) {
-        auto mtl = std::make_shared<UnlitMaterial>(&engine);
+        auto mtl = std::make_shared<BlinnPhongMaterial>(&engine);
         mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1.0));
         auto capsuleEntity = rootEntity->createChild();
         auto renderer = capsuleEntity->addComponent<MeshRenderer>();
-        
+        renderer->castShadow = true;
         renderer->setMesh(PrimitiveMesh::createCapsule(&engine, radius, height, 20));
         renderer->setMaterial(mtl);
         capsuleEntity->transform->setPosition(position);
@@ -256,6 +257,13 @@ int main(int, char **) {
         }
     };
     
+    auto light = rootEntity->createChild("light");
+    light->transform->setPosition(10, 10, 0);
+    light->transform->lookAt(Float3());
+    auto directLight = light->addComponent<DirectLight>();
+    directLight->intensity = 1.0;
+    directLight->setEnableShadow(true);
+    
     auto player = addPlayer(1, 3, Float3(0, 6.5, 0), Quaternion());
     auto controller = player->addComponent<ControllerScript>();
     controller->targetCamera(cameraEntity);
@@ -277,7 +285,7 @@ int main(int, char **) {
         Ray ray = camera->screenPointToRay(Float2(xpos, ypos));
 
         physics::HitResult hit;
-        auto result = engine._physicsManager.raycast(ray, 1, Layer::Layer0, hit);
+        auto result = engine._physicsManager.raycast(ray, std::numeric_limits<float>::max(), Layer::Layer0, hit);
         if (result) {
             auto mtl = std::make_shared<BlinnPhongMaterial>(&engine);
             mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1));
