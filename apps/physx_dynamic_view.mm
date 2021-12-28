@@ -58,7 +58,7 @@ int main(int, char **) {
     
     auto rootEntity = scene->createRootEntity();
     auto cameraEntity = rootEntity->createChild("camera");
-    cameraEntity->transform->setPosition(10, 10, 10);
+    cameraEntity->transform->setPosition(20, 20, 20);
     cameraEntity->transform->lookAt(Float3(0, 0, 0));
     cameraEntity->addComponent<vox::Camera>();
     cameraEntity->addComponent<control::OrbitControl>();
@@ -231,7 +231,7 @@ int main(int, char **) {
                          math::Float3 &outPosition, math::Quaternion &outRotation) {
         outRotation = rotation * outRotation;
         outPosition = math::transformByQuat(outPosition, rotation);
-        outPosition = outPosition - position;
+        outPosition = outPosition + position;
     };
     
     auto createChain = [&](const math::Float3 &position, const math::Quaternion &rotation, size_t length, float separation) {
@@ -276,7 +276,7 @@ int main(int, char **) {
                    Quaternion(0, 0, 0.3, 0.7));
         }
     }
-    createChain(math::Float3(0.0, 25.0, -10.0), math::Quaternion(), 5, 2.0);
+    createChain(math::Float3(0.0, 25.0, -10.0), math::Quaternion(), 10, 2.0);
     
     Canvas::mouse_button_callbacks.push_back([&](GLFWwindow *window, int button, int action, int mods){
         double xpos, ypos;
