@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 040E9CB3277AA469009DF8B7 /* light_debugger.metal */; };
 		0414B0AF27789B62007ED649 /* modelio_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0414B0AD27789B62007ED649 /* modelio_loader.mm */; };
 		0414B0B027789B62007ED649 /* modelio_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0414B0AE27789B62007ED649 /* modelio_loader.h */; };
 		04160FC6274F6124006CD384 /* bounding_frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04160FC4274F6124006CD384 /* bounding_frustum.cpp */; };
@@ -956,6 +957,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		040E9CB3277AA469009DF8B7 /* light_debugger.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = light_debugger.metal; sourceTree = "<group>"; };
 		0414B0AD27789B62007ED649 /* modelio_loader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = modelio_loader.mm; sourceTree = "<group>"; };
 		0414B0AE27789B62007ED649 /* modelio_loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modelio_loader.h; sourceTree = "<group>"; };
 		04160FC4274F6124006CD384 /* bounding_frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bounding_frustum.cpp; sourceTree = "<group>"; };
@@ -3639,11 +3641,12 @@
 				04CE39942753A83C00204B8E /* shadow-map.metal */,
 				04AD28532776CC0C00B86C7E /* deferred_compositor.metal */,
 				04860853276B17F100C05BDA /* core */,
-				0434AC84276611C5009AD4EA /* editor-grid.metal */,
-				0434AC882766133E009AD4EA /* editor */,
 				04C2EA46276EB95300091FB3 /* cubemap_debugger.metal */,
 				04D47E782771E0670038F34A /* shadow_debugger.metal */,
+				040E9CB3277AA469009DF8B7 /* light_debugger.metal */,
 				04C2EA45276EB93800091FB3 /* debug */,
+				0434AC84276611C5009AD4EA /* editor-grid.metal */,
+				0434AC882766133E009AD4EA /* editor */,
 				04860857276B2DED00C05BDA /* gltfloading.metal */,
 				0486085C276B40F500C05BDA /* gltfscene.metal */,
 				04D47E40276C33DE0038F34A /* gltfskinning.metal */,
@@ -4701,6 +4704,7 @@
 				0434A28E2757B0B1009AD4EA /* skinned_mesh_renderer.mm in Sources */,
 				04CE37F6274D167F00204B8E /* track_optimizer.cc in Sources */,
 				04160FE9275091FA006CD384 /* engine.mm in Sources */,
+				040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */,
 				04CE393E2751D2ED00204B8E /* shader_macro_collection.mm in Sources */,
 				04AD284127729A9F00B86C7E /* texture_packer.metal in Sources */,
 				04CE3806274D167F00204B8E /* fbx.cc in Sources */,
