@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0406F420277AD5B600217848 /* deferred_render_pipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04AD284D277544C400B86C7E /* deferred_render_pipeline.mm */; };
-		0406F42C277AEB4C00217848 /* windows_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0416101027545535006CD384 /* windows_view.mm */; };
+		0406F42D277AEFA600217848 /* gltf_view.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0486084F276B0ED700C05BDA /* gltf_view.mm */; };
+		0406F42E277AF5B400217848 /* gltfskinning.metal in Sources */ = {isa = PBXBuildFile; fileRef = 04D47E40276C33DE0038F34A /* gltfskinning.metal */; };
 		040E9CB4277AA469009DF8B7 /* light_debugger.metal in Sources */ = {isa = PBXBuildFile; fileRef = 040E9CB3277AA469009DF8B7 /* light_debugger.metal */; };
 		0414B0AF27789B62007ED649 /* modelio_loader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0414B0AD27789B62007ED649 /* modelio_loader.mm */; };
 		0414B0B027789B62007ED649 /* modelio_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0414B0AE27789B62007ED649 /* modelio_loader.h */; };
@@ -4562,7 +4563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0406F42C277AEB4C00217848 /* windows_view.mm in Sources */,
+				0406F42D277AEFA600217848 /* gltf_view.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4599,6 +4600,7 @@
 				04161075275A5AC4006CD384 /* box_character_controller.mm in Sources */,
 				0431559227608E300070FBEC /* color_render_pass.mm in Sources */,
 				04CE37A0274D167E00204B8E /* string_archive.cc in Sources */,
+				0406F42E277AF5B400217848 /* gltfskinning.metal in Sources */,
 				04CE394A2751E3E600204B8E /* shader.mm in Sources */,
 				04CE39C42757A18C00204B8E /* fbx_mesh.cpp in Sources */,
 				04161060275A112E006CD384 /* hinge_joint.cpp in Sources */,

@@ -36,9 +36,7 @@ vertex VertexOut vertex_experimental(const VertexIn vertexIn [[stage_in]],
                                      constant float3 &u_cameraPos [[buffer(7)]],
                                      constant float4 &u_tilingOffset [[buffer(8)]],
                                      constant matrix_float4x4 *u_jointMatrix [[buffer(9)]],
-                                     constant float3 *u_pointLightColor [[buffer(12), function_constant(hasPointLight)]],
-                                     constant float3 *u_pointLightPosition [[buffer(13), function_constant(hasPointLight)]],
-                                     constant float *u_pointLightDistance [[buffer(14), function_constant(hasPointLight)]]) {
+                                     device PointLightData *u_pointLight [[buffer(10), function_constant(hasPointLight)]]) {
     VertexOut out;
     out.normal = vertexIn.normal;
     out.uv = vertexIn.uv;
@@ -56,7 +54,7 @@ vertex VertexOut vertex_experimental(const VertexIn vertexIn [[stage_in]],
 
     matrix_float3x3 view3x3 = matrix_float3x3(u_viewMat[0].xyz, u_viewMat[1].xyz, u_viewMat[2].xyz);
     float4 pos = u_viewMat * float4(vertexIn.position, 1.0);
-    float3 lPos = view3x3 * u_pointLightPosition[0].xyz;
+    float3 lPos = view3x3 * u_pointLight[0].position;
     out.lightVec = lPos - pos.xyz;
     out.viewVec = -pos.xyz;
     
@@ -80,8 +78,6 @@ fragment float4 fragment_experimental(VertexOut in [[stage_in]],
                                       texture2d<float> u_normalTexture [[texture(2), function_constant(hasNormalTexture)]],
                                       texture2d<float> u_emissiveTexture [[texture(3), function_constant(hasEmissiveMap)]],
                                       texture2d<float> u_metallicRoughnessTexture [[texture(4), function_constant(hasMetalRoughnessMap)]],
-                                      texture2d<float> u_specularTexture [[texture(5), function_constant(hasSpecularMap)]],
-                                      texture2d<float> u_glossinessTexture [[texture(6), function_constant(hasGlossinessMap)]],
                                       texture2d<float> u_occlusionTexture [[texture(7), function_constant(hasOcclusionMap)]]) {
     float4 color = u_baseColorTexture.sample(textureSampler, in.uv);
 

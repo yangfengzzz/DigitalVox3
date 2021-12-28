@@ -18,15 +18,29 @@ Which can load a lot of model format including:
 
 ## Features
 
-### CPU Particle System
+### GLTF Loader
 
-[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/particle_view.mm) about CPU particle system which
-can load [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) solvers.
-![Particle Simulation](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/particle_sim.gif "Particle Simulation")
+[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/gltf_view.mm) about GLTF Loader which based
+on [GLTF](https://github.com/syoyo/tinygltf)
+![GLTF Scene](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/gltf_scene.gif "GLTF Scene")
+
+### GPU Skinning Animation
+
+[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/gltf_view.mm) can also load animation which
+control the tree of entities. GPU Skinning Animation limit the joint weight have only four component.
+
+![GPU Animation](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/gpu_animation.gif "GPU Animation")
 
 ### CPU Animation System
 
 [Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/windows_view.mm) about CPU animation system which
 is based on [OZZ-Animation](https://github.com/guillaumeblanc/ozz-animation). Ozz support CPU skinning, blending, IK and
-other animation ability.
+other animation ability. The CPU animation system does not limit the number of weights of the bones, so it will be more
+free to use.
 ![Animation Simulation](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/animation.gif "Animation Simulation")
+
+### CPU Particle System
+
+[Example](https://github.com/yangfengzzz/DigitalVox3/blob/master/apps/particle_view.mm) about CPU particle system which
+can load [fluid-engine-dev](https://github.com/doyubkim/fluid-engine-dev) solvers.
+![Particle Simulation](https://github.com/yangfengzzz/DigitalVox3/raw/master/doc/img/particle_sim.gif "Particle Simulation")
