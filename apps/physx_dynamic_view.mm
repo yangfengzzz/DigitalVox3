@@ -13,6 +13,7 @@
 #include "../vox.render/runtime/mesh/primitive_mesh.h"
 #include "../vox.render/runtime/animator.h"
 #include "../vox.render/runtime/material/unlit_material.h"
+#include "../vox.render/runtime/material/blinn_phong_material.h"
 #include "../vox.render/runtime/controls/orbit_control.h"
 #include "../vox.render/runtime/physics/static_collider.h"
 #include "../vox.render/runtime/physics/dynamic_collider.h"
@@ -269,6 +270,40 @@ int main(int, char **) {
     }
     createChain(math::Float3(0.0, 25.0, -10.0), math::Quaternion(), 5, 2.0);
     
+    Canvas::mouse_button_callbacks.push_back([&](GLFWwindow *window, int button, int action, int mods){
+        double xpos, ypos;
+        glfwGetCursorPos(window, &xpos, &ypos);
+        auto camera = cameraEntity->getComponent<Camera>();
+        Ray ray = camera->screenPointToRay(Float2(xpos, ypos));
+
+        physics::HitResult hit;
+        auto result = engine._physicsManager.raycast(ray, 1, Layer::Layer0, hit);
+        if (result) {
+            auto mtl = std::make_shared<BlinnPhongMaterial>(&engine);
+            mtl->setBaseColor(math::Color(u(e), u(e), u(e), 1));
+  
+            auto meshes = hit.entity->getComponentsIncludeChildren<MeshRenderer>();
+            for (auto& mesh : meshes) {
+                mesh->setMaterial(mtl);
+            }
+        }
+    });
+    
+    Canvas::key_callbacks.push_back([&](GLFWwindow *window, int key, int scancode, int action, int mods){
+        if (action == GLFW_RELEASE) {
+            Float3 dir = cameraEntity->transform->worldForward();
+            dir = dir * 50;
+            
+            switch (key) {
+                case GLFW_KEY_SPACE:
+                    addSphere(0.5, cameraEntity->transform->position(),
+                              cameraEntity->transform->rotationQuaternion(), dir);
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
     
     engine.run();
 };
