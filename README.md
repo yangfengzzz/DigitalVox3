@@ -1,3 +1,5 @@
+Depreciate!!! If you like C++ please refer to [DigitalVox4](https://github.com/yangfengzzz/DigitalVox4), Or [SwiftArche](https://github.com/ArcheGraphics/SwiftArche)
+
 # DigitalVox3 - Metal Graphics Engine
 
 This project is inspired by [Oasis](https://github.com/oasis-engine) which is an ECS-liked based engine(not very strict)
